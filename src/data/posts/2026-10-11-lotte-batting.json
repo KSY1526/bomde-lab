@@ -831,5 +831,446 @@
    "wrc_plus": 167.6,
    "war": 5.27
   }
+ ],
+ "staff": [
+  {
+   "team": "SSG",
+   "sp_era": 5.13,
+   "sp_outs": 2105,
+   "sp_ip_per_gs": 4.91,
+   "qs": 38,
+   "qs_pct": 26.6,
+   "rp_era": 5.15,
+   "rp_outs": 1682,
+   "rp_whip": 1.53,
+   "sp_era_rank": 9,
+   "sp_outs_rank": 8,
+   "sp_ip_per_gs_rank": 8,
+   "qs_pct_rank": 8,
+   "rp_era_rank": 7,
+   "rp_whip_rank": 5,
+   "sp_ip": "701.2",
+   "rp_ip": "560.2"
+  },
+  {
+   "team": "두산",
+   "sp_era": 3.76,
+   "sp_outs": 2247,
+   "sp_ip_per_gs": 5.24,
+   "qs": 63,
+   "qs_pct": 44.1,
+   "rp_era": 3.95,
+   "rp_outs": 1574,
+   "rp_whip": 1.39,
+   "sp_era_rank": 1,
+   "sp_outs_rank": 4,
+   "sp_ip_per_gs_rank": 4,
+   "qs_pct_rank": 2,
+   "rp_era_rank": 1,
+   "rp_whip_rank": 1,
+   "sp_ip": "749",
+   "rp_ip": "524.2"
+  },
+  {
+   "team": "NC",
+   "sp_era": 4.59,
+   "sp_outs": 2167,
+   "sp_ip_per_gs": 5.05,
+   "qs": 50,
+   "qs_pct": 35.0,
+   "rp_era": 5.17,
+   "rp_outs": 1618,
+   "rp_whip": 1.63,
+   "sp_era_rank": 5,
+   "sp_outs_rank": 6,
+   "sp_ip_per_gs_rank": 6,
+   "qs_pct_rank": 6,
+   "rp_era_rank": 8,
+   "rp_whip_rank": 8,
+   "sp_ip": "722.1",
+   "rp_ip": "539.1"
+  },
+  {
+   "team": "KT",
+   "sp_era": 3.88,
+   "sp_outs": 2320,
+   "sp_ip_per_gs": 5.45,
+   "qs": 66,
+   "qs_pct": 46.5,
+   "rp_era": 4.69,
+   "rp_outs": 1502,
+   "rp_whip": 1.49,
+   "sp_era_rank": 2,
+   "sp_outs_rank": 1,
+   "sp_ip_per_gs_rank": 2,
+   "qs_pct_rank": 1,
+   "rp_era_rank": 4,
+   "rp_whip_rank": 3,
+   "sp_ip": "773.1",
+   "rp_ip": "500.2"
+  },
+  {
+   "team": "삼성",
+   "sp_era": 4.33,
+   "sp_outs": 2270,
+   "sp_ip_per_gs": 5.33,
+   "qs": 59,
+   "qs_pct": 41.5,
+   "rp_era": 4.17,
+   "rp_outs": 1516,
+   "rp_whip": 1.39,
+   "sp_era_rank": 4,
+   "sp_outs_rank": 3,
+   "sp_ip_per_gs_rank": 3,
+   "qs_pct_rank": 3,
+   "rp_era_rank": 2,
+   "rp_whip_rank": 1,
+   "sp_ip": "756.2",
+   "rp_ip": "505.1"
+  },
+  {
+   "team": "키움",
+   "sp_era": 4.79,
+   "sp_outs": 2174,
+   "sp_ip_per_gs": 5.03,
+   "qs": 38,
+   "qs_pct": 26.4,
+   "rp_era": 6.14,
+   "rp_outs": 1628,
+   "rp_whip": 1.68,
+   "sp_era_rank": 8,
+   "sp_outs_rank": 5,
+   "sp_ip_per_gs_rank": 7,
+   "qs_pct_rank": 9,
+   "rp_era_rank": 10,
+   "rp_whip_rank": 10,
+   "sp_ip": "724.2",
+   "rp_ip": "542.2"
+  },
+  {
+   "team": "LG",
+   "sp_era": 4.65,
+   "sp_outs": 2073,
+   "sp_ip_per_gs": 4.87,
+   "qs": 42,
+   "qs_pct": 29.6,
+   "rp_era": 5.07,
+   "rp_outs": 1688,
+   "rp_whip": 1.55,
+   "sp_era_rank": 7,
+   "sp_outs_rank": 9,
+   "sp_ip_per_gs_rank": 9,
+   "qs_pct_rank": 7,
+   "rp_era_rank": 5,
+   "rp_whip_rank": 6,
+   "sp_ip": "691",
+   "rp_ip": "562.2"
+  },
+  {
+   "team": "롯데",
+   "sp_era": 4.6,
+   "sp_outs": 2317,
+   "sp_ip_per_gs": 5.48,
+   "qs": 57,
+   "qs_pct": 40.4,
+   "rp_era": 5.13,
+   "rp_outs": 1426,
+   "rp_whip": 1.58,
+   "sp_era_rank": 6,
+   "sp_outs_rank": 2,
+   "sp_ip_per_gs_rank": 1,
+   "qs_pct_rank": 4,
+   "rp_era_rank": 6,
+   "rp_whip_rank": 7,
+   "sp_ip": "772.1",
+   "rp_ip": "475.1"
+  },
+  {
+   "team": "한화",
+   "sp_era": 5.14,
+   "sp_outs": 1982,
+   "sp_ip_per_gs": 4.62,
+   "qs": 37,
+   "qs_pct": 25.9,
+   "rp_era": 5.45,
+   "rp_outs": 1803,
+   "rp_whip": 1.66,
+   "sp_era_rank": 10,
+   "sp_outs_rank": 10,
+   "sp_ip_per_gs_rank": 10,
+   "qs_pct_rank": 10,
+   "rp_era_rank": 9,
+   "rp_whip_rank": 9,
+   "sp_ip": "660.2",
+   "rp_ip": "601"
+  },
+  {
+   "team": "KIA",
+   "sp_era": 4.16,
+   "sp_outs": 2154,
+   "sp_ip_per_gs": 5.09,
+   "qs": 50,
+   "qs_pct": 35.5,
+   "rp_era": 4.48,
+   "rp_outs": 1604,
+   "rp_whip": 1.49,
+   "sp_era_rank": 3,
+   "sp_outs_rank": 7,
+   "sp_ip_per_gs_rank": 5,
+   "qs_pct_rank": 5,
+   "rp_era_rank": 3,
+   "rp_whip_rank": 3,
+   "sp_ip": "718",
+   "rp_ip": "534.2"
+  }
+ ],
+ "bat": [
+  {
+   "team": "KIA",
+   "rs": 756,
+   "hr": 168,
+   "ops": 0.78,
+   "rs_rank": 4,
+   "hr_rank": 2,
+   "ops_rank": 1
+  },
+  {
+   "team": "KT",
+   "rs": 809,
+   "hr": 117,
+   "ops": 0.779,
+   "rs_rank": 2,
+   "hr_rank": 7,
+   "ops_rank": 2
+  },
+  {
+   "team": "삼성",
+   "rs": 801,
+   "hr": 138,
+   "ops": 0.777,
+   "rs_rank": 3,
+   "hr_rank": 4,
+   "ops_rank": 3
+  },
+  {
+   "team": "한화",
+   "rs": 813,
+   "hr": 175,
+   "ops": 0.776,
+   "rs_rank": 1,
+   "hr_rank": 1,
+   "ops_rank": 4
+  },
+  {
+   "team": "LG",
+   "rs": 717,
+   "hr": 134,
+   "ops": 0.752,
+   "rs_rank": 5,
+   "hr_rank": 5,
+   "ops_rank": 5
+  },
+  {
+   "team": "NC",
+   "rs": 710,
+   "hr": 132,
+   "ops": 0.748,
+   "rs_rank": 6,
+   "hr_rank": 6,
+   "ops_rank": 6
+  },
+  {
+   "team": "SSG",
+   "rs": 701,
+   "hr": 142,
+   "ops": 0.736,
+   "rs_rank": 7,
+   "hr_rank": 3,
+   "ops_rank": 7
+  },
+  {
+   "team": "두산",
+   "rs": 684,
+   "hr": 114,
+   "ops": 0.732,
+   "rs_rank": 8,
+   "hr_rank": 9,
+   "ops_rank": 8
+  },
+  {
+   "team": "롯데",
+   "rs": 665,
+   "hr": 109,
+   "ops": 0.729,
+   "rs_rank": 9,
+   "hr_rank": 10,
+   "ops_rank": 9
+  },
+  {
+   "team": "키움",
+   "rs": 565,
+   "hr": 115,
+   "ops": 0.682,
+   "rs_rank": 10,
+   "hr_rank": 8,
+   "ops_rank": 10
+  }
+ ],
+ "domestic": [
+  {
+   "team": "KIA",
+   "wrc_plus": 107.6,
+   "pa": 4864
+  },
+  {
+   "team": "KT",
+   "wrc_plus": 101.8,
+   "pa": 5112
+  },
+  {
+   "team": "삼성",
+   "wrc_plus": 99.5,
+   "pa": 5067
+  },
+  {
+   "team": "NC",
+   "wrc_plus": 98.4,
+   "pa": 5067
+  },
+  {
+   "team": "두산",
+   "wrc_plus": 98.1,
+   "pa": 5086
+  },
+  {
+   "team": "LG",
+   "wrc_plus": 97.3,
+   "pa": 4911
+  },
+  {
+   "team": "한화",
+   "wrc_plus": 97.1,
+   "pa": 5197
+  },
+  {
+   "team": "SSG",
+   "wrc_plus": 93.4,
+   "pa": 5024
+  },
+  {
+   "team": "키움",
+   "wrc_plus": 86.8,
+   "pa": 4792
+  },
+  {
+   "team": "롯데",
+   "wrc_plus": 77.8,
+   "pa": 4861
+  }
+ ],
+ "foreign_lotte": [
+  "레이예스"
+ ],
+ "close": [
+  {
+   "team": "키움",
+   "g": 144,
+   "low_scoring": 52,
+   "one_run_g": 29,
+   "one_run_w": 14,
+   "one_run_l": 15,
+   "low_rank": 1,
+   "one_run_rank": 9
+  },
+  {
+   "team": "롯데",
+   "g": 141,
+   "low_scoring": 45,
+   "one_run_g": 26,
+   "one_run_w": 9,
+   "one_run_l": 17,
+   "low_rank": 2,
+   "one_run_rank": 10
+  },
+  {
+   "team": "두산",
+   "g": 143,
+   "low_scoring": 44,
+   "one_run_g": 32,
+   "one_run_w": 14,
+   "one_run_l": 18,
+   "low_rank": 3,
+   "one_run_rank": 6
+  },
+  {
+   "team": "SSG",
+   "g": 143,
+   "low_scoring": 38,
+   "one_run_g": 35,
+   "one_run_w": 19,
+   "one_run_l": 16,
+   "low_rank": 4,
+   "one_run_rank": 4
+  },
+  {
+   "team": "NC",
+   "g": 143,
+   "low_scoring": 36,
+   "one_run_g": 39,
+   "one_run_w": 19,
+   "one_run_l": 20,
+   "low_rank": 5,
+   "one_run_rank": 2
+  },
+  {
+   "team": "LG",
+   "g": 142,
+   "low_scoring": 31,
+   "one_run_g": 41,
+   "one_run_w": 23,
+   "one_run_l": 18,
+   "low_rank": 6,
+   "one_run_rank": 1
+  },
+  {
+   "team": "KIA",
+   "g": 141,
+   "low_scoring": 30,
+   "one_run_g": 36,
+   "one_run_w": 17,
+   "one_run_l": 19,
+   "low_rank": 7,
+   "one_run_rank": 3
+  },
+  {
+   "team": "KT",
+   "g": 142,
+   "low_scoring": 30,
+   "one_run_g": 30,
+   "one_run_w": 20,
+   "one_run_l": 10,
+   "low_rank": 7,
+   "one_run_rank": 7
+  },
+  {
+   "team": "삼성",
+   "g": 142,
+   "low_scoring": 27,
+   "one_run_g": 34,
+   "one_run_w": 22,
+   "one_run_l": 12,
+   "low_rank": 9,
+   "one_run_rank": 5
+  },
+  {
+   "team": "한화",
+   "g": 143,
+   "low_scoring": 24,
+   "one_run_g": 30,
+   "one_run_w": 9,
+   "one_run_l": 21,
+   "low_rank": 10,
+   "one_run_rank": 7
+  }
  ]
 }
