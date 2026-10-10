@@ -1,0 +1,60 @@
+---
+// 0을 기준으로 좌(음수)·우(양수)로 뻗는 가로 막대 차트. 빌드 때 SVG로 그려 JS 없이 보인다.
+interface Row { label: string; value: number; highlight?: boolean }
+interface Props {
+  rows: Row[];
+  title: string;
+  caption?: string;
+  unit?: string;
+  digits?: number;
+}
+const { rows, title, caption, unit = '', digits = 1 } = Astro.props;
+
+const W = 640, labelW = 64, valueW = 56, rowH = 30, padTop = 8;
+// 막대 양쪽 끝에 값 글자가 들어갈 자리를 남긴다
+const plotL = labelW + valueW, plotR = W - valueW;
+const max = Math.max(...rows.map((r) => Math.abs(r.value))) || 1;
+const zero = (plotL + plotR) / 2;
+const scale = (plotR - plotL) / 2 / max;
+const H = padTop * 2 + rows.length * rowH;
+const fmt = (v: number) => `${v > 0 ? '+' : ''}${v.toFixed(digits)}${unit}`;
+---
+<figure class="chart">
+  <figcaption class="title">{title}</figcaption>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
+    <line x1={zero} x2={zero} y1={0} y2={H} class="axis" />
+    {rows.map((r, i) => {
+      const y = padTop + i * rowH;
+      const w = Math.abs(r.value) * scale;
+      const x = r.value >= 0 ? zero : zero - w;
+      return (
+        <g class={r.highlight ? 'hl' : ''}>
+          <text x={labelW - 10} y={y + rowH / 2} class="label" text-anchor="end" dominant-baseline="central">{r.label}</text>
+          <rect x={x} y={y + 6} width={Math.max(w, 1)} height={rowH - 12} rx="3" class={r.value >= 0 ? 'pos' : 'neg'} />
+          <text
+            x={r.value >= 0 ? x + w + 6 : x - 6}
+            y={y + rowH / 2}
+            class="value"
+            text-anchor={r.value >= 0 ? 'start' : 'end'}
+            dominant-baseline="central"
+          >{fmt(r.value)}</text>
+        </g>
+      );
+    })}
+  </svg>
+  {caption && <figcaption class="cap">{caption}</figcaption>}
+</figure>
+
+<style>
+  .chart { margin: 1.6em 0; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  svg { width: 100%; height: auto; display: block; }
+  .axis { stroke: var(--muted); stroke-width: 1; }
+  .label { fill: var(--text); font-size: 14px; }
+  .value { fill: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .pos { fill: var(--pos); opacity: .8; }
+  .neg { fill: var(--neg); opacity: .8; }
+  .hl .label { font-weight: 800; fill: var(--accent); }
+  .hl rect { opacity: 1; stroke: var(--text); stroke-width: 1.5; }
+</style>

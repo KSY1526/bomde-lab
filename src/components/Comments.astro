@@ -1,0 +1,142 @@
+---
+// 자체 닉네임 댓글(사용자 결정 2026-10-10). 서버는 챗봇과 같은 곳(2단계에서 구현).
+//   GET    {API}/comments?post=<slug>          → { comments: [{ id, nickname, body, created_at }] }
+//   POST   {API}/comments { post, nickname, password, body } → { comment } | 4xx { error }
+//   DELETE {API}/comments/<id> { password }   → { ok }
+interface Props { slug: string }
+const { slug } = Astro.props;
+const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
+---
+<section class="comments card" data-comments data-api={api} data-slug={slug} aria-labelledby="comments-title">
+  <h2 id="comments-title">댓글 <span class="muted" data-total></span></h2>
+  <ul class="list" data-list><li class="muted empty" data-empty>댓글을 불러오는 중…</li></ul>
+
+  <form class="form" data-form>
+    <div class="row">
+      <label class="sr-only" for="c-nick">닉네임</label>
+      <input id="c-nick" name="nickname" maxlength="20" placeholder="닉네임" required />
+      <label class="sr-only" for="c-pw">비밀번호</label>
+      <input id="c-pw" name="password" type="password" minlength="4" maxlength="30" placeholder="비밀번호(삭제용)" autocomplete="new-password" required />
+    </div>
+    <label class="sr-only" for="c-body">댓글</label>
+    <textarea id="c-body" name="body" rows="3" maxlength="1000" placeholder="야구 이야기는 언제나 환영이에요. 욕설·비방은 삭제될 수 있어요." required></textarea>
+    <div class="actions">
+      <span class="muted small" data-msg></span>
+      <button type="submit" data-submit>댓글 남기기</button>
+    </div>
+  </form>
+</section>
+
+<script>
+  type C = { id: string; nickname: string; body: string; created_at: string };
+  document.querySelectorAll<HTMLElement>('[data-comments]').forEach((root) => {
+    const api = root.dataset.api ?? '';
+    const slug = root.dataset.slug ?? '';
+    const list = root.querySelector<HTMLUListElement>('[data-list]')!;
+    const total = root.querySelector<HTMLElement>('[data-total]')!;
+    const form = root.querySelector<HTMLFormElement>('[data-form]')!;
+    const msg = root.querySelector<HTMLElement>('[data-msg]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-submit]')!;
+    const nick = form.querySelector<HTMLInputElement>('input[name=nickname]')!;
+    try { nick.value = localStorage.getItem('kbot.nickname') ?? ''; } catch { /* 무시 */ }
+
+    const empty = (text: string) => {
+      list.replaceChildren();
+      const li = document.createElement('li');
+      li.className = 'muted empty';
+      li.textContent = text;
+      list.append(li);
+    };
+    const offline = () => { empty('댓글 서버가 지금은 쉬는 중이에요. 잠시 후 다시 들러 주세요.'); submit.disabled = true; };
+
+    function render(comments: C[]) {
+      total.textContent = comments.length ? String(comments.length) : '';
+      if (!comments.length) { empty('첫 댓글을 남겨 주세요.'); return; }
+      list.replaceChildren(...comments.map((c) => {
+        const li = document.createElement('li');
+        const head = document.createElement('div');
+        head.className = 'head';
+        const who = document.createElement('strong');
+        who.textContent = c.nickname;
+        const when = document.createElement('span');
+        when.className = 'muted small';
+        when.textContent = new Date(c.created_at).toLocaleString('ko-KR', { dateStyle: 'short', timeStyle: 'short' });
+        const del = document.createElement('button');
+        del.type = 'button'; del.className = 'del'; del.textContent = '삭제';
+        del.addEventListener('click', () => remove(c.id));
+        head.append(who, when, del);
+        const body = document.createElement('p');
+        body.textContent = c.body;
+        li.append(head, body);
+        return li;
+      }));
+    }
+
+    async function load() {
+      if (!api) { offline(); return; }
+      try {
+        const r = await fetch(`${api}/comments?post=${encodeURIComponent(slug)}`, { signal: AbortSignal.timeout(5000) });
+        if (!r.ok) throw new Error();
+        render((await r.json()).comments ?? []);
+        submit.disabled = false;
+      } catch { offline(); }
+    }
+
+    async function remove(id: string) {
+      const password = prompt('댓글 비밀번호를 입력하세요');
+      if (!password) return;
+      const r = await fetch(`${api}/comments/${encodeURIComponent(id)}`, {
+        method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }),
+      }).catch(() => null);
+      if (r?.ok) load(); else alert('비밀번호가 맞지 않거나 삭제할 수 없어요.');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+      submit.disabled = true; msg.textContent = '';
+      try {
+        const r = await fetch(`${api}/comments`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ post: slug, ...data }),
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) { msg.textContent = j.error ?? '댓글을 남기지 못했어요.'; return; }
+        try { localStorage.setItem('kbot.nickname', data.nickname); } catch { /* 무시 */ }
+        (form.elements.namedItem('body') as HTMLTextAreaElement).value = '';
+        load();
+      } catch {
+        msg.textContent = '서버와 연결이 끊겼어요.';
+      } finally {
+        submit.disabled = false;
+      }
+    });
+
+    load();
+  });
+</script>
+
+<style>
+  .comments { padding: 20px; margin-top: 32px; }
+  h2 { margin: 0 0 12px; font-size: 18px; }
+  .list { list-style: none; margin: 0 0 16px; padding: 0; }
+  .list li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .list li.empty { border: 0; }
+  .list :global(.head) { display: flex; gap: 8px; align-items: baseline; }
+  .list :global(.del) { margin-left: auto; background: none; border: 0; color: var(--muted); font: inherit; font-size: 12.5px; cursor: pointer; }
+  .list :global(p) { margin: 4px 0 0; white-space: pre-wrap; }
+  .form { display: grid; gap: 8px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  input, textarea {
+    width: 100%; font: inherit; font-size: 15px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text);
+  }
+  input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  button[type='submit'] {
+    font: inherit; font-weight: 700; padding: 8px 18px; border: 0; border-radius: 8px;
+    background: var(--navy); color: #fff; cursor: pointer;
+  }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  .small { font-size: 12.5px; }
+</style>

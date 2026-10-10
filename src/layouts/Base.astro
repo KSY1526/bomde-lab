@@ -1,0 +1,100 @@
+---
+import '../styles/global.css';
+import ChatPanel from '../components/ChatPanel.astro';
+import { SITE, CATEGORIES, url } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title, description = SITE.description } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+const nav = [
+  ...Object.entries(CATEGORIES).map(([key, label]) => ({ href: url(`category/${key}`), label })),
+  { href: url('about'), label: '소개' },
+];
+---
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/favicon.svg`} />
+    <link rel="sitemap" href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/sitemap-index.xml`} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.title} href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/rss.xml`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:title" content={title ?? SITE.title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ko_KR" />
+    <meta name="theme-color" content="#041e42" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap head-row">
+        <a class="brand" href={url()}>
+          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#fff" stroke="#d00f31" stroke-width="4"/><path d="M15 15c8 8 8 26 0 34M49 15c-8 8-8 26 0 34" fill="none" stroke="#d00f31" stroke-width="3" stroke-dasharray="4 3"/></svg>
+          <span>
+            <strong>{SITE.title}</strong>
+            <small>{SITE.tagline}</small>
+          </span>
+        </a>
+      </div>
+      <nav class="wrap nav" aria-label="주 메뉴">
+        <a href={url()} aria-current={path === url() ? 'page' : undefined}>홈</a>
+        {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+      </nav>
+      <div class="stripe" aria-hidden="true"></div>
+    </header>
+
+    <div class="wrap layout">
+      <main id="main">
+        <slot />
+      </main>
+      <aside class="chat-aside" aria-label="크봇 챗봇">
+        <ChatPanel />
+      </aside>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p><strong>{SITE.title}</strong> · {SITE.tagline}</p>
+        <p class="muted">{SITE.source}. 자체 계산 지표(*)는 공식 기록과 다를 수 있습니다.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .site-header { background: var(--header-bg); color: var(--header-text); }
+  .head-row { padding-top: 18px; padding-bottom: 6px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; color: inherit; }
+  .brand:hover { text-decoration: none; }
+  .logo { width: 44px; height: 44px; flex: none; }
+  .brand strong { display: block; font-size: 22px; letter-spacing: -.02em; line-height: 1.2; }
+  .brand small { display: block; font-size: 13px; opacity: .75; }
+  .nav { display: flex; gap: 4px; overflow-x: auto; padding-top: 6px; padding-bottom: 0; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a {
+    color: rgb(255 255 255 / 78%); padding: 8px 12px 10px; white-space: nowrap; font-size: 15px;
+    border-bottom: 3px solid transparent;
+  }
+  .nav a:hover { color: #fff; text-decoration: none; }
+  .nav a[aria-current='page'] { color: #fff; font-weight: 700; border-bottom-color: var(--red); }
+  .stripe { height: 4px; background: var(--red); }
+
+  .chat-aside { position: sticky; top: 16px; align-self: start; height: calc(100vh - 32px); }
+  @media (max-width: 1023px) {
+    .chat-aside { position: static; height: auto; }
+  }
+
+  .site-footer { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 14px; }
+  .site-footer p { margin: 0 0 4px; }
+</style>

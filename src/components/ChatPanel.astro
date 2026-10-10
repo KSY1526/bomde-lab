@@ -1,0 +1,219 @@
+---
+// 우측 크봇 챗봇. 데스크톱은 우측 고정 패널, 모바일(1023px 이하)은 우하단 버튼 → 아래에서 올라오는 창.
+// 서버(Tailscale Funnel, 2단계에서 구현) 계약:
+//   GET  {API}/health → { ok: true, remaining_today: number }
+//   POST {API}/chat   { nickname, question } → { reply, remaining_today } | 4xx/5xx { error }
+// 문답은 비공개(사용자 결정 2026-10-10) — 각자 브라우저에 자기 문답만 보관한다.
+const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
+---
+<button class="chat-fab" type="button" aria-controls="kbot-panel" aria-expanded="false" data-chat-toggle>
+  <span aria-hidden="true">💬</span> 크봇에게 물어보기
+</button>
+
+<section id="kbot-panel" class="chat card" data-api={api} aria-labelledby="kbot-title">
+  <header class="chat-head">
+    <div>
+      <h2 id="kbot-title">크봇에게 물어보기</h2>
+      <p class="status" data-status><span class="dot"></span><span data-status-text>연결 확인 중…</span></p>
+    </div>
+    <button class="close" type="button" aria-label="챗봇 닫기" data-chat-toggle>✕</button>
+  </header>
+
+  <ol class="log" data-log aria-live="polite">
+    <li class="msg bot intro">
+      KBO 기록이라면 무엇이든 물어보세요. 2017년부터의 정규시즌 투구·타석 데이터로 답해 드려요.
+      <span class="examples">
+        <button type="button" data-example>롯데 올해 팀 OPS 순위</button>
+        <button type="button" data-example>김도영 2024 wRC+</button>
+        <button type="button" data-example>박세웅 구종별 피안타율</button>
+      </span>
+    </li>
+  </ol>
+
+  <form class="ask" data-form>
+    <label class="sr-only" for="kbot-nick">닉네임</label>
+    <input id="kbot-nick" name="nickname" maxlength="20" placeholder="닉네임" autocomplete="nickname" required />
+    <label class="sr-only" for="kbot-q">질문</label>
+    <textarea id="kbot-q" name="question" maxlength="300" rows="2" placeholder="예) 롯데 불펜 9월 평균자책점" required></textarea>
+    <div class="ask-row">
+      <span class="muted small" data-count>0/300</span>
+      <button type="submit" data-submit>보내기</button>
+    </div>
+  </form>
+  <p class="foot muted small">답변은 데이터 조회 결과이며 공식 기록과 다를 수 있어요. 하루 질문 수에 제한이 있어요.</p>
+</section>
+
+<script>
+  type Turn = { q: string; a: string; at: number; error?: boolean };
+  const HISTORY_KEY = 'kbot.history';
+  const NICK_KEY = 'kbot.nickname';
+  const MAX_HISTORY = 30;
+
+  // 브라우저 저장소는 막혀 있을 수 있다(사생활 보호 모드 등) → 실패해도 동작
+  const store = {
+    get(key: string) { try { return localStorage.getItem(key); } catch { return null; } },
+    set(key: string, v: string) { try { localStorage.setItem(key, v); } catch { /* 무시 */ } },
+  };
+
+  const panel = document.getElementById('kbot-panel')!;
+  const api = panel.dataset.api ?? '';
+  const log = panel.querySelector<HTMLOListElement>('[data-log]')!;
+  const form = panel.querySelector<HTMLFormElement>('[data-form]')!;
+  const nick = form.querySelector<HTMLInputElement>('input[name=nickname]')!;
+  const q = form.querySelector<HTMLTextAreaElement>('textarea')!;
+  const submit = form.querySelector<HTMLButtonElement>('[data-submit]')!;
+  const count = form.querySelector<HTMLElement>('[data-count]')!;
+  const status = panel.querySelector<HTMLElement>('[data-status]')!;
+  const statusText = panel.querySelector<HTMLElement>('[data-status-text]')!;
+  let online = false;
+
+  function setStatus(state: 'on' | 'off', text: string) {
+    status.dataset.state = state;
+    statusText.textContent = text;
+    online = state === 'on';
+    submit.disabled = !online;
+  }
+
+  function loadHistory(): Turn[] {
+    try { return JSON.parse(store.get(HISTORY_KEY) ?? '[]'); } catch { return []; }
+  }
+  function saveHistory(h: Turn[]) { store.set(HISTORY_KEY, JSON.stringify(h.slice(-MAX_HISTORY))); }
+
+  function bubble(cls: string, text: string): HTMLLIElement {
+    const li = document.createElement('li');
+    li.className = `msg ${cls}`;
+    li.textContent = text; // 답변은 텍스트로만 넣는다(HTML 주입 방지)
+    log.append(li);
+    log.scrollTop = log.scrollHeight;
+    return li;
+  }
+
+  for (const t of loadHistory()) {
+    bubble('me', t.q);
+    bubble(t.error ? 'bot error' : 'bot', t.a);
+  }
+
+  nick.value = store.get(NICK_KEY) ?? '';
+  q.addEventListener('input', () => { count.textContent = `${q.value.length}/300`; });
+  q.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); }
+  });
+  panel.querySelectorAll<HTMLButtonElement>('[data-example]').forEach((b) =>
+    b.addEventListener('click', () => { q.value = b.textContent ?? ''; q.dispatchEvent(new Event('input')); q.focus(); }));
+
+  async function checkHealth() {
+    if (!api) { setStatus('off', '준비 중이에요'); return; }
+    try {
+      const r = await fetch(`${api}/health`, { signal: AbortSignal.timeout(5000) });
+      const j = await r.json();
+      setStatus('on', typeof j.remaining_today === 'number' ? `온라인 · 오늘 남은 질문 ${j.remaining_today}개` : '온라인');
+    } catch {
+      setStatus('off', '지금은 쉬는 중이에요');
+    }
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const question = q.value.trim();
+    const nickname = nick.value.trim();
+    if (!question || !nickname || !online) return;
+    store.set(NICK_KEY, nickname);
+    bubble('me', question);
+    q.value = ''; count.textContent = '0/300';
+    const wait = bubble('bot pending', '크봇이 기록을 찾아보는 중이에요…');
+    submit.disabled = true;
+    let turn: Turn;
+    try {
+      const r = await fetch(`${api}/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nickname, question }),
+        signal: AbortSignal.timeout(200_000),
+      });
+      const j = await r.json().catch(() => ({}));
+      turn = r.ok
+        ? { q: question, a: j.reply, at: Date.now() }
+        : { q: question, a: j.error ?? '지금은 답변을 만들지 못했어요. 잠시 후 다시 물어봐 주세요.', at: Date.now(), error: true };
+      if (typeof j.remaining_today === 'number') setStatus('on', `온라인 · 오늘 남은 질문 ${j.remaining_today}개`);
+    } catch {
+      turn = { q: question, a: '크봇과 연결이 끊겼어요. 잠시 후 다시 물어봐 주세요.', at: Date.now(), error: true };
+      checkHealth();
+    }
+    wait.className = turn.error ? 'msg bot error' : 'msg bot';
+    wait.textContent = turn.a;
+    log.scrollTop = log.scrollHeight;
+    saveHistory([...loadHistory(), turn]);
+    submit.disabled = !online;
+  });
+
+  // 모바일: 버튼으로 열고 닫기
+  const fab = document.querySelector<HTMLButtonElement>('.chat-fab')!;
+  document.querySelectorAll('[data-chat-toggle]').forEach((b) =>
+    b.addEventListener('click', () => {
+      const open = panel.classList.toggle('open');
+      fab.setAttribute('aria-expanded', String(open));
+      document.body.classList.toggle('chat-open', open);
+      if (open) q.focus();
+    }));
+
+  checkHealth();
+</script>
+
+<style>
+  .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+  .chat-head {
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+    padding: 14px 16px 12px; background: var(--navy); color: #fff; border-bottom: 3px solid var(--red);
+  }
+  .chat-head h2 { margin: 0; font-size: 17px; }
+  .status { margin: 2px 0 0; font-size: 12.5px; opacity: .85; display: flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #9aa5b8; }
+  .status[data-state='on'] .dot { background: #3ddc84; }
+  .status[data-state='off'] .dot { background: #ff6b81; }
+  .close { display: none; background: none; border: 0; color: #fff; font-size: 18px; cursor: pointer; padding: 4px 8px; }
+
+  .log { list-style: none; margin: 0; padding: 14px; flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; min-height: 160px; }
+  .msg { max-width: 92%; padding: 9px 12px; border-radius: 12px; font-size: 14.5px; line-height: 1.6; white-space: pre-wrap; }
+  .msg.bot { background: var(--chip-bg); align-self: flex-start; border-top-left-radius: 4px; }
+  .msg.me { background: var(--navy); color: #fff; align-self: flex-end; border-top-right-radius: 4px; }
+  .msg.pending { color: var(--muted); }
+  .msg.error { background: var(--red-soft); color: var(--accent); }
+  .intro { white-space: normal; }
+  .examples { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .examples button {
+    font: inherit; font-size: 13px; padding: 3px 10px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  }
+  .examples button:hover { border-color: var(--accent); color: var(--accent); }
+
+  .ask { display: grid; gap: 8px; padding: 12px 14px; border-top: 1px solid var(--line); }
+  .ask input, .ask textarea {
+    width: 100%; font: inherit; font-size: 15px; padding: 8px 10px; resize: none;
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text);
+  }
+  .ask input:focus, .ask textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .ask-row { display: flex; justify-content: space-between; align-items: center; }
+  .ask button {
+    font: inherit; font-weight: 700; padding: 7px 18px; border: 0; border-radius: 8px;
+    background: var(--red); color: #fff; cursor: pointer;
+  }
+  .ask button:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; }
+  .small { font-size: 12.5px; }
+  .foot { margin: 0; padding: 0 14px 12px; }
+
+  .chat-fab { display: none; }
+  @media (max-width: 1023px) {
+    .chat-fab {
+      display: inline-flex; gap: 6px; align-items: center; position: fixed; right: 16px; bottom: 16px; z-index: 40;
+      padding: 12px 18px; border: 0; border-radius: 999px; background: var(--red); color: #fff;
+      font: inherit; font-weight: 700; box-shadow: 0 6px 20px rgb(0 0 0 / 25%); cursor: pointer;
+    }
+    .chat { display: none; }
+    .chat.open {
+      display: flex; position: fixed; inset: auto 0 0 0; height: min(80vh, 640px); z-index: 50;
+      border-radius: 16px 16px 0 0;
+    }
+    .close { display: block; }
+    :global(body.chat-open) .chat-fab { display: none; }
+  }
+</style>

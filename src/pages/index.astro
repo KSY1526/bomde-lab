@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import PostCard from '../components/PostCard.astro';
+import { publishedPosts } from '../lib/posts';
+import standings from '../data/standings-2026.json';
+
+const posts = await publishedPosts();
+const until = new Date(standings.until);
+---
+<Base>
+  <section class="standings card" aria-labelledby="st-title">
+    <div class="st-head">
+      <h2 id="st-title">{standings.season} 순위</h2>
+      <span class="muted small">{until.getMonth() + 1}/{until.getDate()}까지</span>
+    </div>
+    <table class="num">
+      <thead><tr><th>순위</th><th>팀</th><th>경기</th><th>승</th><th>패</th><th>무</th><th>승률</th><th>득실</th></tr></thead>
+      <tbody>
+        {standings.teams.map((t) => (
+          <tr class={t.team === '롯데' ? 'ours' : ''}>
+            <td>{t.rank}</td><td>{t.team}</td><td>{t.g}</td><td>{t.w}</td><td>{t.l}</td><td>{t.d}</td>
+            <td>{t.win_pct.toFixed(3).replace(/^0/, '')}</td>
+            <td class={t.run_diff >= 0 ? 'pos' : 'neg'}>{t.run_diff > 0 ? '+' : ''}{t.run_diff}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section aria-labelledby="latest-title">
+    <h2 id="latest-title" class="sec-title">최신 글</h2>
+    <div class="posts">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .standings { padding: 16px 18px; margin-bottom: 32px; overflow-x: auto; }
+  .st-head { display: flex; justify-content: space-between; align-items: baseline; }
+  .st-head h2 { margin: 0 0 8px; font-size: 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { padding: 7px 8px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:nth-child(2), td:nth-child(2) { text-align: left; }
+  th { color: var(--muted); font-weight: 600; font-size: 12.5px; }
+  tr.ours td { background: var(--red-soft); font-weight: 700; }
+  tr.ours td:nth-child(2) { color: var(--accent); }
+  .pos { color: var(--pos); }
+  .neg { color: var(--neg); }
+  .small { font-size: 13px; }
+  .sec-title { font-size: 20px; margin: 0 0 12px; }
+  .posts { display: grid; gap: 14px; }
+</style>
