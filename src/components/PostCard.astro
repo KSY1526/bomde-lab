@@ -1,0 +1,25 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { CATEGORIES, url, formatDate } from '../lib/site';
+
+interface Props { post: CollectionEntry<'posts'> }
+const { post } = Astro.props;
+const { title, description, date, category } = post.data;
+---
+<article class="post-card card">
+  <div class="meta">
+    <a class="chip red" href={url(`category/${category}`)}>{CATEGORIES[category]}</a>
+    <time class="muted" datetime={date.toISOString()}>{formatDate(date)}</time>
+  </div>
+  <h3><a href={url(`posts/${post.id}`)}>{title}</a></h3>
+  <p class="muted">{description}</p>
+</article>
+
+<style>
+  .post-card { padding: 18px 20px; }
+  .meta { display: flex; gap: 10px; align-items: center; font-size: 13px; }
+  .meta a:hover { text-decoration: none; }
+  h3 { margin: 8px 0 4px; font-size: 19px; line-height: 1.45; }
+  h3 a { color: var(--text); }
+  p { margin: 0; font-size: 15px; }
+</style>

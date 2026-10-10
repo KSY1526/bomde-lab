@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+# 원본 DB·원자료는 공개 저장소에 넣지 않는다 (docs/데이터-공개-원칙.md)
+*.duckdb
+*.duckdb.wal
+*.parquet
+server/data/
+logs/
+__pycache__/
+.omc/
+.claude/settings.local.json
+.shots/

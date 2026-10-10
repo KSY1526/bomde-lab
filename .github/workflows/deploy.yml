@@ -1,0 +1,35 @@
+# main에 push하면 GitHub Pages로 배포 (저장소 Settings → Pages → Source: GitHub Actions)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: withastro/action@v4
+        env:
+          # 챗봇·댓글 서버 주소: 저장소 Settings → Secrets and variables → Actions → Variables 에 KBOT_API 등록
+          PUBLIC_KBOT_API: ${{ vars.KBOT_API }}
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
