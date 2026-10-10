@@ -2,7 +2,8 @@
 // 우측 크봇 챗봇. 데스크톱은 우측 고정 패널, 모바일(1023px 이하)은 우하단 버튼 → 아래에서 올라오는 창.
 // 서버(Tailscale Funnel, 2단계에서 구현) 계약:
 //   GET  {API}/health → { ok: true, remaining_today: number }
-//   POST {API}/chat   { nickname, question } → { reply, remaining_today } | 4xx/5xx { error }
+//   POST {API}/chat   { nickname, question, history: [{ q, a }] } → { reply, remaining_today } | 4xx/5xx { error, remaining_today? }
+//   history = 30분 안의 직전 문답 최대 2개(추가 질문 맥락)
 // 문답은 비공개(사용자 결정 2026-10-10) — 각자 브라우저에 자기 문답만 보관한다.
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
@@ -48,6 +49,8 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   const HISTORY_KEY = 'kbot.history';
   const NICK_KEY = 'kbot.nickname';
   const MAX_HISTORY = 30;
+  const CONTEXT_TURNS = 2;
+  const CONTEXT_WINDOW_MS = 30 * 60 * 1000;
 
   // 브라우저 저장소는 막혀 있을 수 있다(사생활 보호 모드 등) → 실패해도 동작
   const store = {
@@ -112,6 +115,11 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     }
   }
 
+  function recentContext() {
+    const cutoff = Date.now() - CONTEXT_WINDOW_MS;
+    return loadHistory().filter((t) => !t.error && t.at >= cutoff).slice(-CONTEXT_TURNS).map(({ q, a }) => ({ q, a }));
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const question = q.value.trim();
@@ -127,7 +135,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
       const r = await fetch(`${api}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nickname, question }),
+        body: JSON.stringify({ nickname, question, history: recentContext() }),
         signal: AbortSignal.timeout(200_000),
       });
       const j = await r.json().catch(() => ({}));
