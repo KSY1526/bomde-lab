@@ -1,0 +1,835 @@
+{
+ "season": 2026,
+ "until": "2026-10-09",
+ "teams": [
+  {
+   "team": "KIA",
+   "wrc_plus": 109.7,
+   "ops": 0.78,
+   "woba": 0.355,
+   "pa": 5545,
+   "sp_era": 4.16,
+   "rp_era": 4.48,
+   "wrc_rank": 1,
+   "ops_rank": 1,
+   "sp_rank": 3,
+   "rp_rank": 3
+  },
+  {
+   "team": "LG",
+   "wrc_plus": 107.2,
+   "ops": 0.752,
+   "woba": 0.347,
+   "pa": 5538,
+   "sp_era": 4.65,
+   "rp_era": 5.07,
+   "wrc_rank": 2,
+   "ops_rank": 5,
+   "sp_rank": 7,
+   "rp_rank": 5
+  },
+  {
+   "team": "KT",
+   "wrc_plus": 106.5,
+   "ops": 0.779,
+   "woba": 0.36,
+   "pa": 5738,
+   "sp_era": 3.88,
+   "rp_era": 4.69,
+   "wrc_rank": 3,
+   "ops_rank": 2,
+   "sp_rank": 2,
+   "rp_rank": 4
+  },
+  {
+   "team": "삼성",
+   "wrc_plus": 102.6,
+   "ops": 0.777,
+   "woba": 0.358,
+   "pa": 5688,
+   "sp_era": 4.33,
+   "rp_era": 4.17,
+   "wrc_rank": 4,
+   "ops_rank": 3,
+   "sp_rank": 4,
+   "rp_rank": 2
+  },
+  {
+   "team": "두산",
+   "wrc_plus": 100.9,
+   "ops": 0.732,
+   "woba": 0.337,
+   "pa": 5570,
+   "sp_era": 3.76,
+   "rp_era": 3.95,
+   "wrc_rank": 5,
+   "ops_rank": 8,
+   "sp_rank": 1,
+   "rp_rank": 1
+  },
+  {
+   "team": "한화",
+   "wrc_plus": 100.6,
+   "ops": 0.776,
+   "woba": 0.355,
+   "pa": 5752,
+   "sp_era": 5.14,
+   "rp_era": 5.45,
+   "wrc_rank": 6,
+   "ops_rank": 4,
+   "sp_rank": 10,
+   "rp_rank": 9
+  },
+  {
+   "team": "NC",
+   "wrc_plus": 99.3,
+   "ops": 0.748,
+   "woba": 0.345,
+   "pa": 5583,
+   "sp_era": 4.59,
+   "rp_era": 5.17,
+   "wrc_rank": 7,
+   "ops_rank": 6,
+   "sp_rank": 5,
+   "rp_rank": 8
+  },
+  {
+   "team": "SSG",
+   "wrc_plus": 94.4,
+   "ops": 0.736,
+   "woba": 0.338,
+   "pa": 5588,
+   "sp_era": 5.13,
+   "rp_era": 5.15,
+   "wrc_rank": 8,
+   "ops_rank": 7,
+   "sp_rank": 9,
+   "rp_rank": 7
+  },
+  {
+   "team": "키움",
+   "wrc_plus": 91.4,
+   "ops": 0.682,
+   "woba": 0.318,
+   "pa": 5536,
+   "sp_era": 4.79,
+   "rp_era": 6.14,
+   "wrc_rank": 9,
+   "ops_rank": 10,
+   "sp_rank": 8,
+   "rp_rank": 10
+  },
+  {
+   "team": "롯데",
+   "wrc_plus": 84.2,
+   "ops": 0.729,
+   "woba": 0.334,
+   "pa": 5474,
+   "sp_era": 4.6,
+   "rp_era": 5.13,
+   "wrc_rank": 10,
+   "ops_rank": 9,
+   "sp_rank": 6,
+   "rp_rank": 6
+  }
+ ],
+ "park": [
+  {
+   "team": "롯데",
+   "pf": 1.094
+  },
+  {
+   "team": "키움",
+   "pf": 0.919
+  }
+ ],
+ "worst_by_year": [
+  {
+   "season": 2017,
+   "team": "KT",
+   "wrc_plus": 81.5
+  },
+  {
+   "season": 2018,
+   "team": "NC",
+   "wrc_plus": 82.6
+  },
+  {
+   "season": 2019,
+   "team": "롯데",
+   "wrc_plus": 79.4
+  },
+  {
+   "season": 2020,
+   "team": "한화",
+   "wrc_plus": 81.1
+  },
+  {
+   "season": 2021,
+   "team": "KIA",
+   "wrc_plus": 87.0
+  },
+  {
+   "season": 2022,
+   "team": "KT",
+   "wrc_plus": 89.4
+  },
+  {
+   "season": 2023,
+   "team": "롯데",
+   "wrc_plus": 89.4
+  },
+  {
+   "season": 2024,
+   "team": "SSG",
+   "wrc_plus": 89.7
+  },
+  {
+   "season": 2025,
+   "team": "롯데",
+   "wrc_plus": 91.2
+  },
+  {
+   "season": 2026,
+   "team": "롯데",
+   "wrc_plus": 84.2
+  }
+ ],
+ "lotte_rank_by_year": [
+  {
+   "season": 2017,
+   "wrc_plus": 92.4,
+   "from_bottom": 3
+  },
+  {
+   "season": 2018,
+   "wrc_plus": 97.9,
+   "from_bottom": 5
+  },
+  {
+   "season": 2019,
+   "wrc_plus": 79.4,
+   "from_bottom": 1
+  },
+  {
+   "season": 2020,
+   "wrc_plus": 93.1,
+   "from_bottom": 4
+  },
+  {
+   "season": 2021,
+   "wrc_plus": 99.0,
+   "from_bottom": 5
+  },
+  {
+   "season": 2022,
+   "wrc_plus": 91.3,
+   "from_bottom": 3
+  },
+  {
+   "season": 2023,
+   "wrc_plus": 89.4,
+   "from_bottom": 1
+  },
+  {
+   "season": 2024,
+   "wrc_plus": 95.7,
+   "from_bottom": 5
+  },
+  {
+   "season": 2025,
+   "wrc_plus": 91.2,
+   "from_bottom": 1
+  },
+  {
+   "season": 2026,
+   "wrc_plus": 84.2,
+   "from_bottom": 1
+  }
+ ],
+ "runs_below_avg": -112.1,
+ "wins_below_avg": -10.6,
+ "runs_per_win": 10.58,
+ "top5": [
+  {
+   "team": "KIA",
+   "top": [
+    {
+     "name": "김도영",
+     "wrc_plus": 172.7,
+     "pa": 574
+    },
+    {
+     "name": "나성범",
+     "wrc_plus": 143.8,
+     "pa": 568
+    },
+    {
+     "name": "카스트로",
+     "wrc_plus": 139.6,
+     "pa": 417
+    },
+    {
+     "name": "한준수",
+     "wrc_plus": 125.2,
+     "pa": 380
+    },
+    {
+     "name": "박재현",
+     "wrc_plus": 109.4,
+     "pa": 544
+    }
+   ]
+  },
+  {
+   "team": "KT",
+   "top": [
+    {
+     "name": "안현민",
+     "wrc_plus": 153.2,
+     "pa": 406
+    },
+    {
+     "name": "최원준",
+     "wrc_plus": 144.2,
+     "pa": 664
+    },
+    {
+     "name": "힐리어드",
+     "wrc_plus": 144.0,
+     "pa": 626
+    },
+    {
+     "name": "허경민",
+     "wrc_plus": 116.9,
+     "pa": 387
+    },
+    {
+     "name": "김현수",
+     "wrc_plus": 101.8,
+     "pa": 616
+    }
+   ]
+  },
+  {
+   "team": "LG",
+   "top": [
+    {
+     "name": "오스틴",
+     "wrc_plus": 183.5,
+     "pa": 627
+    },
+    {
+     "name": "송찬의",
+     "wrc_plus": 130.8,
+     "pa": 425
+    },
+    {
+     "name": "문정빈",
+     "wrc_plus": 126.0,
+     "pa": 319
+    },
+    {
+     "name": "박해민",
+     "wrc_plus": 107.5,
+     "pa": 582
+    },
+    {
+     "name": "문보경",
+     "wrc_plus": 105.5,
+     "pa": 418
+    }
+   ]
+  },
+  {
+   "team": "NC",
+   "top": [
+    {
+     "name": "박민우",
+     "wrc_plus": 125.2,
+     "pa": 559
+    },
+    {
+     "name": "박건우",
+     "wrc_plus": 123.7,
+     "pa": 495
+    },
+    {
+     "name": "김휘집",
+     "wrc_plus": 121.2,
+     "pa": 346
+    },
+    {
+     "name": "천재환",
+     "wrc_plus": 112.3,
+     "pa": 330
+    },
+    {
+     "name": "김주원",
+     "wrc_plus": 110.6,
+     "pa": 586
+    }
+   ]
+  },
+  {
+   "team": "SSG",
+   "top": [
+    {
+     "name": "박성한",
+     "wrc_plus": 130.6,
+     "pa": 620
+    },
+    {
+     "name": "에레디아",
+     "wrc_plus": 107.4,
+     "pa": 492
+    },
+    {
+     "name": "전의산",
+     "wrc_plus": 97.1,
+     "pa": 327
+    },
+    {
+     "name": "김재환",
+     "wrc_plus": 96.8,
+     "pa": 526
+    },
+    {
+     "name": "조형우",
+     "wrc_plus": 90.2,
+     "pa": 376
+    }
+   ]
+  },
+  {
+   "team": "두산",
+   "top": [
+    {
+     "name": "박준순",
+     "wrc_plus": 129.0,
+     "pa": 413
+    },
+    {
+     "name": "카메론",
+     "wrc_plus": 125.3,
+     "pa": 314
+    },
+    {
+     "name": "김민석",
+     "wrc_plus": 120.8,
+     "pa": 515
+    },
+    {
+     "name": "양의지",
+     "wrc_plus": 116.6,
+     "pa": 534
+    },
+    {
+     "name": "안재석",
+     "wrc_plus": 104.8,
+     "pa": 447
+    }
+   ]
+  },
+  {
+   "team": "롯데",
+   "top": [
+    {
+     "name": "레이예스",
+     "wrc_plus": 134.1,
+     "pa": 613
+    },
+    {
+     "name": "한동희",
+     "wrc_plus": 119.6,
+     "pa": 445
+    },
+    {
+     "name": "나승엽",
+     "wrc_plus": 103.5,
+     "pa": 423
+    },
+    {
+     "name": "고승민",
+     "wrc_plus": 101.3,
+     "pa": 480
+    },
+    {
+     "name": "손성빈",
+     "wrc_plus": 87.9,
+     "pa": 371
+    }
+   ]
+  },
+  {
+   "team": "삼성",
+   "top": [
+    {
+     "name": "구자욱",
+     "wrc_plus": 167.6,
+     "pa": 495
+    },
+    {
+     "name": "디아즈",
+     "wrc_plus": 127.5,
+     "pa": 621
+    },
+    {
+     "name": "최형우",
+     "wrc_plus": 121.0,
+     "pa": 565
+    },
+    {
+     "name": "박승규",
+     "wrc_plus": 117.9,
+     "pa": 375
+    },
+    {
+     "name": "강민호",
+     "wrc_plus": 108.2,
+     "pa": 339
+    }
+   ]
+  },
+  {
+   "team": "키움",
+   "top": [
+    {
+     "name": "데이비슨",
+     "wrc_plus": 141.2,
+     "pa": 522
+    },
+    {
+     "name": "서건창",
+     "wrc_plus": 121.9,
+     "pa": 449
+    },
+    {
+     "name": "히우라",
+     "wrc_plus": 120.1,
+     "pa": 313
+    },
+    {
+     "name": "김웅빈",
+     "wrc_plus": 108.1,
+     "pa": 323
+    },
+    {
+     "name": "추재현",
+     "wrc_plus": 108.0,
+     "pa": 322
+    }
+   ]
+  },
+  {
+   "team": "한화",
+   "top": [
+    {
+     "name": "페라자",
+     "wrc_plus": 132.9,
+     "pa": 555
+    },
+    {
+     "name": "강백호",
+     "wrc_plus": 122.9,
+     "pa": 563
+    },
+    {
+     "name": "노시환",
+     "wrc_plus": 122.5,
+     "pa": 566
+    },
+    {
+     "name": "문현빈",
+     "wrc_plus": 116.7,
+     "pa": 585
+    },
+    {
+     "name": "허인서",
+     "wrc_plus": 108.5,
+     "pa": 458
+    }
+   ]
+  }
+ ],
+ "star_min": 140,
+ "stars": [
+  {
+   "team": "LG",
+   "name": "오스틴",
+   "wrc_plus": 183.5,
+   "pa": 627,
+   "team_rank": 4
+  },
+  {
+   "team": "KIA",
+   "name": "김도영",
+   "wrc_plus": 172.7,
+   "pa": 574,
+   "team_rank": 3
+  },
+  {
+   "team": "삼성",
+   "name": "구자욱",
+   "wrc_plus": 167.6,
+   "pa": 495,
+   "team_rank": 2
+  },
+  {
+   "team": "KT",
+   "name": "안현민",
+   "wrc_plus": 153.2,
+   "pa": 406,
+   "team_rank": 1
+  },
+  {
+   "team": "KT",
+   "name": "최원준",
+   "wrc_plus": 144.2,
+   "pa": 664,
+   "team_rank": 1
+  },
+  {
+   "team": "KT",
+   "name": "힐리어드",
+   "wrc_plus": 144.0,
+   "pa": 626,
+   "team_rank": 1
+  },
+  {
+   "team": "KIA",
+   "name": "나성범",
+   "wrc_plus": 143.8,
+   "pa": 568,
+   "team_rank": 3
+  },
+  {
+   "team": "키움",
+   "name": "데이비슨",
+   "wrc_plus": 141.2,
+   "pa": 522,
+   "team_rank": 10
+  }
+ ],
+ "min_pa": 306,
+ "lotte_hitters": [
+  {
+   "name": "나승엽",
+   "season": 2024,
+   "pa": 488,
+   "avg": 0.312,
+   "obp": 0.409,
+   "slg": 0.469,
+   "ops": 0.879,
+   "hr": 7,
+   "wrc_plus": 123.4,
+   "qualified": true
+  },
+  {
+   "name": "나승엽",
+   "season": 2025,
+   "pa": 391,
+   "avg": 0.229,
+   "obp": 0.345,
+   "slg": 0.36,
+   "ops": 0.705,
+   "hr": 9,
+   "wrc_plus": 91.2,
+   "qualified": true
+  },
+  {
+   "name": "나승엽",
+   "season": 2026,
+   "pa": 423,
+   "avg": 0.289,
+   "obp": 0.371,
+   "slg": 0.425,
+   "ops": 0.796,
+   "hr": 8,
+   "wrc_plus": 103.5,
+   "qualified": true
+  },
+  {
+   "name": "레이예스",
+   "season": 2024,
+   "pa": 631,
+   "avg": 0.352,
+   "obp": 0.393,
+   "slg": 0.51,
+   "ops": 0.903,
+   "hr": 15,
+   "wrc_plus": 125.3,
+   "qualified": true
+  },
+  {
+   "name": "레이예스",
+   "season": 2025,
+   "pa": 627,
+   "avg": 0.326,
+   "obp": 0.37,
+   "slg": 0.475,
+   "ops": 0.845,
+   "hr": 13,
+   "wrc_plus": 122.1,
+   "qualified": true
+  },
+  {
+   "name": "레이예스",
+   "season": 2026,
+   "pa": 613,
+   "avg": 0.359,
+   "obp": 0.4,
+   "slg": 0.521,
+   "ops": 0.921,
+   "hr": 17,
+   "wrc_plus": 134.1,
+   "qualified": true
+  },
+  {
+   "name": "윤동희",
+   "season": 2024,
+   "pa": 612,
+   "avg": 0.293,
+   "obp": 0.375,
+   "slg": 0.453,
+   "ops": 0.828,
+   "hr": 14,
+   "wrc_plus": 109.3,
+   "qualified": true
+  },
+  {
+   "name": "윤동희",
+   "season": 2025,
+   "pa": 399,
+   "avg": 0.282,
+   "obp": 0.386,
+   "slg": 0.433,
+   "ops": 0.82,
+   "hr": 9,
+   "wrc_plus": 119.0,
+   "qualified": true
+  },
+  {
+   "name": "윤동희",
+   "season": 2026,
+   "pa": 302,
+   "avg": 0.235,
+   "obp": 0.321,
+   "slg": 0.34,
+   "ops": 0.661,
+   "hr": 5,
+   "wrc_plus": 69.2,
+   "qualified": false
+  },
+  {
+   "name": "전준우",
+   "season": 2024,
+   "pa": 483,
+   "avg": 0.293,
+   "obp": 0.369,
+   "slg": 0.485,
+   "ops": 0.854,
+   "hr": 17,
+   "wrc_plus": 113.3,
+   "qualified": true
+  },
+  {
+   "name": "전준우",
+   "season": 2025,
+   "pa": 472,
+   "avg": 0.293,
+   "obp": 0.369,
+   "slg": 0.42,
+   "ops": 0.788,
+   "hr": 8,
+   "wrc_plus": 109.6,
+   "qualified": true
+  },
+  {
+   "name": "전준우",
+   "season": 2026,
+   "pa": 252,
+   "avg": 0.222,
+   "obp": 0.267,
+   "slg": 0.295,
+   "ops": 0.562,
+   "hr": 3,
+   "wrc_plus": 38.9,
+   "qualified": false
+  },
+  {
+   "name": "한동희",
+   "season": 2024,
+   "pa": 36,
+   "avg": 0.257,
+   "obp": 0.278,
+   "slg": 0.314,
+   "ops": 0.592,
+   "hr": 0,
+   "wrc_plus": 37.0,
+   "qualified": false
+  },
+  {
+   "name": "한동희",
+   "season": 2026,
+   "pa": 445,
+   "avg": 0.299,
+   "obp": 0.36,
+   "slg": 0.521,
+   "ops": 0.881,
+   "hr": 23,
+   "wrc_plus": 119.6,
+   "qualified": true
+  }
+ ],
+ "koo": [
+  {
+   "season": 2023,
+   "team": "삼성",
+   "pa": 513,
+   "avg": 0.336,
+   "obp": 0.405,
+   "slg": 0.494,
+   "ops": 0.9,
+   "hr": 11,
+   "wrc_plus": 144.7,
+   "war": 4.0
+  },
+  {
+   "season": 2024,
+   "team": "삼성",
+   "pa": 565,
+   "avg": 0.343,
+   "obp": 0.414,
+   "slg": 0.627,
+   "ops": 1.041,
+   "hr": 33,
+   "wrc_plus": 155.4,
+   "war": 5.06
+  },
+  {
+   "season": 2025,
+   "team": "삼성",
+   "pa": 612,
+   "avg": 0.319,
+   "obp": 0.398,
+   "slg": 0.516,
+   "ops": 0.914,
+   "hr": 19,
+   "wrc_plus": 139.5,
+   "war": 4.39
+  },
+  {
+   "season": 2026,
+   "team": "삼성",
+   "pa": 495,
+   "avg": 0.371,
+   "obp": 0.455,
+   "slg": 0.581,
+   "ops": 1.036,
+   "hr": 15,
+   "wrc_plus": 167.6,
+   "war": 5.27
+  }
+ ]
+}

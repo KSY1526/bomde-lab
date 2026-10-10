@@ -1,0 +1,122 @@
+---
+title: "올해 롯데의 가장 큰 문제는 타격이다"
+description: "롯데 타선의 구장 보정 득점 생산력(우르크)은 84.2로 10개 구단 꼴찌다. 선발과 불펜은 리그 중간이었다."
+date: 2026-10-11
+category: season
+tags: ["롯데", "2026", "wRC+", "타격", "구자욱"]
+dataUntil: "2026 정규시즌 10/9까지"
+draft: true
+---
+import BarChart from '../../components/BarChart.astro';
+import d from '../../data/posts/2026-10-11-lotte-batting.json';
+
+export const lotte = d.teams.find((t) => t.team === '롯데');
+export const koo = d.koo;
+export const hitters = (name) => d.lotte_hitters.filter((h) => h.name === name);
+export const f3 = (v) => v.toFixed(3).replace(/^0/, '');
+
+올해 롯데의 가장 큰 문제를 하나만 꼽으면 타격이다.
+
+## 선발, 불펜, 타격
+
+<table>
+  <thead><tr><th>부문</th><th>롯데</th><th>10개 구단 중</th></tr></thead>
+  <tbody>
+    <tr><td>선발 평균자책점</td><td>{lotte.sp_era.toFixed(2)}</td><td>{lotte.sp_rank}위</td></tr>
+    <tr><td>불펜 평균자책점</td><td>{lotte.rp_era.toFixed(2)}</td><td>{lotte.rp_rank}위</td></tr>
+    <tr><td>팀 우르크(wRC+)</td><td>{lotte.wrc_plus.toFixed(1)}</td><td>{lotte.wrc_rank}위</td></tr>
+  </tbody>
+</table>
+
+선발과 불펜은 둘 다 6위로 리그 한가운데다. 타격은 우르크 84.2로 꼴찌다. 팀 OPS가 0.682로 10개 구단 중 가장 낮은 키움(91.4)보다도 아래다.
+
+<BarChart
+  title="2026 팀 우르크(wRC+)"
+  caption="우르크 100 = 리그 평균. 구장 보정 포함."
+  min={60}
+  ref={{ value: 100, label: '리그 평균 100' }}
+  rows={d.teams.map((t) => ({ label: t.team, value: t.wrc_plus, highlight: t.team === '롯데' }))}
+/>
+
+OPS로는 롯데(0.729)가 키움(0.682)보다 높은데 우르크에서 순서가 뒤집힌 건 구장 보정 때문이다. 우르크는 홈구장이 타자에게 얼마나 유리한지를 반영한다. 올해 사직의 파크팩터는 1.094로 10개 구장 중 가장 높고, 키움이 쓰는 고척은 0.919로 가장 낮다. 같은 성적이라도 사직에서 낸 기록은 깎이고 고척에서 낸 기록은 올라간다.
+
+평균자책점은 이런 보정을 하지 않은 숫자다. 타자에게 가장 유리한 구장을 홈으로 쓰면서 선발과 불펜 모두 6위를 했으니 마운드는 표의 순위보다 나았다고 볼 수 있다.
+
+## 84.2는 얼마나 나쁜가
+
+<BarChart
+  title="시즌별 우르크 꼴찌 팀"
+  caption="2026 파크팩터는 최근 3년 득점으로 직접 계산한 값이고, 2025년까지는 장기 평활값이라 해마다 보정 기준이 조금 다르다."
+  min={60}
+  ref={{ value: 100, label: '리그 평균 100' }}
+  rows={d.worst_by_year.map((w) => ({ label: `${w.season} ${w.team}`, value: w.wrc_plus, highlight: w.season === d.season }))}
+/>
+
+2021년부터 2025년까지 다섯 시즌 동안은 꼴찌 팀도 우르크 87.0 아래로 내려간 적이 없다. 올해 롯데는 그보다 낮다. 84.2보다 못 친 팀은 2017~2020년의 네 팀(2017 KT, 2018 NC, 2019 롯데, 2020 한화)뿐이다.
+
+롯데만 놓고 보면 더 씁쓸하다. 2019년(79.4), 2023년(89.4), 2025년(91.2)에 이어 올해까지, 최근 8시즌 중 네 번이 꼴찌다.
+
+득점으로 바꾸면 체감이 쉽다. 우르크 84.2는 리그 평균 타선보다 득점을 15.8% 덜 만든다는 뜻이다. 롯데 타자들이 선 5,474타석에 대입하면 평균 타선보다 약 112점을 덜 냈다. 한 경기에 0.8점꼴이다. 올해는 약 10.6점이 1승이니 10승 남짓이다. 타선이 리그 평균만 했어도 62승이 아니라 73승 언저리였다는 단순 계산이 나온다. 올해 5위 두산이 73승이다.
+
+## 간판 타자
+
+10개 구단에서 우르크가 높은 타자를 5명씩 뽑았다(규정타석 70% 이상).
+
+<table>
+  <thead><tr><th>팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead>
+  <tbody>
+    {d.top5.map((t) => (
+      <tr class={t.team === '롯데' ? 'ours' : ''}>
+        <td>{t.team}</td>
+        {t.top.map((p) => <td>{p.name} {p.wrc_plus.toFixed(1)}</td>)}
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+롯데에서 다른 팀 간판과 견줄 만한 타자는 레이예스(134.1)와 한동희(119.6)다. 레이예스는 롯데에서 뛴 세 시즌 중 가장 높은 우르크를 냈고, 한동희는 23홈런을 쳤다.
+
+그다음부터 벌어진다. 롯데의 3~5번째 타자는 나승엽 103.5, 고승민 101.3, 손성빈 87.9다. 팀별 5번째 타자끼리 비교하면 롯데가 10개 구단 중 가장 낮다.
+
+위로 가도 마찬가지다. 올해 우르크 140을 넘긴 타자는 8명이다. 1위 KT에 안현민, 최원준, 힐리어드 3명, 3위 KIA에 김도영, 나성범 2명이 있고 2위 삼성 구자욱, 4위 LG 오스틴, 키움 데이비슨이 나머지다. 순위 1~4위 팀은 모두 이런 타자를 한 명 이상 가졌다. 롯데 최고 타자 레이예스는 134.1로 여기에 못 미친다.
+
+<BarChart
+  title="우르크 140 이상 타자와 롯데 레이예스 (규정타석 70% 이상)"
+  min={100}
+  rows={[
+    ...d.stars.map((s) => ({ label: s.name, value: s.wrc_plus, note: `${s.team}` })),
+    { label: '레이예스', value: d.lotte_hitters.find((h) => h.name === '레이예스' && h.season === d.season).wrc_plus, note: '롯데', highlight: true },
+  ]}
+/>
+
+## 전준우와 윤동희
+
+<table>
+  <thead><tr><th>선수</th><th>시즌</th><th>타석</th><th>OPS</th><th>우르크</th></tr></thead>
+  <tbody>
+    {['전준우', '윤동희'].flatMap((n) => hitters(n).map((h) => (
+      <tr><td>{h.name}</td><td>{h.season}</td><td>{h.pa}</td><td>{f3(h.ops)}</td><td>{h.wrc_plus.toFixed(1)}</td></tr>
+    )))}
+  </tbody>
+</table>
+
+시즌 전 계산에 들어 있던 두 타자가 무너졌다. 전준우는 지난해 우르크 109.6에서 올해 38.9로, 윤동희는 119.0에서 69.2로 떨어졌다. 둘 다 규정타석 70%를 채우지 못했다(전준우 252타석, 윤동희 302타석).
+
+두 주전이 빠진 자리를 메운 타자도 없었다. 앞에서 본 3~5번째 타자 숫자가 그 결과고, 롯데 타선이 얼마나 얇은지 보여 준다.
+
+## 비시즌 숙제
+
+윤동희와 나승엽이 살아나야 한다. 윤동희는 2024년 109.3, 2025년 119.0으로 두 시즌 연속 평균 이상을 쳤다. 나승엽은 2024년 123.4를 찍은 뒤 지난해 91.2로 내려갔고 올해 103.5까지 올라왔다. 한동희는 올해보다 한 단계 더 올라서야 한다.
+
+여기에 바깥에서 한 명을 데려온다면 FA 구자욱이 첫 번째 이름이다. 최근 4시즌 성적은 이렇다.
+
+<table>
+  <thead><tr><th>시즌</th><th>타석</th><th>타율</th><th>출루율</th><th>장타율</th><th>홈런</th><th>우르크</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {koo.map((k) => (
+      <tr><td>{k.season}</td><td>{k.pa}</td><td>{f3(k.avg)}</td><td>{f3(k.obp)}</td><td>{f3(k.slg)}</td><td>{k.hr}</td><td>{k.wrc_plus.toFixed(1)}</td><td>{k.war.toFixed(2)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+네 시즌 모두 우르크 139 이상이고, 올해 167.6은 규정타석 70% 이상 타자 중 3위다. 올해 롯데에는 우르크 140을 넘긴 타자가 한 명도 없었다.
