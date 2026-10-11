@@ -1,0 +1,408 @@
+{
+ "name": "원태인",
+ "first": 2022,
+ "last": 2026,
+ "sp_min_gs": 15,
+ "seasons": [
+  {
+   "season": 2022,
+   "team": "삼성",
+   "gs": 27,
+   "w": 10,
+   "l": 8,
+   "ip": "165.1",
+   "outs": 496,
+   "era": 3.92,
+   "whip": 1.31,
+   "fip": 3.73,
+   "era_fip": 0.19,
+   "war_ra9": 3.19,
+   "war_fip": 2.95,
+   "k_pct": "18.6",
+   "bb_pct": "5.2",
+   "hr": 16,
+   "opp_avg": 0.27,
+   "tbf": 698,
+   "fb_velo": 144.9,
+   "fb_velo_max": 153.0,
+   "last_date": "2022-10-04"
+  },
+  {
+   "season": 2023,
+   "team": "삼성",
+   "gs": 26,
+   "w": 7,
+   "l": 7,
+   "ip": "150.0",
+   "outs": 450,
+   "era": 3.24,
+   "whip": 1.31,
+   "fip": 4.16,
+   "era_fip": -0.92,
+   "war_ra9": 3.6,
+   "war_fip": 2.03,
+   "k_pct": "16.1",
+   "bb_pct": "5.4",
+   "hr": 15,
+   "opp_avg": 0.268,
+   "tbf": 634,
+   "fb_velo": 144.4,
+   "fb_velo_max": 150.0,
+   "last_date": "2023-10-15"
+  },
+  {
+   "season": 2024,
+   "team": "삼성",
+   "gs": 28,
+   "w": 15,
+   "l": 6,
+   "ip": "159.2",
+   "outs": 479,
+   "era": 3.66,
+   "whip": 1.25,
+   "fip": 4.59,
+   "era_fip": -0.93,
+   "war_ra9": 4.48,
+   "war_fip": 2.53,
+   "k_pct": "17.8",
+   "bb_pct": "6.3",
+   "hr": 17,
+   "opp_avg": 0.245,
+   "tbf": 670,
+   "fb_velo": 143.6,
+   "fb_velo_max": 149.0,
+   "last_date": "2024-09-22"
+  },
+  {
+   "season": 2025,
+   "team": "삼성",
+   "gs": 27,
+   "w": 12,
+   "l": 4,
+   "ip": "166.2",
+   "outs": 500,
+   "era": 3.24,
+   "whip": 1.14,
+   "fip": 4.36,
+   "era_fip": -1.12,
+   "war_ra9": 4.42,
+   "war_fip": 2.25,
+   "k_pct": "16.1",
+   "bb_pct": "4.0",
+   "hr": 20,
+   "opp_avg": 0.253,
+   "tbf": 671,
+   "fb_velo": 146.3,
+   "fb_velo_max": 151.0,
+   "last_date": "2025-09-26"
+  },
+  {
+   "season": 2026,
+   "team": "삼성",
+   "gs": 26,
+   "w": 7,
+   "l": 9,
+   "ip": "145.1",
+   "outs": 436,
+   "era": 4.52,
+   "whip": 1.44,
+   "fip": 3.45,
+   "era_fip": 1.07,
+   "war_ra9": 2.59,
+   "war_fip": 3.65,
+   "k_pct": "18.5",
+   "bb_pct": "5.4",
+   "hr": 6,
+   "opp_avg": 0.291,
+   "tbf": 632,
+   "fb_velo": 146.8,
+   "fb_velo_max": 151.0,
+   "last_date": "2026-10-07"
+  }
+ ],
+ "babip": [
+  {
+   "season": 2022,
+   "babip": 0.314
+  },
+  {
+   "season": 2023,
+   "babip": 0.301
+  },
+  {
+   "season": 2024,
+   "babip": 0.278
+  },
+  {
+   "season": 2025,
+   "babip": 0.275
+  },
+  {
+   "season": 2026,
+   "babip": 0.353
+  }
+ ],
+ "lg_babip": [
+  {
+   "season": 2022,
+   "babip": 0.307
+  },
+  {
+   "season": 2023,
+   "babip": 0.31
+  },
+  {
+   "season": 2024,
+   "babip": 0.325
+  },
+  {
+   "season": 2025,
+   "babip": 0.312
+  },
+  {
+   "season": 2026,
+   "babip": 0.317
+  }
+ ],
+ "arsenal": [
+  {
+   "season": 2022,
+   "pitch": "슬라이더",
+   "n": 668,
+   "usage_pct": 25.0,
+   "avg_velo": 130.7,
+   "max_velo": 142.0,
+   "whiff_pct": 30.6,
+   "pa": 175,
+   "opp_avg": 0.246,
+   "opp_slg": 0.371
+  },
+  {
+   "season": 2023,
+   "pitch": "슬라이더",
+   "n": 630,
+   "usage_pct": 25.0,
+   "avg_velo": 133.0,
+   "max_velo": 145.0,
+   "whiff_pct": 21.3,
+   "pa": 155,
+   "opp_avg": 0.295,
+   "opp_slg": 0.37
+  },
+  {
+   "season": 2024,
+   "pitch": "슬라이더",
+   "n": 606,
+   "usage_pct": 22.5,
+   "avg_velo": 133.9,
+   "max_velo": 141.0,
+   "whiff_pct": 24.5,
+   "pa": 145,
+   "opp_avg": 0.209,
+   "opp_slg": 0.328
+  },
+  {
+   "season": 2025,
+   "pitch": "슬라이더",
+   "n": 663,
+   "usage_pct": 26.6,
+   "avg_velo": 134.8,
+   "max_velo": 143.0,
+   "whiff_pct": 24.7,
+   "pa": 157,
+   "opp_avg": 0.232,
+   "opp_slg": 0.401
+  },
+  {
+   "season": 2026,
+   "pitch": "슬라이더",
+   "n": 428,
+   "usage_pct": 17.3,
+   "avg_velo": 133.0,
+   "max_velo": 141.0,
+   "whiff_pct": 27.4,
+   "pa": 91,
+   "opp_avg": 0.366,
+   "opp_slg": 0.488
+  },
+  {
+   "season": 2022,
+   "pitch": "체인지업",
+   "n": 689,
+   "usage_pct": 25.8,
+   "avg_velo": 125.4,
+   "max_velo": 134.0,
+   "whiff_pct": 33.4,
+   "pa": 198,
+   "opp_avg": 0.2,
+   "opp_slg": 0.259
+  },
+  {
+   "season": 2023,
+   "pitch": "체인지업",
+   "n": 658,
+   "usage_pct": 26.1,
+   "avg_velo": 124.3,
+   "max_velo": 131.0,
+   "whiff_pct": 31.5,
+   "pa": 166,
+   "opp_avg": 0.213,
+   "opp_slg": 0.368
+  },
+  {
+   "season": 2024,
+   "pitch": "체인지업",
+   "n": 618,
+   "usage_pct": 22.9,
+   "avg_velo": 124.6,
+   "max_velo": 134.0,
+   "whiff_pct": 27.7,
+   "pa": 156,
+   "opp_avg": 0.226,
+   "opp_slg": 0.418
+  },
+  {
+   "season": 2025,
+   "pitch": "체인지업",
+   "n": 504,
+   "usage_pct": 20.2,
+   "avg_velo": 126.3,
+   "max_velo": 132.0,
+   "whiff_pct": 29.5,
+   "pa": 134,
+   "opp_avg": 0.203,
+   "opp_slg": 0.375
+  },
+  {
+   "season": 2026,
+   "pitch": "체인지업",
+   "n": 603,
+   "usage_pct": 24.3,
+   "avg_velo": 129.5,
+   "max_velo": 138.0,
+   "whiff_pct": 32.5,
+   "pa": 176,
+   "opp_avg": 0.259,
+   "opp_slg": 0.324
+  },
+  {
+   "season": 2022,
+   "pitch": "포심",
+   "n": 1132,
+   "usage_pct": 42.4,
+   "avg_velo": 144.9,
+   "max_velo": 153.0,
+   "whiff_pct": 10.3,
+   "pa": 298,
+   "opp_avg": 0.333,
+   "opp_slg": 0.467
+  },
+  {
+   "season": 2023,
+   "pitch": "포심",
+   "n": 1034,
+   "usage_pct": 41.0,
+   "avg_velo": 144.4,
+   "max_velo": 150.0,
+   "whiff_pct": 10.2,
+   "pa": 276,
+   "opp_avg": 0.305,
+   "opp_slg": 0.454
+  },
+  {
+   "season": 2024,
+   "pitch": "포심",
+   "n": 1205,
+   "usage_pct": 44.7,
+   "avg_velo": 143.6,
+   "max_velo": 149.0,
+   "whiff_pct": 12.9,
+   "pa": 311,
+   "opp_avg": 0.256,
+   "opp_slg": 0.365
+  },
+  {
+   "season": 2025,
+   "pitch": "포심",
+   "n": 1059,
+   "usage_pct": 42.5,
+   "avg_velo": 146.3,
+   "max_velo": 151.0,
+   "whiff_pct": 11.3,
+   "pa": 315,
+   "opp_avg": 0.281,
+   "opp_slg": 0.434
+  },
+  {
+   "season": 2026,
+   "pitch": "포심",
+   "n": 956,
+   "usage_pct": 38.6,
+   "avg_velo": 146.8,
+   "max_velo": 151.0,
+   "whiff_pct": 13.3,
+   "pa": 247,
+   "opp_avg": 0.288,
+   "opp_slg": 0.423
+  }
+ ],
+ "lg_fb": [
+  {
+   "season": 2022,
+   "all_pitches": 144.0
+  },
+  {
+   "season": 2023,
+   "all_pitches": 143.5
+  },
+  {
+   "season": 2024,
+   "all_pitches": 143.5
+  },
+  {
+   "season": 2025,
+   "all_pitches": 146.2
+  },
+  {
+   "season": 2026,
+   "all_pitches": 146.4
+  }
+ ],
+ "sp_fb": [
+  {
+   "season": 2022,
+   "sp_avg": 144.2,
+   "n_sp": 45,
+   "won_rank": 19,
+   "n_sp_145": 18
+  },
+  {
+   "season": 2023,
+   "sp_avg": 143.9,
+   "n_sp": 43,
+   "won_rank": 20,
+   "n_sp_145": 19
+  },
+  {
+   "season": 2024,
+   "sp_avg": 143.5,
+   "n_sp": 42,
+   "won_rank": 22,
+   "n_sp_145": 14
+  },
+  {
+   "season": 2025,
+   "sp_avg": 146.4,
+   "n_sp": 46,
+   "won_rank": 24,
+   "n_sp_145": 31
+  },
+  {
+   "season": 2026,
+   "sp_avg": 146.2,
+   "n_sp": 46,
+   "won_rank": 17,
+   "n_sp_145": 29
+  }
+ ]
+}

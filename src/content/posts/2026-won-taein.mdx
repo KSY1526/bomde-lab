@@ -1,0 +1,116 @@
+---
+title: "원태인 올해 부진, 일시적인 것일까?"
+description: "원태인의 2026 평균자책점은 4.52로 최근 5년 중 가장 나쁘다. 그런데 FIP는 3.45로 5년 중 가장 좋다."
+date: 2026-10-11
+category: season
+tags: ["원태인", "삼성", "2026", "FIP", "BABIP"]
+dataUntil: "2026 정규시즌 10/10까지 (원태인 마지막 등판 10/7)"
+---
+import BarChart from '../../components/BarChart.astro';
+import DivergingBar from '../../components/DivergingBar.astro';
+import d from '../../data/posts/2026-10-11-won-taein.json';
+
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0/, '');
+export const pitch = (p) => d.arsenal.filter((a) => a.pitch === p);
+export const lgBabip = (y) => d.lg_babip.find((r) => r.season === y).babip;
+
+원태인의 올해 평균자책점은 4.52다. 최근 5년 중 가장 나쁘고 작년 3.24보다 1점 넘게 올랐다. 7승 9패로 2020년 이후 처음 패가 승보다 많았다. 이 부진은 일시적일까. 데이터로 확인해 봤다.
+
+<table>
+  <thead><tr><th>시즌</th><th>이닝</th><th>승-패</th><th>ERA</th><th>WHIP</th><th>FIP</th><th>삼진율</th><th>볼넷률</th><th>피홈런</th></tr></thead>
+  <tbody>
+    {d.seasons.map((s) => (
+      <tr><td>{s.season}</td><td>{s.ip}</td><td>{s.w}-{s.l}</td><td>{f2(s.era)}</td><td>{f2(s.whip)}</td><td>{f2(s.fip)}</td><td>{s.k_pct}%</td><td>{s.bb_pct}%</td><td>{s.hr}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">모두 삼성 선발. FIP = 삼진·볼넷·피홈런만으로 계산한 수비 무관 평균자책점.</p>
+
+WAR(크봇 자체 추정치)로 봐도 평가가 갈린다. 실점(RA9) 기준 WAR은 2.59로 5년 중 가장 낮지만 FIP 기준 WAR은 3.65로 5년 중 가장 높다. 실점만 보면 최악의 시즌, 투수가 직접 책임지는 삼진·볼넷·홈런만 보면 최고의 시즌이다.
+
+<BarChart
+  title="원태인 FIP 기준 WAR"
+  rows={d.seasons.map((s) => ({ label: String(s.season), value: s.war_fip, highlight: s.season === 2026 }))}
+  digits={2}
+/>
+
+## 구위는 오히려 좋아졌다
+
+포심 평균 구속은 146.8km로 5년 중 가장 빠르다. 2024년 143.6km에서 2년 사이 3km 넘게 올랐고 최고 구속은 151km다. 삼진율 18.5%는 5년 중 두 번째로 높고 볼넷률 5.4%는 평소 수준이다. 제구가 무너진 흔적은 없다.
+
+헛스윙도 늘었다. 체인지업 헛스윙률은 작년 29.5%에서 32.5%로, 슬라이더는 24.7%에서 27.4%로 올랐다. 포심 헛스윙률 13.3%도 2024년(12.9%)과 2025년(11.3%)보다 높다.
+
+<table>
+  <thead><tr><th>헛스윙률</th>{pitch('포심').map((a) => <th>{a.season}</th>)}</tr></thead>
+  <tbody>
+    {['포심', '슬라이더', '체인지업'].map((p) => (
+      <tr><td>{p}</td>{pitch(p).map((a) => <td>{a.whiff_pct}%</td>)}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">헛스윙률 = 헛스윙 / 스윙.</p>
+
+## 인플레이 타구 운이 나빴다
+
+홈런을 뺀 인플레이 타구의 타율(BABIP)이 2024년 .278, 2025년 .275에서 올해 .353으로 뛰었다. 리그 평균 .317보다 4푼 가까이 높고, .301~.314였던 2022~2023년보다도 높다. 피안타율도 작년 .253에서 .291이 됐다.
+
+<BarChart
+  title="원태인 BABIP (홈런 제외 인플레이 타구 타율)"
+  caption={`같은 기간 리그 평균은 ${f3(Math.min(...d.lg_babip.map((r) => r.babip)))}~${f3(Math.max(...d.lg_babip.map((r) => r.babip)))}. 점선은 올해 리그 평균.`}
+  min={0.2}
+  digits={3}
+  ref={{ value: lgBabip(2026), label: `2026 리그 ${f3(lgBabip(2026))}` }}
+  rows={d.babip.map((r) => ({ label: String(r.season), value: r.babip, highlight: r.season === 2026 }))}
+/>
+
+평균자책점에서 FIP를 빼면 올해는 +1.07이다. 실점이 투수 본인 몫보다 1점 넘게 많았다는 뜻이다. 2023~2025년에는 거꾸로 평균자책점이 FIP보다 1점 가까이 낮았다. 올해 차이의 상당 부분은 안타가 평소보다 많이 떨어진 영향으로 볼 수 있다.
+
+<DivergingBar
+  title="평균자책점 − FIP"
+  caption="플러스면 FIP보다 실점이 많았다는 뜻."
+  digits={2}
+  rows={d.seasons.map((s) => ({ label: String(s.season), value: s.era_fip, highlight: s.season === 2026 }))}
+/>
+
+## 피홈런 6개
+
+올해 맞은 홈런은 6개뿐이다. 작년에는 20개였다. FIP는 피홈런을 크게 반영하기 때문에 FIP가 좋게 나온 데에는 이 덕도 있다.
+
+여기까지는 원태인이 운이 없었다는 지표다.
+
+## 다만 슬라이더가 맞았다
+
+슬라이더 피안타율이 작년 .232에서 올해 .366으로 크게 올랐다. 구사율도 26.6%에서 17.3%로 줄었다.
+
+<BarChart
+  title="원태인 슬라이더 피안타율"
+  caption={`구사율: ${pitch('슬라이더').map((a) => `${a.season} ${a.usage_pct}%`).join(', ')}`}
+  min={0.15}
+  digits={3}
+  rows={pitch('슬라이더').map((a) => ({ label: String(a.season), value: a.opp_avg, highlight: a.season === 2026 }))}
+/>
+
+원태인은 강한 구위로 승부를 보기보다 플러스 피치인 체인지업이 가장 큰 강점인 투수다. 이닝이 쌓이면서 리그 타자들 눈에 익었다고도 볼 수 있다.
+
+## 리그 직구가 빨라졌다
+
+리그 전체 직구 평균 구속도 빨라지고 있다. 리그 포심 평균은 2022년 144.0km에서 올해 146.4km가 됐다. 선발 15경기 이상 던진 투수 중 포심 평균이 145km를 넘는 투수는 2022년 18명에서 올해 29명으로 늘었다.
+
+<table>
+  <thead><tr><th>시즌</th><th>원태인 포심</th><th>리그 선발 평균</th><th>원태인 순위</th><th>145km 넘는 선발</th></tr></thead>
+  <tbody>
+    {d.sp_fb.map((r) => {
+      const s = d.seasons.find((x) => x.season === r.season);
+      return <tr><td>{r.season}</td><td>{s.fb_velo}</td><td>{r.sp_avg}</td><td>{r.won_rank}위 / {r.n_sp}명</td><td>{r.n_sp_145}명</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">선발 15경기 이상 던진 투수 기준.</p>
+
+원태인도 빨라졌지만 리그가 같이 빨라졌다. 올해 146.8km는 선발 평균 146.2km와 0.6km 차이다. 145km를 넘는 선발이 29명인 리그에서 원태인 직구를 상대적으로 장점이라고 보기는 어렵다.
+
+데이터는 운이 없었다고 말하지만 평균자책점이 눈에 띄게 오른 것도 사실이다. FA를 앞둔 내년 원태인은 어떤 모습일까. 의견은 댓글로 남겨 주면 좋겠다.
