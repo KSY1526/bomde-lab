@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../lib/site';
+import { SITE, SOCIAL } from '../lib/site';
 ---
 <Base title="소개" description={`${SITE.title} 소개`}>
   <article class="prose">
@@ -26,6 +26,11 @@ import { SITE } from '../lib/site';
       <li>티켓 양도와 직관 교류도 합니다</li>
     </ul>
     <p><a href="https://open.kakao.com/o/gLcLEu5h" target="_blank" rel="noopener">⚾ LOTTE GIANTS 오픈채팅방 들어가기</a></p>
+    <h2>영상</h2>
+    <p>블로그 글을 1분 안쪽 세로 영상으로도 만들어 올립니다.</p>
+    <ul>
+      {SOCIAL.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.label} @bomde_lab</a></li>)}
+    </ul>
     <h2>데이터</h2>
     <ul>
       <li>KBO 정규시즌 2010년~현재 투구·타석·박스스코어 기록</li>

@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import ChatPanel from '../components/ChatPanel.astro';
 import Visit from '../components/Visit.astro';
-import { SITE, CATEGORIES, url } from '../lib/site';
+import { SITE, SOCIAL, CATEGORIES, url } from '../lib/site';
 
 interface Props {
   title?: string;
@@ -68,6 +68,9 @@ const nav = [
     <footer class="site-footer">
       <div class="wrap">
         <p><strong>{SITE.title}</strong> · {SITE.tagline}</p>
+        <p class="social">
+          {SOCIAL.map((s) => <a href={s.href} target="_blank" rel="noopener">{s.label}</a>)}
+        </p>
       </div>
     </footer>
     <Visit />
@@ -99,4 +102,5 @@ const nav = [
 
   .site-footer { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 14px; }
   .site-footer p { margin: 0 0 4px; }
+  .social { display: flex; gap: 14px; }
 </style>
