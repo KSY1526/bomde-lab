@@ -17,6 +17,8 @@
   --chip-bg: #eef1f6;
   --pos: #0d3b8c;
   --neg: var(--red);
+  --warn-bg: #fff3c4;
+  --warn-text: #6b5200;
 
   --radius: 10px;
   --shadow: 0 1px 2px rgb(4 30 66 / 6%), 0 4px 16px rgb(4 30 66 / 6%);
@@ -39,6 +41,8 @@
     --red-soft: #3a1520;
     --pos: #8db4ff;
     --neg: #ff4d6a;
+    --warn-bg: #4a3d0a;
+    --warn-text: #ffe28a;
     color-scheme: dark;
   }
 }
@@ -109,6 +113,11 @@ img, svg { max-width: 100%; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .prose tr.ours td { background: var(--red-soft); }
 .prose tr.ours td:first-child { font-weight: 700; color: var(--accent); }
+.prose th.cur { color: var(--accent); }
+.prose td.cur { font-weight: 700; }
+.prose td.up { background: color-mix(in srgb, var(--accent) var(--heat, 15%), transparent); }
+.prose td.down { background: color-mix(in srgb, var(--pos) var(--heat, 15%), transparent); }
+.prose td.small { background: var(--warn-bg); color: var(--warn-text); }
 .prose .table-note { margin-top: -0.6em; font-size: 13px; color: var(--muted); }
 .prose table.wide th { text-align: center; }
 .prose table.wide thead tr:first-child th { border-bottom: 0; color: var(--text); }

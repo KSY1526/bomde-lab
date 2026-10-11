@@ -1,7 +1,8 @@
 ---
 // 가로 막대 차트(순위·비교용). 빌드 때 SVG로 그려 JS 없이 보인다.
 // ref: 기준선(예: wRC+ 100 = 리그 평균). min을 주면 막대가 그 값에서 시작한다(차이를 잘 보이게).
-interface Row { label: string; value: number; highlight?: boolean; note?: string }
+// prev: 비교값(예: 작년). 주면 각 행에 얇은 회색 막대를 위에 겹쳐 그리고, legend로 두 막대 이름을 단다.
+interface Row { label: string; value: number; prev?: number; highlight?: boolean; note?: string }
 interface Props {
   rows: Row[];
   title: string;
@@ -10,25 +11,36 @@ interface Props {
   digits?: number;
   min?: number;
   ref?: { value: number; label: string };
+  legend?: { value: string; prev: string };
 }
-const { rows, title, caption, unit = '', digits = 1, min = 0, ref } = Astro.props;
+const { rows, title, caption, unit = '', digits = 1, min = 0, ref, legend } = Astro.props;
 
-const W = 640, labelW = 92, valueW = 60, rowH = 30, padTop = ref ? 22 : 8;
+const hasPrev = rows.some((r) => r.prev !== undefined);
+const W = 640, labelW = 92, valueW = 60, rowH = hasPrev ? 42 : 30, padTop = ref ? 22 : 8;
 const plotL = labelW, plotR = W - valueW;
-const max = Math.max(...rows.map((r) => r.value), ref?.value ?? -Infinity);
+const max = Math.max(...rows.map((r) => Math.max(r.value, r.prev ?? -Infinity)), ref?.value ?? -Infinity);
 const x = (v: number) => plotL + ((v - min) / (max - min || 1)) * (plotR - plotL);
 const H = padTop + rows.length * rowH + 8;
 ---
 <figure class="chart">
   <figcaption class="title">{title}</figcaption>
+  {legend && (
+    <div class="legend"><span class="sw sw-prev"></span>{legend.prev}<span class="sw sw-value"></span>{legend.value}</div>
+  )}
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
     {rows.map((r, i) => {
       const y = padTop + i * rowH;
       return (
         <g class={r.highlight ? 'hl' : ''}>
           <text x={labelW - 10} y={y + rowH / 2} class="label" text-anchor="end" dominant-baseline="central">{r.label}</text>
-          <rect x={plotL} y={y + 6} width={Math.max(x(r.value) - plotL, 1)} height={rowH - 12} rx="3" class="bar" />
-          <text x={x(r.value) + 6} y={y + rowH / 2} class="value" dominant-baseline="central">
+          {hasPrev && r.prev !== undefined && (
+            <g>
+              <rect x={plotL} y={y + 5} width={Math.max(x(r.prev) - plotL, 1)} height={11} rx="2" class="prev" />
+              <text x={x(r.prev) + 6} y={y + 10.5} class="prev-value" dominant-baseline="central">{r.prev.toFixed(digits)}{unit}</text>
+            </g>
+          )}
+          <rect x={plotL} y={hasPrev ? y + 19 : y + 6} width={Math.max(x(r.value) - plotL, 1)} height={hasPrev ? 17 : rowH - 12} rx="3" class="bar" />
+          <text x={x(r.value) + 6} y={hasPrev ? y + 27.5 : y + rowH / 2} class="value" dominant-baseline="central">
             {r.value.toFixed(digits)}{unit}{r.note ? ` ${r.note}` : ''}
           </text>
         </g>
@@ -55,6 +67,13 @@ const H = padTop + rows.length * rowH + 8;
   .hl .bar { fill: var(--neg); opacity: 1; }
   .hl .label { font-weight: 800; fill: var(--accent); }
   .hl .value { fill: var(--accent); font-weight: 700; }
+  .prev { fill: var(--muted); opacity: .45; }
+  .prev-value { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+  .legend { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+  .sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-left: 8px; }
+  .sw:first-child { margin-left: 0; }
+  .sw-prev { background: var(--muted); opacity: .45; }
+  .sw-value { background: var(--pos); opacity: .55; }
   .ref { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
   .ref-label { fill: var(--muted); font-size: 12px; }
 </style>

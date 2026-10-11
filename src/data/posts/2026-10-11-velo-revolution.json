@@ -1,0 +1,806 @@
+{
+ "first": 2019,
+ "last": 2026,
+ "low": 139,
+ "high": 156,
+ "small_pa": 30,
+ "whiff_ref": 14.8,
+ "avg_velo": [
+  {
+   "season": 2019,
+   "velo": 142.1,
+   "n": 92924
+  },
+  {
+   "season": 2020,
+   "velo": 142.3,
+   "n": 97732
+  },
+  {
+   "season": 2021,
+   "velo": 142.7,
+   "n": 97643
+  },
+  {
+   "season": 2022,
+   "velo": 144.0,
+   "n": 91078
+  },
+  {
+   "season": 2023,
+   "velo": 143.5,
+   "n": 92195
+  },
+  {
+   "season": 2024,
+   "velo": 143.5,
+   "n": 95051
+  },
+  {
+   "season": 2025,
+   "velo": 146.2,
+   "n": 92482
+  },
+  {
+   "season": 2026,
+   "velo": 146.4,
+   "n": 87810
+  }
+ ],
+ "share150": [
+  {
+   "season": 2019,
+   "pct150": 4.9
+  },
+  {
+   "season": 2020,
+   "pct150": 5.3
+  },
+  {
+   "season": 2021,
+   "pct150": 5.8
+  },
+  {
+   "season": 2022,
+   "pct150": 9.6
+  },
+  {
+   "season": 2023,
+   "pct150": 6.7
+  },
+  {
+   "season": 2024,
+   "pct150": 5.8
+  },
+  {
+   "season": 2025,
+   "pct150": 20.3
+  },
+  {
+   "season": 2026,
+   "pct150": 21.6
+  }
+ ],
+ "buckets": [
+  {
+   "season": 2019,
+   "bucket": 139,
+   "pa": 6030,
+   "ops": 0.86,
+   "wrc_plus": 140,
+   "whiff_pct": 11.1,
+   "pitches": 23868
+  },
+  {
+   "season": 2020,
+   "bucket": 139,
+   "pa": 5959,
+   "ops": 0.96,
+   "wrc_plus": 153,
+   "whiff_pct": 11.1,
+   "pitches": 23413
+  },
+  {
+   "season": 2021,
+   "bucket": 139,
+   "pa": 5693,
+   "ops": 0.89,
+   "wrc_plus": 144,
+   "whiff_pct": 11.8,
+   "pitches": 22148
+  },
+  {
+   "season": 2022,
+   "bucket": 139,
+   "pa": 3425,
+   "ops": 0.927,
+   "wrc_plus": 159,
+   "whiff_pct": 10.8,
+   "pitches": 13130
+  },
+  {
+   "season": 2023,
+   "bucket": 139,
+   "pa": 3831,
+   "ops": 0.904,
+   "wrc_plus": 153,
+   "whiff_pct": 10.5,
+   "pitches": 14679
+  },
+  {
+   "season": 2024,
+   "bucket": 139,
+   "pa": 3912,
+   "ops": 0.976,
+   "wrc_plus": 153,
+   "whiff_pct": 9.9,
+   "pitches": 14816
+  },
+  {
+   "season": 2025,
+   "bucket": 139,
+   "pa": 1154,
+   "ops": 0.915,
+   "wrc_plus": 152,
+   "whiff_pct": 8.7,
+   "pitches": 4500
+  },
+  {
+   "season": 2026,
+   "bucket": 139,
+   "pa": 938,
+   "ops": 0.95,
+   "wrc_plus": 154,
+   "whiff_pct": 9.6,
+   "pitches": 3603
+  },
+  {
+   "season": 2019,
+   "bucket": 140,
+   "pa": 3486,
+   "ops": 0.876,
+   "wrc_plus": 144,
+   "whiff_pct": 12.3,
+   "pitches": 13261
+  },
+  {
+   "season": 2020,
+   "bucket": 140,
+   "pa": 3999,
+   "ops": 0.853,
+   "wrc_plus": 126,
+   "whiff_pct": 13.4,
+   "pitches": 15941
+  },
+  {
+   "season": 2021,
+   "bucket": 140,
+   "pa": 3964,
+   "ops": 0.865,
+   "wrc_plus": 137,
+   "whiff_pct": 12.8,
+   "pitches": 15026
+  },
+  {
+   "season": 2022,
+   "bucket": 140,
+   "pa": 2887,
+   "ops": 0.814,
+   "wrc_plus": 131,
+   "whiff_pct": 12.6,
+   "pitches": 11464
+  },
+  {
+   "season": 2023,
+   "bucket": 140,
+   "pa": 3013,
+   "ops": 0.845,
+   "wrc_plus": 137,
+   "whiff_pct": 11.7,
+   "pitches": 11817
+  },
+  {
+   "season": 2024,
+   "bucket": 140,
+   "pa": 3324,
+   "ops": 0.91,
+   "wrc_plus": 136,
+   "whiff_pct": 13.5,
+   "pitches": 12942
+  },
+  {
+   "season": 2025,
+   "bucket": 140,
+   "pa": 1743,
+   "ops": 0.915,
+   "wrc_plus": 151,
+   "whiff_pct": 10.5,
+   "pitches": 6597
+  },
+  {
+   "season": 2026,
+   "bucket": 140,
+   "pa": 1189,
+   "ops": 0.989,
+   "wrc_plus": 161,
+   "whiff_pct": 10.8,
+   "pitches": 4719
+  },
+  {
+   "season": 2019,
+   "bucket": 142,
+   "pa": 4516,
+   "ops": 0.821,
+   "wrc_plus": 128,
+   "whiff_pct": 14.0,
+   "pitches": 17543
+  },
+  {
+   "season": 2020,
+   "bucket": 142,
+   "pa": 4645,
+   "ops": 0.884,
+   "wrc_plus": 135,
+   "whiff_pct": 14.4,
+   "pitches": 18382
+  },
+  {
+   "season": 2021,
+   "bucket": 142,
+   "pa": 4154,
+   "ops": 0.872,
+   "wrc_plus": 139,
+   "whiff_pct": 13.1,
+   "pitches": 16580
+  },
+  {
+   "season": 2022,
+   "bucket": 142,
+   "pa": 3881,
+   "ops": 0.827,
+   "wrc_plus": 132,
+   "whiff_pct": 14.0,
+   "pitches": 15677
+  },
+  {
+   "season": 2023,
+   "bucket": 142,
+   "pa": 4478,
+   "ops": 0.785,
+   "wrc_plus": 121,
+   "whiff_pct": 12.7,
+   "pitches": 17563
+  },
+  {
+   "season": 2024,
+   "bucket": 142,
+   "pa": 4601,
+   "ops": 0.904,
+   "wrc_plus": 136,
+   "whiff_pct": 13.9,
+   "pitches": 17918
+  },
+  {
+   "season": 2025,
+   "bucket": 142,
+   "pa": 3131,
+   "ops": 0.894,
+   "wrc_plus": 145,
+   "whiff_pct": 11.8,
+   "pitches": 12250
+  },
+  {
+   "season": 2026,
+   "bucket": 142,
+   "pa": 2603,
+   "ops": 0.894,
+   "wrc_plus": 139,
+   "whiff_pct": 11.7,
+   "pitches": 10206
+  },
+  {
+   "season": 2019,
+   "bucket": 144,
+   "pa": 4372,
+   "ops": 0.728,
+   "wrc_plus": 104,
+   "whiff_pct": 15.5,
+   "pitches": 17100
+  },
+  {
+   "season": 2020,
+   "bucket": 144,
+   "pa": 4578,
+   "ops": 0.844,
+   "wrc_plus": 123,
+   "whiff_pct": 14.8,
+   "pitches": 17408
+  },
+  {
+   "season": 2021,
+   "bucket": 144,
+   "pa": 4060,
+   "ops": 0.741,
+   "wrc_plus": 105,
+   "whiff_pct": 15.8,
+   "pitches": 16158
+  },
+  {
+   "season": 2022,
+   "bucket": 144,
+   "pa": 4553,
+   "ops": 0.779,
+   "wrc_plus": 121,
+   "whiff_pct": 15.2,
+   "pitches": 18190
+  },
+  {
+   "season": 2023,
+   "bucket": 144,
+   "pa": 4746,
+   "ops": 0.791,
+   "wrc_plus": 124,
+   "whiff_pct": 14.6,
+   "pitches": 18654
+  },
+  {
+   "season": 2024,
+   "bucket": 144,
+   "pa": 4874,
+   "ops": 0.829,
+   "wrc_plus": 117,
+   "whiff_pct": 15.7,
+   "pitches": 19151
+  },
+  {
+   "season": 2025,
+   "bucket": 144,
+   "pa": 4672,
+   "ops": 0.899,
+   "wrc_plus": 146,
+   "whiff_pct": 12.8,
+   "pitches": 18287
+  },
+  {
+   "season": 2026,
+   "bucket": 144,
+   "pa": 4450,
+   "ops": 0.86,
+   "wrc_plus": 130,
+   "whiff_pct": 14.0,
+   "pitches": 17270
+  },
+  {
+   "season": 2019,
+   "bucket": 146,
+   "pa": 3012,
+   "ops": 0.76,
+   "wrc_plus": 112,
+   "whiff_pct": 15.7,
+   "pitches": 11067
+  },
+  {
+   "season": 2020,
+   "bucket": 146,
+   "pa": 3020,
+   "ops": 0.754,
+   "wrc_plus": 100,
+   "whiff_pct": 16.6,
+   "pitches": 11612
+  },
+  {
+   "season": 2021,
+   "bucket": 146,
+   "pa": 3444,
+   "ops": 0.758,
+   "wrc_plus": 110,
+   "whiff_pct": 16.0,
+   "pitches": 13848
+  },
+  {
+   "season": 2022,
+   "bucket": 146,
+   "pa": 3894,
+   "ops": 0.769,
+   "wrc_plus": 118,
+   "whiff_pct": 16.1,
+   "pitches": 15100
+  },
+  {
+   "season": 2023,
+   "bucket": 146,
+   "pa": 3742,
+   "ops": 0.742,
+   "wrc_plus": 109,
+   "whiff_pct": 14.7,
+   "pitches": 14433
+  },
+  {
+   "season": 2024,
+   "bucket": 146,
+   "pa": 3960,
+   "ops": 0.783,
+   "wrc_plus": 105,
+   "whiff_pct": 16.6,
+   "pitches": 15425
+  },
+  {
+   "season": 2025,
+   "bucket": 146,
+   "pa": 4840,
+   "ops": 0.813,
+   "wrc_plus": 125,
+   "whiff_pct": 15.5,
+   "pitches": 18394
+  },
+  {
+   "season": 2026,
+   "bucket": 146,
+   "pa": 4864,
+   "ops": 0.802,
+   "wrc_plus": 116,
+   "whiff_pct": 14.8,
+   "pitches": 18328
+  },
+  {
+   "season": 2019,
+   "bucket": 148,
+   "pa": 1498,
+   "ops": 0.685,
+   "wrc_plus": 92,
+   "whiff_pct": 17.3,
+   "pitches": 5497
+  },
+  {
+   "season": 2020,
+   "bucket": 148,
+   "pa": 1540,
+   "ops": 0.658,
+   "wrc_plus": 77,
+   "whiff_pct": 18.5,
+   "pitches": 5768
+  },
+  {
+   "season": 2021,
+   "bucket": 148,
+   "pa": 2193,
+   "ops": 0.72,
+   "wrc_plus": 99,
+   "whiff_pct": 18.6,
+   "pitches": 8206
+  },
+  {
+   "season": 2022,
+   "bucket": 148,
+   "pa": 2327,
+   "ops": 0.715,
+   "wrc_plus": 102,
+   "whiff_pct": 17.2,
+   "pitches": 8806
+  },
+  {
+   "season": 2023,
+   "bucket": 148,
+   "pa": 2405,
+   "ops": 0.72,
+   "wrc_plus": 103,
+   "whiff_pct": 17.0,
+   "pitches": 8903
+  },
+  {
+   "season": 2024,
+   "bucket": 148,
+   "pa": 2393,
+   "ops": 0.769,
+   "wrc_plus": 101,
+   "whiff_pct": 19.1,
+   "pitches": 9323
+  },
+  {
+   "season": 2025,
+   "bucket": 148,
+   "pa": 3617,
+   "ops": 0.763,
+   "wrc_plus": 112,
+   "whiff_pct": 17.0,
+   "pitches": 13721
+  },
+  {
+   "season": 2026,
+   "bucket": 148,
+   "pa": 3787,
+   "ops": 0.799,
+   "wrc_plus": 115,
+   "whiff_pct": 16.0,
+   "pitches": 14715
+  },
+  {
+   "season": 2019,
+   "bucket": 150,
+   "pa": 854,
+   "ops": 0.699,
+   "wrc_plus": 95,
+   "whiff_pct": 18.8,
+   "pitches": 2892
+  },
+  {
+   "season": 2020,
+   "bucket": 150,
+   "pa": 853,
+   "ops": 0.657,
+   "wrc_plus": 73,
+   "whiff_pct": 17.8,
+   "pitches": 3316
+  },
+  {
+   "season": 2021,
+   "bucket": 150,
+   "pa": 935,
+   "ops": 0.682,
+   "wrc_plus": 89,
+   "whiff_pct": 18.2,
+   "pitches": 3520
+  },
+  {
+   "season": 2022,
+   "bucket": 150,
+   "pa": 1141,
+   "ops": 0.675,
+   "wrc_plus": 91,
+   "whiff_pct": 19.2,
+   "pitches": 4349
+  },
+  {
+   "season": 2023,
+   "bucket": 150,
+   "pa": 909,
+   "ops": 0.651,
+   "wrc_plus": 85,
+   "whiff_pct": 17.9,
+   "pitches": 3555
+  },
+  {
+   "season": 2024,
+   "bucket": 150,
+   "pa": 1061,
+   "ops": 0.647,
+   "wrc_plus": 72,
+   "whiff_pct": 21.5,
+   "pitches": 3870
+  },
+  {
+   "season": 2025,
+   "bucket": 150,
+   "pa": 2126,
+   "ops": 0.713,
+   "wrc_plus": 99,
+   "whiff_pct": 21.3,
+   "pitches": 8438
+  },
+  {
+   "season": 2026,
+   "bucket": 150,
+   "pa": 2659,
+   "ops": 0.807,
+   "wrc_plus": 117,
+   "whiff_pct": 17.6,
+   "pitches": 10154
+  },
+  {
+   "season": 2019,
+   "bucket": 152,
+   "pa": 344,
+   "ops": 0.6,
+   "wrc_plus": 66,
+   "whiff_pct": 22.7,
+   "pitches": 1183
+  },
+  {
+   "season": 2020,
+   "bucket": 152,
+   "pa": 389,
+   "ops": 0.579,
+   "wrc_plus": 54,
+   "whiff_pct": 21.2,
+   "pitches": 1387
+  },
+  {
+   "season": 2021,
+   "bucket": 152,
+   "pa": 393,
+   "ops": 0.568,
+   "wrc_plus": 57,
+   "whiff_pct": 19.9,
+   "pitches": 1454
+  },
+  {
+   "season": 2022,
+   "bucket": 152,
+   "pa": 642,
+   "ops": 0.675,
+   "wrc_plus": 91,
+   "whiff_pct": 19.4,
+   "pitches": 2337
+  },
+  {
+   "season": 2023,
+   "bucket": 152,
+   "pa": 449,
+   "ops": 0.647,
+   "wrc_plus": 83,
+   "whiff_pct": 18.2,
+   "pitches": 1585
+  },
+  {
+   "season": 2024,
+   "bucket": 152,
+   "pa": 321,
+   "ops": 0.679,
+   "wrc_plus": 78,
+   "whiff_pct": 26.8,
+   "pitches": 1175
+  },
+  {
+   "season": 2025,
+   "bucket": 152,
+   "pa": 1605,
+   "ops": 0.69,
+   "wrc_plus": 90,
+   "whiff_pct": 22.0,
+   "pitches": 6098
+  },
+  {
+   "season": 2026,
+   "bucket": 152,
+   "pa": 1439,
+   "ops": 0.791,
+   "wrc_plus": 115,
+   "whiff_pct": 18.7,
+   "pitches": 5629
+  },
+  {
+   "season": 2019,
+   "bucket": 154,
+   "pa": 150,
+   "ops": 0.61,
+   "wrc_plus": 75,
+   "whiff_pct": 20.1,
+   "pitches": 439
+  },
+  {
+   "season": 2020,
+   "bucket": 154,
+   "pa": 110,
+   "ops": 0.605,
+   "wrc_plus": 57,
+   "whiff_pct": 23.4,
+   "pitches": 447
+  },
+  {
+   "season": 2021,
+   "bucket": 154,
+   "pa": 186,
+   "ops": 0.49,
+   "wrc_plus": 35,
+   "whiff_pct": 22.1,
+   "pitches": 605
+  },
+  {
+   "season": 2022,
+   "bucket": 154,
+   "pa": 386,
+   "ops": 0.655,
+   "wrc_plus": 87,
+   "whiff_pct": 19.6,
+   "pitches": 1456
+  },
+  {
+   "season": 2023,
+   "bucket": 154,
+   "pa": 217,
+   "ops": 0.681,
+   "wrc_plus": 91,
+   "whiff_pct": 21.7,
+   "pitches": 722
+  },
+  {
+   "season": 2024,
+   "bucket": 154,
+   "pa": 90,
+   "ops": 0.642,
+   "wrc_plus": 65,
+   "whiff_pct": 21.1,
+   "pitches": 359
+  },
+  {
+   "season": 2025,
+   "bucket": 154,
+   "pa": 859,
+   "ops": 0.526,
+   "wrc_plus": 46,
+   "whiff_pct": 23.6,
+   "pitches": 3220
+  },
+  {
+   "season": 2026,
+   "bucket": 154,
+   "pa": 613,
+   "ops": 0.728,
+   "wrc_plus": 94,
+   "whiff_pct": 23.0,
+   "pitches": 2358
+  },
+  {
+   "season": 2019,
+   "bucket": 156,
+   "pa": 21,
+   "ops": 0.243,
+   "wrc_plus": -32,
+   "whiff_pct": 25.5,
+   "pitches": 74
+  },
+  {
+   "season": 2020,
+   "bucket": 156,
+   "pa": 23,
+   "ops": 0.36,
+   "wrc_plus": 0,
+   "whiff_pct": 28.1,
+   "pitches": 58
+  },
+  {
+   "season": 2021,
+   "bucket": 156,
+   "pa": 26,
+   "ops": 0.878,
+   "wrc_plus": 144,
+   "whiff_pct": 23.3,
+   "pitches": 98
+  },
+  {
+   "season": 2022,
+   "bucket": 156,
+   "pa": 169,
+   "ops": 0.551,
+   "wrc_plus": 61,
+   "whiff_pct": 24.5,
+   "pitches": 569
+  },
+  {
+   "season": 2023,
+   "bucket": 156,
+   "pa": 83,
+   "ops": 0.562,
+   "wrc_plus": 59,
+   "whiff_pct": 27.9,
+   "pitches": 284
+  },
+  {
+   "season": 2024,
+   "bucket": 156,
+   "pa": 21,
+   "ops": 0.979,
+   "wrc_plus": 155,
+   "whiff_pct": 25.0,
+   "pitches": 72
+  },
+  {
+   "season": 2025,
+   "bucket": 156,
+   "pa": 281,
+   "ops": 0.42,
+   "wrc_plus": 16,
+   "whiff_pct": 30.5,
+   "pitches": 977
+  },
+  {
+   "season": 2026,
+   "bucket": 156,
+   "pa": 222,
+   "ops": 0.623,
+   "wrc_plus": 66,
+   "whiff_pct": 22.5,
+   "pitches": 828
+  }
+ ]
+}

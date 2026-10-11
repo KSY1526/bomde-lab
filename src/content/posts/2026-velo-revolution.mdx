@@ -1,0 +1,104 @@
+---
+title: "구속 혁명 2년 차, 타자가 답을 찾았다"
+description: "KBO 포심 평균 구속은 2019년 142.1km/h에서 올해 146.4km/h가 됐다. 타자는 150km/h 초반 직구까지 따라왔다."
+date: 2026-10-12
+category: season
+tags: ["구속", "직구", "wRC+", "헛스윙률", "2026"]
+dataUntil: "2026 정규시즌 10/10까지"
+---
+import BarChart from '../../components/BarChart.astro';
+import d from '../../data/posts/2026-10-11-velo-revolution.json';
+
+export const label = (b) => (b === d.low ? `${b} 이하` : b === d.high ? `${b} 이상` : `${b}~${b + 1}`);
+export const bucketList = [...new Set(d.buckets.map((r) => r.bucket))];
+export const seasons = d.avg_velo.map((r) => r.season);
+export const cell = (b, y) => d.buckets.find((r) => r.bucket === b && r.season === y);
+export const f3 = (v) => v.toFixed(3).replace(/^0/, '');
+export const cls = (b, y, extra = '') => [y === d.last ? 'cur' : '', cell(b, y).pa < d.small_pa ? 'small' : extra].filter(Boolean).join(' ');
+// gap > 0 = 타자 우세(붉은색), gap < 0 = 투수 우세(파란색). 기준에서 step만큼 멀어질 때마다 한 단계 진해진다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const wrcHeat = (b, y) => heat(cell(b, y).wrc_plus - 100, 10);
+export const whiffHeat = (b, y) => heat(Math.round((d.whiff_ref - cell(b, y).whiff_pct) * 10) / 10, 1.5);
+export const td = (b, y, h, text) => <td class={cls(b, y, h ? h.cls : '')} style={h && cell(b, y).pa >= d.small_pa ? `--heat:${h.pct}%` : undefined}>{text}</td>;
+
+올해 KBO 포심 평균 구속은 146.4km/h다. 2019년 142.1km/h보다 4km/h 넘게 빠르다. 2022년 144.0km/h까지 올랐다가 2년 동안 143.5km/h에 머물렀고 2025년에 146.2km/h로 한 번에 뛰었다. 주춤한 해는 있어도 포심 평균 구속은 꾸준히 오르는 추세다.
+
+<BarChart
+  title="KBO 포심 평균 구속 (km/h)"
+  min={140}
+  digits={1}
+  rows={d.avg_velo.map((r) => ({ label: String(r.season), value: r.velo, highlight: r.season === d.last }))}
+/>
+
+150km/h 이상 포심 비율도 2024년 5.8%에서 2026년 21.6%로 3.7배가 됐다. 직구가 빨라지는 동안 타자는 어떻게 대응했을까. 포심을 2km/h 단위로 나눠 2019년부터 구간별 타자 성적을 봤다.
+
+<table>
+  <thead><tr><th>wRC+</th>{seasons.map((y) => <th class={y === d.last ? 'cur' : ''}>{y}</th>)}</tr></thead>
+  <tbody>
+    {bucketList.map((b) => (
+      <tr><td>{label(b)}</td>{seasons.map((y) => td(b, y, wrcHeat(b, y), cell(b, y).wrc_plus))}</tr>
+    ))}
+  </tbody>
+</table>
+
+<table>
+  <thead><tr><th>헛스윙률</th>{seasons.map((y) => <th class={y === d.last ? 'cur' : ''}>{y}</th>)}</tr></thead>
+  <tbody>
+    {bucketList.map((b) => (
+      <tr><td>{label(b)}</td>{seasons.map((y) => td(b, y, whiffHeat(b, y), `${cell(b, y).whiff_pct}%`))}</tr>
+    ))}
+  </tbody>
+</table>
+
+<details>
+  <summary>구간별 OPS와 타석 수</summary>
+  <table>
+    <thead><tr><th>OPS (타석)</th>{seasons.map((y) => <th class={y === d.last ? 'cur' : ''}>{y}</th>)}</tr></thead>
+    <tbody>
+      {bucketList.map((b) => (
+        <tr><td>{label(b)}</td>{seasons.map((y) => <td class={cls(b, y)}>{f3(cell(b, y).ops)} ({cell(b, y).pa})</td>)}</tr>
+      ))}
+    </tbody>
+  </table>
+</details>
+
+<p class="table-note">붉은 칸은 타자가, 파란 칸은 투수가 우세한 칸이다. 기준은 wRC+ 100(리그 평균)과 2019년부터 2026년까지 포심 전체 헛스윙률 14.8%이고, 기준에서 멀수록 진하다. 노란 칸은 30타석 미만이라 표본이 적은 칸이다(156 이상의 2019년부터 2021년까지와 2024년, 21~26타석). 구간은 km/h, 직구 = 포심. OPS·wRC+는 타석 마지막 공이 포심인 타석의 성적, 헛스윙률은 그 구간 포심 전체의 헛스윙 / 스윙.</p>
+
+## 2025년에는 타자가 눌렸다
+
+2025년은 빨라진 공에 타자가 아직 대응하지 못한 해였다. 150km/h 이상 포심 비율이 2024년 5.8%에서 2025년 20.3%로 뛰었다. 154\~155는 OPS .526, wRC+ 46(859타석), 156 이상은 OPS .420, wRC+ 16(281타석)에 그쳤다.
+
+## 150km/h 초반 직구는 따라잡았다
+
+올해 타자가 가장 뚜렷하게 적응한 구간은 150\~153km/h다. wRC+가 150\~151은 2025년 99에서 2026년 117로, 152\~153은 90에서 115로 올랐다. 두 구간 모두 2019년 이후 처음으로 100을 넘었다.
+
+헛스윙률도 150\~151은 21.3%에서 17.6%로, 152\~153은 22.0%에서 18.7%로 내려갔다. 안타가 운 좋게 많이 나온 것만이 아니라 컨택 비율도 좋아졌다는 뜻이다.
+
+<BarChart
+  title="포심 구속 구간별 타자 wRC+, 2025 vs 2026"
+  caption="점선은 리그 평균 타자(wRC+ 100)."
+  digits={0}
+  ref={{ value: 100, label: '리그 평균 100' }}
+  legend={{ prev: '2025', value: '2026' }}
+  rows={bucketList.map((b) => ({ label: label(b), value: Math.max(cell(b, d.last).wrc_plus, 0), prev: Math.max(cell(b, d.last - 1).wrc_plus, 0), highlight: b === 150 || b === 152 }))}
+/>
+
+## 146\~149km/h는 평범한 직구가 됐다
+
+140km/h 후반 직구는 2026년 기준으로 더는 타자를 누르는 공이 아니다. 146\~147은 OPS .802, wRC+ 116(4864타석), 148\~149는 OPS .799, wRC+ 115(3787타석)다. 두 구간 모두 wRC+가 100을 넘는다. 이 구속대 직구를 상대로는 타자가 리그 평균 이상의 생산성을 낸다.
+
+148\~149는 추세도 뚜렷하다. wRC+가 2020년 77에서 올해 115로 올랐다. 헛스윙률은 2024년 19.1%에서 올해 16.0%로 내려와 2019년 이후 가장 낮다.
+
+<BarChart
+  title="148~149km/h 포심 상대 타자 wRC+"
+  caption="점선은 리그 평균 타자(wRC+ 100)."
+  digits={0}
+  ref={{ value: 100, label: '리그 평균 100' }}
+  rows={seasons.map((y) => ({ label: String(y), value: cell(148, y).wrc_plus, highlight: y === d.last }))}
+/>
+
+## 156km/h 이상은 아직이다
+
+아직 대응이 어려운 구간은 156km/h 이상이다. 올해도 OPS .623, wRC+ 66(222타석)이고 헛스윙률은 22.5%다. 154\~155도 OPS .728, wRC+ 94(613타석)로 리그 평균에 미치지 못한다.
+
+150km/h 초반 직구는 비중이 크게 늘어난 지 1년 만에 타자가 평균 이상으로 쳐 냈다. 필자는 2026년 KBO에서 타자를 누르는 직구의 선이 156km/h 근처까지 올라갔다고 생각한다.
