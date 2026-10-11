@@ -1,0 +1,498 @@
+{
+ "season": 2026,
+ "until": "2026-10-10",
+ "first": 2017,
+ "lg_r_pa": 0.1296,
+ "weights": {
+  "bb": 0.74,
+  "hbp": 0.77,
+  "b1": 0.93,
+  "b2": 1.3,
+  "b3": 1.63,
+  "hr": 2.08
+ },
+ "compare": [
+  {
+   "pa": 400,
+   "wrc_plus": 160,
+   "runs_above_avg": 31.1,
+   "runs_above_repl": 44.4
+  },
+  {
+   "pa": 600,
+   "wrc_plus": 140,
+   "runs_above_avg": 31.1,
+   "runs_above_repl": 51.1
+  }
+ ],
+ "repl_per_600": 20,
+ "check_pa": 400,
+ "final_min_pa": 550,
+ "high": 160,
+ "checkpoints": [
+  {
+   "season": 2017,
+   "name": "최형우",
+   "w_check": 188.7,
+   "w_final": 161.6,
+   "pa": 629
+  },
+  {
+   "season": 2017,
+   "name": "김재환",
+   "w_check": 180.6,
+   "w_final": 168.2,
+   "pa": 636
+  },
+  {
+   "season": 2017,
+   "name": "나성범",
+   "w_check": 167.6,
+   "w_final": 153.5,
+   "pa": 561
+  },
+  {
+   "season": 2018,
+   "name": "김재환",
+   "w_check": 178.4,
+   "w_final": 168.2,
+   "pa": 600
+  },
+  {
+   "season": 2019,
+   "name": "샌즈",
+   "w_check": 174.2,
+   "w_final": 163.5,
+   "pa": 612
+  },
+  {
+   "season": 2019,
+   "name": "페르난데스",
+   "w_check": 166.4,
+   "w_final": 157.5,
+   "pa": 643
+  },
+  {
+   "season": 2020,
+   "name": "로하스",
+   "w_check": 174.2,
+   "w_final": 175.3,
+   "pa": 625
+  },
+  {
+   "season": 2020,
+   "name": "김현수",
+   "w_check": 163.1,
+   "w_final": 149.0,
+   "pa": 619
+  },
+  {
+   "season": 2020,
+   "name": "페르난데스",
+   "w_check": 162.8,
+   "w_final": 147.7,
+   "pa": 667
+  },
+  {
+   "season": 2020,
+   "name": "이정후",
+   "w_check": 161.0,
+   "w_final": 144.9,
+   "pa": 613
+  },
+  {
+   "season": 2021,
+   "name": "강백호",
+   "w_check": 178.1,
+   "w_final": 156.1,
+   "pa": 619
+  },
+  {
+   "season": 2021,
+   "name": "양의지",
+   "w_check": 171.1,
+   "w_final": 158.5,
+   "pa": 564
+  },
+  {
+   "season": 2021,
+   "name": "홍창기",
+   "w_check": 162.7,
+   "w_final": 155.6,
+   "pa": 647
+  },
+  {
+   "season": 2022,
+   "name": "이정후",
+   "w_check": 174.9,
+   "w_final": 179.2,
+   "pa": 618
+  },
+  {
+   "season": 2022,
+   "name": "피렐라",
+   "w_check": 161.6,
+   "w_final": 160.5,
+   "pa": 619
+  },
+  {
+   "season": 2024,
+   "name": "김도영",
+   "w_check": 160.2,
+   "w_final": 167.8,
+   "pa": 620
+  },
+  {
+   "season": 2026,
+   "name": "오스틴",
+   "w_check": 180.9,
+   "w_final": 181.0,
+   "pa": 632
+  }
+ ],
+ "checkpoints_kept": 9,
+ "checkpoints_avg_change": -9.3,
+ "all_n": 199,
+ "all_avg_change": -0.6,
+ "austin_month": [
+  {
+   "m": 3,
+   "pa": 14,
+   "wrc_plus": 187.6
+  },
+  {
+   "m": 4,
+   "pa": 113,
+   "wrc_plus": 172.1
+  },
+  {
+   "m": 5,
+   "pa": 113,
+   "wrc_plus": 165.3
+  },
+  {
+   "m": 6,
+   "pa": 105,
+   "wrc_plus": 222.4
+  },
+  {
+   "m": 7,
+   "pa": 92,
+   "wrc_plus": 186.2
+  },
+  {
+   "m": 8,
+   "pa": 77,
+   "wrc_plus": 175.1
+  },
+  {
+   "m": 9,
+   "pa": 81,
+   "wrc_plus": 188.7
+  },
+  {
+   "m": 10,
+   "pa": 37,
+   "wrc_plus": 119.5
+  }
+ ],
+ "austin_cum": [
+  {
+   "pa": 100,
+   "wrc_plus": 170.1
+  },
+  {
+   "pa": 200,
+   "wrc_plus": 180.8
+  },
+  {
+   "pa": 300,
+   "wrc_plus": 186.4
+  },
+  {
+   "pa": 400,
+   "wrc_plus": 180.9
+  },
+  {
+   "pa": 500,
+   "wrc_plus": 178.2
+  },
+  {
+   "pa": 600,
+   "wrc_plus": 184.1
+  },
+  {
+   "pa": 632,
+   "wrc_plus": 181.0
+  }
+ ],
+ "austin_split": [
+  {
+   "part": "9월까지",
+   "pa": 595,
+   "wrc_plus": 184.9
+  },
+  {
+   "part": "10월",
+   "pa": 37,
+   "wrc_plus": 119.5
+  }
+ ],
+ "situ": [
+  {
+   "base": "--3",
+   "result": "BB",
+   "n": 136,
+   "wpa": 2.02
+  },
+  {
+   "base": "--3",
+   "result": "OUT",
+   "n": 387,
+   "wpa": -3.21
+  },
+  {
+   "base": "--3",
+   "result": "SF",
+   "n": 216,
+   "wpa": 2.05
+  },
+  {
+   "base": "-23",
+   "result": "BB",
+   "n": 167,
+   "wpa": 0.94
+  },
+  {
+   "base": "123",
+   "result": "BB",
+   "n": 164,
+   "wpa": 7.2
+  }
+ ],
+ "wpa_first": 2024,
+ "wpa": [
+  {
+   "name": "오스틴",
+   "team": "LG",
+   "wrc_plus": 181.0,
+   "wpa": 7.07,
+   "wrc_rank": 1,
+   "wpa_rank": 1
+  },
+  {
+   "name": "김도영",
+   "team": "KIA",
+   "wrc_plus": 173.6,
+   "wpa": 5.47,
+   "wrc_rank": 2,
+   "wpa_rank": 2
+  },
+  {
+   "name": "구자욱",
+   "team": "삼성",
+   "wrc_plus": 167.5,
+   "wpa": 4.04,
+   "wrc_rank": 3,
+   "wpa_rank": 3
+  },
+  {
+   "name": "최원준",
+   "team": "KT",
+   "wrc_plus": 144.1,
+   "wpa": 3.86,
+   "wrc_rank": 5,
+   "wpa_rank": 4
+  },
+  {
+   "name": "레이예스",
+   "team": "롯데",
+   "wrc_plus": 133.0,
+   "wpa": 2.99,
+   "wrc_rank": 10,
+   "wpa_rank": 5
+  },
+  {
+   "name": "페라자",
+   "team": "한화",
+   "wrc_plus": 132.9,
+   "wpa": 2.76,
+   "wrc_rank": 11,
+   "wpa_rank": 6
+  },
+  {
+   "name": "나성범",
+   "team": "KIA",
+   "wrc_plus": 144.0,
+   "wpa": 2.71,
+   "wrc_rank": 6,
+   "wpa_rank": 7
+  },
+  {
+   "name": "힐리어드",
+   "team": "KT",
+   "wrc_plus": 143.9,
+   "wpa": 2.69,
+   "wrc_rank": 7,
+   "wpa_rank": 8
+  },
+  {
+   "name": "박민우",
+   "team": "NC",
+   "wrc_plus": 125.3,
+   "wpa": 2.45,
+   "wrc_rank": 19,
+   "wpa_rank": 9
+  },
+  {
+   "name": "디아즈",
+   "team": "삼성",
+   "wrc_plus": 127.4,
+   "wpa": 2.37,
+   "wrc_rank": 16,
+   "wpa_rank": 10
+  },
+  {
+   "name": "박성한",
+   "team": "SSG",
+   "wrc_plus": 131.6,
+   "wpa": 2.22,
+   "wrc_rank": 13,
+   "wpa_rank": 11
+  },
+  {
+   "name": "김민석",
+   "team": "두산",
+   "wrc_plus": 120.6,
+   "wpa": 2.19,
+   "wrc_rank": 27,
+   "wpa_rank": 12
+  }
+ ],
+ "wpa_corr": [
+  {
+   "season": 2024,
+   "r": 0.81,
+   "n": 87
+  },
+  {
+   "season": 2025,
+   "r": 0.82,
+   "n": 74
+  },
+  {
+   "season": 2026,
+   "r": 0.84,
+   "n": 79
+  }
+ ],
+ "risp_corr": 0.07,
+ "risp_n": 437,
+ "wrc_persist_corr": 0.58,
+ "wrc_persist_n": 505,
+ "s_class": 180,
+ "seasons": [
+  {
+   "season": 2017,
+   "rpg": 5.33,
+   "max_wrc": 168.2,
+   "top_name": "김재환",
+   "n_s": 0,
+   "n150": 7,
+   "sd": 28.3,
+   "nq": 89
+  },
+  {
+   "season": 2018,
+   "rpg": 5.55,
+   "max_wrc": 186.9,
+   "top_name": "박병호",
+   "n_s": 1,
+   "n150": 5,
+   "sd": 25.4,
+   "nq": 85
+  },
+  {
+   "season": 2019,
+   "rpg": 4.55,
+   "max_wrc": 170.3,
+   "top_name": "양의지",
+   "n_s": 0,
+   "n150": 5,
+   "sd": 25.8,
+   "nq": 84
+  },
+  {
+   "season": 2020,
+   "rpg": 5.16,
+   "max_wrc": 175.3,
+   "top_name": "로하스",
+   "n_s": 0,
+   "n150": 3,
+   "sd": 25.8,
+   "nq": 79
+  },
+  {
+   "season": 2021,
+   "rpg": 4.79,
+   "max_wrc": 165.5,
+   "top_name": "이정후",
+   "n_s": 0,
+   "n150": 5,
+   "sd": 22.9,
+   "nq": 70
+  },
+  {
+   "season": 2022,
+   "rpg": 4.53,
+   "max_wrc": 179.2,
+   "top_name": "이정후",
+   "n_s": 0,
+   "n150": 3,
+   "sd": 23.6,
+   "nq": 78
+  },
+  {
+   "season": 2023,
+   "rpg": 4.6,
+   "max_wrc": 154.9,
+   "top_name": "오스틴",
+   "n_s": 0,
+   "n150": 6,
+   "sd": 23.3,
+   "nq": 78
+  },
+  {
+   "season": 2024,
+   "rpg": 5.38,
+   "max_wrc": 167.8,
+   "top_name": "김도영",
+   "n_s": 0,
+   "n150": 3,
+   "sd": 22.2,
+   "nq": 87
+  },
+  {
+   "season": 2025,
+   "rpg": 4.73,
+   "max_wrc": 172.1,
+   "top_name": "안현민",
+   "n_s": 0,
+   "n150": 7,
+   "sd": 22.8,
+   "nq": 74
+  },
+  {
+   "season": 2026,
+   "rpg": 5.08,
+   "max_wrc": 181.0,
+   "top_name": "오스틴",
+   "n_s": 1,
+   "n150": 4,
+   "sd": 23.7,
+   "nq": 79
+  }
+ ],
+ "env_corr_max": 0.4,
+ "env_corr_sd": 0.33
+}

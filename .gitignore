@@ -24,5 +24,3 @@ scripts/
 server/
 .env.example
 # 초안 글과 그 데이터는 발행 전까지 공개하지 않는다(발행할 때 이 목록에서 뺀다)
-src/content/posts/2026-wrc-limits.mdx
-src/data/posts/2026-10-11-wrc-limits.json
