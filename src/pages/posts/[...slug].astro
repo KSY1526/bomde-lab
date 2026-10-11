@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Comments from '../../components/Comments.astro';
 import { publishedPosts } from '../../lib/posts';
-import { CATEGORIES, SITE, url, formatDate } from '../../lib/site';
+import { CATEGORIES, url, formatDate } from '../../lib/site';
 
 export async function getStaticPaths() {
   const posts = await publishedPosts();
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const { title, description, date, category, tags, dataUntil, draft } = post.data;
+const { title, description, date, category, tags, draft } = post.data;
 ---
 <Base title={title} description={description}>
   <article class="post">
@@ -21,15 +21,16 @@ const { title, description, date, category, tags, dataUntil, draft } = post.data
       {draft && <span class="chip">초안 (배포 안 됨)</span>}
       <h1>{title}</h1>
       <p class="muted lead">{description}</p>
-      <p class="muted small"><time datetime={date.toISOString()}>{formatDate(date)}</time> · 데이터 기준 {dataUntil}</p>
+      <p class="muted small"><time datetime={date.toISOString()}>{formatDate(date)}</time><span hidden data-views data-slug={post.id}></span></p>
     </header>
     <div class="prose">
       <Content />
     </div>
-    <footer class="source muted small">
-      <p>{SITE.source}. 데이터 기준 {dataUntil}. 자체 계산 지표(*)는 공식 기록과 다를 수 있습니다.</p>
-      {tags.length > 0 && <p>{tags.map((t) => <span class="chip">#{t}</span>)}</p>}
-    </footer>
+    {tags.length > 0 && (
+      <footer class="tags muted small">
+        <p>{tags.map((t) => <span class="chip">#{t}</span>)}</p>
+      </footer>
+    )}
   </article>
   <Comments slug={post.id} />
 </Base>
@@ -39,6 +40,6 @@ const { title, description, date, category, tags, dataUntil, draft } = post.data
   h1 { margin: 12px 0 8px; font-size: clamp(24px, 4vw, 32px); line-height: 1.35; letter-spacing: -.02em; }
   .lead { font-size: 17px; margin: 0 0 8px; }
   .small { font-size: 13.5px; margin: 0; }
-  .source { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 32px; }
-  .source p { margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags { border-top: 1px solid var(--line); padding-top: 16px; margin-top: 32px; }
+  .tags p { margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 6px; }
 </style>
