@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import ChatPanel from '../components/ChatPanel.astro';
+import Visit from '../components/Visit.astro';
 import { SITE, CATEGORIES, url } from '../lib/site';
 
 interface Props {
@@ -67,9 +68,9 @@ const nav = [
     <footer class="site-footer">
       <div class="wrap">
         <p><strong>{SITE.title}</strong> · {SITE.tagline}</p>
-        <p class="muted">{SITE.source}. 자체 계산 지표(*)는 공식 기록과 다를 수 있습니다.</p>
       </div>
     </footer>
+    <Visit />
   </body>
 </html>
 

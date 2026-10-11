@@ -1,0 +1,29 @@
+---
+// 방문 기록(사용자 결정 2026-10-11). 페이지를 열 때마다 서버에 알린다. 서버가 꺼져 있으면 조용히 넘어간다.
+//   POST {API}/visit { path, post?, ref } → { views? }  (post가 있으면 그 글 조회수 +1 후 돌려줌)
+// 글 페이지는 [data-views][data-slug] 요소를 두면 조회수가 채워진다.
+const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
+---
+<span hidden data-visit data-api={api}></span>
+
+<script>
+  const api = document.querySelector<HTMLElement>('[data-visit]')?.dataset.api ?? '';
+  const views = document.querySelector<HTMLElement>('[data-views]');
+  const post = views?.dataset.slug;
+  if (api) {
+    fetch(`${api}/visit`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer }),
+      signal: AbortSignal.timeout(5000),
+    })
+      .then((r) => (r.ok ? r.json() : {}))
+      .then((d: { views?: number }) => {
+        if (views && typeof d.views === 'number') {
+          views.textContent = ` · 조회 ${d.views.toLocaleString('ko-KR')}`;
+          views.hidden = false;
+        }
+      })
+      .catch(() => { /* 서버가 꺼져 있어도 글은 그대로 */ });
+  }
+</script>

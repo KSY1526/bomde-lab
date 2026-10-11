@@ -10,7 +10,7 @@ const posts = defineCollection({
     date: z.coerce.date(),
     category: z.enum(['season']),
     tags: z.array(z.string()).default([]),
-    // 데이터 기준일 — 모든 글에 출처·기준일을 적는다(데이터 공개 원칙 4)
+    // 데이터 기준일 — 스냅샷 관리용. 화면에는 표시하지 않는다(데이터 공개 원칙 4)
     dataUntil: z.string(),
     draft: z.boolean().default(false),
   }),
