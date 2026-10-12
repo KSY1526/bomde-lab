@@ -12,7 +12,10 @@ export const SOCIAL = [
 
 // 메뉴 = 카테고리. 새 카테고리는 사용자가 정할 때 여기에 추가한다(content.config.ts enum도 같이).
 export const CATEGORIES: Record<string, string> = {
-  season: '시즌 분석',
+  team: '팀 분석',
+  player: '선수 분석',
+  deep: '심층 분석',
+  metrics: '야구 지표 해설',
 };
 
 /** base('/bomde-lab')를 붙인 내부 링크. url('posts/foo') → '/bomde-lab/posts/foo/' */
