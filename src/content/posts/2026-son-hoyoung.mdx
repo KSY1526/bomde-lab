@@ -1,0 +1,172 @@
+---
+title: "손호영, 직구 말고는 칠 공이 없었다"
+description: "2024년 우르크 118이던 손호영이 2025년 70, 2026년 55로 떨어졌다. 포심 상대 성적은 상대적으로 괜찮았지만 포심이 아닌 공에 약해졌고, 상대는 포심 승부를 줄였다."
+date: 2026-10-13
+category: player
+tags: ["손호영", "롯데", "직구", "슬라이더", "wRC+"]
+dataUntil: "2026 정규시즌 10/11까지 (손호영 마지막 출전 9/5)"
+---
+import BarChart from '../../components/BarChart.astro';
+import d from '../../data/posts/2026-10-12-son-hoyoung.json';
+
+export const years = [d.first, d.first + 1, d.last];
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const pitches = ['포심', '슬라이더', '커브', '체인지업', '포크', '투심', '커터', '스위퍼'];
+export const counts = ['초구', '타자 유리', '그 외', '2스트라이크'];
+export const cntLabel = (c) => (c === '타자 유리' ? '타자가 유리한 카운트' : c);
+export const yc = (y) => (y === d.last ? 'cur' : '');
+export const bp = (p, y) => d.by_pitch.find((r) => r.pitch === p && r.season === y);
+export const sp = (arr, g, y) => arr.find((r) => r.grp === g && r.season === y);
+export const sh = (h, y) => d.slider_hand.find((r) => r.hand === h && r.season === y);
+export const cnt = (arr, c, y) => arr.find((r) => r.cnt === c && r.season === y);
+// gap > 0 = 타자 우세(붉은색), gap < 0 = 투수 우세(파란색). 기준(우르크 100)에서 10씩 멀어질 때마다 한 단계 진해진다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+// 2스트라이크 표 전용: 모두 100 아래라 파란색은 그대로 두고, 진하기는 같은 해 리그 우타자 평균(같은 구종 묶음)보다 얼마나 낮은지로 정한다
+export const tdVsLg = (r, lg, y) => {
+  const gap = r.wrc_plus - lg.wrc_plus;
+  const pct = gap >= 0 ? 6 : [12, 24, 38, 52][Math.min(3, Math.floor((-gap - 1e-9) / 15))];
+  const small = r.pa < d.small_pa;
+  return <td class={[yc(y), small ? 'small' : 'down'].filter(Boolean).join(' ')} style={small ? undefined : `--heat:${pct}%`}>{Math.round(r.wrc_plus)} ({r.pa})</td>;
+};
+export const tdLgBase = (r, y) => <td class={[yc(y), 'down'].filter(Boolean).join(' ')} style="--heat:6%">{Math.round(r.wrc_plus)} ({r.pa})</td>;
+export const wrcTd = (r, y) => {
+  if (!r) return <td class={yc(y)}>-</td>;
+  const small = r.pa < d.small_pa;
+  const h = heat(Math.round(r.wrc_plus - 100), 10);
+  const cls = [yc(y), small ? 'small' : h ? h.cls : ''].filter(Boolean).join(' ');
+  return <td class={cls} style={!small && h ? `--heat:${h.pct}%` : undefined}>{Math.round(r.wrc_plus)} ({r.pa})</td>;
+};
+
+2024년 손호영은 그야말로 신데렐라였다. LG에서 2020년부터 4시즌 동안 170타석, 홈런 4개가 전부였던 선수가 트레이드로 롯데에 온 첫해 100경기 428타석에서 OPS .889, 홈런 18개를 쳤다. 4시즌 통산 홈런의 4배 넘는 홈런을 한 시즌에 친 셈이다. 우르크(wRC+)는 118.1로 리그 평균 타자보다 득점을 18% 더 만들었다.
+
+그러나 2025년에는 OPS .636, 우르크 70.0으로 떨어졌고 올해는 183타석에서 OPS .624, 우르크 55.0으로 더 내려갔다. 2년 사이 무엇이 달라졌는지 상대 투수가 던진 공으로 따라가 봤다.
+
+<table>
+  <thead><tr><th>시즌</th><th>타석</th><th>타율/출루율/장타율</th><th>OPS</th><th>우르크</th><th>홈런</th><th>삼진율</th></tr></thead>
+  <tbody>
+    {d.seasons.map((s) => (
+      <tr><td class={yc(s.season)}>{s.season}</td><td>{s.pa}</td><td>{f3(s.avg)}/{f3(s.obp)}/{f3(s.slg)}</td><td>{f3(s.ops)}</td><td>{s.wrc_plus}</td><td>{s.hr}</td><td>{s.k_pct}%</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">2024년은 LG 시절을 합친 기록. 우르크 = wRC+, 100이 리그 평균 타자.</p>
+
+## 2024년에는 슬라이더만 약했다
+
+2024년 손호영은 포심을 가장 잘 쳤다. 포심으로 끝난 175타석에서 OPS .972, 우르크 139를 기록했는데 리그 우타자의 포심 상대 우르크 119보다 20 높다. 포심이 아닌 공도 못 치지 않았다. 포심 외 공으로 끝난 253타석의 우르크는 104로 리그 우타자 평균 84보다 높았다. 체인지업(145, 41타석)과 커브(93, 44타석)도 무난했다.
+
+그해 약점은 슬라이더 하나였다. 슬라이더로 끝난 110타석의 우르크는 54로 리그 우타자 평균 75에 못 미쳤다.
+
+<table>
+  <thead><tr><th>우르크 (타석)</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+  <tbody>
+    {pitches.map((p) => (
+      <tr><td>{p}</td>{years.map((y) => wrcTd(bp(p, y), y))}</tr>
+    ))}
+  </tbody>
+</table>
+
+<details>
+  <summary>구종별 타율/출루율/장타율</summary>
+  <table>
+    <thead><tr><th>구종</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+    <tbody>
+      {pitches.map((p) => (
+        <tr><td>{p}</td>{years.map((y) => { const r = bp(p, y); return <td class={[yc(y), r && r.pa < d.small_pa ? 'small' : ''].filter(Boolean).join(' ')}>{r ? `${f3(r.avg)}/${f3(r.obp)}/${f3(r.slg)}` : '-'}</td>; })}</tr>
+      ))}
+    </tbody>
+  </table>
+</details>
+
+<p class="table-note">타석 마지막 공의 구종 기준. 붉은 칸은 우르크 100(리그 평균)보다 높은 칸, 파란 칸은 낮은 칸이고 100에서 멀수록 진하다. 노란 칸은 20타석 미만이라 표본이 적은 칸이다.</p>
+
+## 2025년부터는 직구 말고는 다 약했다
+
+2025년부터 포심이 아닌 공 전체가 약점이 됐다. 포심 외 공 상대 우르크가 2024년 104에서 2025년 54, 올해 12로 떨어졌다. 같은 기간 리그 우타자는 80 안팎을 지켰다. 2025년 체인지업(24, 36타석)과 커브(59, 38타석)도 리그 평균에 한참 못 미쳤다.
+
+<BarChart
+  title="포심이 아닌 공 상대 우르크, 손호영 vs 리그 우타자"
+  caption="타석 마지막 공이 포심이 아닌 타석. 점선은 리그 평균 타자(우르크 100)."
+  digits={0}
+  legend={{ value: '손호영', prev: '리그 우타자' }}
+  ref={{ value: 100, label: '100' }}
+  rows={years.map((y) => ({ label: String(y), value: sp(d.fb_split, '포심 외', y).wrc_plus, prev: sp(d.lg_fb_split_r, '포심 외', y).wrc_plus, highlight: y === d.last }))}
+/>
+
+포심 상대 성적은 상대적으로 괜찮았다. 2025년에는 포심 상대 장타율이 .583에서 .349로 내려가 우르크가 94까지 떨어졌지만 올해는 114로 다시 올랐다. 전체 우르크는 55인데 포심으로 끝난 타석만 보면 100을 넘는다.
+
+슬라이더 상대 우르크는 2024년 54, 2025년 49에서 올해 -2까지 떨어졌다. 33타석에서 28타수 3안타, 삼진 10개다. 손호영이 상대한 슬라이더는 대부분 우투수 공이다. 슬라이더로 끝난 타석 중 우투수 상대가 2024년 110타석 중 100타석, 올해 33타석 중 30타석이고, 우투수 슬라이더 상대 우르크는 57, 33, 11로 해마다 낮아졌다.
+
+<table>
+  <thead><tr><th>슬라이더 우르크 (타석)</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+  <tbody>
+    <tr><td>우투수</td>{years.map((y) => wrcTd(sh('R', y), y))}</tr>
+    <tr><td>좌투수</td>{years.map((y) => wrcTd(sh('L', y), y))}</tr>
+  </tbody>
+</table>
+
+<p class="table-note">색의 뜻은 위 표와 같다.</p>
+
+## 상대는 직구 승부를 줄였다
+
+상대 투수도 손호영에게 포심을 덜 던졌다. 손호영이 받은 공 중 포심 비율은 2024년 40.7%에서 2025년 37.5%, 올해 36.3%로 줄었다. 리그 우타자 평균(41.7%, 41.9%, 38.9%)보다 매년 낮고 2025년에는 4.4%p 차이가 났다.
+
+볼이 스트라이크보다 많은, 타자가 유리한 카운트에서 차이가 가장 크다. 투수가 카운트를 잡아야 해서 포심을 많이 던지는 카운트인데 손호영에게 던진 포심 비율은 2024년 53.1%에서 올해 37.9%로 15%p 넘게 줄었다. 리그 우타자 평균은 49.7%에서 46.5%로 3%p 줄었을 뿐이다.
+
+<BarChart
+  title="타자가 유리한 카운트의 포심 비율 (%)"
+  caption="볼이 스트라이크보다 많은 카운트(1-0, 2-0, 2-1, 3-0, 3-1)."
+  digits={1}
+  legend={{ value: '손호영', prev: '리그 우타자' }}
+  rows={years.map((y) => ({ label: String(y), value: cnt(d.fb_rate_cnt, '타자 유리', y).fb_pct, prev: cnt(d.lg_fb_rate_cnt_r, '타자 유리', y).fb_pct, highlight: y === d.last }))}
+/>
+
+<table>
+  <thead><tr><th>포심 비율</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+  <tbody>
+    {counts.map((c) => (
+      <tr><td>{cntLabel(c)}</td>{years.map((y) => <td class={[yc(y), c === '타자 유리' ? 'cur' : ''].filter(Boolean).join(' ')}>{cnt(d.fb_rate_cnt, c, y).fb_pct}% <small>({cnt(d.lg_fb_rate_cnt_r, c, y).fb_pct}%)</small></td>)}</tr>
+    ))}
+    <tr><td>전체</td>{years.map((y) => <td class={yc(y)}>{d.fb_rate.find((r) => r.season === y).fb_pct}% <small>({d.lg_fb_rate_r.find((r) => r.season === y).fb_pct}%)</small></td>)}</tr>
+  </tbody>
+</table>
+
+<p class="table-note">손호영이 받은 공 중 포심 비율. 괄호는 같은 해 리그 우타자 전체. 그 외 = 초구·타자가 유리한 카운트·2스트라이크가 아닌 카운트(0-1, 1-1).</p>
+
+손호영은 포심 대신 들어온 공에 카운트를 잡혔다. 타자가 유리한 카운트에서 포심이 아닌 공이 스트라이크(헛스윙·루킹·파울)가 된 비율은 2024년 49.6%에서 2025년 56.3%로 올라 리그 우타자 평균 51.0%보다 높았다. 타자가 유리한 카운트를 거친 타석 중 2스트라이크까지 몰린 비율도 39.0%에서 53.2%로 뛰어 리그 우타자 평균 47.9%를 넘었다. 이 타석의 우르크는 2024년 188에서 2025년 102, 올해 96으로 떨어졌다. 리그 우타자 평균은 2025년 128, 올해 129다.
+
+<table>
+  <thead><tr><th>타자가 유리한 카운트를 거친 타석</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+  <tbody>
+    <tr><td>포심 외 공 스트라이크 비율</td>{years.map((y) => <td class={yc(y)}>{sp(d.ahead_pitch, '포심 외', y).strike_pct}% <small>({sp(d.lg_ahead_pitch_r, '포심 외', y).strike_pct}%)</small></td>)}</tr>
+    <tr><td>2스트라이크까지 간 비율</td>{years.map((y) => <td class={yc(y)}>{d.ahead_pa.find((r) => r.season === y).reach2s_pct}% <small>({d.lg_ahead_pa_r.find((r) => r.season === y).reach2s_pct}%)</small></td>)}</tr>
+    <tr><td>우르크 (타석)</td>{years.map((y) => wrcTd(d.ahead_pa.find((r) => r.season === y), y))}</tr>
+  </tbody>
+</table>
+
+<p class="table-note">타자가 유리한 카운트 = 1-0, 2-0, 2-1, 3-0, 3-1. 스트라이크 비율은 그 카운트에서 던진 포심 외 공이 헛스윙·루킹 스트라이크·파울이 된 비율. 괄호는 같은 해 리그 우타자 전체. 우르크 칸 색의 뜻은 위 표와 같다.</p>
+
+## 2스트라이크 이후에는 직구도 못 쳤다
+
+2스트라이크 이후 OPS는 2024년 .610에서 2025년 .405, 올해 .322로 떨어졌다. 2024년에는 리그 우타자 평균 .554보다 높았지만 2025년과 올해는 리그 평균(.523, .529)에 한참 못 미친다. 2스트라이크 이후 삼진율도 35.3%에서 43.8%로 올랐다.
+
+2스트라이크 이후에는 포심에도 대응하지 못했다. 2스트라이크 이후 포심으로 끝난 타석의 우르크는 2024년 52로 리그 우타자 평균 60과 비슷했지만 2025년 25(리그 평균 58), 올해 -64(27타석, 리그 평균 63)로 떨어졌다. 2025년에는 2스트라이크 포심에 방망이를 대는 비율이 88.8%로 리그 우타자 평균 82.0%보다 높았는데도 장타율이 .172에 그쳤다. 올해는 2스트라이크 이후 존 밖 포심에 방망이를 낸 비율이 55.6%로 리그 우타자 평균 40.7%보다 15%p 높다.
+
+<table>
+  <thead><tr><th>2스트라이크 이후 우르크 (타석)</th>{years.map((y) => <th class={yc(y)}>{y}</th>)}</tr></thead>
+  <tbody>
+    <tr><td>손호영 포심</td>{years.map((y) => tdVsLg(sp(d.fb_split_2s, '포심', y), sp(d.lg_fb_split_2s_r, '포심', y), y))}</tr>
+    <tr><td>리그 우타자 포심</td>{years.map((y) => tdLgBase(sp(d.lg_fb_split_2s_r, '포심', y), y))}</tr>
+    <tr><td>손호영 포심 외</td>{years.map((y) => tdVsLg(sp(d.fb_split_2s, '포심 외', y), sp(d.lg_fb_split_2s_r, '포심 외', y), y))}</tr>
+    <tr><td>리그 우타자 포심 외</td>{years.map((y) => tdLgBase(sp(d.lg_fb_split_2s_r, '포심 외', y), y))}</tr>
+  </tbody>
+</table>
+
+<p class="table-note">2스트라이크 이후는 리그 전체도 우르크가 100보다 크게 낮아 모든 칸이 파란색이다. 이 표의 진하기는 바로 아래 줄 리그 우타자 평균보다 얼마나 낮은지를 뜻하고, 15씩 낮아질 때마다 한 단계 진해진다. 리그 평균 줄과 그보다 높은 칸은 가장 옅게 칠했다. 노란 칸은 20타석 미만.</p>
+
+## 변화구를 보완한다면
+
+상대는 타자가 유리한 카운트에서 손호영에게 포심을 주지 않았고 포심 외 공으로 카운트를 잡은 뒤 2스트라이크 승부로 끌고 갔다. 필자는 직구에 강한 손호영을 상대 배터리가 제대로 공략했다고 생각한다.
+
+그래도 직구 강점은 확실하다. 2024년 포심 상대 우르크 139는 리그 우타자 평균보다 20 높았고 전체 우르크가 55로 떨어진 올해도 포심 상대로는 114를 기록했다. 2027년에는 변화구, 특히 우투수 슬라이더 약점을 보완해 반등하길 기대해 본다.
