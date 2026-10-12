@@ -1,0 +1,121 @@
+---
+title: "야구 지표 해설 2: 파크팩터는 어떻게 구할까"
+description: "홈경기 득점을 원정경기 득점으로 나누는 파크팩터의 기본 계산과, 홈팀 전력이 구장 지표를 왜곡하지 않는지 잠실 LG·두산 기록으로 확인해 본다."
+date: 2026-10-12
+category: metrics
+tags: ["파크팩터", "구장", "잠실", "고척", "사직", "세이버메트릭스"]
+dataUntil: "2026 정규시즌 10/11까지"
+---
+import BarChart from '../../components/BarChart.astro';
+import d from '../../data/posts/2026-10-12-park-factor.json';
+import { url as siteUrl } from '../../lib/site';
+
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3);
+// 1보다 크면 타자 우세(붉은색), 작으면 투수 우세(파란색). 1에서 step만큼 멀어질 때마다 한 단계 진하게
+export const heat = (v, step) => {
+  const gap = v - 1;
+  if (Math.abs(gap) < 1e-9) return {};
+  return { class: gap > 0 ? 'up' : 'down', style: `--heat:${[12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))]}%` };
+};
+export const ex = d.example;
+export const sajik = d.parks.find((p) => p.park === '사직');
+export const gocheok = d.parks.find((p) => p.park === '고척');
+export const jamsil = d.parks.find((p) => p.park === '잠실');
+
+올해 롯데 홈경기에서는 두 팀 합쳐 경기당 {f2(sajik.home_rpg)}점이 났다. 롯데 원정경기에서는 {f2(sajik.road_rpg)}점이었다. 같은 롯데가 뛰었는데 사직에서만 경기당 2점 가까이 더 났다.
+
+<a href={siteUrl('/posts/2026-wrc-basics/')}>우르크 지표 해설</a>에서 LG 오스틴의 우르크를 계산할 때 홈구장 잠실에 맞춰 보정을 해 줬다. 그 보정에 쓰는 숫자가 파크팩터다. 파크팩터는 구하는 방법이 간단하지만 한 시즌 기록만으로는 흔들림이 커서 최근 몇 년치 기록을 섞어 쓴다.
+
+## 홈경기 득점을 원정경기 득점으로 나눈다
+
+파크팩터는 보통 이렇게 구한다.
+
+그 팀 홈경기의 경기당 득점(양 팀 합) ÷ 그 팀 원정경기의 경기당 득점(양 팀 합)
+
+사직이라면 {f2(sajik.home_rpg)} ÷ {f2(sajik.road_rpg)} = {f3(sajik.ratio)}이다. 1이면 다른 구장과 똑같고 1보다 크면 득점이 많이 나는 타자 친화 구장, 작으면 투수 친화 구장이다. 올해 사직은 다른 구장보다 득점이 {Math.round((sajik.ratio - 1) * 100)}% 더 났다.
+
+선수 기록을 보정할 때는 이 값을 절반만 쓴다. 타자는 시즌의 절반만 홈에서 치고 나머지 절반은 다른 구장에서 치기 때문이다. (1 + {f3(sajik.ratio)}) ÷ 2 = {f3(ex[0].half)}. 롯데 타자의 시즌 기록은 평균 구장에서 친 것보다 11%쯤 부풀어 있다고 보고 그만큼 깎는다.
+
+## 홈팀 전력보다 한 시즌 표본이 더 문제다
+
+여기서 의문이 생긴다. 한 구장에서 특정 팀이 경기의 절반을 뛴다. 그 팀 타선이 강하면 홈경기 득점이 많아지고 투수진이 강하면 적어진다. 그러면 구장 지표가 팀 전력에 따라 왜곡되지 않을까.
+
+팀 전력은 상당 부분 상쇄된다. 파크팩터를 더 크게 흔드는 건 표본 크기다. 구장 하나에서 한 시즌에 열리는 경기는 약 72경기뿐이라 우연에 따른 흔들림이 크다.
+
+상쇄부터 보자. 홈경기에서는 홈팀 타선이 원정팀 9개 팀 투수를 다 상대하고 원정팀 타선도 홈팀 투수를 상대한다. 원정경기도 같은 구성이다. 홈과 원정 양쪽에 같은 팀이 들어가니 분자와 분모에 그 팀의 타선과 투수 수준이 똑같이 들어간다. 강타선 팀이라면 홈에서도 원정에서도 점수가 많이 나고 나누면 그 몫이 지워진다.
+
+KBO는 상대마다 16경기씩 치르고 홈과 원정을 9:7 또는 7:9로 나눈다. 해마다 홈 경기가 많은 쪽이 바뀌는 거의 균형 잡힌 일정이라 상대 팀 구성 차이도 크지 않다.
+
+## 상쇄가 완벽하지는 않다
+
+### 남는 편향
+
+분자와 분모에 같은 팀이 들어가도 완전히 지워지지는 않는다. 원정경기 득점은 리그 평균 구장에서 낸 점수가 아니라 자기 구장을 뺀 나머지 8개 구장에서 낸 점수다. 그리고 홈경기에서 상대하는 9개 팀과 원정경기에서 상대하는 9개 팀은 같아도 경기 수가 9:7, 7:9로 조금씩 다르다. 그래서 전력이 유난히 한쪽으로 치우친 팀은 구장 지표가 약간 왜곡될 수 있다.
+
+### 구장에 맞춘 팀 구성
+
+넓은 구장을 쓰는 팀이 투수와 수비 중심으로, 좁은 구장을 쓰는 팀이 장타자 중심으로 선수를 꾸리면 그 효과가 구장 효과와 섞인다. 이건 통계로 떼어 내기 어렵다.
+
+## 잠실의 자연 실험
+
+팀 전력과 표본 크기 가운데 어느 쪽이 파크팩터를 더 흔드는지 확인해 볼 자연 실험이 KBO에 있다. 잠실은 LG와 두산이 같이 쓴다. 같은 구장의 파크팩터를 LG 경기로만, 두산 경기로만 따로 구할 수 있다. 팀 전력이 문제라면 10년을 합쳐도 두 값이 벌어져야 한다. 표본이 문제라면 해마다는 벌어져도 여러 해를 합치면 두 값이 붙어야 한다.
+
+<table>
+  <thead><tr><th>시즌</th><th>LG 기준</th><th>두산 기준</th><th>LG 득점</th><th>LG 실점</th><th>두산 득점</th><th>두산 실점</th></tr></thead>
+  <tbody>
+    {d.jamsil.map((r) => (
+      <tr><td>{r.season}</td><td {...heat(r.lg, 0.05)}>{f3(r.lg)}</td><td {...heat(r.ds, 0.05)}>{f3(r.ds)}</td><td>{f2(r.lg_rs)}</td><td>{f2(r.lg_ra)}</td><td>{f2(r.ds_rs)}</td><td>{f2(r.ds_ra)}</td></tr>
+    ))}
+    <tr class="ours"><td>10년 합산</td><td class="cur">{f3(d.jamsil_pooled.lg.ratio)}</td><td class="cur">{f3(d.jamsil_pooled.ds.ratio)}</td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+<p class="table-note">LG 기준 = LG 홈경기 경기당 득점 ÷ LG 원정경기 경기당 득점(양 팀 합, 절반 보정 전). 두 팀이 맞붙는 잠실 경기는 홈팀 쪽에만 넣었다. 득점·실점은 팀의 경기당 값. 붉은색은 1보다 큼(타자 우세), 파란색은 1보다 작음(투수 우세), 1에서 .05씩 멀어질 때마다 진해진다.</p>
+
+{d.first}년부터 10년을 합치면 LG 기준 {f3(d.jamsil_pooled.lg.ratio)}, 두산 기준 {f3(d.jamsil_pooled.ds.ratio)}로 차이가 {f3(d.jamsil_pooled.lg.ratio - d.jamsil_pooled.ds.ratio)}뿐이다. 두 팀 전력이 크게 달랐던 해에도 그렇다. 2017년 두산은 경기당 5.90점, LG는 4.85점을 냈는데 잠실 비율은 두산 기준 0.773, LG 기준 0.776으로 거의 같았다.
+
+해마다 따로 보면 두 값이 꽤 벌어진다. 가장 크게 벌어진 {d.jamsil_spread.max_diff_season}년에는 LG 기준 0.857, 두산 기준 1.004로 {f3(d.jamsil_spread.max_diff)} 차이가 났다. 그런데 이 해 두 팀 득점은 경기당 5.33점과 4.31점이었다. 득점을 더 많이 낸 LG 쪽이 오히려 투수 친화로 나왔으니 팀 타선 때문에 생긴 차이로 보기는 어렵다. 한 해 72경기에서 오는 흔들림이 팀 전력 차이보다 크다.
+
+## 그래서 최근 3년치를 쓴다
+
+한 시즌 값은 구장이 그대로여도 크게 움직인다. 같은 고척돔인데 2021년 비율은 {f3(d.swing['고척'].find((r) => r.season === 2021).ratio)}, 2025년은 {f3(d.swing['고척'].find((r) => r.season === 2025).ratio)}였다. 4년 사이 1을 넘는 타자 친화 구장에서 9개 구장 가운데 가장 낮은 구장이 됐다.
+
+파크팩터는 여러 시즌을 평균하거나 1에 가깝게 당기는 보정을 많이 쓴다. 이 블로그와 크봇은 최근 3년의 절반 보정값을 올해 3, 작년 2, 재작년 1의 비율로 가중평균한다. 사직은 이렇게 계산한다.
+
+<table>
+  <thead><tr><th>사직</th><th>홈 경기당 득점</th><th>원정 경기당 득점</th><th>비율</th><th>절반 보정</th><th>가중치</th></tr></thead>
+  <tbody>
+    {ex.map((r) => (
+      <tr><td>{r.season}</td><td>{f2(r.home_rpg)}</td><td>{f2(r.road_rpg)}</td><td {...heat(r.ratio, 0.05)}>{f3(r.ratio)}</td><td>{f3(r.half)}</td><td>{r.w}</td></tr>
+    ))}
+    <tr class="ours"><td>{d.season} 파크팩터</td><td></td><td></td><td></td><td class="cur">{f3(sajik.pf)}</td><td></td></tr>
+  </tbody>
+</table>
+<p class="table-note">({f3(ex[0].half)} × 3 + {f3(ex[1].half)} × 2 + {f3(ex[2].half)} × 1) ÷ 6. 득점은 양 팀 합.</p>
+
+올해 한 시즌만 보면 {f3(ex[0].half)}이지만 앞선 두 해를 섞어 {f3(sajik.pf)}로 조금 내려온다.
+
+## 2026년 구장별 파크팩터
+
+<BarChart
+  title={`${d.season} 구장별 파크팩터`}
+  caption="최근 3년 절반 보정값의 3:2:1 가중평균. 점선은 평균 구장(1.0)."
+  min={0.85}
+  digits={3}
+  ref={{ value: 1, label: '평균 구장 1.0' }}
+  rows={d.parks.map((p) => ({ label: p.park, value: p.pf, highlight: p.park === '사직' || p.park === '고척' || p.park === '잠실' }))}
+/>
+
+<table>
+  <thead><tr><th>구장</th><th>팀</th><th>{d.season} 홈 득점</th><th>{d.season} 원정 득점</th><th>{d.season} 비율</th><th>3년 가중 비율</th><th class="cur">파크팩터</th></tr></thead>
+  <tbody>
+    {d.parks.map((p) => (
+      <tr><td>{p.park}</td><td>{p.teams}</td><td>{f2(p.home_rpg)}</td><td>{f2(p.road_rpg)}</td><td {...heat(p.ratio, 0.05)}>{f3(p.ratio)}</td><td {...heat(p.ratio3, 0.05)}>{f3(p.ratio3)}</td><td class={`cur ${heat(p.pf, 0.025).class ?? ''}`} style={heat(p.pf, 0.025).style}>{f3(p.pf)}</td></tr>
+    ))}
+  </tbody>
+</table>
+<p class="table-note">득점은 경기당, 양 팀 합. 비율은 절반 보정 전, 파크팩터는 절반 보정 후 값이라 1에서 떨어진 정도가 비율의 절반쯤 된다. 대전 신구장은 2025년에 문을 열어 2024년 자리를 1.0으로 채웠다. 붉은색은 타자 우세, 파란색은 투수 우세.</p>
+
+투고타저 구장이라고 하면 보통 KBO에서 가장 넓은 잠실을 떠올린다. 그런데 고척도 잠실만큼 투수에게 유리하다. 올해 파크팩터는 고척 {f3(gocheok.pf)}, 잠실 {f3(jamsil.pf)}로 고척이 9개 구장 가운데 가장 낮다. 3년 가중 비율로 보면 고척은 다른 구장보다 득점이 {Math.round((1 - gocheok.ratio3) * 100)}% 덜 나고 잠실은 {Math.round((1 - jamsil.ratio3) * 100)}% 덜 난다.
+
+사직은 반대로 상당한 타고투저 구장이다. 파크팩터 {f3(sajik.pf)}로 1위이고 3년 가중 비율 {f3(sajik.ratio3)}은 다른 구장보다 득점이 {Math.round((sajik.ratio3 - 1) * 100)}% 더 난다는 뜻이다. 2위 대구와 대전({f3(d.parks[1].pf)})과도 거리가 있다. 롯데 타자의 홈 성적을 볼 때는 사직의 덕을 감안해야 한다는 것이 필자의 의견이다.

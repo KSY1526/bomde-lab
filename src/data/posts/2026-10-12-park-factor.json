@@ -1,0 +1,411 @@
+{
+ "season": 2026,
+ "until": "2026-10-11",
+ "first": 2017,
+ "weights": [
+  3,
+  2,
+  1
+ ],
+ "example_park": "사직",
+ "parks": [
+  {
+   "park": "사직",
+   "teams": "롯데",
+   "home_g": 71,
+   "road_g": 72,
+   "home_rpg": 10.85,
+   "road_rpg": 8.89,
+   "ratio": 1.22,
+   "ratio3": 1.188,
+   "pf": 1.094,
+   "missing": []
+  },
+  {
+   "park": "대구",
+   "teams": "삼성",
+   "home_g": 70,
+   "road_g": 71,
+   "home_rpg": 10.46,
+   "road_rpg": 10.03,
+   "ratio": 1.043,
+   "ratio3": 1.114,
+   "pf": 1.057,
+   "missing": []
+  },
+  {
+   "park": "대전",
+   "teams": "한화",
+   "home_g": 71,
+   "road_g": 73,
+   "home_rpg": 12.46,
+   "road_rpg": 10.56,
+   "ratio": 1.18,
+   "ratio3": 1.114,
+   "pf": 1.057,
+   "missing": [
+    2024
+   ]
+  },
+  {
+   "park": "수원",
+   "teams": "KT",
+   "home_g": 71,
+   "road_g": 72,
+   "home_rpg": 10.52,
+   "road_rpg": 10.01,
+   "ratio": 1.051,
+   "ratio3": 1.051,
+   "pf": 1.025,
+   "missing": []
+  },
+  {
+   "park": "인천",
+   "teams": "SSG",
+   "home_g": 71,
+   "road_g": 73,
+   "home_rpg": 10.34,
+   "road_rpg": 10.53,
+   "ratio": 0.981,
+   "ratio3": 1.027,
+   "pf": 1.014,
+   "missing": []
+  },
+  {
+   "park": "창원",
+   "teams": "NC",
+   "home_g": 73,
+   "road_g": 71,
+   "home_rpg": 10.08,
+   "road_rpg": 10.63,
+   "ratio": 0.948,
+   "ratio3": 1.02,
+   "pf": 1.01,
+   "missing": []
+  },
+  {
+   "park": "광주",
+   "teams": "KIA",
+   "home_g": 72,
+   "road_g": 71,
+   "home_rpg": 9.5,
+   "road_rpg": 10.46,
+   "ratio": 0.908,
+   "ratio3": 0.933,
+   "pf": 0.966,
+   "missing": []
+  },
+  {
+   "park": "잠실",
+   "teams": "두산·LG",
+   "home_g": 143,
+   "road_g": 127,
+   "home_rpg": 9.1,
+   "road_rpg": 10.57,
+   "ratio": 0.862,
+   "ratio3": 0.885,
+   "pf": 0.942,
+   "missing": []
+  },
+  {
+   "park": "고척",
+   "teams": "키움",
+   "home_g": 73,
+   "road_g": 71,
+   "home_rpg": 9.08,
+   "road_rpg": 10.13,
+   "ratio": 0.897,
+   "ratio3": 0.838,
+   "pf": 0.919,
+   "missing": []
+  }
+ ],
+ "example": [
+  {
+   "season": 2026,
+   "home_g": 71,
+   "road_g": 72,
+   "home_rpg": 10.85,
+   "road_rpg": 8.89,
+   "ratio": 1.22,
+   "half": 1.11,
+   "w": 3
+  },
+  {
+   "season": 2025,
+   "home_g": 71,
+   "road_g": 68,
+   "home_rpg": 10.59,
+   "road_rpg": 9.21,
+   "ratio": 1.151,
+   "half": 1.075,
+   "w": 2
+  },
+  {
+   "season": 2024,
+   "home_g": 67,
+   "road_g": 73,
+   "home_rpg": 12.07,
+   "road_rpg": 10.36,
+   "ratio": 1.166,
+   "half": 1.083,
+   "w": 1
+  }
+ ],
+ "jamsil": [
+  {
+   "season": 2017,
+   "lg": 0.776,
+   "ds": 0.773,
+   "both": 0.774,
+   "lg_rs": 4.85,
+   "lg_ra": 4.7,
+   "ds_rs": 5.9,
+   "ds_ra": 4.71
+  },
+  {
+   "season": 2018,
+   "lg": 0.834,
+   "ds": 0.914,
+   "both": 0.874,
+   "lg_rs": 5.47,
+   "lg_ra": 5.67,
+   "ds_rs": 6.56,
+   "ds_ra": 5.25
+  },
+  {
+   "season": 2019,
+   "lg": 0.997,
+   "ds": 0.873,
+   "both": 0.933,
+   "lg_rs": 4.45,
+   "lg_ra": 4.4,
+   "ds_rs": 5.11,
+   "ds_ra": 3.82
+  },
+  {
+   "season": 2020,
+   "lg": 0.807,
+   "ds": 0.737,
+   "both": 0.771,
+   "lg_rs": 5.57,
+   "lg_ra": 4.82,
+   "ds_rs": 5.67,
+   "ds_ra": 4.83
+  },
+  {
+   "season": 2021,
+   "lg": 0.883,
+   "ds": 0.835,
+   "both": 0.857,
+   "lg_rs": 4.54,
+   "lg_ra": 3.9,
+   "ds_rs": 5.13,
+   "ds_ra": 4.56
+  },
+  {
+   "season": 2022,
+   "lg": 0.897,
+   "ds": 0.889,
+   "both": 0.893,
+   "lg_rs": 4.97,
+   "lg_ra": 3.62,
+   "ds_rs": 4.43,
+   "ds_ra": 5.01
+  },
+  {
+   "season": 2023,
+   "lg": 0.857,
+   "ds": 1.004,
+   "both": 0.921,
+   "lg_rs": 5.33,
+   "lg_ra": 4.24,
+   "ds_rs": 4.31,
+   "ds_ra": 4.34
+  },
+  {
+   "season": 2024,
+   "lg": 0.976,
+   "ds": 0.911,
+   "both": 0.943,
+   "lg_rs": 5.61,
+   "lg_ra": 5.06,
+   "ds_rs": 5.48,
+   "ds_ra": 5.19
+  },
+  {
+   "season": 2025,
+   "lg": 0.92,
+   "ds": 0.862,
+   "both": 0.89,
+   "lg_rs": 5.47,
+   "lg_ra": 4.06,
+   "ds_rs": 4.49,
+   "ds_ra": 4.76
+  },
+  {
+   "season": 2026,
+   "lg": 0.822,
+   "ds": 0.9,
+   "both": 0.862,
+   "lg_rs": 5.04,
+   "lg_ra": 5.05,
+   "ds_rs": 4.78,
+   "ds_ra": 4.36
+  }
+ ],
+ "jamsil_pooled": {
+  "lg": {
+   "ratio": 0.873,
+   "home_g": 720,
+   "road_g": 639
+  },
+  "ds": {
+   "ratio": 0.863,
+   "home_g": 719,
+   "road_g": 640
+  }
+ },
+ "jamsil_spread": {
+  "max_diff": 0.147,
+  "max_diff_season": 2023,
+  "lg_min": 0.776,
+  "lg_max": 0.997,
+  "ds_min": 0.737,
+  "ds_max": 1.004
+ },
+ "swing": {
+  "고척": [
+   {
+    "season": 2017,
+    "ratio": 1.009
+   },
+   {
+    "season": 2018,
+    "ratio": 0.927
+   },
+   {
+    "season": 2019,
+    "ratio": 0.923
+   },
+   {
+    "season": 2020,
+    "ratio": 0.865
+   },
+   {
+    "season": 2021,
+    "ratio": 1.067
+   },
+   {
+    "season": 2022,
+    "ratio": 0.835
+   },
+   {
+    "season": 2023,
+    "ratio": 1.005
+   },
+   {
+    "season": 2024,
+    "ratio": 0.828
+   },
+   {
+    "season": 2025,
+    "ratio": 0.753
+   },
+   {
+    "season": 2026,
+    "ratio": 0.897
+   }
+  ],
+  "잠실": [
+   {
+    "season": 2017,
+    "ratio": 0.774
+   },
+   {
+    "season": 2018,
+    "ratio": 0.874
+   },
+   {
+    "season": 2019,
+    "ratio": 0.933
+   },
+   {
+    "season": 2020,
+    "ratio": 0.771
+   },
+   {
+    "season": 2021,
+    "ratio": 0.857
+   },
+   {
+    "season": 2022,
+    "ratio": 0.893
+   },
+   {
+    "season": 2023,
+    "ratio": 0.921
+   },
+   {
+    "season": 2024,
+    "ratio": 0.943
+   },
+   {
+    "season": 2025,
+    "ratio": 0.89
+   },
+   {
+    "season": 2026,
+    "ratio": 0.862
+   }
+  ],
+  "사직": [
+   {
+    "season": 2017,
+    "ratio": 1.237
+   },
+   {
+    "season": 2018,
+    "ratio": 1.077
+   },
+   {
+    "season": 2019,
+    "ratio": 1.017
+   },
+   {
+    "season": 2020,
+    "ratio": 1.127
+   },
+   {
+    "season": 2021,
+    "ratio": 1.132
+   },
+   {
+    "season": 2022,
+    "ratio": 1.108
+   },
+   {
+    "season": 2023,
+    "ratio": 1.076
+   },
+   {
+    "season": 2024,
+    "ratio": 1.166
+   },
+   {
+    "season": 2025,
+    "ratio": 1.151
+   },
+   {
+    "season": 2026,
+    "ratio": 1.22
+   }
+  ]
+ },
+ "sched_counts": [
+  6,
+  7,
+  8,
+  9
+ ]
+}
