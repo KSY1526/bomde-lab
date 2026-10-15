@@ -12,7 +12,7 @@ export const SOCIAL = [
 
 // 메뉴 = 카테고리. 새 카테고리는 사용자가 정할 때 여기에 추가한다(content.config.ts enum도 같이).
 export const CATEGORIES: Record<string, string> = {
-  team: '팀 분석',
+  season: '시즌 분석',
   player: '선수 분석',
   game: '경기 분석',
   deep: '심층 분석',

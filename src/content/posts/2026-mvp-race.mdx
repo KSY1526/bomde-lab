@@ -1,0 +1,189 @@
+---
+title: "2026 정규시즌 MVP는 누구 품에 안길까"
+description: "2026 KBO 정규시즌 MVP 투표가 10월 13일 시행됐다."
+date: 2026-10-15
+category: season
+tags: ["MVP", "오스틴", "김도영", "곽빈", "2026 시즌"]
+dataUntil: "2026 정규시즌 최종전(10/12)까지, 와일드카드 1차전(10/14)"
+---
+import d from '../../data/posts/2026-10-15-mvp-race.json';
+
+export const AUSTIN = '53123';
+export const KDY = '52605';
+export const b = (id) => d.bat.find((r) => r.id === id);
+export const p = (id) => d.pit.find((r) => r.id === id);
+export const br = (id) => d.brank.find((r) => r.batter_id === id);
+export const pr = (id) => d.prank.find((r) => r.pitcher_id === id);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const ipd = (o) => `${Math.floor(o / 3)}.${o % 3}`;
+export const sp = (rows, id, split) => rows.find((r) => r.id === id && r.split === split);
+export const kp = (pitch) => d.k_pitch.find((r) => r.pitch === pitch);
+export const lp = (pitch) => d.lg_pitch.find((r) => r.pitch === pitch);
+export const lw = (pitch) => d.lg_whiff.find((r) => r.pitch === pitch);
+export const months = ['3~4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+export const pitchTypes = ['포심', '투심', '커터', '슬라이더', '스위퍼', '커브', '체인지업', '포크'];
+export const kwakPitches = ['포심', '커터', '슬라이더', '커브', '체인지업'];
+export const half = (h) => (h === 'top' ? '초' : '말');
+export const OUTS = ['무사', '1사', '2사'];
+export const BASES = { '---': '주자 없음', '1--': '1루', '-2-': '2루', '--3': '3루', '12-': '1, 2루', '1-3': '1, 3루', '-23': '2, 3루', '123': '만루' };
+// 우르크(wRC+): 100보다 높으면 타자 우세(붉은색), 낮으면 투수 우세(파란색). 100에서 멀수록 진하다. 20타석 미만은 노란색
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const wrcTd = (r, step = 30, showPa = true) => {
+  if (!r) return <td>-</td>;
+  const small = r.pa < d.small_pa;
+  const h = heat(Math.round(r.wrc_plus - 100), step);
+  const cls = small ? 'small' : h ? h.cls : '';
+  return <td class={cls} style={!small && h ? `--heat:${h.pct}%` : undefined}>{Math.round(r.wrc_plus)}{showPa ? ` (${r.pa})` : ''}</td>;
+};
+
+2026 KBO 정규시즌 MVP 투표가 10월 13일 시행됐다. 후보는 투수 7명, 타자 7명으로 모두 14명이다. 이름은 많지만 기록으로 앞서 있는 선수는 다섯 명 정도다. 타자는 오스틴(LG), 김도영(KIA), 힐리어드(KT), 투수는 곽빈(두산)과 고영표(KT)다.
+
+<table>
+  <thead><tr><th>타자</th><th>경기</th><th>타석</th><th>타율/출루율/장타율</th><th>OPS</th><th>홈런</th><th>타점</th><th>득점</th><th>도루(실패)</th><th>우르크</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {[AUSTIN, KDY, '56034'].map((id) => {
+      const r = b(id);
+      return <tr><td class="cur">{r.name}({r.team})</td><td>{r.g}</td><td>{r.pa}</td><td>{f3(r.avg)}/{f3(r.obp)}/{f3(r.slg)}</td><td>{f3(r.ops)}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{r.r}</td><td>{r.sb}({r.cs})</td><td>{r.wrc_plus.toFixed(1)}</td><td>{f2(r.war)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<table>
+  <thead><tr><th>투수</th><th>경기</th><th>승-패</th><th>이닝</th><th>ERA</th><th>WHIP</th><th>삼진</th><th>FIP</th><th>WAR* (FIP 기준)</th></tr></thead>
+  <tbody>
+    {['68220', '64001'].map((id) => {
+      const r = p(id);
+      return <tr><td class="cur">{r.name}({r.team})</td><td>{r.g}</td><td>{r.w}-{r.l}</td><td>{r.ip}</td><td>{f2(r.era)}</td><td>{f2(r.whip)}</td><td>{r.so}</td><td>{f2(r.fip)}</td><td>{f2(r.war)} ({f2(r.war_fip)})</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">우르크 = wRC+. 100이 리그 평균 타자이고 파크팩터를 반영했다. WAR*은 크봇 자체 추정치로 타자는 수비·주루가 빠져 있고, 투수는 실점 기준(괄호는 FIP 기준)이다.</p>
+
+## 힐리어드와 고영표는 한 발 뒤에 있다
+
+힐리어드는 타점 {b('56034').rbi}개로 리그 1위다. 홈런도 {b('56034').hr}개를 쳤지만 김도영에게 1개 뒤져 홈런왕을 놓쳤다. 타이틀 하나가 사라지자 내세울 게 마땅치 않다. 출루율 {f3(b('56034').obp)}는 규정타석 타자 중 {br('56034').obp}위, 우르크 {b('56034').wrc_plus.toFixed(1)}는 {br('56034').wrc_plus}위로 오스틴, 김도영보다 두 단계 이상 아래다.
+
+고영표는 {p('64001').w}승으로 다승 1위이고 {p('64001').ip}이닝을 던져 곽빈보다 11.2이닝을 더 소화했다. 그러나 곽빈은 아시안게임에 나가느라 9월 9일 등판 뒤 10월 6일까지 {d.k_gap.days}일 동안 리그 경기에 나서지 않았다. 이닝 차이는 그 공백 영향이 크다. 평균자책점은 곽빈 {f2(p('68220').era)}, 고영표 {f2(p('64001').era)}로 1점 넘게 차이 난다. 그래서 이번 MVP는 오스틴, 김도영, 곽빈 세 명의 싸움으로 본다.
+
+## 정해진 기준이 없어 해마다 논쟁이 된다
+
+정규시즌 MVP는 KBO와 한국야구기자회가 뽑는다. 시즌 동안 리그를 취재한 기자들이 후보 중 한 명씩 이름을 적고, 가장 많은 표를 받은 선수가 상을 받는다. 2016~2021년에는 1위부터 5위까지 적어 점수를 매기다가 2022년부터 지금의 다득표제로 바꿨다. 점수제를 들이기 전에는 외국인 선수에게 표를 잘 주지 않는다는 차별 논란도 컸는데, 2016년 니퍼트와 2019년 린드블럼이 국내 선수를 제치고 MVP를 받는 등 차별은 많이 사라지는 추세다. 투표는 정규시즌이 끝난 다음 날 시작해 포스트시즌 전에 끝나고 수상자는 11월 시상식에서 발표한다.
+
+무엇을 보고 뽑으라는 기준은 따로 없다. 그래서 MVP 발표 때마다 기자들이 무엇을 중요하게 봤는지가 논쟁거리가 된다. 지난 논쟁을 보면 표를 가른 기준은 크게 넷이다. 홈런, 타점 같은 타이틀, 누구도 못 해 본 대기록, 팀 성적, 그리고 투수와 타자 중 누구를 더 쳐주느냐다.
+
+<table>
+  <thead><tr><th>시즌</th><th class="cur">MVP (득표)</th><th>MVP 기록</th><th>경쟁자 (득표)</th><th>경쟁자 기록</th><th>쟁점</th></tr></thead>
+  <tbody>
+    {d.mvp_debates.map((r) => (
+      <tr><td>{r.season}</td><td class="cur">{r.mvp} ({r.mvp_vote})</td><td>{r.mvp_rec}</td><td>{r.rival} ({r.rival_vote})</td><td>{r.rival_rec}</td><td>{r.issue}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">2016·2017년은 점수제라 점수, 나머지는 득표 수.</p>
+
+대기록은 타이틀을 이겼다. 2014년 박병호는 52홈런으로 홈런, 타점 1위였지만 KBO 첫 200안타를 친 팀 동료 서건창에게 크게 졌다. 같은 팀 강정호는 유격수 최초 40홈런을 치고도 7표에 그쳤다. 이듬해 박병호는 53홈런 146타점을 치고도 KBO 첫 40홈런-40도루를 해낸 테임즈에게 또 밀렸다. 테임즈는 유효표 99표 중 50표로 과반을 겨우 넘겨 결선 투표를 피했다.
+
+팀 성적도 표를 움직였다. 2016년 최형우는 타율, 타점, 안타 3관왕이었지만 22승으로 두산을 정규시즌 1위에 올린 니퍼트가 MVP를 받았다. 개인 기록은 비슷했는데 니퍼트가 우승 팀 프리미엄을 얻었다는 평가가 나왔다. 2017년 양현종은 20승으로 KIA를 1위에 올려 MVP를 받았는데, 투수 MVP로는 드물게 타이틀이 다승 하나뿐이고 WAR도 낮아 홈런왕 최정과 비교하는 논란이 일었다.
+
+투수와 타자의 대결에서는 지난해 압도적인 투수가 이겼다. 2025년 디아즈는 KBO 첫 50홈런-150타점을 쳤지만 다승, 평균자책점, 탈삼진, 승률 4관왕에 오른 폰세가 125표 중 96표를 가져갔다. 최근 10년 MVP 10명 중 {d.mvp_pitcher_10y}명이 투수다.
+
+## 오스틴: 어느 쪽으로 봐도 약점이 잘 보이지 않는다
+
+오스틴은 우르크({b(AUSTIN).wrc_plus.toFixed(1)}), WAR*({f2(b(AUSTIN).war)}), OPS({f3(b(AUSTIN).ops)})가 모두 리그 1위다. 타율 {f3(b(AUSTIN).avg)}는 {br(AUSTIN).avg}위, 출루율 {f3(b(AUSTIN).obp)}는 {br(AUSTIN).obp}위, 홈런 {b(AUSTIN).hr}개와 타점 {b(AUSTIN).rbi}개는 둘 다 {br(AUSTIN).hr}위다. 타격 타이틀은 하나도 없지만 모든 부문에서 상위권이다. 144경기에 모두 나왔다.
+
+OPS는 김도영({f3(b(KDY).ops)})과 거의 같은데 우르크는 오스틴이 {(b(AUSTIN).wrc_plus - b(KDY).wrc_plus).toFixed(1)} 높다. 차이는 홈구장에서 난다. 잠실 파크팩터는 {d.park.find((r) => r.park === '잠실').pf}으로 리그 평균 구장보다 득점이 약 6% 덜 난다. 광주는 {d.park.find((r) => r.park === '광주').pf}다. 우르크는 타자에게 불리한 구장에서 친 기록을 더 쳐주니 같은 OPS라도 잠실 타자가 앞선다. 오스틴은 그 잠실에서 {sp(d.b_park, AUSTIN, '잠실').pa}타석 OPS {f3(sp(d.b_park, AUSTIN, '잠실').ops)}을 쳤다.
+
+달마다 기복도 적었다. 9월까지 월별 우르크가 165 아래로 내려간 달이 없고 가장 좋았던 6월에는 우르크가 {Math.round(sp(d.b_month, AUSTIN, '6월').wrc_plus)}였다. 투수 손을 가리지 않았고 좌투수를 상대로는 우르크 {Math.round(sp(d.b_hand, AUSTIN, '좌투수 상대').wrc_plus)}으로 더 강했다. 구종으로 나눠 보면 여덟 구종 모두 우르크가 120을 넘는다. 가장 낮은 커터 상대 우르크도 {Math.round(sp(d.b_pitch, AUSTIN, '커터').wrc_plus)}이고 포크로 끝난 타석에서는 우르크가 {Math.round(sp(d.b_pitch, AUSTIN, '포크').wrc_plus)}이었다.
+
+득점권에서는 우르크 {Math.round(sp(d.b_sit, AUSTIN, '득점권').wrc_plus)}({sp(d.b_sit, AUSTIN, '득점권').pa}타석)로 리그 득점권 평균 {Math.round(d.lg_split[0].wrc_plus)}을 훌쩍 넘었다. 2스트라이크 이후에도 우르크 {Math.round(sp(d.b_sit, AUSTIN, '2스트라이크').wrc_plus)}으로 평균 이상의 생산성을 냈다. 승리확률을 얼마나 끌어올렸는지 더한 WPA도 {f2(b(AUSTIN).wpa)}승으로 김도영({f2(b(KDY).wpa)}승)보다 많다.
+
+그러나 10월에 흔들렸다. 10월 우르크는 {Math.round(sp(d.b_month, AUSTIN, '10월').wrc_plus)}({sp(d.b_month, AUSTIN, '10월').pa}타석)로 시즌 내내 지킨 수준에서 크게 떨어졌다. 특히 마지막 3경기에서 13타수 무안타에 그쳤다.
+
+## 김도영: 늦게 달아올라 홈런왕까지
+
+김도영은 홈런 {b(KDY).hr}개와 장타율 {f3(b(KDY).slg)}로 두 부문 1위다. 득점 {b(KDY).r}개는 리그 {br(KDY).r}위이고 도루는 {b(KDY).sb}번 시도해 {b(KDY).cs}번만 잡혔다. 우르크 {b(KDY).wrc_plus.toFixed(1)}과 WAR* {f2(b(KDY).war)}는 오스틴 다음 2위다. 출전은 {b(KDY).g}경기로 오스틴보다 9경기 적다. 그중 {d.kdy_ag}경기는 9월 중순 아시안게임 국가대표로 차출돼 빠진 경기다. 다쳐서 빠진 게 아니라 대표팀에 차출됐으니 감점할 이유가 없다.
+
+시즌 초는 지금 같지 않았다. 3~4월 우르크 {Math.round(sp(d.b_month, KDY, '3~4월').wrc_plus)}, 5월 {Math.round(sp(d.b_month, KDY, '5월').wrc_plus)}으로 좋은 타자였지만 MVP급은 아니었다. 6월 우르크 {Math.round(sp(d.b_month, KDY, '6월').wrc_plus)}로 올라선 뒤로는 어느 달도 150 아래로 내려가지 않았다. 홈런 45개 가운데 31개를 6월 이후에 쳤다.
+
+<table>
+  <thead><tr><th>월</th><th class="cur">오스틴 우르크 (타석)</th><th>오스틴 홈런</th><th class="cur">김도영 우르크 (타석)</th><th>김도영 홈런</th></tr></thead>
+  <tbody>
+    {months.map((m) => (
+      <tr><td>{m}</td>{wrcTd(sp(d.b_month, AUSTIN, m))}<td>{sp(d.b_month, AUSTIN, m).hr}</td>{wrcTd(sp(d.b_month, KDY, m))}<td>{sp(d.b_month, KDY, m).hr}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">3월은 개막 뒤 며칠뿐이라 4월과 묶었다. 붉은 칸은 우르크 100보다 높은 칸, 파란 칸은 낮은 칸이고 100에서 멀수록 진하다.</p>
+
+김도영은 좌우 차이가 거의 없다. 좌투수 상대 우르크 {Math.round(sp(d.b_hand, KDY, '좌투수 상대').wrc_plus)}, 우투수 상대 우르크 {Math.round(sp(d.b_hand, KDY, '우투수 상대').wrc_plus)}이다. 직구에 가장 강해서 포심으로 끝난 타석 우르크가 {Math.round(sp(d.b_pitch, KDY, '포심').wrc_plus)}이고 홈런 45개 중 {sp(d.b_pitch, KDY, '포심').hr}개가 포심을 쳐서 나왔다. 약점은 떨어지는 공이다. 커브 상대 우르크는 {Math.round(sp(d.b_pitch, KDY, '커브').wrc_plus)}({sp(d.b_pitch, KDY, '커브').pa}타석)로 100에 못 미쳤고 포크는 {Math.round(sp(d.b_pitch, KDY, '포크').wrc_plus)}, 삼진율은 {sp(d.b_pitch, KDY, '포크').k_pct}%다.
+
+<table>
+  <thead><tr><th>상대</th><th class="cur">오스틴 우르크 (타석)</th><th class="cur">김도영 우르크 (타석)</th></tr></thead>
+  <tbody>
+    {['좌투수 상대', '우투수 상대'].map((s) => <tr><td>{s}</td>{wrcTd(sp(d.b_hand, AUSTIN, s))}{wrcTd(sp(d.b_hand, KDY, s))}</tr>)}
+    {pitchTypes.map((s) => <tr><td>{s}</td>{wrcTd(sp(d.b_pitch, AUSTIN, s))}{wrcTd(sp(d.b_pitch, KDY, s))}</tr>)}
+    {['홈', '원정', '득점권', '2스트라이크'].map((s) => <tr><td>{s}</td>{wrcTd(sp(d.b_sit, AUSTIN, s))}{wrcTd(sp(d.b_sit, KDY, s))}</tr>)}
+  </tbody>
+</table>
+
+<p class="table-note">구종은 타석 마지막 공 기준. 2스트라이크는 2스트라이크 이후에 끝난 타석. 칸 색의 뜻은 위 표와 같다.</p>
+
+2스트라이크 이후 우르크는 {Math.round(sp(d.b_sit, KDY, '2스트라이크').wrc_plus)}로 오스틴보다 낮다. 대신 득점권 우르크 {Math.round(sp(d.b_sit, KDY, '득점권').wrc_plus)}, 홈인 광주에서 {Math.round(sp(d.b_sit, KDY, '홈').wrc_plus)}로 강했다.
+
+## 곽빈: 리그에서 가장 빠른 선발
+
+곽빈은 평균자책점 {f2(p('68220').era)}, 탈삼진 {p('68220').so}개로 투수 두 부문 1위다. FIP {f2(p('68220').fip)}과 WAR* {f2(p('68220').war)}도 투수 중 1위이고 WHIP {f2(p('68220').whip)}과 삼진율 {p('68220').k_pct}%는 2위다. 피OPS {f3(p('68220').opp_ops)}은 규정이닝 투수 중 가장 낮다.
+
+포심 평균 구속 {p('68220').fb_velo}km/h는 선발 {d.sp_min_gs}경기 이상 던진 {d.sp_fb.n_sp}명 중 가장 빠르다. 이들의 평균은 {d.sp_fb.sp_avg}km/h다. 리그 포심 평균 피우르크는 {Math.round(lp('포심').wrc_plus)}인데 곽빈 포심은 {Math.round(kp('포심').wrc_plus)}이었다. 가장 무서운 공은 체인지업이다. 체인지업으로 끝난 {kp('체인지업').pa}타석에서 피우르크 {Math.round(kp('체인지업').wrc_plus)}, 피안타율 {f3(kp('체인지업').avg)}을 기록했고 헛스윙률 {d.k_ars.find((r) => r.pitch === '체인지업').whiff_pct}%는 리그 체인지업 평균 {lw('체인지업').whiff_pct}%보다 한참 높다. 체인지업은 거의 좌타자에게만 던진다.
+
+<table>
+  <thead><tr><th>구종</th><th>구사율</th><th>평균 구속</th><th>헛스윙률 (리그 같은 구종 평균)</th><th class="cur">피우르크 (타석)</th><th>리그 같은 구종 평균 피우르크</th></tr></thead>
+  <tbody>
+    {kwakPitches.map((s) => {
+      const a = d.k_ars.find((r) => r.pitch === s);
+      return <tr><td>{s}</td><td>{a.usage_pct}%</td><td>{a.avg_velo}</td><td>{a.whiff_pct}% ({lw(s).whiff_pct}%)</td>{wrcTd(kp(s), 25)}<td>{Math.round(lp(s).wrc_plus)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">피우르크 = 곽빈을 상대한 타자의 wRC+(타석 마지막 공 기준). 낮을수록 투수가 잘 막았다는 뜻이다. 파란 칸은 100보다 낮은 칸, 붉은 칸은 높은 칸이다.</p>
+
+약점은 커터다. 커터로 끝난 {kp('커터').pa}타석에서 피우르크가 {Math.round(kp('커터').wrc_plus)}로 리그 커터 평균 피우르크 {Math.round(lp('커터').wrc_plus)}보다 높았고 피안타율도 {f3(kp('커터').avg)}다. 좌타자를 상대로 커터를 {d.k_ars_side.find((r) => r.side === '좌타' && r.pitch === '커터').usage_pct}% 던졌다. 좌우 편차는 크지 않다. 피OPS는 좌타자 {f3(d.k_side.find((r) => r.split === '좌타자 상대').ops)}, 우타자 {f3(d.k_side.find((r) => r.split === '우타자 상대').ops)}다.
+
+시즌 초에는 평균자책점 3점대였다. 3~4월 {f2(d.k_month[0].era)}, 5월 {f2(d.k_month[1].era)}이었다가 6월부터 2점 아래로 내려왔고 8월에는 {f2(d.k_month[4].era)}이었다.
+
+<table>
+  <thead><tr><th>월</th><th>경기</th><th>이닝</th><th>ERA</th><th>WHIP</th><th>삼진율</th></tr></thead>
+  <tbody>
+    {d.k_month.map((r) => <tr><td>{r.split}</td><td>{r.g}</td><td>{ipd(r.outs)}</td><td>{f2(r.era)}</td><td>{f2(r.whip)}</td><td>{r.k_pct}%</td></tr>)}
+  </tbody>
+</table>
+
+## 10월 12일, 3위가 걸린 마지막 경기
+
+10월 12일 광주에서 열린 KIA와 LG의 시즌 최종전은 3위 결정전이었다. 경기 전 KIA는 78승 63패 2무, LG는 78승 64패 1무였고 이기는 팀이 3위, 지는 팀은 4위로 와일드카드 결정전에 가야 했다.
+
+2-2로 맞선 8회초 1사 1루에서 오스틴이 2루수 병살타를 쳤다. LG 승리확률이 11.6%p 떨어졌다. 이어진 8회말 무사 1루에서 김도영이 케네디의 슬라이더를 받아쳐 중견수 뒤로 130m 투런 홈런을 날렸다. KIA 승리확률은 67.6%에서 93.0%로 뛰었고 KIA가 4-2로 이겨 3위를 가져갔다. 이 홈런은 김도영의 시즌 45호였다. 경기 전 김도영과 힐리어드가 44개로 같았는데 이 한 방으로 김도영이 단독 홈런왕이 됐다. 오스틴은 이날 4타수 무안타였다.
+
+<table>
+  <thead><tr><th>이닝</th><th>상황</th><th>타자</th><th>투수</th><th>결과</th><th>승리확률 변화</th></tr></thead>
+  <tbody>
+    {d.decider.map((r) => (
+      <tr><td>{r.inning}회{half(r.half)}</td><td>{OUTS[r.outs]} {BASES[r.bases]}</td><td class={r.batter === '김도영' ? 'cur' : ''}>{r.batter}</td><td>{r.pitcher}</td><td>{r.result_text}</td><td class={r.wpa > 0 ? 'up' : 'down'} style={`--heat:${Math.abs(r.wpa) >= 10 ? 40 : 12}%`}>{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">승리확률 변화는 타자 팀 기준. 붉은 칸은 타자 팀 승리확률이 오른 타석, 파란 칸은 내려간 타석이고 10%p 이상이면 진하다.</p>
+
+## 필자의 예측
+
+기록만 보면 필자는 오스틴이 MVP라고 생각한다. 김도영과 OPS는 비슷하지만 타자에게 불리한 잠실을 홈으로 쓰면서 낸 기록이라 우르크에서 앞서고, WAR*도 리그 1위다. 구종, 투수 손, 달을 어떻게 나눠 봐도 뚜렷한 약점이 없었다.
+
+그러나 MVP 투표에서는 결정적인 장면이 아무래도 인상에 남기 마련이다. 시즌 최종전에서 오스틴은 10월 부진을 이어 갔고, 김도영은 팀을 3위에 올린 결승 홈런으로 홈런왕까지 차지했다. 필자는 이 때문에 타자 표가 오스틴과 김도영으로 갈릴 것으로 본다. 그러면 투수 쪽 단일 후보인 곽빈이 MVP를 받을 수 있다고 필자는 예측한다.
+
+정규시즌 MVP 투표는 포스트시즌 전에 마감된다. 오스틴은 10월 14일 와일드카드 1차전 1회말 곽빈에게서 투런 홈런을 쳤다. LG 승리확률을 {d.wc[0].wpa}%p 끌어올린 선제 홈런이었고 LG는 {d.wc[0].home_score}-{d.wc[0].away_score}로 이겼다. MVP를 다투는 투수를 상대로 친 홈런인데 이번 투표에는 들어가지 않는다. 오스틴에게는 아쉬운 일이다.
