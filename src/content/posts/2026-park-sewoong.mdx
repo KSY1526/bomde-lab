@@ -1,0 +1,190 @@
+---
+title: "윤석민의 조언, 박세웅에게 통했을까"
+description: "5년 90억 계약 뒤 성적이 내리막을 탄 박세웅이 윤석민의 조언을 듣고 카운트별 구종 선택을 바꾸고 스위퍼를 더했다. 슬라이더 계열은 통했지만 포크와 커브가 맞았다."
+date: 2026-10-14
+category: player
+tags: ["박세웅", "롯데", "스위퍼", "구종", "피칭 디자인"]
+dataUntil: "2026 정규시즌 10/11까지 (박세웅 마지막 등판 10/6)"
+---
+import BarChart from '../../components/BarChart.astro';
+import d from '../../data/posts/2026-10-14-park-sewoong.json';
+
+export const years = [2021, 2022, 2023, 2024, 2025, 2026];
+export const recent = [2024, 2025, 2026];
+export const cm = (period, cnt) => d.count_mix.find((r) => r.period === period && r.cnt === cnt);
+export const counts = [['0-0', '0-0'], ['유리', '투수가 유리한 카운트'], ['불리', '투수가 불리한 카운트']];
+export const periods = [`${d.trend_first}~${d.last - 1}`, String(d.last)];
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const yc = (y) => (y === d.last ? 'cur' : '');
+export const mixPitches = ['포심', '슬라이더', '커브', '포크', '스위퍼'];
+export const pitches = ['포심', '슬라이더', '스위퍼', '포크', '커브'];
+export const ss = (y) => d.seasons.find((r) => r.season === y);
+export const opp = (y) => d.opp.find((r) => r.season === y);
+export const ars = (p, y, split = '전체') => d.arsenal.find((r) => r.pitch === p && r.season === y && r.split === split);
+export const bp = (p, y, side = null) => d.by_pitch.find((r) => r.pitch === p && r.season === y && r.side === side);
+export const side = (s, y) => d.side.find((r) => r.side === s && r.season === y);
+export const lgSide = (s, y) => d.lg_side.find((r) => r.side === s && r.season === y);
+export const lgPitch = (p, y) => d.lg_pitch.find((r) => r.pitch === p && r.season === y);
+export const spFb = (y) => d.sp_fb.find((r) => r.season === y);
+// 피우르크: 100보다 높으면 타자 우세(붉은색), 낮으면 투수 우세(파란색). 100에서 멀어질수록 진하다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const wrcTd = (r, y, showPa = true) => {
+  if (!r) return <td class={yc(y)}>-</td>;
+  const small = r.pa < d.small_pa;
+  const h = heat(Math.round(r.wrc_plus - 100), 15);
+  const cls = [yc(y), small ? 'small' : h ? h.cls : ''].filter(Boolean).join(' ');
+  return <td class={cls} style={!small && h ? `--heat:${h.pct}%` : undefined}>{Math.round(r.wrc_plus)}{showPa ? ` (${r.pa})` : ''}</td>;
+};
+
+2021년 박세웅은 롯데 선발진의 중심이었다. 163이닝을 던져 평균자책점 3.98, WHIP 1.25를 기록했다. 박세웅을 상대한 타자의 우르크(wRC+), 즉 피우르크는 81로 리그 평균 타자보다 득점을 19% 덜 만들었다. 롯데는 2023년 시즌을 앞두고 박세웅과 5년 90억 원 계약을 맺었다.
+
+그러나 계약 뒤 성적은 내리막을 탔다. 계약 첫해인 2023년 평균자책점 3.45로 반짝했지만 2024년 4.78, 2025년 4.93으로 올랐다. 2025년 피우르크는 110으로 박세웅을 만난 타자가 리그 평균보다 득점을 10% 더 만들었다. WHIP도 2021년 1.25에서 2025년 1.52가 됐다. 구단은 선발진을 이끌어 달라며 90억 원을 안겼는데 정작 계약 기간에 성적이 떨어졌다. 올해도 다르지 않았다. 평균자책점 4.71, 피우르크 110으로 2025년과 거의 같았고 3승 9패에 그쳤다.
+
+<table>
+  <thead><tr><th>시즌</th><th>선발</th><th>이닝</th><th>ERA</th><th>WHIP</th><th>FIP</th><th>피OPS</th><th>피우르크</th></tr></thead>
+  <tbody>
+    {years.map((y) => {
+      const s = ss(y);
+      return <tr><td class={yc(y)}>{y}</td><td>{s.gs}</td><td>{s.ip}</td><td>{f2(s.era)}</td><td>{f2(s.whip)}</td><td>{f2(s.fip)}</td><td>{f3(opp(y).ops)}</td>{wrcTd(opp(y), y, false)}</tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">모두 롯데 선발. 피우르크 = 박세웅을 상대한 타자들의 wRC+. 100이 리그 평균 타자이고 낮을수록 투수가 잘 막았다는 뜻이다. 파란 칸은 100보다 낮은 칸, 붉은 칸은 높은 칸이고 100에서 멀수록 진하다.</p>
+
+## 직구 구속은 우상향했으나 성적은 떨어지고 있었다
+
+직구는 빨라졌다. 포심 평균 구속이 2017년 143.3km에서 2025년 147.0km로 3.7km 올랐고 2025년에는 리그 선발 평균 146.4km보다 빨랐다.
+
+<BarChart
+  title="포심 평균 구속 (km/h), 박세웅 vs 리그 선발 평균"
+  caption={`리그 선발 평균은 선발 ${d.sp_min_gs}경기 이상 던진 투수 기준.`}
+  min={138}
+  digits={1}
+  legend={{ value: '박세웅', prev: '리그 선발 평균' }}
+  rows={d.sp_fb.map((r) => ({ label: String(r.season), value: ss(r.season).fb_velo, prev: r.sp_avg, highlight: r.season === d.last }))}
+/>
+
+그러나 직구 성적은 떨어지고 있었다. 포심의 피우르크가 2021년 143에서 2025년 164로 올랐다. 2025년 리그 포심 평균 피우르크 124보다 40 높다. 포심 헛스윙률도 2025년 10.9%로 리그 포심 평균 15.7%에 못 미쳤다.
+
+<table>
+  <thead><tr><th>시즌</th><th>포심 평균 구속</th><th>선발 중 직구 평균 구속 순위</th><th>포심 피우르크 (타석)</th><th>리그 포심 피우르크</th></tr></thead>
+  <tbody>
+    {years.map((y) => (
+      <tr><td class={yc(y)}>{y}</td><td>{ss(y).fb_velo}</td><td>{spFb(y).rank}위 / {spFb(y).n_sp}명</td>{wrcTd(bp('포심', y), y)}<td>{Math.round(lgPitch('포심', y).wrc_plus)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">구속 순위는 그해 선발 {d.sp_min_gs}경기 이상 던진 투수 중 순위. 피우르크는 타석 마지막 공의 구종 기준. 칸 색의 뜻은 위 표와 같다.</p>
+
+## 5년 동안 동일했던 피칭 디자인
+
+2021년부터 2025년까지 박세웅의 피칭 디자인은 일정했다. 포심과 슬라이더를 가장 많이 던지고 커브와 포크를 섞었다. 2023년 커터(5.2%), 2024년 체인지업(4.2%)을 잠깐 던졌지만 이듬해에는 사라졌다. 2025년에도 포심 40.0%, 슬라이더 32.3%, 포크 14.2%, 커브 13.5%로 네 구종이 전부였고 구사율도 유사했다.
+
+<table>
+  <thead><tr><th>시즌</th>{mixPitches.map((p) => <th>{p}</th>)}</tr></thead>
+  <tbody>
+    {years.map((y) => (
+      <tr><td class={yc(y)}>{y}</td>{mixPitches.map((p) => { const r = ars(p, y); return <td class={yc(y)}>{r ? `${r.usage_pct}%` : '-'}</td>; })}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">구종별 구사율. 5% 미만 구종(커터, 체인지업, 투심)은 뺐다.</p>
+
+박세웅은 2017년 첫 풀타임 시즌에 선발 28경기를 던졌고 2020년부터 올해까지 7시즌 연속 선발 26경기 이상을 채웠다. 그동안 타자들은 해마다 같은 네 구종을 비슷한 비율로 던지는 박세웅을 상대했다. 필자는 박세웅이 오랫동안 풀타임으로 던지면서 타자 눈에 익었다고 판단한다.
+
+## 윤석민의 조언 뒤 카운트별 구종 선택이 바뀌었다
+
+박세웅은 2025년 시즌이 끝난 뒤 윤석민의 유튜브 채널에 나가 피칭 디자인 조언을 받은 일로 화제가 됐다. 타자가 노리는 코스를 피하고, 유리한 카운트에서는 존을 크게 벗어나는 공 대신 비슷한 코스로 던져 타자가 칠 범위를 좁히고, 존 안에서 타이밍을 뺏으라는 조언이었다. 그래서 올 시즌에 거는 기대가 컸다([관련 기사](https://osen.co.kr/article/G1112712572)).
+
+조언을 들었는지는 카운트별 구종 선택에서 드러난다. 투수가 유리한 카운트에서 포크·커브 비중이 2021~2025년 51.1%에서 올해 38.0%로 줄었고 슬라이더 계열(슬라이더와 스위퍼)은 20.9%에서 33.5%로 늘었다. 초구(0-0)에는 포심이 47.4%에서 36.9%로 줄고 슬라이더 계열이 28.2%에서 39.9%로 늘었다. 투수가 불리한 카운트에서도 포심이 55.6%에서 45.1%로 줄었다. 어느 카운트든 포심이나 포크·커브를 던지던 자리에 슬라이더 계열이 들어갔다.
+
+<table>
+  <thead><tr><th>카운트</th><th>시즌</th><th>포심</th><th>슬라이더 계열</th><th>포크·커브 등</th></tr></thead>
+  <tbody>
+    {counts.map(([k, label]) => periods.map((per, i) => {
+      const r = cm(per, k);
+      const c = per === String(d.last) ? 'cur' : '';
+      return <tr>{i === 0 && <td rowspan="2">{label}</td>}<td class={c}>{per}</td><td class={c}>{r.fb.toFixed(1)}%</td><td class={c}>{r.sl.toFixed(1)}%</td><td class={c}>{r.etc.toFixed(1)}%</td></tr>;
+    }))}
+  </tbody>
+</table>
+
+<p class="table-note">카운트별 구종 비율. 투수가 유리한 카운트는 스트라이크가 볼보다 많은 카운트(0-1, 0-2, 1-2), 불리한 카운트는 볼이 더 많은 카운트(1-0, 2-0, 3-0, 2-1, 3-1)다. 1-1, 2-2, 3-2는 뺐다. 슬라이더 계열 = 슬라이더 + 스위퍼. 포크·커브 등에는 커터·체인지업·투심이 섞여 있지만 2% 안팎이다.</p>
+
+## 직구를 줄이고 스위퍼를 장착했다
+
+직구 구사율을 전반적으로 줄이고 스위퍼를 장착했다. 포심 비율은 40.0%에서 35.5%로 2017년 이후 가장 낮다. 작년까지 한 번도 던지지 않은 스위퍼를 16.2% 던졌고 슬라이더는 32.3%에서 21.8%로 줄었다. 스위퍼는 평균 127.3km로 슬라이더 136.5km보다 9km 느리고 가로로 34.4cm 휜다. 가로 움직임이 6.5cm인 슬라이더와는 다른 공이다.
+
+<BarChart
+  title="박세웅 구사율 (%), 2025 vs 2026"
+  digits={1}
+  legend={{ value: '2026', prev: '2025' }}
+  rows={mixPitches.map((p) => ({ label: p, value: ars(p, 2026)?.usage_pct ?? 0, prev: ars(p, 2025)?.usage_pct ?? 0, highlight: p === '스위퍼' }))}
+/>
+
+## 슬라이더와 스위퍼는 통했고 포크와 커브는 맞았다
+
+새로 더한 스위퍼와 비중을 줄인 슬라이더는 결과가 좋았다. 슬라이더로 끝난 타석의 피우르크가 2025년 112에서 올해 94로 내려갔고 스위퍼는 86이다. 포심도 2025년 164에서 올해 135로 내려갔다.
+
+포크와 커브는 반대로 나빠졌다. 포크 피우르크는 2025년 46에서 올해 74로 올랐고 헛스윙률은 40.6%에서 33.3%로 떨어졌다. 커브는 2025년 7에서 올해 170이 됐다. 커브 피안타율이 .149에서 .396으로 뛰었다.
+
+<table>
+  <thead><tr><th>시즌</th>{pitches.map((p) => <th>{p}</th>)}</tr></thead>
+  <tbody>
+    {recent.map((y) => (
+      <tr><td class={yc(y)}>{y}</td>{pitches.map((p) => wrcTd(bp(p, y), y))}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">구종별 피우르크(괄호는 타석 수).</p>
+
+<details>
+  <summary>구종별 헛스윙률·피안타율</summary>
+  <table>
+    <thead><tr><th>시즌</th>{pitches.map((p) => <th>{p}</th>)}</tr></thead>
+    <tbody>
+      {recent.map((y) => (
+        <tr><td class={yc(y)}>{y}</td>{pitches.map((p) => { const r = ars(p, y); return <td class={yc(y)}>{r ? `${r.whiff_pct}% / ${f3(r.opp_avg)}` : '-'}</td>; })}</tr>
+      ))}
+    </tbody>
+  </table>
+</details>
+
+<p class="table-note">타석 마지막 공의 구종 기준. 칸 색의 뜻은 위 표와 같고, 노란 칸은 {d.small_pa}타석 미만이라 표본이 적은 칸이다. 헛스윙률 = 헛스윙 / 스윙.</p>
+
+## 좌타자에게 약했다
+
+슬라이더와 스위퍼는 우투수가 던지면 우타자 바깥으로 빠져나가는 공이다. 그래서 두 구종이 통하면 우타자를 더 잘 막게 된다. 실제로 올해 박세웅은 좌타자보다 우타자에게 강했다. 우타자 상대 피우르크는 100.5, 좌타자 상대는 118.8로 18.3 차이가 난다. 리그 우투수 평균은 우타자 92.6, 좌타자 101.9로 차이가 9.3이다. 스위퍼는 우타자에게 22.9%, 좌타자에게 10.2% 던졌고 우타자 상대 스위퍼 피우르크는 87(84타석)이다.
+
+<table>
+  <thead><tr><th>시즌</th><th>박세웅 vs 우타자</th><th>박세웅 vs 좌타자</th><th>리그 우투수 vs 우타자</th><th>리그 우투수 vs 좌타자</th></tr></thead>
+  <tbody>
+    {recent.map((y) => (
+      <tr><td class={yc(y)}>{y}</td>{wrcTd(side('R', y), y)}{wrcTd(side('L', y), y)}<td>{Math.round(lgSide('R', y).wrc_plus)}</td><td>{Math.round(lgSide('L', y).wrc_plus)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">피우르크(괄호는 타석 수). 칸 색의 뜻은 위 표와 같다.</p>
+
+좌타자에게는 슬라이더 계열 대신 포크볼을 많이 사용한다. 올해 좌타자에게 던진 공의 27.6%가 포크였고 슬라이더와 스위퍼는 합쳐 26.0%였다. 좌타자 상대 포크 피우르크는 2025년 80에서 올해 90으로, 커브는 -20에서 154로 올랐다.
+
+<table>
+  <thead><tr><th>2026 구종</th><th>우타자 구사율</th><th>우타자 피우르크 (타석)</th><th>좌타자 구사율</th><th>좌타자 피우르크 (타석)</th></tr></thead>
+  <tbody>
+    {pitches.map((p) => (
+      <tr><td>{p}</td><td>{ars(p, 2026, '우타').usage_pct}%</td>{wrcTd(bp(p, 2026, 'R'), 0)}<td>{ars(p, 2026, '좌타').usage_pct}%</td>{wrcTd(bp(p, 2026, 'L'), 0)}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">칸 색의 뜻은 위 표와 같다.</p>
+
+## 개선이 가장 필요한 것은 포크와 커브의 완성도
+
+5년 동안 바꾸지 않던 피칭 디자인을 바꾼 첫해에 스위퍼는 박세웅 구종 중 피우르크가 상당히 낮은 플러스 피치가 됐다. 필자는 직구 구종 가치 상승과 스위퍼 추가의 이점을 살리고 좌타 상대 스플릿을 극복하려면 비시즌에 포크와 커브의 완성도를 높여야 한다고 생각한다. 내년 박세웅의 성적도 이 두 구종에 달려 있다.
