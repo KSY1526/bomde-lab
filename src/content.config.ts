@@ -8,7 +8,7 @@ const posts = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
-    category: z.enum(['team', 'player', 'deep', 'metrics', 'game']),
+    category: z.enum(['season', 'player', 'deep', 'metrics', 'game']),
     tags: z.array(z.string()).default([]),
     // 데이터 기준일 — 스냅샷 관리용. 화면에는 표시하지 않는다(데이터 공개 원칙 4)
     dataUntil: z.string(),
