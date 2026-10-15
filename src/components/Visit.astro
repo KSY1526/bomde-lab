@@ -1,6 +1,7 @@
 ---
 // 방문 기록(사용자 결정 2026-10-11). 페이지를 열 때마다 서버에 알린다. 서버가 꺼져 있으면 조용히 넘어간다.
-//   POST {API}/visit { path, post?, ref } → { views? }  (post가 있으면 그 글 조회수 +1 후 돌려줌)
+//   POST {API}/visit { path, post?, ref, src? } → { views? }  (post가 있으면 그 글 조회수 +1 후 돌려줌)
+// 유입 경로 표시(2026-10-16): 링크에 ?from=insta 처럼 붙이면 src로 남기고, 주소창에서는 지운다(공유될 때 따라가지 않게).
 // 글 페이지는 [data-views][data-slug] 요소를 두면 조회수가 채워진다.
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
@@ -10,11 +11,18 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   const api = document.querySelector<HTMLElement>('[data-visit]')?.dataset.api ?? '';
   const views = document.querySelector<HTMLElement>('[data-views]');
   const post = views?.dataset.slug;
+  const params = new URLSearchParams(location.search);
+  const src = params.get('from')?.slice(0, 30) || undefined;
+  if (src) {
+    params.delete('from');
+    const qs = params.toString();
+    history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + location.hash);
+  }
   if (api) {
     fetch(`${api}/visit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer }),
+      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer, src }),
       signal: AbortSignal.timeout(5000),
     })
       .then((r) => (r.ok ? r.json() : {}))

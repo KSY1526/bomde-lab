@@ -1,0 +1,39 @@
+---
+// 글 끝 "다음에 읽을 글" (2026-10-16). 한 페이지만 보고 나가는 방문을 줄이려고 둔다.
+// frontmatter related(글을 쓸 때 고른 기존 글 id)를 먼저, 모자라면 태그가 겹치는 글 → 같은 카테고리 → 최신 글 순으로 3개를 채운다.
+import type { CollectionEntry } from 'astro:content';
+import PostCard from './PostCard.astro';
+import { publishedPosts } from '../lib/posts';
+
+interface Props { post: CollectionEntry<'posts'> }
+const { post } = Astro.props;
+const MAX = 3;
+
+const others = (await publishedPosts()).filter((p) => p.id !== post.id);
+const byId = new Map(others.map((p) => [p.id, p]));
+const picked = post.data.related.map((id) => byId.get(id)).filter((p) => p !== undefined);
+
+const tags = new Set(post.data.tags);
+const score = (p: CollectionEntry<'posts'>) =>
+  p.data.tags.filter((t) => tags.has(t)).length * 10 + (p.data.category === post.data.category ? 5 : 0);
+const rest = others
+  .filter((p) => !picked.includes(p))
+  .map((p, i) => ({ p, s: score(p), i })) // publishedPosts는 최신순이라 i가 작을수록 최신
+  .sort((a, b) => b.s - a.s || a.i - b.i)
+  .map((x) => x.p);
+const list = [...picked, ...rest].slice(0, MAX);
+---
+{list.length > 0 && (
+  <section class="related" aria-labelledby="related-h">
+    <h2 id="related-h">다음에 읽을 글</h2>
+    <div class="list">
+      {list.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+)}
+
+<style>
+  .related { margin-top: 40px; }
+  h2 { font-size: 20px; margin: 0 0 12px; letter-spacing: -.01em; }
+  .list { display: grid; gap: 12px; }
+</style>
