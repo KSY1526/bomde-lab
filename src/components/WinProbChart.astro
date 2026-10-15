@@ -1,0 +1,65 @@
+---
+// 경기 승리확률 그래프(Baseball-Reference 박스스코어 방식). 빌드 때 SVG로 그려 JS 없이 보인다.
+// timeline: 타석마다 홈팀 승리확률(%), i=0은 경기 시작. 위로 갈수록 홈팀, 아래로 갈수록 원정팀이 유리하다.
+// marks: 결정적 순간 번호(rank)를 그 타석(i) 위치에 찍는다.
+interface Point { i: number; inning: number; half: string; home_wp: number }
+interface Mark { i: number; rank: number }
+interface Props { timeline: Point[]; home: string; away: string; marks?: Mark[]; title: string; caption?: string }
+const { timeline, home, away, marks = [], title, caption } = Astro.props;
+
+const W = 560, H = 300, L = 40, R = 14, T = 22, B = 32;
+const n = timeline[timeline.length - 1].i;
+const x = (i: number) => L + (i / (n || 1)) * (W - L - R);
+const y = (wp: number) => T + (1 - wp / 100) * (H - T - B);
+const path = timeline.map((p, k) => `${k ? 'L' : 'M'}${x(p.i).toFixed(1)},${y(p.home_wp).toFixed(1)}`).join(' ');
+// 이닝 시작(초 공격 첫 타석) 위치에 눈금
+const innings = timeline.filter((p, k) => k > 0 && p.half === 'top' && timeline[k - 1].inning !== p.inning || k === 0);
+const at = (i: number) => timeline.find((p) => p.i === i)!;
+---
+<figure class="chart">
+  <figcaption class="title">{title}</figcaption>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
+    <rect x={L} y={T} width={W - L - R} height={(H - T - B) / 2} class="half-home" />
+    {[0, 25, 50, 75, 100].map((v) => (
+      <g>
+        <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} class={v === 50 ? 'mid' : 'grid'} />
+        <text x={L - 6} y={y(v)} class="tick" text-anchor="end" dominant-baseline="central">{v === 50 ? '50' : v > 50 ? v : 100 - v}</text>
+      </g>
+    ))}
+    <text x={L + 6} y={T + 13} class="side">{home} 유리</text>
+    <text x={L + 6} y={H - B - 7} class="side">{away} 유리</text>
+    {innings.map((p) => (
+      <g>
+        <line x1={x(p.i)} x2={x(p.i)} y1={T} y2={H - B} class="inn" />
+        <text x={x(p.i) + 2} y={H - B + 16} class="tick">{p.inning}회</text>
+      </g>
+    ))}
+    <path d={path} class="line" />
+    {marks.map((m) => {
+      const p = at(m.i);
+      return (
+        <g class="mark">
+          <circle cx={x(p.i)} cy={y(p.home_wp)} r="12" />
+          <text x={x(p.i)} y={y(p.home_wp)} text-anchor="middle" dominant-baseline="central">{m.rank}</text>
+        </g>
+      );
+    })}
+  </svg>
+  {caption && <figcaption class="cap">{caption}</figcaption>}
+</figure>
+
+<style>
+  .chart { margin: 1.6em 0; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  svg { width: 100%; height: auto; display: block; }
+  .half-home { fill: var(--chip-bg); opacity: .6; }
+  .grid { stroke: var(--line); stroke-width: 1; }
+  .mid { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
+  .inn { stroke: var(--line); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .side { fill: var(--muted); font-size: 14px; font-weight: 700; }
+  .line { fill: none; stroke: var(--pos); stroke-width: 2.4; stroke-linejoin: round; }
+  .mark circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+  .mark text { fill: #fff; font-size: 14px; font-weight: 800; }
+</style>

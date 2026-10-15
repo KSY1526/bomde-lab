@@ -14,6 +14,7 @@ export const SOCIAL = [
 export const CATEGORIES: Record<string, string> = {
   team: '팀 분석',
   player: '선수 분석',
+  game: '경기 분석',
   deep: '심층 분석',
   metrics: '야구 지표 해설',
 };
