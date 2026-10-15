@@ -1,0 +1,41 @@
+---
+// 결정적 순간 한 장면(MLB.com "win-probability shifts" 방식): 소제목 + 고정 칸 + 아래 slot에 해설 1~3문장.
+// 승리확률은 이 장면으로 이득을 본 팀 기준으로 보여 준다(안타면 공격팀, 아웃이면 수비팀 = 투수가 주인공).
+interface Play {
+  rank: number; inning_label: string; outs: string | null; bases: string; score_before: Record<string, number>;
+  batter: string; batter_team: string; pitcher: string; pitcher_team: string; result_text: string; runs: number;
+  wpa: number; bat_wp_before: number; bat_wp_after: number;
+  last_pitch: { type: string | null; kmh: number | null; count: string | null; nth: number | null };
+}
+interface Props { play: Play; home: string; away: string; headline: string }
+const { play: p, home, away, headline } = Astro.props;
+
+const byBat = p.wpa > 0;
+const team = byBat ? p.batter_team : p.pitcher_team;
+const before = byBat ? p.bat_wp_before : 100 - p.bat_wp_before;
+const after = byBat ? p.bat_wp_after : 100 - p.bat_wp_after;
+const lp = p.last_pitch;
+const result = p.result_text.replace(/\s*\(.*\)$/, '') + (p.runs ? `, ${p.runs}점` : '');
+---
+<section class="play">
+  <h3><span class="rank">{p.rank}</span>{headline}</h3>
+  <dl>
+    <dt>상황</dt><dd>{p.inning_label} {p.outs} {p.bases}, {away} {p.score_before[away]} : {p.score_before[home]} {home}</dd>
+    <dt>대결</dt><dd>타자 {p.batter}({p.batter_team}) vs 투수 {p.pitcher}({p.pitcher_team})</dd>
+    <dt>결과</dt><dd>{result}</dd>
+    {lp.type && <><dt>마지막 공</dt><dd>{lp.count} 카운트, {lp.nth}구째 {lp.type}{lp.kmh ? ` ${Math.round(lp.kmh)}km/h` : ''}</dd></>}
+    <dt>승리확률</dt><dd class="wp">{team} {before.toFixed(1)}% → {after.toFixed(1)}% <b>+{Math.abs(p.wpa).toFixed(1)}%p</b></dd>
+  </dl>
+  <div class="note"><slot /></div>
+</section>
+
+<style>
+  .play { margin: 1.4em 0; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; font-size: 17px; }
+  .rank { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 14px; font-weight: 800; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  .wp b { color: var(--accent); }
+  .note :global(p) { margin: 10px 0 0; }
+</style>
