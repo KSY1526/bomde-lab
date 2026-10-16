@@ -33,3 +33,36 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+  # 새로 올리거나 고친 글 주소를 IndexNow로 네이버(+빙 등)에 바로 알린다 (2026-10-16).
+  # 키 파일은 public/<키>.txt → /bomde-lab/<키>.txt 라서 /bomde-lab/ 아래 주소만 알릴 수 있다. 구글은 IndexNow를 받지 않는다.
+  indexnow:
+    needs: deploy
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    env:
+      KEY: 34cdc7565fac34409b58e9937442ee9e
+      SITE: https://ksy1526.github.io/bomde-lab
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: 바뀐 글 주소 알리기
+        run: |
+          before="${{ github.event.before }}"
+          urls=()
+          if [ -n "$before" ] && git cat-file -e "$before" 2>/dev/null; then
+            while read -r f; do
+              [ -f "$f" ] || continue                      # 지운 글은 건너뜀
+              grep -q '^draft: true' "$f" && continue      # 초안은 건너뜀
+              slug=$(basename "$f"); slug="${slug%.*}"
+              urls+=("$SITE/posts/$slug/")
+            done < <(git diff --name-only "$before" "${{ github.sha }}" -- 'src/content/posts/*.md' 'src/content/posts/*.mdx')
+          fi
+          if [ ${#urls[@]} -eq 0 ]; then echo "바뀐 글 없음"; exit 0; fi
+          urls+=("$SITE/")                                 # 새 글이 홈 목록에도 올라가므로 홈도 같이
+          printf '%s\n' "${urls[@]}"
+          body=$(jq -n --arg key "$KEY" --arg loc "$SITE/$KEY.txt" '{host:"ksy1526.github.io", key:$key, keyLocation:$loc, urlList:$ARGS.positional}' --args "${urls[@]}")
+          for ep in https://searchadvisor.naver.com/indexnow https://api.indexnow.org/indexnow; do
+            code=$(curl -s -o /tmp/res -w '%{http_code}' -X POST "$ep" -H 'Content-Type: application/json; charset=utf-8' -d "$body")
+            echo "$ep → $code $(head -c 300 /tmp/res)"
+          done
