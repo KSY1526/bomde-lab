@@ -1,0 +1,189 @@
+---
+title: "야구 지표 해설 3: 커터와 투심, 같은 직구인데 무엇이 다를까"
+description: "KBO에서 커터를 100구 이상 던진 투수는 2022년 12명에서 2026년 38명이 됐다."
+date: 2026-10-16
+category: metrics
+tags: ["커터", "투심", "싱커", "변형직구", "구종", "무브먼트"]
+related: ["2026-velo-revolution", "2026-park-sewoong", "2026-wrc-basics"]
+dataUntil: "2026 정규시즌 10/12까지"
+---
+import d from '../../data/posts/2026-10-16-variant-fastball.json';
+
+export const years = [2022, 2023, 2024, 2025, 2026];
+export const trio = ['포심', '투심', '커터'];
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const yc = (y) => (y === d.last ? 'cur' : '');
+export const us = (p, y) => d.usage.find((r) => r.pitch === p && r.season === y);
+export const pf = (p, y) => d.perf.find((r) => r.pitch === p && r.season === y);
+export const ps = (p, s) => d.perf_side.find((r) => r.pitch === p && r.side === s);
+export const usd = (p, s) => d.use_side.find((r) => r.pitch === p && r.side === s).n;
+export const mv = (p) => d.move.find((r) => r.pitch === p);
+export const cd = (name, p) => d.cand.find((r) => r.pname === name && r.pitch === p);
+export const fb = mv('포심');
+export const vf = (y) => us('투심', y).usage_pct + us('커터', y).usage_pct;
+// 가로 움직임: 음수 = 우투수 팔 쪽 = 우타자 몸쪽
+export const hDir = (h) => `${h < 0 ? '몸쪽' : '바깥쪽'} ${Math.abs(h).toFixed(1)}`;
+// 피OPS 칸 색: 같은 해 포심보다 낮으면 파란색(투수 우세), 높으면 붉은색. .030 멀어질 때마다 한 단계 진하게
+export const heat = (gap, step) => (Math.abs(gap) < 1e-9 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const opsTd = (v, base, y) => {
+  const h = heat(v - base, 0.03);
+  return <td class={[yc(y), h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{f3(v)}</td>;
+};
+export const sohyung = cd('소형준', '커터');
+export const nail = cd('네일', '커터');
+export const avila = cd('아빌라', '투심');
+export const koh = cd('고영표', '투심');
+export const choiCt = cd('최민석', '커터');
+export const choiTs = cd('최민석', '투심');
+
+2022년 KBO에서 커터를 100구 이상 던진 투수는 {us('커터', 2022).pitchers}명이었다. 올해는 {us('커터', 2026).pitchers}명이다. 전체 투구 중 커터 비율도 {us('커터', 2022).usage_pct}%에서 {us('커터', 2026).usage_pct}%로 늘었다. 중계에서 "커터", "투심"이라는 말을 듣는 일이 잦아졌다.
+
+커터와 투심은 둘 다 직구 계열이지만 휘는 방향이 정반대다. 둘 다 포심보다 조금 느리고 포심처럼 곧게 오다 마지막에 꺾이거나 가라앉아 타자의 배트 중심을 피한다. 이런 공을 묶어 변형직구라고 부른다.
+
+## 변형직구는 커터, 투심, 싱커 세 가지다
+
+<table class="text pitch">
+  <thead><tr><th colspan="2" class="cur">커터</th></tr></thead>
+  <tbody>
+    <tr><td>그립과 특징</td><td>포심 그립에서 중지에 힘을 다르게 준다</td></tr>
+    <tr><td>휘는 방향</td><td>우타자 바깥쪽으로 짧고 날카롭게 꺾인다</td></tr>
+    <tr><td>주요 목적</td><td>빠른 구속으로 배트 중심을 피한다</td></tr>
+  </tbody>
+</table>
+
+<table class="text pitch">
+  <thead><tr><th colspan="2" class="cur">투심</th></tr></thead>
+  <tbody>
+    <tr><td>그립과 특징</td><td>실밥 두 개를 잡는다</td></tr>
+    <tr><td>휘는 방향</td><td>우타자 몸쪽으로 휜다</td></tr>
+    <tr><td>주요 목적</td><td>정타를 막고 빗맞은 타구를 끌어낸다</td></tr>
+  </tbody>
+</table>
+
+<table class="text pitch">
+  <thead><tr><th colspan="2" class="cur">싱커</th></tr></thead>
+  <tbody>
+    <tr><td>그립과 특징</td><td>투심과 비슷한 그립에 아래로 떨어지는 힘을 더한다</td></tr>
+    <tr><td>휘는 방향</td><td>우타자 몸쪽으로 휘면서 아래로 가라앉는다</td></tr>
+    <tr><td>주요 목적</td><td>땅볼, 병살타를 끌어낸다</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">휘는 방향은 우투수 기준이다. 좌투수는 좌우가 반대다.</p>
+
+커터는 슬라이더처럼 투수 글러브 쪽으로 꺾인다. 슬라이더보다 빠르고 덜 휜다. 타자 눈에는 직구로 보이다가 배트가 나가는 순간 공 반 개, 한 개쯤 비껴 가서 배트 끝이나 손잡이 쪽에 맞는다.
+
+투심과 싱커는 커터와 반대로 투수 팔 쪽, 즉 같은 손 타자의 몸쪽으로 휜다. 싱커는 여기에 가라앉는 움직임이 더 크다. 다만 두 구종의 경계는 투수마다 다르고 둘을 굳이 나누지 않는 사람도 많다. 이 글에 쓴 KBO 투구 데이터도 싱커를 따로 분류하지 않는다. 그래서 이 글에서는 어쩔 수 없이 투심과 싱커를 한 묶음으로 본다.
+
+## 실제로 얼마나 휠까
+
+올해 우투수가 던진 공의 평균 움직임을 보면 설명대로다. 투심은 포심보다 우타자 몸쪽으로 {Math.abs(mv('투심').h_cm - fb.h_cm).toFixed(1)}cm 더 휘고 세로 움직임이 {(fb.v_cm - mv('투심').v_cm).toFixed(1)}cm 작다. 포심만큼 떠오르지 못하고 그만큼 가라앉는다는 뜻이다. 커터는 포심과 반대 방향으로 {(mv('커터').h_cm - fb.h_cm).toFixed(1)}cm 꺾이고 세로 움직임은 {(fb.v_cm - mv('커터').v_cm).toFixed(1)}cm 작다.
+
+<table>
+  <thead><tr><th>2026 우투수</th><th>평균 구속 (km/h)</th><th>가로 움직임 (cm)</th><th>세로 움직임 (cm)</th></tr></thead>
+  <tbody>
+    {['포심', '투심', '커터', '슬라이더'].map((p) => {
+      const r = mv(p);
+      return <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td><td>{r.velo.toFixed(1)}</td><td>{hDir(r.h_cm)}</td><td>{r.v_cm.toFixed(1)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">포수 쪽에서 본 움직임. 가로 움직임의 몸쪽·바깥쪽은 우타자 기준이다. 세로 움직임은 회전 때문에 중력만 받았을 때보다 덜 떨어진 정도로, 클수록 떠오르는 느낌이 강하다. 좌투수는 가로 방향이 반대다.</p>
+
+커터는 속도와 움직임 모두 포심과 슬라이더 사이에 있다. 우투수 커터 평균 구속 {mv('커터').velo.toFixed(1)}km/h는 포심 {fb.velo.toFixed(1)}km/h와 슬라이더 {mv('슬라이더').velo.toFixed(1)}km/h의 중간쯤이다. 투심은 포심과 구속 차이가 크지 않다. 구속을 거의 그대로 두고 방향만 바꾼 공이다.
+
+## 변형직구 비율이 늘었다
+
+커터와 투심을 합친 변형직구 비율은 2022년 전체 투구의 {vf(2022).toFixed(1)}%에서 올해 {vf(2026).toFixed(1)}%로 늘었다. 그동안 포심은 {us('포심', 2022).usage_pct.toFixed(1)}%에서 {us('포심', 2026).usage_pct.toFixed(1)}%로 줄었다. 늘어난 몫은 대부분 커터다. 커터는 {us('커터', 2022).usage_pct.toFixed(1)}%에서 {us('커터', 2026).usage_pct.toFixed(1)}%로 2.5배가 됐고 투심은 2022년 {us('투심', 2022).usage_pct.toFixed(1)}%, 올해 {us('투심', 2026).usage_pct.toFixed(1)}%다.
+
+<table>
+  <thead><tr><th rowspan="2">시즌</th><th colspan="4">구사율</th><th colspan="2">100구 이상 던진 투수</th></tr><tr><th>포심</th><th>투심</th><th>커터</th><th>변형직구 합계</th><th>투심</th><th>커터</th></tr></thead>
+  <tbody>
+    {years.map((y) => (
+      <tr><td class={yc(y)}>{y}</td>{trio.map((p) => <td class={yc(y)}>{us(p, y).usage_pct.toFixed(1)}%</td>)}<td class="cur">{vf(y).toFixed(1)}%</td><td class={yc(y)}>{us('투심', y).pitchers}명</td><td class={yc(y)}>{us('커터', y).pitchers}명</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">구사율 = 그해 전체 투구 중 그 구종 비율. 변형직구 합계 = 투심 + 커터.</p>
+
+구속은 포심과의 차이로 보는 편이 낫다. 리그 전체 직구가 해마다 빨라지고 있어서 투심과 커터의 구속도 같이 오른다. 올해 투심은 포심보다 {(us('포심', 2026).velo - us('투심', 2026).velo).toFixed(1)}km/h, 커터는 {(us('포심', 2026).velo - us('커터', 2026).velo).toFixed(1)}km/h 느리다.
+
+<table>
+  <thead><tr><th rowspan="2">시즌</th><th colspan="3">평균 구속 (괄호는 포심과 차이)</th></tr><tr><th>포심</th><th>투심</th><th>커터</th></tr></thead>
+  <tbody>
+    {years.map((y) => {
+      const f = us('포심', y).velo;
+      return <tr><td class={yc(y)}>{y}</td><td class={yc(y)}>{f.toFixed(1)}</td>{['투심', '커터'].map((p) => <td class={yc(y)}>{us(p, y).velo.toFixed(1)} ({(us(p, y).velo - f).toFixed(1)})</td>)}</tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">단위 km/h.</p>
+
+## 커터는 헛스윙, 투심은 땅볼
+
+변형직구는 대체로 포심보다 덜 맞았다. 그 구종으로 끝난 타석의 피OPS가 커터는 5시즌 내내 그해 포심보다 낮았다. 올해도 커터 {f3(pf('커터', 2026).ops)}, 투심 {f3(pf('투심', 2026).ops)}로 포심 {f3(pf('포심', 2026).ops)}보다 낮다. 투심은 2022년에 포심과 같았고 2023년과 2024년에는 더 높았다.
+
+<table>
+  <thead><tr><th>시즌</th><th>포심 피OPS</th><th>투심 피OPS</th><th>커터 피OPS</th><th>리그 전체 OPS</th></tr></thead>
+  <tbody>
+    {years.map((y) => {
+      const base = pf('포심', y).ops;
+      return <tr><td class={yc(y)}>{y}</td><td class={yc(y)}>{f3(base)}</td>{opsTd(pf('투심', y).ops, base, y)}{opsTd(pf('커터', y).ops, base, y)}<td>{f3(d.lg.find((r) => r.season === y).ops)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">피OPS는 타석 마지막 공의 구종 기준. 파란 칸은 같은 해 포심보다 낮은(투수가 잘 막은) 칸, 붉은 칸은 높은 칸이고 차이가 클수록 진하다. 올해 포심으로 끝난 타석은 {pf('포심', 2026).bb_pct}%가 볼넷·몸에 맞는 공이었다(리그 전체 타석 {d.lg.find((r) => r.season === 2026).bb_pct}%). 그래서 포심 피OPS는 리그 전체 OPS보다 높게 나온다.</p>
+
+두 공이 타자를 잡는 방식은 다르다. 올해 커터는 스윙 다섯 번 중 한 번꼴로 헛스윙이 나왔다(헛스윙률 {us('커터', 2026).whiff_pct}%). 포심 {us('포심', 2026).whiff_pct}%보다 높다. 투심 헛스윙률은 {us('투심', 2026).whiff_pct}%로 셋 중 가장 낮지만 인플레이 타구로 잡은 아웃 중 땅볼 비율이 {pf('투심', 2026).gb_out_pct}%로 포심 {pf('포심', 2026).gb_out_pct}%보다 20%p 높다. 커터는 배트를 헛돌게 하고 투심은 배트에 맞히되 땅으로 굴리게 한다.
+
+<table>
+  <thead><tr><th>2026</th><th>헛스윙률</th><th>삼진 비율</th><th>피안타율</th><th>피장타율</th><th>땅볼 아웃 비율</th></tr></thead>
+  <tbody>
+    {trio.map((p) => {
+      const r = pf(p, 2026);
+      return <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td><td>{us(p, 2026).whiff_pct}%</td><td>{r.k_pct}%</td><td>{f3(r.avg)}</td><td>{f3(r.slg)}</td><td>{r.gb_out_pct}%</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">헛스윙률 = 헛스윙 / 스윙. 삼진 비율·피안타율·피장타율은 그 구종으로 끝난 타석 기준. 땅볼 아웃 비율 = 인플레이 타구로 잡은 아웃 중 땅볼(병살 포함) 비율.</p>
+
+커터는 슬라이더 계열이라 같은 손 타자에게 유리하다. 우투수의 커터는 우타자 바깥쪽으로 빠져나간다. 2022~2026년 커터 피OPS는 같은 손 타자 상대 {f3(ps('커터', '같은 손').ops)}, 반대 손 타자 상대 {f3(ps('커터', '반대 손').ops)}였다. 투심도 같은 손 타자에게 더 강했고 차이는 커터보다 컸다. 같은 손 타자 상대 투심 피OPS는 {f3(ps('투심', '같은 손').ops)}, 반대 손 타자 상대는 {f3(ps('투심', '반대 손').ops)}다. 같은 손 타자에게 몸쪽으로 파고드는 공은 반대 손 타자에게는 바깥에서 가운데 쪽으로 휘어 들어간다.
+
+<table>
+  <thead><tr><th>2022~2026 합계</th><th>같은 손 타자 피OPS (타석)</th><th>반대 손 타자 피OPS (타석)</th></tr></thead>
+  <tbody>
+    {trio.map((p) => (
+      <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td>{['같은 손', '반대 손'].map((s) => <td>{f3(ps(p, s).ops)} ({ps(p, s).pa.toLocaleString()})</td>)}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">같은 손 = 우투수 대 우타자, 좌투수 대 좌타자.</p>
+
+## 2026년 커터와 투심을 무기로 쓴 투수
+
+올해 그 구종을 {d.player_min_n}구 이상, 구사율 {d.player_min_usage}% 이상 던지고 그 구종으로 끝난 타석이 {d.player_min_pa}타석 이상인 투수 중에서 골랐다. 올해 리그 커터 피OPS는 {f3(pf('커터', 2026).ops)}, 투심은 {f3(pf('투심', 2026).ops)}다.
+
+<table>
+  <thead><tr><th>투수</th><th>구종</th><th>구사율</th><th>평균 구속</th><th>헛스윙률</th><th>피OPS (타석)</th><th>땅볼 아웃<br />비율</th></tr></thead>
+  <tbody>
+    {[sohyung, nail, avila, koh].map((r) => (
+      <tr><td class="cur">{r.pname}<br /><small>{r.team}</small></td><td>{r.pitch}</td><td>{r.usage_pct.toFixed(1)}%</td><td>{r.velo.toFixed(1)}</td><td>{r.whiff_pct.toFixed(1)}%</td><td>{f3(r.ops)} ({r.pa})</td><td>{r.gb_out_pct}%</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">평균 구속 단위 km/h. 리그 평균(2026): 커터 헛스윙률 {us('커터', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('커터', 2026).gb_out_pct}%, 투심 헛스윙률 {us('투심', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('투심', 2026).gb_out_pct}%.</p>
+
+커터는 KT 소형준이 가장 덜 맞았다. 던진 공의 {sohyung.usage_pct}%가 커터였고 커터로 끝난 {sohyung.pa}타석의 피OPS가 {f3(sohyung.ops)}다. 리그 커터 피OPS보다 {Math.round(1000 * (pf('커터', 2026).ops - sohyung.ops))}포인트 낮다. KIA 네일은 커터 헛스윙률이 {nail.whiff_pct}%로 리그 커터 평균 {us('커터', 2026).whiff_pct}%보다 높다. 커터를 헛스윙 잡는 공으로 쓴 쪽이다.
+
+투심은 SSG 아빌라의 공이 가장 빠르다. 투심 평균 구속이 {avila.velo}km/h로 리그 포심 평균 {us('포심', 2026).velo}km/h보다 빠르고 투심 피OPS는 {f3(avila.ops)}다. KT 고영표의 투심은 {koh.velo}km/h로 리그 투심 평균보다 {(us('투심', 2026).velo - koh.velo).toFixed(1)}km/h 느리다. 대신 투심으로 잡은 인플레이 아웃의 {koh.gb_out_pct}%가 땅볼이었다. 빠르기보다 가라앉는 움직임으로 땅볼을 만드는, 싱커에 가까운 투심이다.
+
+두산 최민석은 두 구종을 다 잘 썼다. 커터 피OPS {f3(choiCt.ops)}({choiCt.pa}타석), 투심 피OPS {f3(choiTs.ops)}({choiTs.pa}타석)로 둘 다 리그 평균보다 낮았다.
+
+커터는 포심과 슬라이더 사이에서 헛스윙을 노리고, 투심은 포심 구속 그대로 방향을 바꿔 땅볼을 노린다. 같은 변형직구라는 이름으로 묶여도 타자를 잡는 방식은 정반대다.
