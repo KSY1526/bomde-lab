@@ -1,0 +1,76 @@
+---
+title: "무사 1, 2루를 공 여덟 개로 지운 네일"
+description: "준플레이오프 1차전, KIA가 LG를 5-1로 이겼다."
+date: 2026-10-17
+category: game
+tags: ["포스트시즌", "준플레이오프", "KIA", "LG", "WPA"]
+related: ["2026-10-14-ps-wc-1", "2026-mvp-race"]
+dataUntil: "2026 준플레이오프 1차전 (10/17)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-10-17-ps-sp-1.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+KIA가 준플레이오프 1차전에서 LG를 5-1로 이겼다. 2회 홈런을 하나씩 주고받은 뒤 4회 김도영의 솔로 홈런으로 앞섰고, 6회초 LG가 만든 무사 1, 2루를 네일이 삼진과 병살타로 끝냈다. 8회 김도영이 두 번째 홈런을 치며 점수 차가 4점으로 벌어졌다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KIA 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KIA가 유리한 쪽이다."
+/>
+
+2회부터 승리확률이 크게 움직였다. 2회초 송찬의의 홈런으로 KIA 승리확률이 44.6%까지 내려갔다가 2회말 카스트로의 홈런으로 55.4%가 됐다. 4회말 김도영의 홈런으로 65.2%까지 올라선 뒤 5회까지 60%대를 지켰다. 6회초에 다시 흔들렸다. 박해민의 2루타와 고의4구로 51.5%까지 내려갔지만 삼진과 병살타가 이어지며 72.8%로 돌아왔고, 그 뒤로는 70% 아래로 내려가지 않았다. 8회말 김도영의 투런 홈런으로 98.0%가 됐다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="6회초, 박해민의 선두타자 2루타">
+LG가 2-1로 끌려가던 6회초, 박해민이 선두타자로 나와 네일의 2구째 커터를 받아쳐 우중간 2루타를 만들었다. 무사 2루가 되면서 LG 승리확률은 44.2%까지 올라왔다. 박해민은 이 경기 안타 세 개를 쳤다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="2회초, 송찬의의 선제 솔로 홈런">
+2사 주자 없는 상황에서 송찬의가 네일의 3구째 스위퍼를 받아쳐 좌측 담장을 넘겼다. 이 경기 첫 점수였고, LG 승리확률은 55.4%로 올라갔다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="2회말, 카스트로가 바로 따라잡았다">
+바로 다음 이닝 KIA 선두타자 카스트로가 톨허스트의 2구째 커터를 우측 담장 밖으로 보냈다. 앞선 홈런과 거의 같은 폭으로 승리확률이 되돌아왔다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="4회말, 김도영이 초구 포심을 넘겼다">
+1-1이던 4회말 1사 주자 없는 상황, 김도영이 톨허스트의 초구 149km 포심을 받아쳐 좌측 담장을 넘겼다. KIA는 이 홈런으로 앞선 뒤 경기가 끝날 때까지 한 번도 리드를 내주지 않았다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="6회초, 네일이 무사 1, 2루를 병살타로 끝냈다">
+박해민의 2루타 뒤 KIA는 오스틴을 고의4구로 내보냈다. 무사 1, 2루에서 네일은 문정빈에게 스위퍼만 네 개 던져 삼진을 잡았고, 이어 문보경을 상대로 4구째 스위퍼를 던져 2루수 병살타를 끌어냈다. 이 경기에서 승리확률이 가장 크게 움직인 장면이다. 네일은 7회초도 세 타자로 막고 내려갔다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+KIA 승리확률은 선발 네일이 가장 많이 올렸다. 7회까지 26타석을 상대하며 1점만 내주고 +31.3%p를 보탰다. 김도영은 홈런 두 개와 희생플라이 하나로 +16.2%p를 올렸다. LG에서는 안타 세 개를 친 박해민(+10.9%p)이 가장 많이 올렸고, 6회 무사 1, 2루에서 물러난 문정빈과 문보경이 각각 20.3%p, 18.6%p를 깎았다. 문정빈은 8회초 2사 1, 2루에서도 중견수 플라이로 물러났다.
+
+KIA는 5전 3선승제 준플레이오프에서 먼저 1승을 거뒀다. 2차전은 10월 18일 광주에서 열린다.
