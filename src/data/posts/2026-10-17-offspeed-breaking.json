@@ -1,0 +1,563 @@
+{
+ "season": 2026,
+ "last_date": "2026-10-12",
+ "own_min_n": 200,
+ "player_min_n": 300,
+ "league": [
+  {
+   "pitch": "포심",
+   "n": 88334,
+   "velo": 146.4,
+   "whiff_pct": 15.1,
+   "swing_pct": 44.6,
+   "ball_pct": 35.8,
+   "usage_pct": 39.9,
+   "rv100": -0.23,
+   "pa": 22896,
+   "ops": 0.835,
+   "k_pct": 15.3
+  },
+  {
+   "pitch": "슬라이더",
+   "n": 36861,
+   "velo": 133.4,
+   "whiff_pct": 29.9,
+   "swing_pct": 44.5,
+   "ball_pct": 37.0,
+   "usage_pct": 16.6,
+   "rv100": 0.15,
+   "pa": 9079,
+   "ops": 0.715,
+   "k_pct": 23.6
+  },
+  {
+   "pitch": "포크",
+   "n": 18600,
+   "velo": 133.4,
+   "whiff_pct": 30.9,
+   "swing_pct": 48.7,
+   "ball_pct": 39.3,
+   "usage_pct": 8.4,
+   "rv100": 0.09,
+   "pa": 5060,
+   "ops": 0.634,
+   "k_pct": 27.0
+  },
+  {
+   "pitch": "체인지업",
+   "n": 18558,
+   "velo": 129.8,
+   "whiff_pct": 30.7,
+   "swing_pct": 47.7,
+   "ball_pct": 39.6,
+   "usage_pct": 8.4,
+   "rv100": 0.08,
+   "pa": 4812,
+   "ops": 0.656,
+   "k_pct": 22.5
+  },
+  {
+   "pitch": "커브",
+   "n": 16559,
+   "velo": 121.5,
+   "whiff_pct": 26.6,
+   "swing_pct": 37.0,
+   "ball_pct": 42.4,
+   "usage_pct": 7.5,
+   "rv100": -0.24,
+   "pa": 3706,
+   "ops": 0.659,
+   "k_pct": 27.2
+  },
+  {
+   "pitch": "스위퍼",
+   "n": 9965,
+   "velo": 129.1,
+   "whiff_pct": 31.4,
+   "swing_pct": 45.0,
+   "ball_pct": 36.6,
+   "usage_pct": 4.5,
+   "rv100": 0.57,
+   "pa": 2596,
+   "ops": 0.6,
+   "k_pct": 32.3
+  }
+ ],
+ "brk": {
+  "whiff_pct": 29.9,
+  "rv100": 0.1,
+  "pa": 25253,
+  "ops": 0.667,
+  "k_pct": 25.5
+ },
+ "own": [
+  {
+   "pitch": "스위퍼",
+   "pitchers": 17,
+   "velo_gap": 17.7,
+   "arm_diff": -53.1,
+   "drop_cm": 30.7,
+   "move_gap": 63.8
+  },
+  {
+   "pitch": "슬라이더",
+   "pitchers": 64,
+   "velo_gap": 12.9,
+   "arm_diff": -27.0,
+   "drop_cm": 32.7,
+   "move_gap": 43.0
+  },
+  {
+   "pitch": "체인지업",
+   "pitchers": 29,
+   "velo_gap": 14.8,
+   "arm_diff": 7.5,
+   "drop_cm": 18.6,
+   "move_gap": 21.4
+  },
+  {
+   "pitch": "커브",
+   "pitchers": 20,
+   "velo_gap": 24.2,
+   "arm_diff": -43.9,
+   "drop_cm": 66.7,
+   "move_gap": 81.5
+  },
+  {
+   "pitch": "포크",
+   "pitchers": 28,
+   "velo_gap": 12.9,
+   "arm_diff": 1.9,
+   "drop_cm": 27.8,
+   "move_gap": 28.3
+  }
+ ],
+ "team_fork": [
+  {
+   "team": "NC",
+   "fork_pct": 13.4,
+   "fork_pitchers": 22
+  },
+  {
+   "team": "롯데",
+   "fork_pct": 12.3,
+   "fork_pitchers": 21
+  },
+  {
+   "team": "키움",
+   "fork_pct": 9.9,
+   "fork_pitchers": 19
+  },
+  {
+   "team": "LG",
+   "fork_pct": 9.6,
+   "fork_pitchers": 24
+  },
+  {
+   "team": "한화",
+   "fork_pct": 8.2,
+   "fork_pitchers": 20
+  },
+  {
+   "team": "KIA",
+   "fork_pct": 7.0,
+   "fork_pitchers": 13
+  },
+  {
+   "team": "SSG",
+   "fork_pct": 7.0,
+   "fork_pitchers": 18
+  },
+  {
+   "team": "KT",
+   "fork_pct": 5.6,
+   "fork_pitchers": 14
+  },
+  {
+   "team": "두산",
+   "fork_pct": 5.4,
+   "fork_pitchers": 19
+  },
+  {
+   "team": "삼성",
+   "fork_pct": 5.4,
+   "fork_pitchers": 12
+  }
+ ],
+ "fork100": [
+  {
+   "team": "NC",
+   "pitchers": 11
+  },
+  {
+   "team": "SSG",
+   "pitchers": 8
+  },
+  {
+   "team": "KIA",
+   "pitchers": 7
+  },
+  {
+   "team": "롯데",
+   "pitchers": 6
+  },
+  {
+   "team": "LG",
+   "pitchers": 6
+  },
+  {
+   "team": "한화",
+   "pitchers": 5
+  },
+  {
+   "team": "키움",
+   "pitchers": 4
+  },
+  {
+   "team": "삼성",
+   "pitchers": 4
+  },
+  {
+   "team": "두산",
+   "pitchers": 4
+  },
+  {
+   "team": "KT",
+   "pitchers": 4
+  }
+ ],
+ "cand": [
+  {
+   "pitcher_id": "54640",
+   "pname": "네일",
+   "team": "KIA",
+   "pitch": "스위퍼",
+   "n": 878,
+   "rv_sum": 16.99,
+   "rv_per100": 1.94,
+   "rk": 1,
+   "usage_pct": 30.8,
+   "velo": 132.5,
+   "whiff_pct": 29.4,
+   "pa": 276,
+   "ops": 0.538,
+   "k_pct": 35.1,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "56531",
+   "pname": "로드리게스",
+   "team": "롯데",
+   "pitch": "스위퍼",
+   "n": 585,
+   "rv_sum": 10.77,
+   "rv_per100": 1.84,
+   "rk": 2,
+   "usage_pct": 21.0,
+   "velo": 133.7,
+   "whiff_pct": 44.5,
+   "pa": 155,
+   "ops": 0.431,
+   "k_pct": 43.2,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "66291",
+   "pname": "이영하",
+   "team": "두산",
+   "pitch": "슬라이더",
+   "n": 541,
+   "rv_sum": 15.4,
+   "rv_per100": 2.85,
+   "rk": 1,
+   "usage_pct": 48.1,
+   "velo": 135.7,
+   "whiff_pct": 51.1,
+   "pa": 164,
+   "ops": 0.449,
+   "k_pct": 47.6,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "55903",
+   "pname": "라일리",
+   "team": "NC",
+   "pitch": "슬라이더",
+   "n": 519,
+   "rv_sum": 12.43,
+   "rv_per100": 2.4,
+   "rk": 2,
+   "usage_pct": 24.7,
+   "velo": 137.0,
+   "whiff_pct": 36.3,
+   "pa": 105,
+   "ops": 0.577,
+   "k_pct": 18.1,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "61101",
+   "pname": "임찬규",
+   "team": "LG",
+   "pitch": "체인지업",
+   "n": 852,
+   "rv_sum": 14.36,
+   "rv_per100": 1.69,
+   "rk": 1,
+   "usage_pct": 31.7,
+   "velo": 124.8,
+   "whiff_pct": 24.0,
+   "pa": 222,
+   "ops": 0.551,
+   "k_pct": 19.8,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "76715",
+   "pname": "류현진",
+   "team": "한화",
+   "pitch": "체인지업",
+   "n": 508,
+   "rv_sum": 12.82,
+   "rv_per100": 2.52,
+   "rk": 2,
+   "usage_pct": 24.5,
+   "velo": 128.0,
+   "whiff_pct": 31.9,
+   "pa": 159,
+   "ops": 0.552,
+   "k_pct": 22.6,
+   "throws": "L"
+  },
+  {
+   "pitcher_id": "55903",
+   "pname": "라일리",
+   "team": "NC",
+   "pitch": "커브",
+   "n": 360,
+   "rv_sum": 11.3,
+   "rv_per100": 3.14,
+   "rk": 1,
+   "usage_pct": 17.1,
+   "velo": 131.5,
+   "whiff_pct": 36.9,
+   "pa": 147,
+   "ops": 0.327,
+   "k_pct": 53.1,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "68341",
+   "pname": "안우진",
+   "team": "키움",
+   "pitch": "커브",
+   "n": 359,
+   "rv_sum": 9.08,
+   "rv_per100": 2.53,
+   "rk": 2,
+   "usage_pct": 19.1,
+   "velo": 127.7,
+   "whiff_pct": 32.9,
+   "pa": 111,
+   "ops": 0.292,
+   "k_pct": 55.0,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "69045",
+   "pname": "알칸타라",
+   "team": "키움",
+   "pitch": "포크",
+   "n": 848,
+   "rv_sum": 17.37,
+   "rv_per100": 2.05,
+   "rk": 1,
+   "usage_pct": 37.1,
+   "velo": 134.9,
+   "whiff_pct": 33.9,
+   "pa": 264,
+   "ops": 0.51,
+   "k_pct": 32.6,
+   "throws": "R"
+  },
+  {
+   "pitcher_id": "67539",
+   "pname": "나균안",
+   "team": "롯데",
+   "pitch": "포크",
+   "n": 786,
+   "rv_sum": 12.23,
+   "rv_per100": 1.56,
+   "rk": 2,
+   "usage_pct": 31.3,
+   "velo": 131.8,
+   "whiff_pct": 29.3,
+   "pa": 245,
+   "ops": 0.566,
+   "k_pct": 31.0,
+   "throws": "R"
+  }
+ ],
+ "mix": [
+  {
+   "pitch": "포심",
+   "n": 88332,
+   "opp_share": 53.9,
+   "two_k_share": 26.8,
+   "called_pct": 19.2,
+   "whiff_pct": 15.1,
+   "pa": 22896,
+   "k_pct": 15.3,
+   "gb_out_pct": 34.6,
+   "ops": 0.835,
+   "same_ops": 0.812,
+   "opp_ops": 0.854,
+   "same_pa": 10594,
+   "opp_pa": 12302
+  },
+  {
+   "pitch": "브레이킹볼",
+   "n": 63381,
+   "opp_share": 39.1,
+   "two_k_share": 31.2,
+   "called_pct": 18.7,
+   "whiff_pct": 29.4,
+   "pa": 15381,
+   "k_pct": 25.9,
+   "gb_out_pct": 43.3,
+   "ops": 0.682,
+   "same_ops": 0.667,
+   "opp_ops": 0.706,
+   "same_pa": 9624,
+   "opp_pa": 5757
+  },
+  {
+   "pitch": "오프스피드",
+   "n": 37157,
+   "opp_share": 75.5,
+   "two_k_share": 35.9,
+   "called_pct": 12.1,
+   "whiff_pct": 30.8,
+   "pa": 9871,
+   "k_pct": 24.8,
+   "gb_out_pct": 49.7,
+   "ops": 0.644,
+   "same_ops": 0.631,
+   "opp_ops": 0.649,
+   "same_pa": 2520,
+   "opp_pa": 7351
+  },
+  {
+   "pitch": "포심",
+   "n": 88332,
+   "opp_share": 53.9,
+   "two_k_share": 26.8,
+   "called_pct": 19.2,
+   "whiff_pct": 15.1,
+   "pa": 22896,
+   "k_pct": 15.3,
+   "gb_out_pct": 34.6,
+   "ops": 0.835,
+   "same_ops": 0.812,
+   "opp_ops": 0.854,
+   "same_pa": 10594,
+   "opp_pa": 12302
+  },
+  {
+   "pitch": "슬라이더",
+   "n": 36861,
+   "opp_share": 34.5,
+   "two_k_share": 29.5,
+   "called_pct": 18.1,
+   "whiff_pct": 29.9,
+   "pa": 9079,
+   "k_pct": 23.6,
+   "gb_out_pct": 42.8,
+   "ops": 0.715,
+   "same_ops": 0.688,
+   "opp_ops": 0.769,
+   "same_pa": 6033,
+   "opp_pa": 3046
+  },
+  {
+   "pitch": "포크",
+   "n": 18600,
+   "opp_share": 73.4,
+   "two_k_share": 39.0,
+   "called_pct": 11.7,
+   "whiff_pct": 30.9,
+   "pa": 5060,
+   "k_pct": 27.0,
+   "gb_out_pct": 50.6,
+   "ops": 0.634,
+   "same_ops": 0.627,
+   "opp_ops": 0.637,
+   "same_pa": 1390,
+   "opp_pa": 3670
+  },
+  {
+   "pitch": "체인지업",
+   "n": 18557,
+   "opp_share": 77.6,
+   "two_k_share": 32.8,
+   "called_pct": 12.4,
+   "whiff_pct": 30.7,
+   "pa": 4811,
+   "k_pct": 22.5,
+   "gb_out_pct": 48.8,
+   "ops": 0.656,
+   "same_ops": 0.637,
+   "opp_ops": 0.661,
+   "same_pa": 1130,
+   "opp_pa": 3681
+  },
+  {
+   "pitch": "커브",
+   "n": 16559,
+   "opp_share": 50.3,
+   "two_k_share": 30.5,
+   "called_pct": 20.4,
+   "whiff_pct": 26.6,
+   "pa": 3706,
+   "k_pct": 27.2,
+   "gb_out_pct": 48.1,
+   "ops": 0.659,
+   "same_ops": 0.707,
+   "opp_ops": 0.606,
+   "same_pa": 1960,
+   "opp_pa": 1746
+  },
+  {
+   "pitch": "스위퍼",
+   "n": 9961,
+   "opp_share": 37.7,
+   "two_k_share": 38.8,
+   "called_pct": 18.2,
+   "whiff_pct": 31.4,
+   "pa": 2596,
+   "k_pct": 32.3,
+   "gb_out_pct": 37.6,
+   "ops": 0.6,
+   "same_ops": 0.544,
+   "opp_ops": 0.696,
+   "same_pa": 1631,
+   "opp_pa": 965
+  },
+  {
+   "pitch": "변화구",
+   "n": 100538,
+   "opp_share": 52.6,
+   "two_k_share": 33.0,
+   "called_pct": 16.3,
+   "whiff_pct": 29.9,
+   "pa": 25252,
+   "k_pct": 25.5,
+   "gb_out_pct": 45.9,
+   "ops": 0.667,
+   "same_ops": 0.66,
+   "opp_ops": 0.674,
+   "same_pa": 12144,
+   "opp_pa": 13108
+  }
+ ]
+}

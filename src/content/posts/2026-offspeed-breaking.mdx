@@ -1,0 +1,141 @@
+---
+title: "야구 지표 해설 4: 변화구는 무엇으로 타자를 속일까"
+description: "2026년 KBO 투구의 45.4%가 슬라이더, 포크, 체인지업, 커브, 스위퍼였다."
+date: 2026-10-17
+category: metrics
+tags: ["오프스피드", "브레이킹볼", "변화구", "포크", "체인지업", "슬라이더", "커브", "스위퍼", "구종가치"]
+related: ["2026-variant-fastball", "2026-park-sewoong", "2026-velo-revolution"]
+dataUntil: "2026 정규시즌 10/12까지"
+---
+import d from '../../data/posts/2026-10-17-offspeed-breaking.json';
+import { url as siteUrl } from '../../lib/site';
+
+export const order = ['체인지업', '포크', '슬라이더', '스위퍼', '커브'];
+export const kind = { 체인지업: '오프스피드', 포크: '오프스피드', 슬라이더: '브레이킹볼', 스위퍼: '브레이킹볼', 커브: '브레이킹볼' };
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const sg = (v, k = 2) => `${v > 0 ? '+' : ''}${v.toFixed(k)}`;
+export const lg = (p) => d.league.find((r) => r.pitch === p);
+export const ow = (p) => d.own.find((r) => r.pitch === p);
+export const cd = (p) => d.cand.filter((r) => r.pitch === p);
+export const pn = (name, p) => d.cand.find((r) => r.pname === name && r.pitch === p);
+export const mx = (p) => d.mix.find((r) => r.pitch === p);
+export const mixRows = ['포심', '오프스피드', '체인지업', '포크', '브레이킹볼', '슬라이더', '스위퍼', '커브'];
+export const isGroup = (p) => p === '오프스피드' || p === '브레이킹볼';
+export const rowName = (p) => <td class={isGroup(p) ? 'cur' : ''} style={isGroup(p) || p === '포심' ? undefined : 'padding-left:1.4em'}>{isGroup(p) ? `${p} 합계` : p}</td>;
+export const all5 = mx('변화구');
+export const tf = (t) => d.team_fork.find((r) => r.team === t);
+export const brkUse = order.reduce((s, p) => s + lg(p).usage_pct, 0);
+// 기준값과 비교해 칠한 칸(차이가 한 단계의 1/3 미만이면 칠하지 않음). good = 1이면 클수록 투수 우세(구종가치·헛스윙률·삼진 비율), -1이면 작을수록 투수 우세(피OPS)
+export const heat = (gap, step) => (Math.abs(gap) < step / 3 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const hTd = (v, base, step, good, text, extra = '') => {
+  const h = heat(good > 0 ? base - v : v - base, step);
+  return <td class={[extra, h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{text}</td>;
+};
+// 본인 포심과 차이 표: 좋고 나쁨이 아니라 크기만 보여 주므로 회색. 그 열 안에서 클수록 진하게
+export const lvTd = (v, all, text) => {
+  const lo = Math.min(...all), hi = Math.max(...all);
+  const pct = [4, 12, 22, 34][Math.min(3, Math.floor(((v - lo) / (hi - lo || 1)) * 4))];
+  return <td class="lvl" style={`--heat:${pct}%`}>{text}</td>;
+};
+// 팔 쪽(+) = 같은 손 타자 몸쪽, 글러브 쪽(−) = 같은 손 타자 바깥쪽
+export const side = (a) => `${a >= 0 ? '몸쪽' : '바깥쪽'} ${Math.abs(a).toFixed(1)}`;
+export const cu = ow('체인지업');
+export const fk = ow('포크');
+export const sl = ow('슬라이더');
+export const sw = ow('스위퍼');
+export const cb = ow('커브');
+
+올해 KBO 투구 열 개 중 네 개는 포심이었다(전체 투구의 {lg('포심').usage_pct}%). 나머지 대부분은 슬라이더, 포크, 체인지업, 커브, 스위퍼다. 이 다섯 구종을 합치면 전체 투구의 {brkUse.toFixed(1)}%다. 같은 이름이어도 투수마다 그립과 궤적이 다르다. 그래서 중계 화면에 뜨는 구종 이름만으로는 어떤 공인지 감이 잘 오지 않는다.
+
+이름은 많아도 변화구가 타자를 속이는 방법은 크게 두 가지다. 직구보다 느리게 와서 타이밍을 뺏거나, 직구와 다르게 움직여서 배트 중심을 피한다. 앞쪽을 오프스피드, 뒤쪽을 브레이킹볼이라고 부른다.
+
+## 오프스피드는 느림으로, 브레이킹볼은 움직임으로 속인다
+
+오프스피드는 직구와 같은 팔 스윙으로 던지는데 공만 느리게 온다. 타자는 직구 타이밍에 배트를 내다가 공이 늦게 들어와 헛스윙하거나 앞에서 걸린다. 체인지업이 대표 구종이다. MLB 공식 분류는 체인지업, 스플리터, 포크볼을 오프스피드로 묶는다.
+
+브레이킹볼은 회전으로 공을 휘거나 떨어뜨린다. 직구처럼 오던 공이 옆으로 빠지거나 아래로 가라앉아 배트가 공 위나 옆을 지나간다. 슬라이더, 스위퍼, 커브가 여기 들어간다.
+
+두 성격이 칼같이 갈리지는 않는다. 브레이킹볼도 직구보다 느리고 오프스피드도 조금은 움직인다. 변화구 대부분은 브레이킹볼 성격과 오프스피드 성격이 섞여 있고 두 성격 중 어느 쪽이 주력 무기인지로 나눈다고 보면 된다.
+
+커터와 투심 같은 변형직구는 이 두 갈래에 들지 않는다. 직구를 조금 비튼 공이라 MLB도 포심과 함께 패스트볼로 분류한다. 변형직구는 <a href={siteUrl('posts/2026-variant-fastball')}>이 시리즈 3편</a>에서 따로 다뤘다. 다만 커터는 슬라이더와 경계가 흐리다. 느리고 많이 휘는 커터는 작은 슬라이더처럼 보이기도 한다.
+
+## 투수 본인 직구와 비교하면
+
+같은 체인지업이라도 직구가 150km/h인 투수와 140km/h인 투수에게는 의미가 다르다. 그래서 올해 그 구종을 {d.own_min_n}구 이상 던진 투수의 공을 같은 투수의 포심과 비교했다.
+
+<table>
+  <thead><tr><th>2026</th><th>갈래</th><th>구속 차</th><th>좌우로 더 휜 정도</th><th>더 떨어진 정도</th></tr></thead>
+  <tbody>
+    {order.map((p) => {
+      const r = ow(p);
+      return <tr><td class="cur">{p}</td><td>{kind[p]}</td>{lvTd(r.velo_gap, order.map((x) => ow(x).velo_gap), r.velo_gap.toFixed(1))}{lvTd(Math.abs(r.arm_diff), order.map((x) => Math.abs(ow(x).arm_diff)), side(r.arm_diff))}{lvTd(r.drop_cm, order.map((x) => ow(x).drop_cm), r.drop_cm.toFixed(1))}</tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">구속 차는 km/h, 움직임은 cm. 모두 같은 투수의 포심과 비교한 값을 투구 수로 가중 평균했다(그 구종 {d.own_min_n}구 이상, 포심 100구 이상 던진 투수. 체인지업 {cu.pitchers}명, 포크 {fk.pitchers}명, 슬라이더 {sl.pitchers}명, 스위퍼 {sw.pitchers}명, 커브 {cb.pitchers}명). 몸쪽·바깥쪽은 같은 손 타자 기준이다(우투수라면 우타자, 좌투수라면 좌타자). 더 떨어진 정도는 회전 때문에 떠오르는 힘을 포심보다 얼마나 덜 받았는지로, 클수록 포심보다 아래로 떨어진다. 회색이 진할수록 그 열에서 값이 크다.</p>
+
+체인지업은 본인 포심보다 {cu.velo_gap}km/h 느리고 {cu.drop_cm}cm 더 떨어진다. 좌우로는 같은 손 타자 몸쪽으로 {cu.arm_diff}cm 더 휜다. 움직임 차이가 다섯 구종 중 가장 작다. 구속 차로 승부하는 오프스피드 그대로다.
+
+슬라이더와 스위퍼는 같은 손 타자 바깥쪽으로 휜다. 슬라이더는 본인 포심보다 {sl.velo_gap}km/h 느려 구속 차가 체인지업보다 작은데 바깥쪽으로 {Math.abs(sl.arm_diff).toFixed(1)}cm 휘고 {sl.drop_cm}cm 더 떨어진다. 스위퍼는 이름처럼 옆으로 쓸고 지나가는 공이다. 바깥쪽으로 {Math.abs(sw.arm_diff)}cm, 슬라이더의 두 배 가까이 휜다.
+
+커브는 두 성격을 다 가졌다. 본인 포심보다 {cb.velo_gap}km/h 느려 구속 차가 가장 크고 {cb.drop_cm}cm 더 떨어져 움직임도 가장 크다. 분류는 브레이킹볼이지만 느린 공으로 타이밍을 뺏는 오프스피드 역할도 한다.
+
+## 포크는 오프스피드로 분류되지만 낙차도 크다
+
+MLB 공식 분류에서 스플리터와 포크볼은 체인지업과 같은 오프스피드다. KBO 투구 데이터는 스플리터와 포크볼을 나누지 않고 모두 포크로 기록한다.
+
+그러나 숫자로 보면 포크의 무기는 구속 차보다 낙차다. 포크는 본인 포심보다 {fk.velo_gap}km/h 느려 체인지업({cu.velo_gap}km/h)보다 구속 차가 작다. 대신 {fk.drop_cm}cm 더 떨어져 체인지업({cu.drop_cm}cm)보다 {(fk.drop_cm - cu.drop_cm).toFixed(1)}cm 더 가라앉는다. 좌우로는 {fk.arm_diff}cm만 움직여 직구와 거의 같은 길로 온다. 슬라이더도 본인 포심보다 {sl.drop_cm}cm 더 떨어지지만 바깥쪽으로 {Math.abs(sl.arm_diff).toFixed(1)}cm 함께 휜다. 포크는 옆으로 거의 휘지 않고 아래로만 떨어진다. 공을 검지와 중지 사이에 깊이 끼워 회전을 줄인다. 그래서 직구처럼 떠오르는 힘을 받지 못하고 타자 앞에서 아래로 떨어진다.
+
+롯데 팬에게 포크는 익숙한 공이다. 올해 롯데 투구의 {tf('롯데').fork_pct}%가 포크였다. NC {tf('NC').fork_pct}% 다음으로 높고 리그 평균 {lg('포크').usage_pct}%보다 높다. 나균안은 던진 공의 {pn('나균안', '포크').usage_pct}%가 포크였다.
+
+포크도 직구보다 느린 만큼 오프스피드 성격이 있다. 다만 필자는 포크가 체인지업처럼 구속 차로 속이는 공이라기보다 떨어지는 움직임으로 헛스윙을 끌어내는, 브레이킹볼에 가까운 목적으로 던지는 공이라고 생각한다.
+
+## 오프스피드는 반대 손 타자에게, 브레이킹볼은 같은 손 타자에게
+
+두 갈래는 쓰임새도 다르다. 올해 오프스피드는 {mx('오프스피드').opp_share}%를 반대 손 타자에게 던졌다. 우투수라면 좌타자, 좌투수라면 우타자다. 브레이킹볼은 반대 손 타자에게 던진 비율이 {mx('브레이킹볼').opp_share}%로, 나머지 {(100 - mx('브레이킹볼').opp_share).toFixed(1)}%를 같은 손 타자에게 던졌다. 포심은 {mx('포심').opp_share}%로 반반에 가깝다.
+
+{[['오프스피드', '체인지업', '포크'], ['브레이킹볼', '슬라이더', '스위퍼', '커브']].map((grp) => (
+  <table>
+    <thead><tr><th class="cur">{grp[0]}</th><th>같은 손 타자에게<br />던진 비율</th><th>반대 손 타자에게<br />던진 비율</th><th>같은 손 타자<br />피OPS</th><th>반대 손 타자<br />피OPS</th></tr></thead>
+    <tbody>
+      {grp.map((p, i) => {
+        const r = mx(p);
+        return <tr class={i === 0 ? 'total' : undefined}><td>{i === 0 ? '합계' : p}</td><td>{(100 - r.opp_share).toFixed(1)}%</td><td>{r.opp_share.toFixed(1)}%</td>{hTd(r.same_ops, all5.same_ops, 0.03, -1, f3(r.same_ops))}{hTd(r.opp_ops, all5.opp_ops, 0.03, -1, f3(r.opp_ops))}</tr>;
+      })}
+    </tbody>
+  </table>
+))}
+
+<p class="table-note">던진 비율은 그 구종 전체 투구 중 비율, 피OPS는 그 구종으로 끝난 타석 기준. 같은 손 = 우투수 대 우타자, 좌투수 대 좌타자. 파란 칸은 변화구 다섯 구종 합계(같은 손 타자 {f3(all5.same_ops)}, 반대 손 타자 {f3(all5.opp_ops)})보다 피OPS가 낮은 칸, 붉은 칸은 높은 칸이고 차이가 클수록 진하다. 포심은 같은 손 타자에게 {(100 - mx('포심').opp_share).toFixed(1)}%를 던졌고 피OPS는 같은 손 타자 상대 {f3(mx('포심').same_ops)}, 반대 손 타자 상대 {f3(mx('포심').opp_ops)}다.</p>
+
+공이 휘는 방향을 보면 이 차이를 알 수 있다. 슬라이더와 스위퍼는 같은 손 타자 바깥쪽으로 휜다. 체인지업은 같은 손 타자 몸쪽으로 휘니 반대 손 타자에게는 바깥쪽으로 달아나는 공이 된다. 실제로 슬라이더 피OPS는 같은 손 타자 상대 {f3(mx('슬라이더').same_ops)}, 반대 손 타자 상대 {f3(mx('슬라이더').opp_ops)}로 차이가 컸고 스위퍼는 같은 손 타자 상대 {f3(mx('스위퍼').same_ops)}, 반대 손 타자 상대 {f3(mx('스위퍼').opp_ops)}으로 더 컸다. 오프스피드는 같은 손 타자 상대 피OPS {f3(mx('오프스피드').same_ops)}, 반대 손 타자 상대 {f3(mx('오프스피드').opp_ops)}로 차이가 작다.
+
+커브는 예외다. 반대 손 타자에게 던진 비율이 {mx('커브').opp_share}%로 반반이고 피OPS는 오히려 반대 손 타자 상대 {f3(mx('커브').opp_ops)}이 같은 손 타자 상대 {f3(mx('커브').same_ops)}보다 낮다. 앞에서 본 커브의 오프스피드 성격과 같은 방향의 숫자다.
+
+## 2026년 구종별 플러스 피치
+
+플러스 피치는 리그 평균보다 뛰어난 구종을 말한다. 이 글에서는 구종가치로 골랐다. 구종가치는 공 하나가 볼카운트와 결과를 투수 쪽으로 얼마나 기울였는지 점수로 매긴 값이다. 스트라이크를 잡거나 아웃을 만들면 +, 볼을 던지거나 안타를 맞으면 −가 붙고 이 점수를 구종별로 더한다.
+
+아래는 올해 그 구종을 {d.player_min_n}구 이상 던진 투수 중 구종가치 합계가 가장 높은 두 명씩이다.
+
+<table>
+  <thead><tr><th>구종</th><th>투수</th><th>구사율</th><th>구종가치 합계</th><th>헛스윙률</th><th>피OPS</th></tr></thead>
+  <tbody>
+    {order.flatMap((p) => cd(p).map((r, i) => (
+      <tr>{i === 0 && <td rowspan={cd(p).length}>{p}</td>}<td class="cur" style="text-align:left">{r.pname} <small>({r.team})</small></td><td>{r.usage_pct.toFixed(1)}%</td><td>{sg(r.rv_sum, 1)}</td>{hTd(r.whiff_pct, lg(p).whiff_pct, 3, 1, `${r.whiff_pct.toFixed(1)}%`)}{hTd(r.ops, lg(p).ops, 0.05, -1, f3(r.ops))}</tr>
+    )))}
+  </tbody>
+</table>
+
+<p class="table-note">피OPS는 그 구종으로 끝난 타석 기준. 파란 칸은 그 구종 리그 평균보다 투수에게 좋은 쪽(헛스윙률은 높고 피OPS는 낮음), 붉은 칸은 반대다. 리그 평균 헛스윙률과 피OPS는 {order.map((p) => `${p} ${lg(p).whiff_pct}%, ${f3(lg(p).ops)}`).join(' / ')}. 구사율 = 그 투수가 던진 공 중 그 구종 비율.</p>
+
+체인지업은 LG 임찬규의 구종가치 합계가 {sg(pn('임찬규', '체인지업').rv_sum, 1)}로 가장 높았다. 한화 류현진은 체인지업 헛스윙률이 {pn('류현진', '체인지업').whiff_pct}%로 임찬규 {pn('임찬규', '체인지업').whiff_pct.toFixed(1)}%보다 높다.
+
+포크는 키움 알칸타라가 {sg(pn('알칸타라', '포크').rv_sum, 1)}로 이 표에서 가장 높다. 롯데 나균안이 {sg(pn('나균안', '포크').rv_sum, 1)}로 뒤를 잇는다.
+
+슬라이더는 두산 이영하가 {sg(pn('이영하', '슬라이더').rv_sum, 1)}다. 던진 공의 {pn('이영하', '슬라이더').usage_pct}%가 슬라이더였고 슬라이더 헛스윙률이 {pn('이영하', '슬라이더').whiff_pct}%로 스윙 두 번 중 한 번은 헛스윙이었다. 스위퍼는 KIA 네일({sg(pn('네일', '스위퍼').rv_sum, 1)})과 롯데 로드리게스({sg(pn('로드리게스', '스위퍼').rv_sum, 1)})다. 로드리게스의 스위퍼 헛스윙률은 {pn('로드리게스', '스위퍼').whiff_pct}%로 리그 스위퍼 평균 {lg('스위퍼').whiff_pct}%보다 높다.
+
+커브는 NC 라일리와 키움 안우진이다. 커브로 끝난 타석의 삼진 비율이 라일리 {pn('라일리', '커브').k_pct}%, 안우진 {pn('안우진', '커브').k_pct.toFixed(1)}%로 둘 다 절반을 넘는다. 라일리는 슬라이더도 구종가치 합계 2위다.
+
+구종 이름은 투수마다 경계가 흐리다. 같은 포크라도 누구는 빠르게 떨어뜨리고 누구는 느리게 떨어뜨린다. 공을 같은 이름끼리 묶어 보는 것이 야구 이해에 효과적일 수는 있으나 같은 구종이라도 이 투수는 오프스피드 목적으로 던지는지, 브레이킹볼 목적으로 던지는지 살펴보면 야구를 보는 재미가 한층 늘어난다는 것이 필자의 생각이다.
