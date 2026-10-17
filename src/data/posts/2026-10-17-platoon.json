@@ -1,0 +1,2147 @@
+{
+ "season": 2026,
+ "last_date": "2026-10-12",
+ "side_min_pa": 120,
+ "b_side_min_pa": 100,
+ "p_max_wrc": 100,
+ "small_pa": 50,
+ "b_min_wrc": 100,
+ "league4": [
+  {
+   "p": "R",
+   "b": "R",
+   "side": "same",
+   "pa": 20715,
+   "avg": 0.254,
+   "obp": 0.33,
+   "slg": 0.394,
+   "ops": 0.724,
+   "k_pct": 21.3,
+   "bb_pct": 8.4,
+   "wrc": 92.6
+  },
+  {
+   "p": "R",
+   "b": "L",
+   "side": "opp",
+   "pa": 22128,
+   "avg": 0.276,
+   "obp": 0.352,
+   "slg": 0.406,
+   "ops": 0.759,
+   "k_pct": 18.0,
+   "bb_pct": 9.8,
+   "wrc": 102.0
+  },
+  {
+   "p": "L",
+   "b": "R",
+   "side": "opp",
+   "pa": 7607,
+   "avg": 0.276,
+   "obp": 0.356,
+   "slg": 0.444,
+   "ops": 0.8,
+   "k_pct": 19.4,
+   "bb_pct": 9.9,
+   "wrc": 112.2
+  },
+  {
+   "p": "L",
+   "b": "L",
+   "side": "same",
+   "pa": 6202,
+   "avg": 0.277,
+   "obp": 0.357,
+   "slg": 0.383,
+   "ops": 0.74,
+   "k_pct": 19.0,
+   "bb_pct": 9.4,
+   "wrc": 99.7
+  }
+ ],
+ "league2": [
+  {
+   "side": "opp",
+   "pa": 29735,
+   "avg": 0.276,
+   "obp": 0.353,
+   "slg": 0.416,
+   "ops": 0.769,
+   "k_pct": 18.4,
+   "bb_pct": 9.8,
+   "wrc": 104.6
+  },
+  {
+   "side": "same",
+   "pa": 26917,
+   "avg": 0.259,
+   "obp": 0.336,
+   "slg": 0.392,
+   "ops": 0.728,
+   "k_pct": 20.8,
+   "bb_pct": 8.6,
+   "wrc": 94.3
+  }
+ ],
+ "yearly": [
+  {
+   "season": 2017,
+   "side": "opp",
+   "pa": 26208,
+   "wrc": 103.9
+  },
+  {
+   "season": 2017,
+   "side": "same",
+   "pa": 30036,
+   "wrc": 98.2
+  },
+  {
+   "season": 2018,
+   "side": "opp",
+   "pa": 26314,
+   "wrc": 106.8
+  },
+  {
+   "season": 2018,
+   "side": "same",
+   "pa": 29947,
+   "wrc": 94.9
+  },
+  {
+   "season": 2019,
+   "side": "opp",
+   "pa": 26024,
+   "wrc": 105.6
+  },
+  {
+   "season": 2019,
+   "side": "same",
+   "pa": 28883,
+   "wrc": 95.9
+  },
+  {
+   "season": 2020,
+   "side": "opp",
+   "pa": 27335,
+   "wrc": 104.9
+  },
+  {
+   "season": 2020,
+   "side": "same",
+   "pa": 29173,
+   "wrc": 95.6
+  },
+  {
+   "season": 2021,
+   "side": "opp",
+   "pa": 27619,
+   "wrc": 103.9
+  },
+  {
+   "season": 2021,
+   "side": "same",
+   "pa": 28281,
+   "wrc": 96.2
+  },
+  {
+   "season": 2022,
+   "side": "opp",
+   "pa": 28328,
+   "wrc": 106.9
+  },
+  {
+   "season": 2022,
+   "side": "same",
+   "pa": 27492,
+   "wrc": 92.6
+  },
+  {
+   "season": 2023,
+   "side": "opp",
+   "pa": 28710,
+   "wrc": 103.0
+  },
+  {
+   "season": 2023,
+   "side": "same",
+   "pa": 27426,
+   "wrc": 96.2
+  },
+  {
+   "season": 2024,
+   "side": "opp",
+   "pa": 29866,
+   "wrc": 105.0
+  },
+  {
+   "season": 2024,
+   "side": "same",
+   "pa": 27295,
+   "wrc": 95.3
+  },
+  {
+   "season": 2025,
+   "side": "opp",
+   "pa": 28846,
+   "wrc": 104.1
+  },
+  {
+   "season": 2025,
+   "side": "same",
+   "pa": 27027,
+   "wrc": 94.9
+  },
+  {
+   "season": 2026,
+   "side": "opp",
+   "pa": 29735,
+   "wrc": 104.6
+  },
+  {
+   "season": 2026,
+   "side": "same",
+   "pa": 26917,
+   "wrc": 94.3
+  }
+ ],
+ "mix": [
+  {
+   "side": "opp",
+   "pitch": "포심",
+   "n": 47572,
+   "pct": 40.5
+  },
+  {
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 14391,
+   "pct": 12.3
+  },
+  {
+   "side": "opp",
+   "pitch": "포크",
+   "n": 13645,
+   "pct": 11.6
+  },
+  {
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 12714,
+   "pct": 10.8
+  },
+  {
+   "side": "opp",
+   "pitch": "투심",
+   "n": 8852,
+   "pct": 7.5
+  },
+  {
+   "side": "opp",
+   "pitch": "커브",
+   "n": 8332,
+   "pct": 7.1
+  },
+  {
+   "side": "opp",
+   "pitch": "커터",
+   "n": 8086,
+   "pct": 6.9
+  },
+  {
+   "side": "opp",
+   "pitch": "스위퍼",
+   "n": 3758,
+   "pct": 3.2
+  },
+  {
+   "side": "opp",
+   "pitch": "너클볼",
+   "n": 4,
+   "pct": 0.0
+  },
+  {
+   "side": "same",
+   "pitch": "포심",
+   "n": 40760,
+   "pct": 39.1
+  },
+  {
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 24147,
+   "pct": 23.2
+  },
+  {
+   "side": "same",
+   "pitch": "투심",
+   "n": 9773,
+   "pct": 9.4
+  },
+  {
+   "side": "same",
+   "pitch": "커브",
+   "n": 8227,
+   "pct": 7.9
+  },
+  {
+   "side": "same",
+   "pitch": "스위퍼",
+   "n": 6203,
+   "pct": 6.0
+  },
+  {
+   "side": "same",
+   "pitch": "커터",
+   "n": 5930,
+   "pct": 5.7
+  },
+  {
+   "side": "same",
+   "pitch": "포크",
+   "n": 4955,
+   "pct": 4.8
+  },
+  {
+   "side": "same",
+   "pitch": "체인지업",
+   "n": 4166,
+   "pct": 4.0
+  },
+  {
+   "side": "same",
+   "pitch": "너클볼",
+   "n": 2,
+   "pct": 0.0
+  }
+ ],
+ "mix_grp": [
+  {
+   "side": "opp",
+   "grp": "슬라이더 계열",
+   "pct": 14.0
+  },
+  {
+   "side": "opp",
+   "grp": "체인지업·포크",
+   "pct": 23.9
+  },
+  {
+   "side": "opp",
+   "grp": "포심",
+   "pct": 40.5
+  },
+  {
+   "side": "opp",
+   "grp": null,
+   "pct": 21.5
+  },
+  {
+   "side": "same",
+   "grp": "슬라이더 계열",
+   "pct": 29.1
+  },
+  {
+   "side": "same",
+   "grp": "체인지업·포크",
+   "pct": 8.8
+  },
+  {
+   "side": "same",
+   "grp": "포심",
+   "pct": 39.1
+  },
+  {
+   "side": "same",
+   "grp": null,
+   "pct": 23.0
+  }
+ ],
+ "mix_hand": [
+  {
+   "p": "R",
+   "b": "R",
+   "grp": "슬라이더 계열",
+   "pct": 28.2
+  },
+  {
+   "p": "R",
+   "b": "R",
+   "grp": "체인지업·포크",
+   "pct": 10.4
+  },
+  {
+   "p": "R",
+   "b": "R",
+   "grp": "포심",
+   "pct": 37.7
+  },
+  {
+   "p": "R",
+   "b": "L",
+   "grp": "슬라이더 계열",
+   "pct": 13.5
+  },
+  {
+   "p": "R",
+   "b": "L",
+   "grp": "체인지업·포크",
+   "pct": 24.5
+  },
+  {
+   "p": "R",
+   "b": "L",
+   "grp": "포심",
+   "pct": 40.0
+  },
+  {
+   "p": "L",
+   "b": "R",
+   "grp": "슬라이더 계열",
+   "pct": 15.7
+  },
+  {
+   "p": "L",
+   "b": "R",
+   "grp": "체인지업·포크",
+   "pct": 22.1
+  },
+  {
+   "p": "L",
+   "b": "R",
+   "grp": "포심",
+   "pct": 42.2
+  },
+  {
+   "p": "L",
+   "b": "L",
+   "grp": "슬라이더 계열",
+   "pct": 32.2
+  },
+  {
+   "p": "L",
+   "b": "L",
+   "grp": "체인지업·포크",
+   "pct": 3.3
+  },
+  {
+   "p": "L",
+   "b": "L",
+   "grp": "포심",
+   "pct": 44.0
+  }
+ ],
+ "grp_res": [
+  {
+   "grp": "슬라이더 계열",
+   "side": "opp",
+   "pa": 4011,
+   "avg": 0.259,
+   "obp": 0.342,
+   "slg": 0.409,
+   "ops": 0.751,
+   "k_pct": 25.3,
+   "bb_pct": 9.1,
+   "wrc": 99.7,
+   "whiff_pct": 26.2
+  },
+  {
+   "grp": "슬라이더 계열",
+   "side": "same",
+   "pa": 7664,
+   "avg": 0.239,
+   "obp": 0.3,
+   "slg": 0.357,
+   "ops": 0.657,
+   "k_pct": 25.6,
+   "bb_pct": 7.0,
+   "wrc": 73.2,
+   "whiff_pct": 32.3
+  },
+  {
+   "grp": "체인지업·포크",
+   "side": "opp",
+   "pa": 7351,
+   "avg": 0.249,
+   "obp": 0.292,
+   "slg": 0.357,
+   "ops": 0.649,
+   "k_pct": 21.8,
+   "bb_pct": 5.4,
+   "wrc": 69.3,
+   "whiff_pct": 29.8
+  },
+  {
+   "grp": "체인지업·포크",
+   "side": "same",
+   "pa": 2520,
+   "avg": 0.223,
+   "obp": 0.281,
+   "slg": 0.35,
+   "ops": 0.631,
+   "k_pct": 33.5,
+   "bb_pct": 5.9,
+   "wrc": 65.7,
+   "whiff_pct": 33.6
+  },
+  {
+   "grp": "포심",
+   "side": "opp",
+   "pa": 12302,
+   "avg": 0.294,
+   "obp": 0.396,
+   "slg": 0.458,
+   "ops": 0.854,
+   "k_pct": 14.4,
+   "bb_pct": 13.6,
+   "wrc": 128.7,
+   "whiff_pct": 14.7
+  },
+  {
+   "grp": "포심",
+   "side": "same",
+   "pa": 10594,
+   "avg": 0.277,
+   "obp": 0.382,
+   "slg": 0.431,
+   "ops": 0.812,
+   "k_pct": 16.3,
+   "bb_pct": 12.2,
+   "wrc": 118.6,
+   "whiff_pct": 15.6
+  }
+ ],
+ "p_count": 74,
+ "p_good_count": 44,
+ "p_big": [
+  {
+   "pitcher_id": "55239",
+   "pname": "잭로그",
+   "team": "두산",
+   "throws": "L",
+   "tbf": 713,
+   "wrc": 94.3,
+   "same_pa": 248,
+   "opp_pa": 465,
+   "same_wrc": 48.7,
+   "opp_wrc": 118.8,
+   "gap": 70.1,
+   "sl_pct": 26.6,
+   "ch_pct": 9.2
+  },
+  {
+   "pitcher_id": "52043",
+   "pname": "벤자민",
+   "team": "두산",
+   "throws": "L",
+   "tbf": 545,
+   "wrc": 65.4,
+   "same_pa": 202,
+   "opp_pa": 343,
+   "same_wrc": 23.8,
+   "opp_wrc": 90.1,
+   "gap": 66.3,
+   "sl_pct": 16.2,
+   "ch_pct": 8.7
+  },
+  {
+   "pitcher_id": "56840",
+   "pname": "김민준",
+   "team": "SSG",
+   "throws": "R",
+   "tbf": 377,
+   "wrc": 65.4,
+   "same_pa": 173,
+   "opp_pa": 204,
+   "same_wrc": 32.6,
+   "opp_wrc": 93.3,
+   "gap": 60.7,
+   "sl_pct": 12.5,
+   "ch_pct": 24.4
+  },
+  {
+   "pitcher_id": "56801",
+   "pname": "아빌라",
+   "team": "SSG",
+   "throws": "R",
+   "tbf": 364,
+   "wrc": 37.8,
+   "same_pa": 162,
+   "opp_pa": 202,
+   "same_wrc": 8.2,
+   "opp_wrc": 61.5,
+   "gap": 53.3,
+   "sl_pct": 1.6,
+   "ch_pct": 16.0
+  },
+  {
+   "pitcher_id": "56523",
+   "pname": "비슬리",
+   "team": "롯데",
+   "throws": "R",
+   "tbf": 660,
+   "wrc": 99.5,
+   "same_pa": 264,
+   "opp_pa": 396,
+   "same_wrc": 72.8,
+   "opp_wrc": 117.0,
+   "gap": 44.2,
+   "sl_pct": 32.1,
+   "ch_pct": 12.2
+  }
+ ],
+ "p_rev": [
+  {
+   "pitcher_id": "62528",
+   "pname": "김원중",
+   "team": "롯데",
+   "throws": "R",
+   "tbf": 262,
+   "wrc": 89.9,
+   "same_pa": 133,
+   "opp_pa": 129,
+   "same_wrc": 119.4,
+   "opp_wrc": 59.0,
+   "gap": -60.4,
+   "sl_pct": 11.8,
+   "ch_pct": 43.4
+  },
+  {
+   "pitcher_id": "55903",
+   "pname": "라일리",
+   "team": "NC",
+   "throws": "R",
+   "tbf": 529,
+   "wrc": 62.9,
+   "same_pa": 213,
+   "opp_pa": 316,
+   "same_wrc": 98.0,
+   "opp_wrc": 39.2,
+   "gap": -58.8,
+   "sl_pct": 24.7,
+   "ch_pct": 22.3
+  },
+  {
+   "pitcher_id": "54843",
+   "pname": "시라카와",
+   "team": "KIA",
+   "throws": "R",
+   "tbf": 362,
+   "wrc": 81.6,
+   "same_pa": 172,
+   "opp_pa": 190,
+   "same_wrc": 109.5,
+   "opp_wrc": 56.6,
+   "gap": -52.9,
+   "sl_pct": 19.3,
+   "ch_pct": 26.8
+  },
+  {
+   "pitcher_id": "55130",
+   "pname": "톨허스트",
+   "team": "LG",
+   "throws": "R",
+   "tbf": 699,
+   "wrc": 83.8,
+   "same_pa": 322,
+   "opp_pa": 377,
+   "same_wrc": 111.1,
+   "opp_wrc": 60.4,
+   "gap": -50.7,
+   "sl_pct": 0.0,
+   "ch_pct": 15.6
+  },
+  {
+   "pitcher_id": "65933",
+   "pname": "구창모",
+   "team": "NC",
+   "throws": "L",
+   "tbf": 700,
+   "wrc": 94.7,
+   "same_pa": 345,
+   "opp_pa": 355,
+   "same_wrc": 105.8,
+   "opp_wrc": 83.9,
+   "gap": -21.9,
+   "sl_pct": 30.3,
+   "ch_pct": 17.3
+  }
+ ],
+ "p_group": [
+  {
+   "k": "sl",
+   "n": 42,
+   "gap": 9.8,
+   "same_wrc": 88.2,
+   "opp_wrc": 98.0
+  },
+  {
+   "k": "ch",
+   "n": 32,
+   "gap": -2.9,
+   "same_wrc": 91.8,
+   "opp_wrc": 88.9
+  }
+ ],
+ "p_pitch": [
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 327,
+   "whiff_pct": 23.8,
+   "usage_pct": 24.1,
+   "pa": 72,
+   "ops": 1.057,
+   "wrc": 177.0
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 309,
+   "whiff_pct": 11.4,
+   "usage_pct": 22.8,
+   "pa": 79,
+   "ops": 0.756,
+   "wrc": 101.8
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 272,
+   "whiff_pct": 41.7,
+   "usage_pct": 20.1,
+   "pa": 63,
+   "ops": 0.4,
+   "wrc": -0.5
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 185,
+   "whiff_pct": 46.4,
+   "usage_pct": 13.6,
+   "pa": 37,
+   "ops": 0.751,
+   "wrc": 100.3
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "투심",
+   "n": 161,
+   "whiff_pct": 13.5,
+   "usage_pct": 11.9,
+   "pa": 53,
+   "ops": 0.625,
+   "wrc": 68.1
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "opp",
+   "pitch": "스위퍼",
+   "n": 102,
+   "whiff_pct": 39.0,
+   "usage_pct": 7.5,
+   "pa": 39,
+   "ops": 0.641,
+   "wrc": 72.8
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "same",
+   "pitch": "스위퍼",
+   "n": 241,
+   "whiff_pct": 42.7,
+   "usage_pct": 31.4,
+   "pa": 69,
+   "ops": 0.392,
+   "wrc": 1.7
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "same",
+   "pitch": "커터",
+   "n": 229,
+   "whiff_pct": 32.0,
+   "usage_pct": 29.9,
+   "pa": 54,
+   "ops": 0.247,
+   "wrc": -40.9
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "same",
+   "pitch": "투심",
+   "n": 140,
+   "whiff_pct": 16.2,
+   "usage_pct": 18.3,
+   "pa": 47,
+   "ops": 0.548,
+   "wrc": 48.9
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "same",
+   "pitch": "포심",
+   "n": 136,
+   "whiff_pct": 9.8,
+   "usage_pct": 17.7,
+   "pa": 30,
+   "ops": 0.969,
+   "wrc": 158.8
+  },
+  {
+   "pitcher_id": "52043",
+   "side": "same",
+   "pitch": "커브",
+   "n": 21,
+   "whiff_pct": 66.7,
+   "usage_pct": 2.7,
+   "pa": 2,
+   "ops": 0.0,
+   "wrc": -113.6
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 379,
+   "whiff_pct": 11.8,
+   "usage_pct": 47.3,
+   "pa": 89,
+   "ops": 0.593,
+   "wrc": 66.2
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 178,
+   "whiff_pct": 20.5,
+   "usage_pct": 22.2,
+   "pa": 46,
+   "ops": 0.335,
+   "wrc": -12.0
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 112,
+   "whiff_pct": 12.2,
+   "usage_pct": 14.0,
+   "pa": 29,
+   "ops": 0.898,
+   "wrc": 133.0
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 63,
+   "whiff_pct": 29.6,
+   "usage_pct": 7.9,
+   "pa": 14,
+   "ops": 0.357,
+   "wrc": -18.3
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 41,
+   "whiff_pct": 13.3,
+   "usage_pct": 5.1,
+   "pa": 8,
+   "ops": 1.25,
+   "wrc": 214.9
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 28,
+   "whiff_pct": 25.0,
+   "usage_pct": 3.5,
+   "pa": 4,
+   "ops": 0.5,
+   "wrc": 26.2
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "포심",
+   "n": 309,
+   "whiff_pct": 5.3,
+   "usage_pct": 43.5,
+   "pa": 85,
+   "ops": 0.813,
+   "wrc": 121.6
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 180,
+   "whiff_pct": 38.0,
+   "usage_pct": 25.4,
+   "pa": 44,
+   "ops": 0.728,
+   "wrc": 88.7
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "포크",
+   "n": 143,
+   "whiff_pct": 41.3,
+   "usage_pct": 20.1,
+   "pa": 24,
+   "ops": 1.067,
+   "wrc": 173.9
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "커브",
+   "n": 36,
+   "whiff_pct": 25.0,
+   "usage_pct": 5.1,
+   "pa": 7,
+   "ops": 0.762,
+   "wrc": 116.8
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "체인지업",
+   "n": 21,
+   "whiff_pct": 25.0,
+   "usage_pct": 3.0,
+   "pa": 5,
+   "ops": 0.0,
+   "wrc": -115.0
+  },
+  {
+   "pitcher_id": "54843",
+   "side": "same",
+   "pitch": "커터",
+   "n": 21,
+   "whiff_pct": 20.0,
+   "usage_pct": 3.0,
+   "pa": 7,
+   "ops": 0.452,
+   "wrc": 28.7
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 657,
+   "whiff_pct": 18.7,
+   "usage_pct": 43.9,
+   "pa": 139,
+   "ops": 0.679,
+   "wrc": 80.0
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 340,
+   "whiff_pct": 24.4,
+   "usage_pct": 22.7,
+   "pa": 116,
+   "ops": 0.468,
+   "wrc": 18.7
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 297,
+   "whiff_pct": 22.5,
+   "usage_pct": 19.9,
+   "pa": 73,
+   "ops": 0.821,
+   "wrc": 112.3
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 201,
+   "whiff_pct": 25.0,
+   "usage_pct": 13.4,
+   "pa": 49,
+   "ops": 0.495,
+   "wrc": 27.7
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "포심",
+   "n": 523,
+   "whiff_pct": 15.3,
+   "usage_pct": 44.2,
+   "pa": 141,
+   "ops": 0.859,
+   "wrc": 126.8
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "커터",
+   "n": 346,
+   "whiff_pct": 20.6,
+   "usage_pct": 29.2,
+   "pa": 92,
+   "ops": 0.818,
+   "wrc": 114.0
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "커브",
+   "n": 230,
+   "whiff_pct": 16.3,
+   "usage_pct": 19.4,
+   "pa": 66,
+   "ops": 0.699,
+   "wrc": 85.0
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "포크",
+   "n": 77,
+   "whiff_pct": 25.5,
+   "usage_pct": 6.5,
+   "pa": 23,
+   "ops": 0.696,
+   "wrc": 79.3
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "투심",
+   "n": 6,
+   "whiff_pct": 0.0,
+   "usage_pct": 0.5,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "55130",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 1,
+   "whiff_pct": null,
+   "usage_pct": 0.1,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 637,
+   "whiff_pct": 15.6,
+   "usage_pct": 37.5,
+   "pa": 182,
+   "ops": 0.829,
+   "wrc": 115.3
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "스위퍼",
+   "n": 404,
+   "whiff_pct": 25.5,
+   "usage_pct": 23.8,
+   "pa": 102,
+   "ops": 0.796,
+   "wrc": 111.8
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 300,
+   "whiff_pct": 11.7,
+   "usage_pct": 17.7,
+   "pa": 89,
+   "ops": 0.772,
+   "wrc": 97.8
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 235,
+   "whiff_pct": 22.9,
+   "usage_pct": 13.8,
+   "pa": 57,
+   "ops": 0.817,
+   "wrc": 111.0
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "투심",
+   "n": 119,
+   "whiff_pct": 9.8,
+   "usage_pct": 7.0,
+   "pa": 34,
+   "ops": 1.248,
+   "wrc": 231.6
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 4,
+   "whiff_pct": 100.0,
+   "usage_pct": 0.2,
+   "pa": 1,
+   "ops": 0.0,
+   "wrc": -120.5
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "same",
+   "pitch": "포심",
+   "n": 324,
+   "whiff_pct": 11.2,
+   "usage_pct": 35.6,
+   "pa": 108,
+   "ops": 0.623,
+   "wrc": 62.0
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "same",
+   "pitch": "스위퍼",
+   "n": 291,
+   "whiff_pct": 38.3,
+   "usage_pct": 32.0,
+   "pa": 63,
+   "ops": 0.388,
+   "wrc": -3.1
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "same",
+   "pitch": "커터",
+   "n": 174,
+   "whiff_pct": 18.2,
+   "usage_pct": 19.1,
+   "pa": 43,
+   "ops": 0.884,
+   "wrc": 131.6
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "same",
+   "pitch": "투심",
+   "n": 116,
+   "whiff_pct": 12.7,
+   "usage_pct": 12.7,
+   "pa": 34,
+   "ops": 0.362,
+   "wrc": -1.8
+  },
+  {
+   "pitcher_id": "55239",
+   "side": "same",
+   "pitch": "체인지업",
+   "n": 5,
+   "whiff_pct": 100.0,
+   "usage_pct": 0.5,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 457,
+   "whiff_pct": 17.4,
+   "usage_pct": 37.4,
+   "pa": 104,
+   "ops": 0.829,
+   "wrc": 116.9
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 453,
+   "whiff_pct": 36.7,
+   "usage_pct": 37.1,
+   "pa": 113,
+   "ops": 0.547,
+   "wrc": 38.3
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 176,
+   "whiff_pct": 40.6,
+   "usage_pct": 14.4,
+   "pa": 80,
+   "ops": 0.229,
+   "wrc": -43.8
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 136,
+   "whiff_pct": 35.7,
+   "usage_pct": 11.1,
+   "pa": 19,
+   "ops": 0.269,
+   "wrc": -30.9
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 383,
+   "whiff_pct": 36.5,
+   "usage_pct": 43.4,
+   "pa": 86,
+   "ops": 0.646,
+   "wrc": 69.0
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "same",
+   "pitch": "포심",
+   "n": 299,
+   "whiff_pct": 22.6,
+   "usage_pct": 33.9,
+   "pa": 55,
+   "ops": 1.227,
+   "wrc": 210.2
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "same",
+   "pitch": "커브",
+   "n": 184,
+   "whiff_pct": 33.0,
+   "usage_pct": 20.9,
+   "pa": 67,
+   "ops": 0.444,
+   "wrc": 11.8
+  },
+  {
+   "pitcher_id": "55903",
+   "side": "same",
+   "pitch": "포크",
+   "n": 16,
+   "whiff_pct": 45.5,
+   "usage_pct": 1.8,
+   "pa": 5,
+   "ops": 2.4,
+   "wrc": 518.7
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 493,
+   "whiff_pct": 12.7,
+   "usage_pct": 33.1,
+   "pa": 124,
+   "ops": 1.069,
+   "wrc": 186.1
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "스위퍼",
+   "n": 396,
+   "whiff_pct": 26.6,
+   "usage_pct": 26.6,
+   "pa": 105,
+   "ops": 0.629,
+   "wrc": 66.0
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 263,
+   "whiff_pct": 18.4,
+   "usage_pct": 17.7,
+   "pa": 68,
+   "ops": 0.765,
+   "wrc": 105.0
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 246,
+   "whiff_pct": 33.3,
+   "usage_pct": 16.5,
+   "pa": 76,
+   "ops": 0.803,
+   "wrc": 106.0
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "투심",
+   "n": 50,
+   "whiff_pct": 17.4,
+   "usage_pct": 3.4,
+   "pa": 16,
+   "ops": 0.375,
+   "wrc": -6.5
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 28,
+   "whiff_pct": 30.0,
+   "usage_pct": 1.9,
+   "pa": 4,
+   "ops": 0.0,
+   "wrc": -120.4
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 13,
+   "whiff_pct": 16.7,
+   "usage_pct": 0.9,
+   "pa": 3,
+   "ops": 2.333,
+   "wrc": 503.8
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "스위퍼",
+   "n": 332,
+   "whiff_pct": 35.0,
+   "usage_pct": 34.5,
+   "pa": 105,
+   "ops": 0.474,
+   "wrc": 23.5
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "포심",
+   "n": 307,
+   "whiff_pct": 14.7,
+   "usage_pct": 31.9,
+   "pa": 77,
+   "ops": 1.056,
+   "wrc": 180.2
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "커터",
+   "n": 213,
+   "whiff_pct": 19.8,
+   "usage_pct": 22.2,
+   "pa": 53,
+   "ops": 0.505,
+   "wrc": 36.3
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "포크",
+   "n": 40,
+   "whiff_pct": 38.1,
+   "usage_pct": 4.2,
+   "pa": 14,
+   "ops": 0.0,
+   "wrc": -115.1
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "투심",
+   "n": 37,
+   "whiff_pct": 20.0,
+   "usage_pct": 3.9,
+   "pa": 6,
+   "ops": 2.0,
+   "wrc": 449.7
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 31,
+   "whiff_pct": 63.6,
+   "usage_pct": 3.2,
+   "pa": 9,
+   "ops": 0.333,
+   "wrc": 36.4
+  },
+  {
+   "pitcher_id": "56523",
+   "side": "same",
+   "pitch": "체인지업",
+   "n": 1,
+   "whiff_pct": 0.0,
+   "usage_pct": 0.1,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "투심",
+   "n": 275,
+   "whiff_pct": 12.8,
+   "usage_pct": 35.1,
+   "pa": 64,
+   "ops": 0.764,
+   "wrc": 100.4
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 198,
+   "whiff_pct": 17.7,
+   "usage_pct": 25.3,
+   "pa": 48,
+   "ops": 0.643,
+   "wrc": 75.4
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "체인지업",
+   "n": 159,
+   "whiff_pct": 43.6,
+   "usage_pct": 20.3,
+   "pa": 46,
+   "ops": 0.315,
+   "wrc": -12.5
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 77,
+   "whiff_pct": 8.7,
+   "usage_pct": 9.8,
+   "pa": 17,
+   "ops": 0.863,
+   "wrc": 157.0
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 73,
+   "whiff_pct": 36.8,
+   "usage_pct": 9.3,
+   "pa": 27,
+   "ops": 0.389,
+   "wrc": 11.1
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "opp",
+   "pitch": "스위퍼",
+   "n": 1,
+   "whiff_pct": 100.0,
+   "usage_pct": 0.1,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "투심",
+   "n": 264,
+   "whiff_pct": 17.3,
+   "usage_pct": 45.8,
+   "pa": 77,
+   "ops": 0.442,
+   "wrc": 18.8
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "커터",
+   "n": 133,
+   "whiff_pct": 23.1,
+   "usage_pct": 23.1,
+   "pa": 25,
+   "ops": 0.581,
+   "wrc": 60.8
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "커브",
+   "n": 60,
+   "whiff_pct": 34.8,
+   "usage_pct": 10.4,
+   "pa": 15,
+   "ops": 0.205,
+   "wrc": -47.9
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "체인지업",
+   "n": 59,
+   "whiff_pct": 71.4,
+   "usage_pct": 10.2,
+   "pa": 29,
+   "ops": 0.212,
+   "wrc": -32.8
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "포심",
+   "n": 39,
+   "whiff_pct": 16.7,
+   "usage_pct": 6.8,
+   "pa": 10,
+   "ops": 0.444,
+   "wrc": 10.6
+  },
+  {
+   "pitcher_id": "56801",
+   "side": "same",
+   "pitch": "스위퍼",
+   "n": 21,
+   "whiff_pct": 57.1,
+   "usage_pct": 3.6,
+   "pa": 6,
+   "ops": 0.333,
+   "wrc": -11.3
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 430,
+   "whiff_pct": 13.0,
+   "usage_pct": 54.0,
+   "pa": 112,
+   "ops": 0.688,
+   "wrc": 86.9
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 224,
+   "whiff_pct": 29.1,
+   "usage_pct": 28.1,
+   "pa": 65,
+   "ops": 0.57,
+   "wrc": 53.5
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 78,
+   "whiff_pct": 29.0,
+   "usage_pct": 9.8,
+   "pa": 18,
+   "ops": 1.007,
+   "wrc": 168.5
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 64,
+   "whiff_pct": 31.3,
+   "usage_pct": 8.0,
+   "pa": 9,
+   "ops": 1.556,
+   "wrc": 308.8
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "same",
+   "pitch": "포심",
+   "n": 396,
+   "whiff_pct": 19.2,
+   "usage_pct": 54.8,
+   "pa": 112,
+   "ops": 0.568,
+   "wrc": 54.6
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "same",
+   "pitch": "포크",
+   "n": 147,
+   "whiff_pct": 41.3,
+   "usage_pct": 20.3,
+   "pa": 35,
+   "ops": 0.264,
+   "wrc": -36.2
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 112,
+   "whiff_pct": 28.3,
+   "usage_pct": 15.5,
+   "pa": 21,
+   "ops": 0.538,
+   "wrc": 38.4
+  },
+  {
+   "pitcher_id": "56840",
+   "side": "same",
+   "pitch": "커브",
+   "n": 68,
+   "whiff_pct": 22.2,
+   "usage_pct": 9.4,
+   "pa": 5,
+   "ops": 0.4,
+   "wrc": -1.0
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 232,
+   "whiff_pct": 32.5,
+   "usage_pct": 50.4,
+   "pa": 68,
+   "ops": 0.542,
+   "wrc": 38.1
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 188,
+   "whiff_pct": 9.9,
+   "usage_pct": 40.9,
+   "pa": 53,
+   "ops": 0.706,
+   "wrc": 84.7
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 32,
+   "whiff_pct": 31.3,
+   "usage_pct": 7.0,
+   "pa": 5,
+   "ops": 0.4,
+   "wrc": 0.7
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 5,
+   "whiff_pct": null,
+   "usage_pct": 1.1,
+   "pa": 2,
+   "ops": null,
+   "wrc": 362.3
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 2,
+   "whiff_pct": null,
+   "usage_pct": 0.4,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "opp",
+   "pitch": "투심",
+   "n": 1,
+   "whiff_pct": 0.0,
+   "usage_pct": 0.2,
+   "pa": 1,
+   "ops": 0.0,
+   "wrc": -120.5
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "same",
+   "pitch": "포심",
+   "n": 239,
+   "whiff_pct": 14.8,
+   "usage_pct": 44.2,
+   "pa": 53,
+   "ops": 0.981,
+   "wrc": 166.3
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "same",
+   "pitch": "포크",
+   "n": 202,
+   "whiff_pct": 39.4,
+   "usage_pct": 37.3,
+   "pa": 61,
+   "ops": 0.63,
+   "wrc": 69.2
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 86,
+   "whiff_pct": 28.2,
+   "usage_pct": 15.9,
+   "pa": 18,
+   "ops": 0.896,
+   "wrc": 129.7
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "same",
+   "pitch": "커브",
+   "n": 11,
+   "whiff_pct": 0.0,
+   "usage_pct": 2.0,
+   "pa": 1,
+   "ops": 2.0,
+   "wrc": 459.8
+  },
+  {
+   "pitcher_id": "62528",
+   "side": "same",
+   "pitch": "커터",
+   "n": 3,
+   "whiff_pct": 100.0,
+   "usage_pct": 0.6,
+   "pa": null,
+   "ops": null,
+   "wrc": null
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "opp",
+   "pitch": "포심",
+   "n": 601,
+   "whiff_pct": 17.2,
+   "usage_pct": 43.9,
+   "pa": 169,
+   "ops": 0.732,
+   "wrc": 92.8
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "opp",
+   "pitch": "포크",
+   "n": 400,
+   "whiff_pct": 30.9,
+   "usage_pct": 29.2,
+   "pa": 92,
+   "ops": 0.632,
+   "wrc": 58.2
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "opp",
+   "pitch": "슬라이더",
+   "n": 279,
+   "whiff_pct": 23.7,
+   "usage_pct": 20.4,
+   "pa": 80,
+   "ops": 0.642,
+   "wrc": 83.9
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "opp",
+   "pitch": "커브",
+   "n": 78,
+   "whiff_pct": 22.2,
+   "usage_pct": 5.7,
+   "pa": 12,
+   "ops": 1.117,
+   "wrc": 187.4
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "opp",
+   "pitch": "커터",
+   "n": 10,
+   "whiff_pct": 0.0,
+   "usage_pct": 0.7,
+   "pa": 2,
+   "ops": 0.0,
+   "wrc": -114.4
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "same",
+   "pitch": "포심",
+   "n": 627,
+   "whiff_pct": 11.5,
+   "usage_pct": 49.6,
+   "pa": 168,
+   "ops": 0.744,
+   "wrc": 98.2
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "same",
+   "pitch": "슬라이더",
+   "n": 518,
+   "whiff_pct": 24.9,
+   "usage_pct": 41.0,
+   "pa": 141,
+   "ops": 0.735,
+   "wrc": 94.9
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "same",
+   "pitch": "커브",
+   "n": 62,
+   "whiff_pct": 21.9,
+   "usage_pct": 4.9,
+   "pa": 15,
+   "ops": 1.067,
+   "wrc": 181.8
+  },
+  {
+   "pitcher_id": "65933",
+   "side": "same",
+   "pitch": "포크",
+   "n": 56,
+   "whiff_pct": 21.9,
+   "usage_pct": 4.4,
+   "pa": 21,
+   "ops": 1.131,
+   "wrc": 183.4
+  }
+ ],
+ "p_sixth": {
+  "pitcher_id": "55633",
+  "pname": "올러",
+  "team": "KIA",
+  "throws": "R",
+  "tbf": 717,
+  "wrc": 57.9,
+  "same_pa": 321,
+  "opp_pa": 396,
+  "same_wrc": 30.6,
+  "opp_wrc": 79.8,
+  "gap": 49.2,
+  "sl_pct": 30.0,
+  "ch_pct": 11.3
+ },
+ "b_count": 49,
+ "b_good_count": 32,
+ "b_big": [
+  {
+   "batter_id": "68110",
+   "bname": "송찬의",
+   "team": "LG",
+   "pa": 434,
+   "wrc": 130.0,
+   "l_pct": 0.0,
+   "same_pa": 323,
+   "opp_pa": 111,
+   "bats": "R",
+   "same_wrc": 109.6,
+   "opp_wrc": 189.3,
+   "gap": 79.7,
+   "sl_pa": 76,
+   "sl_wrc": 85.0,
+   "sl_whiff": 31.1,
+   "fb_pa": 114,
+   "fb_wrc": 126.8
+  },
+  {
+   "batter_id": "69737",
+   "bname": "노시환",
+   "team": "한화",
+   "pa": 571,
+   "wrc": 121.1,
+   "l_pct": 0.0,
+   "same_pa": 449,
+   "opp_pa": 122,
+   "bats": "R",
+   "same_wrc": 105.4,
+   "opp_wrc": 179.2,
+   "gap": 73.8,
+   "sl_pa": 135,
+   "sl_wrc": 74.3,
+   "sl_whiff": 29.8,
+   "fb_pa": 143,
+   "fb_wrc": 150.8
+  },
+  {
+   "batter_id": "52001",
+   "bname": "안현민",
+   "team": "KT",
+   "pa": 416,
+   "wrc": 151.4,
+   "l_pct": 0.0,
+   "same_pa": 289,
+   "opp_pa": 127,
+   "bats": "R",
+   "same_wrc": 129.0,
+   "opp_wrc": 202.2,
+   "gap": 73.2,
+   "sl_pa": 74,
+   "sl_wrc": 95.0,
+   "sl_whiff": 23.8,
+   "fb_pa": 107,
+   "fb_wrc": 158.0
+  },
+  {
+   "batter_id": "78603",
+   "bname": "김선빈",
+   "team": "KIA",
+   "pa": 537,
+   "wrc": 106.7,
+   "l_pct": 0.0,
+   "same_pa": 368,
+   "opp_pa": 169,
+   "bats": "R",
+   "same_wrc": 87.8,
+   "opp_wrc": 148.7,
+   "gap": 60.9,
+   "sl_pa": 63,
+   "sl_wrc": 95.2,
+   "sl_whiff": 11.5,
+   "fb_pa": 173,
+   "fb_wrc": 114.0
+  },
+  {
+   "batter_id": "55636",
+   "bname": "박재현",
+   "team": "KIA",
+   "pa": 556,
+   "wrc": 111.8,
+   "l_pct": 100.0,
+   "same_pa": 164,
+   "opp_pa": 392,
+   "bats": "L",
+   "same_wrc": 81.5,
+   "opp_wrc": 124.4,
+   "gap": 42.9,
+   "sl_pa": 59,
+   "sl_wrc": 85.9,
+   "sl_whiff": 28.6,
+   "fb_pa": 65,
+   "fb_wrc": 105.3
+  }
+ ],
+ "b_rev": [
+  {
+   "batter_id": "68646",
+   "bname": "한준수",
+   "team": "KIA",
+   "pa": 388,
+   "wrc": 125.7,
+   "l_pct": 100.0,
+   "same_pa": 108,
+   "opp_pa": 280,
+   "bats": "L",
+   "same_wrc": 189.9,
+   "opp_wrc": 101.1,
+   "gap": -88.8,
+   "sl_pa": 27,
+   "sl_wrc": 107.9,
+   "sl_whiff": 35.0,
+   "fb_pa": 56,
+   "fb_wrc": 233.3
+  },
+  {
+   "batter_id": "62907",
+   "bname": "박민우",
+   "team": "NC",
+   "pa": 559,
+   "wrc": 125.3,
+   "l_pct": 100.0,
+   "same_pa": 145,
+   "opp_pa": 414,
+   "bats": "L",
+   "same_wrc": 164.6,
+   "opp_wrc": 111.6,
+   "gap": -53.0,
+   "sl_pa": 36,
+   "sl_wrc": 151.1,
+   "sl_whiff": 26.8,
+   "fb_pa": 74,
+   "fb_wrc": 180.3
+  },
+  {
+   "batter_id": "62415",
+   "bname": "박해민",
+   "team": "LG",
+   "pa": 591,
+   "wrc": 105.6,
+   "l_pct": 100.0,
+   "same_pa": 155,
+   "opp_pa": 436,
+   "bats": "L",
+   "same_wrc": 140.4,
+   "opp_wrc": 93.4,
+   "gap": -47.0,
+   "sl_pa": 46,
+   "sl_wrc": 91.9,
+   "sl_whiff": 20.5,
+   "fb_pa": 69,
+   "fb_wrc": 187.3
+  },
+  {
+   "batter_id": "67893",
+   "bname": "박성한",
+   "team": "SSG",
+   "pa": 625,
+   "wrc": 131.6,
+   "l_pct": 100.0,
+   "same_pa": 146,
+   "opp_pa": 479,
+   "bats": "L",
+   "same_wrc": 160.1,
+   "opp_wrc": 122.9,
+   "gap": -37.2,
+   "sl_pa": 44,
+   "sl_wrc": 135.8,
+   "sl_whiff": 17.5,
+   "fb_pa": 61,
+   "fb_wrc": 214.0
+  },
+  {
+   "batter_id": "79240",
+   "bname": "허경민",
+   "team": "KT",
+   "pa": 395,
+   "wrc": 118.5,
+   "l_pct": 0.0,
+   "same_pa": 291,
+   "opp_pa": 104,
+   "bats": "R",
+   "same_wrc": 120.7,
+   "opp_wrc": 112.6,
+   "gap": -8.1,
+   "sl_pa": 54,
+   "sl_wrc": 142.0,
+   "sl_whiff": 23.1,
+   "fb_pa": 124,
+   "fb_wrc": 121.9
+  }
+ ],
+ "b_lotte": [
+  {
+   "batter_id": "51551",
+   "bname": "나승엽",
+   "team": "롯데",
+   "pa": 437,
+   "wrc": 101.2,
+   "l_pct": 100.0,
+   "same_pa": 107,
+   "opp_pa": 330,
+   "bats": "L",
+   "same_wrc": 103.8,
+   "opp_wrc": 100.3,
+   "gap": -3.5,
+   "sl_pa": 34,
+   "sl_wrc": 167.8,
+   "sl_whiff": 22.2,
+   "fb_pa": 45,
+   "fb_wrc": 68.0
+  },
+  {
+   "batter_id": "69517",
+   "bname": "고승민",
+   "team": "롯데",
+   "pa": 493,
+   "wrc": 103.1,
+   "l_pct": 100.0,
+   "same_pa": 118,
+   "opp_pa": 375,
+   "bats": "L",
+   "same_wrc": 106.3,
+   "opp_wrc": 102.0,
+   "gap": -4.3,
+   "sl_pa": 41,
+   "sl_wrc": 52.9,
+   "sl_whiff": 24.6,
+   "fb_pa": 52,
+   "fb_wrc": 170.9
+  }
+ ],
+ "b_tier": [
+  {
+   "q": 1,
+   "n": 17,
+   "lo": -49.9,
+   "hi": 77.5,
+   "gap": 25.3,
+   "same_wrc": 89.0,
+   "opp_wrc": 114.2
+  },
+  {
+   "q": 2,
+   "n": 16,
+   "lo": 77.9,
+   "hi": 109.0,
+   "gap": 16.2,
+   "same_wrc": 112.9,
+   "opp_wrc": 129.1
+  },
+  {
+   "q": 3,
+   "n": 16,
+   "lo": 111.1,
+   "hi": 173.5,
+   "gap": -2.1,
+   "same_wrc": 128.7,
+   "opp_wrc": 126.6
+  }
+ ],
+ "b_hand": [
+  {
+   "bats": "L",
+   "n": 30,
+   "gap": -0.2
+  },
+  {
+   "bats": "R",
+   "n": 19,
+   "gap": 34.9
+  }
+ ]
+}
