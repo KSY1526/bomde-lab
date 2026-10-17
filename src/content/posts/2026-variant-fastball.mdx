@@ -183,7 +183,7 @@ export const choiTs = cd('최민석', '투심');
 올해 그 구종을 {d.player_min_n}구 이상, 구사율 {d.player_min_usage}% 이상 던지고 그 구종으로 끝난 타석이 {d.player_min_pa}타석 이상인 투수 중에서 골랐다. 올해 리그 커터 피OPS는 {f3(pf('커터', 2026).ops)}, 투심은 {f3(pf('투심', 2026).ops)}다.
 
 <table>
-  <thead><tr><th>투수</th><th>구종</th><th>구사율</th><th>평균 구속</th><th>헛스윙률</th><th>피OPS (타석)</th><th>땅볼 아웃<br />비율</th></tr></thead>
+  <thead><tr><th>투수</th><th>구종</th><th>구사율</th><th>평균 구속</th><th>헛스윙률</th><th>피OPS (타석)</th><th>땅볼 아웃 비율</th></tr></thead>
   <tbody>
     {[sohyung, nail, avila, koh].map((r) => (
       <tr><td class="cur">{r.pname}<br /><small>{r.team}</small></td><td>{r.pitch}</td><td>{r.usage_pct.toFixed(1)}%</td>{hTd(r.velo, us(r.pitch, 2026).velo, 2, 1, r.velo.toFixed(1))}{hTd(r.whiff_pct, us(r.pitch, 2026).whiff_pct, 3, 1, `${r.whiff_pct.toFixed(1)}%`)}{hTd(r.ops, pf(r.pitch, 2026).ops, 0.03, -1, `${f3(r.ops)} (${r.pa})`)}{hTd(r.gb_out_pct, pf(r.pitch, 2026).gb_out_pct, 5, 1, `${r.gb_out_pct}%`)}</tr>
