@@ -29,6 +29,17 @@ export const opsTd = (v, base, y) => {
   const h = heat(v - base, 0.03);
   return <td class={[yc(y), h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{f3(v)}</td>;
 };
+// 기준값과 비교해 칠한 칸. good = 1이면 클수록 투수 우세(헛스윙률 등), -1이면 작을수록 투수 우세(피OPS 등)
+export const hTd = (v, base, step, good, text, extra = '') => {
+  const h = heat(good > 0 ? base - v : v - base, step);
+  return <td class={[extra, h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{text}</td>;
+};
+// 구사율 표: 좋고 나쁨이 아니라 크기만 보여 주므로 붉은·파란색 대신 회색. 그 열의 5시즌 중 클수록 진하게
+export const lvTd = (v, all, y, text, extra = '') => {
+  const lo = Math.min(...all), hi = Math.max(...all);
+  const pct = [4, 12, 22, 34][Math.min(3, Math.floor(((v - lo) / (hi - lo || 1)) * 4))];
+  return <td class={['lvl', yc(y), extra].filter(Boolean).join(' ')} style={`--heat:${pct}%`}>{text}</td>;
+};
 export const sohyung = cd('소형준', '커터');
 export const nail = cd('네일', '커터');
 export const avila = cd('아빌라', '투심');
@@ -101,12 +112,12 @@ export const choiTs = cd('최민석', '투심');
   <thead><tr><th rowspan="2">시즌</th><th colspan="4">구사율</th><th colspan="2">100구 이상 던진 투수</th></tr><tr><th>포심</th><th>투심</th><th>커터</th><th>변형직구 합계</th><th>투심</th><th>커터</th></tr></thead>
   <tbody>
     {years.map((y) => (
-      <tr><td class={yc(y)}>{y}</td>{trio.map((p) => <td class={yc(y)}>{us(p, y).usage_pct.toFixed(1)}%</td>)}<td class="cur">{vf(y).toFixed(1)}%</td><td class={yc(y)}>{us('투심', y).pitchers}명</td><td class={yc(y)}>{us('커터', y).pitchers}명</td></tr>
+      <tr><td class={yc(y)}>{y}</td>{trio.map((p) => lvTd(us(p, y).usage_pct, years.map((x) => us(p, x).usage_pct), y, `${us(p, y).usage_pct.toFixed(1)}%`))}{lvTd(vf(y), years.map(vf), y, `${vf(y).toFixed(1)}%`, 'cur')}{['투심', '커터'].map((p) => lvTd(us(p, y).pitchers, years.map((x) => us(p, x).pitchers), y, `${us(p, y).pitchers}명`))}</tr>
     ))}
   </tbody>
 </table>
 
-<p class="table-note">구사율 = 그해 전체 투구 중 그 구종 비율. 변형직구 합계 = 투심 + 커터.</p>
+<p class="table-note">구사율 = 그해 전체 투구 중 그 구종 비율. 변형직구 합계 = 투심 + 커터. 회색이 진할수록 그 열의 5시즌 중 값이 크다.</p>
 
 구속은 포심과의 차이로 보는 편이 낫다. 리그 전체 직구가 해마다 빨라지고 있어서 투심과 커터의 구속도 같이 오른다. 올해 투심은 포심보다 {(us('포심', 2026).velo - us('투심', 2026).velo).toFixed(1)}km/h, 커터는 {(us('포심', 2026).velo - us('커터', 2026).velo).toFixed(1)}km/h 느리다.
 
@@ -145,12 +156,14 @@ export const choiTs = cd('최민석', '투심');
   <tbody>
     {trio.map((p) => {
       const r = pf(p, 2026);
-      return <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td><td>{us(p, 2026).whiff_pct}%</td><td>{r.k_pct}%</td><td>{f3(r.avg)}</td><td>{f3(r.slg)}</td><td>{r.gb_out_pct}%</td></tr>;
+      const b = pf('포심', 2026);
+      const w = us(p, 2026).whiff_pct;
+      return <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td>{hTd(w, us('포심', 2026).whiff_pct, 3, 1, `${w}%`)}{hTd(r.k_pct, b.k_pct, 3, 1, `${r.k_pct}%`)}{hTd(r.avg, b.avg, 0.015, -1, f3(r.avg))}{hTd(r.slg, b.slg, 0.03, -1, f3(r.slg))}{hTd(r.gb_out_pct, b.gb_out_pct, 5, 1, `${r.gb_out_pct}%`)}</tr>;
     })}
   </tbody>
 </table>
 
-<p class="table-note">헛스윙률 = 헛스윙 / 스윙. 삼진 비율·피안타율·피장타율은 그 구종으로 끝난 타석 기준. 땅볼 아웃 비율 = 인플레이 타구로 잡은 아웃 중 땅볼(병살 포함) 비율.</p>
+<p class="table-note">헛스윙률 = 헛스윙 / 스윙. 삼진 비율·피안타율·피장타율은 그 구종으로 끝난 타석 기준. 땅볼 아웃 비율 = 인플레이 타구로 잡은 아웃 중 땅볼(병살 포함) 비율. 파란 칸은 포심보다 투수에게 좋은 쪽(헛스윙률·삼진 비율·땅볼 아웃 비율은 높고 피안타율·피장타율은 낮음), 붉은 칸은 반대이고 차이가 클수록 진하다.</p>
 
 커터는 슬라이더 계열이라 같은 손 타자에게 유리하다. 우투수의 커터는 우타자 바깥쪽으로 빠져나간다. 2022~2026년 커터 피OPS는 같은 손 타자 상대 {f3(ps('커터', '같은 손').ops)}, 반대 손 타자 상대 {f3(ps('커터', '반대 손').ops)}였다. 투심도 같은 손 타자에게 더 강했고 차이는 커터보다 컸다. 같은 손 타자 상대 투심 피OPS는 {f3(ps('투심', '같은 손').ops)}, 반대 손 타자 상대는 {f3(ps('투심', '반대 손').ops)}다. 같은 손 타자에게 몸쪽으로 파고드는 공은 반대 손 타자에게는 바깥에서 가운데 쪽으로 휘어 들어간다.
 
@@ -158,12 +171,12 @@ export const choiTs = cd('최민석', '투심');
   <thead><tr><th>2022~2026 합계</th><th>같은 손 타자 피OPS (타석)</th><th>반대 손 타자 피OPS (타석)</th></tr></thead>
   <tbody>
     {trio.map((p) => (
-      <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td>{['같은 손', '반대 손'].map((s) => <td>{f3(ps(p, s).ops)} ({ps(p, s).pa.toLocaleString()})</td>)}</tr>
+      <tr><td class={p === '포심' ? '' : 'cur'}>{p}</td>{['같은 손', '반대 손'].map((s) => hTd(ps(p, s).ops, ps('포심', s).ops, 0.03, -1, `${f3(ps(p, s).ops)} (${ps(p, s).pa.toLocaleString()})`))}</tr>
     ))}
   </tbody>
 </table>
 
-<p class="table-note">같은 손 = 우투수 대 우타자, 좌투수 대 좌타자.</p>
+<p class="table-note">같은 손 = 우투수 대 우타자, 좌투수 대 좌타자. 파란 칸은 같은 열의 포심보다 피OPS가 낮은 칸, 붉은 칸은 높은 칸이다.</p>
 
 ## 2026년 커터와 투심을 무기로 쓴 투수
 
@@ -173,12 +186,12 @@ export const choiTs = cd('최민석', '투심');
   <thead><tr><th>투수</th><th>구종</th><th>구사율</th><th>평균 구속</th><th>헛스윙률</th><th>피OPS (타석)</th><th>땅볼 아웃<br />비율</th></tr></thead>
   <tbody>
     {[sohyung, nail, avila, koh].map((r) => (
-      <tr><td class="cur">{r.pname}<br /><small>{r.team}</small></td><td>{r.pitch}</td><td>{r.usage_pct.toFixed(1)}%</td><td>{r.velo.toFixed(1)}</td><td>{r.whiff_pct.toFixed(1)}%</td><td>{f3(r.ops)} ({r.pa})</td><td>{r.gb_out_pct}%</td></tr>
+      <tr><td class="cur">{r.pname}<br /><small>{r.team}</small></td><td>{r.pitch}</td><td>{r.usage_pct.toFixed(1)}%</td>{hTd(r.velo, us(r.pitch, 2026).velo, 2, 1, r.velo.toFixed(1))}{hTd(r.whiff_pct, us(r.pitch, 2026).whiff_pct, 3, 1, `${r.whiff_pct.toFixed(1)}%`)}{hTd(r.ops, pf(r.pitch, 2026).ops, 0.03, -1, `${f3(r.ops)} (${r.pa})`)}{hTd(r.gb_out_pct, pf(r.pitch, 2026).gb_out_pct, 5, 1, `${r.gb_out_pct}%`)}</tr>
     ))}
   </tbody>
 </table>
 
-<p class="table-note">평균 구속 단위 km/h. 리그 평균(2026): 커터 헛스윙률 {us('커터', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('커터', 2026).gb_out_pct}%, 투심 헛스윙률 {us('투심', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('투심', 2026).gb_out_pct}%.</p>
+<p class="table-note">평균 구속 단위 km/h. 리그 평균(2026): 커터 헛스윙률 {us('커터', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('커터', 2026).gb_out_pct}%, 투심 헛스윙률 {us('투심', 2026).whiff_pct}%·땅볼 아웃 비율 {pf('투심', 2026).gb_out_pct}%. 파란 칸은 그 구종 리그 평균보다 투수에게 좋은 쪽(구속·헛스윙률·땅볼 아웃 비율은 높고 피OPS는 낮음), 붉은 칸은 반대다.</p>
 
 커터는 KT 소형준이 가장 덜 맞았다. 던진 공의 {sohyung.usage_pct}%가 커터였고 커터로 끝난 {sohyung.pa}타석의 피OPS가 {f3(sohyung.ops)}다. 리그 커터 피OPS보다 {Math.round(1000 * (pf('커터', 2026).ops - sohyung.ops))}포인트 낮다. KIA 네일은 커터 헛스윙률이 {nail.whiff_pct}%로 리그 커터 평균 {us('커터', 2026).whiff_pct}%보다 높다. 커터를 헛스윙 잡는 공으로 쓴 쪽이다.
 
