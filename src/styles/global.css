@@ -119,5 +119,9 @@ img, svg { max-width: 100%; }
 .prose td.down { background: color-mix(in srgb, var(--pos) var(--heat, 15%), transparent); }
 .prose td.small { background: var(--warn-bg); color: var(--warn-text); }
 .prose .table-note { margin-top: -0.6em; font-size: 13px; color: var(--muted); }
+.prose table.text td { white-space: normal; text-align: left; }
+.prose table.pitch { display: table; margin: 0.6em 0; }
+.prose table.pitch th { font-size: 15px; text-align: left; border-bottom: 2px solid var(--accent); }
+.prose table.pitch td:first-child { width: 6.5em; min-width: 6.5em; color: var(--muted); }
 .prose table.wide th { text-align: center; }
 .prose table.wide thead tr:first-child th { border-bottom: 0; color: var(--text); }
