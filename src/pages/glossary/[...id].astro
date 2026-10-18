@@ -1,0 +1,60 @@
+---
+// 지표 사전 항목 (2026-10-18): 한 줄 정의 → 어떻게 구하나·어떻게 읽나 → 이 지표를 다룬 글 → 같이 볼 지표
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import { publishedPosts } from '../../lib/posts';
+import { url } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('glossary');
+  return terms.map((t) => ({ params: { id: t.id }, props: { t, all: terms } }));
+}
+
+const { t, all } = Astro.props;
+const { Content } = await render(t);
+const { term, aka, summary, posts: postIds, see } = t.data;
+const byId = new Map((await publishedPosts()).map((p) => [p.id, p]));
+const posts = postIds.map((id) => byId.get(id)).filter((p) => p !== undefined);
+const seeTerms = see.map((id) => all.find((x) => x.id === id)).filter((x) => x !== undefined);
+const name = aka ? `${term}(${aka})` : term;
+---
+<Base title={`${name} 뜻과 계산법`} description={summary} breadcrumbs={[{ name: '홈', path: url() }, { name: '지표 사전', path: url('glossary') }, { name: term, path: url(`glossary/${t.id}`) }]}>
+  <article class="term-page">
+    <nav class="crumbs small" aria-label="현재 위치">
+      <a href={url()}>홈</a><span aria-hidden="true">›</span><a href={url('glossary')}>지표 사전</a>
+    </nav>
+    <h1>{term}{aka && <span class="aka">{aka}</span>}</h1>
+    <p class="lead">{summary}</p>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+
+  {posts.length > 0 && (
+    <section class="more" aria-labelledby="posts-h">
+      <h2 id="posts-h">이 지표를 다룬 글</h2>
+      <div class="list">{posts.map((p) => <PostCard post={p} />)}</div>
+    </section>
+  )}
+  {seeTerms.length > 0 && (
+    <section class="more" aria-labelledby="see-h">
+      <h2 id="see-h">같이 볼 지표</h2>
+      <p class="see">{seeTerms.map((x) => <a class="chip" href={url(`glossary/${x.id}`)}>{x.data.term}</a>)}</p>
+    </section>
+  )}
+</Base>
+
+<style>
+  .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; color: var(--muted); }
+  .crumbs a { color: var(--muted); }
+  .crumbs a:last-of-type { color: var(--accent); font-weight: 600; }
+  .small { font-size: 13.5px; }
+  h1 { margin: 12px 0 8px; font-size: clamp(26px, 4vw, 32px); letter-spacing: -.02em; }
+  .aka { font-size: .55em; font-weight: 600; color: var(--muted); margin-left: 10px; letter-spacing: 0; }
+  .lead { font-size: 17.5px; font-weight: 600; line-height: 1.7; margin: 0 0 24px; padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--chip-bg); border-radius: 0 8px 8px 0; }
+  .more { margin-top: 36px; }
+  .more h2 { font-size: 20px; margin: 0 0 12px; }
+  .list { display: grid; gap: 12px; }
+  .see { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+</style>

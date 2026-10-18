@@ -97,6 +97,9 @@ img, svg { max-width: 100%; }
 
 /* 글 본문 */
 .prose { font-size: 17px; }
+/* 지표 사전 자동 링크(2026-10-18): 글 흐름을 깨지 않게 글자색은 그대로, 점선 밑줄만 */
+.prose a.term-link { color: inherit; text-decoration: underline dotted var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.prose a.term-link:hover { color: var(--accent); }
 .prose h2 { margin: 2.2em 0 .6em; font-size: 1.35em; line-height: 1.4; padding-left: 12px; border-left: 4px solid var(--accent); }
 .prose h3 { margin: 1.8em 0 .5em; font-size: 1.15em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }

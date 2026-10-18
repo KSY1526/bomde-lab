@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { readdirSync, readFileSync } from 'node:fs';
+import { glossaryLinks } from './src/lib/glossary-links.mjs';
 
 // sitemap lastmod: 글 frontmatter의 updated(없으면 date). 검색엔진이 다시 수집할 때 참고한다 (2026-10-16)
 const POSTS_DIR = new URL('./src/content/posts/', import.meta.url);
@@ -21,6 +22,8 @@ export default defineConfig({
   site: 'https://bomdelab.com',
   trailingSlash: 'always',
   integrations: [
+    // 글 본문에서 지표 이름 첫 등장 → 지표 사전 링크 (2026-10-18, 빌드 결과를 고친다)
+    glossaryLinks({ base: '/' }),
     mdx(),
     sitemap({
       serialize(item) {

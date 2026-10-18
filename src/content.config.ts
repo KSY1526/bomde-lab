@@ -29,4 +29,24 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+// 지표 사전(2026-10-18, FanGraphs Library 방식). 글 본문에서 지표 이름이 처음 나오면 빌드 때 이 페이지로 링크된다(src/lib/glossary-links.mjs)
+const glossary = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/glossary' }),
+  schema: z.object({
+    term: z.string(),
+    // 다른 이름(영문 약자 등). 제목 옆에 작게
+    aka: z.string().optional(),
+    // 한 줄 정의 — 사전 목록·검색 설명
+    summary: z.string(),
+    group: z.enum(['타격', '투구', '경기 상황', '공통']),
+    order: z.number(),
+    // 글 본문에서 링크를 걸 표기들(긴 것부터 맞춘다)
+    match: z.array(z.string()),
+    // 이 지표를 다룬 글 id
+    posts: z.array(z.string()).default([]),
+    // 같이 볼 지표 id
+    see: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { posts, glossary };
