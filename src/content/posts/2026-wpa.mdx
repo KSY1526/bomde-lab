@@ -1,0 +1,149 @@
+---
+title: "야구 지표 해설 6: WPA, 같은 안타가 다른 값을 받는 이유"
+description: "2026년 KBO 타자 WPA 1위는 LG 오스틴, 투수 WPA 1위는 KT 박영현이었다."
+date: 2026-10-18
+category: metrics
+tags: ["WPA", "승리확률", "wRC+", "OPS", "불펜", "세이버메트릭스"]
+related: ["2026-wrc-basics", "2026-wrc-limits", "2026-10-17-ps-sp-1"]
+dataUntil: "2026 정규시즌 10/12까지"
+---
+import d from '../../data/posts/2026-10-18-wpa.json';
+import { url as siteUrl } from '../../lib/site';
+import { ida, ieot, ro } from '../../lib/josa';
+
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const sg = (v) => `${v > 0 ? '+' : ''}${v.toFixed(1)}`;
+export const sg2 = (v) => `${v > 0 ? '+' : ''}${v.toFixed(2)}`;
+export const baseKr = { '---': '주자 없음', '1--': '1루', '-2-': '2루', '--3': '3루', '12-': '1, 2루', '1-3': '1, 3루', '-23': '2, 3루', '123': '만루' };
+export const outKr = ['무사', '1사', '2사'];
+export const diffKr = (v) => (v === 0 ? '동점' : v > 0 ? `${v}점 앞섬` : `${-v}점 뒤짐`);
+export const ex = d.example;
+export const exc = (p) => ex.cases.find((c) => c.play === p);
+export const kim = d.top_plays[0];
+export const res = (r) => d.by_result.find((x) => x.result === r);
+export const B = (n) => [...d.b_top, ...d.b_gap, ...d.b_rev].find((r) => r.bname === n);
+export const R = (n) => d.rp_all.find((r) => r.pname === n);
+export const S = (n) => d.sp_top.find((r) => r.pname === n);
+// 기준값과 비교해 칠한 칸(차이가 한 단계의 1/3 미만이면 칠하지 않음). 붉은색 = 타자 우세, 파란색 = 투수 우세.
+// good = -1이면 클수록 타자 우세(우르크·OPS·타자 WPA·평균자책점), 1이면 클수록 투수 우세(투수 WPA)
+export const heat = (gap, step) => (Math.abs(gap) < step / 3 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const hTd = (v, base, step, good, text, extra = '') => {
+  const h = heat(good > 0 ? base - v : v - base, step);
+  return <td class={[extra, h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{text}</td>;
+};
+export const ip = (r) => r.ip.replace(/\.0$/, '');
+export const rk = (n) => <small> ({n}위)</small>;
+export const name = (r, nm) => <td class="cur" style="text-align:left">{nm} <small>({r.team})</small></td>;
+export const gapTable = (list) => (
+  <table>
+    <thead><tr><th>타자</th><th>WPA (순위)</th><th>우르크 (순위)</th><th>OPS (순위)</th><th>7회 이후 접전<br />우르크</th></tr></thead>
+    <tbody>
+      {list.map((r) => (
+        <tr>{name(r, r.bname)}{hTd(r.wpa, 0, 1.5, -1, <>{f2(r.wpa)}{rk(r.wpa_rk)}</>)}{hTd(r.wrc, 100, 20, -1, <>{f1(r.wrc)}{rk(r.wrc_rk)}</>)}{hTd(r.ops, 0.75, 0.1, -1, <>{f3(r.ops)}{rk(r.ops_rk)}</>)}{hTd(r.cl_wrc, 100, 20, -1, <>{f1(r.cl_wrc)} <small>({r.cl_pa})</small></>, r.cl_pa < d.small_pa ? 'small' : '')}</tr>
+      ))}
+      <tr class="total"><td style="text-align:left">리그 평균</td><td></td><td>100.0</td><td></td><td>{f1(d.league_cl_wrc)}</td></tr>
+    </tbody>
+  </table>
+);
+export const rpTable = (list) => list.map((r) => (
+  <tr>{name(r, r.pname)}<td>{ip(r)}</td>{hTd(r.era, d.rp_era_avg, 1, -1, <>{r.era.toFixed(2)}{rk(r.era_rk)}</>)}<td>{r.sv} / {r.hld}</td>{hTd(r.wpa, 0, 1, 1, <>{sg2(r.wpa)}{rk(r.wpa_rk)}</>)}</tr>
+));
+
+8월 23일 고척, 키움이 KIA에 3점 뒤진 9회말 2사 만루에서 김재현이 끝내기 만루홈런을 쳤다. 타석에 들어서기 전 키움이 이길 확률은 {kim.wp_before}%였고 공이 담장을 넘어가자 100%가 됐다. 홈런 한 방으로 승리확률이 {f1(kim.wpa)}%p 올랐다. 올해 KBO에서 승리확률을 가장 크게 바꾼 타석이다.
+
+WPA(Win Probability Added, 승리확률 기여)는 이렇게 타석 하나가 팀 승리확률을 몇 %p 올리고 내렸는지를 선수마다 시즌 내내 더한 값이다. 승리확률 100%p를 1승으로 쳐서 WPA 1.00은 1승이다. 김재현의 끝내기 만루홈런 하나로 WPA {f2(kim.wpa / 100)}, 1승에 가까운 값을 얻었다. WPA 3.00인 선수는 한 시즌 동안 팀에 3승만큼 승리확률을 보탰다는 뜻이다.
+
+## 세이버 지표는 대부분 상황을 따지지 않는다
+
+우르크(wRC+), FIP 같은 세이버메트릭스 지표는 대부분 상황을 따지지 않는다. 우르크는 타자가 리그 평균 타자보다 득점을 얼마나 더 만들었는지를 리그 평균 100에 맞춰 나타낸 타격 지표다. 우르크에서 홈런은 1회에 치든 9회에 치든 같은 값을 받고 삼진도 언제 당하든 같은 아웃 하나다. 김재현의 끝내기 만루홈런도 우르크에서는 크게 이기고 있는 경기의 만루홈런과 같은 값이다.
+
+흔히 상황에 따른 차이는 운에 가깝고 시즌 내내 타석이 쌓이면 서로 상쇄된다고 본다. 대수의 법칙을 믿고 상황을 지우는 셈이다. 그래야 다음 시즌에도 이어질 타자 실력을 잴 수 있다.
+
+WPA는 이와 달리 상황을 그대로 담는다. 같은 홈런이라도 크게 앞선 경기에서 치면 WPA가 0에 가깝다. 올해 홈런 {res('HR').n.toLocaleString()}개의 WPA는 평균 {sg(res('HR').avg)}%p였는데, 김재현의 홈런은 {sg(kim.wpa)}%p였다. 승리확률이 얼마나 올랐는지를 보여 주니 직관적이다. <a href={siteUrl('category/game')}>경기 분석</a> 글에서 고르는 결정적 순간 TOP5도 이 값이 기준이다.
+
+## 승리확률은 어떻게 구할까
+
+WPA 자체는 직관적이지만 그 바탕인 승리확률은 세이버메트릭스 시뮬레이션에서 나온다. 몇 회인지, 몇 아웃인지, 주자가 어디 있는지, 몇 점 차인지가 같은 장면을 하나로 묶는다. 그 장면에서 경기를 끝까지 수없이 돌려 보거나 과거 경기를 모아 그 팀이 몇 번 이겼는지 세어 둔다. 타석이 하나 끝나면 바뀐 장면에 맞는 값을 찾아 승리확률로 쓴다.
+
+예를 들어 7회말 1점 뒤진 홈팀이 무사 1, 2루를 만들면 승리확률은 {ex.start}%다. 지고 있지만 남은 공격이 많고 주자도 둘이라 이길 확률이 절반을 넘는다. 다음 타자가 무엇을 하느냐에 따라 승리확률은 이렇게 바뀐다.
+
+<table>
+  <thead><tr><th>결과</th><th>결과 뒤 상황</th><th>승리확률</th><th>WPA</th></tr></thead>
+  <tbody>
+    <tr class="total"><td style="text-align:left">타석 전</td><td>무사 1, 2루, 1점 뒤짐</td><td>{ex.start}%</td><td></td></tr>
+    {ex.cases.map((c) => (
+      <tr><td class="cur" style="text-align:left">{c.play}</td><td>{outKr[c.outs]} {baseKr[c.bases]}, {diffKr(c.diff)}</td><td>{c.wp}%</td>{hTd(c.delta, 0, 8, -1, `${sg(c.delta)}%p`)}</tr>
+    ))}
+  </tbody>
+</table>
+<p class="note">7회말 홈팀 기준. 붉은색은 타자, 파란색은 투수가 승리확률을 가져간 쪽이다.</p>
+
+3점 홈런을 치면 승리확률이 {sg(exc('3점 홈런').delta)}%p 오르고, 병살타를 치면 {sg(exc('병살타').delta)}%p 떨어진다. 희생번트는 성공해도 {sg(exc('희생번트 성공').delta)}%p로 승리확률이 거의 그대로다. 아웃 하나를 내주고 주자를 한 베이스씩 보낸 손익이 0에 가깝다.
+
+## 2026년 타자 WPA 순위
+
+올해 규정타석 70% 이상 타자 {d.n_qual}명 가운데 WPA 상위 10명이다. OPS는 출루율과 장타율을 더한 타격 지표다.
+
+<table>
+  <thead><tr><th>타자</th><th>타석</th><th>WPA</th><th>우르크 (순위)</th><th>OPS (순위)</th></tr></thead>
+  <tbody>
+    {d.b_top.map((r) => (
+      <tr>{name(r, r.bname)}<td>{r.pa}</td>{hTd(r.wpa, 0, 1.5, -1, f2(r.wpa))}{hTd(r.wrc, 100, 20, -1, <>{f1(r.wrc)}{rk(r.wrc_rk)}</>)}{hTd(r.ops, 0.75, 0.1, -1, <>{f3(r.ops)}{rk(r.ops_rk)}</>)}</tr>
+    ))}
+  </tbody>
+</table>
+<p class="note">규정타석 70% 이상. WPA 1.00 = 1승. 붉은색이 진할수록 WPA는 0, 우르크는 100, OPS는 .750보다 높다. 순위는 같은 {d.n_qual}명 안에서 매겼다.</p>
+
+1위는 LG 오스틴이다. WPA {f2(B('오스틴').wpa)}, 혼자 팀에 7승 가까이 보탰고 우르크와 OPS도 1위다. 2위 KIA 김도영, 3위 삼성 구자욱까지 세 지표 순위가 같다. 상위권은 대체로 겹치지만 그 아래로 내려가면 순위가 갈린다. 롯데 레이예스는 우르크 {B('레이예스').wrc_rk}위인데 WPA는 {B('레이예스').wpa_rk}위, 한화 페라자는 우르크 {B('페라자').wrc_rk}위인데 WPA는 {B('페라자').wpa_rk}위다.
+
+## 우르크·OPS에 비해 WPA가 높은 타자
+
+WPA 상위 20위 안에서 우르크 순위보다 WPA 순위가 가장 많이 높은 다섯 명이다.
+
+{gapTable(d.b_gap)}
+<p class="note">7회 이후 접전 = 7회부터 점수 차 {d.close}점 이내에서 들어선 타석. 괄호 안은 타석 수, 노란색은 {d.small_pa}타석 미만.</p>
+
+이 선수들은 세이버 기록과 대비하여 팬 체감 성적이 좋다. KT 김현수는 우르크 {f1(B('김현수').wrc)}로 리그 평균을 살짝 넘는 정도라 우르크 순위는 {B('김현수').wrc_rk}위다. 그런데 WPA는 {B('김현수').wpa_rk}위까지 올라간다. 7회 이후 접전 상황 우르크가 {f1(B('김현수').cl_wrc)}, 주자가 2루나 3루에 있는 득점권 우르크가 {ro(f1(B('김현수').risp_wrc))} 경기가 걸린 타석에서 시즌 성적보다 훨씬 잘 쳤다. 롯데 나승엽도 우르크 {f1(B('나승엽').wrc)}({B('나승엽').wrc_rk}위)에 WPA {B('나승엽').wpa_rk}위다. 7회 이후 접전 상황 우르크는 {ieot(f1(B('나승엽').cl_wrc))}. 두산 김민석은 7회 이후 접전 상황 우르크가 {ro(f1(B('김민석').cl_wrc))} 다섯 명 가운데 가장 높다.
+
+반대로 우르크 상위 20위 안에서 WPA 순위가 가장 많이 낮은 다섯 명은 이렇다.
+
+{gapTable(d.b_rev)}
+<p class="note">노란색은 7회 이후 접전 타석이 {d.small_pa}타석 미만.</p>
+
+이 선수들은 세이버 기록과 대비하여 팬 체감 성적이 아쉽다. KIA 한준수는 우르크 {f1(B('한준수').wrc)}로 {B('한준수').wrc_rk}위인데 WPA는 {ro(sg2(B('한준수').wpa))} {B('한준수').wpa_rk}위다. LG 송찬의도 우르크 {f1(B('송찬의').wrc)}({B('송찬의').wrc_rk}위)에 WPA는 {B('송찬의').wpa_rk}위이고, 7회 이후 접전 상황 우르크는 {ro(f1(B('송찬의').cl_wrc))} 리그 평균 {f1(d.league_cl_wrc)}에 못 미쳤다.
+
+## 투수 WPA: 선발과 불펜
+
+투수 WPA는 상대 타자 WPA의 부호를 뒤집은 값이다. 아웃을 잡아 승리확률을 지키면 쌓이고 점수를 내주면 깎인다. 먼저 선발투수(15경기 이상 선발) 상위 5명이다. 평균자책점은 9이닝을 던졌을 때 내주는 자책점으로, 낮을수록 좋다.
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>평균자책점 (순위)</th><th>WPA</th></tr></thead>
+  <tbody>
+    {d.sp_top.map((r) => (
+      <tr>{name(r, r.pname)}<td>{ip(r)}</td>{hTd(r.era, d.sp_era_avg, 1, -1, <>{r.era.toFixed(2)}{rk(r.era_rk)}</>)}{hTd(r.wpa, 0, 1, 1, f2(r.wpa))}</tr>
+    ))}
+  </tbody>
+</table>
+<p class="note">15경기 이상 선발 {d.n_sp}명 안의 순위. 파란색이 진할수록 WPA는 0보다 높고, 평균자책점은 이 {d.n_sp}명의 평균 {d.sp_era_avg.toFixed(2)}보다 낮다.</p>
+
+두산 곽빈이 WPA {f2(S('곽빈').wpa)}로 1위다. 평균자책점도 {S('곽빈').era.toFixed(2)}로 선발 가운데 가장 낮다. 다음은 불펜투수다. 아래 표의 세이브는 마무리가 리드를 지켜 경기를 끝낸 횟수, 홀드는 중간투수가 리드를 지키고 다음 투수에게 넘긴 횟수다.
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>평균자책점 (순위)</th><th>세이브 / 홀드</th><th>WPA (순위)</th></tr></thead>
+  <tbody>
+    {rpTable(d.rp_top)}
+    <tr class="total"><td colspan="5">WPA 하위 5명</td></tr>
+    {rpTable(d.rp_bot)}
+  </tbody>
+</table>
+<p class="note">선발 2경기 이하, 40이닝 이상 불펜투수 {d.n_rp}명 안의 순위. 파란색은 투수 우세, 붉은색은 타자 우세. 평균자책점은 이 {d.n_rp}명의 평균 {d.rp_era_avg.toFixed(2)}, WPA는 0이 기준이다.</p>
+
+WPA 기준으로는 선발과 불펜의 차이가 크게 나지 않는다. 상위 5명의 WPA 평균은 선발 {f2(d.sp_top_avg)}, 불펜 {ieot(f2(d.rp_top_avg))}. 불펜투수는 던지는 이닝이 훨씬 적지만 마무리는 1점 차 9회처럼 승리확률이 크게 흔들리는 타석에 나서서 아웃 하나의 값이 크다. KT 마무리 박영현은 {ip(R('박영현'))}이닝을 던지고 WPA {ro(f2(R('박영현').wpa))} 올해 투수 가운데 가장 높았다.
+
+중간투수의 체감 성적은 평균자책점보다 WPA와 맞아떨어질 때가 많다. 평균자책점만 보면 삼성 배찬승이 {R('배찬승').era.toFixed(2)}로 불펜 {d.n_rp}명 가운데 1위지만 WPA는 {sg2(R('배찬승').wpa)}로 {R('배찬승').wpa_rk}위다. 반대로 SSG 노경은은 평균자책점 {R('노경은').era.toFixed(2)}로 {R('노경은').era_rk}위인데 WPA는 {R('노경은').wpa}로 꼴찌다. 평균자책점에는 실점이 어느 상황에서 나왔는지가 남지 않는다. 앞 투수가 내보낸 주자가 홈을 밟으면 자책점은 앞 투수 몫이지만 WPA는 그때 마운드에 있던 투수가 떠안는다.
+
+## WPA는 한 시즌의 기여를 보여 준다
+
+상황에 따라 상대적으로 더 잘 치는 능력이 따로 없다고 가정하면, 상황을 지운 세이버 지표가 선수 실력을 재는 데 더 낫고 다음 시즌 성적을 예측하는 데도 좋다. 그래도 한 시즌 동안 누가 팀 승리에 얼마나 보탰는지는 WPA가 가장 단순하고 잘 보여 준다는 게 필자 의견이다.
