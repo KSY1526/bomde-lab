@@ -8,11 +8,11 @@ export async function getStaticPaths() {
   const posts = await publishedPosts();
   return [
     { params: { slug: 'default' }, props: { title: SITE.description.split('. ')[0], label: undefined } },
-    ...posts.map((p) => ({ params: { slug: p.id }, props: { title: p.data.title, label: CATEGORIES[p.data.category] } })),
+    ...posts.map((p) => ({ params: { slug: p.id }, props: { title: p.data.title, label: CATEGORIES[p.data.category], stat: p.data.stat } })),
   ];
 }
 
 export async function GET({ props }: APIContext) {
-  const png = await ogPng(props as { title: string; label?: string });
+  const png = await ogPng(props as Parameters<typeof ogPng>[0]);
   return new Response(png as BodyInit, { headers: { 'Content-Type': 'image/png' } });
 }

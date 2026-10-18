@@ -44,8 +44,26 @@ function titleSize(title: string): number {
   return 50;
 }
 
-export async function ogPng(opts: { title: string; label?: string }): Promise<Uint8Array> {
-  const { title, label } = opts;
+/** 대표 숫자(stat)가 있으면 숫자를 가장 크게, 제목은 그 아래 작게 (2026-10-18). 작은 카드 썸네일로 줄여도 숫자가 읽히게 */
+function body(title: string, stat?: { value: string; label: string }): Node {
+  if (!stat) {
+    return h('div', {
+      display: 'flex', flex: 1, alignItems: 'center',
+      fontSize: titleSize(title), fontWeight: 800, lineHeight: 1.3, letterSpacing: '-0.02em', wordBreak: 'keep-all',
+    }, title);
+  }
+  const n = [...stat.value].length;
+  return h('div', { display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'center' }, [
+    h('div', { display: 'flex', alignItems: 'baseline', gap: 28 }, [
+      h('div', { fontSize: n <= 6 ? 150 : n <= 10 ? 120 : 96, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.05 }, stat.value),
+    ]),
+    h('div', { fontSize: 34, fontWeight: 700, color: '#ffb3c0', marginTop: 10, wordBreak: 'keep-all' }, stat.label),
+    h('div', { fontSize: 40, fontWeight: 700, lineHeight: 1.3, marginTop: 26, opacity: 0.92, wordBreak: 'keep-all' }, title),
+  ]);
+}
+
+export async function ogPng(opts: { title: string; label?: string; stat?: { value: string; label: string } }): Promise<Uint8Array> {
+  const { title, label, stat } = opts;
   const tree = h('div', {
     width: 1200, height: 630, display: 'flex', flexDirection: 'column',
     background: NAVY, color: '#fff', fontFamily: 'Pretendard',
@@ -56,10 +74,7 @@ export async function ogPng(opts: { title: string; label?: string }): Promise<Ui
             h('div', { background: RED, color: '#fff', fontSize: 30, fontWeight: 700, padding: '8px 22px', borderRadius: 999 }, label),
           ])
         : h('div', { display: 'flex' }, ''),
-      h('div', {
-        display: 'flex', flex: 1, alignItems: 'center',
-        fontSize: titleSize(title), fontWeight: 800, lineHeight: 1.3, letterSpacing: '-0.02em', wordBreak: 'keep-all',
-      }, title),
+      body(title, stat),
     ]),
     h('div', { display: 'flex', alignItems: 'center', gap: 20, padding: '0 80px 48px' }, [
       logo(64),

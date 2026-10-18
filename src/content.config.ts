@@ -14,6 +14,8 @@ const posts = defineCollection({
     tags: z.array(z.string()).default([]),
     // 글 끝 "다음에 읽을 글"에 먼저 보일 기존 글 id(파일 이름). 글을 쓸 때 고른다(bomde-writing 스킬)
     related: z.array(z.string()).default([]),
+    // 공유 썸네일·다음에 읽을 글 카드에 크게 보일 대표 숫자(2026-10-18). value는 숫자, label은 그 숫자가 무엇인지 한 줄
+    stat: z.object({ value: z.string(), label: z.string() }).optional(),
     // 데이터 기준일 — 스냅샷 관리용. 화면에는 표시하지 않는다(데이터 공개 원칙 4)
     dataUntil: z.string(),
     draft: z.boolean().default(false),

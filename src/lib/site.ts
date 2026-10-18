@@ -19,6 +19,15 @@ export const CATEGORIES: Record<string, string> = {
   metrics: '야구 지표 해설',
 };
 
+// 카테고리 페이지 맨 위 한 줄 설명(사용자 결정 2026-10-18). 처음 온 사람이 고르기 쉽게, 검색 설명(meta description)으로도 쓴다
+export const CATEGORY_DESC: Record<string, string> = {
+  season: '한 시즌 동안 팀과 리그가 어떻게 흘러갔는지 숫자로 짚어 봅니다',
+  player: '한 선수의 성적이 왜 그렇게 나왔는지 투구·타격 데이터로 들여다봅니다',
+  game: '포스트시즌 경기마다 승부를 가른 장면을 승리확률로 되짚습니다',
+  deep: '리그 전체에 걸친 흐름과 기록의 한계를 깊게 파고듭니다',
+  metrics: '우르크, WPA처럼 어려운 기록을 하나씩 풀어 보는 연재입니다',
+};
+
 /** base를 붙인 내부 링크. url('posts/foo') → '/posts/foo/' (2026-10-18 개인 도메인으로 옮기며 base '/bomde-lab' → '/') */
 export function url(path = ''): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
