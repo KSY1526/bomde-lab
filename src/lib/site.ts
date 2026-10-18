@@ -19,7 +19,7 @@ export const CATEGORIES: Record<string, string> = {
   metrics: '야구 지표 해설',
 };
 
-/** base('/bomde-lab')를 붙인 내부 링크. url('posts/foo') → '/bomde-lab/posts/foo/' */
+/** base를 붙인 내부 링크. url('posts/foo') → '/posts/foo/' (2026-10-18 개인 도메인으로 옮기며 base '/bomde-lab' → '/') */
 export function url(path = ''): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   const clean = path.replace(/^\/|\/$/g, '');

@@ -16,10 +16,9 @@ const lastmod = Object.fromEntries(
     }),
 );
 
-// GitHub Pages: https://ksy1526.github.io/bomde-lab (도메인 없음, 사용자 결정 2026-10-10)
+// GitHub Pages + 개인 도메인 https://bomdelab.com (2026-10-18). 옛 주소 ksy1526.github.io/bomde-lab/... 는 GitHub가 같은 경로로 301 이동시킨다
 export default defineConfig({
-  site: 'https://ksy1526.github.io',
-  base: '/bomde-lab',
+  site: 'https://bomdelab.com',
   trailingSlash: 'always',
   integrations: [
     mdx(),
