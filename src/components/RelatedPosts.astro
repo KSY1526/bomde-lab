@@ -27,7 +27,7 @@ const list = [...picked, ...rest].slice(0, MAX);
   <section class="related" aria-labelledby="related-h">
     <h2 id="related-h">다음에 읽을 글</h2>
     <div class="list">
-      {list.map((p) => <PostCard post={p} thumb />)}
+      {list.map((p) => <PostCard post={p} />)}
     </div>
   </section>
 )}

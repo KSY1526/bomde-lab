@@ -88,3 +88,41 @@ export async function ogPng(opts: { title: string; label?: string; stat?: { valu
   const svg = await satori(tree as never, { width: 1200, height: 630, fonts: FONTS });
   return new Resvg(svg).render().asPng();
 }
+
+// 글 목록 카드용 작은 썸네일(480×360, 2026-10-18). 공유 썸네일을 줄이면 글자가 안 읽혀서 대표 숫자만 크게 넣는다.
+// "104.6 vs 94.3"·"81 → 110"처럼 비교하는 값은 두 줄로 나눠 글자를 키운다. 대표 숫자가 없는 글은 로고만
+const TW = 480;
+const TH = 360;
+
+function thumbLines(value: string): string[] {
+  const m = value.match(/^(.+?)\s+((?:vs|→)\s+.+)$/);
+  return m ? [m[1], m[2]] : [value];
+}
+/** "146.4km/h"처럼 끝에 영문 단위가 붙으면 숫자만 크게, 단위는 아랫줄에 작게 */
+function unitSplit(value: string): [string, string] | null {
+  const m = value.match(/^([-+\d.,]+)([a-zA-Z/]{2,})$/);
+  return m ? [m[1], m[2]] : null;
+}
+
+export async function thumbPng(stat?: { value: string }): Promise<Uint8Array> {
+  const unit = stat ? unitSplit(stat.value) : null;
+  const lines = stat ? (unit ? [unit[0]] : thumbLines(stat.value)) : [];
+  const longest = Math.max(1, ...lines.map((l) => [...l].length));
+  // 굵은 숫자 한 글자 폭 ≈ 글자 크기의 0.6배. 좌우 여백 36px씩
+  const size = Math.min(lines.length > 1 ? 120 : 150, Math.floor((TW - 72) / (longest * 0.6)));
+  const tree = h('div', {
+    width: TW, height: TH, display: 'flex', flexDirection: 'column',
+    background: NAVY, color: '#fff', fontFamily: 'Pretendard',
+  }, [
+    h('div', { display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', justifyContent: 'center' },
+      stat
+        ? [
+            ...lines.map((l) => h('div', { fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }, l)),
+            ...(unit ? [h('div', { fontSize: Math.round(size * 0.4), fontWeight: 700, opacity: 0.85 }, unit[1])] : []),
+          ]
+        : [logo(150)]),
+    h('div', { display: 'flex', height: 12, background: RED }),
+  ]);
+  const svg = await satori(tree as never, { width: TW, height: TH, fonts: FONTS });
+  return new Resvg(svg).render().asPng();
+}
