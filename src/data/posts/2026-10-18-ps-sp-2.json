@@ -1,0 +1,820 @@
+{
+ "game_id": "33331018LGHT0",
+ "date": "2026-10-18",
+ "round": "준플레이오프",
+ "round_code": "kbo_ps_sp",
+ "series_game": 2,
+ "stadium": "광주",
+ "home": "KIA",
+ "away": "LG",
+ "home_score": 6,
+ "away_score": 3,
+ "winner": "KIA",
+ "series_after": {
+  "KIA": 2,
+  "LG": 0
+ },
+ "format": "short",
+ "max_swing": 10.4,
+ "n_big": 1,
+ "big": 10.0,
+ "short_max": 12.0,
+ "baseline": {
+  "games": 1438,
+  "median_max": 18.0,
+  "avg_big": 4.0,
+  "short_pct": 16.8
+ },
+ "linescore": [
+  {
+   "team": "LG",
+   "innings": [
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    1,
+    0
+   ],
+   "r": 3,
+   "h": 9
+  },
+  {
+   "team": "KIA",
+   "innings": [
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    null
+   ],
+   "r": 6,
+   "h": 8
+  }
+ ],
+ "timeline": [
+  {
+   "i": 0,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 50.0
+  },
+  {
+   "i": 1,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 52.3
+  },
+  {
+   "i": 2,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 54.0
+  },
+  {
+   "i": 3,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 55.1
+  },
+  {
+   "i": 4,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 52.8
+  },
+  {
+   "i": 5,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 54.9
+  },
+  {
+   "i": 6,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 57.9
+  },
+  {
+   "i": 7,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 68.3
+  },
+  {
+   "i": 8,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 77.1
+  },
+  {
+   "i": 9,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 84.6
+  },
+  {
+   "i": 10,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 88.9
+  },
+  {
+   "i": 11,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 90.3
+  },
+  {
+   "i": 12,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 88.2
+  },
+  {
+   "i": 13,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 89.0
+  },
+  {
+   "i": 14,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 86.6
+  },
+  {
+   "i": 15,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 88.2
+  },
+  {
+   "i": 16,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 89.2
+  },
+  {
+   "i": 17,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 89.9
+  },
+  {
+   "i": 18,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 89.1
+  },
+  {
+   "i": 19,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 89.8
+  },
+  {
+   "i": 20,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 88.9
+  },
+  {
+   "i": 21,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 88.1
+  },
+  {
+   "i": 22,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 89.8
+  },
+  {
+   "i": 23,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 87.8
+  },
+  {
+   "i": 24,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 83.4
+  },
+  {
+   "i": 25,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 80.8
+  },
+  {
+   "i": 26,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 84.2
+  },
+  {
+   "i": 27,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 86.4
+  },
+  {
+   "i": 28,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 85.6
+  },
+  {
+   "i": 29,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 85.1
+  },
+  {
+   "i": 30,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 87.3
+  },
+  {
+   "i": 31,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 88.5
+  },
+  {
+   "i": 32,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 89.3
+  },
+  {
+   "i": 33,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 88.5
+  },
+  {
+   "i": 34,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 87.8
+  },
+  {
+   "i": 35,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 88.2
+  },
+  {
+   "i": 36,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 87.3
+  },
+  {
+   "i": 37,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 89.5
+  },
+  {
+   "i": 38,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 87.6
+  },
+  {
+   "i": 39,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 89.8
+  },
+  {
+   "i": 40,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 88.3
+  },
+  {
+   "i": 41,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 82.4
+  },
+  {
+   "i": 42,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 86.6
+  },
+  {
+   "i": 43,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 85.4
+  },
+  {
+   "i": 44,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 84.5
+  },
+  {
+   "i": 45,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 83.9
+  },
+  {
+   "i": 46,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 86.8
+  },
+  {
+   "i": 47,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 88.5
+  },
+  {
+   "i": 48,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 87.3
+  },
+  {
+   "i": 49,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 89.6
+  },
+  {
+   "i": 50,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 88.6
+  },
+  {
+   "i": 51,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 87.8
+  },
+  {
+   "i": 52,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 87.3
+  },
+  {
+   "i": 53,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 83.9
+  },
+  {
+   "i": 54,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 92.0
+  },
+  {
+   "i": 55,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 93.0
+  },
+  {
+   "i": 56,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 94.7
+  },
+  {
+   "i": 57,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 94.5
+  },
+  {
+   "i": 58,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 95.7
+  },
+  {
+   "i": 59,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 96.0
+  },
+  {
+   "i": 60,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 95.2
+  },
+  {
+   "i": 61,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 93.4
+  },
+  {
+   "i": 62,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 95.7
+  },
+  {
+   "i": 63,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 97.2
+  },
+  {
+   "i": 64,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 94.6
+  },
+  {
+   "i": 65,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 92.5
+  },
+  {
+   "i": 66,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 96.6
+  },
+  {
+   "i": 67,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 96.3
+  },
+  {
+   "i": 68,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 96.0
+  },
+  {
+   "i": 69,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 95.7
+  },
+  {
+   "i": 70,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 98.4
+  },
+  {
+   "i": 71,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 99.6
+  },
+  {
+   "i": 72,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 100.0
+  }
+ ],
+ "top": [
+  {
+   "i": 7,
+   "pa_id": "33331018LGHT0-007",
+   "inning": 1,
+   "half": "bottom",
+   "inning_label": "1회말",
+   "outs": "1사",
+   "bases": "1, 2루",
+   "score_before": {
+    "KIA": 0,
+    "LG": 0
+   },
+   "batter": "카스트로",
+   "batter_team": "KIA",
+   "pitcher": "임찬규",
+   "pitcher_team": "LG",
+   "result_text": "우익수 오른쪽 앞 1루타",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 10.4,
+   "bat_wp_before": 57.9,
+   "bat_wp_after": 68.3,
+   "home_wp_after": 68.3,
+   "hero": "batter",
+   "last_pitch": {
+    "type": "체인지업",
+    "kmh": 130.0,
+    "count": "0-1",
+    "nth": 2
+   },
+   "rank": 1
+  },
+  {
+   "i": 8,
+   "pa_id": "33331018LGHT0-008",
+   "inning": 1,
+   "half": "bottom",
+   "inning_label": "1회말",
+   "outs": "1사",
+   "bases": "1, 3루",
+   "score_before": {
+    "KIA": 1,
+    "LG": 0
+   },
+   "batter": "나성범",
+   "batter_team": "KIA",
+   "pitcher": "임찬규",
+   "pitcher_team": "LG",
+   "result_text": "우익수 오른쪽 2루타",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 8.8,
+   "bat_wp_before": 68.3,
+   "bat_wp_after": 77.1,
+   "home_wp_after": 77.1,
+   "hero": "batter",
+   "last_pitch": {
+    "type": "커브",
+    "kmh": 115.0,
+    "count": "0-2",
+    "nth": 3
+   },
+   "rank": 2
+  },
+  {
+   "i": 54,
+   "pa_id": "33331018LGHT0-055",
+   "inning": 7,
+   "half": "top",
+   "inning_label": "7회초",
+   "outs": "무사",
+   "bases": "1루",
+   "score_before": {
+    "KIA": 5,
+    "LG": 2
+   },
+   "batter": "박동원",
+   "batter_team": "LG",
+   "pitcher": "성영탁",
+   "pitcher_team": "KIA",
+   "result_text": "1루수 병살타 아웃 (1루수->유격수->1루수 송구아웃)",
+   "runs": 0,
+   "rbi": 0,
+   "wpa": -8.1,
+   "bat_wp_before": 16.1,
+   "bat_wp_after": 8.0,
+   "home_wp_after": 92.0,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": "커터",
+    "kmh": 135.0,
+    "count": "2-2",
+    "nth": 6
+   },
+   "rank": 3
+  }
+ ],
+ "players": [
+  {
+   "name": "올러",
+   "team": "KIA",
+   "pa": 24,
+   "wpa": 13.7,
+   "role": "투수"
+  },
+  {
+   "name": "카스트로",
+   "team": "KIA",
+   "pa": 3,
+   "wpa": 10.2,
+   "role": "타자"
+  },
+  {
+   "name": "성영탁",
+   "team": "KIA",
+   "pa": 2,
+   "wpa": 9.1,
+   "role": "투수"
+  },
+  {
+   "name": "전상현",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 8.4,
+   "role": "투수"
+  },
+  {
+   "name": "박해민",
+   "team": "LG",
+   "pa": 4,
+   "wpa": 8.0,
+   "role": "타자"
+  },
+  {
+   "name": "나성범",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 7.7,
+   "role": "타자"
+  },
+  {
+   "name": "김선빈",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 6.1,
+   "role": "타자"
+  },
+  {
+   "name": "케네디",
+   "team": "LG",
+   "pa": 7,
+   "wpa": 5.5,
+   "role": "투수"
+  },
+  {
+   "name": "구본혁",
+   "team": "LG",
+   "pa": 4,
+   "wpa": 4.5,
+   "role": "타자"
+  },
+  {
+   "name": "이우찬",
+   "team": "LG",
+   "pa": 5,
+   "wpa": 3.8,
+   "role": "투수"
+  },
+  {
+   "name": "우강훈",
+   "team": "LG",
+   "pa": 5,
+   "wpa": 3.2,
+   "role": "투수"
+  },
+  {
+   "name": "손주영",
+   "team": "LG",
+   "pa": 3,
+   "wpa": 2.3,
+   "role": "투수"
+  },
+  {
+   "name": "한준수",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 1.9,
+   "role": "타자"
+  },
+  {
+   "name": "문보경",
+   "team": "LG",
+   "pa": 4,
+   "wpa": 1.5,
+   "role": "타자"
+  },
+  {
+   "name": "김도영",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 1.2,
+   "role": "타자"
+  },
+  {
+   "name": "오지환",
+   "team": "LG",
+   "pa": 4,
+   "wpa": 0.9,
+   "role": "타자"
+  },
+  {
+   "name": "김진수",
+   "team": "LG",
+   "pa": 3,
+   "wpa": 0.9,
+   "role": "투수"
+  },
+  {
+   "name": "박재현",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": 0.7,
+   "role": "타자"
+  },
+  {
+   "name": "하주석",
+   "team": "KIA",
+   "pa": 2,
+   "wpa": 0.6,
+   "role": "타자"
+  },
+  {
+   "name": "박민",
+   "team": "KIA",
+   "pa": 2,
+   "wpa": -1.3,
+   "role": "타자"
+  },
+  {
+   "name": "문정빈",
+   "team": "LG",
+   "pa": 4,
+   "wpa": -1.9,
+   "role": "타자"
+  },
+  {
+   "name": "김강률",
+   "team": "LG",
+   "pa": 5,
+   "wpa": -2.0,
+   "role": "투수"
+  },
+  {
+   "name": "조상우",
+   "team": "KIA",
+   "pa": 5,
+   "wpa": -2.7,
+   "role": "투수"
+  },
+  {
+   "name": "박정우",
+   "team": "KIA",
+   "pa": 5,
+   "wpa": -3.1,
+   "role": "타자"
+  },
+  {
+   "name": "곽도규",
+   "team": "KIA",
+   "pa": 1,
+   "wpa": -3.4,
+   "role": "투수"
+  },
+  {
+   "name": "김호령",
+   "team": "KIA",
+   "pa": 4,
+   "wpa": -3.7,
+   "role": "타자"
+  },
+  {
+   "name": "오스틴",
+   "team": "LG",
+   "pa": 4,
+   "wpa": -7.7,
+   "role": "타자"
+  },
+  {
+   "name": "이재원",
+   "team": "LG",
+   "pa": 4,
+   "wpa": -9.3,
+   "role": "타자"
+  },
+  {
+   "name": "박동원",
+   "team": "LG",
+   "pa": 4,
+   "wpa": -9.5,
+   "role": "타자"
+  },
+  {
+   "name": "송찬의",
+   "team": "LG",
+   "pa": 4,
+   "wpa": -11.6,
+   "role": "타자"
+  },
+  {
+   "name": "임찬규",
+   "team": "LG",
+   "pa": 8,
+   "wpa": -34.0,
+   "role": "투수"
+  }
+ ],
+ "n_pa": 72
+}
