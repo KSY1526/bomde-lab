@@ -15,7 +15,7 @@ const posts = (await publishedPosts()).filter((p) => p.data.category === categor
 ---
 <Base title={label} description={desc ?? `봄데 연구소 ${label} 글 모음`} breadcrumbs={[{ name: '홈', path: url() }, { name: label, path: url(`category/${category}`) }]}>
   <h1>{label}</h1>
-  {desc && <p class="muted desc">{desc}{category === 'metrics' && <> <a class="dict" href={url('glossary')}>지표 사전 →</a></>}</p>}
+  {desc && <p class="muted desc">{desc}</p>}
   {posts.length
     ? <div class="posts">{posts.map((p) => <PostCard post={p} />)}</div>
     : <p class="muted">아직 글이 없어요. 곧 채워집니다.</p>}
@@ -25,6 +25,5 @@ const posts = (await publishedPosts()).filter((p) => p.data.category === categor
   h1 { font-size: 26px; margin: 0 0 16px; }
   h1:has(+ .desc) { margin-bottom: 6px; }
   .desc { margin: 0 0 18px; font-size: 15.5px; }
-  .dict { font-weight: 600; white-space: nowrap; }
   .posts { display: grid; gap: 14px; }
 </style>

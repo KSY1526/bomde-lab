@@ -1,13 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { CATEGORIES, url, formatDate } from '../lib/site';
+import { CATEGORIES, url, formatDate, imgVersion } from '../lib/site';
 
 // 왼쪽에 대표 숫자 썸네일(/thumb/<글>.png) — 홈·카테고리·다음에 읽을 글 모두 (2026-10-18, 이미지 붙은 링크가 더 눌린다)
 interface Props { post: CollectionEntry<'posts'> }
 const { post } = Astro.props;
 const { title, description, date, category } = post.data;
 const href = url(`posts/${post.id}`);
-const img = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/thumb/${post.id}.png`;
+const img = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/thumb/${post.id}.png?v=${imgVersion(post.data.stat)}`;
 ---
 <article class="post-card card">
   <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={img} alt="" width="480" height="360" loading="lazy" decoding="async" /></a>

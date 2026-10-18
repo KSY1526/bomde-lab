@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Comments from '../../components/Comments.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import { publishedPosts } from '../../lib/posts';
-import { CATEGORIES, url, formatDate } from '../../lib/site';
+import { CATEGORIES, url, formatDate, imgVersion } from '../../lib/site';
 
 export async function getStaticPaths() {
   const posts = await publishedPosts();
@@ -20,7 +20,7 @@ const crumbs = [
   { name: title, path: url(`posts/${post.id}`) },
 ];
 ---
-<Base title={title} description={description} image={`og/${post.id}.png`} published={date} updated={updated} tags={tags} breadcrumbs={crumbs}>
+<Base title={title} description={description} image={`og/${post.id}.png?v=${imgVersion([title, post.data.stat])}`} published={date} updated={updated} tags={tags} breadcrumbs={crumbs}>
   <article class="post">
     <header>
       <nav class="crumbs small" aria-label="현재 위치">

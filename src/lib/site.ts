@@ -40,3 +40,10 @@ export function formatDate(d: Date): string {
   const k = new Date(d.getTime() + 9 * 3600 * 1000);
   return `${k.getUTCFullYear()}.${String(k.getUTCMonth() + 1).padStart(2, '0')}.${String(k.getUTCDate()).padStart(2, '0')}`;
 }
+
+/** 썸네일 주소 끝에 붙일 짧은 버전. 내용(대표 숫자)이 바뀌면 주소가 바뀌어 브라우저·SNS가 옛 그림을 캐시로 보여 주지 않는다 (2026-10-18) */
+export function imgVersion(v: unknown): string {
+  let h = 5381;
+  for (const c of JSON.stringify(v ?? '')) h = ((h * 33) ^ c.charCodeAt(0)) >>> 0;
+  return h.toString(36);
+}
