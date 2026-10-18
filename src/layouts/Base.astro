@@ -14,8 +14,10 @@ interface Props {
   /** 내용을 크게 고친 날(frontmatter updated) — 구조화 데이터 dateModified */
   updated?: Date;
   tags?: string[];
+  /** 경로(홈 › 카테고리 › 글). 구글 검색 결과에 경로로 보이게 BreadcrumbList 구조화 데이터를 붙인다 (2026-10-18) */
+  breadcrumbs?: { name: string; path: string }[];
 }
-const { title, description = SITE.description, image = 'og/default.png', published, updated, tags = [] } = Astro.props;
+const { title, description = SITE.description, image = 'og/default.png', published, updated, tags = [], breadcrumbs = [] } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -33,6 +35,13 @@ const jsonLd = published && {
   keywords: tags.join(', ') || undefined,
   author: { '@type': 'Organization', name: SITE.title, url: new URL(`${base}/`, Astro.site).href },
   publisher: { '@type': 'Organization', name: SITE.title },
+};
+const crumbLd = breadcrumbs.length > 0 && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((c, i) => ({
+    '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.path, Astro.site).href,
+  })),
 };
 const path = Astro.url.pathname;
 const nav = [
@@ -67,6 +76,7 @@ const nav = [
     {tags.map((t) => <meta property="article:tag" content={t} />)}
     <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {crumbLd && <script type="application/ld+json" set:html={JSON.stringify(crumbLd)} />}
     <meta name="theme-color" content="#041e42" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   </head>

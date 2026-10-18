@@ -14,8 +14,15 @@ const posts = defineCollection({
     tags: z.array(z.string()).default([]),
     // 글 끝 "다음에 읽을 글"에 먼저 보일 기존 글 id(파일 이름). 글을 쓸 때 고른다(bomde-writing 스킬)
     related: z.array(z.string()).default([]),
-    // 공유 썸네일·다음에 읽을 글 카드에 크게 보일 대표 숫자(2026-10-18). value는 숫자, label은 그 숫자가 무엇인지 한 줄
-    stat: z.object({ value: z.string(), label: z.string() }).optional(),
+    // 대표 숫자(2026-10-18). value·label = 공유 썸네일(숫자 + 한 줄 설명).
+    // 글 카드 썸네일은 short(맨 위 짧은 이름, 10자 안팎) + value, 비교 값이면 items(숫자 v + 아래 꼬리표 cap)와 sep(→·vs·:)
+    stat: z.object({
+      value: z.string(),
+      label: z.string(),
+      short: z.string().optional(),
+      items: z.array(z.object({ v: z.string(), cap: z.string() })).optional(),
+      sep: z.string().optional(),
+    }).optional(),
     // 데이터 기준일 — 스냅샷 관리용. 화면에는 표시하지 않는다(데이터 공개 원칙 4)
     dataUntil: z.string(),
     draft: z.boolean().default(false),

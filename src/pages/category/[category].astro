@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import PostCard from '../../components/PostCard.astro';
 import { publishedPosts } from '../../lib/posts';
-import { CATEGORIES, CATEGORY_DESC } from '../../lib/site';
+import { CATEGORIES, CATEGORY_DESC, url } from '../../lib/site';
 
 export function getStaticPaths() {
   return Object.keys(CATEGORIES).map((category) => ({ params: { category } }));
@@ -13,7 +13,7 @@ const label = CATEGORIES[category];
 const desc = CATEGORY_DESC[category];
 const posts = (await publishedPosts()).filter((p) => p.data.category === category);
 ---
-<Base title={label} description={desc ?? `봄데 연구소 ${label} 글 모음`}>
+<Base title={label} description={desc ?? `봄데 연구소 ${label} 글 모음`} breadcrumbs={[{ name: '홈', path: url() }, { name: label, path: url(`category/${category}`) }]}>
   <h1>{label}</h1>
   {desc && <p class="muted desc">{desc}</p>}
   {posts.length

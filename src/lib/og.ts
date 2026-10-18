@@ -89,38 +89,62 @@ export async function ogPng(opts: { title: string; label?: string; stat?: { valu
   return new Resvg(svg).render().asPng();
 }
 
-// 글 목록 카드용 작은 썸네일(480×360, 2026-10-18). 공유 썸네일을 줄이면 글자가 안 읽혀서 대표 숫자만 크게 넣는다.
-// "104.6 vs 94.3"·"81 → 110"처럼 비교하는 값은 두 줄로 나눠 글자를 키운다. 대표 숫자가 없는 글은 로고만
+// 글 목록 카드용 작은 썸네일(480×360, 2026-10-18). 공유 썸네일을 줄이면 글자가 안 읽혀서 따로 만든다.
+// 맨 위 짧은 이름(short) + 대표 숫자. 비교 값(items)은 칸을 나눠 숫자마다 아래에 꼬리표(연도·팀·구분)를 단다.
+// 숫자만 두면 무엇의 숫자인지 몰라 직관성이 떨어진다는 사용자 피드백(2026-10-18). 대표 숫자가 없는 글은 로고만
 const TW = 480;
 const TH = 360;
+const PINK = '#ffb3c0';
 
-function thumbLines(value: string): string[] {
-  const m = value.match(/^(.+?)\s+((?:vs|→)\s+.+)$/);
-  return m ? [m[1], m[2]] : [value];
-}
-/** "146.4km/h"처럼 끝에 영문 단위가 붙으면 숫자만 크게, 단위는 아랫줄에 작게 */
+export type Stat = { value: string; label: string; short?: string; items?: { v: string; cap: string }[]; sep?: string };
+
+/** "146.4km/h"처럼 끝에 영문 단위가 붙으면 숫자만 크게, 단위는 작게 */
 function unitSplit(value: string): [string, string] | null {
   const m = value.match(/^([-+\d.,]+)([a-zA-Z/]{2,})$/);
   return m ? [m[1], m[2]] : null;
 }
+// 굵은 숫자·영문 한 글자 폭 ≈ 글자 크기의 0.6배, 한글은 1배
+const em = (t: string) => [...t].reduce((a, c) => a + (/[가-힣]/.test(c) ? 1 : 0.6), 0);
+const fit = (w: number, width: number, max: number) => Math.min(max, Math.floor(width / Math.max(0.6, w)));
 
-export async function thumbPng(stat?: { value: string }): Promise<Uint8Array> {
-  const unit = stat ? unitSplit(stat.value) : null;
-  const lines = stat ? (unit ? [unit[0]] : thumbLines(stat.value)) : [];
-  const longest = Math.max(1, ...lines.map((l) => [...l].length));
-  // 굵은 숫자 한 글자 폭 ≈ 글자 크기의 0.6배. 좌우 여백 36px씩
-  const size = Math.min(lines.length > 1 ? 120 : 150, Math.floor((TW - 72) / (longest * 0.6)));
+function thumbBody(stat: Stat): Node[] {
+  const top = stat.short
+    ? [h('div', { fontSize: 38, fontWeight: 700, color: PINK, marginBottom: 6, whiteSpace: 'nowrap' }, stat.short)]
+    : [];
+  if (stat.items?.length) {
+    const n = stat.items.length;
+    const sep = stat.sep ?? '→';
+    const colW = (TW - 56 - (n - 1) * 56) / n;
+    const size = fit(Math.max(...stat.items.map((it) => em(it.v))), colW, 110);
+    const cols: Node[] = [];
+    stat.items.forEach((it, k) => {
+      if (k > 0) cols.push(h('div', { display: 'flex', width: 56, justifyContent: 'center', fontSize: sep === 'vs' ? 34 : 52, fontWeight: 700, opacity: 0.7, paddingBottom: 40 }, sep));
+      cols.push(h('div', { display: 'flex', flexDirection: 'column', alignItems: 'center', width: colW }, [
+        h('div', { fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, whiteSpace: 'nowrap' }, it.v),
+        h('div', { fontSize: 30, fontWeight: 700, opacity: 0.8, marginTop: 4, whiteSpace: 'nowrap' }, it.cap),
+      ]));
+    });
+    return [...top, h('div', { display: 'flex', alignItems: 'center' }, cols)];
+  }
+  const unit = unitSplit(stat.value);
+  const main = unit ? unit[0] : stat.value;
+  const size = fit(em(main) + (unit ? em(unit[1]) * 0.3 + 0.2 : 0), TW - 72, 140);
+  return [
+    ...top,
+    h('div', { display: 'flex', alignItems: 'baseline', gap: 8 }, [
+      h('div', { fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }, main),
+      ...(unit ? [h('div', { fontSize: 40, fontWeight: 700, opacity: 0.85 }, unit[1])] : []),
+    ]),
+  ];
+}
+
+export async function thumbPng(stat?: Stat): Promise<Uint8Array> {
   const tree = h('div', {
     width: TW, height: TH, display: 'flex', flexDirection: 'column',
     background: NAVY, color: '#fff', fontFamily: 'Pretendard',
   }, [
     h('div', { display: 'flex', flexDirection: 'column', flex: 1, alignItems: 'center', justifyContent: 'center' },
-      stat
-        ? [
-            ...lines.map((l) => h('div', { fontSize: size, fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1 }, l)),
-            ...(unit ? [h('div', { fontSize: Math.round(size * 0.4), fontWeight: 700, opacity: 0.85 }, unit[1])] : []),
-          ]
-        : [logo(150)]),
+      stat ? thumbBody(stat) : [logo(150)]),
     h('div', { display: 'flex', height: 12, background: RED }),
   ]);
   const svg = await satori(tree as never, { width: TW, height: TH, fonts: FONTS });
