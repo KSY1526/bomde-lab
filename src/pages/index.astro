@@ -4,27 +4,42 @@ import PostCard from '../components/PostCard.astro';
 import { publishedPosts } from '../lib/posts';
 import { CATEGORIES, url } from '../lib/site';
 
+const RECENT = 5;
 const PER_CATEGORY = 2;
 
-// 메뉴 순서대로 카테고리마다 최신 글 2개. 글이 없는 카테고리는 첫 글이 올라올 때 나타난다.
+// 맨 위 "최근 글"(카테고리 상관없이 최신 5개, 2026-10-18). 첫 진입의 절반 이상이 홈이라 새 글이 첫 화면에 보이게 한다.
+// 그 아래는 메뉴 순서대로 카테고리마다 최근 글에 없는 글 2개. 남는 글이 없는 카테고리는 제목만 둔다.
 const posts = await publishedPosts();
+const recent = posts.slice(0, RECENT);
+const shown = new Set(recent.map((p) => p.id));
 const sections = Object.entries(CATEGORIES)
   .map(([key, label]) => {
     const inCat = posts.filter((p) => p.data.category === key);
-    return { key, label, total: inCat.length, latest: inCat.slice(0, PER_CATEGORY) };
+    return { key, label, total: inCat.length, latest: inCat.filter((p) => !shown.has(p.id)).slice(0, PER_CATEGORY) };
   })
   .filter((s) => s.total > 0);
 ---
 <Base>
+  <section class="cat" aria-labelledby="recent-h">
+    <div class="sec-head">
+      <h2 id="recent-h" class="sec-title">최근 글</h2>
+    </div>
+    <div class="posts">
+      {recent.map((p) => <PostCard post={p} />)}
+    </div>
+  </section>
+
   {sections.map((s) => (
     <section class="cat" aria-labelledby={`cat-${s.key}`}>
       <div class="sec-head">
         <h2 id={`cat-${s.key}`} class="sec-title"><a href={url(`category/${s.key}`)}>{s.label}</a></h2>
-        {s.total > PER_CATEGORY && <a class="more small" href={url(`category/${s.key}`)}>전체 {s.total}편 보기 →</a>}
+        <a class="more small" href={url(`category/${s.key}`)}>전체 {s.total}편 보기 →</a>
       </div>
-      <div class="posts">
-        {s.latest.map((p) => <PostCard post={p} />)}
-      </div>
+      {s.latest.length > 0 && (
+        <div class="posts">
+          {s.latest.map((p) => <PostCard post={p} />)}
+        </div>
+      )}
     </section>
   ))}
 </Base>

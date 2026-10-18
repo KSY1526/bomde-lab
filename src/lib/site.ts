@@ -26,6 +26,8 @@ export function url(path = ''): string {
   return clean ? `${base}/${clean}/` : `${base}/`;
 }
 
+/** 한국 날짜로 표시. 빌드 서버(GitHub Actions)는 UTC라서 date에 시각을 넣은 글(같은 날 여러 편, 2026-10-18~)이 하루 밀리지 않게 +9시간 */
 export function formatDate(d: Date): string {
-  return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
+  const k = new Date(d.getTime() + 9 * 3600 * 1000);
+  return `${k.getUTCFullYear()}.${String(k.getUTCMonth() + 1).padStart(2, '0')}.${String(k.getUTCDate()).padStart(2, '0')}`;
 }
