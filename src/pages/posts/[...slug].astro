@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Comments from '../../components/Comments.astro';
+import Like from '../../components/Like.astro';
 import RelatedPosts from '../../components/RelatedPosts.astro';
 import { publishedPosts } from '../../lib/posts';
 import { CATEGORIES, url, formatDate, imgVersion } from '../../lib/site';
@@ -41,6 +42,7 @@ const crumbs = [
     )}
   </article>
   <!-- 댓글을 글 바로 아래, 다음에 읽을 글은 그 뒤 (2026-10-18). docs/블로그/진단-2026-10-18.md -->
+  <Like slug={post.id} />
   <Comments slug={post.id} />
   <RelatedPosts post={post} />
 </Base>
