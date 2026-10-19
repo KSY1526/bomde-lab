@@ -168,7 +168,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 </script>
 
 <style>
-  .chat { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+  .chat { display: flex; flex-direction: column; overflow: hidden; }
   .chat-head {
     display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
     padding: 12px 0 10px; border-top: 2px solid var(--head-line); border-bottom: 1px solid var(--line);
@@ -180,7 +180,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   .status[data-state='off'] .dot { background: var(--accent); }
   .close { display: none; background: none; border: 0; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px 8px; }
 
-  .log { list-style: none; margin: 0; padding: 14px 0; flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 10px; min-height: 160px; }
+  .log { list-style: none; margin: 0; padding: 14px 0; flex: 1; max-height: calc(100vh - 380px); overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
   /* 말풍선은 JS로 만들어져 Astro 범위 스타일이 붙지 않는다 → :global로 지정(.log 안으로 한정) */
   .log :global(.msg) {
     max-width: 92%; min-width: 0; padding: 10px 13px; border-radius: var(--radius); font-size: 14.5px; line-height: 1.65;
@@ -226,6 +226,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
       background: var(--bg); padding: 0 16px; border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgb(0 0 0 / 12%);
     }
     .close { display: block; }
+    .chat.open .log { max-height: none; }
     :global(body.chat-open) .chat-fab { display: none; }
   }
 </style>

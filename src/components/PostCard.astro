@@ -44,24 +44,24 @@ const stack = !lead && !!stat?.items?.length &&
 </article>
 
 <style>
-  .post-row { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .post-row { display: grid; grid-template-columns: 136px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--line); }
   .post-row.plain { grid-template-columns: minmax(0, 1fr); }
-  .board { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 4px; align-self: start; text-align: center; line-height: 1; }
+  .board { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 14px 6px; align-self: start; text-align: center; line-height: 1; }
   .board:hover { text-decoration: none; }
-  .v { font-size: 28px; }
-  .unit { font-family: var(--font); font-size: 11px; font-weight: 600; margin-left: 1px; }
+  .v { font-size: 38px; }
+  .unit { font-family: var(--font); font-size: 13px; font-weight: 600; margin-left: 1px; }
   .items { display: flex; align-items: flex-start; justify-content: center; gap: 3px; }
   .item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-  .items .v { font-size: 22px; }
-  .sep { font-family: var(--num); font-size: 15px; opacity: .55; line-height: 22px; }
+  .items .v { font-size: 30px; }
+  .sep { font-family: var(--num); font-size: 19px; opacity: .55; line-height: 30px; }
   .v, .cap { white-space: nowrap; }
   .items.stack { flex-direction: column; align-items: stretch; gap: 2px; width: 100%; padding: 0 4px; }
   .items.stack { gap: 6px; }
   .items.stack .item { flex-direction: column-reverse; gap: 1px; }
-  .items.stack .cap { font-size: 10px; }
-  .items.stack .v { font-size: 19px; }
-  .post-row .items.stack .v { font-size: 19px; }
-  .cap, .short { font-size: 10.5px; line-height: 1.3; opacity: .8; word-break: keep-all; }
+  .items.stack .cap { font-size: 12px; }
+  .items.stack .v { font-size: 26px; }
+  .post-row .items.stack .v { font-size: 26px; }
+  .cap, .short { font-size: 12.5px; line-height: 1.3; opacity: .8; word-break: keep-all; }
   .meta-line { margin: 0; }
   .meta-line a:hover { text-decoration: none; }
   .title { margin: 4px 0 4px; font-size: 18px; line-height: 1.45; letter-spacing: -.01em; }
@@ -82,10 +82,12 @@ const stack = !lead && !!stat?.items?.length &&
   .lead .short { font-size: 14px; }
 
   @media (max-width: 560px) {
-    .post-row:not(.lead) { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
+    .post-row:not(.lead) { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
     .post-row.plain { grid-template-columns: minmax(0, 1fr); }
-    .post-row:not(.lead) .v { font-size: 25px; }
-    .post-row:not(.lead) .items .v { font-size: 19px; }
+    .post-row:not(.lead) .v { font-size: 32px; }
+    .post-row:not(.lead) .items .v { font-size: 25px; }
+    .post-row:not(.lead) .items.stack .v { font-size: 23px; }
+    .post-row:not(.lead) :is(.cap, .short) { font-size: 11.5px; }
     .lead .v, .lead .items .v { font-size: 46px; }
     .title { font-size: 16.5px; }
     .post-row:not(.lead) .desc { display: none; }
