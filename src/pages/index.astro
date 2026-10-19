@@ -25,7 +25,7 @@ const sections = Object.entries(CATEGORIES)
       <h2 id="recent-h" class="sec-title">최근 글</h2>
     </div>
     <div class="posts">
-      {recent.map((p) => <PostCard post={p} />)}
+      {recent.map((p, i) => <PostCard post={p} lead={i === 0} />)}
     </div>
   </section>
 
@@ -33,7 +33,7 @@ const sections = Object.entries(CATEGORIES)
     <section class="cat" aria-labelledby={`cat-${s.key}`}>
       <div class="sec-head">
         <h2 id={`cat-${s.key}`} class="sec-title"><a href={url(`category/${s.key}`)}>{s.label}</a></h2>
-        <a class="more small" href={url(`category/${s.key}`)}>전체 {s.total}편 보기 →</a>
+        <a class="more small" href={url(`category/${s.key}`)}>전체 {s.total}편 보기</a>
       </div>
       {s.latest.length > 0 && (
         <div class="posts">
@@ -45,12 +45,12 @@ const sections = Object.entries(CATEGORIES)
 </Base>
 
 <style>
-  .cat + .cat { margin-top: 36px; }
-  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 12px; }
-  .sec-title { font-size: 20px; margin: 0; }
+  .cat + .cat { margin-top: 40px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--text); }
+  .sec-title { font-size: 18px; margin: 0; }
   .sec-title a { color: var(--text); }
   .more { color: var(--muted); white-space: nowrap; }
   .more:hover { color: var(--accent); }
   .small { font-size: 13.5px; }
-  .posts { display: grid; gap: 14px; }
+  .posts { display: grid; }
 </style>

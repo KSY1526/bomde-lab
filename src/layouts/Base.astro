@@ -17,7 +17,7 @@ interface Props {
   /** 경로(홈 › 카테고리 › 글). 구글 검색 결과에 경로로 보이게 BreadcrumbList 구조화 데이터를 붙인다 (2026-10-18) */
   breadcrumbs?: { name: string; path: string }[];
 }
-const { title, description = SITE.description, image = 'og/default.png', published, updated, tags = [], breadcrumbs = [] } = Astro.props;
+const { title, description = SITE.description, image = 'og/default.png?v=2', published, updated, tags = [], breadcrumbs = [] } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -77,25 +77,30 @@ const nav = [
     <meta name="twitter:card" content="summary_large_image" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
     {crumbLd && <script type="application/ld+json" set:html={JSON.stringify(crumbLd)} />}
-    <meta name="theme-color" content="#041e42" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <meta name="theme-color" content="#f3f2ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151c28" media="(prefers-color-scheme: dark)" />
+    <!-- 다크/밝게 버튼으로 고른 값(브라우저에만 저장)을 그리기 전에 적용해 깜빡임을 막는다 -->
+    <script is:inline>try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans+KR:wght@400;600;700&display=swap" />
   </head>
   <body>
     <header class="site-header">
       <div class="wrap head-row">
         <a class="brand" href={url()}>
-          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#fff" stroke="#d00f31" stroke-width="4"/><path d="M15 15c8 8 8 26 0 34M49 15c-8 8-8 26 0 34" fill="none" stroke="#d00f31" stroke-width="3" stroke-dasharray="4 3"/></svg>
+          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#fff" stroke="#c4202f" stroke-width="4"/><path d="M15 15c8 8 8 26 0 34M49 15c-8 8-8 26 0 34" fill="none" stroke="#c4202f" stroke-width="3" stroke-dasharray="4 3"/></svg>
           <span>
             <strong>{SITE.title}</strong>
             <small>{SITE.tagline}</small>
           </span>
         </a>
+        <button class="theme-btn" type="button" data-theme-btn aria-label="화면 밝기 바꾸기">다크</button>
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
         <a href={url()} aria-current={path === url() ? 'page' : undefined}>홈</a>
         {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
       </nav>
-      <div class="stripe" aria-hidden="true"></div>
     </header>
 
     <div class="wrap layout">
@@ -116,35 +121,54 @@ const nav = [
       </div>
     </footer>
     <Visit />
+    <script is:inline>
+      (() => {
+        const btn = document.querySelector('[data-theme-btn]');
+        const root = document.documentElement;
+        const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        const label = () => { btn.textContent = isDark() ? '밝게' : '다크'; };
+        label();
+        matchMedia('(prefers-color-scheme: dark)').addEventListener('change', label);
+        btn.addEventListener('click', () => {
+          const t = isDark() ? 'light' : 'dark';
+          root.dataset.theme = t;
+          try { localStorage.setItem('theme', t); } catch {}
+          label();
+        });
+      })();
+    </script>
     <!-- Cloudflare Web Analytics (2026-10-18): PC가 꺼져도 방문이 집계되게. 쿠키 없음. DNS only라 자동 설정 대신 스니펫 -->
     <script is:inline type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "c1392abb8d4541a5830dcc26201e6920"}'></script>
   </body>
 </html>
 
 <style>
-  .site-header { background: var(--header-bg); color: var(--header-text); }
-  .head-row { padding-top: 18px; padding-bottom: 6px; }
-  .brand { display: inline-flex; align-items: center; gap: 12px; color: inherit; }
+  .site-header { border-bottom: 2px solid var(--head-line); }
+  .head-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 20px; padding-bottom: 4px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); }
   .brand:hover { text-decoration: none; }
-  .logo { width: 44px; height: 44px; flex: none; }
-  .brand strong { display: block; font-size: 22px; letter-spacing: -.02em; line-height: 1.2; }
-  .brand small { display: block; font-size: 13px; opacity: .75; }
-  .nav { display: flex; gap: 4px; overflow-x: auto; padding-top: 6px; padding-bottom: 0; scrollbar-width: none; }
-  .nav::-webkit-scrollbar { display: none; }
-  .nav a {
-    color: rgb(255 255 255 / 78%); padding: 8px 12px 10px; white-space: nowrap; font-size: 15px;
-    border-bottom: 3px solid transparent;
+  .logo { width: 40px; height: 40px; flex: none; }
+  .brand strong { display: block; font-size: 23px; letter-spacing: -.02em; line-height: 1.2; }
+  .brand small { display: block; font-size: 13px; color: var(--muted); }
+  .theme-btn {
+    flex: none; font: inherit; font-size: 13px; color: var(--muted); background: none;
+    border: 1px solid var(--line); border-radius: var(--radius); padding: 3px 10px; cursor: pointer;
   }
-  .nav a:hover { color: #fff; text-decoration: none; }
-  .nav a[aria-current='page'] { color: #fff; font-weight: 700; border-bottom-color: var(--red); }
-  .stripe { height: 4px; background: var(--red); }
+  .theme-btn:hover { color: var(--text); border-color: var(--muted); }
+  .nav { display: flex; gap: 20px; overflow-x: auto; padding-top: 8px; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { color: var(--muted); padding: 8px 0 10px; white-space: nowrap; font-size: 15px; }
+  .nav a:hover { color: var(--text); text-decoration: none; }
+  .nav a[aria-current='page'] { color: var(--accent); font-weight: 600; box-shadow: inset 0 -2px var(--accent); }
 
   .chat-aside { position: sticky; top: 16px; align-self: start; height: calc(100vh - 32px); }
   @media (max-width: 1023px) {
     .chat-aside { position: static; height: auto; }
   }
 
-  .site-footer { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 14px; }
+  .site-footer { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 14px; color: var(--muted); }
+  .site-footer strong { color: var(--text); }
   .site-footer p { margin: 0 0 4px; }
   .social { display: flex; gap: 14px; }
+  .social a { color: var(--muted); }
 </style>

@@ -25,5 +25,5 @@ const posts = (await publishedPosts()).filter((p) => p.data.category === categor
   h1 { font-size: 26px; margin: 0 0 16px; }
   h1:has(+ .desc) { margin-bottom: 6px; }
   .desc { margin: 0 0 18px; font-size: 15.5px; }
-  .posts { display: grid; gap: 14px; }
+  .posts { display: grid; border-top: 1px solid var(--text); }
 </style>

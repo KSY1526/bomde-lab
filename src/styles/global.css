@@ -1,50 +1,75 @@
-/* 봄데 연구소 — 롯데 자이언츠 컬러(남색·빨강) */
+/* 봄데 연구소 — 밝은 미색 바탕 + 연한 남색 숫자판 (2026-10-19 새 단장, 규칙 .claude/rules/design.md) */
 :root {
-  --navy: #041e42;
-  --navy-2: #0d2d5c;
-  --red: #d00f31;
-  --red-soft: #fbe7ea;
+  --navy: #0f2a52;
+  --red: #c4202f;
+  --red-soft: #f4dfe0;
 
-  --bg: #f6f7fa;
-  --surface: #ffffff;
-  --text: #16202e;
-  --muted: #5b6676;
-  --line: #e1e5ec;
+  --bg: #f3f2ee;
+  --surface: #f8f7f4;
+  --text: #1c2433;
+  --muted: #67675f;
+  --line: #d9d6cc;
   --accent: var(--red);
-  --link: #0d3b8c;
-  --header-bg: var(--navy);
-  --header-text: #ffffff;
-  --chip-bg: #eef1f6;
-  --pos: #0d3b8c;
+  --link: #1d4a8f;
+  --board: #e2e6ee;
+  --board-text: var(--navy);
+  --head-line: var(--navy);
+  --chip-bg: #e9e7e0;
+  --pos: #2c4f86;
   --neg: var(--red);
-  --warn-bg: #fff3c4;
+  --warn-bg: #fbefc6;
   --warn-text: #6b5200;
+  --ok: #2f8a57;
 
-  --radius: 10px;
-  --shadow: 0 1px 2px rgb(4 30 66 / 6%), 0 4px 16px rgb(4 30 66 / 6%);
-  --font: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --radius: 3px;
+  --font: 'IBM Plex Sans KR', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --num: 'Barlow Condensed', 'IBM Plex Sans KR', sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   color-scheme: light;
 }
 
+/* 다크: 기기 설정을 따르고(사용자 결정 ②), 머리말 버튼으로 data-theme을 정하면 그쪽을 따른다 */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0b1220;
-    --surface: #121b2d;
-    --text: #e6eaf2;
-    --muted: #9aa5b8;
-    --line: #24314a;
-    --accent: #ff4d6a;
-    --link: #8db4ff;
-    --header-bg: #06142c;
-    --chip-bg: #1a2640;
-    --red-soft: #3a1520;
-    --pos: #8db4ff;
-    --neg: #ff4d6a;
+    --navy: #dfe6f3;
+    --red-soft: #3a2230;
+    --bg: #151c28;
+    --surface: #192131;
+    --text: #e9e4d6;
+    --muted: #a19d92;
+    --line: #2a3446;
+    --accent: #ff7f89;
+    --link: #9dbbec;
+    --board: #22304a;
+    --head-line: #34507f;
+    --chip-bg: #1f2838;
+    --pos: #8fb0e6;
+    --neg: #ff7f89;
     --warn-bg: #4a3d0a;
     --warn-text: #ffe28a;
+    --ok: #5fcf8e;
     color-scheme: dark;
   }
+}
+:root[data-theme='dark'] {
+  --navy: #dfe6f3;
+  --red-soft: #3a2230;
+  --bg: #151c28;
+  --surface: #192131;
+  --text: #e9e4d6;
+  --muted: #a19d92;
+  --line: #2a3446;
+  --accent: #ff7f89;
+  --link: #9dbbec;
+  --board: #22304a;
+  --head-line: #34507f;
+  --chip-bg: #1f2838;
+  --pos: #8fb0e6;
+  --neg: #ff7f89;
+  --warn-bg: #4a3d0a;
+  --warn-text: #ffe28a;
+  --ok: #5fcf8e;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -63,13 +88,13 @@ a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 img, svg { max-width: 100%; }
 
-.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
 /* 본문 + 우측 챗봇 */
 .layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 48px;
   padding-top: 28px;
   padding-bottom: 48px;
 }
@@ -77,36 +102,27 @@ img, svg { max-width: 100%; }
   .layout { grid-template-columns: minmax(0, 1fr); }
 }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
+/* 숫자판(블로그 표식) — 글 목록·점수판·순서 번호에만 */
+.board { background: var(--board); color: var(--board-text); border-radius: var(--radius); }
+.digits { font-family: var(--num); font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: 0; }
 
-.chip {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--chip-bg);
-  color: var(--muted);
-  font-size: 13px;
-  line-height: 1.6;
-}
-.chip.red { background: var(--red-soft); color: var(--accent); font-weight: 600; }
+/* 카테고리·날짜 한 줄 */
+.meta-line { font-size: 13px; color: var(--muted); }
+.meta-line .cat { color: var(--accent); font-weight: 600; }
 
 /* 글 본문 */
 .prose { font-size: 17px; }
-.prose h2 { margin: 2.2em 0 .6em; font-size: 1.35em; line-height: 1.4; padding-left: 12px; border-left: 4px solid var(--accent); }
+.prose h2 { margin: 2.4em 0 .7em; font-size: 1.25em; line-height: 1.4; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
 .prose h3 { margin: 1.8em 0 .5em; font-size: 1.15em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
-.prose blockquote { margin: 1.4em 0; padding: 12px 16px; background: var(--chip-bg); border-radius: 8px; color: var(--muted); }
+.prose blockquote { margin: 1.4em 0; padding: 2px 0 2px 16px; border-left: 1px solid var(--muted); color: var(--muted); }
 .prose blockquote p:last-child { margin: 0; }
 .prose code { font-family: var(--mono); font-size: .9em; background: var(--chip-bg); padding: 1px 5px; border-radius: 4px; }
 .prose table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 1.2em 0; display: block; overflow-x: auto; }
 .prose th, .prose td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
 .prose th:first-child, .prose td:first-child { text-align: left; }
-.prose th { color: var(--muted); font-weight: 600; font-size: 13px; }
+.prose th { color: var(--muted); font-weight: 600; font-size: 13px; border-bottom-color: var(--text); }
+.prose table { font-variant-numeric: tabular-nums; }
 
 .num { font-variant-numeric: tabular-nums; }
 .muted { color: var(--muted); }

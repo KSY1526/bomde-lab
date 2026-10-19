@@ -1,38 +1,93 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { CATEGORIES, url, formatDate, imgVersion } from '../lib/site';
+import { CATEGORIES, url, formatDate } from '../lib/site';
 
-// 왼쪽에 대표 숫자 썸네일(/thumb/<글>.png) — 홈·카테고리·다음에 읽을 글 모두 (2026-10-18, 이미지 붙은 링크가 더 눌린다)
-interface Props { post: CollectionEntry<'posts'> }
-const { post } = Astro.props;
-const { title, description, date, category } = post.data;
+// 글 목록 한 줄: 왼쪽 숫자판(frontmatter stat을 글자로) + 카테고리·날짜 + 제목 + 요약 (2026-10-19 새 단장).
+// 숫자판은 블로그 표식이라 글 목록과 점수판에만 쓴다(.claude/rules/design.md). stat이 없는 글은 숫자판 없이 제목만.
+// lead = 홈 맨 위 최신 글 하나: 제목을 크게, 숫자판을 넓게
+interface Props { post: CollectionEntry<'posts'>; lead?: boolean }
+const { post, lead = false } = Astro.props;
+const { title, description, date, category, stat } = post.data;
 const href = url(`posts/${post.id}`);
-const img = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/thumb/${post.id}.png?v=${imgVersion(post.data.stat)}`;
+
+/** "146.4km/h"처럼 끝에 영문 단위가 붙으면 숫자와 단위를 나눈다 */
+const unitSplit = (v: string) => v.match(/^([-+\d.,]+)([a-zA-Z/%]{2,})$/)?.slice(1) ?? [v, ''];
+const [main, unit] = stat ? unitSplit(stat.value) : ['', ''];
+const Tag = lead ? 'h2' : 'h3';
+// 비교 값이 길면(숫자 합이 6자 넘거나 꼬리표가 4자 넘으면) 좁은 숫자판에 한 줄로 안 들어가 → 줄마다 "숫자 꼬리표"로 쌓는다
+const stack = !lead && !!stat?.items?.length &&
+  (stat.items.reduce((a, it) => a + [...it.v].length, 0) > 6 || stat.items.some((it) => [...it.cap].length > 4));
 ---
-<article class="post-card card">
-  <a class="thumb" href={href} tabindex="-1" aria-hidden="true"><img src={img} alt="" width="480" height="360" loading="lazy" decoding="async" /></a>
+<article class:list={['post-row', { lead, plain: !stat }]}>
+  {stat && (
+    <a class="board" href={href} tabindex="-1" aria-hidden="true">
+      {stat.items?.length ? (
+        <span class:list={['items', { stack }]}>
+          {stat.items.map((it, k) => (
+            <>
+              {k > 0 && !stack && <span class="sep">{stat.sep ?? '→'}</span>}
+              <span class="item"><span class="digits v">{it.v}</span><span class="cap">{it.cap}</span></span>
+            </>
+          ))}
+        </span>
+      ) : (
+        <span class="digits v one">{main}{unit && <span class="unit">{unit}</span>}</span>
+      )}
+      {stat.short && !(lead && stat.items?.length) && <span class="short">{stat.short}</span>}
+    </a>
+  )}
   <div class="text">
-    <div class="meta">
-      <a class="chip red" href={url(`category/${category}`)}>{CATEGORIES[category]}</a>
-      <time class="muted" datetime={date.toISOString()}>{formatDate(date)}</time>
-    </div>
-    <h3><a href={href}>{title}</a></h3>
-    <p class="muted">{description}</p>
+    <p class="meta-line"><a class="cat" href={url(`category/${category}`)}>{CATEGORIES[category]}</a> · <time datetime={date.toISOString()}>{formatDate(date)}</time></p>
+    <Tag class="title"><a href={href}>{title}</a></Tag>
+    <p class="desc">{description}</p>
   </div>
 </article>
 
 <style>
-  .post-card { padding: 16px; display: grid; grid-template-columns: 168px 1fr; gap: 18px; align-items: start; }
-  .thumb img { display: block; width: 100%; height: auto; border-radius: 8px; }
-  .text { min-width: 0; }
-  .meta { display: flex; gap: 10px; align-items: center; font-size: 13px; }
-  .meta a:hover { text-decoration: none; }
-  h3 { margin: 8px 0 4px; font-size: 19px; line-height: 1.45; }
-  h3 a { color: var(--text); }
-  p { margin: 0; font-size: 15px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .post-row { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .post-row.plain { grid-template-columns: minmax(0, 1fr); }
+  .board { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px 4px; align-self: start; text-align: center; line-height: 1; }
+  .board:hover { text-decoration: none; }
+  .v { font-size: 28px; }
+  .unit { font-family: var(--font); font-size: 11px; font-weight: 600; margin-left: 1px; }
+  .items { display: flex; align-items: flex-start; justify-content: center; gap: 3px; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .items .v { font-size: 22px; }
+  .sep { font-family: var(--num); font-size: 15px; opacity: .55; line-height: 22px; }
+  .v, .cap { white-space: nowrap; }
+  .items.stack { flex-direction: column; align-items: stretch; gap: 2px; width: 100%; padding: 0 4px; }
+  .items.stack { gap: 6px; }
+  .items.stack .item { flex-direction: column-reverse; gap: 1px; }
+  .items.stack .cap { font-size: 10px; }
+  .items.stack .v { font-size: 19px; }
+  .post-row .items.stack .v { font-size: 19px; }
+  .cap, .short { font-size: 10.5px; line-height: 1.3; opacity: .8; word-break: keep-all; }
+  .meta-line { margin: 0; }
+  .meta-line a:hover { text-decoration: none; }
+  .title { margin: 4px 0 4px; font-size: 18px; line-height: 1.45; letter-spacing: -.01em; }
+  .title a { color: var(--text); }
+  .desc { margin: 0; font-size: 14.5px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* 홈 맨 위 최신 글 */
+  .lead { grid-template-columns: minmax(0, 1fr); padding: 6px 0 24px; }
+  .lead .board { order: 2; flex-direction: row; gap: 18px; padding: 14px 20px; max-width: 520px; width: 100%; }
+  .lead .text { order: 1; }
+  .lead .title { font-size: clamp(24px, 3.4vw, 30px); line-height: 1.3; margin: 6px 0 8px; letter-spacing: -.02em; }
+  .lead .desc { font-size: 16px; -webkit-line-clamp: 3; }
+  .lead .v { font-size: 52px; }
+  .lead .items { gap: 0; width: 100%; justify-content: space-around; align-items: center; }
+  .lead .items .v { font-size: 56px; }
+  .lead .sep { font-size: 26px; line-height: 1; }
+  .lead .cap { font-size: 13px; }
+  .lead .short { font-size: 14px; }
+
   @media (max-width: 560px) {
-    .post-card { grid-template-columns: 112px 1fr; gap: 12px; padding: 14px; }
-    h3 { font-size: 16.5px; margin-top: 6px; }
-    p { font-size: 14px; }
+    .post-row:not(.lead) { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; padding: 16px 0; }
+    .post-row.plain { grid-template-columns: minmax(0, 1fr); }
+    .post-row:not(.lead) .v { font-size: 25px; }
+    .post-row:not(.lead) .items .v { font-size: 19px; }
+    .lead .v, .lead .items .v { font-size: 46px; }
+    .title { font-size: 16.5px; }
+    .post-row:not(.lead) .desc { display: none; }
   }
 </style>

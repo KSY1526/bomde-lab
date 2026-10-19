@@ -46,13 +46,13 @@ const fmt = (v: number) => `${v > 0 ? '+' : ''}${v.toFixed(digits)}${unit}`;
 </figure>
 
 <style>
-  .chart { margin: 1.6em 0; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .chart { margin: 1.8em 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
   .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
   .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
   svg { width: 100%; height: auto; display: block; }
   .axis { stroke: var(--muted); stroke-width: 1; }
   .label { fill: var(--text); font-size: 14px; }
-  .value { fill: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .value { fill: var(--muted); font-size: 15px; font-family: var(--num); font-weight: 600; font-variant-numeric: tabular-nums; }
   .pos { fill: var(--pos); opacity: .8; }
   .neg { fill: var(--neg); opacity: .8; }
   .hl .label { font-weight: 800; fill: var(--accent); }

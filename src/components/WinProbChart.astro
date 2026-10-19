@@ -39,7 +39,7 @@ const at = (i: number) => timeline.find((p) => p.i === i)!;
       const p = at(m.i);
       return (
         <g class="mark">
-          <circle cx={x(p.i)} cy={y(p.home_wp)} r="12" />
+          <rect x={x(p.i) - 11} y={y(p.home_wp) - 11} width="22" height="22" rx="3" />
           <text x={x(p.i)} y={y(p.home_wp)} text-anchor="middle" dominant-baseline="central">{m.rank}</text>
         </g>
       );
@@ -49,17 +49,17 @@ const at = (i: number) => timeline.find((p) => p.i === i)!;
 </figure>
 
 <style>
-  .chart { margin: 1.6em 0; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .chart { margin: 1.8em 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
   .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
   .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
   svg { width: 100%; height: auto; display: block; }
-  .half-home { fill: var(--chip-bg); opacity: .6; }
+  .half-home { fill: var(--board); opacity: .5; }
   .grid { stroke: var(--line); stroke-width: 1; }
   .mid { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
   .inn { stroke: var(--line); stroke-width: 1; }
   .tick { fill: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
   .side { fill: var(--muted); font-size: 14px; font-weight: 700; }
   .line { fill: none; stroke: var(--pos); stroke-width: 2.4; stroke-linejoin: round; }
-  .mark circle { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
-  .mark text { fill: #fff; font-size: 14px; font-weight: 800; }
+  .mark rect { fill: var(--board); stroke: var(--navy); stroke-width: 1.5; }
+  .mark text { fill: var(--board-text); font-family: var(--num); font-size: 17px; font-weight: 700; }
 </style>

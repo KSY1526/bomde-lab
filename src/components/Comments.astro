@@ -7,7 +7,7 @@ interface Props { slug: string }
 const { slug } = Astro.props;
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
-<section class="comments card" data-comments data-api={api} data-slug={slug} aria-labelledby="comments-title">
+<section class="comments" data-comments data-api={api} data-slug={slug} aria-labelledby="comments-title">
   <h2 id="comments-title">댓글 <span class="muted" data-total></span></h2>
   <ul class="list" data-list><li class="muted empty" data-empty>댓글을 불러오는 중…</li></ul>
 
@@ -117,8 +117,8 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 </script>
 
 <style>
-  .comments { padding: 20px; margin-top: 32px; }
-  h2 { margin: 0 0 12px; font-size: 18px; }
+  .comments { margin-top: 40px; }
+  h2 { margin: 0 0 4px; font-size: 18px; padding-bottom: 6px; border-bottom: 1px solid var(--text); }
   .list { list-style: none; margin: 0 0 16px; padding: 0; }
   .list li { padding: 12px 0; border-bottom: 1px solid var(--line); }
   .list li.empty { border: 0; }
@@ -129,13 +129,13 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   input, textarea {
     width: 100%; font: inherit; font-size: 15px; padding: 8px 10px;
-    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text);
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
   }
   input:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
   .actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
   button[type='submit'] {
-    font: inherit; font-weight: 700; padding: 8px 18px; border: 0; border-radius: 8px;
-    background: var(--navy); color: #fff; cursor: pointer;
+    font: inherit; font-weight: 600; padding: 7px 18px; border: 0; border-radius: var(--radius);
+    background: var(--board); color: var(--board-text); cursor: pointer;
   }
   button:disabled { opacity: .5; cursor: not-allowed; }
   .small { font-size: 12.5px; }
