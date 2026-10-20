@@ -1,0 +1,175 @@
+---
+title: "삼성 대 KIA 플레이오프, 1차전을 잡는 쪽은 어디일까"
+description: "2026 KBO 플레이오프는 10월 25일 대구에서 정규시즌 2위 삼성과 3위 KIA의 1차전으로 시작한다."
+date: 2026-10-21T07:35:00+09:00
+category: season
+tags: ["포스트시즌", "플레이오프", "삼성", "KIA", "김도영", "구자욱"]
+related: ["2026-10-20-ps-sp-3", "2026-won-taein", "2026-mvp-race"]
+stat: { value: "77.1%", label: "플레이오프 1차전 승리 팀의 한국시리즈 진출", short: "PO 1차전" }
+dataUntil: "2026 준플레이오프 3차전(10/20)까지"
+---
+import d from '../../data/posts/2026-10-21-po-preview.json';
+
+export const tm = (t) => d.teams.find((r) => r.team === t);
+export const b = (id) => d.bat.find((r) => r.id === id);
+export const br = (id) => d.brank.find((r) => r.id === id);
+export const bp = (id) => d.bat_ps.find((r) => r.id === id);
+export const bm = (id, m) => d.b_month.find((r) => r.id === id && r.split === m);
+export const p = (id) => d.pit.find((r) => r.id === id);
+export const pv = (id) => d.p_vs.find((r) => r.id === id);
+export const pp = (id) => d.pit_ps.find((r) => r.id === id);
+export const fr = (id) => d.fip_rank.find((r) => r.id === id);
+export const kbm = (m) => d.bp_month.find((r) => r.team === 'KIA' && r.m === m);
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const pct = (a, n) => (100 * a / n).toFixed(1);
+export const inn = (o) => `${Math.floor(o / 3)}${o % 3 ? ` ${o % 3}/3` : ''}`;
+export const KDY = '52605', NSB = '62947', CAS = '56626', HJS = '68646';
+export const KOO = '62404', DIAZ = '54400', CHOI = '72443';
+export const NALE = '54640', OLLER = '55633', PEDE = '56459', WON = '69446', JURADO = '53375';
+export const kia = tm('KIA'), ss = tm('삼성'), kt = tm('KT');
+export const months = ['3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+// 붉은색 = 타자 우세, 파란색 = 투수 우세. 기준에서 멀수록 진하다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const hTd = (gap, step, body, extra = '') => {
+  const h = heat(gap, step);
+  return <td class={`${h ? h.cls : ''} ${extra}`.trim()} style={h ? `--heat:${h.pct}%` : undefined}>{body}</td>;
+};
+export const wrcTd = (v, step = 20) => hTd(Math.round(v - 100), step, f1(v));
+
+플레이오프는 10월 25일 대구에서 시작한다. 정규시즌 2위 삼성이 준플레이오프에서 LG를 3연승으로 꺾고 올라온 3위 KIA를 기다린다. 두 팀의 정규시즌 상대 전적은 KIA가 {d.h2h.w}승 {d.h2h.l}패로 조금 앞섰다.
+
+## 플레이오프에서 2위 팀이 이긴 건 절반 남짓이다
+
+단일리그 시기 한국시리즈는 정규시즌 1위가 {d.hist[1].n}번 중 {d.hist[1].upper}번 우승해 상위 팀이 압도적이었다. 플레이오프는 다르다. 2위 팀이 시리즈를 가져간 건 {d.hist[0].n}번 중 {d.hist[0].upper}번, {pct(d.hist[0].upper, d.hist[0].n)}%였다.
+
+<table>
+  <thead><tr><th>시리즈</th><th>맞대결</th><th>시리즈 수</th><th class="cur">상위 팀 승리</th><th>상위 팀 승률</th></tr></thead>
+  <tbody>
+    {d.hist.map((r) => (
+      <tr><td>{r.round}</td><td>{r.match}</td><td>{r.n}</td><td class="cur">{r.upper}</td><td>{pct(r.upper, r.n)}%</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">단일리그 시기(1989\~1998년, 2001\~2025년). 상위 팀은 정규시즌 순위가 높은 팀이다.</p>
+
+## KIA는 세부 지표에서 투타 모두 강력했다
+
+KIA의 팀 우르크(wRC+, 100이 리그 평균 타자이고 구장 효과를 걸러 낸 타격 지표)가 {f1(kia.wrc)}로 10개 구단 중 {kia.wrc_rk}위다. 투수진이 상대한 타자의 우르크인 피우르크는 {f1(kia.opp_wrc)}로 두산({f1(tm('두산').opp_wrc)}) 다음 {kia.opp_wrc_rk}위였다. 피우르크는 낮을수록 투수진이 잘 막았다는 뜻이다. 정규시즌 1위 KT도 우르크 {kt.wrc_rk}위, 피우르크 {kt.opp_wrc_rk}위로 KIA에 못 미쳤다.
+
+<table>
+  <thead><tr><th>팀</th><th>순위</th><th>승-패-무</th><th>득점</th><th>실점</th><th>우르크 (순위)</th><th>피우르크 (순위)</th><th>1점 차 경기</th><th>6회까지 앞선 경기</th></tr></thead>
+  <tbody>
+    {[kt, ss, kia].map((r) => (
+      <tr><td class={r.team === 'KIA' ? 'cur' : ''}>{r.team}</td><td>{r.rank}</td><td>{r.w}-{r.l}-{r.d}</td><td>{r.rs} ({r.rs_rk}위)</td><td>{r.ra} ({r.ra_rk}위)</td>{hTd(Math.round(r.wrc - 100), 5, <>{f1(r.wrc)} ({r.wrc_rk}위)</>)}{hTd(Math.round(r.opp_wrc - 100), 5, <>{f1(r.opp_wrc)} ({r.opp_wrc_rk}위)</>)}<td>{r.w1}승 {r.l1}패</td><td>{r.lead6_w}승 {r.lead6_l}패{r.lead6_d ? ` ${r.lead6_d}무` : ''}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">피우르크 = 그 팀 투수진이 상대한 타자의 wRC+. 붉은 칸은 타자 우세(우르크·피우르크 100 초과), 파란 칸은 투수 우세이고 100에서 5 단위로 진해진다.</p>
+
+## 그런데도 3위에 그친 이유
+
+KIA는 지표만큼 점수를 내지 못했다. 우르크 1위, 팀 OPS {kia.ops_rk}위였지만 득점은 {kia.rs}점으로 {kia.rs_rk}위였다. 우르크 {ss.wrc_rk}위 삼성이 {ss.rs}점을 냈으니 KIA보다 {ss.rs - kia.rs}점 많다. 득점과 실점으로 계산한 기대 승수(피타고리안 승수)도 KIA는 {f1(kia.pyth_w)}승으로 삼성의 {f1(ss.pyth_w)}승보다 적었다.
+
+접전에서도 약했다. KIA는 1점 차 경기에서 {kia.w1}승 {kia.l1}패로 5할을 밑돌았는데 삼성은 같은 1점 차 경기에서 {ss.w1}승 {ss.l1}패, KT는 {kt.w1}승 {kt.l1}패였다. 6회까지 앞선 경기에서 진 횟수도 KIA가 {kia.lead6_l}번으로 삼성({ss.lead6_l}번), KT({kt.lead6_l}번)보다 많았다. 리드를 잡고도 경기 후반을 버티지 못한 셈이고 그 부담은 불펜이 졌다.
+
+## KIA 불펜은 9월부터 달라졌다
+
+KIA 불펜은 여름에 흔들렸다. 6월부터 8월까지 석 달 연속 평균자책점이 5점 안팎이었고 7월에는 불펜 피우르크가 {f1(kbm('7월').opp_wrc)}까지 올랐다. 9월부터 달라졌다. 불펜 피우르크가 9월 {f1(kbm('9월').opp_wrc)}, 10월 {f1(kbm('10월').opp_wrc)}로 내려갔고 준플레이오프 세 경기에서는 불펜이 {inn(d.bp_ps.outs)}이닝 동안 {d.bp_ps.er}점만 내줬다. 시즌 내내 접전에서 약했던 KIA가 9월부터 살아난 불펜을 바탕으로 접전에서도 버틴다면 세부 지표에서 보여 준 투타 전력의 진가가 플레이오프에서 드러날 수 있다.
+
+<table>
+  <thead><tr><th>월</th><th>불펜 이닝</th><th>불펜 평균자책점</th><th class="cur">불펜 피우르크</th></tr></thead>
+  <tbody>
+    {d.bp_month.filter((r) => r.team === 'KIA').map((r) => (
+      <tr><td>{r.m}</td><td>{inn(r.outs)}</td><td>{f2(r.era)}</td>{wrcTd(r.opp_wrc, 10)}</tr>
+    ))}
+    <tr class="total"><td>준플레이오프</td><td>{inn(d.bp_ps.outs)}</td><td>{f2(d.bp_ps.era)}</td><td>-</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">구원 투수 기록만 모았다. 3월은 4월과 묶었다. 붉은 칸은 피우르크 100 초과, 파란 칸은 100 미만이고 10 단위로 진해진다.</p>
+
+## 준플레이오프의 김도영
+
+가을야구에는 미친 타자가 나타나야 한다고들 한다. 준플레이오프의 김도영이 그랬다. 세 경기 {bp(KDY).pa}타석에서 홈런 {bp(KDY).hr}개, 타점 {bp(KDY).rbi}개를 기록했고 삼진은 하나도 없었다. 3차전에는 만루 홈런도 쳤다. 정규시즌에도 홈런 {b(KDY).hr}개, 장타율 리그 {br(KDY).slg}위로 MVP 후보였던 타자다.
+
+김도영만이 아니다. 나성범은 홈런 {bp(NSB).hr}개, 외국인 타자 카스트로는 {bp(CAS).pa}타석에서 안타 {bp(CAS).h}개를 쳤다. KIA는 세 경기에서 {d.team_ps.rs}점을 내고 {d.team_ps.ra}점만 내줬다.
+
+<table>
+  <thead><tr><th rowspan="2">타자</th><th colspan="3">정규시즌</th><th colspan="5" class="cur">준플레이오프</th></tr>
+  <tr><th>홈런</th><th>OPS</th><th>우르크</th><th>타석</th><th>안타</th><th>홈런</th><th>타점</th><th>타율/출루율/장타율</th></tr></thead>
+  <tbody>
+    {[KDY, NSB, CAS, HJS, '62700', '78603'].map((id) => {
+      const r = bp(id), s = d.bat.find((x) => x.id === id);
+      return <tr><td class={id === KDY ? 'cur' : ''}>{r.name}</td><td>{s ? s.hr : '-'}</td><td>{s ? f3(s.ops) : '-'}</td>{s ? wrcTd(s.wrc_plus) : <td>-</td>}<td class="small">{r.pa}</td><td>{r.h}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{f3(r.avg)}/{f3(r.obp)}/{f3(r.slg)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">준플레이오프 타석은 모두 {d.small_pa}타석 미만(노란 칸)이다. 정규시즌 우르크의 붉은 칸은 100보다 높은 칸이고 20 단위로 진해진다.</p>
+
+## 푹 쉬고 나오는 네일과 올러
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>승-패</th><th>평균자책점</th><th>FIP</th><th>WHIP</th><th>삼진율</th><th>삼성전 평균자책점 (이닝)</th><th class="cur">준플레이오프</th></tr></thead>
+  <tbody>
+    {[NALE, OLLER].map((id) => {
+      const r = p(id), v = pv(id), q = pp(id);
+      return <tr><td>{r.name}</td><td>{r.ip}</td><td>{r.w}-{r.l}</td><td>{f2(r.era)}</td><td>{f2(r.fip)}</td><td>{f2(r.whip)}</td><td>{f1(r.k_pct)}%</td><td>{f2(v.era)} ({v.ip})</td><td class="cur">{inn(q.outs)}이닝 {q.er}실점 {q.so}삼진</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">FIP = 삼진, 볼넷, 홈런만으로 계산한 수비 무관 평균자책점.</p>
+
+네일과 올러는 정규시즌 이닝 리그 {p(NALE).outs_rk}위와 {p(OLLER).outs_rk}위다. 네일이 {inn(p(NALE).outs)}이닝, 올러가 {inn(p(OLLER).outs)}이닝을 던졌고 평균자책점은 올러가 {f2(p(OLLER).era)}로 규정이닝을 채운 {p(OLLER).n_qual_p}명 중 {p(OLLER).era_rk}위, 네일이 {f2(p(NALE).era)}로 {p(NALE).era_rk}위다. 준플레이오프에서도 네일이 1차전 {inn(pp(NALE).outs)}이닝 {pp(NALE).er}실점, 올러가 2차전 {inn(pp(OLLER).outs)}이닝 {pp(OLLER).er}실점으로 두 경기를 잡았다. 3차전을 시라카와가 맡아 두 투수는 각각 10월 17일, 18일 등판 뒤 플레이오프 1차전까지 일주일 넘게 쉰다.
+
+## 삼성의 무기는 타선, 변수는 구자욱
+
+삼성이 내세울 강점은 역시 타선이다. 그 중심인 구자욱은 타율 {f3(b(KOO).avg)}, 출루율 {f3(b(KOO).obp)}로 규정타석을 채운 {d.n_qual}명 중 두 부문 모두 1위였다. 우르크도 {f1(b(KOO).wrc_plus)}로 리그 {br(KOO).wrc_plus}위였고 7월부터 9월까지는 석 달 연속 월간 우르크가 170 이상이었다.
+
+구자욱은 9월 30일 한화전에서 왼쪽 햄스트링을 다쳐 남은 정규시즌을 뛰지 못했다. 10월 19일 청백전에 지명타자로 나와 안타와 볼넷을 기록했지만 아직 수비와 주루는 어렵다. 구자욱이 지명타자로라도 라인업에 들어올 수 있는지가 이 시리즈의 가장 큰 변수다.
+
+## 디아즈는 살아났고 최형우는 쉬고 나온다
+
+디아즈는 시즌 초반보다 후반에 더 잘 쳤다. 4월 우르크 {f1(bm(DIAZ, '4월').wrc_plus)}에서 7월부터 9월까지는 매달 130 후반을 기록했다. 최형우는 반대로 갈수록 내려갔다. 5월 우르크 {f1(bm(CHOI, '5월').wrc_plus)}이 9월에는 {f1(bm(CHOI, '9월').wrc_plus)}였다. 그래도 최형우는 정규시즌이 끝난 뒤 열흘 넘게 쉬었고 산전수전 다 겪은 베테랑이라 큰 경기에서 활약을 기대할 만하다.
+
+<table>
+  <thead><tr><th>월</th><th>구자욱 우르크 (타석)</th><th class="cur">디아즈 우르크 (타석)</th><th class="cur">최형우 우르크 (타석)</th></tr></thead>
+  <tbody>
+    {months.map((m) => (
+      <tr><td>{m}</td>{[KOO, DIAZ, CHOI].map((id) => { const r = bm(id, m); return r ? (r.pa < d.small_pa ? <td class="small">{f1(r.wrc_plus)} ({r.pa})</td> : hTd(Math.round(r.wrc_plus - 100), 20, <>{f1(r.wrc_plus)} <small>({r.pa})</small></>)) : <td>-</td>; })}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">붉은 칸은 우르크 100보다 높은 달, 파란 칸은 낮은 달이고 20 단위로 진해진다. 노란 칸은 {d.small_pa}타석 미만. 구자욱은 9월 30일 부상 뒤 출전하지 않았다.</p>
+
+## 페덱의 구위, 원태인의 불운, 후라도
+
+페덱은 7월 18일 첫 등판으로 시즌 중반에 합류했지만 투구 내용은 압도적이었다. {inn(p(PEDE).outs)}이닝 평균자책점 {f2(p(PEDE).era)}, WHIP {f2(p(PEDE).whip)}이고 볼넷 비율 {f1(p(PEDE).bb_pct)}%였다. 선발로 10경기 이상 나선 투수 {d.sp10.n}명 가운데 WHIP {d.sp10.whip_rk}위, FIP {d.sp10.fip_rk}위다.
+
+원태인은 올해 평균자책점 {f2(p(WON).era)}로 부진했다. 그러나 FIP는 {f2(p(WON).fip)}로 {d.sp_min_ip}이닝 이상 던진 투수 {fr(WON).n}명 중 {fr(WON).fip_rk}위였다. 평균자책점과 FIP 차이 {f2(fr(WON).gap)}점은 이 가운데 {fr(WON).gap_rk}번째로 크다. 투구 내용에 비해 운이 따르지 않았다고 보면 삼성으로서는 원태인에게 기대를 걸어 볼 만하다. 다만 KIA전에는 한 번 나와 {inn(pv(WON).outs)}이닝 평균자책점 {f2(pv(WON).era)}로 좋지 않았다. 후라도는 평균자책점 {f2(p(JURADO).era)}, {inn(p(JURADO).outs)}이닝으로 꾸준했고 3선발로 제 몫을 할 것으로 보인다.
+
+<table>
+  <thead><tr><th>투수</th><th>선발</th><th>이닝</th><th>승-패</th><th>평균자책점</th><th>FIP</th><th>WHIP</th><th>삼진율</th><th>볼넷 비율</th><th class="cur">KIA전 평균자책점 (경기, 이닝)</th></tr></thead>
+  <tbody>
+    {[PEDE, WON, JURADO].map((id) => {
+      const r = p(id), v = pv(id);
+      return <tr><td>{r.name}</td><td>{r.gs}</td><td>{r.ip}</td><td>{r.w}-{r.l}</td><td>{f2(r.era)}</td><td>{f2(r.fip)}</td><td>{f2(r.whip)}</td><td>{f1(r.k_pct)}%</td><td>{f1(r.bb_pct)}%</td><td class="cur">{f2(v.era)} ({v.g}, {v.ip})</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">리그 선발 평균자책점은 {f2(d.lg_sp_era)}다.</p>
+
+## 휴식은 삼성, 기세는 KIA
+
+삼성은 10월 12일 정규시즌 최종전 뒤 1차전까지 열이틀을 쉰다. KIA는 10월 20일 준플레이오프를 끝내고 나흘을 쉰다. 체력은 삼성이 앞선다. 다만 KIA도 준플레이오프를 3연승으로 끝내 4·5차전을 치르지 않았다. 네일과 올러도 한 번씩만 던졌다. 그래서 삼성이 상대적으로 오래 쉰 가치가 희석될 수도 있다.
+
+구자욱이 가장 큰 변수이고 불붙은 KIA 타선을 페덱이 얼마나 막느냐가 관전 포인트다. 5전 3선승제 플레이오프에서 1차전을 이긴 팀은 2025년까지 {d.po_g1_win.n}번 가운데 {d.po_g1_win.adv}번, {pct(d.po_g1_win.adv, d.po_g1_win.n)}% 확률로 한국시리즈에 올랐다. 그래서 1차전이 정말 중요하다.
+
+필자는 기세를 탄 KIA의 약우세를 점친다. 그리고 시리즈가 최소 4차전까지 간다고 본다. 장기전으로 간다면 한국시리즈에서 기다리는 KT에 우승 청신호가 켜질 것이다.
