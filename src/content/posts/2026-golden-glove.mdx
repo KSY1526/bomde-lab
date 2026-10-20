@@ -1,0 +1,243 @@
+---
+title: "2026 골든글러브, 열 자리의 주인은 누구일까"
+description: "2026 KBO 골든글러브 투표가 10월 17일 시작됐다."
+date: 2026-10-20T12:40:00+09:00
+category: season
+tags: ["골든글러브", "곽빈", "오스틴", "김도영", "레이예스", "2026 시즌"]
+related: ["2026-mvp-race", "2026-wrc-basics", "2026-lotte-batting"]
+stat: { value: "211", label: "레이예스 안타, KBO 한 시즌 최다", short: "레이예스 안타" }
+dataUntil: "2026 정규시즌 최종전(10/12)까지"
+---
+import d from '../../data/posts/2026-10-20-golden-glove.json';
+
+export const b = (id) => d.bat.find((r) => r.id === id);
+export const br = (id) => d.brank.find((r) => r.id === id);
+export const rp = (id) => d.risp.find((r) => r.id === id);
+export const p = (id) => d.pit.find((r) => r.id === id);
+export const pr = (id) => d.prank.find((r) => r.id === id);
+export const pm = (id, m) => d.p_month.find((r) => r.id === id && r.split === m);
+export const ps = (id) => d.p_summer.find((r) => r.id === id);
+export const ct = (id) => d.catchers.find((r) => r.id === id);
+export const tm = (t) => d.teams.find((r) => r.team === t);
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const inn = (o) => Math.floor(o / 3);
+export const months = ['3~4월', '5월', '6월', '7월', '8월', '9월', '10월'];
+export const KWAK = '68220', KO = '64001', OLLER = '55633', NALE = '54640';
+export const HIS = '52764', KHJ = '68912';
+export const AUSTIN = '53123', KDY = '52605';
+export const KOO = '62404', HILL = '56034', REY = '54529', CWJ = '66606', NSB = '62947';
+export const KBH = '68050', CHW = '72443';
+// 붉은색 = 타자 우세, 파란색 = 투수 우세. 기준에서 멀수록 진하다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const hTd = (gap, step, body, extra = '') => {
+  const h = heat(gap, step);
+  return <td class={`${h ? h.cls : ''} ${extra}`.trim()} style={h ? `--heat:${h.pct}%` : undefined}>{body}</td>;
+};
+export const wrcTd = (v, step = 20) => hTd(Math.round(v - 100), step, f1(v));
+export const BatTable = ({ ids, win }) => (
+  <table>
+    <thead><tr><th>타자</th><th>경기</th><th>타석</th><th>안타</th><th>홈런</th><th>타점</th><th>득점</th><th>도루(실패)</th><th>타율/출루율/장타율</th><th>우르크</th><th>WAR*</th></tr></thead>
+    <tbody>
+      {ids.map((id) => {
+        const r = b(id);
+        return <tr><td class={win.includes(id) ? 'cur' : ''}>{r.name} ({r.team})</td><td>{r.g}</td><td>{r.pa}</td><td>{r.h}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{r.r}</td><td>{r.sb}({r.cs})</td><td>{f3(r.avg)}/{f3(r.obp)}/{f3(r.slg)}</td>{wrcTd(r.wrc_plus)}<td>{f2(r.war)}</td></tr>;
+      })}
+    </tbody>
+  </table>
+);
+
+2026 KBO 골든글러브 투표가 10월 17일 시작됐다. KBO가 발표한 후보는 79명이다. 포지션마다 한 명, 외야수만 세 명을 뽑아 모두 열 명이 골든글러브를 받는다. 수상자는 12월 8일 시상식에서 발표한다. 올해는 외야 세 자리에 타격 타이틀을 가진 선수가 네 명이나 몰렸고 15년 동안 이어진 포수 양강 체제도 끝났다.
+
+## 표는 타격으로 갈린다
+
+후보 자격은 기록으로 정한다. 포수와 야수는 그 포지션에서 {d.gg_inn}이닝(팀 경기 수 × 5이닝) 이상 수비해야 하고 지명타자는 지명타자로 297타석 이상 서야 한다. 투수는 규정이닝을 채우거나 10승, 30세이브, 30홀드 중 하나를 넘겨야 한다. 정규시즌 개인 타이틀 1위는 이 기준과 관계없이 후보가 된다. 2011년부터 지난해까지 포수 골든글러브를 나눠 가진 양의지(두산)와 강민호(삼성)가 올해는 이 이닝 기준에 걸려 후보에 들지 못했다.
+
+한 해 동안 KBO리그를 취재한 기자와 방송 관계자가 포지션마다 한 명씩 이름을 적어 투표한다. 무엇을 보고 뽑으라는 기준은 따로 없지만 표는 대체로 타격 성적을 따라간다. 2015년부터 지난해까지 내야 네 포지션 수상자 {d.gg_rank.length}명 가운데 {d.gg_rank.filter((r) => r.war_rk === 1).length}명이 그 포지션에서 타격 WAR*이 가장 높은 선수였다. 2위까지 넓히면 {d.gg_rank.filter((r) => r.war_rk <= 2).length}명이다. 수비만 따로 평가하려고 2023년 신설한 수비상과는 잘 겹치지 않는다. {d.def_overlap.years}년 야수 {d.def_overlap.slots}자리 중 두 상을 같은 선수가 받은 자리는 {d.def_overlap.same}자리였고 외야는 한 번도 겹치지 않았다.
+
+<table>
+  <thead><tr><th>골든글러브 수상자 중</th><th class="cur">해당 선수</th></tr></thead>
+  <tbody>
+    <tr><td>포지션 타격 WAR* 1위</td><td class="cur">{d.gg_rank.filter((r) => r.war_rk === 1).length} / {d.gg_rank.length}</td></tr>
+    <tr><td>포지션 타격 WAR* 1~2위</td><td class="cur">{d.gg_rank.filter((r) => r.war_rk <= 2).length} / {d.gg_rank.length}</td></tr>
+    <tr><td>포지션 우르크 1위</td><td class="cur">{d.gg_rank.filter((r) => r.wrc_rk === 1).length} / {d.gg_rank.length}</td></tr>
+    <tr><td>같은 해 수비상 수상자 ({d.def_overlap.years} 야수)</td><td class="cur">{d.def_overlap.same} / {d.def_overlap.slots}</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">위 세 줄은 2015~2025년 1루수, 2루수, 3루수, 유격수 수상자. 그 포지션을 주 포지션으로 {d.gg_min_pa}타석 이상 선 타자와 비교했다. WAR*은 크봇 자체 추정치로 수비·주루가 빠진 타격 기준이다.</p>
+
+## 표를 가르는 요소: 클래식 스탯, 임팩트, 팀 성적
+
+기준이 없다 보니 해마다 수상자를 두고 뒷말이 나온다. 지난 논란을 모아 보면 표를 가른 요소는 크게 넷이다.
+
+<table class="text">
+  <thead><tr><th>시즌</th><th class="cur">수상자</th><th>밀린 선수</th><th>쟁점</th></tr></thead>
+  <tbody>
+    {d.gg_debates.map((r) => (
+      <tr><td style="white-space:nowrap">{r.season}<br/><small>{r.pos}</small></td><td class="cur">{r.winner}<br/><small>{r.w_rec}</small></td><td>{r.rival}<br/><small>{r.r_rec}</small></td><td>{r.issue}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+클래식 스탯이 가장 힘이 세다. 홈런왕은 거의 빠짐없이 골든글러브를 받았다. 2000년대 들어 열린 시상식 24번 가운데 홈런왕이 골든글러브를 놓친 해는 4번뿐이었다. 투수도 타이틀을 따라간다. 2013년에는 46세이브로 구원왕에 오른 손승락이 역대 투수 부문 최저 득표율인 30%로 수상했다.
+
+임팩트는 비슷한 기록 사이에서 승부를 가른다. 2014년 2루수 부문에서 나바로(삼성)는 홈런 {d.gg2014.find((r) => r.name === '나바로').hr}개를 쳤고 우르크도 {f1(d.gg2014.find((r) => r.name === '나바로').wrc_plus)}로 서건창(넥센)의 {f1(d.gg2014.find((r) => r.name === '서건창').wrc_plus)}과 거의 같았다. 그러나 KBO 첫 200안타를 친 서건창이 292표를 받아 골든글러브를 가져갔다.
+
+팀 성적도 개인 기록이 비슷할 때 승부를 가른다. 최근 유격수 투표 두 번이 그랬다. 2023년에는 LG 통합 우승을 이끈 오지환이 박찬호를 34표 차로, 2024년에는 KIA 통합 우승 멤버가 된 박찬호가 박성한을 36표 차로 이겼다. 2024년 타격 기록은 박성한이 조금 나았다. 크봇 WAR*은 박성한 {f2(d.gg2024.find((r) => r.id === '67893').war)}, 박찬호 {f2(d.gg2024.find((r) => r.id === '64646').war)}이고 우르크(wRC+, 100이 리그 평균 타자)도 박성한이 {f1(d.gg2024.find((r) => r.id === '67893').wrc_plus)}으로 박찬호의 {f1(d.gg2024.find((r) => r.id === '64646').wrc_plus)}보다 높았다. 포스트시즌 성적이 정규시즌 평가에 끼어든다는 지적에 KBO는 지난해부터 투표를 한국시리즈 뒤가 아니라 준플레이오프 기간에 받는다. 이제 팀 성적은 정규시즌 순위로만 표에 반영된다.
+
+인지도와 국적도 거론된다. 1998년 우즈는 42홈런으로 MVP를 받고도 1루수 골든글러브는 이승엽에게 내줘 외국인 차별 논란이 일었다. 2013년 손승락이 수상했을 때도 성적이 더 좋았던 외국인 선발 세든과 찰리가 외면받았다는 비판이 나왔다.
+
+## 투수: 평균자책점, 탈삼진 2관왕 곽빈
+
+투수는 네 명이 접전이다. 고영표(KT)는 {p(KO).w}승으로 임찬규(LG)와 함께 공동 다승왕에 올랐고 KT를 정규시즌 1위로 이끌었다. 네일(KIA)은 {inn(p(NALE).outs)}이닝으로 리그에서 가장 많이 던지며 {p(NALE).w}승을 거뒀다. 올러(KIA)는 시즌 전반 가장 무서운 투수였다. 3~4월 평균자책점이 {f2(pm(OLLER, '3~4월').era)}, 6월은 {f2(pm(OLLER, '6월').era)}였다. 그러나 여름에 무너졌다. 7월 {pm(OLLER, '7월').g}경기에서 평균자책점이 {f2(pm(OLLER, '7월').era)}이었다.
+
+<table>
+  <thead><tr><th>투수</th><th>경기</th><th>승-패</th><th>이닝</th><th>ERA</th><th>WHIP</th><th>삼진</th><th>삼진율</th><th>FIP</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {[KWAK, KO, OLLER, NALE].map((id) => {
+      const r = p(id);
+      return <tr><td class={id === KWAK ? 'cur' : ''}>{r.name} ({r.team})</td><td>{r.g}</td><td>{r.w}-{r.l}</td><td>{r.ip}</td><td>{f2(r.era)}</td><td>{f2(r.whip)}</td><td>{r.so}</td><td>{r.k_pct}%</td><td>{f2(r.fip)}</td><td>{f2(r.war)}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">WAR*은 크봇 자체 추정치. 투수는 실점 기준이다.</p>
+
+곽빈(두산)은 {inn(p(KWAK).outs)}이닝으로 네 명 가운데 가장 적게 던졌다. 네일보다 {inn(p(NALE).outs - p(KWAK).outs)}이닝 적다. 그러나 곽빈은 아시안게임 국가대표로 9월 9일 등판 뒤 10월 6일까지 {d.k_gap.days}일 동안 리그 경기에 나서지 않았다. 이닝 차이는 그 공백 영향이 크다. 이닝을 빼면 곽빈이 압도적이다. 평균자책점 {f2(p(KWAK).era)}, 탈삼진 {p(KWAK).so}개, WAR* {f2(p(KWAK).war)}가 모두 리그 1위다. 평균자책점은 나머지 세 명 중 가장 낮은 올러보다 {f2(p(OLLER).era - p(KWAK).era)}점 낮고 삼진율 {p(KWAK).k_pct}%는 고영표의 삼진율 {p(KO).k_pct}%보다 {f1(p(KWAK).k_pct - p(KO).k_pct)}%p 높다. 클래식 스탯으로 봐도 곽빈은 평균자책점과 탈삼진 두 부문 타이틀을 차지했다.
+
+곽빈은 시즌 초 평균자책점 3점대였지만 6월부터는 한 달도 2점을 넘지 않았다. 순위 싸움이 가장 뜨거운 6~8월 평균자책점은 {f2(ps(KWAK).era)}로 네 명 중 가장 낮다. 같은 기간 고영표는 {f2(ps(KO).era)}, 올러는 {f2(ps(OLLER).era)}였다. 두산은 그 여름을 버텨 정규시즌 {tm('두산').rank}위로 가을야구에 올랐다.
+
+<table>
+  <thead><tr><th>월</th><th class="cur">곽빈</th><th>고영표</th><th>올러</th><th>네일</th></tr></thead>
+  <tbody>
+    {months.map((m) => (
+      <tr><td>{m}</td>{[KWAK, KO, OLLER, NALE].map((id) => { const r = pm(id, m); return r ? hTd(Math.round((r.era - d.ace_era) * 100), 75, <>{f2(r.era)} <small>({inn(r.outs)})</small></>) : <td>-</td>; })}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">월별 평균자책점, 괄호는 이닝. 3월은 4월과 묶었다. 파란 칸은 평균자책점 {f2(d.ace_era)}보다 낮은 달, 붉은 칸은 높은 달이고 0.75점 단위로 진해진다. 리그 선발 평균자책점은 {f2(d.lg_sp_era)}다.</p>
+
+팀 성적은 KT를 1위로 이끈 고영표가 앞선다. 임팩트는 곽빈 쪽이다. 정규시즌 기록만 보는 투표지만 골든글러브는 상징성도 따진다. 곽빈은 아시안게임 결승에서 일본을 상대로 6과 3분의 1이닝 1실점으로 던져 금메달을 이끌었다. 필자는 곽빈이 무난하게 투수 골든글러브를 받을 것으로 본다.
+
+## 포수: 수비에서 밀리지 않는 20홈런 허인서
+
+양의지, 강민호가 빠지면서 포수 부문은 허인서(한화)와 김형준(NC)으로 좁혀진다. 양의지는 포수로 {inn(ct('76232').outs)}이닝, 강민호는 {inn(ct('74540').outs)}이닝을 수비해 {d.gg_inn}이닝에 못 미쳤다. 양의지는 지명타자로 나선 경기가 많았다.
+
+<table>
+  <thead><tr><th>포수</th><th>포수 이닝</th><th>도루 허용</th><th>도루 저지</th><th>도루저지율</th><th>9이닝당 포일</th><th>홈런</th><th>타점</th><th>타율/출루율/장타율</th><th>우르크</th></tr></thead>
+  <tbody>
+    {[HIS, KHJ].map((id) => {
+      const c = ct(id), r = b(id);
+      return <tr><td class={id === HIS ? 'cur' : ''}>{r.name} ({r.team})</td><td>{inn(c.outs)}</td><td>{c.sb}</td><td>{c.cs}</td><td>{f1(c.cs_pct)}%</td><td>{c.pb9.toFixed(3)}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{f3(r.avg)}/{f3(r.obp)}/{f3(r.slg)}</td>{wrcTd(r.wrc_plus)}</tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">도루 저지는 포수 송구로 잡은 도루 실패만 셌다(투수 견제로 잡은 주자 제외). 우르크 = wRC+. 100이 리그 평균 타자이고 파크팩터를 반영했다. 붉은 칸은 100보다 높은 칸이고 20 단위로 진해진다.</p>
+
+김형준은 수비 평가가 좋다. 그러나 허인서도 수비에서 크게 밀리지 않는다. 도루저지율 {f1(ct(HIS).cs_pct)}%는 김형준의 {f1(ct(KHJ).cs_pct)}%보다 높고 포수로 {d.gg_inn}이닝 이상 수비한 {d.catchers.filter((r) => r.outs >= d.gg_inn * 3).length}명 가운데 가장 높다. 9이닝당 포일도 허인서 {ct(HIS).pb9.toFixed(3)}개, 김형준 {ct(KHJ).pb9.toFixed(3)}개로 비슷하다. 타격은 허인서가 조금 앞선다. 허인서의 우르크는 {f1(b(HIS).wrc_plus)}로 김형준의 {f1(b(KHJ).wrc_plus)}보다 높다.
+
+클래식 스탯과 임팩트에서는 차이가 더 벌어진다. 허인서는 홈런 {b(HIS).hr}개로 포수 20홈런을 채웠고 타점도 {b(HIS).rbi}개로 김형준보다 {b(HIS).rbi - b(KHJ).rbi}개 많다. 포수 20홈런은 골든글러브 투표에서 무시하기 어려운 숫자다. 필자는 허인서가 우위에 있다고 본다.
+
+## 1루수: 오스틴
+
+1루는 오스틴(LG), 데이비슨(키움), 디아즈(삼성)가 후보다. 디아즈는 지난해 1루수 수상자이고 올해도 타점 {b('54400').rbi}개로 리그 {br('54400').rbi}위다.
+
+<BatTable ids={d.pos['1루수']} win={[AUSTIN]} />
+
+<p class="table-note">WAR*은 크봇 자체 추정치로 타자는 수비·주루가 빠져 있다. 우르크 칸 색은 위 표와 같다.</p>
+
+그러나 타격은 오스틴이 압도적이다. 우르크 {f1(b(AUSTIN).wrc_plus)}, OPS {f3(b(AUSTIN).ops)}, WAR* {f2(b(AUSTIN).war)}이 모두 리그 1위다. 두 번째로 높은 데이비슨의 우르크 {f1(b('54944').wrc_plus)}보다도 {f1(b(AUSTIN).wrc_plus - b('54944').wrc_plus)} 높다. 타이틀은 없지만 클래식 스탯으로 봐도 홈런 {b(AUSTIN).hr}개와 타점 {b(AUSTIN).rbi}개가 모두 리그 {br(AUSTIN).hr}위다. 수비 평가도 좋다. 리그 MVP를 노릴 만한 성적이라 필자는 오스틴이 매우 무난하게 받을 것으로 본다.
+
+## 2루수: 박민우
+
+2루수는 박민우(NC) 말고는 류지혁(삼성) 정도가 거론된다.
+
+<BatTable ids={d.pos['2루수']} win={['62907']} />
+
+박민우는 타율 {f3(b('62907').avg)}, 출루율 {f3(b('62907').obp)}을 기록했고 도루 {b('62907').sb}개로 리그 {br('62907').sb}위에 올랐다. 우르크는 {f1(b('62907').wrc_plus)}으로 류지혁의 우르크 {f1(b('62234').wrc_plus)}보다 30 가까이 높다. 류지혁에게는 삼성의 정규시즌 {tm('삼성').rank}위라는 팀 성적 프리미엄이 붙겠지만 타격 차이가 크다. 필자는 박민우가 무난하게 받을 것으로 본다.
+
+## 유격수: 박성한
+
+유격수는 박성한(SSG), 김주원(NC), 박찬호(두산)의 경합이 예상된다. 김주원은 지난해, 박찬호는 2024년 수상자다.
+
+<BatTable ids={d.pos['유격수']} win={['67893']} />
+
+수비는 김주원과 박찬호가 조금 더 좋은 평가를 받는다. 그러나 박성한은 {b('67893').pa}타석에 들어서며 우르크 {f1(b('67893').wrc_plus)}을 기록했다. 유격수로서 600타석 넘게 서며 우르크 130을 넘긴 압도적인 타격 성적이다. 김주원의 우르크는 {f1(b('51907').wrc_plus)}, 박찬호는 {f1(b('64646').wrc_plus)}이다. 클래식 스탯도 박성한이 앞선다. 타율 {f3(b('67893').avg)}은 리그 {br('67893').avg}위, 안타 {b('67893').h}개는 {br('67893').h}위다. 2024년에는 팀 성적이 박성한의 발목을 잡았지만 올해는 SSG {tm('SSG').rank}위, 두산 {tm('두산').rank}위, NC {tm('NC').rank}위로 팀 성적 프리미엄을 크게 받을 후보가 없다. 필자는 박성한이 이번에는 무난하게 받을 것으로 본다.
+
+## 3루수: 김도영
+
+3루는 김도영(KIA), 노시환(한화), 허경민(KT)이 후보다.
+
+<BatTable ids={d.pos['3루수']} win={[KDY]} />
+
+1루와 구도가 비슷하다. 김도영은 홈런 {b(KDY).hr}개로 홈런왕에 올랐고 장타율 {f3(b(KDY).slg)}도 1위다. 우르크 {f1(b(KDY).wrc_plus)}은 오스틴 다음 리그 2위로 노시환의 우르크 {f1(b('69737').wrc_plus)}, 허경민의 우르크 {f1(b('79240').wrc_plus)}보다 50 넘게 높다. 홈런왕이 골든글러브를 놓친 해가 드물다는 점까지 더하면 오스틴과 MVP를 다툰 김도영이 무난하게 받을 것이다.
+
+## 지명타자: 근소하게 강백호
+
+지명타자는 강백호(한화)와 최형우(삼성)의 경합이다.
+
+<table>
+  <thead><tr><th>타자</th><th>경기</th><th>타석</th><th>홈런</th><th>타점</th><th>타율/출루율/장타율</th><th>우르크</th><th>득점권 타율</th><th>득점권 우르크 (타석)</th><th>팀 순위</th></tr></thead>
+  <tbody>
+    {[KBH, CHW].map((id) => {
+      const r = b(id), s = rp(id);
+      return <tr><td class={id === KBH ? 'cur' : ''}>{r.name} ({r.team})</td><td>{r.g}</td><td>{r.pa}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{f3(r.avg)}/{f3(r.obp)}/{f3(r.slg)}</td>{wrcTd(r.wrc_plus)}<td>{f3(s.avg)}</td>{hTd(Math.round(s.wrc_plus - 100), 20, <>{f1(s.wrc_plus)} <small>({s.pa})</small></>)}<td>{tm(r.team).rank}위</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">득점권은 2루나 3루에 주자가 있을 때. 우르크 칸 색은 위 표와 같다.</p>
+
+두 선수의 우르크는 강백호 {f1(b(KBH).wrc_plus)}, 최형우 {f1(b(CHW).wrc_plus)}로 거의 같다. 팀 성적은 최형우가 낫다. 삼성은 정규시즌 {tm('삼성').rank}위, 한화는 {tm('한화').rank}위였다. 최형우는 지명타자 3연패에 도전한다. 클래식 스탯은 강백호가 앞선다. 홈런 {b(KBH).hr}개로 30홈런을 넘겼고 타점도 {b(KBH).rbi}개로 최형우보다 {b(KBH).rbi - b(CHW).rbi}개 많다. 골든글러브 투표에서 가장 힘이 센 건 클래식 스탯이다. 그래서 필자는 강백호가 근소한 차이로 받을 것으로 예상한다.
+
+## 외야수: 가장 뜨거운 세 자리
+
+가장 격전지는 외야다. 후보는 구자욱(삼성), 힐리어드(KT), 레이예스(롯데), 최원준(KT), 나성범(KIA)으로 추려진다. 다섯 명 중 네 명이 타격 타이틀을 하나 이상 가졌다.
+
+<BatTable ids={d.pos['외야수']} win={[KOO, HILL, REY]} />
+
+<p class="table-note">우르크 칸 색은 위 표와 같다.</p>
+
+구자욱은 비율 스탯에서 가장 압도적이었다. 타율 {f3(b(KOO).avg)}과 출루율 {f3(b(KOO).obp)}로 두 부문 타이틀을 가져갔고 우르크 {f1(b(KOO).wrc_plus)}는 외야 후보 중 가장 높다. 정규시즌 2위 삼성 타선의 선봉장이었다. 다만 부상으로 {b(KOO).g}경기 출장에 그친 게 아쉽다. 필자는 풀타임 소화를 높은 가치로 본다. 그러나 구자욱은 {b(KOO).g}경기만 뛰고도 WAR* {f2(b(KOO).war)}을 쌓아 {b(CWJ).g}경기를 뛴 최원준({f2(b(CWJ).war)})과 같은 수준이다. 압도적인 비율 스탯과 WAR을 보면 구자욱의 손을 들어 주는 게 맞다고 필자는 본다.
+
+힐리어드는 클래식 스탯과 팀 성적을 모두 갖췄다. 타점 {b(HILL).rbi}개로 타점 타이틀을 차지했고 홈런 {b(HILL).hr}개는 김도영에게 1개 뒤진 리그 2위다. {b(HILL).g}경기를 뛰며 KT의 정규시즌 1위를 이끌었다. 다만 우르크 {f1(b(HILL).wrc_plus)}는 리그 {br(HILL).wrc_plus}위로 홈런 개수만큼 압도적이지는 않다. 그래도 필자는 힐리어드의 수상이 무난하다고 본다.
+
+남은 한 자리는 최원준과 레이예스다. 두 선수는 시즌 막바지까지 최다 안타 경쟁으로 화제가 됐다. 레이예스는 {b(REY).h}안타로 2024년 자신이 세운 {d.top_hits.find((r) => r.season === 2024).h}안타를 넘어 KBO 한 시즌 최다 안타 기록을 새로 썼다. 최원준도 {b(CWJ).h}안타를 쳤다. 롯데는 팀 우르크 {f1(tm('롯데').wrc_plus)}로 리그에서 가장 약한 타선이었는데 레이예스는 그 타선에서 이 기록을 썼다. 레이예스는 앞선 2024년과 2025년에도 최다 안타 타이틀을 앞세워 골든글러브를 받았다.
+
+<table>
+  <thead><tr><th>타자</th><th>타율</th><th>출루율</th><th>출루율 − 타율</th><th>볼넷</th><th>우르크</th><th>득점권 타율</th><th>득점권 우르크 (타석)</th><th>득점권 타점</th></tr></thead>
+  <tbody>
+    {[REY, CWJ].map((id) => {
+      const r = b(id), s = rp(id);
+      return <tr><td class={id === REY ? 'cur' : ''}>{r.name} ({r.team})</td><td>{f3(r.avg)}</td><td>{f3(r.obp)}</td><td>{f3(r.obp - r.avg)}</td><td>{r.bb}</td>{wrcTd(r.wrc_plus)}<td>{f3(s.avg)}</td>{hTd(Math.round(s.wrc_plus - 100), 20, <>{f1(s.wrc_plus)} <small>({s.pa})</small></>)}<td>{s.rbi}</td></tr>;
+    })}
+  </tbody>
+</table>
+
+<p class="table-note">리그 득점권 평균 타율은 {f3(d.lg_risp.avg)}, 득점권 평균 우르크는 {f1(d.lg_risp.wrc_plus)}다.</p>
+
+우르크 같은 세이버 지표에서는 레이예스({f1(b(REY).wrc_plus)})가 최원준({f1(b(CWJ).wrc_plus)})에게 조금 밀린다. 출루율과 타율의 차이가 레이예스는 {f3(b(REY).obp - b(REY).avg)}로 최원준({f3(b(CWJ).obp - b(CWJ).avg)})의 절반이다. 볼넷이 적어 타율에 비해 출루율이 덜 높았던 영향으로 보인다. 다만 필자는 외국인 타자에게 바라는 건 출루보다 타점이 아닐까 생각한다. 레이예스는 득점권에서 타율 {f3(rp(REY).avg)}, 우르크 {f1(rp(REY).wrc_plus)}로 상당히 강했다.
+
+최원준은 시즌 막판 기록에 감정적인 모습을 드러낸 게 마이너스다. 그래도 득점 {b(CWJ).r}개로 득점왕에 올라 KT의 정규시즌 1위에 기여했다고 본다. 나성범도 우르크 {f1(b(NSB).wrc_plus)}로 후보에 들기에 충분한 타격 성적을 냈다. 다만 앞의 네 선수와 비교하면 내세울 기록이 부족하다.
+
+필자는 위 사항을 고려했을 때 접전 끝에 구자욱, 힐리어드, 레이예스가 골든글러브를 받을 것으로 예상한다.
+
+## 필자의 예측
+
+<table class="text">
+  <thead><tr><th>포지션</th><th class="cur">예상 수상자</th><th>경쟁자</th></tr></thead>
+  <tbody>
+    <tr><td>투수</td><td class="cur">곽빈 (두산)</td><td>고영표, 올러, 네일</td></tr>
+    <tr><td>포수</td><td class="cur">허인서 (한화)</td><td>김형준</td></tr>
+    <tr><td>1루수</td><td class="cur">오스틴 (LG)</td><td>데이비슨, 디아즈</td></tr>
+    <tr><td>2루수</td><td class="cur">박민우 (NC)</td><td>류지혁</td></tr>
+    <tr><td>유격수</td><td class="cur">박성한 (SSG)</td><td>김주원, 박찬호</td></tr>
+    <tr><td>3루수</td><td class="cur">김도영 (KIA)</td><td>노시환, 허경민</td></tr>
+    <tr><td>지명타자</td><td class="cur">강백호 (한화)</td><td>최형우</td></tr>
+    <tr><td>외야수</td><td class="cur">구자욱 (삼성)<br/>힐리어드 (KT)<br/>레이예스 (롯데)</td><td>최원준<br/>나성범</td></tr>
+  </tbody>
+</table>
