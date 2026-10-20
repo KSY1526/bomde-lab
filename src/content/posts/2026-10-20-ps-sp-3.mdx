@@ -1,0 +1,77 @@
+---
+title: "김도영 만루포, LG는 2회에 침몰했다"
+description: "준플레이오프 3차전, KIA가 LG를 13-1로 이겼다."
+date: 2026-10-20T22:30:00+09:00
+category: game
+tags: ["포스트시즌", "준플레이오프", "KIA", "LG", "WPA"]
+related: ["2026-10-18-ps-sp-2", "2026-10-17-ps-sp-1", "2026-mvp-race"]
+stat: { value: "13-1", label: "준플레이오프 3차전, KIA가 LG를 꺾었다", short: "준PO 3차전", items: [{ v: "13", cap: "KIA" }, { v: "1", cap: "LG" }], sep: ":" }
+dataUntil: "2026 준플레이오프 3차전 (10/20)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-10-20-ps-sp-3.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+KIA가 준플레이오프 3차전에서 LG를 13-1로 꺾고 3연승으로 시리즈를 끝냈다. 경기는 2회초에 사실상 정해졌다. 나성범의 선두 타자 홈런으로 시작한 이 이닝에 KIA는 열 명이 타석에 들어서 일곱 점을 냈고 마지막은 김도영의 만루 홈런이었다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KIA 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KIA가 유리한 쪽이다."
+/>
+
+1회에는 양 팀 모두 점수를 내지 못해 KIA 승리확률이 50.0%에서 끝났다. 2회초 나성범의 홈런으로 59.3%가 됐고, 김규성의 안타와 하주석의 볼넷으로 1사 만루가 되자 67.0%까지 올랐다. 박정우와 박재현의 연속 적시타가 74.5%, 80.8%로 이어졌고 김도영의 만루 홈런으로 93.1%가 됐다. TOP 5가 모두 이 이닝에서 나왔다. 그 뒤로 KIA 승리확률은 한 번도 92% 밑으로 내려가지 않았고 8회초 세 점을 더하며 100%에 닿았다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="2회초, 하주석의 볼넷으로 만든 만루">
+나성범의 홈런으로 1-0이 된 뒤 1사에서 한준수가 실책으로 나가고 김규성이 안타를 쳤다. 코칭스태프가 마운드를 다녀간 직후 하주석은 카라스코의 공 네 개를 모두 골라 볼넷을 얻었다. 마지막 공은 3-0에서 들어온 커터였다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="2회초, 박재현이 바뀐 투수 케네디를 상대로 친 적시타">
+박정우의 적시타로 2-0이 되자 LG는 카라스코를 내리고 케네디를 올렸다. 박재현은 1-1에서 들어온 3구째 포심을 받아쳐 좌익수 앞에 떨어뜨렸고 3루에 있던 김규성이 홈을 밟았다. 주자는 다시 만루로 채워졌다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="2회초, 박정우의 만루 적시타">
+하주석의 볼넷으로 1사 만루가 된 뒤 박정우가 카라스코와 2-2까지 갔다. 5구째 커터를 받아쳐 좌익수 왼쪽으로 보냈고 3루 주자 한준수가 들어와 2-0이 됐다. 카라스코는 이 타석을 끝으로 마운드를 내려갔다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="2회초, 나성범의 선두 타자 홈런">
+1회를 0-0으로 마친 뒤 2회초 첫 타자로 나선 나성범이 카라스코의 3구째 148km 포심을 받아쳐 가운데 담장을 넘겼다. 이 경기 첫 점수다. 나성범은 6회초에도 솔로 홈런을 쳐 이날 홈런 두 개를 기록했다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="2회초, 김도영의 만루 홈런">
+박재현의 적시타로 3-0, 1사 만루가 이어진 상황에서 김도영이 케네디를 상대했다. 1-1에서 들어온 3구째 144km 포심을 받아쳐 좌중간 담장을 넘겼다. 주자 셋이 모두 들어와 7-0이 됐고 KIA 승리확률은 80.8%에서 93.1%로 올랐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+KIA 선발 시라카와가 승리확률을 11.2%p 올려 가장 높았다. 6회 무사 2, 3루에서 내려갈 때까지 5이닝 동안 안타 4개를 내주고 볼넷 없이 삼진 9개를 잡았다. 박정우는 2회와 5회 적시타 두 개로 10.9%p를, 김도영은 만루 홈런 한 방으로 9.3%p를 올렸다. LG에서는 선발 카라스코가 1⅓이닝 5실점으로 18.2%p를 깎았고 2회 1사 만루에 올라와 첫 두 타자에게 적시타와 만루 홈런을 맞은 케네디가 16.8%p를 깎았다. 케네디는 그 뒤 삼진 네 개를 잡으며 3회까지 막았다.
+
+KIA가 5전 3선승제 준플레이오프를 3승 무패로 마쳤다. 플레이오프에서는 정규시즌 2위 삼성을 만나고 1차전은 10월 25일 대구에서 열린다.
