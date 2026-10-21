@@ -20,6 +20,8 @@ export const pv = (id) => d.p_vs.find((r) => r.id === id);
 export const pp = (id) => d.pit_ps.find((r) => r.id === id);
 export const fr = (id) => d.fip_rank.find((r) => r.id === id);
 export const kbm = (m) => d.bp_month.find((r) => r.team === 'KIA' && r.m === m);
+export const sbm = (m) => d.bp_month.find((r) => r.team === '삼성' && r.m === m);
+export const bpt = (t) => d.bp_team.find((r) => r.team === t);
 export const f1 = (v) => v.toFixed(1);
 export const f2 = (v) => v.toFixed(2);
 export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
@@ -78,19 +80,21 @@ KIA는 지표만큼 점수를 내지 못했다. 우르크 1위, 팀 OPS {kia.ops
 
 ## KIA 불펜은 9월부터 달라졌다
 
-KIA 불펜은 여름에 흔들렸다. 6월부터 8월까지 석 달 연속 평균자책점이 5점 안팎이었고 7월에는 불펜 피우르크가 {f1(kbm('7월').opp_wrc)}까지 올랐다. 9월부터 달라졌다. 불펜 피우르크가 9월 {f1(kbm('9월').opp_wrc)}, 10월 {f1(kbm('10월').opp_wrc)}로 내려갔고 준플레이오프 세 경기에서는 불펜이 {inn(d.bp_ps.outs)}이닝 동안 {d.bp_ps.er}점만 내줬다. 시즌 내내 접전에서 약했던 KIA가 9월부터 살아난 불펜을 바탕으로 접전에서도 버틴다면 세부 지표에서 보여 준 투타 전력의 진가가 플레이오프에서 드러날 수 있다.
+시즌 전체로 보면 KIA 불펜 평균자책점은 {f2(bpt('KIA').era)}으로 10개 구단 중 {bpt('KIA').rk}위였다. 여름이 문제였다. 6월부터 8월까지 석 달 연속 불펜 평균자책점이 5점 안팎이었고 7월에는 불펜 피우르크가 {f1(kbm('7월').opp_wrc)}까지 올랐다. 9월부터 달라졌다. 불펜 피우르크가 9월 {f1(kbm('9월').opp_wrc)}, 10월 {f1(kbm('10월').opp_wrc)}로 내려갔고 준플레이오프 세 경기에서는 불펜이 {inn(d.bp_ps.outs)}이닝 동안 {d.bp_ps.er}점만 내줬다.
+
+삼성 불펜은 반대로 갔다. 7월 {f1(sbm('7월').opp_wrc)}이던 불펜 피우르크가 9월에는 {f1(sbm('9월').opp_wrc)}로 올랐다. 시즌 막판 불펜 기록만 놓고 보면 KIA가 앞선다. KIA는 시즌 내내 접전에서 약했다. 9월부터 살아난 불펜으로 접전에서도 버틴다면 세부 지표에서 보여 준 투타 전력의 진가가 플레이오프에서 드러날 수 있다.
 
 <table>
-  <thead><tr><th>월</th><th>불펜 이닝</th><th>불펜 평균자책점</th><th class="cur">불펜 피우르크</th></tr></thead>
+  <thead><tr><th>월</th><th>불펜 이닝</th><th>불펜 평균자책점</th><th class="cur">불펜 피우르크</th><th>삼성 불펜 피우르크</th></tr></thead>
   <tbody>
     {d.bp_month.filter((r) => r.team === 'KIA').map((r) => (
-      <tr><td>{r.m}</td><td>{inn(r.outs)}</td><td>{f2(r.era)}</td>{wrcTd(r.opp_wrc, 10)}</tr>
+      <tr><td>{r.m}</td><td>{inn(r.outs)}</td><td>{f2(r.era)}</td>{wrcTd(r.opp_wrc, 10)}{wrcTd(sbm(r.m).opp_wrc, 10)}</tr>
     ))}
-    <tr class="total"><td>준플레이오프</td><td>{inn(d.bp_ps.outs)}</td><td>{f2(d.bp_ps.era)}</td><td>-</td></tr>
+    <tr class="total"><td>준플레이오프</td><td>{inn(d.bp_ps.outs)}</td><td>{f2(d.bp_ps.era)}</td><td>-</td><td>-</td></tr>
   </tbody>
 </table>
 
-<p class="table-note">구원 투수 기록만 모았다. 3월은 4월과 묶었다. 붉은 칸은 피우르크 100 초과, 파란 칸은 100 미만이고 10 단위로 진해진다.</p>
+<p class="table-note">구원 투수 기록만 모았다. 이닝·평균자책점은 KIA 불펜이다. 3월은 4월과 묶었다. 붉은 칸은 피우르크 100 초과, 파란 칸은 100 미만이고 10 단위로 진해진다.</p>
 
 ## 준플레이오프의 김도영
 
