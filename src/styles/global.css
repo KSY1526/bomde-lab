@@ -23,6 +23,7 @@
 
   --radius: 3px;
   --font: 'IBM Plex Sans KR', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-body: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; /* 글 본문만(2026-10-21, 장문 가독성) */
   --num: 'Barlow Condensed', 'IBM Plex Sans KR', sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   color-scheme: light;
@@ -111,7 +112,8 @@ img, svg { max-width: 100%; }
 .meta-line .cat { color: var(--accent); font-weight: 600; }
 
 /* 글 본문 */
-.prose { font-size: 17px; }
+.prose { font-size: 17px; font-family: var(--font-body); }
+.prose :is(h2, h3, h4) { font-family: var(--font); }
 .prose h2 { margin: 2.4em 0 .7em; font-size: 1.25em; line-height: 1.4; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
 .prose h3 { margin: 1.8em 0 .5em; font-size: 1.15em; }
 .prose p, .prose ul, .prose ol { margin: 0 0 1.1em; }
