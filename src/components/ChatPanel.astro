@@ -1,7 +1,7 @@
 ---
 // 우측 크봇 챗봇. 데스크톱은 우측 고정 패널, 모바일(1023px 이하)은 우하단 버튼 → 아래에서 올라오는 창.
 // 서버(Tailscale Funnel, 2단계에서 구현) 계약:
-//   GET  {API}/health → { ok: true, remaining_today: number }
+//   GET  {API}/health → { ok, remaining_today: number }  (ok:false = 사용 한도가 차서 쉬는 중, 2026-10-24)
 //   POST {API}/chat   { nickname, question, history: [{ q, a }] } → { reply, remaining_today } | 4xx/5xx { error, remaining_today? }
 //   history = 30분 안의 직전 문답 최대 2개(추가 질문 맥락)
 // 문답은 비공개(사용자 결정 2026-10-10) — 각자 브라우저에 자기 문답만 보관한다.
@@ -102,13 +102,22 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); form.requestSubmit(); }
   });
   panel.querySelectorAll<HTMLButtonElement>('[data-example]').forEach((b) =>
-    b.addEventListener('click', () => { q.value = b.textContent ?? ''; q.dispatchEvent(new Event('input')); q.focus(); }));
+    b.addEventListener('click', () => {
+      q.value = b.textContent ?? ''; q.dispatchEvent(new Event('input')); q.focus();
+      ev('kbot_example', b.textContent ?? '');
+    }));
+  // 화면 이벤트(Visit.astro): 크봇을 열거나 질문 칸을 눌렀을 때 한 번
+  function ev(name: string, detail?: string) {
+    (window as unknown as { bomdeEvent?: (n: string, d?: string) => void }).bomdeEvent?.(name, detail);
+  }
+  q.addEventListener('focus', () => ev('kbot_open'));
 
   async function checkHealth() {
     if (!api) { setStatus('off', '준비 중이에요'); return; }
     try {
       const r = await fetch(`${api}/health`, { signal: AbortSignal.timeout(5000) });
       const j = await r.json();
+      if (j.ok === false) { setStatus('off', '지금은 쉬는 중이에요'); return; }
       setStatus('on', typeof j.remaining_today === 'number' ? `온라인 · 오늘 남은 질문 ${j.remaining_today}개` : '온라인');
     } catch {
       setStatus('off', '지금은 쉬는 중이에요');
@@ -161,7 +170,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
       const open = panel.classList.toggle('open');
       fab.setAttribute('aria-expanded', String(open));
       document.body.classList.toggle('chat-open', open);
-      if (open) q.focus();
+      if (open) { q.focus(); ev('kbot_open'); }
     }));
 
   checkHealth();

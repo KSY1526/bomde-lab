@@ -3,6 +3,9 @@
 //   POST {API}/visit { path, post?, ref, src? } → { views? }  (post가 있으면 그 글 조회수 +1 후 돌려줌)
 // 유입 경로 표시(2026-10-16): 링크에 ?from=insta 처럼 붙이면 src로 남기고, 주소창에서는 지운다(공유될 때 따라가지 않게).
 // 글 페이지는 [data-views][data-slug] 요소를 두면 조회수가 채워진다.
+// 본인 표시(2026-10-24): ?me=1로 한 번 들어오면 이 브라우저를 본인으로 기억하고 me:true를 실어 보낸다(조회수에 안 넣음). ?me=0이면 지운다.
+// 화면 이벤트(2026-10-24): POST {API}/event { name, path, post?, detail?, me } — 글 50%·끝까지 읽음, 댓글 칸·좋아요 보임, 다음에 읽을 글 클릭.
+//   다른 컴포넌트는 window.bomdeEvent(name, detail?)로 보낸다(크봇 열기 등). 같은 페이지에서 같은 이름은 한 번만.
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
 <span hidden data-visit data-api={api}></span>
@@ -13,8 +16,16 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   const post = views?.dataset.slug;
   const params = new URLSearchParams(location.search);
   const src = params.get('from')?.slice(0, 30) || undefined;
-  if (src) {
+  const meParam = params.get('me');
+  try {
+    if (meParam === '1') localStorage.setItem('bomde.me', '1');
+    if (meParam === '0') localStorage.removeItem('bomde.me');
+  } catch { /* 저장소가 막혀 있으면 무시 */ }
+  let me = false;
+  try { me = localStorage.getItem('bomde.me') === '1'; } catch { /* 무시 */ }
+  if (src || meParam !== null) {
     params.delete('from');
+    params.delete('me');
     const qs = params.toString();
     history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + location.hash);
   }
@@ -22,7 +33,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     fetch(`${api}/visit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer, src }),
+      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer, src, me }),
       signal: AbortSignal.timeout(5000),
     })
       .then((r) => (r.ok ? r.json() : {}))
@@ -34,4 +45,42 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
       })
       .catch(() => { /* 서버가 꺼져 있어도 글은 그대로 */ });
   }
+
+  const sent = new Set<string>();
+  function send(name: string, detail?: string) {
+    if (!api || sent.has(name)) return;
+    sent.add(name);
+    fetch(`${api}/event`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, path: location.pathname, post, detail, me }),
+      keepalive: true,
+    }).catch(() => {});
+  }
+  (window as unknown as { bomdeEvent: typeof send }).bomdeEvent = send;
+
+  const prose = document.querySelector<HTMLElement>('.prose');
+  if (prose) {
+    const onScroll = () => {
+      const r = prose.getBoundingClientRect();
+      const read = (innerHeight - r.top) / r.height;
+      if (read >= 0.5) send('scroll50');
+      if (read >= 1) { send('scroll100'); removeEventListener('scroll', onScroll); }
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+  }
+  const seen: [string, string][] = [['[data-comments]', 'comments_seen'], ['[data-like]', 'like_seen']];
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      const hit = seen.find(([sel]) => e.target.matches(sel));
+      if (hit) send(hit[1]);
+      io.unobserve(e.target);
+    }
+  });
+  for (const [sel] of seen) { const el = document.querySelector(sel); if (el) io.observe(el); }
+  document.querySelector('.related')?.addEventListener('click', (e) => {
+    const a = (e.target as HTMLElement).closest('a');
+    if (a) send('related_click', new URL(a.href).pathname);
+  });
 </script>
