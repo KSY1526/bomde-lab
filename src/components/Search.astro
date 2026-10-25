@@ -1,0 +1,229 @@
+---
+// 헤더 글 검색(사용자 결정 2026-10-25). 돋보기 → 검색 창. 처음 열 때 /search.json(src/pages/search.json.ts)을 받아 브라우저 안에서 찾는다(서버·AI 없음, 바로 뜸).
+// 결과 아래 "크봇에게 이 질문하기"를 누르면 입력한 문장을 크봇(ChatPanel)에 넘긴다: window에 'kbot:ask' 이벤트 { detail: 질문 }.
+// 화면 이벤트(logs/<날짜>/event.jsonl): search_open(창 열기), search(검색어 — 입력이 1.5초 멈추거나 창을 닫을 때),
+//   search_click("글id | 검색어"), search_kbot(크봇으로 넘긴 검색어). 같은 검색어는 페이지당 한 번
+import { url } from '../lib/site';
+---
+<button class="search-btn" type="button" data-search-open aria-haspopup="dialog">
+  <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <span>검색</span>
+</button>
+
+<dialog class="search" data-search data-index={`${url()}search.json`} data-base={url()} aria-label="글 검색">
+  <form method="dialog" class="search-head" data-search-form>
+    <label class="sr-only" for="search-q">검색어</label>
+    <input id="search-q" type="search" maxlength="300" autocomplete="off" placeholder="선수, 팀, 궁금한 것" data-search-q />
+    <button class="close" type="button" aria-label="검색 닫기" data-search-close>✕</button>
+  </form>
+  <ol class="results" data-search-results aria-live="polite"></ol>
+  <p class="empty muted" data-search-empty hidden>글에서 찾지 못했어요.</p>
+  <button class="to-kbot" type="button" data-search-kbot hidden>크봇에게 이 질문하기</button>
+</dialog>
+
+<script>
+  type Stat = { value: string; short?: string; items?: { v: string; cap: string }[]; sep?: string };
+  type Item = { stat?: Stat; id: string; title: string; description: string; category: string; date: string; tags: string[]; text: string; tables: string };
+  const dlg = document.querySelector<HTMLDialogElement>('[data-search]')!;
+  const input = dlg.querySelector<HTMLInputElement>('[data-search-q]')!;
+  const list = dlg.querySelector<HTMLOListElement>('[data-search-results]')!;
+  const empty = dlg.querySelector<HTMLElement>('[data-search-empty]')!;
+  const toKbot = dlg.querySelector<HTMLButtonElement>('[data-search-kbot]')!;
+  const base = dlg.dataset.base ?? '/';
+  let index: Item[] | null = null;
+  let loading: Promise<void> | null = null;
+
+  const ev = (name: string, detail?: string) =>
+    (window as unknown as { bomdeEvent?: (n: string, d?: string) => void }).bomdeEvent?.(name, detail);
+
+  function load() {
+    loading ??= fetch(dlg.dataset.index!)
+      .then((r) => r.json())
+      .then((j: Item[]) => { index = j; })
+      .catch(() => { loading = null; });
+    return loading;
+  }
+
+  // 한국어 조사·어미를 떼고 2자 이상만 검색어로("김도영이" → "김도영", "왜"는 버림)
+  const JOSA = /(으로|에서|에게|까지|부터|이랑|하고|이야|이에요|은|는|이|가|을|를|의|에|도|로|와|과|랑|야)$/;
+  function terms(q: string): string[] {
+    return [...new Set(q.toLowerCase().split(/[\s,.?!]+/)
+      .map((w) => (w.length >= 3 ? w.replace(JOSA, '') : w))
+      .filter((w) => w.length >= 2))];
+  }
+
+  // 점수: 제목 10 · 태그 6 · 요약 4 · 본문 1(+등장 횟수, 최대 3) · 표 1. 맞은 검색어 수를 먼저 보고,
+  // 검색어를 모두 담은 글이 있으면 그 글만 보여 준다("김도영 만루포"에 김도영만 나온 글이 줄줄이 붙지 않게)
+  function search(q: string) {
+    const ts = terms(q);
+    if (!index || ts.length === 0) return [];
+    const rows = index
+      .map((it) => {
+        const title = it.title.toLowerCase(), desc = it.description.toLowerCase(), text = it.text.toLowerCase();
+        const tags = it.tags.join(' ').toLowerCase(), tables = it.tables.toLowerCase();
+        let hit = 0, score = 0, first = -1;
+        for (const t of ts) {
+          let s = 0;
+          if (title.includes(t)) s += 10;
+          if (tags.includes(t)) s += 6;
+          if (desc.includes(t)) s += 4;
+          const at = text.indexOf(t);
+          if (at >= 0) {
+            s += 1 + Math.min(text.split(t).length - 2, 3);
+            if (first < 0) first = at;
+          } else if (tables.includes(t)) s += 1;
+          if (s > 0) { hit++; score += s; }
+        }
+        return { it, hit, score, first };
+      })
+      .filter((r) => r.hit > 0)
+      .sort((a, b) => b.hit - a.hit || b.score - a.score);
+    const all = rows.filter((r) => r.hit === ts.length);
+    return (all.length ? all : rows).slice(0, 8);
+  }
+
+  function snippet(text: string, at: number) {
+    if (at < 0) return '';
+    const s = Math.max(0, at - 30);
+    return (s > 0 ? '…' : '') + text.slice(s, s + 90).trim() + (s + 90 < text.length ? '…' : '');
+  }
+
+  // 글 목록(PostCard)과 같은 숫자판을 작게. 비교 값이 길면 줄마다 "숫자 꼬리표"로 쌓는다
+  const el = (tag: string, cls: string, text?: string) => {
+    const e = document.createElement(tag); e.className = cls; if (text !== undefined) e.textContent = text; return e;
+  };
+  function board(st: Stat) {
+    const b = el('span', 'board');
+    if (st.items?.length) {
+      const stack = st.items.reduce((n, it) => n + [...it.v].length, 0) > 6 || st.items.some((it) => [...it.cap].length > 4);
+      const box = el('span', stack ? 'items stack' : 'items');
+      st.items.forEach((it, k) => {
+        if (k > 0 && !stack) box.append(el('span', 'sep', st.sep ?? '→'));
+        const one = el('span', 'item');
+        one.append(el('span', 'digits v', it.v), el('span', 'cap', it.cap));
+        box.append(one);
+      });
+      b.append(box);
+    } else {
+      const [, main, unit] = st.value.match(/^([-+\d.,]+)([a-zA-Z/%]{2,})$/) ?? [, st.value, ''];
+      const v = el('span', 'digits v', main);
+      if (unit) v.append(el('span', 'unit', unit));
+      b.append(v);
+    }
+    if (st.short) b.append(el('span', 'short', st.short));
+    return b;
+  }
+
+  function render() {
+    const q = input.value.trim();
+    list.replaceChildren();
+    const rows = search(q);
+    for (const { it, first } of rows) {
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `${base}posts/${it.id}/`;
+      a.addEventListener('click', () => ev('search_click', `${it.id} | ${q}`.slice(0, 100)));
+      const meta = document.createElement('span');
+      meta.className = 'meta';
+      meta.textContent = `${it.category} · ${it.date}`;
+      const title = document.createElement('strong');
+      title.textContent = it.title;
+      const sn = document.createElement('span');
+      sn.className = 'snip';
+      sn.textContent = snippet(it.text, first) || it.description;
+      const text = el('span', 'text');
+      text.append(meta, title, sn);
+      if (it.stat) a.append(board(it.stat));
+      else a.classList.add('plain');
+      a.append(text);
+      li.append(a);
+      list.append(li);
+    }
+    empty.hidden = !(q && index && rows.length === 0);
+    toKbot.hidden = !q;
+  }
+
+  let typing: ReturnType<typeof setTimeout> | undefined;
+  const logQuery = () => { const q = input.value.trim(); if (q) ev('search', q.slice(0, 100)); };
+  input.addEventListener('input', () => { render(); clearTimeout(typing); typing = setTimeout(logQuery, 1500); });
+  input.addEventListener('keydown', (e) => {
+    // 엔터: 결과가 있으면 첫 글로, 없으면 크봇에게
+    if (e.key !== 'Enter' || e.isComposing) return;
+    e.preventDefault();
+    const first = list.querySelector<HTMLAnchorElement>('a');
+    if (first) first.click(); else if (input.value.trim()) toKbot.click();
+  });
+
+  document.querySelector('[data-search-open]')!.addEventListener('click', () => {
+    dlg.showModal();
+    input.focus();
+    ev('search_open');
+    load().then(render);
+  });
+  dlg.querySelector('[data-search-close]')!.addEventListener('click', () => dlg.close());
+  dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 누르면 닫기
+  dlg.addEventListener('close', () => { clearTimeout(typing); logQuery(); });
+
+  toKbot.addEventListener('click', () => {
+    const q = input.value.trim();
+    if (!q) return;
+    ev('search_kbot', q.slice(0, 100));
+    dlg.close();
+    window.dispatchEvent(new CustomEvent('kbot:ask', { detail: q }));
+  });
+</script>
+
+<style>
+  .search-btn {
+    flex: none; display: inline-flex; align-items: center; gap: 5px; font: inherit; font-size: 13px; color: var(--muted);
+    background: none; border: 1px solid var(--line); border-radius: var(--radius); padding: 3px 10px; cursor: pointer;
+  }
+  .search-btn svg { width: 14px; height: 14px; }
+  .search-btn:hover { color: var(--text); border-color: var(--muted); }
+
+  .search {
+    width: min(640px, calc(100vw - 24px)); max-height: min(80vh, 720px); margin: 8vh auto auto; padding: 0;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text);
+  }
+  .search[open] { display: flex; flex-direction: column; }
+  .search::backdrop { background: rgb(0 0 0 / 40%); }
+  .search-head { display: flex; gap: 8px; align-items: center; padding: 12px 14px; border-bottom: 2px solid var(--head-line); }
+  .search-head input {
+    flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
+  }
+  .search-head input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .search-head input::-webkit-search-cancel-button { display: none; } /* 닫기 ✕와 겹침 */
+  .close { background: none; border: 0; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px 8px; }
+
+  .results { list-style: none; margin: 0; padding: 0 14px; overflow-y: auto; }
+  .results :global(li) { border-bottom: 1px solid var(--line); }
+  .results :global(a) { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; padding: 12px 0; color: var(--text); }
+  .results :global(a.plain) { grid-template-columns: minmax(0, 1fr); }
+  .results :global(.text) { display: grid; gap: 3px; align-content: start; min-width: 0; }
+  .results :global(.board) { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 10px 4px; align-self: start; text-align: center; line-height: 1; }
+  .results :global(.board .v) { font-size: 27px; white-space: nowrap; }
+  .results :global(.board .unit) { font-family: var(--font); font-size: 11px; font-weight: 600; margin-left: 1px; }
+  .results :global(.items) { display: flex; align-items: flex-start; justify-content: center; gap: 2px; }
+  .results :global(.item) { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .results :global(.items .v) { font-size: 22px; }
+  .results :global(.sep) { font-family: var(--num); font-size: 15px; opacity: .55; line-height: 22px; }
+  .results :global(.items.stack) { flex-direction: column; align-items: stretch; gap: 4px; width: 100%; padding: 0 2px; }
+  .results :global(.items.stack .item) { flex-direction: column-reverse; gap: 1px; }
+  .results :global(.items.stack .v) { font-size: 19px; }
+  .results :global(:is(.cap, .short)) { font-size: 11px; line-height: 1.3; opacity: .8; word-break: keep-all; white-space: normal; }
+  .results :global(a:hover) { text-decoration: none; }
+  .results :global(a:hover strong) { color: var(--accent); }
+  .results :global(.meta) { font-size: 12.5px; color: var(--accent); }
+  .results :global(strong) { font-size: 16px; line-height: 1.45; word-break: keep-all; }
+  .results :global(.snip) { font-size: 13.5px; color: var(--muted); line-height: 1.55; word-break: keep-all; overflow-wrap: anywhere; }
+  .empty { margin: 0; padding: 14px; font-size: 14px; }
+  .to-kbot {
+    margin: 12px 14px 14px; align-self: flex-start; font: inherit; font-weight: 600; font-size: 14px; padding: 7px 14px;
+    border: 1px solid var(--accent); border-radius: var(--radius); background: none; color: var(--accent); cursor: pointer;
+  }
+  .to-kbot:hover { background: var(--accent); color: var(--bg); }
+  @media (max-width: 1023px) {
+    .search { margin-top: 12px; max-height: calc(100dvh - 24px); }
+  }
+</style>

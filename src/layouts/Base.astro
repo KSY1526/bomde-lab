@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import ChatPanel from '../components/ChatPanel.astro';
 import Visit from '../components/Visit.astro';
+import Search from '../components/Search.astro';
 import { SITE, SOCIAL, CATEGORIES, url } from '../lib/site';
 
 interface Props {
@@ -96,7 +97,10 @@ const nav = [
             <small>{SITE.tagline}</small>
           </span>
         </a>
-        <button class="theme-btn" type="button" data-theme-btn aria-label="화면 밝기 바꾸기">다크</button>
+        <div class="head-tools">
+          <Search />
+          <button class="theme-btn" type="button" data-theme-btn aria-label="화면 밝기 바꾸기">다크</button>
+        </div>
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
         <a href={url()} aria-current={path === url() ? 'page' : undefined}>홈</a>
@@ -151,6 +155,7 @@ const nav = [
   .logo { width: 40px; height: 40px; flex: none; }
   .brand strong { display: block; font-size: 23px; letter-spacing: -.02em; line-height: 1.2; }
   .brand small { display: block; font-size: 13px; color: var(--muted); }
+  .head-tools { display: flex; gap: 8px; align-items: center; flex: none; }
   .theme-btn {
     flex: none; font: inherit; font-size: 13px; color: var(--muted); background: none;
     border: 1px solid var(--line); border-radius: var(--radius); padding: 3px 10px; cursor: pointer;
