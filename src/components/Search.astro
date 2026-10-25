@@ -7,7 +7,7 @@ import { url } from '../lib/site';
 ---
 <button class="search-btn" type="button" data-search-open aria-haspopup="dialog">
   <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-  <span>검색</span>
+  <span class="short">검색</span><span class="long">블로그 내 글 검색</span>
 </button>
 
 <dialog class="search" data-search data-index={`${url()}search.json`} data-base={url()} aria-label="글 검색">
@@ -180,6 +180,13 @@ import { url } from '../lib/site';
   }
   .search-btn svg { width: 14px; height: 14px; }
   .search-btn:hover { color: var(--text); border-color: var(--muted); }
+  .search-btn .long { display: none; }
+  /* PC: 입력 칸처럼 가로로 길게 (사용자 결정 2026-10-25) */
+  @media (min-width: 720px) {
+    .search-btn { width: 300px; gap: 8px; padding: 8px 12px; font-size: 14px; background: var(--surface); }
+    .search-btn .short { display: none; }
+    .search-btn .long { display: inline; }
+  }
 
   .search {
     width: min(640px, calc(100vw - 24px)); max-height: min(80vh, 720px); margin: 8vh auto auto; padding: 0;

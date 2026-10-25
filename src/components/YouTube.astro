@@ -1,9 +1,9 @@
 ---
 // 글 끝 "이 글 영상으로 보기"(사용자 결정 2026-10-25). 글 frontmatter youtube에 적은 영상을 본문 끝·태그 위에 내장한다.
-// 롱폼(가로)이 먼저, 쇼츠(세로)는 그 아래. 화면에 가까워질 때만 불러온다(loading="lazy")
+// 글 하나에 영상 한 편, 롱폼과 쇼츠가 다 있으면 롱폼(사용자 결정 2026-10-25). 화면에 가까워질 때만 불러온다(loading="lazy")
 interface Props { videos: { id: string; type: 'long' | 'short' }[] }
-const order = { long: 0, short: 1 };
-const videos = [...Astro.props.videos].sort((a, b) => order[a.type] - order[b.type]);
+const pick = Astro.props.videos.find((v) => v.type === 'long') ?? Astro.props.videos[0];
+const videos = pick ? [pick] : [];
 ---
 {videos.length > 0 && (
   <section class="yt" aria-labelledby="yt-title">
