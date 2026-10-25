@@ -1,0 +1,129 @@
+---
+// 글 목록 썸네일(2026-10-25 사용자 결정): 영상 선수 카드처럼 구단 색 판 + 흰 실루엣 + 아래 진한 띠. 옛 연한 남색 숫자판을 대신한다.
+// 무엇을 그릴지는 글 frontmatter thumb(player·players·team·teams·pose), 숫자는 stat. 선수 체격·등번호는 src/data/players.json
+// 목록 = 정사각 판(띠에 숫자 + 짧은 설명), lead(홈 맨 위) = 가로로 긴 판(숫자를 크게, 실루엣은 오른쪽)
+import type { CollectionEntry } from 'astro:content';
+import Silhouette from './Silhouette.astro';
+import PLAYERS from '../data/players.json';
+import { teamColor, darken } from '../lib/teams';
+
+interface Props { data: CollectionEntry<'posts'>['data']; href: string; lead?: boolean }
+const { data, href, lead = false } = Astro.props;
+const { stat, thumb = {} } = data;
+type P = (typeof PLAYERS)[keyof typeof PLAYERS];
+const player = (n: string) => (PLAYERS as Record<string, P>)[n];
+
+// 판 한 쪽 = 색 + 실루엣. 두 쪽이면 반씩 나눠 서로 마주 보게
+const generic = thumb.pose === 'pitch';
+const sides = (thumb.players ?? (thumb.player ? [thumb.player] : [])).length
+  ? (thumb.players ?? [thumb.player!]).map((n) => ({ name: n, p: player(n), team: player(n)?.team }))
+  : (thumb.teams ?? [thumb.team]).map((t) => ({ name: '', p: undefined, team: t }));
+const one = sides.length === 1 ? sides[0] : undefined;
+const col = sides.map((s) => teamColor(s.team));
+
+// 띠에 넣을 짧은 설명: 비교 꼬리표가 연도·팀 이름이면 short, 아니면 꼬리표를 이어서("평균자책점 vs FIP")
+const items = stat?.items ?? [];
+const capIsTag = items.every((it) => /^\d{4}$/.test(it.cap) || it.cap in { KIA: 1, 삼성: 1, LG: 1, 두산: 1, KT: 1, SSG: 1, 롯데: 1, 한화: 1, NC: 1, 키움: 1 });
+const joined = items.map((it) => it.cap).join(` ${stat?.sep ?? '→'} `);
+const caption = items.length && !capIsTag && joined.length <= 11 ? joined : (stat?.short ?? '');
+const label = one?.p ? `${one.team} #${one.p.no}` : one?.team ?? '';
+const bandName = one?.p ? one.name : '';
+// 두 쪽 판의 맨 위 글: 비교 숫자는 반쪽마다 하나씩, 숫자가 하나뿐이면 목록처럼 아래 띠에
+const twoBand = lead && sides.length === 2 && !items.length;
+const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sides[k]?.team);
+---
+<a class:list={['thumb', lead ? 'wide' : 'square', { two: sides.length === 2 }]} href={href} tabindex="-1" aria-hidden="true">
+  {col.map((c, i) => <span class="half" style={`background:${c.c};${sides.length === 2 ? (i ? 'left:50%' : 'right:50%') : ''}`}></span>)}
+  {one?.p && <span class="ghost digits">{one.p.no}</span>}
+  {label && <span class="label">{label}</span>}
+  {sides.length === 2 && sides.map((s, i) => <span class:list={['label', 'tl', `t${i}`]}>{s.p ? `${s.team} #${s.p.no}` : s.team}</span>)}
+  {sides.length === 2 && <span class="seam"></span>}
+  {sides.map((s, i) => (
+    <span class:list={['fig', `f${i}`]}>
+      <Silhouette pitcher={s.p ? s.p.pitcher : generic} height={s.p?.height} weight={s.p?.weight} no={s.p?.no} c={col[i].c}
+        flip={sides.length === 2 ? i === 1 : !!s.p?.left} />
+    </span>
+  ))}
+  {lead && stat && !twoBand && (
+    <span class="nums">
+      {items.length ? items.map((it, k) => (
+        <>
+          {k > 0 && <span class="sep digits">{stat.sep ?? '→'}</span>}
+          <span class="item"><span class="v digits">{it.v}</span>{capShown(it.cap, k) && <span class="cap">{it.cap}</span>}</span>
+        </>
+      )) : <span class="item"><span class="v digits">{stat.value}</span>{stat.short && <span class="cap">{stat.short}</span>}</span>}
+    </span>
+  )}
+  {lead && !twoBand ? (
+    one && bandName && <span class="band name" style={`background:${darken(col[0].c)};border-top-color:${col[0].c2}`}>{bandName}</span>
+  ) : stat && (
+    <span class="band" style={sides.length === 2 ? `background:linear-gradient(90deg, ${darken(col[0].c)} 50%, ${darken(col[1].c)} 50%);border-top-color:${col[0].c2}` : `background:${darken(col[0].c)};border-top-color:${col[0].c2}`}>
+      <span class="bv digits">
+        {items.length ? items.map((it, k) => <>{k > 0 && <span class="bsep">{stat.sep ?? '→'}</span>}{it.v}</>) : stat.value}
+      </span>
+      {caption && <span class="bcap">{caption}</span>}
+    </span>
+  )}
+</a>
+
+<style>
+  .thumb { position: relative; display: block; overflow: hidden; border-radius: var(--radius); color: #fff; align-self: start; box-shadow: inset 0 0 0 1px var(--thumb-edge); }
+  .thumb:hover { text-decoration: none; }
+  .half { position: absolute; inset: 0; }
+  .ghost { position: absolute; right: 4%; top: -8%; font-size: 4.4em; line-height: 1; color: rgba(255, 255, 255, .2); }
+  .label { position: absolute; left: 7%; top: 5%; font-weight: 700; white-space: nowrap; font-size: .78em; z-index: 1; }
+  .fig { position: absolute; bottom: 0; }
+  .t1 { left: auto; right: 7%; }
+  .seam { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: rgba(255, 255, 255, .55); }
+  .band { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; border-top: 3px solid; z-index: 1; }
+
+  /* 목록: 정사각, 판 아래 36%는 띠 */
+  .square { width: 100%; aspect-ratio: 1 / 1; font-size: 15px; }
+  .square .fig { left: 8%; right: 8%; top: 13%; bottom: 34%; }
+  .square.two .fig { top: 20%; }
+  .square.two .f0 { left: 0; right: 50%; }
+  .square.two .f1 { left: 50%; right: 0; }
+  .square .band { height: 36%; gap: 2px; }
+  .bv { font-size: 24px; line-height: 1; white-space: nowrap; }
+  .bsep { font-size: .62em; opacity: .7; margin: 0 3px; vertical-align: .18em; }
+  .bcap { font-size: 11px; line-height: 1.2; opacity: .85; white-space: nowrap; max-width: 94%; overflow: hidden; text-overflow: ellipsis; }
+
+  /* 맨 위 글: 가로로 긴 판. 숫자는 왼쪽, 실루엣은 오른쪽(두 쪽이면 양 끝에서 마주 봄) */
+  .wide { width: 100%; max-width: 640px; height: 210px; font-size: 20px; }
+  .wide .ghost { right: 3%; top: -4%; font-size: 9em; }
+  .wide .band:not(.name) { height: 30%; }
+  .wide .band .bv { font-size: 40px; }
+  .wide .band .bcap { font-size: 13px; }
+  .wide.two:has(.band:not(.name)) .fig { bottom: 30%; top: 16%; }
+  .wide .fig { top: 8%; bottom: 22%; width: 32%; right: 3%; }
+  .wide .tl { top: 7%; font-size: .8em; }
+  .wide .t0 { left: 3%; }
+  .wide .t1 { right: 3%; }
+  .wide.two .fig { bottom: 0; top: 14%; width: 24%; }
+  .wide.two .f0 { left: 2%; right: auto; }
+  .wide.two .f1 { right: 2%; }
+  .wide .band.name { height: 22%; font-size: 17px; font-weight: 700; left: auto; width: 38%; }
+  .nums { position: absolute; left: 5%; top: 0; bottom: 0; right: 38%; display: flex; align-items: center; justify-content: space-around; z-index: 1; }
+  .wide.two .nums { left: 24%; right: 24%; display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
+  .wide.two .sep { display: none; }
+  .wide:not(:has(.band)) .nums { right: 34%; }
+  .item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .v { font-size: 64px; line-height: 1; white-space: nowrap; }
+  .cap { font-size: 14px; opacity: .85; white-space: nowrap; }
+  .sep { font-size: 28px; opacity: .6; }
+
+  @media (max-width: 560px) {
+    .bv { font-size: 21px; }
+    .bcap { font-size: 10px; }
+    .label { font-size: .7em; }
+    .wide { height: 170px; }
+    .wide .ghost { font-size: 7.5em; }
+    .wide .band .bv { font-size: 30px; }
+    .wide.two .nums { left: 22%; right: 22%; }
+    .wide.two .v { font-size: 36px; }
+    .v { font-size: 46px; }
+    .sep { font-size: 20px; }
+    .cap { font-size: 12px; }
+    .wide .band.name { font-size: 14px; }
+  }
+</style>

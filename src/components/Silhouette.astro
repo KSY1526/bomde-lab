@@ -1,0 +1,37 @@
+---
+// 선수 실루엣: 영상 선수 카드(video/src/silhouette.tsx)를 블로그용 SVG로 옮긴 것. 바탕 없이 흰 몸, 등에 구단 색 번호.
+// 체격 규칙은 영상과 같다: 키 170cm→높이 90%, 195cm→110% / 체격지수 21→굵기 80%, 30→120%. 투수는 투구 자세, 나머지는 타격 자세, 왼손(좌타·좌투)은 좌우 반전.
+// 선수를 모르면(팀·리그 글) 키 183·몸무게 88의 번호 없는 실루엣
+interface Props { pitcher?: boolean; height?: number; weight?: number; flip?: boolean; no?: string; c?: string }
+const { pitcher = false, height = 183, weight = 88, flip = false, no = '', c = '#000' } = Astro.props;
+const clamp = (x: number) => Math.max(0, Math.min(1, x));
+const bmi = weight / (height / 100) ** 2;
+const tall = 0.9 + 0.2 * clamp((height - 170) / 25), k = 0.8 + 0.4 * clamp((bmi - 21) / 9);
+const s = (0.86 * tall).toFixed(3);
+const torso = (d: string) => d.replace(/(\d+) (\d+)/g, (_, x, y) => `${(105 + (Number(x) - 105) * k).toFixed(1)} ${y}`);
+const line = (pts: number[][]) => 'M' + pts.map(([x, y]) => `${x} ${y}`).join(' L');
+const B = pitcher
+  ? { arms: [[[126, 70], [160, 56], [176, 22]], [[92, 72], [62, 86], [46, 74]]], legs: [[[100, 134], [62, 172], [40, 242]], [[132, 134], [158, 190], [184, 244]]], feet: [[[28, 244], [50, 244]], [[176, 246], [196, 240]]],
+      body: 'M78 62 Q112 46 144 64 L150 136 L92 146 L74 120 Z', head: [104, 38], cap: 'M124 36 Q122 16 104 16 Q86 16 84 34 L72 36 L74 42 L122 42 Z', num: [113, 116, 44] }
+  : { arms: [[[86, 70], [110, 84], [136, 54]], [[124, 68], [150, 76], [138, 54]]], legs: [[[88, 136], [72, 190], [62, 246]], [[122, 136], [140, 190], [150, 246]]], feet: [[[52, 248], [70, 248]], [[146, 248], [164, 248]]],
+      body: 'M70 64 Q105 48 140 64 L146 142 L66 142 Z', head: [105, 36], cap: 'M85 34 Q86 14 106 14 Q124 14 126 32 L136 34 L134 40 L86 40 Z', num: [106, 118, 46] };
+---
+<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+  <g transform={`translate(105 256) scale(${flip ? -1 : 1} 1) scale(${s}) translate(-105 -252)`} fill="#fff" stroke="#fff">
+    {!pitcher && <rect x="146" y="-14" width="10" height="80" rx="5" stroke="none" transform="rotate(32 151 50)" />}
+    {pitcher && <circle cx="180" cy="15" r="9" stroke="none" />}
+    {pitcher && <ellipse cx="40" cy="74" rx="13" ry="11" stroke="none" />}
+    {B.arms.map((p) => <path d={line(p)} fill="none" stroke-width={24 * k} stroke-linecap="round" stroke-linejoin="round" />)}
+    <path d={torso(B.body)} stroke="none" />
+    {B.legs.map((p) => <path d={line(p)} fill="none" stroke-width={33 * k} stroke-linecap="round" stroke-linejoin="round" />)}
+    {B.feet.map((p) => <path d={line(p)} fill="none" stroke-width="16" stroke-linecap="round" />)}
+    <circle cx={B.head[0]} cy={B.head[1]} r="21" stroke="none" />
+    <path d={B.cap} stroke="none" />
+    {no && <text x={B.num[0]} y={B.num[1]} text-anchor="middle" font-size={B.num[2]} font-weight="700" fill={c} stroke="none" transform={flip ? `translate(${2 * B.num[0]} 0) scale(-1 1)` : undefined}>{no}</text>}
+  </g>
+</svg>
+
+<style>
+  .sil { display: block; width: 100%; height: 100%; overflow: visible; }
+  .sil text { font-family: var(--num); }
+</style>

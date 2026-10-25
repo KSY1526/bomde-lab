@@ -1,5 +1,6 @@
 ---
 // 0을 기준으로 좌(음수)·우(양수)로 뻗는 가로 막대 차트. 빌드 때 SVG로 그려 JS 없이 보인다.
+// 색은 본문 표(td.up·td.down)와 같다: 양수 빨강(--accent), 음수 파랑(--pos).
 interface Row { label: string; value: number; highlight?: boolean }
 interface Props {
   rows: Row[];
@@ -53,8 +54,8 @@ const fmt = (v: number) => `${v > 0 ? '+' : ''}${v.toFixed(digits)}${unit}`;
   .axis { stroke: var(--muted); stroke-width: 1; }
   .label { fill: var(--text); font-size: 14px; }
   .value { fill: var(--muted); font-size: 15px; font-family: var(--num); font-weight: 600; font-variant-numeric: tabular-nums; }
-  .pos { fill: var(--pos); opacity: .8; }
-  .neg { fill: var(--neg); opacity: .8; }
+  .pos { fill: var(--accent); opacity: .8; }
+  .neg { fill: var(--pos); opacity: .8; }
   .hl .label { font-weight: 800; fill: var(--accent); }
   .hl rect { opacity: 1; stroke: var(--text); stroke-width: 1.5; }
 </style>

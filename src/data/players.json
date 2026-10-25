@@ -1,0 +1,58 @@
+{
+ "오스틴": {
+  "team": "LG",
+  "no": "23",
+  "height": 183,
+  "weight": 97,
+  "pitcher": false,
+  "left": false
+ },
+ "손호영": {
+  "team": "롯데",
+  "no": "33",
+  "height": 182,
+  "weight": 88,
+  "pitcher": false,
+  "left": false
+ },
+ "박세웅": {
+  "team": "롯데",
+  "no": "21",
+  "height": 182,
+  "weight": 85,
+  "pitcher": true,
+  "left": false
+ },
+ "박성한": {
+  "team": "SSG",
+  "no": "2",
+  "height": 180,
+  "weight": 77,
+  "pitcher": false,
+  "left": true
+ },
+ "레이예스": {
+  "team": "롯데",
+  "no": "29",
+  "height": 196,
+  "weight": 87,
+  "pitcher": false,
+  "left": false
+ },
+ "김재현": {
+  "team": "키움",
+  "no": "32",
+  "height": 178,
+  "weight": 90,
+  "pitcher": false,
+  "left": false
+ },
+ "원태인": {
+  "team": "삼성",
+  "no": "18",
+  "height": 183,
+  "weight": 92,
+  "pitcher": true,
+  "left": false
+ }
+}

@@ -23,6 +23,15 @@ const posts = defineCollection({
       items: z.array(z.object({ v: z.string(), cap: z.string() })).optional(),
       sep: z.string().optional(),
     }).optional(),
+    // 글 목록 썸네일 그림(2026-10-25). player = 선수 한 명(실루엣·등번호·구단 색, src/data/players.json), players = 두 선수 맞대결,
+    // team = 팀 글(번호 없는 실루엣 + 구단 색), teams = 두 팀(경기·시리즈), 아무것도 없으면 리그 색. pose = 번호 없는 실루엣 자세(bat 기본·pitch)
+    thumb: z.object({
+      player: z.string().optional(),
+      players: z.array(z.string()).length(2).optional(),
+      team: z.string().optional(),
+      teams: z.array(z.string()).length(2).optional(),
+      pose: z.enum(['bat', 'pitch']).optional(),
+    }).optional(),
     // 이 글로 만든 유튜브 영상(2026-10-25). 글 끝 "이 글 영상으로 보기"에 내장(글당 한 편, 롱폼 우선). id = 영상 주소의 11자, type = long(가로)·short(쇼츠)
     // 영상을 올리면 shortform-video 스킬 마지막 단계에서 적는다. 영상↔글 대응 전체는 docs/유튜브/영상-글-대응.md
     youtube: z.array(z.object({ id: z.string(), type: z.enum(['long', 'short']) })).default([]),

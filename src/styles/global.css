@@ -13,6 +13,7 @@
   --link: #1d4a8f;
   --board: #e2e6ee;
   --board-text: var(--navy);
+  --thumb-edge: transparent; /* 글 썸네일 판 테두리: 다크에서만 판 경계가 보이게 */
   --head-line: var(--navy);
   --chip-bg: #e9e7e0;
   --pos: #2c4f86;
@@ -42,6 +43,7 @@
     --accent: #ff7f89;
     --link: #9dbbec;
     --board: #22304a;
+    --thumb-edge: #ffffff24;
     --head-line: #34507f;
     --chip-bg: #1f2838;
     --pos: #8fb0e6;
@@ -63,6 +65,7 @@
   --accent: #ff7f89;
   --link: #9dbbec;
   --board: #22304a;
+  --thumb-edge: #ffffff24;
   --head-line: #34507f;
   --chip-bg: #1f2838;
   --pos: #8fb0e6;
