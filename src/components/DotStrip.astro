@@ -1,0 +1,57 @@
+---
+// 행마다 여러 값을 점으로 찍는 차트(감독별 시즌 값 등). 점 하나가 한 시즌, 가는 선은 최솟값~최댓값, 세로 눈금은 평균.
+// 색은 DivergingBar·본문 표와 같다: 양수 빨강(--accent), 음수 파랑(--pos). 빌드 때 SVG로 그려 JS 없이 보인다.
+interface Row { label: string; values: number[]; highlight?: boolean }
+interface Props {
+  rows: Row[];
+  title: string;
+  caption?: string;
+  unit?: string;
+}
+const { rows, title, caption, unit = '' } = Astro.props;
+
+const W = 640, labelW = 64, rowH = 28, padTop = 8, axisH = 22;
+const plotL = labelW + 8, plotR = W - 12;
+const max = Math.ceil(Math.max(...rows.flatMap((r) => r.values.map(Math.abs))) / 5) * 5 || 5;
+const x = (v: number) => plotL + ((v + max) / (2 * max)) * (plotR - plotL);
+const H = padTop + rows.length * rowH + axisH;
+const ticks = [-max, -max / 2, 0, max / 2, max];
+const fmt = (v: number) => `${v > 0 ? '+' : ''}${v}${unit}`;
+const mean = (a: number[]) => a.reduce((s, v) => s + v, 0) / a.length;
+---
+<figure class="chart">
+  <figcaption class="title">{title}</figcaption>
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
+    {ticks.map((t) => <line x1={x(t)} x2={x(t)} y1={0} y2={H - axisH} class={t === 0 ? 'axis' : 'grid'} />)}
+    {ticks.map((t) => <text x={x(t)} y={H - 6} class="tick" text-anchor="middle">{fmt(t)}</text>)}
+    {rows.map((r, i) => {
+      const y = padTop + i * rowH + rowH / 2;
+      const lo = Math.min(...r.values), hi = Math.max(...r.values), m = mean(r.values);
+      return (
+        <g class={r.highlight ? 'hl' : ''}>
+          <text x={labelW} y={y} class="label" text-anchor="end" dominant-baseline="central">{r.label}</text>
+          <line x1={x(lo)} x2={x(hi)} y1={y} y2={y} class="range" />
+          {r.values.map((v) => <circle cx={x(v)} cy={y} r="5" class={v >= 0 ? 'pos' : 'neg'} />)}
+          <line x1={x(m)} x2={x(m)} y1={y - 9} y2={y + 9} class="mean" />
+        </g>
+      );
+    })}
+  </svg>
+  {caption && <figcaption class="cap">{caption}</figcaption>}
+</figure>
+
+<style>
+  .chart { margin: 1.8em 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
+  .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  svg { width: 100%; height: auto; display: block; }
+  .axis { stroke: var(--muted); stroke-width: 1; }
+  .grid { stroke: var(--line); stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 13px; font-family: var(--num); font-variant-numeric: tabular-nums; }
+  .label { fill: var(--text); font-size: 14px; }
+  .range { stroke: var(--muted); stroke-width: 1.5; opacity: .5; }
+  .pos { fill: var(--accent); opacity: .75; }
+  .neg { fill: var(--pos); opacity: .75; }
+  .mean { stroke: var(--text); stroke-width: 2.5; }
+  .hl .label { font-weight: 800; fill: var(--accent); }
+</style>
