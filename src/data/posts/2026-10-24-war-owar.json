@@ -137,6 +137,30 @@
    "repl_runs": 19.8,
    "repl_all": 21.8,
    "war": 4.1
+  },
+  {
+   "batter_name": "박민우",
+   "team": "NC",
+   "pos_kr": "이",
+   "pa": 559,
+   "bat_runs": 18.3,
+   "pos_runs": 0.2,
+   "lg_runs": 1.8,
+   "repl_runs": 17.6,
+   "repl_all": 19.4,
+   "war": 3.58
+  },
+  {
+   "batter_name": "페라자",
+   "team": "한화",
+   "pos_kr": "우",
+   "pa": 558,
+   "bat_runs": 23.8,
+   "pos_runs": -5.6,
+   "lg_runs": 1.8,
+   "repl_runs": 17.6,
+   "repl_all": 19.4,
+   "war": 3.56
   }
  ],
  "pair": [
