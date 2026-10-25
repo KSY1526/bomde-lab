@@ -34,7 +34,5 @@ video/
 # 초안(발행 때 지움)
 src/content/posts/2026-manager-impact.mdx
 src/data/posts/2026-10-24-manager-impact.json
-src/content/posts/2026-war-owar.mdx
-src/data/posts/2026-10-24-war-owar.json
 src/content/posts/2026-war-dwar.mdx
 src/data/posts/2026-10-24-war.json

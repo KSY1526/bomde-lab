@@ -1,0 +1,132 @@
+---
+title: "야구 지표 해설 7: WAR 1편, 공격 지표 oWAR"
+description: "2026년 크봇 WAR* 1위는 KIA 김도영(7.16), 2위는 LG 오스틴(7.09)이었다."
+date: 2026-10-25T19:14:00+09:00
+category: metrics
+tags: ["WAR", "oWAR", "포지션 보정", "대체 선수", "세이버메트릭스"]
+related: ["2026-wrc-basics", "2026-golden-glove", "2026-wrc-limits"]
+stat: { value: "5.03 vs 4.10", label: "WAR*, 박성한(유격수) vs 레이예스(좌익수)", short: "포지션 보정", items: [{ v: "5.03", cap: "박성한" }, { v: "4.10", cap: "레이예스" }], sep: "vs" }
+thumb: { players: ["박성한", "레이예스"] }
+dataUntil: "2026 정규시즌 최종전(10/12)까지"
+---
+import d from '../../data/posts/2026-10-24-war-owar.json';
+import { url as siteUrl } from '../../lib/site';
+
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const sg = (v) => `${v > 0 ? '+' : ''}${v.toFixed(1)}`;
+export const posKr = { '포': '포수', '일': '1루수', '이': '2루수', '삼': '3루수', '유': '유격수', '좌': '좌익수', '중': '중견수', '우': '우익수', '지': '지명타자' };
+export const Y = (y) => d.rpw_years.find((r) => r.season === y);
+export const T = (n) => d.top.find((r) => r.batter_name === n);
+export const P = (n) => d.pair.find((r) => r.batter_name === n);
+export const O = (n, pos) => d.pos_outs.find((r) => r.batter_name === n && r.pos === pos).outs;
+export const rk = (n, all) => `${all.filter((x) => x === n).length > 1 ? '공동 ' : ''}${n}위`;
+export const inn = (o) => `${Math.floor(o / 3)}${['', '⅓', '⅔'][o % 3]}`;
+export const envTd = (v) => <td class={v >= 0 ? 'up' : 'down'} style={`--heat:${Math.round(Math.abs(v) * 80)}%`}>{v > 0 ? '+' : ''}{f2(v)}</td>;
+export const warTd = (v) => <td class="lvl cur" style={`--heat:${Math.round(v * 5)}%`}>{f2(v)}</td>;
+export const wRow = (r) => (
+  <tr><td class="cur" style="text-align:left">{r.batter_name} <small>({r.team})</small></td><td>{posKr[r.pos_kr]}</td><td>{sg(r.bat_runs)}</td><td>{sg(r.pos_runs)}</td><td>{sg(r.repl_all)}</td>{warTd(r.war)}</tr>
+);
+export const wHead = <thead><tr><th>타자</th><th>포지션</th><th>타격<br />득점</th><th>포지션<br />보정</th><th>대체 선수<br />보정</th><th>WAR*</th></tr></thead>;
+
+야구 이야기를 하다 보면 WAR이라는 말을 자주 쓴다. 연도가 다른 선수를 비교할 때도, 한 선수의 커리어 하이 시즌을 찾을 때도 WAR이 몇인지부터 꺼낸다. 포지션도 시즌도 다른 선수를 승수 하나로 비교할 수 있어서다. 이름 때문에 전쟁(war)처럼 들리지만 Wins Above Replacement의 줄임말이고 국내에서는 흔히 승리기여도라고 부른다.
+
+대체 선수는 주전이 다쳐 빠졌을 때 2군에서 바로 불러올려 그 자리를 메우는 선수라고 생각하면 쉽다. 돈을 거의 들이지 않고 언제든 구할 수 있는 수준이다. WAR은 어떤 선수 대신 대체 선수가 한 시즌을 뛰었다면 팀이 몇 승을 덜 했을지를 나타낸다. WAR 5는 그 자리를 대체 선수가 채웠을 때보다 팀이 5승을 더 거뒀다는 뜻이다.
+
+## 공격을 의미하는 oWAR, 수비를 의미하는 dWAR
+
+야수 WAR은 공격과 수비로 나눠 볼 수 있다. 미국 기록 사이트 베이스볼 레퍼런스는 공격(Offense) WAR과 수비(Defense) WAR을 각각 보여 준다. 영어 앞 글자를 따서 공격 WAR은 oWAR, 수비 WAR은 dWAR이라고 부른다. oWAR은 타격과 주루로 번 점수에 포지션 보정과 대체 선수 보정을 더한 값이고 dWAR은 수비로 막은 점수를 승수로 바꾼 값이다. 둘 다 포지션 보정이 들어가서 oWAR과 dWAR을 더해도 전체 WAR과 같지 않다.
+
+두 계산은 바탕이 다르다. oWAR은 안타, 홈런, 볼넷처럼 경기마다 남는 기록을 그대로 쓴다. dWAR은 수비수가 무엇을 했는지 기록만으로는 알기 어렵다. 이 글은 oWAR을 다루고 dWAR은 2편에서 따로 살펴본다.
+
+## 사이트마다 다른 WAR
+
+국내에서도 네이버 스포츠, 스탯티즈, 케이비리포트, KBO 공식 기록업체 스포츠투아이 등 여러 곳이 저마다 WAR을 계산해 내놓는다. 곳마다 계산식이 조금씩 달라 같은 선수라도 값이 엇갈린다. 2019년 SK 최정의 WAR은 스탯티즈 {f2(d.choi2019.statiz)}, 케이비리포트 {f2(d.choi2019.kbreport)}, 스포츠투아이 {f2(d.choi2019.sports2i)}였다. 스탯티즈와 케이비리포트에서는 전체 3위였는데 스포츠투아이에서는 15위로 나왔다. 올해 네이버 스포츠와 스탯티즈의 WAR, 이 블로그의 WAR\*도 아래처럼 차이가 난다.
+
+<table>
+  <thead><tr><th>타자</th><th>네이버<br />WAR</th><th>스탯티즈<br />WAR</th><th>스탯티즈<br />oWAR</th><th>크봇<br />WAR*</th></tr></thead>
+  <tbody>
+    {d.sites.map((r) => <tr><td class="cur" style="text-align:left">{r.batter_name} <small>({r.team})</small></td>{[['naver', 'naver_rank'], ['statiz', 'statiz_rank'], ['statiz_owar', 'statiz_owar_rank'], ['kbot', 'kbot_rank']].map(([v, k]) => <td class={v === 'kbot' ? 'cur' : undefined}>{f2(r[v])}<br /><small>{rk(r[k], d.sites.map((x) => x[k]))}</small></td>)}</tr>)}
+  </tbody>
+</table>
+<p class="table-note">2026 정규시즌. 숫자 아래는 그 사이트의 타자 순위. 크봇 WAR*은 수비와 주루를 뺀 값이다.</p>
+
+WAR은 이처럼 측정 방식이 명확하지 않긴 하다. 대체 선수 대비 승리 기여도라는 정의부터 다소 모호해서 대체 선수를 어느 수준으로 볼지, 무엇을 몇 점으로 칠지를 사이트마다 따로 정한다.
+
+이 블로그는 미국 기록 사이트 [FanGraphs](https://library.fangraphs.com/war/war-position-players/)가 공개한 방식을 따라 KBO 기록으로 WAR을 직접 계산한다. FanGraphs는 베이스볼 레퍼런스와 함께 WAR을 계산해 공개하는 대표 사이트다. 두 사이트의 WAR을 fWAR, bWAR로 나눠 부를 만큼 많이 인용된다. 2013년에는 두 사이트가 대체 선수 수준을 같은 값으로 맞췄다. 이 블로그가 계산한 WAR은 크봇에게 물어 바로 뽑아 볼 수 있다.
+
+## oWAR은 이렇게 계산한다
+
+oWAR 계산은 세 가지 유형으로 나뉜다. 타격 득점, 포지션 보정, 대체 선수 보정이다. 세 가지를 모두 점수로 구해 더한 뒤 승수로 바꾼다.
+
+### oWAR 계산법 1 - 타격 득점
+
+타격 득점은 타자가 방망이로 리그 평균 타자보다 몇 점을 더 벌었는지 나타낸다. 타자가 친 안타, 홈런, 볼넷마다 득점 가치를 매겨 더한 다음 리그 평균 타자가 같은 타석에서 냈을 득점을 뺀다. 홈구장이 타자에게 유리한지도 보정한다. 우르크(wRC+, <a href={siteUrl('/posts/2026-wrc-basics/')}>참고 글</a>)를 만들 때와 같은 재료다.
+
+LG 오스틴은 올해 타격 득점이 {sg(T('오스틴').bat_runs)}점으로 WAR\* 상위 8명 가운데 가장 많다. 리그 평균 타자가 오스틴 대신 {T('오스틴').pa}타석에 섰다면 LG는 {Math.round(T('오스틴').bat_runs)}점가량 덜 냈을 거라는 말이다. 평균 타자는 0점이고 그보다 못 치면 마이너스가 된다.
+
+### oWAR 계산법 2 - 포지션 보정
+
+포지션마다 수비 난도가 다르다. 유격수는 처리할 타구가 많고 까다롭다. 그만큼 이 자리를 볼 수 있는 선수가 귀하다. 타격 성적이 같다면 유격수가 팀에 더 큰 도움이 되는 셈이라 유격수에게는 점수를 더하고 수비를 아예 하지 않는 지명타자에게서는 가장 많이 뺀다.
+
+몇 점을 더하고 뺄지는 FanGraphs 값을 그대로 가져다 쓴다. FanGraphs는 포지션을 옮긴 선수의 수비 성적이 새 자리에서 얼마나 달라졌는지 보고 포지션 사이 난도 차이를 계산해 이 값을 정했다.
+
+이렇게 계산하면 평균 유격수는 평균 좌익수보다 162경기 한 시즌에 15점가량 더 막는다. 그래서 FanGraphs는 유격수에 {sg(d.pos_adj.find((r) => r.pos === '유격수').fg)}점, 좌익수에 {sg(d.pos_adj.find((r) => r.pos === '좌익수').fg)}점을 준다. 아래 표는 이 값을 KBO에서 600타석에 서는 동안 수비하는 이닝에 맞춰 고쳐 적은 것이다.
+
+<table>
+  <thead><tr><th>포지션</th><th>600타석 기준<br />포지션 보정</th></tr></thead>
+  <tbody>
+    {d.pos_adj.map((r) => <tr><td style="text-align:left">{r.pos}</td><td class="cur">{sg(r.per600)}점</td></tr>)}
+  </tbody>
+</table>
+<p class="table-note">FanGraphs의 162경기 기준 값을 KBO 600타석(약 {d.inn600}이닝 수비)에 맞춰 바꾼 값. 크봇 WAR*은 포지션별 수비 이닝대로 나눠 준다.</p>
+
+실제 계산에서는 선수가 포지션별로 수비한 이닝만큼 나눠 준다. SSG 박성한은 올해 유격수로 {inn(O('박성한', '유격수'))}이닝을 소화해 {sg(P('박성한').pos_runs)}점을 받았다.
+
+### oWAR 계산법 3 - 대체 선수 보정
+
+타격 득점은 리그 평균 타자를 기준으로 삼은 값이라 평균 타자는 0점이다. 그런데 WAR은 평균 타자가 아니라 대체 선수와 비교한다. 평균 타자도 대체 선수보다는 잘 치니 그 차이만큼 점수를 더해 줘야 한다. 이 값이 대체 선수 보정이다.
+
+대체 선수 보정도 FanGraphs 방식을 따랐다. 대체 선수로만 꾸린 팀은 승률 3할 정도에 그친다고 보고 리그 전체 승수에서 이 팀이 거둘 승수를 뺀 나머지를 WAR 총량으로 둔다. 그중 57%가 타자 몫이다. FanGraphs가 실제 시즌 기록으로 선수들이 대체 선수보다 더 거둔 승수를 나눠 보니 타자 쪽이 57% 안팎이었다. 타자는 경기마다 9명이 공격과 수비에 모두 나서니 투수보다 몫이 조금 더 큰 셈이다. 리그 전체에 돌아갈 이 타자 몫 WAR을 선수마다 선 타석 수대로 나눠 준다. 여기에 리그 전체 타자의 타격 득점과 포지션 보정을 합한 값이 0이 되도록 맞추는 몫도 함께 넣는다. 시즌이 달라도 WAR의 기준을 일관되게 유지하기 위해서다.
+
+타석에 많이 설수록 대체 선수 보정도 커진다. 올해 {T('김도영').pa}타석에 선 KIA 김도영은 {f1(T('김도영').repl_all)}점, {T('구자욱').pa}타석에 선 삼성 구자욱은 {f1(T('구자욱').repl_all)}점을 받았다.
+
+대체 선수 보정은 그해 경기 수와 타석, 득점 환경에 맞춰 해마다 다시 계산한다. 타고투저 등 리그 특성을 고려한 값이다. 총량을 승수로 정해 두었기 때문에 점수로 바꾸면 1승당 득점이 큰 타고투저 시즌에는 커지고 투고타저 시즌에는 작아진다. 올해 KBO는 600타석당 {f1(d.repl_per600)}점이다.
+
+### 점수를 승수로 바꾸면 WAR
+
+세 가지를 더한 점수를 승수로 바꾸면 WAR이 된다. 올해 KBO에서는 {f1(d.runs_per_win)}점이 1승이다. 이 값은 해마다 다르다. 점수가 많이 나는 해에는 1승을 더 올리는 데 드는 점수도 늘어난다.
+
+<table>
+  <thead><tr><th>시즌</th><th>팀 경기당<br />득점</th><th>2010년 이후<br />평균과 차이</th><th>1승당<br />득점</th><th>600타석당<br />대체 선수 보정</th></tr></thead>
+  <tbody>
+    {d.rpw_years.map((r) => <tr><td style="text-align:left">{r.season}</td><td>{f2(r.rpg)}</td>{envTd(r.rpg_diff)}<td class="cur">{f2(r.rpw)}</td><td>{f1(r.repl600)}점</td></tr>)}
+  </tbody>
+</table>
+<p class="table-note">KBO 정규시즌. 2010년 이후 팀 경기당 득점 평균은 {f2(d.rpg_avg)}점. 붉은색은 평균보다 점수가 많이 난 타고투저 시즌, 파란색은 적게 난 투고타저 시즌이고 차이가 클수록 진하다. 1승당 득점은 FanGraphs 근사식(9 × 리그 이닝당 득점 × 1.5 + 3)으로 구한다.</p>
+
+최근 5년 가운데 2024년은 팀이 경기당 {f2(Y(2024).rpg)}점을 내 2010년 이후 평균보다 {f2(Y(2024).rpg_diff)}점 많았다. 가장 타고투저였던 이 해에는 {f2(Y(2024).rpw)}점이 1승이었다. 2022년은 경기당 {f2(Y(2022).rpg)}점으로 평균보다 {f2(-Y(2022).rpg_diff)}점 적어 가장 투고타저였고 1승에 {f2(Y(2022).rpw)}점이 필요했다. 600타석당 대체 선수 보정도 2024년이 {f1(Y(2024).repl600)}점으로 2022년의 {f1(Y(2022).repl600)}점보다 컸다. 같은 타격 득점 40점이라도 2022년이면 {f1(40 / Y(2022).rpw)}승, 2024년이면 {f1(40 / Y(2024).rpw)}승이 된다. WAR은 타격 득점을 그해 리그 평균 타자와 비교하고 승수로 바꿀 때도 그해 득점 환경에 맞춘다. 그래서 타고투저 시즌이든 투고타저 시즌이든 연도가 다른 선수를 같은 잣대로 잴 수 있다.
+
+## 크봇 WAR\*로 본 올해 타자
+
+롯데 레이예스는 타격 득점이 {f1(P('레이예스').bat_runs)}점으로 SSG 박성한의 {f1(P('박성한').bat_runs)}점보다 많다. 그런데 WAR\*은 박성한이 {f2(P('박성한').war)}으로 레이예스의 {f2(P('레이예스').war)}보다 높게 나온다. 유격수인 박성한은 포지션 보정으로 {sg(P('박성한').pos_runs)}점을 받았고 좌익수인 레이예스는 {sg(P('레이예스').pos_runs)}점이었다. 키움 데이비슨은 1루수라 타격 득점이 박성한보다 많은데도 WAR\*이 {f2(P('데이비슨').war)}에 그쳤다.
+
+<table>
+  {wHead}
+  <tbody>{d.pair.map(wRow)}</tbody>
+</table>
+<p class="table-note">2026 정규시즌. 득점 단위. 회색이 진할수록 WAR*이 높다.</p>
+
+<table>
+  {wHead}
+  <tbody>{d.top.map(wRow)}</tbody>
+</table>
+<p class="table-note">2026 정규시즌 WAR* 상위 {d.top.length}명. 회색이 진할수록 WAR*이 높다.</p>
+
+이 블로그의 WAR\*(크봇 자체 추정치)은 oWAR에서 주루를 뺀 값이고 dWAR도 넣지 않았다. 주루를 뺀 이유는 주루 가치의 상당수가 이미 타격 득점에 들어 있어서다. 빠른 발로 만든 내야안타는 안타로, 단타를 2루타로 늘린 주루는 2루타로 기록된다. 이를 뺀 순수 주루는 메이저리그에서 가장 뛰어난 주자조차 한 시즌에 1승 안팎을 보태는 정도라 가치가 크지 않다. 그래서 이 글에서는 주루를 다루지 않고 주루의 가치는 이후 시리즈에서 따로 집중해서 다룰 것이다.
+
+## oWAR이 좋은 이유
+
+oWAR은 논리적이다. 계산 재료부터 실제로 나온 안타, 홈런, 볼넷을 쓴다. 안타 하나, 홈런 하나가 몇 점짜리인지도 누가 정한 값이 아니라 수많은 경기에서 그 결과 뒤에 점수가 얼마나 났는지를 세어서 매긴다. 그러니 같은 기록을 넣으면 누가 계산해도 타격 득점은 거의 같게 나온다. 사이트마다 다른 건 포지션 보정이나 대체 선수 값 정도다.
+
+oWAR은 우르크처럼 세이버메트릭스 기반으로 타격 능력을 평가하고, 여기에 포지션까지 반영한다. 다만 우르크와 달리 oWAR은 누적치다. 우르크는 타석당 효율이라 150인 타자가 300타석에 서든 600타석에 서든 그대로 150으로 남는다. oWAR은 많이 뛴 만큼 쌓이니 600타석에 선 쪽이 팀에 두 배 가까이 보탰다고 나온다. 한 선수가 팀에 몇 승을 더했는지 직관적으로 설명하기도 좋다.

@@ -1,0 +1,309 @@
+{
+ "season": 2026,
+ "runs_per_win": 10.6,
+ "repl_per600": 20.9,
+ "lg_per600": 1.9,
+ "rpw_years": [
+  {
+   "season": 2022,
+   "rpw": 9.85,
+   "rpg": 4.53,
+   "repl600": 19.8,
+   "rpg_diff": -0.46
+  },
+  {
+   "season": 2023,
+   "rpw": 9.97,
+   "rpg": 4.6,
+   "repl600": 19.9,
+   "rpg_diff": -0.39
+  },
+  {
+   "season": 2024,
+   "rpw": 11.17,
+   "rpg": 5.38,
+   "repl600": 21.3,
+   "rpg_diff": 0.39
+  },
+  {
+   "season": 2025,
+   "rpw": 10.2,
+   "rpg": 4.73,
+   "repl600": 20.5,
+   "rpg_diff": -0.26
+  },
+  {
+   "season": 2026,
+   "rpw": 10.58,
+   "rpg": 5.07,
+   "repl600": 20.9,
+   "rpg_diff": 0.08
+  }
+ ],
+ "rpg_avg": 4.99,
+ "top": [
+  {
+   "batter_name": "김도영",
+   "team": "KIA",
+   "pos_kr": "삼",
+   "pa": 586,
+   "bat_runs": 55.4,
+   "pos_runs": -0.1,
+   "lg_runs": 1.9,
+   "repl_runs": 18.5,
+   "repl_all": 20.4,
+   "war": 7.16
+  },
+  {
+   "batter_name": "오스틴",
+   "team": "LG",
+   "pos_kr": "일",
+   "pa": 636,
+   "bat_runs": 65.2,
+   "pos_runs": -12.3,
+   "lg_runs": 2.1,
+   "repl_runs": 20.1,
+   "repl_all": 22.2,
+   "war": 7.09
+  },
+  {
+   "batter_name": "최원준",
+   "team": "KT",
+   "pos_kr": "우",
+   "pa": 676,
+   "bat_runs": 39.1,
+   "pos_runs": -3.8,
+   "lg_runs": 2.2,
+   "repl_runs": 21.3,
+   "repl_all": 23.5,
+   "war": 5.56
+  },
+  {
+   "batter_name": "힐리어드",
+   "team": "KT",
+   "pos_kr": "좌",
+   "pa": 637,
+   "bat_runs": 37.5,
+   "pos_runs": -3.1,
+   "lg_runs": 2.1,
+   "repl_runs": 20.1,
+   "repl_all": 22.2,
+   "war": 5.35
+  },
+  {
+   "batter_name": "구자욱",
+   "team": "삼성",
+   "pos_kr": "좌",
+   "pa": 495,
+   "bat_runs": 43.3,
+   "pos_runs": -5.4,
+   "lg_runs": 1.6,
+   "repl_runs": 15.6,
+   "repl_all": 17.2,
+   "war": 5.21
+  },
+  {
+   "batter_name": "박성한",
+   "team": "SSG",
+   "pos_kr": "유",
+   "pa": 625,
+   "bat_runs": 25.6,
+   "pos_runs": 5.9,
+   "lg_runs": 2.0,
+   "repl_runs": 19.7,
+   "repl_all": 21.7,
+   "war": 5.03
+  },
+  {
+   "batter_name": "나성범",
+   "team": "KIA",
+   "pos_kr": "우",
+   "pa": 580,
+   "bat_runs": 32.1,
+   "pos_runs": -7.9,
+   "lg_runs": 1.9,
+   "repl_runs": 18.3,
+   "repl_all": 20.2,
+   "war": 4.2
+  },
+  {
+   "batter_name": "레이예스",
+   "team": "롯데",
+   "pos_kr": "좌",
+   "pa": 627,
+   "bat_runs": 29.4,
+   "pos_runs": -7.9,
+   "lg_runs": 2.0,
+   "repl_runs": 19.8,
+   "repl_all": 21.8,
+   "war": 4.1
+  }
+ ],
+ "pair": [
+  {
+   "batter_name": "박성한",
+   "team": "SSG",
+   "pos_kr": "유",
+   "pa": 625,
+   "bat_runs": 25.6,
+   "pos_runs": 5.9,
+   "lg_runs": 2.0,
+   "repl_runs": 19.7,
+   "repl_all": 21.7,
+   "war": 5.03
+  },
+  {
+   "batter_name": "레이예스",
+   "team": "롯데",
+   "pos_kr": "좌",
+   "pa": 627,
+   "bat_runs": 29.4,
+   "pos_runs": -7.9,
+   "lg_runs": 2.0,
+   "repl_runs": 19.8,
+   "repl_all": 21.8,
+   "war": 4.1
+  },
+  {
+   "batter_name": "데이비슨",
+   "team": "키움",
+   "pos_kr": "일",
+   "pa": 522,
+   "bat_runs": 27.9,
+   "pos_runs": -9.2,
+   "lg_runs": 1.7,
+   "repl_runs": 16.5,
+   "repl_all": 18.2,
+   "war": 3.48
+  }
+ ],
+ "pos_outs": [
+  {
+   "batter_name": "데이비슨",
+   "pos": "1루수",
+   "outs": 2334
+  },
+  {
+   "batter_name": "데이비슨",
+   "pos": "지명타자",
+   "outs": 632
+  },
+  {
+   "batter_name": "레이예스",
+   "pos": "좌익수",
+   "outs": 2515
+  },
+  {
+   "batter_name": "레이예스",
+   "pos": "지명타자",
+   "outs": 745
+  },
+  {
+   "batter_name": "레이예스",
+   "pos": "우익수",
+   "outs": 334
+  },
+  {
+   "batter_name": "박성한",
+   "pos": "유격수",
+   "outs": 3460
+  },
+  {
+   "batter_name": "박성한",
+   "pos": "지명타자",
+   "outs": 3
+  }
+ ],
+ "sites": [
+  {
+   "batter_name": "오스틴",
+   "team": "LG",
+   "naver": 8.72,
+   "naver_rank": 1,
+   "kbot": 7.09,
+   "kbot_rank": 2,
+   "statiz": 8.39,
+   "statiz_rank": 2,
+   "statiz_owar": 8.51,
+   "statiz_owar_rank": 1
+  },
+  {
+   "batter_name": "김도영",
+   "team": "KIA",
+   "naver": 7.2,
+   "naver_rank": 3,
+   "kbot": 7.16,
+   "kbot_rank": 1,
+   "statiz": 8.92,
+   "statiz_rank": 1,
+   "statiz_owar": 8.09,
+   "statiz_owar_rank": 2
+  },
+  {
+   "batter_name": "박성한",
+   "team": "SSG",
+   "naver": 6.72,
+   "naver_rank": 4,
+   "kbot": 5.03,
+   "kbot_rank": 6,
+   "statiz": 6.98,
+   "statiz_rank": 4,
+   "statiz_owar": 7.23,
+   "statiz_owar_rank": 3
+  }
+ ],
+ "choi2019": {
+  "statiz": 6.32,
+  "kbreport": 6.63,
+  "sports2i": 4.82,
+  "kbot": 5.41
+ },
+ "pos_adj": [
+  {
+   "pos": "포수",
+   "fg": 12.5,
+   "per600": 10.4
+  },
+  {
+   "pos": "유격수",
+   "fg": 7.5,
+   "per600": 6.3
+  },
+  {
+   "pos": "2루수",
+   "fg": 2.5,
+   "per600": 2.1
+  },
+  {
+   "pos": "3루수",
+   "fg": 2.5,
+   "per600": 2.1
+  },
+  {
+   "pos": "중견수",
+   "fg": 2.5,
+   "per600": 2.1
+  },
+  {
+   "pos": "좌익수",
+   "fg": -7.5,
+   "per600": -6.3
+  },
+  {
+   "pos": "우익수",
+   "fg": -7.5,
+   "per600": -6.3
+  },
+  {
+   "pos": "1루수",
+   "fg": -12.5,
+   "per600": -10.4
+  },
+  {
+   "pos": "지명타자",
+   "fg": -17.5,
+   "per600": -14.6
+  }
+ ],
+ "inn600": 1217
+}
