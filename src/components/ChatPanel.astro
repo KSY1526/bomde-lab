@@ -6,7 +6,8 @@
 //   history = 30분 안의 직전 문답 최대 2개(추가 질문 맥락)
 //   posts = 답과 관련된 발행 글 최대 2편 [{ id, title, category, date }] → 답 아래 글 링크로 보인다(2026-10-25)
 // 닉네임은 받지 않는다(사용자 결정 2026-10-25, 질문 문턱 낮추기).
-// 헤더 검색(Search.astro)의 "크봇에게 이 질문하기"는 window 'kbot:ask' 이벤트로 질문을 넘긴다 → 창을 열고 바로 보낸다.
+// 헤더 검색(Search.astro)·검색 결과 페이지의 "크봇에게 이 질문하기"는 window 'kbot:ask' 이벤트로 질문을 넘긴다 → 창을 열고 입력 칸에 채운다.
+// 보내기는 사용자가 누른다(2026-10-26 사용자 요청: 자동으로 보내지 말 것)
 // 문답은 비공개(사용자 결정 2026-10-10) — 각자 브라우저에 자기 문답만 보관한다.
 import { url } from '../lib/site';
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
@@ -202,7 +203,6 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     if (matchMedia('(max-width: 1023px)').matches) setOpen(true);
     else panel.scrollIntoView({ block: 'nearest' });
     q.value = text; q.dispatchEvent(new Event('input')); q.focus();
-    if (online) form.requestSubmit();
   });
 
   checkHealth();

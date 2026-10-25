@@ -1,0 +1,67 @@
+---
+// 검색 결과 페이지 /search/?q=검색어 (2026-10-26 사용자 요청: 검색 창에서 엔터를 누르면 여기로). 모양은 검색 창 결과와 같다.
+// 찾기·결과 줄은 src/lib/search.ts, 줄 CSS(.search-results)와 썸네일 CSS는 헤더 Search.astro가 모든 페이지에 싣는다.
+// 입력을 고치면 결과와 주소(?q=)가 같이 바뀐다. 결과가 없어도 크봇으로 자동으로 넘기지 않는다(버튼만)
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/site';
+---
+<Base title="글 검색" description="봄데 연구소 글 검색">
+  <h1>글 검색</h1>
+  <form class="search-page" action={url('search/')} method="get" data-page-form data-index={`${url()}search.json`} data-base={url()}>
+    <label class="sr-only" for="page-q">검색어</label>
+    <input id="page-q" name="q" type="search" maxlength="300" autocomplete="off" placeholder="선수, 팀, 궁금한 것" data-page-q />
+  </form>
+  <ol class="search-results" data-page-results aria-live="polite"></ol>
+  <p class="empty muted" data-page-empty hidden>글에서 찾지 못했어요.</p>
+  <button class="to-kbot" type="button" data-page-kbot hidden>크봇에게 이 질문하기</button>
+</Base>
+
+<script>
+  import { load, loaded, search, renderRows, ev, askKbot } from '../lib/search';
+  const form = document.querySelector<HTMLFormElement>('[data-page-form]')!;
+  const input = form.querySelector<HTMLInputElement>('[data-page-q]')!;
+  const list = document.querySelector<HTMLOListElement>('[data-page-results]')!;
+  const empty = document.querySelector<HTMLElement>('[data-page-empty]')!;
+  const toKbot = document.querySelector<HTMLButtonElement>('[data-page-kbot]')!;
+  const base = form.dataset.base ?? '/';
+
+  function render() {
+    const q = input.value.trim();
+    const rows = search(q, 30);
+    renderRows(list, rows, q, base);
+    empty.hidden = !(q && loaded() && rows.length === 0);
+    toKbot.hidden = !q;
+  }
+
+  input.value = new URLSearchParams(location.search).get('q') ?? '';
+  ev('search_page', input.value.trim().slice(0, 100));
+  load(form.dataset.index!).then(render);
+
+  let typing: ReturnType<typeof setTimeout> | undefined;
+  input.addEventListener('input', () => {
+    render();
+    const q = input.value.trim();
+    history.replaceState(null, '', q ? `?q=${encodeURIComponent(q)}` : location.pathname);
+    clearTimeout(typing);
+    typing = setTimeout(() => { if (q) ev('search', q.slice(0, 100)); }, 1500);
+  });
+  // 엔터: 이미 결과가 떠 있으니 키보드만 내린다(휴대폰)
+  form.addEventListener('submit', (e) => { e.preventDefault(); input.blur(); });
+  toKbot.addEventListener('click', () => { const q = input.value.trim(); if (q) askKbot(q); });
+</script>
+
+<style>
+  h1 { font-size: 26px; margin: 0 0 14px; }
+  .search-page input {
+    width: 100%; font: inherit; font-size: 16px; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
+  }
+  .search-page input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .search-results { margin-top: 10px; padding: 0; border-top: 1px solid var(--text); }
+  .empty { margin: 0; padding: 14px 0; font-size: 14px; }
+  .to-kbot {
+    margin: 14px 0; font: inherit; font-weight: 600; font-size: 14px; padding: 7px 14px;
+    border: 1px solid var(--accent); border-radius: var(--radius); background: none; color: var(--accent); cursor: pointer;
+  }
+  .to-kbot:hover { background: var(--accent); color: var(--bg); }
+</style>

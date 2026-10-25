@@ -7,8 +7,10 @@ import Silhouette from './Silhouette.astro';
 import PLAYERS from '../data/players.json';
 import { teamColor, darken } from '../lib/teams';
 
-interface Props { data: CollectionEntry<'posts'>['data']; href: string; lead?: boolean }
-const { data, href, lead = false } = Astro.props;
+// bare = 링크 없이 span으로(검색 결과처럼 줄 전체가 이미 링크일 때, search.json.ts)
+interface Props { data: CollectionEntry<'posts'>['data']; href?: string; lead?: boolean; bare?: boolean }
+const { data, href, lead = false, bare = false } = Astro.props;
+const Tag = bare ? 'span' : 'a';
 const { stat, thumb = {} } = data;
 type P = (typeof PLAYERS)[keyof typeof PLAYERS];
 const player = (n: string) => (PLAYERS as Record<string, P>)[n];
@@ -32,7 +34,7 @@ const bandName = one?.p ? one.name : '';
 const twoBand = lead && sides.length === 2 && !items.length;
 const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sides[k]?.team);
 ---
-<a class:list={['thumb', lead ? 'wide' : 'square', { two: sides.length === 2 }]} href={href} tabindex="-1" aria-hidden="true">
+<Tag class:list={['thumb', lead ? 'wide' : 'square', { two: sides.length === 2 }]} href={bare ? undefined : href} tabindex={bare ? undefined : '-1'} aria-hidden="true">
   {col.map((c, i) => <span class="half" style={`background:${c.c};${sides.length === 2 ? (i ? 'left:50%' : 'right:50%') : ''}`}></span>)}
   {one?.p && <span class="ghost digits">{one.p.no}</span>}
   {label && <span class="label">{label}</span>}
@@ -64,7 +66,7 @@ const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sid
       {caption && <span class="bcap">{caption}</span>}
     </span>
   )}
-</a>
+</Tag>
 
 <style>
   .thumb { position: relative; display: block; overflow: hidden; border-radius: var(--radius); color: #fff; align-self: start; box-shadow: inset 0 0 0 1px var(--thumb-edge); }
