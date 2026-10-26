@@ -1,0 +1,80 @@
+---
+title: "카스트로 3타점, 대구 1차전은 3회에 끝났다"
+description: "플레이오프 1차전, KIA가 삼성을 5-1로 이겼다."
+date: 2026-10-26T22:06:00+09:00
+category: game
+tags: ["포스트시즌", "플레이오프", "KIA", "삼성", "WPA"]
+related: ["2026-po-preview", "2026-10-20-ps-sp-3", "2026-wpa"]
+stat: { value: "5-1", label: "플레이오프 1차전, KIA가 삼성을 꺾었다", short: "PO 1차전", items: [{ v: "5", cap: "KIA" }, { v: "1", cap: "삼성" }], sep: ":" }
+thumb: { teams: ["KIA", "삼성"] }
+dataUntil: "2026 플레이오프 1차전 (10/26)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-10-26-ps-po-1.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+KIA가 플레이오프 1차전에서 삼성을 5-1로 꺾었다. 1회초에 두 점을 먼저 냈고 3회초 카스트로의 투런 홈런으로 4-0까지 달아났다. 삼성 선발 페덱은 4⅔이닝 5실점으로 내려갔고 삼성은 5회말에야 첫 점수를 냈다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KIA 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KIA가 유리한 쪽이다."
+/>
+
+1회초 2사 2루에서 카스트로의 안타가 나오기 전까지 KIA 승리확률은 47.9%였다. 카스트로의 안타로 57.0%, 이어진 나성범의 2루타로 65.2%가 됐다. 1회말 삼성의 무사 1루 기회가 병살로 끝나 66.8%가 됐고 3회초 카스트로의 투런 홈런이 81.3%까지 끌어올렸다. 4회초 한준수의 솔로 홈런으로 90.1%가 되면서 승부는 사실상 갈렸다. 그 뒤 삼성 승리확률은 12.2%를 넘지 못했다. TOP 5 가운데 네 장면이 1회와 3회에 나왔다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="4회초, 한준수의 솔로 홈런">
+KIA가 4-0으로 앞선 4회초 선두 타자 한준수가 페덱과 1-1에서 3구째 133km 체인지업을 받아쳤다. 타구는 우익수 뒤 담장을 넘어 5-0이 됐다. KIA 승리확률은 85.4%에서 90.1%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="1회말, 네일이 병살로 끊은 삼성의 첫 기회">
+KIA가 2-0으로 앞선 1회말 김지찬이 중견수 앞 안타로 나가 삼성이 무사 1루를 만들었다. 김성윤은 네일의 초구 150km 투심을 쳤지만 타구가 1루수 앞으로 굴러 병살이 됐다. 삼성은 다음 타자 구자욱의 좌익수 뜬공으로 이닝을 마쳤다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="1회초, 나성범의 2루타로 만든 2-0">
+카스트로의 안타로 1-0이 된 직후 2사 3루에서 나성범이 페덱과 2-2까지 갔다. 6구째 153km 포심을 받아쳐 좌익수 왼쪽으로 보냈고 3루 주자 카스트로가 홈을 밟았다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="1회초, 카스트로가 우익수 앞으로 보낸 선취점">
+0-0이던 1회초 2사에서 김도영이 볼넷 뒤 도루로 2루까지 갔다. 카스트로는 페덱의 2구째 142km 커터를 우익수 앞에 떨어뜨렸고 2루 주자 김도영이 홈을 밟아 1-0이 됐다. 우익수의 홈 송구가 포수 쪽으로 빗나가는 사이 카스트로는 3루까지 진루했다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="3회초, 카스트로의 투런 홈런">
+KIA가 2-0으로 앞선 3회초 2사 1루에서 카스트로가 페덱을 상대했다. 3-2까지 간 9구째 144km 커터를 받아쳐 우익수 뒤 담장을 넘겼다. 4-0이 됐고 KIA 승리확률은 66.8%에서 81.3%로 올랐다. 1회에 안타로 선취점을 만든 타자가 이 경기 두 번째 결정적 장면도 만들었다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+카스트로가 4타석 3안타 3타점으로 승리확률을 23.1%p 올려 가장 높았다. KIA 선발 네일은 4⅓이닝 동안 안타 1개만 맞고 삼진 3개를 잡아 19.8%p를 보탰고 나성범은 1회 2루타 하나로 7.4%p를 더했다. 삼성에서는 페덱이 홈런 두 개를 포함해 안타 5개와 볼넷 2개를 내주며 20.4%p를 깎았다. 1회말 병살타를 친 김성윤은 9.6%p가 줄었다.
+
+삼성의 유일한 점수는 5회말에 나왔다. 5-0으로 뒤진 1사에서 네일의 6구째 투심이 박승규의 머리 쪽으로 향하는 헤드샷이 되어 네일은 퇴장당했다. 바뀐 투수 정해영이 올라오자 박승규가 도루로 2루에 갔고 2사에서 김영웅이 2-2에서 151km 포심을 받아쳐 좌익수 앞 안타를 쳤다. 2루 주자 박승규가 홈을 밟았지만 점수는 5-1이었다. 삼성은 이날 안타 두 개에 그쳤고 하나가 이 안타였다.
+
+KIA가 시리즈를 1승 무패로 시작했다. 5전 3선승제 플레이오프에서 1차전을 이긴 팀이 한국시리즈에 오른 건 2025년까지 35번 중 27번, 77.1%다. 1차전을 내준 팀이 뒤집은 경우는 8번, 22.9%에 그쳤다. 삼성은 10월 27일 2차전을 반드시 잡아야 한다.
