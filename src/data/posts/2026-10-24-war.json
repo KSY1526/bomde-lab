@@ -1,0 +1,311 @@
+{
+ "season": 2026,
+ "runs_per_win": 10.6,
+ "repl_per600": 20,
+ "top": [
+  {
+   "batter_name": "오스틴",
+   "team": "LG",
+   "pos_kr": "일",
+   "pa": 636,
+   "bat_runs": 65.2,
+   "pos_runs": -8.5,
+   "repl_runs": 21.2,
+   "war": 7.36
+  },
+  {
+   "batter_name": "김도영",
+   "team": "KIA",
+   "pos_kr": "삼",
+   "pa": 586,
+   "bat_runs": 55.4,
+   "pos_runs": -1.0,
+   "repl_runs": 19.5,
+   "war": 6.99
+  },
+  {
+   "batter_name": "최원준",
+   "team": "KT",
+   "pos_kr": "우",
+   "pa": 676,
+   "bat_runs": 39.1,
+   "pos_runs": -5.6,
+   "repl_runs": 22.5,
+   "war": 5.29
+  },
+  {
+   "batter_name": "구자욱",
+   "team": "삼성",
+   "pos_kr": "좌",
+   "pa": 495,
+   "bat_runs": 43.3,
+   "pos_runs": -4.1,
+   "repl_runs": 16.5,
+   "war": 5.26
+  },
+  {
+   "batter_name": "박성한",
+   "team": "SSG",
+   "pos_kr": "유",
+   "pa": 625,
+   "bat_runs": 25.6,
+   "pos_runs": 7.3,
+   "repl_runs": 20.8,
+   "war": 5.08
+  },
+  {
+   "batter_name": "힐리어드",
+   "team": "KT",
+   "pos_kr": "좌",
+   "pa": 637,
+   "bat_runs": 37.5,
+   "pos_runs": -5.3,
+   "repl_runs": 21.2,
+   "war": 5.05
+  },
+  {
+   "batter_name": "나성범",
+   "team": "KIA",
+   "pos_kr": "우",
+   "pa": 580,
+   "bat_runs": 32.1,
+   "pos_runs": -4.8,
+   "repl_runs": 19.3,
+   "war": 4.41
+  },
+  {
+   "batter_name": "레이예스",
+   "team": "롯데",
+   "pos_kr": "좌",
+   "pa": 627,
+   "bat_runs": 29.4,
+   "pos_runs": -5.2,
+   "repl_runs": 20.9,
+   "war": 4.26
+  }
+ ],
+ "pair": [
+  {
+   "batter_name": "박성한",
+   "team": "SSG",
+   "pos_kr": "유",
+   "pa": 625,
+   "bat_runs": 25.6,
+   "pos_runs": 7.3,
+   "repl_runs": 20.8,
+   "war": 5.08
+  },
+  {
+   "batter_name": "레이예스",
+   "team": "롯데",
+   "pos_kr": "좌",
+   "pa": 627,
+   "bat_runs": 29.4,
+   "pos_runs": -5.2,
+   "repl_runs": 20.9,
+   "war": 4.26
+  },
+  {
+   "batter_name": "데이비슨",
+   "team": "키움",
+   "pos_kr": "일",
+   "pa": 522,
+   "bat_runs": 27.9,
+   "pos_runs": -7.0,
+   "repl_runs": 17.4,
+   "war": 3.62
+  }
+ ],
+ "pos_adj": [
+  {
+   "pos": "포수",
+   "runs": 10
+  },
+  {
+   "pos": "유격수",
+   "runs": 7
+  },
+  {
+   "pos": "2루수",
+   "runs": 3
+  },
+  {
+   "pos": "중견수",
+   "runs": 3
+  },
+  {
+   "pos": "3루수",
+   "runs": -1
+  },
+  {
+   "pos": "좌익수",
+   "runs": -5
+  },
+  {
+   "pos": "우익수",
+   "runs": -5
+  },
+  {
+   "pos": "1루수",
+   "runs": -8
+  },
+  {
+   "pos": "지명타자",
+   "runs": -15
+  }
+ ],
+ "mlb": {
+  "years": "2016~2025",
+  "min_inn": 500,
+  "pool_k": 4,
+  "single": [
+   {
+    "pos": "2루수",
+    "n": 267,
+    "fpct": 0.34,
+    "rf": 0.18,
+    "comb": 0.35,
+    "uzr": 0.36,
+    "uzr_n": 240,
+    "drs": 0.5,
+    "drs_n": 267
+   },
+   {
+    "pos": "3루수",
+    "n": 271,
+    "fpct": 0.52,
+    "rf": 0.45,
+    "comb": 0.62,
+    "uzr": 0.58,
+    "uzr_n": 241,
+    "drs": 0.66,
+    "drs_n": 271
+   },
+   {
+    "pos": "유격수",
+    "n": 299,
+    "fpct": 0.45,
+    "rf": 0.22,
+    "comb": 0.45,
+    "uzr": 0.5,
+    "uzr_n": 266,
+    "drs": 0.56,
+    "drs_n": 299
+   },
+   {
+    "pos": "1루수",
+    "n": 282,
+    "fpct": 0.3,
+    "rf": 0.14,
+    "comb": 0.31,
+    "uzr": 0.34,
+    "uzr_n": 252,
+    "drs": 0.54,
+    "drs_n": 282
+   },
+   {
+    "pos": "좌익수",
+    "n": 225,
+    "fpct": 0.25,
+    "rf": 0.28,
+    "comb": 0.36,
+    "uzr": 0.56,
+    "uzr_n": 200,
+    "drs": 0.65,
+    "drs_n": 225
+   },
+   {
+    "pos": "중견수",
+    "n": 279,
+    "fpct": 0.06,
+    "rf": 0.47,
+    "comb": 0.37,
+    "uzr": 0.65,
+    "uzr_n": 251,
+    "drs": 0.76,
+    "drs_n": 279
+   },
+   {
+    "pos": "우익수",
+    "n": 246,
+    "fpct": 0.16,
+    "rf": 0.36,
+    "comb": 0.36,
+    "uzr": 0.62,
+    "uzr_n": 219,
+    "drs": 0.73,
+    "drs_n": 246
+   }
+  ],
+  "single_grp": [
+   {
+    "grp": "내야(2루·3루·유격)",
+    "n": 837,
+    "fpct": 0.44,
+    "rf": 0.28,
+    "comb": 0.47,
+    "uzr": 0.48,
+    "uzr_n": 747,
+    "drs": 0.57,
+    "drs_n": 837
+   },
+   {
+    "grp": "외야",
+    "n": 750,
+    "fpct": 0.15,
+    "rf": 0.38,
+    "comb": 0.36,
+    "uzr": 0.61,
+    "uzr_n": 670,
+    "drs": 0.72,
+    "drs_n": 750
+   }
+  ],
+  "multi": [
+   {
+    "seasons": 1,
+    "n": 145,
+    "fpct": 0.35,
+    "rf": 0.38,
+    "comb": 0.47,
+    "uzr": 0.58,
+    "uzr_n": 145,
+    "drs": 0.67,
+    "drs_n": 145
+   },
+   {
+    "seasons": 2,
+    "n": 145,
+    "fpct": 0.28,
+    "rf": 0.42,
+    "comb": 0.48,
+    "uzr": 0.51,
+    "uzr_n": 145,
+    "drs": 0.68,
+    "drs_n": 145
+   },
+   {
+    "seasons": 3,
+    "n": 145,
+    "fpct": 0.26,
+    "rf": 0.48,
+    "comb": 0.51,
+    "uzr": 0.53,
+    "uzr_n": 145,
+    "drs": 0.68,
+    "drs_n": 145
+   },
+   {
+    "seasons": 4,
+    "n": 145,
+    "fpct": 0.28,
+    "rf": 0.5,
+    "comb": 0.52,
+    "uzr": 0.55,
+    "uzr_n": 123,
+    "drs": 0.72,
+    "drs_n": 145
+   }
+  ]
+ }
+}

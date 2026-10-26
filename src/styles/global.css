@@ -139,6 +139,7 @@ img, svg { max-width: 100%; }
 .prose td.up { background: color-mix(in srgb, var(--accent) var(--heat, 15%), transparent); }
 .prose td.down { background: color-mix(in srgb, var(--pos) var(--heat, 15%), transparent); }
 .prose td.lvl { background: color-mix(in srgb, var(--text) var(--heat, 10%), transparent); }
+.prose th.gsep, .prose td.gsep { border-left: 2px solid var(--muted); }
 .prose td.small { background: var(--warn-bg); color: var(--warn-text); }
 .prose tr.total td { font-weight: 700; border-top: 2px solid var(--muted); border-bottom: 2px solid var(--muted); }
 .prose tr.total td:not(.up):not(.down) { background: color-mix(in srgb, var(--text) 13%, transparent); }
