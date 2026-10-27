@@ -54,5 +54,21 @@
   "weight": 92,
   "pitcher": true,
   "left": false
+ },
+ "비슬리": {
+  "team": "롯데",
+  "no": "23",
+  "height": 188,
+  "weight": 106,
+  "pitcher": true,
+  "left": false
+ },
+ "로드리게스": {
+  "team": "롯데",
+  "no": "31",
+  "height": 193,
+  "weight": 97,
+  "pitcher": true,
+  "left": false
  }
 }

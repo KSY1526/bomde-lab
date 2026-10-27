@@ -27,7 +27,9 @@ const col = sides.map((s) => teamColor(s.team));
 const items = stat?.items ?? [];
 const capIsTag = items.every((it) => /^\d{4}$/.test(it.cap) || it.cap in { KIA: 1, 삼성: 1, LG: 1, 두산: 1, KT: 1, SSG: 1, 롯데: 1, 한화: 1, NC: 1, 키움: 1 });
 const joined = items.map((it) => it.cap).join(` ${stat?.sep ?? '→'} `);
-const caption = items.length && !capIsTag && joined.length <= 11 ? joined : (stat?.short ?? '');
+// 꼬리표가 판의 두 선수 이름이면 이름 대신 기준(short)을 띠에 쓴다(무슨 숫자인지 보이게)
+const capIsSide = sides.length === 2 && items.every((it, k) => it.cap === sides[k]?.name);
+const caption = items.length && !capIsTag && !capIsSide && joined.length <= 11 ? joined : (stat?.short ?? '');
 const label = one?.p ? `${one.team} #${one.p.no}` : one?.team ?? '';
 const bandName = one?.p ? one.name : '';
 // 두 쪽 판의 맨 위 글: 비교 숫자는 반쪽마다 하나씩, 숫자가 하나뿐이면 목록처럼 아래 띠에
@@ -40,6 +42,7 @@ const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sid
   {label && <span class="label">{label}</span>}
   {sides.length === 2 && sides.map((s, i) => <span class:list={['label', 'tl', `t${i}`]}>{s.p ? `${s.team} #${s.p.no}` : s.team}</span>)}
   {sides.length === 2 && <span class="seam"></span>}
+  {lead && sides.length === 2 && items.length > 0 && stat?.short && <span class="basis">{stat.short}</span>}
   {sides.map((s, i) => (
     <span class:list={['fig', `f${i}`]}>
       <Silhouette pitcher={s.p ? s.p.pitcher : generic} height={s.p?.height} weight={s.p?.weight} no={s.p?.no} c={col[i].c}
@@ -106,9 +109,11 @@ const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sid
   .wide.two .f1 { right: 2%; }
   .wide .band.name { height: 22%; font-size: 17px; font-weight: 700; left: auto; width: 38%; }
   .nums { position: absolute; left: 5%; top: 0; bottom: 0; right: 38%; display: flex; align-items: center; justify-content: space-around; z-index: 1; }
+  .wide:not(:has(.band)) .nums { right: 34%; }
+  /* 두 쪽 판은 숫자를 반쪽마다 가운데에(위 규칙보다 뒤에 둬야 오른쪽 여백이 34%로 덮이지 않는다) */
   .wide.two .nums { left: 24%; right: 24%; display: grid; grid-template-columns: 1fr 1fr; justify-items: center; }
   .wide.two .sep { display: none; }
-  .wide:not(:has(.band)) .nums { right: 34%; }
+  .basis { position: absolute; left: 50%; top: 7%; transform: translateX(-50%); font-size: .7em; font-weight: 700; white-space: nowrap; z-index: 1; padding: 2px 8px; border-radius: 4px; background: rgba(0, 0, 0, .35); }
   .item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .v { font-size: 64px; line-height: 1; white-space: nowrap; }
   .cap { font-size: 14px; opacity: .85; white-space: nowrap; }
