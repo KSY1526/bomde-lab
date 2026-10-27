@@ -16,7 +16,7 @@ import d from '../../data/posts/2026-10-26-ps-po-1.json';
 export const play = (rank) => d.top.find((p) => p.rank === rank);
 export const innings = d.linescore[0].innings.map((_, k) => k + 1);
 
-KIA가 플레이오프 1차전에서 삼성을 5-1로 꺾었다. 1회초에 두 점을 먼저 냈고 3회초 카스트로의 투런 홈런으로 4-0까지 달아났다. 삼성 선발 페덱은 4⅔이닝 5실점으로 내려갔고 삼성은 5회말에야 첫 점수를 냈다.
+KIA가 플레이오프 1차전에서 삼성을 5-1으로 꺾었다. 1회초에 두 점을 먼저 냈고 3회초 카스트로의 투런 홈런으로 4-0까지 달아났다. 삼성 선발 페덱은 4⅔이닝 5실점으로 내려갔고 삼성은 5회말에야 첫 점수를 냈다.
 
 <table>
   <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>

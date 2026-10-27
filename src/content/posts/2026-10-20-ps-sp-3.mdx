@@ -18,7 +18,7 @@ import d from '../../data/posts/2026-10-20-ps-sp-3.json';
 export const play = (rank) => d.top.find((p) => p.rank === rank);
 export const innings = d.linescore[0].innings.map((_, k) => k + 1);
 
-KIA가 준플레이오프 3차전에서 LG를 13-1로 꺾고 3연승으로 시리즈를 끝냈다. 경기는 2회초에 사실상 정해졌다. 나성범의 선두 타자 홈런으로 시작한 이 이닝에 KIA는 열 명이 타석에 들어서 일곱 점을 냈고 마지막은 김도영의 만루 홈런이었다.
+KIA가 준플레이오프 3차전에서 LG를 13-1으로 꺾고 3연승으로 시리즈를 끝냈다. 경기는 2회초에 사실상 정해졌다. 나성범의 선두 타자 홈런으로 시작한 이 이닝에 KIA는 열 명이 타석에 들어서 일곱 점을 냈고 마지막은 김도영의 만루 홈런이었다.
 
 <table>
   <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>

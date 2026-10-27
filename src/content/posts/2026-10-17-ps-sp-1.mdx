@@ -18,7 +18,7 @@ import d from '../../data/posts/2026-10-17-ps-sp-1.json';
 export const play = (rank) => d.top.find((p) => p.rank === rank);
 export const innings = d.linescore[0].innings.map((_, k) => k + 1);
 
-KIA가 준플레이오프 1차전에서 LG를 5-1로 이겼다. 2회 홈런을 하나씩 주고받은 뒤 4회 김도영의 솔로 홈런으로 앞섰고, 6회초 LG가 만든 무사 1, 2루를 네일이 삼진과 병살타로 끝냈다. 8회 김도영이 두 번째 홈런을 치며 점수 차가 4점으로 벌어졌다.
+KIA가 준플레이오프 1차전에서 LG를 5-1으로 이겼다. 2회 홈런을 하나씩 주고받은 뒤 4회 김도영의 솔로 홈런으로 앞섰고, 6회초 LG가 만든 무사 1, 2루를 네일이 삼진과 병살타로 끝냈다. 8회 김도영이 두 번째 홈런을 치며 점수 차가 4점으로 벌어졌다.
 
 <table>
   <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
@@ -43,7 +43,7 @@ KIA가 준플레이오프 1차전에서 LG를 5-1로 이겼다. 2회 홈런을 �
 ## 결정적 순간 TOP 5
 
 <KeyPlay play={play(5)} home={d.home} away={d.away} headline="6회초, 박해민의 선두타자 2루타">
-LG가 2-1로 끌려가던 6회초, 박해민이 선두타자로 나와 네일의 2구째 커터를 받아쳐 우중간 2루타를 만들었다. 무사 2루가 되면서 LG 승리확률은 44.2%까지 올라왔다. 박해민은 이 경기 안타 세 개를 쳤다.
+LG가 2-1으로 끌려가던 6회초, 박해민이 선두타자로 나와 네일의 2구째 커터를 받아쳐 우중간 2루타를 만들었다. 무사 2루가 되면서 LG 승리확률은 44.2%까지 올라왔다. 박해민은 이 경기 안타 세 개를 쳤다.
 </KeyPlay>
 
 <KeyPlay play={play(4)} home={d.home} away={d.away} headline="2회초, 송찬의의 선제 솔로 홈런">
