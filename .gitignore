@@ -32,3 +32,7 @@ video/
 
 
 # 초안(발행 때 지움)
+
+# 선수검색 데이터(scripts/export_players.py가 만듦, 약 9MB·2천여 파일) — 깃에 올리지 않는다 (사용자 결정 2026-10-27)
+src/data/players/
+src/data/player-index.json

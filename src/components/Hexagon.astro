@@ -1,0 +1,46 @@
+---
+// 선수 육각형(선수검색). 목업 mock_lib3.py hexsvg()를 옮긴 것: 위부터 시계 방향 6축, 점선 = 리그 중간(50),
+// 축 글자 = 이름 + 실제 값(크게, Barlow Condensed) + 백분위(작게 회색). labels=false면 작은 판(연도별 줄)
+interface Props { vals: [string, number, string][]; size?: number; labels?: boolean; ring?: boolean }
+const { vals, size = 300, labels = true, ring = true } = Astro.props;
+const R = size * (labels ? 0.30 : 0.42), cx = size / 2, cy = size / 2;
+const ang = [0, 1, 2, 3, 4, 5].map((i) => -Math.PI / 2 + (i * Math.PI) / 3);
+const P = (r: number, a: number): [number, number] => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+const pts = (r: (i: number) => number) => ang.map((a, i) => P(r(i), a).map((v) => v.toFixed(1)).join(',')).join(' ');
+const at = (i: number) => R * Math.max(0.04, vals[i][1] / 100);
+const label = (i: number) => {
+  const a = ang[i];
+  const anc = Math.abs(Math.cos(a)) < 0.2 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end';
+  let [x, y] = P(R + 34, a);
+  x += anc === 'start' ? -14 : anc === 'end' ? 14 : 0;
+  return { x: x.toFixed(1), y, anc };
+};
+---
+<svg viewBox={`0 0 ${size} ${size}`} class:list={['hex', { mini: !labels }]} role="img" aria-label={vals.map(([l, p, v]) => `${l} ${v}(백분위 ${p})`).join(', ')}>
+  {[0.25, 0.5, 0.75, 1].map((k) => <polygon points={pts(() => R * k)} class={k === 0.5 && ring ? 'avg' : 'grid'} />)}
+  {ang.map((a) => { const [x, y] = P(R, a); return <line x1={cx} y1={cy} x2={x.toFixed(1)} y2={y.toFixed(1)} class="grid" />; })}
+  <polygon points={pts(at)} class="shape" />
+  {ang.map((a, i) => { const [x, y] = P(at(i), a); return <circle cx={x.toFixed(1)} cy={y.toFixed(1)} r="3.5" class="dot" />; })}
+  {labels && vals.map(([lab, p, raw], i) => {
+    const { x, y, anc } = label(i);
+    return (
+      <>
+        <text x={x} y={(y - 6).toFixed(1)} text-anchor={anc} class="hl">{lab}</text>
+        <text x={x} y={(y + 13).toFixed(1)} text-anchor={anc} class="hp"><tspan class="rv">{raw}</tspan> <tspan class="pc">{p}</tspan></text>
+      </>
+    );
+  })}
+</svg>
+
+<style>
+  .hex { width: 100%; display: block; margin: 0 auto; overflow: visible; }
+  .grid { fill: none; stroke: var(--line); stroke-width: 1; }
+  .avg { fill: none; stroke: var(--muted); stroke-dasharray: 4 3; stroke-width: 1; }
+  .shape { fill: var(--navy); fill-opacity: .28; stroke: var(--navy); stroke-width: 2.5; stroke-linejoin: round; }
+  .mini .shape { stroke-width: 2; }
+  .dot { fill: var(--navy); }
+  .hl { font-size: 13px; fill: var(--text); font-weight: 600; font-family: var(--font); }
+  .hp { font-size: 12px; fill: var(--muted); }
+  .rv { font-family: var(--num); font-size: 20px; fill: var(--navy); font-weight: 700; }
+  .pc { font-size: 12px; fill: var(--muted); }
+</style>

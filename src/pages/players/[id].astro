@@ -1,0 +1,224 @@
+---
+// 선수 페이지 /players/<id>/ (설계 docs/블로그/선수검색-설계.md 2·4절, 1차: 상단 + 기록 탭).
+// 데이터 src/data/players/<id>.json(scripts/export_players.py). 연도 버튼·연도별 작은 육각형을 누르면 위 육각형·유형·등급이 바뀐다(모두 미리 그려 두고 숨김 전환)
+import Base from '../../layouts/Base.astro';
+import PlayerSearch from '../../components/PlayerSearch.astro';
+import Silhouette from '../../components/Silhouette.astro';
+import Hexagon from '../../components/Hexagon.astro';
+import { teamColor, darken } from '../../lib/teams';
+
+type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
+type Player = {
+  id: string; name: string; kind: 'b' | 'p'; team: string; no: string | null; height: number | null; weight: number | null;
+  school: string | null; joined: string | null; years: number[]; missing: number[]; pos: string; hand: string; left: boolean;
+  hex: Record<string, Hex>; rows: Record<string, any>[]; total: Record<string, any>;
+};
+
+export function getStaticPaths() {
+  const files = import.meta.glob<{ default: Player }>('../../data/players/*.json', { eager: true });
+  return Object.values(files).map((m) => ({ params: { id: m.default.id }, props: { p: m.default } }));
+}
+const { p } = Astro.props as { p: Player };
+const bat = p.kind === 'b';
+const CUR = 2026; // 지금 시즌(기록 표 강조·연도 버튼 기본값)
+const keys = [...p.years.map(String).filter((y) => p.hex[y]), ...(p.hex.career ? ['career'] : [])];
+const first = keys.includes(String(CUR)) ? String(CUR) : keys.filter((k) => k !== 'career').at(-1) ?? 'career';
+const col = teamColor(p.team);
+const f3 = (x: number | null | undefined) => (x == null ? '-' : Math.abs(x) < 1 ? x.toFixed(3).replace(/^(-?)0/, '$1') : x.toFixed(3));
+const f2 = (x: number | null | undefined) => (x == null ? '-' : x.toFixed(2));
+const f1 = (x: number | null | undefined, s = '') => (x == null ? '-' : x.toFixed(1) + s);
+const span = p.years[0] === p.years.at(-1) ? `${p.years[0]}` : `${p.years[0]}–${p.years.at(-1)}`;
+const T = p.total;
+const tiles: [string, string][] = bat
+  ? [[`${T.seasons}`, '시즌'], [T.pa.toLocaleString(), '타석'], [`${T.hr}`, '홈런'], [f3(T.avg), '타율'], [f3(T.ops), 'OPS'], [f1(T.war), 'WAR']]
+  : [[`${T.seasons}`, '시즌'], [T.ip, '이닝'], [`${T.w}`, '승'], [f2(T.era), '평균자책점'], [T.so.toLocaleString(), '탈삼진'], [f1(T.war), 'WAR']];
+const bio = [p.hand, p.height && p.weight ? `${p.height}cm ${p.weight}kg` : '', p.school ?? '', p.joined ? `${p.joined} 입단` : ''].filter(Boolean).join(' · ');
+const word = bat ? '타격' : '투구', qual = bat ? '규정타석' : '규정이닝', vol = bat ? '타석' : '이닝';
+const cut = bat ? '100타석' : '30이닝';
+const head = (k: string) => {
+  const h = p.hex[k];
+  if (k === 'career') return { t: `통산 ${word} 육각형`, s: `시즌별 백분위를 ${vol} 수로 가중 평균 · 값은 통산 기록 · 점선 = 리그 중간(50)` };
+  return { t: `${k} ${word} 육각형`, s: `${qual} 70% 이상 ${h.n}명 중 백분위${h.q ? '' : `(이 시즌은 ${qual} 70% 미달)`} · 점선 = 리그 중간(50)` };
+};
+const gradeCap = (k: string) => {
+  const h = p.hex[k];
+  if (!h.grade) return '';
+  if (h.grade === '표본 적음') return `등급 <b>표본 적음</b> = ${k}년 ${cut} 미만`;
+  const why = h.grade === 'S' ? 'WAR 4 이상' : h.grade === 'A' ? 'WAR 2 이상' : 'WAR 2 미만';
+  return `등급 <b>${h.grade}</b> = ${k} ${why}(S 4 이상 · A 2 이상 · B 그 아래 · ${cut} 미만은 표본 적음)`;
+};
+const axisOrder = p.hex[first].vals.map((v) => v[0]).join(' · ');
+const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
+const title = `${p.name} 기록 · ${word} 육각형`;
+const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
+---
+<Base title={title} description={desc} breadcrumbs={[{ name: '홈', path: '/' }, { name: '선수검색', path: '/players/' }, { name: p.name, path: `/players/${p.id}/` }]}>
+  <PlayerSearch />
+  <section class="player" data-player>
+    <div class="top">
+      <div class="pcard" style={`--tc:${col.c};--tc2:${col.c2};--tc3:${darken(col.c, 0.55)}`}>
+        <div class="pc-top"><span>{p.team}</span>{keys.map((k) => p.hex[k].grade && <span class="pc-grade" data-y={k} hidden={k !== first}>{p.hex[k].grade}</span>)}</div>
+        <div class="pc-sil"><Silhouette pitcher={!bat} height={p.height ?? undefined} weight={p.weight ?? undefined} flip={p.left} no={p.no ?? ''} c={col.c} /></div>
+        <div class="pc-band"><b>{p.name}</b><span>{p.no ? `#${p.no} · ` : ''}{p.pos}</span></div>
+      </div>
+
+      <div class="hexwrap">
+        {keys.map((k) => <div class="hexhead" data-y={k} hidden={k !== first}><b>{head(k).t}</b><span>{head(k).s}</span></div>)}
+        <div class="years" role="group" aria-label="시즌 고르기">
+          {keys.map((k) => <button type="button" data-pick={k} aria-pressed={k === first ? 'true' : 'false'} class:list={{ nq: !p.hex[k].q }}>{k === 'career' ? '통산' : k}</button>)}
+        </div>
+        {keys.map((k) => <div class="hexbig" data-y={k} hidden={k !== first}><Hexagon vals={p.hex[k].vals} size={340} /></div>)}
+      </div>
+
+      <div class="side">
+        {keys.map((k) => <div class="type" data-y={k} hidden={k !== first}>{p.hex[k].type}</div>)}
+        <div class="tiles">{tiles.map(([v, l]) => <div class="tile"><b>{v}</b><span>{l}</span></div>)}</div>
+        <p class="cap">통산{bio ? ` · ${bio}` : ''}</p>
+        {keys.map((k) => gradeCap(k) && <p class="cap" data-y={k} hidden={k !== first} set:html={gradeCap(k)} />)}
+      </div>
+    </div>
+
+    <div class="ai"><p class="muted">AI 요약은 추후 제공합니다.</p></div>
+
+    {p.years.length > 1 && (
+      <>
+        <h2>연도별 모양 변화<small>연도를 누르면 위 육각형이 바뀝니다 · 흐린 칸은 {qual} 70% 미달</small></h2>
+        <div class="strip">
+          {keys.filter((k) => k !== 'career').map((k) => (
+            <button type="button" class:list={['mini', { nq: !p.hex[k].q }]} data-pick={k} aria-label={`${k} 육각형 보기`}>
+              <Hexagon vals={p.hex[k].vals} size={120} labels={false} ring={false} />
+              <span>{k}{p.hex[k].q ? '' : ' · 미달'}</span>
+            </button>
+          ))}
+        </div>
+      </>
+    )}
+    <p class="legend">축 순서(위부터 시계 방향): {axisOrder}</p>
+
+    <div class="tabs" role="tablist">
+      {['기록', '상황별', '관련 글'].map((t, i) => <button type="button" role="tab" data-tab={i} aria-selected={i === 0 ? 'true' : 'false'}>{t}</button>)}
+    </div>
+    <div data-panel="0">
+      <h2>연도별 · 통산<small>맨 아래 줄이 통산</small></h2>
+      <div class="tw">
+        {bat ? (
+          <table class="rec">
+            <thead><tr><th>시즌</th><th class="t">팀</th><th>경기</th><th>타석</th><th>타수</th><th>안타</th><th>홈런</th><th>타점</th><th>도루</th><th>볼넷</th><th>삼진</th><th>타율</th><th>출루</th><th>장타</th><th>OPS</th><th>wRC+</th><th>WAR</th></tr></thead>
+            <tbody>
+              {p.rows.map((r) => (
+                <tr class:list={{ on: r.season === CUR }}><td>{r.season}</td><td class="t">{r.team}</td><td>{r.g}</td><td>{r.pa}</td><td>{r.ab}</td><td>{r.h}</td><td>{r.hr}</td><td>{r.rbi}</td><td>{r.sb}</td><td>{r.bb}</td><td>{r.so}</td>
+                  <td>{f3(r.avg)}</td><td>{f3(r.obp)}</td><td>{f3(r.slg)}</td><td><b>{f3(r.ops)}</b></td><td>{r.wrc ?? '-'}</td><td><b>{f2(r.war)}</b></td></tr>
+              ))}
+              <tr class="tot"><td>통산</td><td class="t">{T.seasons}시즌</td><td>{T.g}</td><td>{T.pa}</td><td>{T.ab}</td><td>{T.h}</td><td>{T.hr}</td><td>{T.rbi}</td><td>{T.sb}</td><td>{T.bb}</td><td>{T.so}</td>
+                <td>{f3(T.avg)}</td><td>{f3(T.obp)}</td><td>{f3(T.slg)}</td><td><b>{f3(T.ops)}</b></td><td></td><td><b>{f2(T.war)}</b></td></tr>
+            </tbody>
+          </table>
+        ) : (
+          <table class="rec">
+            <thead><tr><th>시즌</th><th class="t">팀</th><th>경기</th><th>선발</th><th>승-패</th><th>세</th><th>홀</th><th>이닝</th><th>ERA</th><th>FIP</th><th>WHIP</th><th>K%</th><th>BB%</th><th>직구</th><th>WAR</th></tr></thead>
+            <tbody>
+              {p.rows.map((r) => (
+                <tr class:list={{ on: r.season === CUR }}><td>{r.season}</td><td class="t">{r.team}</td><td>{r.g}</td><td>{r.gs}</td><td>{r.w}-{r.l}</td><td>{r.sv}</td><td>{r.hld}</td><td>{r.ip}</td>
+                  <td><b>{f2(r.era)}</b></td><td>{f2(r.fip)}</td><td>{f2(r.whip)}</td><td>{f1(r.k)}</td><td>{f1(r.bb)}</td><td>{f1(r.velo)}</td><td><b>{f2(r.war)}</b></td></tr>
+              ))}
+              <tr class="tot"><td>통산</td><td class="t">{T.seasons}시즌</td><td>{T.g}</td><td>{T.gs}</td><td>{T.w}-{T.l}</td><td>{T.sv}</td><td>{T.hld}</td><td>{T.ip}</td>
+                <td><b>{f2(T.era)}</b></td><td>{f2(T.fip)}</td><td>{f2(T.whip)}</td><td>{f1(T.k)}</td><td>{f1(T.bb)}</td><td></td><td><b>{f2(T.war)}</b></td></tr>
+            </tbody>
+          </table>
+        )}
+      </div>
+      {missingNote && <p class="note">{missingNote}</p>}
+    </div>
+    <div data-panel="1" hidden><p class="soon muted">상황별 기록은 추후 제공합니다.</p></div>
+    <div data-panel="2" hidden><p class="soon muted">관련 글은 추후 제공합니다.</p></div>
+  </section>
+</Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-player]')!;
+  root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.pick!;
+    root.querySelectorAll<HTMLElement>('[data-y]').forEach((el) => { el.hidden = el.dataset.y !== k; });
+    root.querySelectorAll<HTMLButtonElement>('.years [data-pick]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pick === k)));
+    if (b.classList.contains('mini')) root.querySelector('.hexwrap')!.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }));
+  root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {
+    root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    root.querySelectorAll<HTMLElement>('[data-panel]').forEach((el) => { el.hidden = el.dataset.panel !== t.dataset.tab; });
+  }));
+</script>
+
+<style>
+  .player { margin-top: 24px; padding-top: 20px; border-top: 2px solid var(--head-line); }
+  .top { display: grid; grid-template-columns: 180px minmax(0, 1fr) 220px; grid-template-areas: 'card hex side'; gap: 22px; align-items: start; }
+  .pcard { grid-area: card; background: var(--tc); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+  .pc-top { display: flex; justify-content: space-between; padding: 8px 10px; color: #fffd; font-size: 13px; font-weight: 600; }
+  .pc-grade { border: 1px solid #fff8; padding: 0 6px; border-radius: 2px; font-size: 12px; }
+  .pc-sil { height: 200px; padding: 4px 24px 0; }
+  .pc-band { background: var(--tc3); border-top: 3px solid var(--tc2); color: #fff; padding: 8px 12px 10px; }
+  .pc-band b { display: block; font-size: 24px; line-height: 1.15; }
+  .pc-band span { font-size: 13px; opacity: .85; }
+
+  .hexwrap { grid-area: hex; text-align: center; min-width: 0; }
+  .hexhead b { font-size: 17px; display: block; }
+  .hexhead span { font-size: 12px; color: var(--muted); display: block; line-height: 1.5; }
+  .years { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin: 10px 0 0; }
+  .years button {
+    font: 600 16px/1.4 var(--num); padding: 1px 8px; border: 1px solid var(--line); border-radius: var(--radius);
+    background: transparent; color: var(--text); cursor: pointer;
+  }
+  .years button.nq { color: var(--muted); border-style: dashed; }
+  .years button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); border-style: solid; }
+  .years button:last-child { font-family: var(--font); font-size: 14px; }
+  .hexbig { max-width: 360px; margin: 0 auto; }
+
+  .side { grid-area: side; }
+  .type { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .tile { background: var(--board); color: var(--board-text); border-radius: var(--radius); padding: 6px 4px 5px; text-align: center; }
+  .tile b { display: block; font-family: var(--num); font-size: 25px; line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .tile span { font-size: 12px; white-space: nowrap; }
+  .cap { font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.55; }
+  .cap :global(b) { color: var(--text); }
+
+  .ai { margin: 22px 0 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .ai p { margin: 0; font-size: 15px; }
+
+  h2 { font-size: 17px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); line-height: 1.4; }
+  h2 small { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 8px; }
+  .strip { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mini { width: 108px; padding: 4px 0 2px; background: none; border: 1px solid transparent; border-radius: var(--radius); cursor: pointer; color: var(--text); }
+  .mini:hover { border-color: var(--line); }
+  .mini span { display: block; font-family: var(--num); font-size: 16px; font-weight: 600; }
+  .mini.nq { opacity: .4; }
+  .legend { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+
+  .tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--line); margin-top: 28px; }
+  .tabs button { font: inherit; font-size: 15px; padding: 8px 0; color: var(--muted); background: none; border: 0; cursor: pointer; }
+  .tabs button[aria-selected='true'] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px var(--navy); }
+  .soon { margin: 20px 0; font-size: 15px; }
+
+  .tw { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 14px; }
+  th, td { padding: 7px 7px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; }
+  .t { text-align: left; }
+  tr.on td { background: var(--board); }
+  tr.tot td { border-top: 2px solid var(--head-line); font-weight: 600; }
+  .note { font-size: 13px; color: var(--muted); }
+
+  @media (max-width: 760px) {
+    .top { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: 'card hex' 'side side'; gap: 10px 10px; }
+    .pc-top { padding: 5px 6px; font-size: 11px; }
+    .pc-grade { font-size: 11px; padding: 0 4px; }
+    .pc-sil { height: 104px; padding: 2px 10px 0; }
+    .pc-band { padding: 5px 7px 6px; }
+    .pc-band b { font-size: 16px; }
+    .pc-band span { font-size: 11px; }
+    .hexwrap { margin-right: -6px; }
+    .hexhead b { font-size: 15px; }
+    .years button { font-size: 14px; padding: 0 6px; }
+    .side { margin-top: 4px; }
+    .mini { width: 74px; }
+  }
+</style>

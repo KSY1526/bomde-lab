@@ -1,0 +1,17 @@
+---
+// 선수검색 메뉴 첫 화면(설계 docs/블로그/선수검색-설계.md). 검색창 → 후보 → 선수 페이지 /players/<id>/
+import Base from '../../layouts/Base.astro';
+import PlayerSearch from '../../components/PlayerSearch.astro';
+import index from '../../data/player-index.json';
+const nb = index.filter((r) => r[2] === 'b').length, np = index.length - nb;
+---
+<Base title="선수검색" description="2010년 이후 KBO 1군 타자·투수의 연도별 기록과 육각형을 선수 이름으로 찾아봅니다.">
+  <h1>선수검색</h1>
+  <PlayerSearch autofocus />
+  <p class="muted note">2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
+</Base>
+
+<style>
+  h1 { font-size: 26px; margin: 0 0 14px; }
+  .note { font-size: 14px; margin-top: 10px; }
+</style>

@@ -1,0 +1,62 @@
+---
+// 선수 검색창(선수검색 메뉴 첫 화면·선수 페이지 맨 위). 이름(또는 "이름 팀")을 치면 후보 목록, 동명이인은 팀·포지션·기간으로 구분한다.
+// 색인은 /player-index.json(처음 입력할 때 한 번 받음). 엔터 = 첫 후보로 이동
+import { url } from '../lib/site';
+interface Props { autofocus?: boolean }
+const { autofocus = false } = Astro.props;
+---
+<form class="psearch" data-psearch data-index={`${url()}player-index.json`} data-base={url()} role="search">
+  <label class="sr-only" for="psearch-q">선수 이름</label>
+  <input id="psearch-q" type="search" maxlength="40" autocomplete="off" placeholder="선수 이름" autofocus={autofocus} data-q />
+  <ol class="cands" data-list hidden></ol>
+</form>
+
+<script>
+  type Row = [string, string, 'b' | 'p', string, string, number, number, string[]];
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-psearch]')) {
+    const input = form.querySelector<HTMLInputElement>('[data-q]')!;
+    const list = form.querySelector<HTMLOListElement>('[data-list]')!;
+    const base = form.dataset.base ?? '/';
+    let rows: Row[] | null = null, loading: Promise<void> | null = null;
+    const load = () => (loading ??= fetch(form.dataset.index!).then((r) => r.json()).then((j) => { rows = j; }));
+    const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+    let hits: Row[] = [];
+
+    function render() {
+      const words = input.value.trim().split(/\s+/).filter(Boolean);
+      if (!words.length || !rows) { list.hidden = true; hits = []; return; }
+      // 모든 낱말이 이름이나 뛴 팀에 들어 있어야. 이름이 정확히 같은 선수 먼저, 그다음 최근에 뛴 순(색인 순서)
+      hits = rows.filter((r) => words.every((w) => r[1].includes(w) || r[7].some((t) => t.toLowerCase() === w.toLowerCase())));
+      hits.sort((a, b) => Number(words.includes(b[1])) - Number(words.includes(a[1])));
+      hits = hits.slice(0, 20);
+      list.innerHTML = hits.length
+        ? hits.map((r) => `<li><a href="${base}players/${r[0]}/"><b>${esc(r[1])}</b><span>${esc(r[7].join('·'))} · ${esc(r[4])} · ${r[5] === r[6] ? r[5] : `${r[5]}–${r[6]}`}</span></a></li>`).join('')
+        : '<li class="none">2010년 이후 1군에서 뛴 선수 중에 없어요.</li>';
+      list.hidden = false;
+    }
+    input.addEventListener('focus', () => { load(); });
+    input.addEventListener('input', () => { load().then(render); });
+    form.addEventListener('submit', (e) => { e.preventDefault(); if (hits[0]) location.href = `${base}players/${hits[0][0]}/`; });
+    document.addEventListener('click', (e) => { if (!form.contains(e.target as Node)) list.hidden = true; });
+    input.addEventListener('focus', () => { if (input.value.trim() && rows) render(); });
+  }
+</script>
+
+<style>
+  .psearch { position: relative; max-width: 520px; }
+  input {
+    width: 100%; font: inherit; font-size: 16px; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
+  }
+  input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .cands {
+    position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 0; list-style: none;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); max-height: 420px; overflow-y: auto;
+  }
+  .cands :global(li + li) { border-top: 1px solid var(--line); }
+  .cands :global(a) { display: flex; gap: 10px; align-items: baseline; padding: 8px 12px; color: var(--text); }
+  .cands :global(a:hover), .cands :global(a:focus) { background: var(--chip-bg); text-decoration: none; }
+  .cands :global(b) { font-weight: 600; white-space: nowrap; }
+  .cands :global(span) { font-size: 13px; color: var(--muted); }
+  .cands :global(.none) { padding: 8px 12px; font-size: 14px; color: var(--muted); }
+</style>

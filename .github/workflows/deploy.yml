@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # 선수검색 데이터는 깃에 없다(2026-10-27). 릴리스 players-data 첨부파일을 받아 src/data/에 푼다(올리기: scripts/players_release.py)
+      - name: 선수검색 데이터 받기
+        run: gh release download players-data -p players-data.tar.gz -O - | tar xz
+        env:
+          GH_TOKEN: ${{ github.token }}
       - uses: withastro/action@v4
         env:
           # 챗봇·댓글 서버 주소: 저장소 Settings → Secrets and variables → Actions → Variables 에 KBOT_API 등록
