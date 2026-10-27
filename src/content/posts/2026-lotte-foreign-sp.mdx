@@ -1,0 +1,258 @@
+---
+title: "비슬리와 로드리게스, 내년에도 사직에서 볼 수 있을까"
+description: "2026년 롯데 외국인 선발 비슬리는 평균자책점 4.96, 로드리게스는 4.28을 기록했다."
+date: 2026-10-27T13:15:00+09:00
+category: player
+tags: ["비슬리", "로드리게스", "롯데", "외국인 투수", "재계약", "WAR", "FIP", "구종가치"]
+related: ["2026-park-sewoong", "2026-war-dwar", "2026-platoon"]
+stat: { value: "3.96 · 2.74", label: "WAR* (실점 기준), 로드리게스 · 비슬리", short: "롯데 외인 WAR*", items: [{ v: "3.96", cap: "로드리게스" }, { v: "2.74", cap: "비슬리" }], sep: "·" }
+thumb: { players: ["로드리게스", "비슬리"] }
+dataUntil: "2026 정규시즌"
+---
+import { url as siteUrl } from '../../lib/site';
+import d from '../../data/posts/2026-10-26-lotte-foreign-sp.json';
+
+export const MAIN = ['비슬리', '로드리게스'];
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const sg = (v) => (v > 0 ? '+' : '') + v.toFixed(1);
+export const S = (n) => d.seasons.find((r) => r.name === n);
+export const O = (n) => d.opp.find((r) => r.name === n);
+export const F = (n) => d.foreign.find((r) => r.name === n);
+export const Q = (n) => d.qual.find((r) => r.name === n);
+export const SP = (n) => d.spread.find((r) => r.name === n);
+export const T = (t) => d.team_def.find((r) => r.team === t);
+export const mon = (n, m) => d.monthly.find((r) => r.name === n && r.m === m);
+export const monO = (n, m) => d.monthly_opp.find((r) => r.name === n && r.m === m);
+export const side = (n, s) => d.side.find((r) => r.name === n && r.side === s);
+export const lgSide = (s) => d.lg_side.find((r) => r.side === s);
+export const ars = (n, p, split = '전체') => d.arsenal.find((r) => r.name === n && r.pitch === p && r.split === split);
+export const rv = (n, p) => d.rv.find((r) => r.name === n && r.pitch === p);
+export const rvs = (n, p, s) => d.rv_side.find((r) => r.name === n && r.pitch === p && r.side === s);
+export const FP = (n) => d.fip_parts.find((r) => r.name === n);
+export const RN = (n, k) => d.runners.find((r) => r.name === n && r.runners === k);
+export const lgRN = (k) => d.lg_runners.find((r) => r.runners === k);
+export const H = (p, s, h) => d.height.find((r) => r.pitch === p && r.side === s && r.h === h);
+export const lgH = (p, s, h) => d.lg_height.find((r) => r.pitch === p && r.side === s && r.h === h);
+export const heights = ['높은 공', '가운데 높이', '낮은 공'];
+export const hLabel = (h) => (h === '가운데 높이' ? '가운데 공' : h);
+export const lgW = (p) => d.lg_whiff.find((r) => r.pitch === p).whiff_pct;
+export const months = [4, 5, 6, 7, 8, 9];
+export const mLabel = (m) => (m === 4 ? '3·4월' : m === 9 ? '9·10월' : `${m}월`);
+export const isMain = (n) => MAIN.includes(n);
+// 피우르크: 100보다 높으면 타자 우세(붉은색), 낮으면 투수 우세(파란색). 100에서 멀어질수록 진하다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const wrcTd = (r, showPa = true, cur = false, extra = '') => {
+  if (!r) return <td class={extra}>-</td>;
+  const small = r.pa < d.small_pa;
+  const h = heat(Math.round(r.wrc_plus - 100), 15);
+  const cls = [extra, cur ? 'cur' : '', small ? 'small' : h ? h.cls : ''].filter(Boolean).join(' ');
+  return <td class={cls} style={!small && h ? `--heat:${h.pct}%` : undefined}>{Math.round(r.wrc_plus)}{showPa ? ` (${r.pa})` : ''}</td>;
+};
+// 평균자책점: 리그 선발 평균에서 멀수록 진하게(높으면 붉은색 = 타자 우세)
+export const eraTd = (era) => { const h = heat(Math.round((era - d.lg_sp_era) * 10), 8); return <td class={h ? h.cls : ''} style={h ? `--heat:${h.pct}%` : undefined}>{f2(era)}</td>; };
+// 구종가치: +는 투수에게 유리(파란색), -는 타자에게 유리(붉은색)
+export const rvTd = (v, extra = '') => { if (v == null) return <td class={extra}>-</td>; const h = heat(-Math.round(v), 3); return <td class={[extra, h ? h.cls : ''].filter(Boolean).join(' ')} style={h ? `--heat:${h.pct}%` : undefined}>{sg(v)}</td>; };
+
+롯데는 2026년 외국인 선발 두 자리를 모두 새 얼굴로 채웠다. 비슬리와 로드리게스 둘 다 올해 처음 KBO에서 던졌고 둘 다 시속 150km가 넘는 포심을 던지는 우투수다. 시즌이 끝난 지금 롯데는 두 투수의 재계약 여부를 정해야 한다.
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>ERA</th><th>FIP</th><th>삼진율</th><th>피홈런</th><th>피우르크</th></tr></thead>
+  <tbody>
+    {MAIN.map((n) => { const s = S(n); return <tr><td class="cur">{n}</td><td>{s.ip}</td><td>{f2(s.era)}</td><td>{f2(s.fip)}</td><td>{s.k_pct.toFixed(1)}%</td><td>{s.hr}</td>{wrcTd(O(n), false)}</tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">피우르크 = 이 투수를 상대한 타자들의 <a href={siteUrl('posts/2026-wrc-basics')}>우르크(wRC+)</a>. 100이 리그 평균 타자이고 낮을수록 투수가 잘 막았다는 뜻이다. 파란 칸은 100보다 낮은 칸, 붉은 칸은 높은 칸이고 100에서 멀수록 진하다.</p>
+
+## 외국인 선발 13명 중 로드리게스 6위, 비슬리 10위
+
+WAR\*(크봇 자체 추정치)은 대체 선수, 즉 2군에서 바로 올릴 수 있는 수준의 투수보다 몇 승을 더 보탰는지 잰 값이다([WAR 해설]({siteUrl('/posts/2026-war-owar/')})). 투수 WAR\*은 실제 실점으로 계산한 값과 FIP로 계산한 값 두 가지를 본다. FIP는 수비가 끼어들지 않는 삼진, 볼넷, 홈런만으로 매긴 평균자책점이다.
+
+올해 규정이닝의 70% 이상을 던진 외국인 선발 13명을 실점 기준 WAR\*으로 줄 세웠다. 아시아쿼터 투수는 뺐다.
+
+<table>
+  <thead><tr><th>순위</th><th>투수</th><th>이닝</th><th>WAR*<br />(실점)</th><th>WAR*<br />(FIP)</th></tr></thead>
+  <tbody>
+    {d.foreign.map((r) => { const c = isMain(r.name) ? 'cur' : ''; return <tr><td class={c}>{r.ra9_rank}</td><td class={c}>{r.name} ({r.team})</td><td class={c}>{r.ip}</td><td class={c}>{f2(r.war_ra9)}</td><td class={c}>{f2(r.war_fip)} ({r.fip_rank}위)</td></tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">규정이닝 70%(101이닝) 이상 던진 외국인 투수. 일본·대만·호주 국적 아시아쿼터 투수는 뺐다.</p>
+
+실점 기준 WAR\*으로 로드리게스는 {f2(F('로드리게스').war_ra9)}으로 13명 중 6위, 비슬리는 {f2(F('비슬리').war_ra9)}으로 10위다. 순위가 FIP 기준으로는 크게 바뀐다. 비슬리의 FIP 기준 WAR\*은 {f2(F('비슬리').war_fip)}으로 13명 중 1위이고, 로드리게스는 {f2(F('로드리게스').war_fip)}으로 5위다. 로드리게스는 두 WAR\* 차이가 0.09밖에 안 나지만 비슬리는 1.56 차이가 난다.
+
+## 두 투수 모두 기복이 심했다
+
+비슬리는 7월 세 경기에서 평균자책점 1.00을 기록했지만 다음 달 8월에는 7.99였다. 로드리게스도 5월 평균자책점 7.02, 7월 2.87으로 오르내렸다.
+
+<table>
+  <thead>
+    <tr><th rowspan="2">월</th><th colspan="3">비슬리</th><th colspan="3" class="gsep">로드리게스</th></tr>
+    <tr><th>선발</th><th>ERA</th><th>피우르크</th><th class="gsep">선발</th><th>ERA</th><th>피우르크</th></tr>
+  </thead>
+  <tbody>
+    {months.map((m) => <tr><td>{mLabel(m)}</td><td>{mon('비슬리', m).gs}</td>{eraTd(mon('비슬리', m).era)}{wrcTd(monO('비슬리', m))}<td class="gsep">{mon('로드리게스', m).gs}</td>{eraTd(mon('로드리게스', m).era)}{wrcTd(monO('로드리게스', m))}</tr>)}
+  </tbody>
+</table>
+
+<p class="table-note">3월과 10월은 한 경기씩이라 4월, 9월에 합쳤다. 피우르크 괄호는 타석 수. ERA 칸은 리그 선발 평균자책점 {d.lg_sp_era}보다 높으면 붉은색, 낮으면 파란색이다.</p>
+
+## 두 투수 모두 좌타자에게 약했고 비슬리가 더 심했다
+
+비슬리의 피우르크는 우타자 상대 {Math.round(side('비슬리', 'R').wrc_plus)}, 좌타자 상대 {Math.round(side('비슬리', 'L').wrc_plus)}이었다. 비슬리를 만난 좌타자는 리그 평균 타자보다 득점을 17% 더 만들었다는 뜻이다. 리그 우투수 평균은 우타자 {Math.round(lgSide('R').wrc_plus)}, 좌타자 {Math.round(lgSide('L').wrc_plus)}으로 차이가 {Math.round(lgSide('L').wrc_plus - lgSide('R').wrc_plus)}인데 비슬리는 {Math.round(side('비슬리', 'L').wrc_plus - side('비슬리', 'R').wrc_plus)}으로 네 배가 넘는다. 로드리게스도 우타자 {Math.round(side('로드리게스', 'R').wrc_plus)}, 좌타자 {Math.round(side('로드리게스', 'L').wrc_plus)}으로 차이가 {Math.round(side('로드리게스', 'L').wrc_plus - side('로드리게스', 'R').wrc_plus)}였다. 리그 평균의 두 배가 넘지만 비슬리보다는 덜했다.
+
+<table>
+  <thead>
+    <tr><th rowspan="2">투수</th><th colspan="2">우타자 상대</th><th colspan="2" class="gsep">좌타자 상대</th></tr>
+    <tr><th>피우르크<br />(타석)</th><th>삼진율</th><th class="gsep">피우르크<br />(타석)</th><th>삼진율</th></tr>
+  </thead>
+  <tbody>
+    {MAIN.map((n) => <tr><td class="cur">{n}</td>{wrcTd(side(n, 'R'))}<td>{side(n, 'R').k_pct.toFixed(1)}%</td>{wrcTd(side(n, 'L'), true, false, 'gsep')}<td>{side(n, 'L').k_pct.toFixed(1)}%</td></tr>)}
+    <tr class="total"><td>리그 우투수 평균</td>{wrcTd(lgSide('R'), false)}<td>{lgSide('R').k_pct.toFixed(1)}%</td>{wrcTd(lgSide('L'), false, false, 'gsep')}<td>{lgSide('L').k_pct.toFixed(1)}%</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">칸 색의 뜻은 위 표와 같다.</p>
+
+## 강점인 스위퍼를 좌타자에게 살리지 못했다
+
+비슬리의 가장 좋은 공은 스위퍼다. 우투수의 스위퍼는 우타자 바깥쪽으로 크게 휘어 나가고, 좌타자에게는 몸쪽으로 파고든다. 비슬리 스위퍼의 구종가치는 리그에서 300구 이상 던진 스위퍼 {rv('비슬리', '스위퍼').n_pitchers}개 중 {rv('비슬리', '스위퍼').rank}위다. 구종가치(크봇 자체 계산)는 그 공 하나하나가 볼카운트와 결과로 실점을 얼마나 막았는지 더한 값으로, +는 투수가 실점을 막았다는 뜻이다.
+
+이 스위퍼가 좌타자에게는 덜 통했다. 우타자에게는 공의 {ars('비슬리', '스위퍼', '우타').usage_pct}%를 스위퍼로 던져 헛스윙률 {ars('비슬리', '스위퍼', '우타').whiff_pct.toFixed(1)}%를 기록했지만 좌타자에게는 {ars('비슬리', '스위퍼', '좌타').usage_pct}%만 던졌고 헛스윙률도 {ars('비슬리', '스위퍼', '좌타').whiff_pct}%로 떨어졌다. 스위퍼 구종가치도 우타자 상대 {sg(rvs('비슬리', '스위퍼', 'R').rv)}점, 좌타자 상대 {sg(rvs('비슬리', '스위퍼', 'L').rv)}점이다. 좌타자에게 늘려 던진 포크는 {sg(rvs('비슬리', '포크', 'L').rv)}점, 포심은 {sg(rvs('비슬리', '포심', 'L').rv)}점으로 실점을 내줬다.
+
+<table>
+  <thead>
+    <tr><th rowspan="2">비슬리 구종</th><th colspan="3">우타자 상대</th><th colspan="3" class="gsep">좌타자 상대</th></tr>
+    <tr><th>구사율</th><th>헛스윙률</th><th>구종가치</th><th class="gsep">구사율</th><th>헛스윙률</th><th>구종가치</th></tr>
+  </thead>
+  <tbody>
+    {['포심', '스위퍼', '커터', '포크'].map((p) => <tr><td>{p}</td><td>{ars('비슬리', p, '우타').usage_pct}%</td><td>{ars('비슬리', p, '우타').whiff_pct.toFixed(1)}%</td>{rvTd(rvs('비슬리', p, 'R')?.rv)}<td class="gsep">{ars('비슬리', p, '좌타').usage_pct}%</td><td>{ars('비슬리', p, '좌타').whiff_pct.toFixed(1)}%</td>{rvTd(rvs('비슬리', p, 'L')?.rv)}</tr>)}
+  </tbody>
+</table>
+
+<p class="table-note">구종가치는 점(실점) 단위, +가 투수에게 유리하다. 파란 칸은 투수가 실점을 막은 칸, 붉은 칸은 실점을 내준 칸이다. 헛스윙률 = 헛스윙 / 스윙.</p>
+
+## 비슬리의 FIP가 유독 좋은 이유
+
+비슬리는 평균자책점과 FIP가 {f2(S('비슬리').era)}, {f2(S('비슬리').fip)}으로 {f2(S('비슬리').era_fip)} 차이가 난다. 규정이닝을 채운 투수 {Q('비슬리').n}명 가운데 이 차이가 가장 크다. FIP 순위는 {FP('비슬리').fip_r}위인데 평균자책점 순위는 {FP('비슬리').era_r}위다.
+
+FIP가 좋은 건 삼진과 볼넷 덕분이다. 삼진율에서 볼넷율을 뺀 값이 {FP('비슬리').kbb}%포인트로 {FP('비슬리').n}명 중 {FP('비슬리').kbb_r}위였고 9이닝당 피홈런 {f2(FP('비슬리').hr9)}개는 {FP('비슬리').hr9_r}위로 중간쯤이었다. FIP는 삼진, 볼넷, 홈런 세 가지만 보고 안타 등은 운적인 요소로 가정한다.
+
+비슬리의 평균자책점과 FIP가 크게 벌어진 데는 두 가지 원인이 있다. 하나는 인플레이 타구다. 인플레이 타구가 안타가 된 비율(피BABIP)이 {f3(FP('비슬리').babip)}으로 {FP('비슬리').n}명 중 가장 높았다. 리그 평균은 {f3(d.lg.babip)}이다. 다른 하나는 주자가 있을 때다. 주자가 없을 때 피우르크는 {Math.round(RN('비슬리', '주자 없음').wrc_plus)}이었는데 주자가 나가면 {Math.round(RN('비슬리', '주자 있음').wrc_plus)}으로 올랐고 삼진율은 {RN('비슬리', '주자 없음').k_pct.toFixed(1)}%에서 {RN('비슬리', '주자 있음').k_pct}%로 떨어졌다. 리그 평균도 주자가 있으면 피우르크가 {Math.round(lgRN('주자 없음').wrc_plus)}에서 {Math.round(lgRN('주자 있음').wrc_plus)}으로 오르지만 비슬리는 오르는 폭이 두 배 가까이 컸다. 내보낸 주자를 막은 비율(잔루율)도 {FP('비슬리').lob}%로 리그 평균 {d.lg_lob}%보다 낮았다.
+
+<table>
+  <thead><tr><th>투수</th><th>삼진율<br />- 볼넷율</th><th>9이닝당<br />피홈런</th><th>피BABIP</th><th>잔루율</th><th>FIP</th><th>ERA</th></tr></thead>
+  <tbody>
+    {MAIN.map((n) => { const r = FP(n); return <tr><td class="cur">{n}</td><td>{r.kbb.toFixed(1)}%p<br /><small>{r.kbb_r}위</small></td><td>{f2(r.hr9)}<br /><small>{r.hr9_r}위</small></td><td>{f3(r.babip)}<br /><small>{r.babip_r}위</small></td><td>{r.lob.toFixed(1)}%<br /><small>{r.lob_r}위</small></td><td>{f2(r.fip)}<br /><small>{r.fip_r}위</small></td><td>{f2(r.era)}<br /><small>{r.era_r}위</small></td></tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">순위는 규정이닝 투수 {FP('비슬리').n}명 중 투수에게 좋은 쪽부터 셌고 피BABIP는 높은 쪽부터, 잔루율은 낮은 쪽부터 셌다. 잔루율 = (안타 + 볼넷 + 몸에 맞는 공 - 실점) / (안타 + 볼넷 + 몸에 맞는 공 - 1.4 × 홈런), 리그 평균 {d.lg_lob}%.</p>
+
+<table>
+  <thead>
+    <tr><th rowspan="2">투수</th><th colspan="2">주자 없을 때</th><th colspan="2" class="gsep">주자 있을 때</th></tr>
+    <tr><th>피우르크<br />(타석)</th><th>삼진율</th><th class="gsep">피우르크<br />(타석)</th><th>삼진율</th></tr>
+  </thead>
+  <tbody>
+    {MAIN.map((n) => <tr><td class="cur">{n}</td>{wrcTd(RN(n, '주자 없음'))}<td>{RN(n, '주자 없음').k_pct.toFixed(1)}%</td>{wrcTd(RN(n, '주자 있음'), true, false, 'gsep')}<td>{RN(n, '주자 있음').k_pct.toFixed(1)}%</td></tr>)}
+    <tr class="total"><td>리그 평균</td>{wrcTd(lgRN('주자 없음'), false)}<td>{lgRN('주자 없음').k_pct.toFixed(1)}%</td>{wrcTd(lgRN('주자 있음'), false, false, 'gsep')}<td>{lgRN('주자 있음').k_pct.toFixed(1)}%</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">칸 색의 뜻은 위 피우르크 표와 같다.</p>
+
+## 롯데 수비를 생각하면 비슬리는 억울한 면이 있다
+
+높은 피BABIP에는 수비가 끼어 있다. 롯데 수비는 리그 최악으로 평가받는다. 롯데 투수가 맞은 인플레이 타구 중 아웃이 된 비율(수비 효율)은 {f3(T('롯데').der)}으로 10개 팀 중 {T('롯데').der_rank}위였고 팀 실책 {T('롯데').e}개는 {T('롯데').e_rank}번째로 많았다. 롯데 투수 전체로 봐도 실점 기준 WAR\*이 FIP 기준보다 {Math.abs(T('롯데').war_gap)}승 적다.
+
+<table>
+  <thead><tr><th>팀</th><th>수비 효율</th><th>피BABIP</th><th>실책</th><th>팀 투수 WAR* 차이<br />(실점 - FIP)</th></tr></thead>
+  <tbody>
+    {d.team_def.map((r) => { const c = r.team === '롯데' ? 'cur' : ''; return <tr><td class={c}>{r.team}</td><td class={c}>{f3(r.der)} ({r.der_rank}위)</td><td class={c}>{f3(r.babip)}</td><td class={c}>{r.e}</td><td class={c}>{sg(r.war_gap)}</td></tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">수비 효율 = 1 - (홈런 아닌 안타) / (홈런·삼진·볼넷·몸에 맞는 공을 뺀 타석). 인플레이 타구를 아웃으로 바꾼 비율이다. 수비 효율이 낮은 팀부터 적었다.</p>
+
+비슬리는 FIP와 평균자책점 차이가 많이 나니 억까를 당했다고 볼 수도 있다. 그러나 필자는 한 시즌 FIP는 표본이 적어 신뢰도가 낮기 때문에 높은 방어율에 주목해야 한다고 생각한다. 실점으로 보면 비슬리는 같은 팀 박세웅과 성적이 비슷하다.
+
+<table>
+  <thead><tr><th>투수</th><th>ERA</th><th>FIP</th><th>피우르크</th><th>WAR*<br />(실점)</th><th>WAR*<br />(FIP)</th></tr></thead>
+  <tbody>
+    {['비슬리', '박세웅'].map((n) => { const s = S(n); const c = n === '비슬리' ? 'cur' : ''; return <tr><td class={c}>{n}</td><td>{f2(s.era)}</td><td>{f2(s.fip)}</td>{wrcTd(O(n), false)}<td>{f2(s.war_ra9)}</td><td>{f2(s.war_fip)}</td></tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">칸 색의 뜻은 위 표와 같다.</p>
+
+비슬리와 [박세웅]({siteUrl('/posts/2026-park-sewoong/')})은 둘 다 147이닝을 던졌고 실점 기준 WAR\*도 {f2(S('비슬리').war_ra9)}와 {f2(S('박세웅').war_ra9)}으로 차이가 작다. 평균자책점은 비슬리가 오히려 0.32 높다.
+
+## 로드리게스는 기복이 있었지만 이닝을 먹었다
+
+로드리게스는 경기별 편차가 심한 편이었다. 선발 한 경기를 점수로 매기는 게임 스코어(50점에서 시작해 이닝과 삼진은 더하고 안타, 실점, 볼넷은 뺀 점수)로 보면 로드리게스는 경기마다 점수가 평균에서 흩어진 폭이 외국인 선발 13명 중 {SP('로드리게스').sd_rank}번째로 컸다. 퀄리티스타트(6이닝 이상 3자책 이하)는 {S('로드리게스').gs}경기 중 {SP('로드리게스').qs}번이었고 5자책 이상 내준 경기도 {SP('로드리게스').er5}번 있었다.
+
+<table>
+  <thead><tr><th>투수</th><th>선발</th><th>게임 스코어<br />편차</th><th>퀄리티<br />스타트</th><th>5자책<br />이상</th></tr></thead>
+  <tbody>
+    {d.spread.map((r) => { const c = isMain(r.name) ? 'cur' : ''; return <tr><td class={c}>{r.name} ({r.team})</td><td class={c}>{r.gs}</td><td class={c}>{r.gsc_sd.toFixed(1)} ({r.sd_rank}위)</td><td class={c}>{r.qs}</td><td class={c}>{r.er5}</td></tr>; })}
+  </tbody>
+</table>
+
+<p class="table-note">게임 스코어는 빌 제임스 방식. 편차는 경기별 게임 스코어의 표준편차로, 클수록 경기마다 결과가 들쭉날쭉했다는 뜻이다. 편차가 큰 투수부터 적었다.</p>
+
+그래도 전반적으로 준수했다. 실점 기준 WAR\*은 외국인 선발 중 6위였고 159⅔이닝은 리그 전체 투수 중 {d.ip_rank.find((r) => r.name === '로드리게스').ip_r}위로 이닝도 나름 상위권이다. 외국인 선발 중에서는 네일, 올러, 잭로그, 톨허스트 다음으로 많이 던졌다.
+
+## 삼진은 잘 잡았지만 홈런을 너무 맞았다
+
+로드리게스는 삼진을 굉장히 잘 잡았다. 삼진율 {S('로드리게스').k_pct}%는 규정이닝 투수 {Q('로드리게스').n}명 중 {Q('로드리게스').k_rank}위로 라일리, 곽빈, 안우진 다음이다. 리그 평균 삼진율 {d.lg.k_pct}%보다 7%포인트 높다. 포심이 평균 {ars('로드리게스', '포심').avg_velo}km로 리그 우투수 포심 평균 {d.lg_fb.velo}km보다 빠르고 포심 헛스윙률도 {ars('로드리게스', '포심').whiff_pct}%로 리그 우투수 포심 평균 {d.lg_fb.whiff_pct}%를 웃돈다. 탈삼진율이 좋은 것으로 보아 구위는 충분히 훌륭하다고 판단된다.
+
+반면 피홈런은 {S('로드리게스').hr}개로 규정이닝 투수 중 가장 많았다. 롯데 타자 한동희가 올해 친 홈런이 {d.hr_bat.hr}개(리그 {d.hr_bat.r}위)이니 로드리게스가 맞은 홈런 수가 한동희 홈런 수와 비슷하다. 이 점은 정말 아쉽다.
+
+## 구종가치로 본 두 투수
+
+두 투수의 구종별 가치를 리그 순위와 함께 정리했다.
+
+{MAIN.map((n) => (
+  <table>
+    <thead><tr><th colspan="4" class="cur">{n}</th></tr><tr><th>구종</th><th>구사율</th><th>구종가치</th><th>리그 순위</th></tr></thead>
+    <tbody>
+      {d.arsenal.filter((a) => a.name === n && a.split === '전체' && a.usage_pct >= 5).map((a) => {
+        const r = rv(n, a.pitch);
+        const v = d.rv_side.filter((x) => x.name === n && x.pitch === a.pitch).reduce((t, x) => t + x.rv, 0);
+        return <tr><td>{a.pitch}</td><td>{a.usage_pct.toFixed(1)}%</td>{rvTd(v)}<td>{r ? `${r.rank}위 / ${r.n_pitchers}명` : '-'}</td></tr>;
+      })}
+    </tbody>
+  </table>
+))}
+
+<p class="table-note">구종가치(크봇 자체 계산)는 점 단위, +가 투수에게 유리하다. 구사율 5% 이상 구종만 적었다. 리그 순위는 그 구종을 {d.min_pitch_rv}구 이상 던진 투수 중 구종가치 합계 순위로, 300구가 안 되는 구종은 -로 두었다. 칸 색의 뜻은 위 구종 표와 같다.</p>
+
+비슬리는 포심이 가장 큰 문제였다. 포심 구종가치 {sg(rv('비슬리', '포심').rv_sum)}점은 포심을 300구 이상 던진 투수 {rv('비슬리', '포심').n_pitchers}명 중 {rv('비슬리', '포심').rank}위로 뒤에서 두 번째다. 평균 {ars('비슬리', '포심').avg_velo}km로 빠르지만 헛스윙률은 {ars('비슬리', '포심').whiff_pct}%로 리그 우투수 포심 평균 {d.lg_fb.whiff_pct}%보다 낮았고 포심으로 끝난 타석의 피안타율이 {f3(ars('비슬리', '포심').opp_avg)}이었다. 스위퍼와 커터는 리그 상위권이었다.
+
+로드리게스는 스위퍼가 리그 {rv('로드리게스', '스위퍼').n_pitchers}명 중 {rv('로드리게스', '스위퍼').rank}위였고 커브는 {rv('로드리게스', '커브').n_pitchers}명 중 {rv('로드리게스', '커브').rank}위로 가장 낮았다. 커브는 우타자에게 특히 약해서 우타자 상대 커브 구종가치가 {sg(rvs('로드리게스', '커브', 'R').rv)}점이었고 커브로 맞은 홈런이 5개나 된다. 포심은 구속과 헛스윙률이 좋았다. 그러나 홈런 23개 중 10개를 포심으로 맞았고 구종가치도 {sg(rv('로드리게스', '포심').rv_sum)}점으로 리그 중간이었다.
+
+## 로드리게스는 높이만 바꿔도 달라질 수 있다
+
+로드리게스가 던진 포심과 커브를 높이별로 나눠 보면 실점한 곳이 뚜렷하다. 우타자에게는 커브가 문제였다. 우타자에게 던진 커브의 {(H('커브', 'R', '높은 공').pct + H('커브', 'R', '가운데 높이').pct).toFixed(1)}%가 가운데 공이나 높은 공이었고 이 공의 구종가치가 {sg(H('커브', 'R', '높은 공').rv + H('커브', 'R', '가운데 높이').rv)}점이었다. 대신 높은 포심은 우타자에게 잘 통했다. 헛스윙률이 {H('포심', 'R', '높은 공').whiff_pct}%였고 구종가치는 {sg(H('포심', 'R', '높은 공').rv)}점이었다.
+
+좌타자에게는 반대로 낮은 포심이 문제였다. 좌타자에게 던진 포심 중 낮은 공은 {H('포심', 'L', '낮은 공').pct}%뿐인데 구종가치가 {sg(H('포심', 'L', '낮은 공').rv)}점이었다. 100구로 환산하면 {sg(H('포심', 'L', '낮은 공').rv100)}점으로 리그 우투수의 좌타자 상대 낮은 포심 {sg(lgH('포심', 'L', '낮은 공').rv100)}점보다 훨씬 나빴다. 같은 낮은 공이라도 커브는 헛스윙률 {H('커브', 'L', '낮은 공').whiff_pct.toFixed(1)}%, 구종가치 {sg(H('커브', 'L', '낮은 공').rv)}점으로 좌타자를 잘 잡았다.
+
+<table>
+  <thead>
+    <tr><th rowspan="2">높이</th><th colspan="2">우타자 상대</th><th colspan="2" class="gsep">좌타자 상대</th></tr>
+    <tr><th>포심</th><th>커브</th><th class="gsep">포심</th><th>커브</th></tr>
+  </thead>
+  <tbody>
+    {heights.map((h) => <tr><td>{hLabel(h)}</td>{rvTd(H('포심', 'R', h).rv)}{rvTd(H('커브', 'R', h).rv)}{rvTd(H('포심', 'L', h).rv, 'gsep')}{rvTd(H('커브', 'L', h).rv)}</tr>)}
+  </tbody>
+</table>
+
+<p class="table-note">로드리게스 구종가치(점). 높이는 타자 스트라이크존을 위아래로 3등분한 위치이고 존 위아래로 벗어난 공은 가장 가까운 칸에 넣었다. 칸 색의 뜻은 위 구종 표와 같다.</p>
+
+필자는 로드리게스가 피칭 디자인을 잘 다듬으면 내년에 반등을 기대할 수 있지 않을까 예상한다. 우타자에게는 높게 몰리는 커브를 줄이고 높은 포심과 스위퍼로 승부하고 좌타자에게는 낮은 포심 대신 낮게 떨어지는 커브를 쓰는 식이다.
+
+## 결론
+
+로드리게스는 기복이 있었고 홈런도 많이 맞았지만 삼진율은 규정이닝 투수 중 {Q('로드리게스').k_rank}위, 이닝은 리그 {d.ip_rank.find((r) => r.name === '로드리게스').ip_r}위였다. 실점 기준 WAR\*도 외국인 선발 13명 중 {F('로드리게스').ra9_rank}위로 올해도 준수했다. 피칭 디자인을 바꾸면 내년에는 더 좋은 성적을 기대할 수 있다. 비슬리는 150km대 포심에 스위퍼와 커터를 섞는 우투수라는 점에서 로드리게스와 전반적으로 비슷하지만 실점 기준 WAR\*({f2(S('비슬리').war_ra9)} 대 {f2(S('로드리게스').war_ra9)}), 이닝(147이닝 대 159⅔이닝), 삼진율({S('비슬리').k_pct}% 대 {S('로드리게스').k_pct}%), 좌타자 상대 피우르크({Math.round(side('비슬리', 'L').wrc_plus)} 대 {Math.round(side('로드리게스', 'L').wrc_plus)}) 모두 로드리게스에 비해 하위 호환이었다. 포심 구종가치도 리그 {rv('비슬리', '포심').n_pitchers}명 중 {rv('비슬리', '포심').rank}위였다. 그래서 필자는 외인 투수 시장 풀을 고려해야겠지만 비슬리는 재계약 불가, 로드리게스는 좋은 투수를 확보하지 못하면 재계약을 고려하는 것이 맞다고 생각한다.
