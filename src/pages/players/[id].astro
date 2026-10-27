@@ -6,6 +6,10 @@ import PlayerSearch from '../../components/PlayerSearch.astro';
 import Silhouette from '../../components/Silhouette.astro';
 import Hexagon from '../../components/Hexagon.astro';
 import { teamColor, darken } from '../../lib/teams';
+import { renderBatter, renderPitcher } from '../../lib/situ';
+import '../../styles/situ.css';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
 type Player = {
@@ -14,11 +18,15 @@ type Player = {
   hex: Record<string, Hex>; rows: Record<string, any>[]; total: Record<string, any>;
 };
 
+// 선수 JSON은 빌드 때 파일로 하나씩 읽는다(import.meta.glob로 2천여 개를 모듈로 묶으면 느리고 메모리를 많이 씀, 2026-10-28)
 export function getStaticPaths() {
-  const files = import.meta.glob<{ default: Player }>('../../data/players/*.json', { eager: true });
-  return Object.values(files).map((m) => ({ params: { id: m.default.id }, props: { p: m.default } }));
+  const dir = join(process.cwd(), 'src/data/players');
+  // 시험 빌드용: PLAYERS_ONLY=68525,64021 이면 그 선수만
+  const only = process.env.PLAYERS_ONLY?.split(',');
+  return readdirSync(dir).filter((f) => f.endsWith('.json') && (!only || only.includes(f.slice(0, -5))))
+    .map((f) => ({ params: { id: f.slice(0, -5) }, props: { file: join(dir, f) } }));
 }
-const { p } = Astro.props as { p: Player };
+const p: Player = JSON.parse(readFileSync((Astro.props as { file: string }).file, 'utf8'));
 const bat = p.kind === 'b';
 const CUR = 2026; // 지금 시즌(기록 표 강조·연도 버튼 기본값)
 const keys = [...p.years.map(String).filter((y) => p.hex[y]), ...(p.hex.career ? ['career'] : [])];
@@ -29,9 +37,15 @@ const f2 = (x: number | null | undefined) => (x == null ? '-' : x.toFixed(2));
 const f1 = (x: number | null | undefined, s = '') => (x == null ? '-' : x.toFixed(1) + s);
 const span = p.years[0] === p.years.at(-1) ? `${p.years[0]}` : `${p.years[0]}–${p.years.at(-1)}`;
 const T = p.total;
-const tiles: [string, string][] = bat
-  ? [[`${T.seasons}`, '시즌'], [T.pa.toLocaleString(), '타석'], [`${T.hr}`, '홈런'], [f3(T.avg), '타율'], [f3(T.ops), 'OPS'], [f1(T.war), 'WAR']]
-  : [[`${T.seasons}`, '시즌'], [T.ip, '이닝'], [`${T.w}`, '승'], [f2(T.era), '평균자책점'], [T.so.toLocaleString(), '탈삼진'], [f1(T.war), 'WAR']];
+// 숫자판: 고른 연도면 그 시즌 기록, "통산"이면 통산(2026-10-27 사용자: 연도를 골랐는데 통산이 나오면 안 됨)
+const tilesOf = (k: string): [string, string][] => {
+  const r = k === 'career' ? T : p.rows.find((x) => String(x.season) === k)!;
+  const first: [string, string] = k === 'career' ? [`${T.seasons}`, '시즌'] : [`${r.g}`, '경기'];
+  return bat
+    ? [first, [r.pa.toLocaleString(), '타석'], [`${r.hr}`, '홈런'], [f3(r.avg), '타율'], [f3(r.ops), 'OPS'], [f1(r.war), 'WAR']]
+    : [first, [r.ip, '이닝'], [`${r.w}`, '승'], [f2(r.era), '평균자책점'], [(r.so ?? 0).toLocaleString(), '탈삼진'], [f1(r.war), 'WAR']];
+};
+const tiles = tilesOf('career');
 const bio = [p.hand, p.height && p.weight ? `${p.height}cm ${p.weight}kg` : '', p.school ?? '', p.joined ? `${p.joined} 입단` : ''].filter(Boolean).join(' · ');
 const word = bat ? '타격' : '투구', qual = bat ? '규정타석' : '규정이닝', vol = bat ? '타석' : '이닝';
 const cut = bat ? '100타석' : '30이닝';
@@ -49,6 +63,13 @@ const gradeCap = (k: string) => {
 };
 const axisOrder = p.hex[first].vals.map((v) => v[0]).join(' · ');
 const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
+// 상황별 탭: 기본 시즌(지금 시즌, 없으면 마지막 시즌)만 미리 그리고, 다른 시즌은 버튼을 누를 때 situ.json을 받아 같은 함수로 그린다
+const situPath = join(process.cwd(), 'src/data/players-situ', `${p.id}.json`);
+const situ: Record<string, any> = existsSync(situPath) ? JSON.parse(readFileSync(situPath, 'utf8')) : {};
+const situYears = Object.keys(situ).sort();
+const situFirst = situYears.includes(String(CUR)) ? String(CUR) : situYears.at(-1);
+const situHtml = !situFirst ? '<p class="soon">상황별 기록이 없습니다.</p>'
+  : bat ? renderBatter(situ[situFirst]) : renderPitcher(situ[situFirst], p.name, p.height ?? 183, situFirst);
 const title = `${p.name} 기록 · ${word} 육각형`;
 const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
 ---
@@ -72,8 +93,8 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 
       <div class="side">
         {keys.map((k) => <div class="type" data-y={k} hidden={k !== first}>{p.hex[k].type}</div>)}
-        <div class="tiles">{tiles.map(([v, l]) => <div class="tile"><b>{v}</b><span>{l}</span></div>)}</div>
-        <p class="cap">통산{bio ? ` · ${bio}` : ''}</p>
+        {keys.map((k) => <div class="tiles" data-y={k} hidden={k !== first}><span class="tl">{k === 'career' ? '통산' : `${k} 시즌`}</span>{tilesOf(k).map(([v, l]) => <div class="tile"><b>{v}</b><span>{l}</span></div>)}</div>)}
+        {bio && <p class="cap">{bio}</p>}
         {keys.map((k) => gradeCap(k) && <p class="cap" data-y={k} hidden={k !== first} set:html={gradeCap(k)} />)}
       </div>
     </div>
@@ -129,12 +150,20 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       </div>
       {missingNote && <p class="note">{missingNote}</p>}
     </div>
-    <div data-panel="1" hidden><p class="soon muted">상황별 기록은 추후 제공합니다.</p></div>
+    <div data-panel="1" hidden>
+      {situYears.length > 1 && (
+        <div class="seasonbar" role="group" aria-label="상황별 시즌 고르기"><span>시즌</span>
+          {situYears.map((y) => <button type="button" data-season={y} aria-pressed={y === situFirst ? 'true' : 'false'}>{y}</button>)}
+        </div>
+      )}
+      <div class="situ" data-situ data-src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/players/${p.id}/situ.json`} data-kind={p.kind} data-name={p.name} data-height={p.height ?? 183} set:html={situHtml} />
+    </div>
     <div data-panel="2" hidden><p class="soon muted">관련 글은 추후 제공합니다.</p></div>
   </section>
 </Base>
 
 <script>
+  import { renderBatter, renderPitcher } from '../../lib/situ';
   const root = document.querySelector<HTMLElement>('[data-player]')!;
   root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.pick!;
@@ -142,10 +171,24 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
     root.querySelectorAll<HTMLButtonElement>('.years [data-pick]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pick === k)));
     if (b.classList.contains('mini')) root.querySelector('.hexwrap')!.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }));
+  // 상황별 시즌 버튼: 처음 누를 때 이 선수의 situ.json을 한 번 받아 둔다
+  const box = root.querySelector<HTMLElement>('[data-situ]')!;
+  let all: Promise<Record<string, any>> | null = null;
+  root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((b) => b.addEventListener('click', async () => {
+    const y = b.dataset.season!;
+    root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    all ??= fetch(box.dataset.src!).then((r) => r.json());
+    const e = (await all)[y];
+    box.innerHTML = !e ? '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>'
+      : box.dataset.kind === 'b' ? renderBatter(e) : renderPitcher(e, box.dataset.name!, Number(box.dataset.height), y);
+  }));
   root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
     root.querySelectorAll<HTMLElement>('[data-panel]').forEach((el) => { el.hidden = el.dataset.panel !== t.dataset.tab; });
+    history.replaceState(null, '', t.dataset.tab === '1' ? '#situ' : location.pathname);
   }));
+  // 주소 끝 #situ = 상황별 탭을 연 채로(공유용)
+  if (location.hash === '#situ') root.querySelector<HTMLButtonElement>('[data-tab="1"]')!.click();
 </script>
 
 <style>
@@ -175,6 +218,8 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .side { grid-area: side; }
   .type { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }
   .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .tiles[hidden] { display: none; }
+  .tl { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
   .tile { background: var(--board); color: var(--board-text); border-radius: var(--radius); padding: 6px 4px 5px; text-align: center; }
   .tile b { display: block; font-family: var(--num); font-size: 25px; line-height: 1.05; font-variant-numeric: tabular-nums; }
   .tile span { font-size: 12px; white-space: nowrap; }
@@ -197,6 +242,10 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .tabs button { font: inherit; font-size: 15px; padding: 8px 0; color: var(--muted); background: none; border: 0; cursor: pointer; }
   .tabs button[aria-selected='true'] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px var(--navy); }
   .soon { margin: 20px 0; font-size: 15px; }
+  .seasonbar { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 14px 0 0; font-size: 13px; color: var(--muted); }
+  .seasonbar span { margin-right: 4px; }
+  .seasonbar button { font: 600 16px/1.4 var(--num); padding: 1px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--text); cursor: pointer; }
+  .seasonbar button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
 
   .tw { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; font-size: 14px; }
