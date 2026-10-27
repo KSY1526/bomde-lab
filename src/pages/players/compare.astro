@@ -1,0 +1,147 @@
+---
+// 육각형 비교(설계 docs/블로그/선수검색-설계.md 6절, 3단계). 최대 3명(같은 선수 다른 연도 가능, 타자끼리·투수끼리).
+// 선택 상태는 주소 ?p=id:2026,id:2022 에 들어가 공유된다. 그림·표는 브라우저에서 /players/<id>/hex.json을 받아 그린다
+// 슬롯 색은 고정 순서 --cmp1~3(global.css, dataviz 검증기 통과). AI 비교 요약은 자리만(4단계)
+import Base from '../../layouts/Base.astro';
+import { url } from '../../lib/site';
+---
+<Base title="육각형 비교" description="KBO 선수 최대 3명의 육각형을 겹쳐 비교합니다. 같은 선수의 다른 시즌도 비교할 수 있습니다.">
+  <h1>육각형 비교</h1>
+  <p class="lead">선수를 검색해 최대 3명까지 겹쳐 봅니다. 같은 선수의 다른 연도도 넣을 수 있습니다. 타자는 타자끼리, 투수는 투수끼리.</p>
+  <div class="cmp" data-cmp data-base={url()}>
+    <div class="pick">
+      <span data-chips></span>
+      <span class="add" data-add>
+        <label class="sr-only" for="cmp-q">비교할 선수 추가</label>
+        <input id="cmp-q" type="search" maxlength="40" autocomplete="off" placeholder="+ 선수 추가" data-q />
+        <ol class="cands" data-list hidden></ol>
+      </span>
+    </div>
+    <p class="empty" data-empty>위 칸에 선수 이름을 넣어 보세요.</p>
+    <div class="body" data-body hidden>
+      <div class="hexbox" data-hex></div>
+      <div class="tw"><table class="tab" data-tab></table></div>
+    </div>
+    <div class="ai" data-ai hidden><p>AI 비교 요약은 추후 제공합니다.</p></div>
+    <p class="note" data-note hidden></p>
+  </div>
+</Base>
+
+<script>
+  import { compareHex, compareTable } from '../../lib/compare';
+  type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string };
+  type P = { id: string; name: string; kind: 'b' | 'p'; team: string; pos: string; hex: Record<string, Hex> };
+  type Row = [string, string, 'b' | 'p', string, string, number, number, string[]];
+
+  const root = document.querySelector<HTMLElement>('[data-cmp]')!;
+  const base = root.dataset.base ?? '/';
+  const $ = <T extends HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const chips = $('[data-chips]'), add = $('[data-add]'), input = $<HTMLInputElement>('[data-q]'), list = $<HTMLOListElement>('[data-list]');
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  const cache = new Map<string, Promise<P>>();
+  const getP = (id: string) => { if (!cache.has(id)) cache.set(id, fetch(`${base}players/${id}/hex.json`).then((r) => r.json())); return cache.get(id)!; };
+  const ylab = (k: string) => (k === 'career' ? '통산' : k);
+  const defYear = (p: P) => (p.hex['2026'] ? '2026' : Object.keys(p.hex).filter((k) => k !== 'career').sort().at(-1) ?? 'career');
+
+  let sel: { id: string; y: string }[] = (new URLSearchParams(location.search).get('p') ?? '')
+    .split(',').map((s) => s.split(':')).filter(([id]) => /^\d+$/.test(id ?? '')).map(([id, y]) => ({ id, y: y || '' })).slice(0, 3);
+
+  async function render() {
+    const ps = await Promise.all(sel.map((s) => getP(s.id).catch(() => null)));
+    sel = sel.filter((_, i) => ps[i]);
+    const items = sel.map((s, i) => { const p = ps.filter(Boolean)[i]!; if (!p.hex[s.y]) s.y = defYear(p); return { p, y: s.y, slot: i + 1 }; });
+    // 첫 선수와 종류(타자·투수)가 다른 선수는 뺀다
+    const kind = items[0]?.p.kind;
+    const ok = items.filter((it) => it.p.kind === kind);
+    history.replaceState(null, '', ok.length ? `?p=${ok.map((it) => `${it.p.id}:${it.y}`).join(',')}` : location.pathname);
+    chips.innerHTML = ok.map((it, i) => `<span class="chip"><i style="background:var(--cmp${i + 1})"></i><a href="${base}players/${it.p.id}/">${esc(it.p.name)}</a>
+<label class="sr-only" for="cy${i}">${esc(it.p.name)} 시즌</label><select id="cy${i}" data-i="${i}">${Object.keys(it.p.hex).sort().map((k) => `<option value="${k}"${k === it.y ? ' selected' : ''}>${ylab(k)}</option>`).join('')}</select>
+<button type="button" data-x="${i}" aria-label="${esc(it.p.name)} 빼기">×</button></span>`).join('');
+    add.hidden = ok.length >= 3;
+    input.placeholder = ok.length ? `+ ${kind === 'b' ? '타자' : '투수'} 추가` : '+ 선수 추가';
+    $('[data-empty]').hidden = ok.length > 0;
+    $('[data-body]').hidden = $('[data-ai]').hidden = ok.length === 0;
+    const note = $('[data-note]');
+    note.hidden = ok.length === 0;
+    if (ok.length) {
+      const its = ok.map((it, i) => ({ name: it.p.name, year: ylab(it.y), hex: it.p.hex[it.y], color: `var(--cmp${i + 1})` }));
+      $('[data-hex]').innerHTML = compareHex(its);
+      $('[data-tab]').innerHTML = compareTable(its);
+      note.textContent = `칸의 큰 숫자 = 실제 기록, 작은 숫자 = 그 시즌 ${kind === 'b' ? '규정타석' : '규정이닝'} 70% 이상 선수 중 백분위(통산은 시즌별 백분위 가중 평균). 밑줄 = 셋 중 백분위가 가장 높은 값. 점선 = 리그 중간(50).`;
+    }
+    sel = ok.map((it) => ({ id: it.p.id, y: it.y }));
+  }
+
+  chips.addEventListener('change', (e) => { const t = e.target as HTMLSelectElement; sel[Number(t.dataset.i)].y = t.value; render(); });
+  chips.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-x]'); if (b) { sel.splice(Number(b.dataset.x), 1); render(); } });
+
+  // 선수 추가 검색(색인은 처음 입력할 때 한 번)
+  let rows: Row[] | null = null, loading: Promise<void> | null = null, hits: Row[] = [];
+  const load = () => (loading ??= fetch(`${base}player-index.json`).then((r) => r.json()).then((j) => { rows = j; }));
+  async function search() {
+    await load();
+    const words = input.value.trim().split(/\s+/).filter(Boolean);
+    const kind = sel.length ? (await getP(sel[0].id)).kind : null;
+    if (!words.length || !rows) { list.hidden = true; return; }
+    hits = rows.filter((r) => (!kind || r[2] === kind) && words.every((w) => r[1].includes(w) || r[7].some((t) => t.toLowerCase() === w.toLowerCase())));
+    hits.sort((a, b) => Number(words.includes(b[1])) - Number(words.includes(a[1])));
+    hits = hits.slice(0, 15);
+    list.innerHTML = hits.length ? hits.map((r, i) => `<li><button type="button" data-h="${i}"><b>${esc(r[1])}</b><span>${esc(r[7].join('·'))} · ${esc(r[4])} · ${r[5] === r[6] ? r[5] : `${r[5]}–${r[6]}`}</span></button></li>`).join('')
+      : `<li class="none">${kind ? `${kind === 'b' ? '타자' : '투수'} 중에 ` : ''}찾는 선수가 없어요.</li>`;
+    list.hidden = false;
+  }
+  async function pick(r: Row) {
+    const p = await getP(r[0]);
+    sel.push({ id: r[0], y: defYear(p) });
+    input.value = ''; list.hidden = true;
+    render();
+  }
+  input.addEventListener('focus', () => { load(); });
+  input.addEventListener('input', search);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); if (hits[0]) pick(hits[0]); } });
+  list.addEventListener('click', (e) => { const b = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-h]'); if (b) pick(hits[Number(b.dataset.h)]); });
+  document.addEventListener('click', (e) => { if (!add.contains(e.target as Node)) list.hidden = true; });
+  render();
+</script>
+
+<style>
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .lead { font-size: 14px; color: var(--muted); margin: 0 0 12px; }
+  .pick { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pick [data-chips] { display: contents; }
+  .pick :global(.chip) { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 4px 6px 4px 10px; font-weight: 600; }
+  .pick :global(.chip i) { width: 12px; height: 12px; display: inline-block; border-radius: 2px; }
+  .pick :global(.chip a) { color: var(--text); }
+  .pick :global(.chip select) { font: 600 15px var(--num); color: var(--link); background: transparent; border: 0; cursor: pointer; }
+  .pick :global(.chip button) { border: 0; background: none; color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer; padding: 0 4px; }
+  .add { position: relative; }
+  .add[hidden] { display: none; }
+  .add input { font: inherit; font-size: 15px; padding: 6px 10px; border: 1px dashed var(--line); border-radius: var(--radius); background: transparent; color: var(--text); width: 170px; }
+  .add input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .cands { position: absolute; z-index: 20; left: 0; top: calc(100% + 4px); width: 320px; max-width: 80vw; margin: 0; padding: 0; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); max-height: 360px; overflow-y: auto; }
+  .cands :global(li + li) { border-top: 1px solid var(--line); }
+  .cands :global(button) { display: flex; gap: 10px; align-items: baseline; width: 100%; text-align: left; padding: 8px 12px; border: 0; background: none; font: inherit; color: var(--text); cursor: pointer; }
+  .cands :global(button:hover), .cands :global(button:focus) { background: var(--chip-bg); }
+  .cands :global(b) { font-weight: 600; white-space: nowrap; }
+  .cands :global(span) { font-size: 13px; color: var(--muted); }
+  .cands :global(.none) { padding: 8px 12px; font-size: 14px; color: var(--muted); }
+  .empty { color: var(--muted); font-size: 15px; margin: 28px 0; }
+  .body { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 24px; align-items: center; margin-top: 16px; }
+  .body[hidden] { display: none; }
+  .tw { overflow-x: auto; }
+  .tab :global(th), .tab :global(td) { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  .tab { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+  .tab :global(th) { font-size: 14px; }
+  .tab :global(th i) { display: inline-block; width: 10px; height: 10px; margin-right: 5px; border-radius: 2px; }
+  .tab :global(th small) { color: var(--muted); font-weight: 400; display: block; }
+  .tab :global(td.t) { text-align: left; font-size: 14px; }
+  .tab :global(td b) { font-family: var(--num); font-size: 21px; font-weight: 600; }
+  .tab :global(td small) { color: var(--muted); margin-left: 5px; font-size: 12px; }
+  .tab :global(td.best b) { color: var(--navy); font-weight: 700; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .tab :global(td.ty) { font-weight: 700; color: var(--navy); font-size: 14px; }
+  .ai { margin: 20px 0 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+  .ai[hidden] { display: none; }
+  .ai p { margin: 0; color: var(--muted); font-size: 15px; }
+  .note { font-size: 13px; color: var(--muted); }
+  @media (max-width: 760px) { .body { grid-template-columns: 1fr; } }
+</style>

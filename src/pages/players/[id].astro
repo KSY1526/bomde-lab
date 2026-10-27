@@ -6,6 +6,7 @@ import PlayerSearch from '../../components/PlayerSearch.astro';
 import Silhouette from '../../components/Silhouette.astro';
 import Hexagon from '../../components/Hexagon.astro';
 import { teamColor, darken } from '../../lib/teams';
+import { url } from '../../lib/site';
 import { renderBatter, renderPitcher } from '../../lib/situ';
 import '../../styles/situ.css';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -89,6 +90,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
           {keys.map((k) => <button type="button" data-pick={k} aria-pressed={k === first ? 'true' : 'false'} class:list={{ nq: !p.hex[k].q }}>{k === 'career' ? '통산' : k}</button>)}
         </div>
         {keys.map((k) => <div class="hexbig" data-y={k} hidden={k !== first}><Hexagon vals={p.hex[k].vals} size={340} /></div>)}
+        <a class="cmplink" data-cmplink href={`${url('players/compare')}?p=${p.id}:${first}`}>다른 선수와 육각형 비교</a>
       </div>
 
       <div class="side">
@@ -169,6 +171,8 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
     const k = b.dataset.pick!;
     root.querySelectorAll<HTMLElement>('[data-y]').forEach((el) => { el.hidden = el.dataset.y !== k; });
     root.querySelectorAll<HTMLButtonElement>('.years [data-pick]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pick === k)));
+    const cl = root.querySelector<HTMLAnchorElement>('[data-cmplink]')!;
+    cl.href = cl.href.replace(/:[^:]*$/, `:${k}`);
     if (b.classList.contains('mini')) root.querySelector('.hexwrap')!.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }));
   // 상황별 시즌 버튼: 처음 누를 때 이 선수의 situ.json을 한 번 받아 둔다
@@ -214,6 +218,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .years button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); border-style: solid; }
   .years button:last-child { font-family: var(--font); font-size: 14px; }
   .hexbig { max-width: 360px; margin: 0 auto; }
+  .cmplink { display: inline-block; font-size: 14px; margin-top: 4px; }
 
   .side { grid-area: side; }
   .type { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.35; }

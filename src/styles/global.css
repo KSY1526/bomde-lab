@@ -21,6 +21,10 @@
   --warn-bg: #fbefc6;
   --warn-text: #6b5200;
   --ok: #2f8a57;
+  /* 육각형 비교 슬롯 색(고정 순서, 2026-10-28 dataviz 검증기 통과: 라이트 #f3f2ee·다크 #151c28 바탕) */
+  --cmp1: #2b5cab;
+  --cmp2: #b3202e;
+  --cmp3: #a97c0a;
 
   --radius: 3px;
   --font: 'IBM Plex Sans KR', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
@@ -51,6 +55,9 @@
     --warn-bg: #4a3d0a;
     --warn-text: #ffe28a;
     --ok: #5fcf8e;
+    --cmp1: #5a8ee0;
+    --cmp2: #e85a6a;
+    --cmp3: #b8891c;
     color-scheme: dark;
   }
 }
@@ -73,6 +80,9 @@
   --warn-bg: #4a3d0a;
   --warn-text: #ffe28a;
   --ok: #5fcf8e;
+  --cmp1: #5a8ee0;
+  --cmp2: #e85a6a;
+  --cmp3: #b8891c;
   color-scheme: dark;
 }
 
