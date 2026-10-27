@@ -71,6 +71,10 @@ const situYears = Object.keys(situ).sort();
 const situFirst = situYears.includes(String(CUR)) ? String(CUR) : situYears.at(-1);
 const situHtml = !situFirst ? '<p class="soon">상황별 기록이 없습니다.</p>'
   : bat ? renderBatter(situ[situFirst]) : renderPitcher(situ[situFirst], p.name, p.height ?? 183, situFirst);
+// AI 요약(scripts/ai_summary.py, 2026 시즌 일부 선수만). **굵게** → <b>
+const aiPath = join(process.cwd(), 'src/data/ai-summary', `${p.id}.json`);
+const ai: Record<string, { text: string }> = existsSync(aiPath) ? JSON.parse(readFileSync(aiPath, 'utf8')) : {};
+const aiHtml = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const title = `${p.name} 기록 · ${word} 육각형`;
 const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
 ---
@@ -101,7 +105,18 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       </div>
     </div>
 
-    <div class="ai"><p class="muted">AI 요약은 추후 제공합니다.</p></div>
+    <div class="ai">
+      {keys.map((k) => (
+        <div data-y={k} hidden={k !== first}>
+          {ai[k] ? (
+            <>
+              <p class="aitext" set:html={aiHtml(ai[k].text)} />
+              <p class="who">AI 요약 · {k}년 기록으로 생성</p>
+            </>
+          ) : <p class="muted">AI 요약은 추후 제공합니다.</p>}
+        </div>
+      ))}
+    </div>
 
     {p.years.length > 1 && (
       <>
@@ -233,6 +248,9 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 
   .ai { margin: 22px 0 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
   .ai p { margin: 0; font-size: 15px; }
+  .ai .aitext { font-family: var(--font-body); font-size: 16px; line-height: 1.75; }
+  .ai .aitext :global(b) { color: var(--navy); }
+  .ai .who { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
   h2 { font-size: 17px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); line-height: 1.4; }
   h2 small { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 8px; }
