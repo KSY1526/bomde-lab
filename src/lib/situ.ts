@@ -49,7 +49,7 @@ function gap(aLab: string, a: number | null, bLab: string, b: number | null, goo
   if (a == null || b == null) return '';
   const d = a - b, w = Math.min(50, (Math.abs(d) / 0.4) * 50), better = (d > 0) === goodHigh;
   return `<div class="gap"><span>${aLab}</span><div class="track"><i class="${d > 0 ? 'l' : 'r'} ${better ? 'pos' : 'neg'}" style="width:${w.toFixed(0)}%"></i><em></em></div><span>${bLab}</span></div>
-<p class="gapcap">${goodHigh ? 'OPS' : '피OPS'} 차이 <b>${d > 0 ? '+' : '−'}${f3(Math.abs(d))}</b> (${d > 0 ? aLab : bLab} 쪽이 높음)</p>`;
+<p class="gapcap">${goodHigh ? 'OPS' : '피OPS'} 차이 <b>${f3(Math.abs(d))}</b> (${d > 0 ? aLab : bLab} 쪽이 높음)</p>`;
 }
 
 function rvBar(v: number | null, scale = 2): string {
@@ -73,14 +73,14 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
 <div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>20타석 미만(표본 적음)</div>`;
 }
 
-function diamonds(sp: Record<string, Split>, label: string): string {
+function diamonds(sp: Record<string, Split>): string {
   const on: Record<string, number[]> = { '주자 없음': [0, 0, 0], '주자 있음': [1, 0, 0], 득점권: [0, 1, 0], 만루: [1, 1, 1] };
   const base = (x: number, y: number, f: number) => `<rect x="${x - 9}" y="${y - 9}" width="18" height="18" transform="rotate(45 ${x} ${y})" class="${f ? 'bf' : 'be'}"/>`;
   const cells = Object.keys(on).filter((k) => sp[k]).map((k) => {
     const [b1, b2, b3] = on[k], pa = sp[k][0];
     return `<div class="dcell${pa < 20 ? ' thin' : ''}"><svg viewBox="0 0 100 70" class="dia" aria-hidden="true">${base(80, 40, b1)}${base(50, 12, b2)}${base(20, 40, b3)}<path d="M44 62 L56 62 L56 56 L50 51 L44 56 Z" class="be"/></svg><b>${f3(sp[k][4])}</b><span>${k} · ${pa}타석${pa < 20 ? ' · 표본 적음' : ''}</span></div>`;
   }).join('');
-  return `<div class="diamonds">${cells}</div><p class="note">득점권 = 2루나 3루에 주자. 칸 숫자는 ${label}.</p>`;
+  return `<div class="diamonds">${cells}</div>`;
 }
 
 function spray(cnt: Record<string, [number, number, number]>): string {
@@ -105,7 +105,7 @@ export function renderBatter(e: SituB): string {
   const sp = e.sp ?? {};
   let out = '';
   if (sp['좌투'] || sp['우투']) {
-    out += h2('좌우 투수', '상대 투수 손별 · 실루엣이 상대 투수') + `<div class="hands">${hands(sp, [['좌투', 'vs 좌투수', true], ['우투', 'vs 우투수', false]], true)}</div>`;
+    out += h2('좌우 투수') + `<div class="hands">${hands(sp, [['좌투', 'vs 좌투수', true], ['우투', 'vs 우투수', false]], true)}</div>`;
     out += gap('좌투', sp['좌투']?.[4] ?? null, '우투', sp['우투']?.[4] ?? null, true);
   }
   const pt = (e.pt ?? []).filter((r) => r[1] >= 40).sort((a, b) => b[1] - a[1]);
@@ -113,21 +113,20 @@ export function renderBatter(e: SituB): string {
     const tot = (e.pt ?? []).reduce((a, r) => a + r[1], 0);
     const rows = pt.map(([t, n, wh, rv]) => {
       const o = sp[t];
-      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span>${n0((n / tot) * 100)}%</td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<small>${o ? o[0] : 0}</small></td></tr>`;
+      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<small>${o ? o[0] : 0}</small></td></tr>`;
     }).join('');
-    out += h2('구종별 대응', '구종가치 = 그 구종을 상대로 번 점수, 100구당 · 오른쪽(파랑)이 타자에게 이득');
+    out += h2('구종별 대응');
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>상대한 비율</th>${rvHead('타자')}<th>헛스윙률</th><th>결과 OPS<small>타석</small></th></tr></thead><tbody>${rows}</tbody></table></div>`;
-    out += '<p class="note">결과 OPS는 그 구종이 타석의 마지막 공일 때. 40구 미만 구종은 뺌.</p>';
   }
-  if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응', '타석이 끝난 카운트 기준 OPS · 색 = 리그 같은 카운트 대비') + countGrid(sp, e.lgc, true);
+  if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응') + countGrid(sp, e.lgc, true);
   const sprayHtml = e.spray ? spray(e.spray) : '';
-  const runners = sp['주자 없음'] ? `<div>${h2('주자 상황', 'OPS')}${diamonds(sp, 'OPS')}</div>` : '';
+  const runners = sp['주자 없음'] ? `<div>${h2('주자 상황', 'OPS')}${diamonds(sp)}</div>` : '';
   if (sprayHtml || runners) {
     const n = e.spray ? Object.values(e.spray).reduce((a, v) => a + v[0], 0) : 0;
     const pullZ = e.side === 'L' ? ['우', '우중'] : ['좌', '좌중'];
     const pull = n ? (pullZ.reduce((a, z) => a + e.spray![z][0], 0) / n) * 100 : 0;
     const ha = sp['홈'] && sp['원정'] ? ` · 홈/원정 OPS ${f3(sp['홈'][4])} / ${f3(sp['원정'][4])}` : '';
-    out += `<div class="two">${runners}${sprayHtml ? `<div>${h2('타구 방향', `인플레이 타구 ${n}개 · 칸 숫자 = 그쪽으로 간 타구 비율 · 내야 타구는 방향으로 합침`)}${sprayHtml}
+    out += `<div class="two">${runners}${sprayHtml ? `<div>${h2('타구 방향', `인플레이 타구 ${n}개`)}${sprayHtml}
 <p class="note">당겨친 쪽(${e.side === 'L' ? '우측·우중간' : '좌측·좌중간'}) ${n0(pull)}%${ha}</p></div>` : ''}</div>`;
   }
   return out || '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>';
@@ -197,12 +196,12 @@ export function renderPitcher(e: SituP, name: string, height: number, season: st
   const sp = e.sp ?? {};
   let out = '';
   if (sp['좌타'] || sp['우타']) {
-    out += h2('좌우 타자', '상대 타자 손별 · 실루엣이 상대 타자') + `<div class="hands">${hands(sp, [['좌타', 'vs 좌타자', true], ['우타', 'vs 우타자', false]], false)}</div>`;
+    out += h2('좌우 타자') + `<div class="hands">${hands(sp, [['좌타', 'vs 좌타자', true], ['우타', 'vs 우타자', false]], false)}</div>`;
     out += gap('좌타', sp['좌타']?.[4] ?? null, '우타', sp['우타']?.[4] ?? null, false);
   }
   const ars = e.ars ?? [];
   if (ars.length) {
-    out += h2('구종 · 구종가치', '구종가치 = 그 구종으로 막아 낸 점수, 100구당 · 오른쪽(파랑)이 투수에게 이득');
+    out += h2('구종 · 구종가치');
     const hasMove = ars.some((r) => r[4] != null);
     out += '<div class="arsenal">';
     if (e.rel) {
@@ -213,12 +212,11 @@ ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}c
     }
     if (hasMove) out += `<div class="acol"><h3>공이 어떻게 휘나</h3>${move(ars, e.lgm, e.throws, name, season)}</div>`;
     out += '</div>';
-    const rows = ars.map(([t, u, v, w, hm, vm, rv, oa, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span>${u.toFixed(1)}%</td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
+    const rows = ars.map(([t, u, v, w, hm, vm, rv, oa, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span><span class="ubn">${u.toFixed(1)}%</span></td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
 <td class="mvd">${mvtxt(hm, vm, e.lgm[t], e.throws)}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(oa)}<small>${pa}</small></td></tr>`).join('');
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>평균 km/h</th><th>헛스윙률</th><th>리그 대비 움직임</th>${rvHead('투수')}<th>피안타율<small>타석</small></th></tr></thead><tbody>${rows}</tbody></table></div>`;
-    out += `<p class="note">움직임 그림과 표는 포수 자리에서 본 방향. 옅게 칠한 쪽이 실루엣의 던지는 팔 쪽입니다.${e.rel ? '' : ' 릴리스 위치는 2016년부터 있습니다.'}</p>`;
   }
-  if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과', '타석이 끝난 카운트 기준 피OPS · 색 = 리그 같은 카운트 대비(파랑 = 잘 막음)') + countGrid(sp, e.lgc, false);
-  if (sp['주자 없음']) out += h2('주자 상황', '피OPS') + diamonds(sp, '피OPS');
+  if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
+  if (sp['주자 없음']) out += h2('주자 상황', '피OPS') + diamonds(sp);
   return out || '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>';
 }

@@ -1,6 +1,6 @@
 ---
 // 선수 육각형(선수검색). 목업 mock_lib3.py hexsvg()를 옮긴 것: 위부터 시계 방향 6축, 점선 = 리그 중간(50),
-// 축 글자 = 이름 + 실제 값(크게, Barlow Condensed) + 백분위(작게 회색). labels=false면 작은 판(연도별 줄)
+// 축 글자 = 이름 + 실제 값(크게, Barlow Condensed) + (백분위)(아주 작게 회색, 2026-10-28 사용자: 모양으로 보이니 줄이고 괄호). labels=false면 작은 판(연도별 줄)
 interface Props { vals: [string, number, string][]; size?: number; labels?: boolean; ring?: boolean }
 const { vals, size = 300, labels = true, ring = true } = Astro.props;
 const R = size * (labels ? 0.30 : 0.42), cx = size / 2, cy = size / 2;
@@ -26,7 +26,7 @@ const label = (i: number) => {
     return (
       <>
         <text x={x} y={(y - 6).toFixed(1)} text-anchor={anc} class="hl">{lab}</text>
-        <text x={x} y={(y + 13).toFixed(1)} text-anchor={anc} class="hp"><tspan class="rv">{raw}</tspan> <tspan class="pc">{p}</tspan></text>
+        <text x={x} y={(y + 13).toFixed(1)} text-anchor={anc} class="hp"><tspan class="rv">{raw}</tspan><tspan class="pc" dx="3">({p})</tspan></text>
       </>
     );
   })}
@@ -42,5 +42,5 @@ const label = (i: number) => {
   .hl { font-size: 13px; fill: var(--text); font-weight: 600; font-family: var(--font); }
   .hp { font-size: 12px; fill: var(--muted); }
   .rv { font-family: var(--num); font-size: 20px; fill: var(--navy); font-weight: 700; }
-  .pc { font-size: 12px; fill: var(--muted); }
+  .pc { font-size: 10px; fill: var(--muted); }
 </style>

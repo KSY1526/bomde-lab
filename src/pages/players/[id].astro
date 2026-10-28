@@ -48,21 +48,14 @@ const tilesOf = (k: string): [string, string][] => {
 };
 const tiles = tilesOf('career');
 const bio = [p.hand, p.height && p.weight ? `${p.height}cm ${p.weight}kg` : '', p.school ?? '', p.joined ? `${p.joined} 입단` : ''].filter(Boolean).join(' · ');
-const word = bat ? '타격' : '투구', qual = bat ? '규정타석' : '규정이닝', vol = bat ? '타석' : '이닝';
-const cut = bat ? '100타석' : '30이닝';
-const head = (k: string) => {
-  const h = p.hex[k];
-  if (k === 'career') return { t: `통산 ${word} 육각형`, s: `시즌별 백분위를 ${vol} 수로 가중 평균 · 값은 통산 기록 · 점선 = 리그 중간(50)` };
-  return { t: `${k} ${word} 육각형`, s: `${qual} 70% 이상 ${h.n}명 중 백분위${h.q ? '' : `(이 시즌은 ${qual} 70% 미달)`} · 점선 = 리그 중간(50)` };
+const word = bat ? '타격' : '투구';
+const head = (k: string) => (k === 'career' ? `통산 ${word} 육각형` : `${k} ${word} 육각형`);
+// 등급(2026-10-28 사용자: 7단계, 기준은 화면에 안 씀). 표본 적음은 데이터(export_players.py)의 판정을 따른다
+const grade = (h: Hex) => {
+  if (!h.grade || h.grade === '표본 적음' || h.war == null) return h.grade;
+  const w = h.war;
+  return w >= 6 ? 'S+' : w >= 4 ? 'S' : w >= 3 ? 'A+' : w >= 2 ? 'A' : w >= 1 ? 'B+' : w > 0 ? 'B' : 'C';
 };
-const gradeCap = (k: string) => {
-  const h = p.hex[k];
-  if (!h.grade) return '';
-  if (h.grade === '표본 적음') return `등급 <b>표본 적음</b> = ${k}년 ${cut} 미만`;
-  const why = h.grade === 'S' ? 'WAR 4 이상' : h.grade === 'A' ? 'WAR 2 이상' : 'WAR 2 미만';
-  return `등급 <b>${h.grade}</b> = ${k} ${why}(S 4 이상 · A 2 이상 · B 그 아래 · ${cut} 미만은 표본 적음)`;
-};
-const axisOrder = p.hex[first].vals.map((v) => v[0]).join(' · ');
 const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
 // 상황별 탭: 기본 시즌(지금 시즌, 없으면 마지막 시즌)만 미리 그리고, 다른 시즌은 버튼을 누를 때 situ.json을 받아 같은 함수로 그린다
 const situPath = join(process.cwd(), 'src/data/players-situ', `${p.id}.json`);
@@ -83,13 +76,13 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   <section class="player" data-player>
     <div class="top">
       <div class="pcard" style={`--tc:${col.c};--tc2:${col.c2};--tc3:${darken(col.c, 0.55)}`}>
-        <div class="pc-top"><span>{p.team}</span>{keys.map((k) => p.hex[k].grade && <span class="pc-grade" data-y={k} hidden={k !== first}>{p.hex[k].grade}</span>)}</div>
+        <div class="pc-top"><span>{p.team}</span>{keys.map((k) => grade(p.hex[k]) && <span class:list={['pc-grade', { thin: p.hex[k].grade === '표본 적음' }]} data-y={k} hidden={k !== first}>{grade(p.hex[k])}</span>)}</div>
         <div class="pc-sil"><Silhouette pitcher={!bat} height={p.height ?? undefined} weight={p.weight ?? undefined} flip={p.left} no={p.no ?? ''} c={col.c} /></div>
         <div class="pc-band"><b>{p.name}</b><span>{p.no ? `#${p.no} · ` : ''}{p.pos}</span></div>
       </div>
 
       <div class="hexwrap">
-        {keys.map((k) => <div class="hexhead" data-y={k} hidden={k !== first}><b>{head(k).t}</b><span>{head(k).s}</span></div>)}
+        {keys.map((k) => <div class="hexhead" data-y={k} hidden={k !== first}><b>{head(k)}</b></div>)}
         <div class="years" role="group" aria-label="시즌 고르기">
           {keys.map((k) => <button type="button" data-pick={k} aria-pressed={k === first ? 'true' : 'false'} class:list={{ nq: !p.hex[k].q }}>{k === 'career' ? '통산' : k}</button>)}
         </div>
@@ -101,7 +94,6 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
         {keys.map((k) => <div class="type" data-y={k} hidden={k !== first}>{p.hex[k].type}</div>)}
         {keys.map((k) => <div class="tiles" data-y={k} hidden={k !== first}><span class="tl">{k === 'career' ? '통산' : `${k} 시즌`}</span>{tilesOf(k).map(([v, l]) => <div class="tile"><b>{v}</b><span>{l}</span></div>)}</div>)}
         {bio && <p class="cap">{bio}</p>}
-        {keys.map((k) => gradeCap(k) && <p class="cap" data-y={k} hidden={k !== first} set:html={gradeCap(k)} />)}
       </div>
     </div>
 
@@ -120,7 +112,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 
     {p.years.length > 1 && (
       <>
-        <h2>연도별 모양 변화<small>연도를 누르면 위 육각형이 바뀝니다 · 흐린 칸은 {qual} 70% 미달</small></h2>
+        <h2>연도별 모양 변화</h2>
         <div class="strip">
           {keys.filter((k) => k !== 'career').map((k) => (
             <button type="button" class:list={['mini', { nq: !p.hex[k].q }]} data-pick={k} aria-label={`${k} 육각형 보기`}>
@@ -131,13 +123,21 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
         </div>
       </>
     )}
-    <p class="legend">축 순서(위부터 시계 방향): {axisOrder}</p>
 
     <div class="tabs" role="tablist">
-      {['기록', '상황별', '관련 글'].map((t, i) => <button type="button" role="tab" data-tab={i} aria-selected={i === 0 ? 'true' : 'false'}>{t}</button>)}
+      {['상황별', '시즌별 기록', '관련 글'].map((t, i) => <button type="button" role="tab" data-tab={i} aria-selected={i === 0 ? 'true' : 'false'}>{t}</button>)}
     </div>
     <div data-panel="0">
-      <h2>연도별 · 통산<small>맨 아래 줄이 통산</small></h2>
+      {situYears.length > 1 && (
+        <div class="seasonbar" role="group" aria-label="상황별 시즌 고르기"><span>시즌</span>
+          {situYears.map((y) => <button type="button" data-season={y} aria-pressed={y === situFirst ? 'true' : 'false'}>{y}</button>)}
+        </div>
+      )}
+      <div class="ai situai"><p class="muted">상황별 AI 요약은 추후 제공합니다.</p></div>
+      <div class="situ" data-situ data-src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/players/${p.id}/situ.json`} data-kind={p.kind} data-name={p.name} data-height={p.height ?? 183} set:html={situHtml} />
+    </div>
+    <div data-panel="1" hidden>
+      <h2>연도별 · 통산</h2>
       <div class="tw">
         {bat ? (
           <table class="rec">
@@ -166,14 +166,6 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
         )}
       </div>
       {missingNote && <p class="note">{missingNote}</p>}
-    </div>
-    <div data-panel="1" hidden>
-      {situYears.length > 1 && (
-        <div class="seasonbar" role="group" aria-label="상황별 시즌 고르기"><span>시즌</span>
-          {situYears.map((y) => <button type="button" data-season={y} aria-pressed={y === situFirst ? 'true' : 'false'}>{y}</button>)}
-        </div>
-      )}
-      <div class="situ" data-situ data-src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/players/${p.id}/situ.json`} data-kind={p.kind} data-name={p.name} data-height={p.height ?? 183} set:html={situHtml} />
     </div>
     <div data-panel="2" hidden><p class="soon muted">관련 글은 추후 제공합니다.</p></div>
   </section>
@@ -204,18 +196,19 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
     root.querySelectorAll<HTMLElement>('[data-panel]').forEach((el) => { el.hidden = el.dataset.panel !== t.dataset.tab; });
-    history.replaceState(null, '', t.dataset.tab === '1' ? '#situ' : location.pathname);
+    history.replaceState(null, '', t.dataset.tab === '1' ? '#record' : location.pathname);
   }));
-  // 주소 끝 #situ = 상황별 탭을 연 채로(공유용)
-  if (location.hash === '#situ') root.querySelector<HTMLButtonElement>('[data-tab="1"]')!.click();
+  // 주소 끝 #record = 시즌별 기록 탭을 연 채로(공유용). 상황별이 기본 탭(2026-10-28 사용자)
+  if (location.hash === '#record') root.querySelector<HTMLButtonElement>('[data-tab="1"]')!.click();
 </script>
 
 <style>
   .player { margin-top: 24px; padding-top: 20px; border-top: 2px solid var(--head-line); }
   .top { display: grid; grid-template-columns: 180px minmax(0, 1fr) 220px; grid-template-areas: 'card hex side'; gap: 22px; align-items: start; }
   .pcard { grid-area: card; background: var(--tc); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
-  .pc-top { display: flex; justify-content: space-between; padding: 8px 10px; color: #fffd; font-size: 13px; font-weight: 600; }
-  .pc-grade { border: 1px solid #fff8; padding: 0 6px; border-radius: 2px; font-size: 12px; }
+  .pc-top { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; color: #fffd; font-size: 13px; font-weight: 600; }
+  .pc-grade { border: 1.5px solid #fffa; padding: 1px 8px; border-radius: 3px; font: 700 26px/1.1 var(--num); color: #fff; }
+  .pc-grade.thin { font: 600 12px/1.4 var(--font); padding: 1px 6px; }
   .pc-sil { height: 200px; padding: 4px 24px 0; }
   .pc-band { background: var(--tc3); border-top: 3px solid var(--tc2); color: #fff; padding: 8px 12px 10px; }
   .pc-band b { display: block; font-size: 24px; line-height: 1.15; }
@@ -223,7 +216,6 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 
   .hexwrap { grid-area: hex; text-align: center; min-width: 0; }
   .hexhead b { font-size: 17px; display: block; }
-  .hexhead span { font-size: 12px; color: var(--muted); display: block; line-height: 1.5; }
   .years { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin: 10px 0 0; }
   .years button {
     font: 600 16px/1.4 var(--num); padding: 1px 8px; border: 1px solid var(--line); border-radius: var(--radius);
@@ -251,6 +243,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .ai .aitext { font-family: var(--font-body); font-size: 16px; line-height: 1.75; }
   .ai .aitext :global(b) { color: var(--navy); }
   .ai .who { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .situai { margin: 14px 0 0; }
 
   h2 { font-size: 17px; margin: 28px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); line-height: 1.4; }
   h2 small { font-weight: 400; color: var(--muted); font-size: 12px; margin-left: 8px; }
@@ -259,7 +252,6 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .mini:hover { border-color: var(--line); }
   .mini span { display: block; font-family: var(--num); font-size: 16px; font-weight: 600; }
   .mini.nq { opacity: .4; }
-  .legend { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
 
   .tabs { display: flex; gap: 18px; border-bottom: 1px solid var(--line); margin-top: 28px; }
   .tabs button { font: inherit; font-size: 15px; padding: 8px 0; color: var(--muted); background: none; border: 0; cursor: pointer; }
@@ -282,7 +274,8 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   @media (max-width: 760px) {
     .top { grid-template-columns: 104px minmax(0, 1fr); grid-template-areas: 'card hex' 'side side'; gap: 10px 10px; }
     .pc-top { padding: 5px 6px; font-size: 11px; }
-    .pc-grade { font-size: 11px; padding: 0 4px; }
+    .pc-grade { font-size: 19px; padding: 0 5px; }
+    .pc-grade.thin { font-size: 10px; padding: 0 3px; }
     .pc-sil { height: 104px; padding: 2px 10px 0; }
     .pc-band { padding: 5px 7px 6px; }
     .pc-band b { font-size: 16px; }
