@@ -174,8 +174,11 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 <script>
   import { renderBatter, renderPitcher } from '../../lib/situ';
   const root = document.querySelector<HTMLElement>('[data-player]')!;
+  // 로그(Visit.astro 화면 이벤트): 탭·연도·상황별 시즌·비교 링크
+  const ev = (n: string, d?: string) => (window as unknown as { bomdeEvent?: (n: string, d?: string) => void }).bomdeEvent?.(n, d);
   root.querySelectorAll<HTMLButtonElement>('[data-pick]').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.pick!;
+    ev('player_year', k);
     root.querySelectorAll<HTMLElement>('[data-y]').forEach((el) => { el.hidden = el.dataset.y !== k; });
     root.querySelectorAll<HTMLButtonElement>('.years [data-pick]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.pick === k)));
     const cl = root.querySelector<HTMLAnchorElement>('[data-cmplink]')!;
@@ -187,13 +190,16 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   let all: Promise<Record<string, any>> | null = null;
   root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((b) => b.addEventListener('click', async () => {
     const y = b.dataset.season!;
+    ev('player_situ_year', y);
     root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     all ??= fetch(box.dataset.src!).then((r) => r.json());
     const e = (await all)[y];
     box.innerHTML = !e ? '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>'
       : box.dataset.kind === 'b' ? renderBatter(e) : renderPitcher(e, box.dataset.name!, Number(box.dataset.height), y);
   }));
+  root.querySelector('[data-cmplink]')!.addEventListener('click', () => ev('player_compare'));
   root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {
+    ev('player_tab', t.textContent ?? '');
     root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
     root.querySelectorAll<HTMLElement>('[data-panel]').forEach((el) => { el.hidden = el.dataset.panel !== t.dataset.tab; });
     history.replaceState(null, '', t.dataset.tab === '1' ? '#record' : location.pathname);

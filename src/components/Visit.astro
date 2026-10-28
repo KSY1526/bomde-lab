@@ -7,6 +7,7 @@
 // 화면 이벤트(2026-10-24): POST {API}/event { name, path, post?, detail?, me } — 글 50%·끝까지 읽음, 댓글 칸·좋아요 보임, 다음에 읽을 글 클릭.
 //   다른 컴포넌트는 window.bomdeEvent(name, detail?)로 보낸다(크봇 열기 등). 같은 페이지에서 같은 이름은 한 번만.
 //   검색 이벤트(search·search_click·search_kbot)는 이름 + 내용이 같을 때만 한 번(검색어마다 남게, 2026-10-25).
+//   선수검색 이벤트(psearch·psearch_click·player_tab·player_year·player_situ_year·player_compare·cmp_add, 2026-10-28)도 같은 방식.
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
 <span hidden data-visit data-api={api}></span>
@@ -49,7 +50,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 
   const sent = new Set<string>();
   function send(name: string, detail?: string) {
-    const key = name.startsWith('search') ? `${name}|${detail}` : name;
+    const key = /^(search|psearch|player_|cmp_)/.test(name) ? `${name}|${detail}` : name;
     if (!api || sent.has(key)) return;
     sent.add(key);
     fetch(`${api}/event`, {

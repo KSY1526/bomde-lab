@@ -93,6 +93,7 @@ import { url } from '../../lib/site';
   async function pick(r: Row) {
     const p = await getP(r[0]);
     sel.push({ id: r[0], y: defYear(p) });
+    (window as unknown as { bomdeEvent?: (n: string, d?: string) => void }).bomdeEvent?.('cmp_add', `${r[0]} ${r[1]}`);
     input.value = ''; list.hidden = true;
     render();
   }

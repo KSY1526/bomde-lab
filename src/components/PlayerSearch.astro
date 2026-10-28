@@ -20,7 +20,10 @@ const { autofocus = false } = Astro.props;
     let rows: Row[] | null = null, loading: Promise<void> | null = null;
     const load = () => (loading ??= fetch(form.dataset.index!).then((r) => r.json()).then((j) => { rows = j; }));
     const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
-    let hits: Row[] = [];
+    let hits: Row[] = [], typing = 0;
+    // 로그(Visit.astro): 검색어는 입력이 1.5초 멈췄을 때, 고른 선수는 "id 이름"
+    const ev = (n: string, d?: string) => (window as unknown as { bomdeEvent?: (n: string, d?: string) => void }).bomdeEvent?.(n, d);
+    const logQ = () => { const q = input.value.trim(); if (q) ev('psearch', q.slice(0, 100)); };
 
     function render() {
       const words = input.value.trim().split(/\s+/).filter(Boolean);
@@ -35,8 +38,12 @@ const { autofocus = false } = Astro.props;
       list.hidden = false;
     }
     input.addEventListener('focus', () => { load(); });
-    input.addEventListener('input', () => { load().then(render); });
-    form.addEventListener('submit', (e) => { e.preventDefault(); if (hits[0]) location.href = `${base}players/${hits[0][0]}/`; });
+    input.addEventListener('input', () => { load().then(render); clearTimeout(typing); typing = window.setTimeout(logQ, 1500); });
+    form.addEventListener('submit', (e) => { e.preventDefault(); if (hits[0]) { logQ(); ev('psearch_click', `${hits[0][0]} ${hits[0][1]}`); location.href = `${base}players/${hits[0][0]}/`; } });
+    list.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest('a'), r = a && hits.find((h) => a.pathname.endsWith(`/players/${h[0]}/`));
+      if (r) { logQ(); ev('psearch_click', `${r[0]} ${r[1]}`); }
+    });
     document.addEventListener('click', (e) => { if (!form.contains(e.target as Node)) list.hidden = true; });
     input.addEventListener('focus', () => { if (input.value.trim() && rows) render(); });
   }
