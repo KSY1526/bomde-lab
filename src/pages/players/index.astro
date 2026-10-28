@@ -4,9 +4,14 @@ import Base from '../../layouts/Base.astro';
 import PlayerSearch from '../../components/PlayerSearch.astro';
 import index from '../../data/player-index.json';
 import { url } from '../../lib/site';
+// 맨 아래 크봇 예시(2026-10-28 사용자: "올해 9월 OPS TOP5" 같은 이름 없는 질문)
+const chat = {
+  lead: '찾는 기록이 선수 페이지에 없으면 크봇에게 물어보세요. 2010년부터의 정규시즌 투구·타석 데이터로 답해 드려요.',
+  examples: ['올해 9월 OPS TOP5', '올해 145km 이상 공 상대 타율 TOP5', '올해 좌투수 상대 OPS TOP5'],
+};
 const nb = index.filter((r) => r[2] === 'b').length, np = index.length - nb;
 ---
-<Base title="선수검색" description="2010년 이후 KBO 1군 타자·투수의 연도별 기록과 육각형을 선수 이름으로 찾아봅니다.">
+<Base title="선수검색" description="2010년 이후 KBO 1군 타자·투수의 연도별 기록과 육각형을 선수 이름으로 찾아봅니다." chat={chat}>
   <h1>선수검색</h1>
   <PlayerSearch autofocus />
   <p class="muted note">2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>

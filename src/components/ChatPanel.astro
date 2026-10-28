@@ -1,5 +1,8 @@
 ---
-// 우측 크봇 챗봇. 데스크톱은 우측 고정 패널, 모바일(1023px 이하)은 우하단 버튼 → 아래에서 올라오는 창.
+// 크봇 챗봇. 두 가지 모양(2026-10-28 사용자 결정: PC 우측 고정 칸은 이용이 적어 없앰)
+//   inline = 선수 페이지·선수검색 첫 화면 맨 아래 본문 안. "더 자세한 기록" 질문용, 예시 질문은 페이지가 넘긴다
+//   popup(기본) = 다른 페이지. 평소엔 안 보이고 헤더 검색의 "크봇에게 이 질문하기"(kbot:ask)로 창이 뜬다.
+//   모바일(1023px 이하)은 둘 다 우하단 버튼 → 아래에서 올라오는 창(inline은 본문 안에 그대로 보임).
 // 서버(Tailscale Funnel, 2단계에서 구현) 계약:
 //   GET  {API}/health → { ok, remaining_today: number }  (ok:false = 사용 한도가 차서 쉬는 중, 2026-10-24)
 //   POST {API}/chat   { question, history: [{ q, a }] } → { reply, posts?, remaining_today } | 4xx/5xx { error, remaining_today? }
@@ -10,13 +13,27 @@
 // 보내기는 사용자가 누른다(2026-10-26 사용자 요청: 자동으로 보내지 말 것)
 // 문답은 비공개(사용자 결정 2026-10-10) — 각자 브라우저에 자기 문답만 보관한다.
 import { url } from '../lib/site';
+interface Props {
+  inline?: boolean;
+  /** 예시 질문(누르면 입력 칸에 채움) */
+  examples?: string[];
+  /** 첫 안내 말 */
+  lead?: string;
+}
+const {
+  inline = false,
+  examples = ['롯데 올해 팀 OPS 순위', '김도영 2024 wRC+', '박세웅 구종별 피안타율'],
+  lead = 'KBO 기록이라면 무엇이든 물어보세요. 2010년부터의 정규시즌 투구·타석 데이터로 답해 드려요. 관련된 글이 있으면 같이 찾아 드려요.',
+} = Astro.props;
 const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 ---
-<button class="chat-fab" type="button" aria-controls="kbot-panel" aria-expanded="false" data-chat-toggle>
-  크봇에게 물어보기
-</button>
+{!inline && (
+  <button class="chat-fab" type="button" aria-controls="kbot-panel" aria-expanded="false" data-chat-toggle>
+    크봇에게 물어보기
+  </button>
+)}
 
-<section id="kbot-panel" class="chat" data-api={api} data-base={url()} aria-labelledby="kbot-title">
+<section id="kbot-panel" class:list={['chat', inline ? 'inline' : 'popup']} data-api={api} data-base={url()} aria-labelledby="kbot-title">
   <header class="chat-head">
     <div>
       <h2 id="kbot-title">크봇에게 물어보기</h2>
@@ -27,11 +44,9 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
 
   <ol class="log" data-log aria-live="polite">
     <li class="msg bot intro">
-      KBO 기록이라면 무엇이든 물어보세요. 2010년부터의 정규시즌 투구·타석 데이터로 답해 드려요. 관련된 글이 있으면 같이 찾아 드려요.
+      {lead}
       <span class="examples">
-        <button type="button" data-example>롯데 올해 팀 OPS 순위</button>
-        <button type="button" data-example>김도영 2024 wRC+</button>
-        <button type="button" data-example>박세웅 구종별 피안타율</button>
+        {examples.map((x) => <button type="button" data-example>{x}</button>)}
       </span>
     </li>
   </ol>
@@ -185,11 +200,12 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     submit.disabled = !online;
   });
 
-  // 모바일: 버튼으로 열고 닫기
-  const fab = document.querySelector<HTMLButtonElement>('.chat-fab')!;
+  // popup: 버튼(모바일)·검색 넘김으로 열고 닫기. inline은 늘 본문 안에 있다
+  const fab = document.querySelector<HTMLButtonElement>('.chat-fab');
+  const inline = panel.classList.contains('inline');
   function setOpen(open: boolean) {
     panel.classList.toggle('open', open);
-    fab.setAttribute('aria-expanded', String(open));
+    fab?.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('chat-open', open);
     if (open) { q.focus(); ev('kbot_open'); }
   }
@@ -200,8 +216,8 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   window.addEventListener('kbot:ask', (e) => {
     const text = String((e as CustomEvent).detail ?? '').slice(0, 300);
     if (!text) return;
-    if (matchMedia('(max-width: 1023px)').matches) setOpen(true);
-    else panel.scrollIntoView({ block: 'nearest' });
+    if (inline) panel.scrollIntoView({ block: 'center' });
+    else setOpen(true);
     q.value = text; q.dispatchEvent(new Event('input')); q.focus();
   });
 
@@ -262,19 +278,32 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   .foot { margin: 0; padding: 0 0 12px; }
 
   .chat-fab { display: none; }
+  /* inline: 본문 맨 아래 */
+  .chat.inline { margin-top: 40px; }
+  .chat.inline .log { max-height: 460px; }
+  /* popup: 평소 숨김, 열리면 PC는 오른쪽 아래 창 */
+  .chat.popup { display: none; }
+  @media (min-width: 1024px) {
+    .chat.popup.open {
+      display: flex; position: fixed; right: 24px; bottom: 24px; width: 380px; height: min(80vh, 640px); z-index: 50;
+      background: var(--bg); padding: 0 16px; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 4px 20px rgb(0 0 0 / 16%);
+    }
+    .chat.popup.open .log { max-height: none; }
+    .chat.popup .close { display: block; }
+  }
   @media (max-width: 1023px) {
     .chat-fab {
       display: inline-flex; gap: 6px; align-items: center; position: fixed; right: 16px; bottom: 16px; z-index: 40;
       padding: 11px 18px; border: 0; border-radius: var(--radius); background: var(--accent); color: var(--bg);
       font: inherit; font-weight: 600; box-shadow: 0 2px 8px rgb(0 0 0 / 18%); cursor: pointer;
     }
-    .chat { display: none; }
-    .chat.open {
+    .chat.popup { display: none; }
+    .chat.popup.open {
       display: flex; position: fixed; inset: auto 0 0 0; height: min(80vh, 640px); z-index: 50;
       background: var(--bg); padding: 0 16px; border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgb(0 0 0 / 12%);
     }
-    .close { display: block; }
-    .chat.open .log { max-height: none; }
+    .chat.popup .close { display: block; }
+    .chat.popup.open .log { max-height: none; }
     :global(body.chat-open) .chat-fab { display: none; }
   }
 </style>

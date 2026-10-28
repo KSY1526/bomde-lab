@@ -104,17 +104,12 @@ img, svg { max-width: 100%; }
 
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
-/* 본문 + 우측 챗봇 */
+/* 본문. 우측 챗봇 칸을 없애며(2026-10-28) 폭은 그대로(832px) 가운데로 — 글 한 줄 길이 유지 */
 .layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 48px;
   padding-top: 28px;
   padding-bottom: 48px;
 }
-@media (max-width: 1023px) {
-  .layout { grid-template-columns: minmax(0, 1fr); }
-}
+.layout > main { max-width: 832px; margin: 0 auto; }
 
 /* 숫자판(블로그 표식) — 글 목록·점수판·순서 번호에만 */
 .board { background: var(--board); color: var(--board-text); border-radius: var(--radius); }

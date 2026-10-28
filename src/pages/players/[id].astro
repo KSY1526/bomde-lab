@@ -72,9 +72,17 @@ const sumPath = join(process.cwd(), 'src/data/situ-summary', `${p.id}.json`);
 const situAi: Record<string, { text: string }> = existsSync(sumPath) ? JSON.parse(readFileSync(sumPath, 'utf8')) : {};
 const aiHtml = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const title = `${p.name} 기록 · ${word} 육각형`;
+// 맨 아래 크봇: 이 페이지에 없는 기록만 예시로(2026-10-28 사용자. 시즌이 끝나 "최근 N경기"는 뺌)
+const ly = p.years.at(-1);
+const chat = {
+  lead: '더 자세한 기록이 궁금하면 크봇에게 물어보세요. 2010년부터의 정규시즌 투구·타석 데이터로 답해 드려요.',
+  examples: bat
+    ? [`${p.name} ${ly} 월별 성적`, `${p.name} ${ly} 145km 이상 공 상대 성적`, `${p.name} ${ly} 상대 팀별 성적`, `${p.name} ${ly} 구장별 성적`, `${p.name} ${ly} 가장 많이 상대한 투수 성적`]
+    : [`${p.name} ${ly} 월별 성적`, `${p.name} ${ly} 이닝별 피OPS`, ...(p.pos === '선발투수' ? [`${p.name} ${ly} 투구 수 50구 전후 피OPS`] : []), `${p.name} ${ly} 상대 팀별 성적`, `${p.name} ${ly} 가장 많이 상대한 타자 성적`],
+};
 const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
 ---
-<Base title={title} description={desc} breadcrumbs={[{ name: '홈', path: '/' }, { name: '선수검색', path: '/players/' }, { name: p.name, path: `/players/${p.id}/` }]}>
+<Base title={title} description={desc} chat={chat} breadcrumbs={[{ name: '홈', path: '/' }, { name: '선수검색', path: '/players/' }, { name: p.name, path: `/players/${p.id}/` }]}>
   <PlayerSearch />
   <section class="player" data-player>
     <div class="top">
