@@ -67,6 +67,9 @@ const situHtml = !situFirst ? '<p class="soon">상황별 기록이 없습니다.
 // AI 요약(scripts/ai_summary.py, 2026 시즌 일부 선수만). **굵게** → <b>
 const aiPath = join(process.cwd(), 'src/data/ai-summary', `${p.id}.json`);
 const ai: Record<string, { text: string }> = existsSync(aiPath) ? JSON.parse(readFileSync(aiPath, 'utf8')) : {};
+// 상황별 AI 요약(scripts/situ_summary.py, Sonnet, 2026 시즌 일부 선수만). 시즌 버튼을 누르면 그 시즌 것만 보인다
+const sumPath = join(process.cwd(), 'src/data/situ-summary', `${p.id}.json`);
+const situAi: Record<string, { text: string }> = existsSync(sumPath) ? JSON.parse(readFileSync(sumPath, 'utf8')) : {};
 const aiHtml = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const title = `${p.name} 기록 · ${word} 육각형`;
 const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
@@ -133,7 +136,18 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
           {situYears.map((y) => <button type="button" data-season={y} aria-pressed={y === situFirst ? 'true' : 'false'}>{y}</button>)}
         </div>
       )}
-      <div class="ai situai"><p class="muted">상황별 AI 요약은 추후 제공합니다.</p></div>
+      <div class="ai situai">
+        {(situYears.length ? situYears : ['']).map((y) => (
+          <div data-sy={y} hidden={y !== (situFirst ?? '')}>
+            {situAi[y] ? (
+              <>
+                <p class="aitext" set:html={aiHtml(situAi[y].text)} />
+                <p class="who">AI 요약 · {y}년 상황별 기록으로 생성</p>
+              </>
+            ) : <p class="muted">상황별 AI 요약은 추후 제공합니다.</p>}
+          </div>
+        ))}
+      </div>
       <div class="situ" data-situ data-src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/players/${p.id}/situ.json`} data-kind={p.kind} data-name={p.name} data-height={p.height ?? 183} set:html={situHtml} />
     </div>
     <div data-panel="1" hidden>
@@ -192,6 +206,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
     const y = b.dataset.season!;
     ev('player_situ_year', y);
     root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    root.querySelectorAll<HTMLElement>('[data-sy]').forEach((x) => { x.hidden = x.dataset.sy !== y; });
     all ??= fetch(box.dataset.src!).then((r) => r.json());
     const e = (await all)[y];
     box.innerHTML = !e ? '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>'

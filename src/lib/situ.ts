@@ -7,7 +7,7 @@ export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number |
 type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
   sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
-  rel?: [number, number, number]; throws: 'L' | 'R'; lgm: Record<string, [number, number]>; lgr?: [number, number]; lgc: Record<string, number>;
+  rel?: [number, number, number]; throws: 'L' | 'R'; lgm: Record<string, [number, number]>; lgslot?: string; lgr?: [number, number]; lgc: Record<string, number>;
 };
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
@@ -171,7 +171,7 @@ function front(x: number, h: number, H: number, lg: [number, number] | undefined
   return `<svg viewBox="0 0 ${W} ${Ht}" class="front" role="img" aria-label="릴리스 위치: 높이 ${n0(h)}cm, 팔 각도 ${ang}도 ${slot(ang)}">${g}</svg>`;
 }
 
-function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | 'R', name: string, season: string): string {
+function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | 'R', name: string, season: string, lgslot?: string): string {
   const W = 320, H = 320, M = 30, K = 2.4, sx = (x: number) => W / 2 + x * K, sy = (y: number) => H / 2 - y * K, f = (v: number) => v.toFixed(1);
   const armLeft = throws === 'R';
   let g = '<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" class="ahd"/></marker></defs>';
@@ -194,13 +194,13 @@ function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | '
   const [a, b] = armLeft ? ['← 던지는 팔 쪽', '반대쪽 →'] : ['← 반대쪽', '던지는 팔 쪽 →'];
   g += `<text x="${M}" y="${H - M + 20}" class="tk${armLeft ? ' arml' : ''}">${a}</text><text x="${W - M}" y="${H - M + 20}" class="tk${armLeft ? '' : ' arml'}" text-anchor="end">${b}</text>`;
   return `<svg viewBox="0 0 ${W} ${H}" class="move" role="img" aria-label="구종별 움직임">${g}</svg>
-<div class="mleg"><span><i class="lgp-sw"></i>${season} 리그 평균(${throws === 'R' ? '우' : '좌'}투수)</span><span><i class="pd-sw"></i>${esc(name)}</span><span>화살표 = 리그 평균과 얼마나 다르게 움직이나</span></div>`;
+<div class="mleg"><span><i class="lgp-sw"></i>${season} ${lgslot ? `${lgslot} 투수 평균` : `리그 평균(${throws === 'R' ? '우' : '좌'}투수)`}</span><span><i class="pd-sw"></i>${esc(name)}</span><span>화살표 = 평균과 얼마나 다르게 움직이나</span></div>`;
 }
 
 function mvtxt(hm: number, vm: number, L: [number, number] | undefined, throws: 'L' | 'R'): string {
   if (!L || hm == null || vm == null) return '-';
   const dh = hm - L[0], dv = vm - L[1], arm = (dh < 0) === (throws === 'R');
-  const v = Math.abs(dv) < 1.5 ? '높이는 리그와 비슷' : `<b>${n0(Math.abs(dv))}cm</b> ${dv > 0 ? '덜 떨어짐' : '더 떨어짐'}`;
+  const v = Math.abs(dv) < 1.5 ? '높이는 평균과 비슷' : `<b>${n0(Math.abs(dv))}cm</b> ${dv > 0 ? '덜 떨어짐' : '더 떨어짐'}`;
   return v + (Math.abs(dh) < 1.5 ? '' : `<br><small>${arm ? '던지는 팔 쪽' : '반대쪽'}으로 ${n0(Math.abs(dh))}cm 더</small>`);
 }
 
@@ -222,7 +222,7 @@ export function renderPitcher(e: SituP, name: string, height: number, season: st
 <p class="rcap"><b class="slot">${slot(ang)}</b> · 팔 각도 약 ${ang}°<br>공이 손을 떠나는 높이 <b>${n0(h)}cm</b>, 몸 가운데에서 ${e.throws === 'R' ? '3루' : '1루'} 쪽으로 <b>${n0(Math.abs(x))}cm</b>
 ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}cm). 높이는 리그보다 ${Math.abs(h - lg[1]) < 1.5 ? '비슷' : `${n0(Math.abs(h - lg[1]))}cm ${h > lg[1] ? '높음' : '낮음'}`}</span>` : ''}</p></div>`;
     }
-    if (hasMove) out += `<div class="acol"><h3>공이 어떻게 휘나</h3>${move(ars, e.lgm, e.throws, name, season)}</div>`;
+    if (hasMove) out += `<div class="acol"><h3>공이 어떻게 휘나</h3>${move(ars, e.lgm, e.throws, name, season, e.lgslot)}</div>`;
     out += '</div>';
     // 전체 · 좌타자 · 우타자 탭(2026-10-28 사용자). 탭 전환은 [id].astro가 [data-side]로
     const sets: [string, string, Ars][] = [['전체', '전체', ars], ['좌타', '좌타자', e.arsS?.['좌타'] ?? []], ['우타', '우타자', e.arsS?.['우타'] ?? []]];
