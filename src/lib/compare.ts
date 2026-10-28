@@ -17,7 +17,9 @@ export function compareHex(items: Item[], size = 380): string {
     g += `<polygon points="${pts(at)}" style="fill:${it.color};stroke:${it.color}" class="shape"><title>${esc(it.name)} ${it.year}: ${it.hex.vals.map(([l, p, v]) => `${l} ${v}(${p})`).join(', ')}</title></polygon>`;
     for (let i = 0; i < 6; i++) { const [x, y] = P(at(i), ang[i]); g += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4" style="fill:${it.color}" class="dot"/>`; }
   }
-  items[0].hex.vals.forEach(([lab], i) => {
+  // 구원투수는 WAR 자리가 WPA라 섞이면 'WAR/WPA'
+  const labs = items[0].hex.vals.map((_, i) => [...new Set(items.map((it) => it.hex.vals[i][0]))].join('/'));
+  labs.forEach((lab, i) => {
     const a = ang[i], [x, y] = P(R + 22, a), anc = Math.abs(Math.cos(a)) < 0.2 ? 'middle' : Math.cos(a) > 0 ? 'start' : 'end';
     g += `<text x="${x.toFixed(1)}" y="${(y + 5).toFixed(1)}" text-anchor="${anc}" class="hl">${esc(lab)}</text>`;
   });
@@ -28,7 +30,8 @@ export function compareHex(items: Item[], size = 380): string {
 
 export function compareTable(items: Item[]): string {
   const head = `<thead><tr><th class="t"></th>${items.map((it) => `<th><i style="background:${it.color}"></i>${esc(it.name)}<small>${it.year}</small></th>`).join('')}</tr></thead>`;
-  const rows = items[0].hex.vals.map(([lab], k) => {
+  const rows = items[0].hex.vals.map((_, k) => {
+    const lab = [...new Set(items.map((it) => it.hex.vals[k][0]))].join('/');
     const ps = items.map((it) => it.hex.vals[k][1]), best = Math.max(...ps);
     return `<tr><td class="t">${esc(lab)}</td>${items.map((it) => { const [, p, raw] = it.hex.vals[k]; return `<td class="${items.length > 1 && p === best ? 'best' : ''}"><b>${esc(raw)}</b><small>${p}</small></td>`; }).join('')}</tr>`;
   }).join('');

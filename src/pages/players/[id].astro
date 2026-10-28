@@ -197,6 +197,14 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
     box.innerHTML = !e ? '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>'
       : box.dataset.kind === 'b' ? renderBatter(e) : renderPitcher(e, box.dataset.name!, Number(box.dataset.height), y);
   }));
+  // 구종 표 전체·좌타자·우타자 탭(situ.ts가 tbody를 손별로 그려 둠). 시즌을 바꾸면 innerHTML이 새로 들어오므로 위임
+  box.addEventListener('click', (x) => {
+    const b = (x.target as HTMLElement).closest<HTMLButtonElement>('[data-side]');
+    if (!b) return;
+    ev('player_pitch_side', b.dataset.side);
+    box.querySelectorAll<HTMLButtonElement>('[data-side]').forEach((y) => y.setAttribute('aria-pressed', String(y === b)));
+    box.querySelectorAll<HTMLElement>('[data-side-body]').forEach((y) => { y.hidden = y.dataset.sideBody !== b.dataset.side; });
+  });
   root.querySelector('[data-cmplink]')!.addEventListener('click', () => ev('player_compare'));
   root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {
     ev('player_tab', t.textContent ?? '');

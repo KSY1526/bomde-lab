@@ -4,8 +4,9 @@
 
 type Split = [number, number | null, number | null, number | null, number | null, number | null, number | null]; // 타석, 타율, 출루, 장타, OPS, 삼진%, 볼넷%
 export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R' };
+type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
-  sp?: Record<string, Split>; ars?: [string, number, number, number, number, number, number | null, number | null, number][];
+  sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
   rel?: [number, number, number]; throws: 'L' | 'R'; lgm: Record<string, [number, number]>; lgr?: [number, number]; lgc: Record<string, number>;
 };
 
@@ -68,8 +69,8 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
     const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
     cells += `<div class="cc${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${k}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
   }
-  return `<div class="cgrid-wrap"><div class="cg-y">스트라이크</div><div><div class="cg-x"><span>볼 0</span><span>1</span><span>2</span><span>3</span></div>
-<div class="cgrid">${cells}</div></div><div class="cg-s"><span>0</span><span>1</span><span>2</span></div></div>
+  return `<div class="cgrid-wrap"><div class="cg-y">스트라이크</div><div class="cg-s"><span>0</span><span>1</span><span>2</span></div><div><div class="cg-x"><span>볼 0</span><span>1</span><span>2</span><span>3</span></div>
+<div class="cgrid">${cells}</div></div></div>
 <div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>20타석 미만(표본 적음)</div>`;
 }
 
@@ -135,28 +136,39 @@ export function renderBatter(e: SituB): string {
 // ---- 투수: 어디서 던지나(포수 시점 실루엣 + 릴리스 위치) · 움직임 그림 (release_mock.py, 2026-10-28 사용자 확정) ----
 const slot = (a: number) => (a >= 70 ? '오버핸드' : a >= 35 ? '스리쿼터' : a >= 0 ? '사이드암' : '언더핸드(잠수함)');
 
-function front(x: number, h: number, H: number, lg: [number, number] | undefined, throws: 'L' | 'R'): string {
-  const W = 300, Ht = 300, K = 1.15, X = (cm: number) => W / 2 + cm * K, Y = (cm: number) => Ht - 26 - cm * K;
-  const side = throws === 'R' ? -1 : 1, sh = 0.81 * H, sx = 0.11 * H, hip = 0.5 * H, f = (v: number) => v.toFixed(1);
+// 포수 자리에서 본 상체(다리는 자름, 2026-10-28 사용자) + 어깨 둘레 팔 각도 부채(오버핸드~언더핸드), 이 투수 구간을 칠한다
+function front(x: number, h: number, H: number, lg: [number, number] | undefined, throws: 'L' | 'R', ang: number): string {
+  const side = throws === 'R' ? -1 : 1, W = 320, K = 1.3, R = 0.5 * H, top = Math.max(H + 12, 0.81 * H + R + 22, h + 30), bot = Math.min(0.81 * H - R - 10, h - 25), Ht = Math.round((top - bot) * K) + 24;
+  const cx = W / 2 - side * 40, X = (cm: number) => cx + cm * K, Y = (cm: number) => 8 + (top - cm) * K, f = (v: number) => v.toFixed(1);
+  const sh = 0.81 * H, sx = 0.11 * H, hip = 0.5 * H, ax = side * sx;
   let g = '';
-  for (const cm of [50, 100, 150, 200]) g += `<line x1="14" y1="${f(Y(cm))}" x2="${W - 14}" y2="${f(Y(cm))}" class="tick"/><text x="${W - 12}" y="${f(Y(cm) - 3)}" class="tkl" text-anchor="end">${cm}cm</text>`;
-  g += `<line x1="8" y1="${f(Y(0))}" x2="${W - 8}" y2="${f(Y(0))}" class="ground"/>`;
-  for (const d of [-1, 1]) g += `<path d="M${f(X(d * 0.06 * H))} ${f(Y(hip))} L${f(X(d * 0.17 * H))} ${f(Y(0.24 * H))} L${f(X(d * 0.22 * H))} ${f(Y(2))}" class="limb leg"/>`;
-  g += `<path d="M${f(X(-sx - 3))} ${f(Y(sh + 2))} Q${f(X(0))} ${f(Y(sh + 8))} ${f(X(sx + 3))} ${f(Y(sh + 2))} L${f(X(0.09 * H))} ${f(Y(hip))} L${f(X(-0.09 * H))} ${f(Y(hip))} Z" class="body"/>`;
+  for (const cm of [50, 100, 150, 200]) if (cm > bot && cm < top) g += `<line x1="8" y1="${f(Y(cm))}" x2="${W - 8}" y2="${f(Y(cm))}" class="tick"/><text x="${side < 0 ? W - 10 : 10}" y="${f(Y(cm) - 3)}" class="tkl" text-anchor="${side < 0 ? 'end' : 'start'}">${cm}cm</text>`;
+  // 팔 각도 부채: 수평 = 0°, 위 = 90°. 투수 구간만 진하게
+  const P = (deg: number, r: number) => [X(ax + side * r * Math.cos((deg * Math.PI) / 180)), Y(sh + r * Math.sin((deg * Math.PI) / 180))];
+  const zones: [string, number, number][] = [['오버핸드', 70, 105], ['스리쿼터', 35, 70], ['사이드암', 0, 35], ['언더핸드', -40, 0]];
+  const mine = slot(ang).slice(0, 4);
+  for (const [lab, a0, a1] of zones) {
+    const [p0, p1] = [P(a0, R), P(a1, R)], sweep = side < 0 ? 1 : 0, on = lab.startsWith(mine);
+    g += `<path d="M${f(X(ax))} ${f(Y(sh))} L${f(p0[0])} ${f(p0[1])} A${f(R * K)} ${f(R * K)} 0 0 ${sweep} ${f(p1[0])} ${f(p1[1])} Z" class="zone${on ? ' on' : ''}"/>`;
+    const m = P((a0 + a1) / 2, R + 13);
+    g += `<text x="${f(m[0])}" y="${f(m[1] + 4)}" class="zl${on ? ' on' : ''}" text-anchor="middle">${lab}</text>`;
+  }
+  // 상체: 엉덩이 높이에서 자르고 아래는 흐리게
+  g += `<defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.6" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="cut"><rect x="0" y="0" width="${W}" height="${f(Y(hip - 12))}" fill="url(#fade)"/></mask></defs><g mask="url(#cut)">`;
+  g += `<path d="M${f(X(-sx - 3))} ${f(Y(sh + 2))} Q${f(X(0))} ${f(Y(sh + 8))} ${f(X(sx + 3))} ${f(Y(sh + 2))} L${f(X(0.1 * H))} ${f(Y(hip - 12))} L${f(X(-0.1 * H))} ${f(Y(hip - 12))} Z" class="body"/>`;
+  const gs = -side;
+  g += `<path d="M${f(X(gs * sx))} ${f(Y(sh))} L${f(X(gs * (sx + 12)))} ${f(Y(sh - 28))} L${f(X(gs * 6))} ${f(Y(sh - 22))}" class="limb"/><ellipse cx="${f(X(gs * 6))}" cy="${f(Y(sh - 22))}" rx="11" ry="10" class="body"/></g>`;
   g += `<circle cx="${f(X(0))}" cy="${f(Y(0.905 * H))}" r="${f(0.062 * H * K)}" class="body"/>`;
   g += `<path d="M${f(X(-0.07 * H))} ${f(Y(0.93 * H))} Q${f(X(0))} ${f(Y(0.99 * H))} ${f(X(0.07 * H))} ${f(Y(0.93 * H))} Z" class="body"/>`;
-  const gs = -side;
-  g += `<path d="M${f(X(gs * sx))} ${f(Y(sh))} L${f(X(gs * (sx + 12)))} ${f(Y(sh - 28))} L${f(X(gs * 6))} ${f(Y(sh - 22))}" class="limb"/><ellipse cx="${f(X(gs * 6))}" cy="${f(Y(sh - 22))}" rx="11" ry="10" class="body"/>`;
   if (lg) g += `<circle cx="${f(X(lg[0]))}" cy="${f(Y(lg[1]))}" r="9" class="lgrel"/>`;
-  const ax = side * sx, ay = sh, mx = (ax + x) / 2, my = (ay + h) / 2;
-  const nx = -(h - ay), ny = x - ax, L = Math.hypot(nx, ny) || 1, bend = 7 * ((side * nx) / L > 0 ? 1 : -1);
-  g += `<path d="M${f(X(ax))} ${f(Y(ay))} L${f(X(mx + (nx / L) * bend))} ${f(Y(my + (ny / L) * bend))} L${f(X(x))} ${f(Y(h))}" class="limb arm"/><circle cx="${f(X(x))}" cy="${f(Y(h))}" r="7" class="ball"/>`;
-  // 글자: 팔 바깥쪽에 두되, 판 밖으로 나가면 공 아래로
-  const out = X(x) + side * 95 > 0 && X(x) + side * 95 < W;
-  const tx = out ? X(x) + side * 14 : X(x), ty = out ? Y(h) - 10 : Y(h) + 24, anc = out ? (side < 0 ? 'end' : 'start') : 'middle';
-  g += `<text x="${f(tx)}" y="${f(ty)}" class="rl" text-anchor="${anc}">공이 떠나는 곳</text><text x="${f(tx)}" y="${f(ty + 16)}" class="rvt" text-anchor="${anc}">높이 ${n0(h)}cm</text>`;
-  g += `<text x="14" y="${Ht - 6}" class="tkl">3루 쪽</text><text x="${W - 14}" y="${Ht - 6}" class="tkl" text-anchor="end">1루 쪽</text><text x="${W / 2}" y="${Ht - 6}" class="tkl" text-anchor="middle">포수 자리에서 본 모습</text>`;
-  return `<svg viewBox="0 0 ${W} ${Ht}" class="front" role="img" aria-label="릴리스 위치: 높이 ${n0(h)}cm">${g}</svg>`;
+  g += `<path d="M${f(X(ax))} ${f(Y(sh))} L${f(X(x))} ${f(Y(h))}" class="limb arm"/><circle cx="${f(X(x))}" cy="${f(Y(h))}" r="8" class="ball"/>`;
+  // 공 높이 표시: 공에서 눈금 쪽으로 점선
+  const ex = side < 0 ? W - 52 : 52; // 눈금 글자(cm) 앞에서 멈춤
+  g += `<line x1="${f(X(x))}" y1="${f(Y(h))}" x2="${ex}" y2="${f(Y(h))}" class="hline"/>`;
+  const ty = Y(h) > Y(sh) ? Y(h) + 22 : Y(h) - 14;
+  g += `<text x="${f(X(x))}" y="${f(ty)}" class="rvt" text-anchor="middle">${n0(h)}cm · ${ang}°</text>`;
+  g += `<text x="${W / 2}" y="${Ht - 6}" class="tkl" text-anchor="middle">포수 자리에서 본 모습 · ${side < 0 ? '왼쪽 = 3루 쪽' : '오른쪽 = 1루 쪽'}</text>`;
+  return `<svg viewBox="0 0 ${W} ${Ht}" class="front" role="img" aria-label="릴리스 위치: 높이 ${n0(h)}cm, 팔 각도 ${ang}도 ${slot(ang)}">${g}</svg>`;
 }
 
 function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | 'R', name: string, season: string): string {
@@ -206,15 +218,19 @@ export function renderPitcher(e: SituP, name: string, height: number, season: st
     out += '<div class="arsenal">';
     if (e.rel) {
       const [x, h, ang] = e.rel, lg = e.lgr, hand = e.throws === 'R' ? '우투' : '좌투';
-      out += `<div class="acol"><h3>어디서 던지나</h3>${front(x, h, height, lg, e.throws)}
+      out += `<div class="acol"><h3>어디서 던지나</h3>${front(x, h, height, lg, e.throws, ang)}
 <p class="rcap"><b class="slot">${slot(ang)}</b> · 팔 각도 약 ${ang}°<br>공이 손을 떠나는 높이 <b>${n0(h)}cm</b>, 몸 가운데에서 ${e.throws === 'R' ? '3루' : '1루'} 쪽으로 <b>${n0(Math.abs(x))}cm</b>
 ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}cm). 높이는 리그보다 ${Math.abs(h - lg[1]) < 1.5 ? '비슷' : `${n0(Math.abs(h - lg[1]))}cm ${h > lg[1] ? '높음' : '낮음'}`}</span>` : ''}</p></div>`;
     }
     if (hasMove) out += `<div class="acol"><h3>공이 어떻게 휘나</h3>${move(ars, e.lgm, e.throws, name, season)}</div>`;
     out += '</div>';
-    const rows = ars.map(([t, u, v, w, hm, vm, rv, oa, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span><span class="ubn">${u.toFixed(1)}%</span></td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
-<td class="mvd">${mvtxt(hm, vm, e.lgm[t], e.throws)}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(oa)}<small>${pa}</small></td></tr>`).join('');
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>평균 km/h</th><th>헛스윙률</th><th>리그 대비 움직임</th>${rvHead('투수')}<th>피안타율<small>타석</small></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    // 전체 · 좌타자 · 우타자 탭(2026-10-28 사용자). 탭 전환은 [id].astro가 [data-side]로
+    const sets: [string, string, Ars][] = [['전체', '전체', ars], ['좌타', '좌타자', e.arsS?.['좌타'] ?? []], ['우타', '우타자', e.arsS?.['우타'] ?? []]];
+    const body = (rs: Ars) => rs.map(([t, u, v, w, hm, vm, rv, ops, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span><span class="ubn">${u.toFixed(1)}%</span></td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
+<td class="mvd">${mvtxt(hm, vm, e.lgm[t], e.throws)}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<small>${pa}</small></td></tr>`).join('');
+    const live = sets.filter(([, , rs]) => rs.length);
+    if (live.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 타자 고르기">${live.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>평균 km/h</th><th>헛스윙률</th><th>리그 대비 움직임</th>${rvHead('투수')}<th>피OPS<small>타석</small></th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
   if (sp['주자 없음']) out += h2('주자 상황', '피OPS') + diamonds(sp);
