@@ -23,7 +23,7 @@ const result = p.result_text.replace(/\s*\(.*\)$/, '') + (p.runs ? `, ${p.runs}�
     <dt>상황</dt><dd>{p.inning_label} {p.outs} {p.bases}, {away} {p.score_before[away]} : {p.score_before[home]} {home}</dd>
     <dt>대결</dt><dd>타자 {p.batter}({p.batter_team}) vs 투수 {p.pitcher}({p.pitcher_team})</dd>
     <dt>결과</dt><dd>{result}</dd>
-    {lp.type && <><dt>마지막 공</dt><dd>{lp.count} 카운트, {lp.nth}구째 {lp.type}{lp.kmh ? ` ${Math.round(lp.kmh)}km/h` : ''}</dd></>}
+    {lp.nth && <><dt>마지막 공</dt><dd>{lp.count} 카운트, {lp.nth}구째{lp.type ? ` ${lp.type}` : ''}{lp.kmh ? ` ${Math.round(lp.kmh)}km/h` : ''}</dd></>}
     <dt>승리확률</dt><dd class="wp">{team} {before.toFixed(1)}% → {after.toFixed(1)}% <b>+{Math.abs(p.wpa).toFixed(1)}%p</b></dd>
   </dl>
   <div class="note"><slot /></div>

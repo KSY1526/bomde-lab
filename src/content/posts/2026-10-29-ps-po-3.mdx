@@ -1,0 +1,78 @@
+---
+title: "류지혁 역전 투런, 삼성이 한국시리즈까지 1승 남겼다"
+description: "플레이오프 3차전, 삼성이 KIA를 6-4으로 이겼다."
+date: 2026-10-29T23:32:00+09:00
+category: game
+tags: ["포스트시즌", "플레이오프", "삼성", "KIA", "WPA"]
+related: ["2026-10-27-ps-po-2", "2026-po-preview", "2026-wpa"]
+stat: { value: "6-4", label: "플레이오프 3차전, 삼성이 KIA를 꺾었다", short: "PO 3차전", items: [{ v: "6", cap: "삼성" }, { v: "4", cap: "KIA" }], sep: ":" }
+thumb: { teams: ["삼성", "KIA"] }
+dataUntil: "2026 플레이오프 3차전 (10/29)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-10-29-ps-po-3.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+삼성이 광주에서 열린 플레이오프 3차전에서 KIA를 6-4으로 꺾고 시리즈 2승 1패를 만들었다. 두 팀은 홈런을 두 개씩 주고받았고 점수는 세 번 뒤집히거나 맞춰졌다. 4-4으로 맞선 7회초 2사 2루에서 박승규와 구자욱이 연달아 쳐 두 점을 냈고 삼성 불펜이 마지막 세 이닝을 무실점으로 막았다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KIA 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KIA가 유리한 쪽이다."
+/>
+
+1회초 디아즈의 투런 홈런으로 KIA 승리확률은 36.4%까지 내려갔다. KIA는 2회말 두 점으로 2-2 동점을 만들었고 3회말 김도영의 솔로 홈런으로 3-2으로 뒤집어 4회에는 67.4%까지 올라갔다. 5회초 류지혁의 투런 홈런 한 방에 40.1%로 떨어졌고 6회말 나성범의 동점 홈런으로 57.7%까지 되돌렸다. 7회초 2사 2루에서 박승규의 2루타와 구자욱의 안타가 이어지며 23.0%가 됐고 그 뒤로 KIA 승리확률은 20%를 넘지 못했다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="7회초, 구자욱의 추가 적시타">
+삼성이 5-4으로 앞선 7회초 2사 2루에서 바뀐 투수 이의리가 구자욱을 상대했다. 구자욱은 2-2에서 5구째를 받아쳐 우중간에 떨어뜨렸고 2루 주자 박승규가 홈을 밟아 6-4가 됐다. 바로 앞 타자 박승규의 2루타가 2위 장면이다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="6회말, 나성범의 동점 솔로 홈런">
+삼성이 4-3으로 앞선 6회말, 원태인이 마운드에 올라 첫 타자 나성범을 맞았다. 나성범은 1-1에서 3구째를 때려 우익수 뒤 담장을 넘겼다. 4-4 동점이 됐고 KIA 승리확률은 42.0%에서 57.7%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="1회초, 디아즈의 선제 투런 홈런">
+0-0이던 1회초 2사에서 구자욱이 스트라이크 낫아웃 폭투로 1루를 밟았다. 다음 타자 디아즈가 0-1에서 시라카와의 2구째를 우익수 뒤로 넘겼다. 삼성이 2-0으로 앞서며 경기를 시작했다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="7회초, 박승규의 결승 2루타">
+4-4으로 맞선 7회초 1사에서 이재현이 중견수 왼쪽 안타로 나갔고 김지찬의 번트 아웃 때 2루까지 가 2사 2루가 됐다. 박승규는 조상우와 1-0에서 2구째를 받아쳐 우중간으로 2루타를 때렸다. 이재현이 홈을 밟아 삼성이 5-4으로 다시 앞섰다. 이 점수가 결승점이 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="5회초, 류지혁의 역전 투런 홈런">
+KIA가 3-2으로 앞선 5회초 선두 강민호가 우익수 앞 안타로 나갔고 전병우가 삼진으로 물러나 1사 1루가 됐다. 8번 타자 류지혁이 시라카와와 1-0에서 2구째를 받아쳐 우익수 뒤 담장을 넘겼다. 점수는 4-3으로 뒤집혔고 삼성 승리확률은 37.6%에서 59.9%로 올랐다. 시라카와는 다음 타자 이재현에게 볼넷을 내준 뒤 마운드를 내려갔다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+류지혁이 역전 투런 홈런과 8회 볼넷으로 승리확률을 21.1%p 올렸다. 디아즈는 1회 투런 홈런을 포함해 15.8%p를 보탰다. 이승민은 7회말 2사에 올라와 다섯 타자를 상대했고, 안타와 볼넷을 하나씩 내줬지만 점수를 주지 않아 12.3%p를 올렸다. KIA에서는 시라카와가 4⅓이닝 동안 홈런 두 개로 4점을 내주며 20.3%p를 깎았다. 박재현은 2회말 2사 1, 3루에서 삼진으로 물러나는 등 5타석에서 안타 하나에 그쳤고 승리확률은 10.7%p 줄었다. 삼성 선발 최원태도 1⅔이닝 2실점으로 13.0%p를 깎았다.
+
+플레이오프는 삼성의 2승 1패가 됐다. 4차전은 30일 광주에서 열리고 삼성은 한 번 더 이기면 한국시리즈에 오른다.
