@@ -1,0 +1,78 @@
+---
+title: "한준수 풀카운트 결승타, KIA가 마지막 승부로 끌고 갔다"
+description: "플레이오프 4차전, KIA가 삼성을 4-2으로 이겼다."
+date: 2026-10-30T21:38:59+09:00
+category: game
+tags: ["포스트시즌", "플레이오프", "삼성", "KIA", "WPA"]
+related: ["2026-10-29-ps-po-3", "2026-po-preview", "2026-wpa"]
+stat: { value: "4-2", label: "플레이오프 4차전, KIA가 삼성을 꺾었다", short: "PO 4차전", items: [{ v: "4", cap: "KIA" }, { v: "2", cap: "삼성" }], sep: ":" }
+thumb: { teams: ["삼성", "KIA"] }
+dataUntil: "2026 플레이오프 4차전 (10/30)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-10-30-ps-po-4.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+KIA가 광주에서 열린 플레이오프 4차전에서 삼성을 4-2으로 꺾었다. 1-2으로 뒤진 7회말 카스트로가 동점 적시타를 쳤고 한준수가 2사 1, 3루에서 결승타를 보탰다. KIA는 이날 승리로 시리즈를 2승 2패로 맞췄다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KIA 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KIA가 유리한 쪽이다."
+/>
+
+KIA 승리확률은 4회말 동점 뒤 50.0%였지만 최형우의 6회초 홈런으로 38.4%까지 내려갔다. 6회말에는 한준수의 안타로 55.4%까지 올랐다가 후속 타자들이 득점하지 못해 이닝이 끝날 때 32.9%가 됐다. 7회말 카스트로의 동점타와 한준수의 결승타가 나오며 KIA 승리확률은 76.9%로 올랐고 추가 득점까지 더해졌다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="6회말, 한준수의 안타로 1사 2, 3루">
+삼성이 2-1으로 앞선 6회말 1사 1루에서 한준수가 페덱의 3구째를 쳤다. 타구는 1루수에 맞고 2루수 쪽으로 흘렀다. 2루수의 송구 실책이 겹치며 KIA는 1사 2, 3루 기회를 잡았다. KIA 승리확률은 42.1%에서 55.4%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="6회초, 최형우의 균형을 깬 솔로 홈런">
+1-1으로 맞선 6회초 1사 주자 없는 상황에서 최형우가 곽도규의 초구를 받아쳤다. 타구가 우익수 뒤 담장을 넘어가며 삼성이 2-1으로 앞섰다. 46.9%였던 삼성 승리확률은 61.6%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="7회말, 카스트로의 동점 적시타">
+삼성이 2-1으로 앞선 7회말 1사 2루에서 카스트로가 사토시와 풀카운트까지 갔다. 카스트로는 6구째를 좌익수 오른쪽으로 보내 동점 주자를 불러들였다. KIA 승리확률은 42.2%에서 58.6%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="6회말, 이승민이 하주석을 땅볼로 막았다">
+삼성이 2-1으로 앞선 6회말 1사 2, 3루에서 이승민이 하주석을 상대했다. 하주석은 1-0에서 2구째를 쳤지만 1루수 땅볼로 물러났고 주자들은 홈을 밟지 못했다. 이승민은 이 아웃 하나로 삼성 승리확률을 44.6%에서 62.5%로 올렸다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="7회말, 한준수의 풀카운트 결승타">
+2-2으로 맞선 7회말 2사 1, 3루에서 한준수가 이재희와 풀카운트 승부를 벌였다. 한준수는 6구째를 우익수 오른쪽으로 보내 3루 주자를 불러들였다. KIA가 3-2으로 뒤집으며 승리확률은 58.7%에서 76.9%가 됐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+한준수는 4타석에서 KIA 승리확률을 42.9%p 올렸다. 6회말 안타와 7회말 결승타가 모두 TOP 5에 들었다. 삼성에서는 이승민이 상대한 세 타석에서 승리확률을 22.5%p 올렸지만 사토시와 이재희가 각각 24.3%p, 25.6%p를 깎았다.
+
+플레이오프는 2승 2패가 됐다. 삼성과 KIA는 5차전에서 한국시리즈 진출 팀을 가린다.
