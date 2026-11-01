@@ -4,6 +4,7 @@
 // 유입 경로 표시(2026-10-16): 링크에 ?from=insta 처럼 붙이면 src로 남기고, 주소창에서는 지운다(공유될 때 따라가지 않게).
 // 글 페이지는 [data-views][data-slug] 요소를 두면 조회수가 채워진다.
 // 본인 표시(2026-10-24): ?me=1로 한 번 들어오면 이 브라우저를 본인으로 기억하고 me:true를 실어 보낸다(조회수에 안 넣음). ?me=0이면 지운다.
+// 검수 표시: ?review=1로 검수 모드 저장, ?review=0으로 해제. 방문·이벤트 모두 review를 보내 별도 로그로 분리한다.
 // 화면 이벤트(2026-10-24): POST {API}/event { name, path, post?, detail?, me } — 글 50%·끝까지 읽음, 댓글 칸·좋아요 보임, 다음에 읽을 글 클릭.
 //   다른 컴포넌트는 window.bomdeEvent(name, detail?)로 보낸다(크봇 열기 등). 같은 페이지에서 같은 이름은 한 번만.
 //   검색 이벤트(search·search_click·search_kbot)는 이름 + 내용이 같을 때만 한 번(검색어마다 남게, 2026-10-25).
@@ -19,15 +20,26 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   const params = new URLSearchParams(location.search);
   const src = params.get('from')?.slice(0, 30) || undefined;
   const meParam = params.get('me');
-  try {
-    if (meParam === '1') localStorage.setItem('bomde.me', '1');
-    if (meParam === '0') localStorage.removeItem('bomde.me');
-  } catch { /* 저장소가 막혀 있으면 무시 */ }
-  let me = false;
-  try { me = localStorage.getItem('bomde.me') === '1'; } catch { /* 무시 */ }
-  if (src || meParam !== null) {
+  const reviewParam = params.get('review');
+  function marker(key: string, value: string | null): boolean {
+    let enabled = false;
+    try { enabled = localStorage.getItem(key) === '1'; } catch { /* 저장소 접근 차단 */ }
+    // URL 표시는 저장 성공 여부와 무관하게 현재 페이지에서 우선 적용한다.
+    if (value === '1' || value === '0') {
+      enabled = value === '1';
+      try {
+        if (enabled) localStorage.setItem(key, '1');
+        else localStorage.removeItem(key);
+      } catch { /* 저장 불가 시 다음 페이지에도 URL 표시 필요 */ }
+    }
+    return enabled;
+  }
+  const me = marker('bomde.me', meParam);
+  const review = marker('bomde.review', reviewParam);
+  if (src || meParam !== null || reviewParam !== null) {
     params.delete('from');
     params.delete('me');
+    params.delete('review');
     const qs = params.toString();
     history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + location.hash);
   }
@@ -35,7 +47,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     fetch(`${api}/visit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer, src, me }),
+      body: JSON.stringify({ path: location.pathname, post, ref: document.referrer, src, me, review }),
       signal: AbortSignal.timeout(5000),
     })
       .then((r) => (r.ok ? r.json() : {}))
@@ -56,7 +68,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     fetch(`${api}/event`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, path: location.pathname, post, detail, me }),
+      body: JSON.stringify({ name, path: location.pathname, post, detail, me, review }),
       keepalive: true,
     }).catch(() => {});
   }
