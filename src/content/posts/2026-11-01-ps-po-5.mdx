@@ -1,0 +1,71 @@
+---
+title: "최형우 풀카운트 적시타로 시작한 4점, KIA는 끝내 따라붙지 못했다"
+description: "플레이오프 5차전, 삼성이 KIA를 6-1으로 이기고 한국시리즈에 올랐다."
+date: 2026-11-01T16:47:57+09:00
+category: game
+format: short
+tags: ["포스트시즌", "플레이오프", "삼성", "KIA", "WPA"]
+related: ["2026-10-30-ps-po-4", "2026-10-27-ps-po-2", "2026-wpa"]
+stat: { value: "6-1", label: "플레이오프 5차전, 삼성이 KIA를 꺾었다", short: "PO 5차전", items: [{ v: "6", cap: "삼성" }, { v: "1", cap: "KIA" }], sep: ":" }
+thumb: { teams: ["삼성", "KIA"] }
+dataUntil: "2026 플레이오프 5차전 (11/01)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-11-01-ps-po-5.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+삼성이 대구에서 열린 플레이오프 5차전에서 KIA를 6-1으로 이겼다. 시리즈를 3승 2패로 마친 삼성이 한국시리즈에 올랐다. 1회말 최형우의 적시타로 앞서 나간 삼성은 2회말 김지찬의 2타점 적시타를 앞세워 3점을 더했다. KIA는 3회초 1점을 낸 뒤로 점수를 뽑지 못했다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 삼성 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 삼성이 유리한 쪽이다."
+/>
+
+이 경기의 흐름은 2회에 이미 기울었다. 삼성 승리확률은 1회말 최형우의 적시타로 63.2%가 됐고 2회말 김지찬의 적시타 뒤 79.9%까지 올랐다. 2회가 끝났을 때는 83.2%였다. KIA가 3회초 1점을 따라붙었을 때도 79.0%에 머물렀고 6회말 삼성이 2점을 보태면서 95%를 넘겼다.
+
+## 결정적 순간 TOP 3
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="2회초, 후라도가 김선빈을 병살로 잡았다">
+삼성이 1-0으로 앞선 2회초 무사 1루에서 후라도가 김선빈을 상대했다. 후라도는 0-2에서 3구째 체인지업으로 유격수 병살타를 이끌어 냈다. 아웃 2개를 한 번에 잡으며 삼성 승리확률은 56.0%에서 63.5%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="2회말, 김지찬의 초구 2타점 적시타">
+삼성이 1-0으로 앞선 2회말 1사 2, 3루에서 김지찬이 올러의 초구 148km/h 포심을 받아쳤다. 타구가 우익수 오른쪽으로 빠지며 주자 2명이 들어왔고 점수는 3-0이 됐다. 삼성 승리확률은 71.4%에서 79.9%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="1회말, 최형우의 풀카운트 선제 적시타">
+0-0이던 1회말 2사 1, 2루에서 최형우가 올러와 풀카운트까지 갔다. 최형우는 6구째 136km/h 슬라이더를 중견수 앞으로 보내 선제점을 올렸다. 삼성 승리확률은 54.0%에서 63.2%로 올랐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+후라도는 28타석을 상대하며 삼성 승리확률을 28.1%p 올렸다. 김지찬과 최형우는 TOP 3에 든 적시타로 각각 14.7%p, 9.9%p를 더했다. KIA에서는 1, 2회에 두 적시타를 맞은 올러가 승리확률을 21.6%p 깎았고 병살타를 친 김선빈도 14.8%p를 잃었다.
+
+삼성은 KIA를 3승 2패로 꺾고 한국시리즈에 올랐다. 한국시리즈는 11월 3일 수원에서 정규시즌 1위 KT와 1차전으로 시작한다.
