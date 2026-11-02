@@ -94,7 +94,7 @@ export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100
   <tbody>
     {d.compare.map((c) => (
       <tr class={c.name === '노시환' ? 'cur' : ''}>
-        <td>{c.name}({c.first}\~{c.last})</td><td>{c.pa}</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td {...ht(c.wrc_plus - 100, 15)}>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
+        <td>{c.name}({c.first}~{c.last})</td><td>{c.pa}</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td {...ht(c.wrc_plus - 100, 15)}>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
         <td>{c.best.wrc_plus.toFixed(0)}({c.best.season})</td><td {...ht(c.fb150.ops - c.lg_fb150.ops, 0.05)}>{f3(c.fb150.ops)}</td><td {...ht(d.foreign[c.name].me.ops - d.foreign[c.name].lg.ops, 0.05)}>{f3(d.foreign[c.name].me.ops)}</td>
       </tr>
     ))}
