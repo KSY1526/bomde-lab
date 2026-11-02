@@ -91,11 +91,11 @@ export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100
 강정호, 박병호, 황재균, 김하성, 이정후, 송성문은 KBO 마지막 시즌까지, 노시환은 올해까지의 기록이다.
 
 <table>
-  <thead><tr><th>선수(KBO 기간)</th><th>타석</th><th>홈런</th><th>WAR</th><th>wRC+</th><th>삼진율</th><th>최고 시즌 wRC+(연도)</th><th>150km 이상 직구 OPS</th><th>외국인 투수 상대 OPS</th></tr></thead>
+  <thead><tr><th>선수(KBO 기간)</th><th>홈런</th><th>WAR</th><th>wRC+</th><th>삼진율</th><th>최고 시즌 wRC+(연도)</th><th>150km 이상 직구 OPS</th><th>외국인 투수 상대 OPS</th></tr></thead>
   <tbody>
     {d.compare.map((c) => (
       <tr class={c.name === '노시환' ? 'cur' : ''}>
-        <td>{c.name}({c.first}~{c.last})</td><td>{c.pa}</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td {...ht(c.wrc_plus - 100, 15)}>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
+        <td>{c.name}({c.first}~{c.last})</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td {...ht(c.wrc_plus - 100, 15)}>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
         <td>{c.best.wrc_plus.toFixed(0)}({c.best.season})</td><td {...ht(c.fb150.ops - c.lg_fb150.ops, 0.05)}>{f3(c.fb150.ops)}</td><td {...ht(d.foreign[c.name].me.ops - d.foreign[c.name].lg.ops, 0.05)}>{f3(d.foreign[c.name].me.ops)}</td>
       </tr>
     ))}
