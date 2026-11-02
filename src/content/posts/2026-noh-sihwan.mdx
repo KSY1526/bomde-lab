@@ -58,8 +58,7 @@ export const pcar = d.platoon_car;
         <td>{f3(r.ops)}({r.pa})</td><td>{f3(r.lg.ops)}</td>
         <td>{f3(vl['2021-25'][i].ops)}({vl['2021-25'][i].pa})</td><td>{f3(vl['2021-25'][i].lg.ops)}</td></tr>
     ))}
-    <tr><td>150 이상 헛스윙률</td>
-      {['2026', '2021-25'].map((k) => <><td>{d.whiff150[k].noh.whiff_pct}%({d.whiff150[k].noh.swings})</td><td>{d.whiff150[k].lg.whiff_pct}%</td></>)}</tr>
+    <tr><td>150 이상 헛스윙률</td><td>{d.whiff150['2026'].noh.whiff_pct}%({d.whiff150['2026'].noh.swings})</td><td>{d.whiff150['2026'].lg.whiff_pct}%</td><td>{d.whiff150['2021-25'].noh.whiff_pct}%({d.whiff150['2021-25'].noh.swings})</td><td>{d.whiff150['2021-25'].lg.whiff_pct}%</td></tr>
   </tbody>
 </table>
 
