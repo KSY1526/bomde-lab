@@ -67,7 +67,7 @@ export const diff3 = (a, b) => f3(Math.abs(a - b));
     <tr class="ours"><td>전체 평균</td><td>{sign(d.re_overall.BB)}</td><td>{sign(d.re_overall['1B'])}</td><td>{sign(d.re_overall.HR)}</td></tr>
   </tbody>
 </table>
-<p class="table-note">{d.first}~{d.season}년 1~8회 타석. 숫자는 그 결과로 바뀐 득점 기대값(점). 아웃은 평균 {sign(d.re_overall.OUT)}점.</p>
+<p class="table-note">{d.first}\~{d.season}년 1\~8회 타석. 숫자는 그 결과로 바뀐 득점 기대값(점). 아웃은 평균 {sign(d.re_overall.OUT)}점.</p>
 
 같은 볼넷 하나가 1사 2, 3루에서는 {sign(d.re_states[3].BB)}점, 2사 만루에서는 {sign(d.re_states[4].BB)}점으로 4배 차이가 난다. 그런데 가중출루율은 볼넷이 어떤 상황에서 나왔는지 묻지 않는다. {d.first}년부터 나온 볼넷 {d.re_overall_n.BB.toLocaleString()}개의 가치를 모두 더해 평균을 내고, 그 평균값을 모든 볼넷에 똑같이 준다. 볼넷이 수만 개 모이면 만루에서 나온 볼넷과 2, 3루에서 나온 볼넷이 고르게 섞여서 평균이 거의 흔들리지 않는다. 이것이 대수의 법칙이다. 앞에서 본 가중치(볼넷 {w.bb.toFixed(2)})도 이렇게 낸 평균값으로 만든다.
 
@@ -135,7 +135,7 @@ export const [lp, la] = d.ops_pairs[1];
     ))}
   </tbody>
 </table>
-<p class="table-note">{d.first}~{d.season}년. 붉은 줄은 올해 기록. 팀은 지금 구단명으로 적었다.</p>
+<p class="table-note">{d.first}\~{d.season}년. 붉은 줄은 올해 기록. 팀은 지금 구단명으로 적었다.</p>
 
 1위는 2018년 박병호의 186.9다. 올해 오스틴은 181.0으로 2위에 올랐다. 올해만 오스틴, 김도영, 구자욱 세 명이 20위 안에 들었다. 2018년 박병호의 OPS는 1.167으로 오스틴(1.066)보다 .101 높지만 우르크 차이는 5.9뿐이다. 2018년은 리그 OPS가 {f3(d.env.find((e) => e.season === 2018).lg_ops)}으로 10년 중 가장 높았던 타고투저 시즌이다.
 
