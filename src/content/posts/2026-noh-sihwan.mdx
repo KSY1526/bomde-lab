@@ -20,6 +20,7 @@ export const vl = d.velo;
 export const pc = (label, p) => { const r = d.pitch[label].find((x) => x.pitch === p); return r ? sgn(r.rv100) : '-'; };
 export const pcar = d.platoon_car;
 export const ht = (gap, step) => (gap == null || Math.abs(gap) < step / 3 ? {} : { class: gap > 0 ? 'up' : 'down', style: `--heat:${[12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))]}%` });
+export const sep = (o) => ({ ...o, style: `${o.style ? o.style + ';' : ''}border-left:3px solid var(--text)` });
 export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100;
 
 노시환이 포스팅으로 메이저리그에 도전한다는 깜짝 소식이 나왔다. 노시환의 타격 기록을 자세히 확인해 보고, 앞서 미국으로 건너간 타자들과 같은 기준으로 비교해 봤다.
@@ -51,16 +52,16 @@ export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100
 
 <table>
   <thead>
-    <tr><th rowspan="2">직구 구속</th><th colspan="2">2026</th><th colspan="2">2021\~25</th></tr>
-    <tr><th>노시환(타석)</th><th>리그</th><th>노시환(타석)</th><th>리그</th></tr>
+    <tr><th rowspan="2">직구 구속</th><th colspan="2">2026</th><th colspan="2" style="border-left:3px solid var(--text)">2021\~25</th></tr>
+    <tr><th>노시환(타석)</th><th>리그</th><th style="border-left:3px solid var(--text)">노시환(타석)</th><th>리그</th></tr>
   </thead>
   <tbody>
     {vl['2026'].map((r, i) => (
       <tr class={r.bucket === '150 이상' ? 'total' : ''}><td>{r.bucket}</td>
         <td {...ht(r.ops - r.lg.ops, 0.05)}>{f3(r.ops)}({r.pa})</td><td>{f3(r.lg.ops)}</td>
-        <td {...ht(vl['2021-25'][i].ops - vl['2021-25'][i].lg.ops, 0.05)}>{f3(vl['2021-25'][i].ops)}({vl['2021-25'][i].pa})</td><td>{f3(vl['2021-25'][i].lg.ops)}</td></tr>
+        <td {...sep(ht(vl['2021-25'][i].ops - vl['2021-25'][i].lg.ops, 0.05))}>{f3(vl['2021-25'][i].ops)}({vl['2021-25'][i].pa})</td><td>{f3(vl['2021-25'][i].lg.ops)}</td></tr>
     ))}
-    <tr><td>150 이상 헛스윙률</td><td {...ht(d.whiff150['2026'].lg.whiff_pct - d.whiff150['2026'].noh.whiff_pct, 3)}>{d.whiff150['2026'].noh.whiff_pct}%({d.whiff150['2026'].noh.swings})</td><td>{d.whiff150['2026'].lg.whiff_pct}%</td><td {...ht(d.whiff150['2021-25'].lg.whiff_pct - d.whiff150['2021-25'].noh.whiff_pct, 3)}>{d.whiff150['2021-25'].noh.whiff_pct}%({d.whiff150['2021-25'].noh.swings})</td><td>{d.whiff150['2021-25'].lg.whiff_pct}%</td></tr>
+    <tr><td>150 이상 헛스윙률</td><td {...ht(d.whiff150['2026'].lg.whiff_pct - d.whiff150['2026'].noh.whiff_pct, 3)}>{d.whiff150['2026'].noh.whiff_pct}%({d.whiff150['2026'].noh.swings})</td><td>{d.whiff150['2026'].lg.whiff_pct}%</td><td {...sep(ht(d.whiff150['2021-25'].lg.whiff_pct - d.whiff150['2021-25'].noh.whiff_pct, 3))}>{d.whiff150['2021-25'].noh.whiff_pct}%({d.whiff150['2021-25'].noh.swings})</td><td>{d.whiff150['2021-25'].lg.whiff_pct}%</td></tr>
   </tbody>
 </table>
 
@@ -70,13 +71,13 @@ export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100
 
 ## 노시환의 유일한 약점은 스위퍼이다
 
-구종가치는 구종마다 공 100개당 득점 기여를 계산한 값이다. 아래 표는 타자 기준이라 +일수록 노시환에게 유리하다. 올해 포심은 +1.77으로 리그 평균(+0.23)보다 훨씬 높고, 2023년(+2.12)과 2021\~25년(+1.04)에도 플러스였다. 슬라이더, 커브, 체인지업도 같은 기간 모두 플러스다.
+구종가치는 구종마다 공 100개당 득점 기여를 계산한 값이다. 아래 표는 타자 기준이라 +일수록 노시환에게 유리하다. 올해 포심은 +1.77으로 리그 평균(+0.23)보다 훨씬 높고, 2021\~25년(+1.04)에도 플러스였다. 슬라이더, 커브, 체인지업도 같은 기간 모두 플러스다.
 
 <table>
-  <thead><tr><th>구종</th><th>2026 마주한 공</th><th>2026</th><th>2023</th><th>2021\~25</th><th>리그 평균(2026)</th></tr></thead>
+  <thead><tr><th>구종</th><th>2026 마주한 공</th><th>2026</th><th>리그 평균(2026)</th><th style="border-left:3px solid var(--text)">2021\~25</th></tr></thead>
   <tbody>
     {d.pitch['2026'].map((r) => (
-      <tr><td>{r.pitch}</td><td>{r.n}</td><td {...ht(r.rv100, 1)}>{sgn(r.rv100)}</td><td {...ht(pv('2023', r.pitch), 1)}>{pc('2023', r.pitch)}</td><td {...ht(pv('2021-25', r.pitch), 1)}>{pc('2021-25', r.pitch)}</td><td>{sgn(lg(r.pitch))}</td></tr>
+      <tr><td>{r.pitch}</td><td>{r.n}</td><td {...ht(r.rv100, 1)}>{sgn(r.rv100)}</td><td>{sgn(lg(r.pitch))}</td><td {...sep(ht(pv('2021-25', r.pitch), 1))}>{pc('2021-25', r.pitch)}</td></tr>
     ))}
   </tbody>
 </table>
