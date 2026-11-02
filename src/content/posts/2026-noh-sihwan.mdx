@@ -19,6 +19,8 @@ export const lg = (p) => d.lg_pitch.find((r) => r.pitch === p).rv100;
 export const vl = d.velo;
 export const pc = (label, p) => { const r = d.pitch[label].find((x) => x.pitch === p); return r ? sgn(r.rv100) : '-'; };
 export const pcar = d.platoon_car;
+export const ht = (gap, step) => (gap == null || Math.abs(gap) < step / 3 ? {} : { class: gap > 0 ? 'up' : 'down', style: `--heat:${[12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))]}%` });
+export const pv = (label, p) => d.pitch[label].find((x) => x.pitch === p)?.rv100;
 
 노시환이 포스팅으로 메이저리그에 도전한다는 깜짝 소식이 나왔다. 노시환의 타격 기록을 자세히 확인해 보고, 앞서 미국으로 건너간 타자들과 같은 기준으로 비교해 봤다.
 
@@ -32,14 +34,14 @@ export const pcar = d.platoon_car;
     {[2021, 2022, 2023, 2024, 2025, 2026].map((y) => {
       const r = d.platoon.find((p) => p.season === y && p.split === '우투');
       const l = d.platoon.find((p) => p.season === y && p.split === '좌투');
-      return <tr class={y === 2026 ? 'cur' : ''}><td>{y}</td><td>{r.pa}</td><td>{f3(r.ops)}</td><td>{l.pa}</td><td>{f3(l.ops)}</td></tr>;
+      return <tr class={y === 2026 ? 'cur' : ''}><td>{y}</td><td>{r.pa}</td><td {...ht(r.ops - pcar.R.lg.ops, 0.05)}>{f3(r.ops)}</td><td>{l.pa}</td><td {...ht(l.ops - pcar.L.lg.ops, 0.05)}>{f3(l.ops)}</td></tr>;
     })}
-    <tr class="total"><td>통산(2019\~26)</td><td>{pcar.R.all.pa}</td><td>{f3(pcar.R.all.ops)}</td><td>{pcar.L.all.pa}</td><td>{f3(pcar.L.all.ops)}</td></tr>
+    <tr class="total"><td>통산(2019\~26)</td><td>{pcar.R.all.pa}</td><td {...ht(pcar.R.all.ops - pcar.R.lg.ops, 0.05)}>{f3(pcar.R.all.ops)}</td><td>{pcar.L.all.pa}</td><td {...ht(pcar.L.all.ops - pcar.L.lg.ops, 0.05)}>{f3(pcar.L.all.ops)}</td></tr>
     <tr><td>리그 평균(2019\~26)</td><td>-</td><td>{f3(pcar.R.lg.ops)}</td><td>-</td><td>{f3(pcar.L.lg.ops)}</td></tr>
   </tbody>
 </table>
 
-<p class="table-note">OPS = 출루율 + 장타율. 좌투수 상대는 매년 84\~157타석이다. 리그 평균은 같은 기간 모든 타자의 OPS.</p>
+<p class="table-note">OPS = 출루율 + 장타율. 좌투수 상대는 매년 84\~157타석이다. 리그 평균은 같은 기간 모든 타자의 OPS. 붉은색은 리그 평균보다 높고 파란색은 낮으며, 차이가 클수록 진하다.</p>
 
 ## 빠른 공에도 크게 무너지지 않는다
 
@@ -55,14 +57,14 @@ export const pcar = d.platoon_car;
   <tbody>
     {vl['2026'].map((r, i) => (
       <tr class={r.bucket === '150 이상' ? 'total' : ''}><td>{r.bucket}</td>
-        <td>{f3(r.ops)}({r.pa})</td><td>{f3(r.lg.ops)}</td>
-        <td>{f3(vl['2021-25'][i].ops)}({vl['2021-25'][i].pa})</td><td>{f3(vl['2021-25'][i].lg.ops)}</td></tr>
+        <td {...ht(r.ops - r.lg.ops, 0.05)}>{f3(r.ops)}({r.pa})</td><td>{f3(r.lg.ops)}</td>
+        <td {...ht(vl['2021-25'][i].ops - vl['2021-25'][i].lg.ops, 0.05)}>{f3(vl['2021-25'][i].ops)}({vl['2021-25'][i].pa})</td><td>{f3(vl['2021-25'][i].lg.ops)}</td></tr>
     ))}
-    <tr><td>150 이상 헛스윙률</td><td>{d.whiff150['2026'].noh.whiff_pct}%({d.whiff150['2026'].noh.swings})</td><td>{d.whiff150['2026'].lg.whiff_pct}%</td><td>{d.whiff150['2021-25'].noh.whiff_pct}%({d.whiff150['2021-25'].noh.swings})</td><td>{d.whiff150['2021-25'].lg.whiff_pct}%</td></tr>
+    <tr><td>150 이상 헛스윙률</td><td {...ht(d.whiff150['2026'].lg.whiff_pct - d.whiff150['2026'].noh.whiff_pct, 3)}>{d.whiff150['2026'].noh.whiff_pct}%({d.whiff150['2026'].noh.swings})</td><td>{d.whiff150['2026'].lg.whiff_pct}%</td><td {...ht(d.whiff150['2021-25'].lg.whiff_pct - d.whiff150['2021-25'].noh.whiff_pct, 3)}>{d.whiff150['2021-25'].noh.whiff_pct}%({d.whiff150['2021-25'].noh.swings})</td><td>{d.whiff150['2021-25'].lg.whiff_pct}%</td></tr>
   </tbody>
 </table>
 
-<p class="table-note">헛스윙률 행을 뺀 나머지는 OPS. 포심과 투심만 집계했고 구속은 타석 마지막 공 기준이다. 150 이상은 150\~153과 154 이상의 합. 리그는 같은 기간 모든 타자의 같은 구간 기록. 헛스윙률은 헛스윙 ÷ 스윙이고 괄호는 스윙 수.</p>
+<p class="table-note">헛스윙률 행을 뺀 나머지는 OPS. 포심과 투심만 집계했고 구속은 타석 마지막 공 기준이다. 150 이상은 150\~153과 154 이상의 합. 리그는 같은 기간 모든 타자의 같은 구간 기록. 헛스윙률은 헛스윙 ÷ 스윙이고 괄호는 스윙 수. 붉은색은 노시환이 리그보다 좋고(OPS는 높고 헛스윙률은 낮음) 파란색은 나쁘다.</p>
 
 다만 150km 이상 직구 헛스윙률은 올해 27.9%로 리그 평균(18.5%)보다 높다. 2021\~25년에는 20.8%로 리그 평균(20.3%)과 비슷했다.
 
@@ -74,14 +76,14 @@ export const pcar = d.platoon_car;
   <thead><tr><th>구종</th><th>2026 마주한 공</th><th>2026</th><th>2023</th><th>2021\~25</th><th>리그 평균(2026)</th></tr></thead>
   <tbody>
     {d.pitch['2026'].map((r) => (
-      <tr><td>{r.pitch}</td><td>{r.n}</td><td>{sgn(r.rv100)}</td><td>{pc('2023', r.pitch)}</td><td>{pc('2021-25', r.pitch)}</td><td>{sgn(lg(r.pitch))}</td></tr>
+      <tr><td>{r.pitch}</td><td>{r.n}</td><td {...ht(r.rv100, 1)}>{sgn(r.rv100)}</td><td {...ht(pv('2023', r.pitch), 1)}>{pc('2023', r.pitch)}</td><td {...ht(pv('2021-25', r.pitch), 1)}>{pc('2021-25', r.pitch)}</td><td>{sgn(lg(r.pitch))}</td></tr>
     ))}
   </tbody>
 </table>
 
-<p class="table-note">공 100개당 구종가치, 타자 기준(+가 타자에게 유리). 2021\~25는 5시즌 합산. 2021\~25 스위퍼는 마주한 공이 32개뿐이다.</p>
+<p class="table-note">공 100개당 구종가치, 타자 기준(+가 타자에게 유리). 2021\~25는 5시즌 합산. 2021\~25 스위퍼는 마주한 공이 32개뿐이다. 붉은색은 플러스, 파란색은 마이너스이고 클수록 진하다.</p>
 
-올해 구종가치가 가장 낮은 공은 스위퍼(-3.64)다. 스위퍼는 2021\~25년에도 -1.37이었지만 표본이 작다. 올해 스위퍼를 상대한 30타석의 OPS는 .274이고 그중 우투수가 던진 28타석의 wOBA는 .152다. 이 약점이 그대로 남으면 상대 투수가 이 공을 집요하게 노릴 가능성이 높다고 본다.
+올해 구종가치가 가장 낮은 공은 스위퍼(-3.64)다. 스위퍼는 2021\~25년에도 -1.37이었지만 표본이 작다. 올해 스위퍼를 상대한 30타석의 OPS는 .274이고 그중 우투수가 던진 28타석의 wOBA는 .152다. 이 약점이 그대로 남으면 메이저리그에서 이 공을 집요하게 던질 가능성이 높다고 본다.
 
 ## 먼저 건너간 타자들과 비교하면
 
@@ -92,14 +94,14 @@ export const pcar = d.platoon_car;
   <tbody>
     {d.compare.map((c) => (
       <tr class={c.name === '노시환' ? 'cur' : ''}>
-        <td>{c.name}({c.first}\~{c.last})</td><td>{c.pa}</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
-        <td>{c.best.wrc_plus.toFixed(0)}({c.best.season})</td><td>{f3(c.fb150.ops)}</td><td>{f3(d.foreign[c.name].me.ops)}</td>
+        <td>{c.name}({c.first}\~{c.last})</td><td>{c.pa}</td><td>{c.hr}</td><td>{c.war.toFixed(1)}</td><td {...ht(c.wrc_plus - 100, 15)}>{c.wrc_plus.toFixed(0)}</td><td>{c.k_pct}%</td>
+        <td>{c.best.wrc_plus.toFixed(0)}({c.best.season})</td><td {...ht(c.fb150.ops - c.lg_fb150.ops, 0.05)}>{f3(c.fb150.ops)}</td><td {...ht(d.foreign[c.name].me.ops - d.foreign[c.name].lg.ops, 0.05)}>{f3(d.foreign[c.name].me.ops)}</td>
       </tr>
     ))}
   </tbody>
 </table>
 
-<p class="table-note">wRC+는 시즌 wRC+의 타석 가중 평균, 최고 시즌은 400타석 이상 중 wRC+ 1위. 직구는 포심·투심. 외국인 투수 상대 OPS는 각자 KBO 기간에 외국인 투수를 상대한 모든 타석 기준.</p>
+<p class="table-note">wRC+는 시즌 wRC+의 타석 가중 평균, 최고 시즌은 400타석 이상 중 wRC+ 1위. 직구는 포심·투심. 외국인 투수 상대 OPS는 각자 KBO 기간에 외국인 투수를 상대한 모든 타석 기준. 색은 wRC+는 100(리그 평균), OPS는 같은 기간 리그 평균과 비교해 붉은색이 높고 파란색이 낮다.</p>
 
 노시환의 통산 wRC+는 116으로 강정호(139), 박병호(156), 이정후(145), 김하성(122)에 못 미치고 황재균(102), 송성문(115)과 비슷한 자리다. 2023년 최고 시즌 wRC+ 155는 김하성(148)보다 높지만 강정호(177), 박병호(175), 이정후(179)보다 낮다. 삼진율 23.3%는 박병호(23.5%)와 같은 수준으로, 나머지 선수는 모두 17.3% 이하다.
 
