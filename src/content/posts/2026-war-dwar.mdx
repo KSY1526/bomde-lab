@@ -134,7 +134,7 @@ KBO에는 공개된 영상 판독 수비 데이터가 없어서 메이저리그 
     {d.mlb.single_grp.map((r) => <tr class="total"><td style="text-align:left">{r.grp}</td><td>{r.n}</td>{cTd(r.fpct)}{cTd(r.rf)}{cTd(r.uzr, 1)}{cTd(r.drs)}</tr>)}
   </tbody>
 </table>
-<p class="table-note">MLB 2016~2025(2020 제외), 한 시즌 그 포지션 {d.mlb.min_inn}이닝 이상. 칸의 숫자는 OAA(1000이닝당)와의 상관계수. UZR은 FanGraphs가 2025년 값을 내지 않아 2024년까지. 회색이 진할수록 OAA와 잘 맞는다.</p>
+<p class="table-note">MLB 2016~2025(60경기만 치른 2020 제외), 한 시즌 그 포지션 {d.mlb.min_inn}이닝 이상. 칸의 숫자는 OAA(1000이닝당)와의 상관계수. UZR은 FanGraphs가 2025년 값을 내지 않아 2024년까지. 회색이 진할수록 OAA와 잘 맞는다.</p>
 
 한 시즌 기준으로 1단계 수비율과 OAA의 상관은 내야가 {f2(M(0).fpct)}, 외야가 {f2(M(1).fpct)}다. 중견수는 {f2(d.mlb.single.find((r) => r.pos === '중견수').fpct)}으로 사실상 관계가 없다. 외야수는 실책이 워낙 적어서 수비율로는 선수가 거의 갈리지 않는다. 박해민 같은 중견수를 수비율로 평가하기 어려운 이유다.
 
