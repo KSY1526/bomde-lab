@@ -70,5 +70,13 @@
   "weight": 97,
   "pitcher": true,
   "left": false
+ },
+ "노시환": {
+  "team": "한화",
+  "no": "8",
+  "height": 185,
+  "weight": 105,
+  "pitcher": false,
+  "left": false
  }
 }
