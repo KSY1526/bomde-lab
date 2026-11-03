@@ -1,69 +1,43 @@
 ---
-// 헤더 글 검색(사용자 결정 2026-10-25). 돋보기 → 검색 창. 처음 열 때 /search.json(src/pages/search.json.ts)을 받아 브라우저 안에서 찾는다(서버·AI 없음, 바로 뜸).
-// 찾기·결과 줄 그리기는 src/lib/search.ts(검색 결과 페이지 pages/search.astro와 같이 씀). 엔터 = 검색 결과 페이지 /search/?q=.
+// 머리말 검색(사용자 결정 2026-10-25). 돋보기 → 검색 창. 2026-11-03 사용자: 홈 선수 검색과 하나로 합침 → 창 안은 통합 검색(PlayerSearch posts inline).
+// 선수 후보(최대 6명) 아래 글 결과. 엔터 = 첫 선수 후보로, 선수 후보가 없으면 검색 결과 페이지 /search/?q=. 찾기·글 결과 줄은 src/lib/search.ts.
+// 홈은 맨 위에 같은 통합 검색창이 있으므로 머리말 버튼을 숨긴다(hideButton, 화면에 검색창 하나).
 // 결과 아래 "크봇에게 이 질문하기"를 누르면 입력한 문장을 크봇(ChatPanel) 입력 칸에 채운다: window에 'kbot:ask' 이벤트 { detail: 질문 }.
 // 결과 썸네일은 글 목록과 같은 Thumb(search.json에 HTML로). 그 CSS가 모든 페이지에 실리도록 아래 <template>에 하나 그려 둔다
-// 화면 이벤트(logs/<날짜>/event.jsonl): search_open(창 열기), search(검색어 — 입력이 1.5초 멈추거나 창을 닫을 때),
-//   search_click("글id | 검색어"), search_kbot(크봇으로 넘긴 검색어). 같은 검색어는 페이지당 한 번
-import { url } from '../lib/site';
+// 화면 이벤트(logs/<날짜>/event.jsonl): search_open(창 열기). 검색어·클릭 로그(psearch·psearch_click·search·search_click)는 PlayerSearch·lib/search.ts
 import Thumb from './Thumb.astro';
+import PlayerSearch from './PlayerSearch.astro';
+interface Props { hideButton?: boolean }
+const { hideButton = false } = Astro.props;
 ---
-<button class="search-btn" type="button" data-search-open aria-haspopup="dialog">
+<button class:list={['search-btn', { 'is-hidden': hideButton }]} type="button" data-search-open aria-haspopup="dialog">
   <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-  <span class="short">검색</span><span class="long">블로그 내 글 검색</span>
+  <span class="short">검색</span><span class="long">선수 이름 or 글 검색</span>
 </button>
 
-<dialog class="search" data-search data-index={`${url()}search.json`} data-base={url()} aria-label="글 검색">
-  <form method="dialog" class="search-head" data-search-form>
-    <label class="sr-only" for="search-q">검색어</label>
-    <input id="search-q" type="search" maxlength="300" autocomplete="off" placeholder="선수, 팀, 궁금한 것" data-search-q />
-    <button class="close" type="button" aria-label="검색 닫기" data-search-close>✕</button>
-  </form>
-  <ol class="results search-results" data-search-results aria-live="polite"></ol>
-  <p class="empty muted" data-search-empty hidden>글에서 찾지 못했어요.</p>
-  <button class="to-kbot" type="button" data-search-kbot hidden>크봇에게 이 질문하기</button>
+<dialog class="search" data-search aria-label="선수·글 검색">
+  <button class="close" type="button" aria-label="검색 닫기" data-search-close>✕</button>
+  <div class="search-body">
+    <PlayerSearch posts inline qid="search-q" />
+    <button class="to-kbot" type="button" data-search-kbot hidden>크봇에게 이 질문하기</button>
+  </div>
 </dialog>
 <template><Thumb data={{ stat: { value: '', label: '' } } as never} bare /></template>
 
 <script>
-  import { load, loaded, search, renderRows, ev, searchUrl, askKbot } from '../lib/search';
+  import { ev, askKbot } from '../lib/search';
   const dlg = document.querySelector<HTMLDialogElement>('[data-search]')!;
-  const input = dlg.querySelector<HTMLInputElement>('[data-search-q]')!;
-  const list = dlg.querySelector<HTMLOListElement>('[data-search-results]')!;
-  const empty = dlg.querySelector<HTMLElement>('[data-search-empty]')!;
+  const input = dlg.querySelector<HTMLInputElement>('input[type="search"]')!;
   const toKbot = dlg.querySelector<HTMLButtonElement>('[data-search-kbot]')!;
-  const base = dlg.dataset.base ?? '/';
 
-  function render() {
-    const q = input.value.trim();
-    const rows = search(q);
-    renderRows(list, rows, q, base);
-    empty.hidden = !(q && loaded() && rows.length === 0);
-    toKbot.hidden = !q;
-  }
-
-  let typing: ReturnType<typeof setTimeout> | undefined;
-  const logQuery = () => { const q = input.value.trim(); if (q) ev('search', q.slice(0, 100)); };
-  input.addEventListener('input', () => { render(); clearTimeout(typing); typing = setTimeout(logQuery, 1500); });
-  input.addEventListener('keydown', (e) => {
-    // 엔터: 검색 결과 페이지로(2026-10-26 사용자 요청. 예전엔 첫 글로 바로 가거나 크봇에게 넘겼다)
-    if (e.key !== 'Enter' || e.isComposing) return;
-    e.preventDefault();
-    const q = input.value.trim();
-    if (!q) return;
-    clearTimeout(typing); logQuery();
-    location.href = searchUrl(base, q);
-  });
-
+  input.addEventListener('input', () => { toKbot.hidden = !input.value.trim(); });
   document.querySelector('[data-search-open]')!.addEventListener('click', () => {
     dlg.showModal();
     input.focus();
     ev('search_open');
-    load(dlg.dataset.index!).then(render);
   });
   dlg.querySelector('[data-search-close]')!.addEventListener('click', () => dlg.close());
   dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); }); // 바깥 누르면 닫기
-  dlg.addEventListener('close', () => { clearTimeout(typing); logQuery(); });
 
   toKbot.addEventListener('click', () => {
     const q = input.value.trim();
@@ -88,24 +62,23 @@ import Thumb from './Thumb.astro';
     .search-btn .long { display: inline; }
   }
 
+  .search-btn.is-hidden { display: none; }
+
   .search {
     width: min(640px, calc(100vw - 24px)); max-height: min(80vh, 720px); margin: 8vh auto auto; padding: 0;
     border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text);
   }
   .search[open] { display: flex; flex-direction: column; }
   .search::backdrop { background: rgb(0 0 0 / 40%); }
-  .search-head { display: flex; gap: 8px; align-items: center; padding: 12px 14px; border-bottom: 2px solid var(--head-line); }
-  .search-head input {
-    flex: 1; min-width: 0; font: inherit; font-size: 16px; padding: 8px 10px;
-    border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: var(--text);
-  }
-  .search-head input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
-  .search-head input::-webkit-search-cancel-button { display: none; } /* 닫기 ✕와 겹침 */
-  .close { background: none; border: 0; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px 8px; }
+  .search-body { overflow-y: auto; padding: 12px 14px; }
+  .search-body :global(.psearch) { max-width: none; }
+  .search-body :global(input) { width: calc(100% - 40px); }
+  .search-body :global(input::-webkit-search-cancel-button) { display: none; } /* 닫기 ✕와 겹침 */
+  .search .search-body :global(.psearch .drop) { margin-top: 12px; border-top: 2px solid var(--head-line); }
+  .close { position: absolute; top: 14px; right: 8px; background: none; border: 0; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px 8px; }
 
-  .empty { margin: 0; padding: 14px; font-size: 14px; }
   .to-kbot {
-    margin: 12px 14px 14px; align-self: flex-start; font: inherit; font-weight: 600; font-size: 14px; padding: 7px 14px;
+    margin: 12px 0 2px; font: inherit; font-weight: 600; font-size: 14px; padding: 7px 14px;
     border: 1px solid var(--accent); border-radius: var(--radius); background: none; color: var(--accent); cursor: pointer;
   }
   .to-kbot:hover { background: var(--accent); color: var(--bg); }

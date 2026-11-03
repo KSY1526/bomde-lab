@@ -99,11 +99,12 @@ const nav = [
             <small>{SITE.tagline}</small>
           </span>
         </a>
-        <Search />
+        <Search hideButton={path === url()} />
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
         <a href={url()} aria-current={path === url() ? 'page' : undefined}>홈</a>
-        <a href={url('players')} aria-current={path.startsWith(url('players')) ? 'page' : undefined}>선수검색</a>
+        <a href={url('players')} aria-current={path.startsWith(url('players')) && !path.startsWith(url('players/compare')) ? 'page' : undefined}>선수검색</a>
+        <a href={url('players/compare')} aria-current={path.startsWith(url('players/compare')) ? 'page' : undefined}>선수 비교</a>
         {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
       </nav>
     </header>

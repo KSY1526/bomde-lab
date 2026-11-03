@@ -1,14 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostCard from '../components/PostCard.astro';
+import PlayerSearch from '../components/PlayerSearch.astro';
+import TodayPlayer from '../components/TodayPlayer.astro';
+import WarBoard from '../components/WarBoard.astro';
 import { publishedPosts } from '../lib/posts';
 import { CATEGORIES, url } from '../lib/site';
+import playerIndex from '../data/player-index.json';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const RECENT = 5;
 const PER_CATEGORY = 2;
 
-// 맨 위 "최근 글"(카테고리 상관없이 최신 5개, 2026-10-18). 첫 진입의 절반 이상이 홈이라 새 글이 첫 화면에 보이게 한다.
-// 그 아래는 메뉴 순서대로 카테고리마다 최근 글에 없는 글 2개. 남는 글이 없는 카테고리는 제목만 둔다.
+// 블록 순서(2026-11-03 사용자: 홈 C안 + B안 순위표): 통합 검색·예시 선수 → 오늘의 선수(+비교 바로가기) → 최근 글(최신 5개)
+// → 2026 WAR 순위 → 카테고리별 글. 홈에 나오는 선수는 모두 2026에 뛴 선수만(2026-11-03 사용자).
+// 카테고리별 글은 메뉴 순서대로 카테고리마다 최근 글에 없는 글 2개. 남는 글이 없는 카테고리는 제목만 둔다.
 const posts = await publishedPosts();
 const recent = posts.slice(0, RECENT);
 const shown = new Set(recent.map((p) => p.id));
@@ -18,8 +25,47 @@ const sections = Object.entries(CATEGORIES)
     return { key, label, total: inCat.length, latest: inCat.filter((p) => !shown.has(p.id)).slice(0, PER_CATEGORY) };
   })
   .filter((s) => s.total > 0);
+
+// 검색창 아래 예시 선수(2026-11-03 사용자: 3명, 이름+팀만, 등급 글자 없음). 빌드 때 계산: 최신 글부터 frontmatter tags에 이름이 있는 선수
+// (동명이인은 2026에 뛴 선수만, 그래도 여럿이면 글 태그의 팀으로 고르고 못 고르면 건너뜀). 3명이 안 되면 2026 WAR 높은 순으로 채움
+type IRow = [string, string, string, string, string, number, number, string[]];
+const rowsIdx = playerIndex as IRow[];
+const EXAMPLES = 3;
+const examples: { id: string; name: string; team: string }[] = [];
+const add = (r: IRow) => { if (examples.length < EXAMPLES && !examples.some((e) => e.id === r[0])) examples.push({ id: r[0], name: r[1], team: r[3] }); };
+for (const p of posts) {
+  for (const t of p.data.tags) {
+    let same = rowsIdx.filter((r) => r[1] === t && r[6] === 2026);
+    if (same.length > 1) same = same.filter((r) => p.data.tags.includes(r[3]));
+    if (same.length === 1) add(same[0]);
+  }
+  if (examples.length >= EXAMPLES) break;
+}
+if (examples.length < EXAMPLES) {
+  const war2026 = (id: string) => {
+    const h = JSON.parse(readFileSync(join(process.cwd(), 'src/data/players', `${id}.json`), 'utf8')).hex?.['2026'];
+    return h && h.war != null ? (h.war as number) : null;
+  };
+  rowsIdx.filter((r) => r[6] === 2026).map((r) => ({ r, w: war2026(r[0]) })).filter((x) => x.w != null)
+    .sort((a, b) => b.w! - a.w!).forEach((x) => add(x.r));
+}
+// 검색창 아래 설명 한 줄(선수검색 메뉴 첫 화면과 같은 계산)
+const nb = rowsIdx.filter((r) => r[2] === 'b').length, np = rowsIdx.length - nb;
 ---
 <Base>
+  <div class="home-search">
+    <PlayerSearch posts qid="home-q" />
+    {examples.length > 0 && (
+      <p class="examples">
+        <span class="ex-label">예시</span>
+        {examples.map((e) => <a href={url(`players/${e.id}`)}>{e.name}<small>{e.team}</small></a>)}
+      </p>
+    )}
+    <p class="count">2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
+  </div>
+
+  <TodayPlayer posts={posts} />
+
   <section class="cat" aria-labelledby="recent-h">
     <div class="sec-head">
       <h2 id="recent-h" class="sec-title">최근 글</h2>
@@ -28,6 +74,8 @@ const sections = Object.entries(CATEGORIES)
       {recent.map((p, i) => <PostCard post={p} lead={i === 0} />)}
     </div>
   </section>
+
+  <WarBoard />
 
   {sections.map((s) => (
     <section class="cat" aria-labelledby={`cat-${s.key}`}>
@@ -45,10 +93,21 @@ const sections = Object.entries(CATEGORIES)
 </Base>
 
 <style>
-  .cat + .cat { margin-top: 40px; }
-  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--text); }
-  .sec-title { font-size: 18px; margin: 0; }
-  .sec-title a { color: var(--text); }
+  .home-search { margin-bottom: 32px; }
+  .home-search :global(.psearch) { max-width: none; }
+  .home-search :global(input) { font-size: 17px; padding: 13px 14px; }
+  .examples { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin: 10px 0 0; font-size: 14.5px; }
+  .ex-label { color: var(--muted); font-size: 13px; }
+  .examples a { color: var(--text); white-space: nowrap; }
+  .examples a:hover { color: var(--accent); text-decoration: none; }
+  .examples small { margin-left: 5px; font-size: 12.5px; color: var(--muted); }
+  .count { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+  .cat + .cat, :global(.war-board) + .cat { margin-top: 40px; }
+  :global(.war-board) { margin-top: 40px; }
+  /* 섹션 머리는 오늘의 선수·WAR 순위 부품도 같이 쓴다 */
+  :global(.sec-head) { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 6px; border-bottom: 1px solid var(--text); }
+  :global(.sec-title) { font-size: 18px; margin: 0; }
+  :global(.sec-title a) { color: var(--text); }
   .more { color: var(--muted); white-space: nowrap; }
   .more:hover { color: var(--accent); }
   .small { font-size: 13.5px; }
