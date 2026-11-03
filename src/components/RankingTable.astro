@@ -1,0 +1,153 @@
+---
+// 순위 페이지 본문(요청 L, 2026-11-03). 일반 표, 숫자판 면 칠하지 않음. 등급은 S+·S만 글자.
+// 타자·투수 전환과 지표 정렬은 아래 스크립트(표 머리 버튼). JS가 꺼져도 두 표가 WAR 순으로 다 보인다.
+// 정렬 규칙은 홈 WarBoard와 같다: 순위·등급 가운데, 숫자 오른쪽, 글자 왼쪽, table-layout fixed.
+import { COLS, SEASONS, seasonRankings } from '../lib/rankings';
+import { SEASON } from '../lib/home';
+import { url } from '../lib/site';
+
+interface Props { season: number }
+const { season } = Astro.props;
+const data = seasonRankings(season);
+const tables = (['b', 'p'] as const).map((k) => ({ k, title: k === 'b' ? '타자' : '투수', id: k === 'b' ? 'batters' : 'pitchers', cols: COLS[k], rows: data[k] }));
+const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`rankings/${y}`));
+---
+<div class="rk" data-rk>
+  <nav class="seasons" aria-label="시즌">
+    {SEASONS.map((y) => (y === season ? <span aria-current="page">{y}</span> : <a href={seasonHref(y)}>{y}</a>))}
+  </nav>
+
+  <div class="tabs" role="tablist" aria-label="타자·투수" hidden data-tabs>
+    {tables.map((t, i) => (
+      <button type="button" role="tab" id={`tab-${t.id}`} aria-controls={t.id} aria-selected={i === 0 ? 'true' : 'false'} data-tab={t.id}>{t.title}</button>
+    ))}
+  </div>
+
+  {tables.map((t) => (
+    <section id={t.id} class="pane" role="tabpanel" aria-labelledby={`tab-${t.id}`} data-pane={t.id}>
+      <h2 class="th">{t.title} <span>(표본 충족 {t.rows.length}명)</span></h2>
+      <div class="scroll">
+        <table data-table>
+          <colgroup><col class="c-rank" /><col class="c-name" /><col class="c-team" />{t.cols.map(() => <col class="c-num" />)}<col class="c-grade" /></colgroup>
+          <thead>
+            <tr>
+              <th class="c s1" scope="col">순위</th>
+              <th class="s2" scope="col">선수</th>
+              <th scope="col">팀</th>
+              {t.cols.map((c, i) => (
+                <th class="n" scope="col" aria-sort={i === 0 ? 'descending' : undefined}>
+                  <button type="button" data-col={i + 3} data-low={c.low ? '1' : undefined} title={c.title}>{c.label}</button>
+                </th>
+              ))}
+              <th class="c" scope="col">등급</th>
+            </tr>
+          </thead>
+          <tbody>
+            {t.rows.map((r) => (
+              <tr>
+                <td class="c s1" data-rank>{r.rank}</td>
+                <td class="s2"><a href={url(`players/${r.id}`)}>{r.name}</a></td>
+                <td>{r.team}</td>
+                {r.cells.map((c) => <td class="n" data-s={c.s ?? ''}>{c.t}</td>)}
+                <td class="c g">{r.grade}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+  <p class="note">표본 충족 기준과 등급은 선수 페이지와 같습니다. 표 머리의 기록 이름을 누르면 그 기록으로 다시 줄 세웁니다.</p>
+</div>
+
+<script>
+  // 표 머리 정렬: 같은 값은 공동 순위. 처음 누르면 좋은 쪽부터(낮을수록 좋은 기록은 오름차순), 다시 누르면 반대
+  function rankText(vals: number[], i: number): string {
+    const v = vals[i];
+    const rk = 1 + vals.filter((o) => o > v).length;
+    return vals.filter((o) => o === v).length > 1 ? `공동 ${rk}` : String(rk);
+  }
+  function sortTable(table: HTMLTableElement, col: number, desc: boolean) {
+    const body = table.tBodies[0];
+    const rows = [...body.rows];
+    const val = (tr: HTMLTableRowElement) => { const s = tr.cells[col].dataset.s; return s === '' || s == null ? null : Number(s); };
+    rows.sort((a, b) => {
+      const x = val(a), y = val(b);
+      if (x == null || y == null) return x == null ? (y == null ? 0 : 1) : -1; // 빈 값은 맨 아래
+      return desc ? y - x : x - y;
+    });
+    // 순위는 "좋은 쪽" 기준 값으로(오름차순 정렬이면 부호를 뒤집어 같은 함수로)
+    const keyed = rows.map((r) => { const v = val(r); return v == null ? -Infinity : desc ? v : -v; });
+    rows.forEach((r, i) => { r.cells[0].textContent = val(r) == null ? '' : rankText(keyed, i); body.appendChild(r); });
+    table.querySelectorAll('thead th').forEach((th, i) => {
+      if (i === col) th.setAttribute('aria-sort', desc ? 'descending' : 'ascending');
+      else th.removeAttribute('aria-sort');
+    });
+  }
+  document.querySelectorAll<HTMLTableElement>('[data-table]').forEach((table) => {
+    table.querySelectorAll<HTMLButtonElement>('button[data-col]').forEach((b) => {
+      b.addEventListener('click', () => {
+        const col = Number(b.dataset.col);
+        const th = b.closest('th')!;
+        const cur = th.getAttribute('aria-sort');
+        const goodDesc = !b.dataset.low;
+        const desc = cur ? cur === 'ascending' : goodDesc;
+        sortTable(table, col, desc);
+      });
+    });
+  });
+
+  // 타자·투수 탭: 주소 #pitchers면 투수부터
+  const root = document.querySelector<HTMLElement>('[data-rk]');
+  const tabs = root?.querySelector<HTMLElement>('[data-tabs]');
+  if (root && tabs) {
+    tabs.hidden = false;
+    const btns = [...tabs.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const show = (id: string, push: boolean) => {
+      btns.forEach((x) => x.setAttribute('aria-selected', String(x.dataset.tab === id)));
+      root.querySelectorAll<HTMLElement>('[data-pane]').forEach((p) => { p.hidden = p.dataset.pane !== id; });
+      if (push) history.replaceState(null, '', id === 'batters' ? location.pathname : `#${id}`);
+    };
+    btns.forEach((x) => x.addEventListener('click', () => show(x.dataset.tab!, true)));
+    show(location.hash === '#pitchers' ? 'pitchers' : 'batters', false);
+    // 시즌을 옮겨도 보던 탭 유지
+    root.querySelectorAll<HTMLAnchorElement>('.seasons a').forEach((a) => a.addEventListener('click', () => {
+      if (location.hash === '#pitchers') a.hash = 'pitchers';
+    }));
+  }
+</script>
+
+<style>
+  .seasons { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 14px; font-variant-numeric: tabular-nums; margin: 4px 0 16px; }
+  .seasons a { color: var(--muted); text-decoration: none; }
+  .seasons a:hover { color: var(--text); text-decoration: underline; }
+  .seasons [aria-current] { color: var(--accent); font-weight: 700; }
+  .tabs { display: flex; gap: 20px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .tabs[hidden] { display: none; }
+  .tabs button { font: inherit; font-size: 15px; font-weight: 600; color: var(--muted); background: none; border: 0; padding: 6px 0; margin-bottom: -1px; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; }
+  .tabs button[aria-selected='true'] { color: var(--text); border-bottom-color: var(--text); }
+  .pane { margin-bottom: 28px; }
+  .pane[hidden] { display: none; }
+  .th { margin: 0 0 6px; font-size: 15px; }
+  .th span { font-weight: 400; color: var(--muted); font-size: 13.5px; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; min-width: 760px; table-layout: fixed; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); padding: 6px 6px; border-bottom: 1px solid var(--text); white-space: nowrap; }
+  td { padding: 7px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .c-rank { width: 68px; } .c-name { width: 6.5em; } .c-team { width: 3.6em; } .c-num { width: 3.8em; } .c-grade { width: 3.2em; }
+  td a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .n { text-align: right; }
+  .c { text-align: center; }
+  .g { font-weight: 700; }
+  th button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; width: 100%; text-align: right; white-space: nowrap; }
+  th button:hover { color: var(--text); text-decoration: underline; }
+  th[aria-sort] { color: var(--text); }
+  th[aria-sort='descending'] button::after { content: ' ↓'; }
+  th[aria-sort='ascending'] button::after { content: ' ↑'; }
+  /* 휴대폰: 가로로 밀어도 순위·선수 열은 고정 */
+  .s1, .s2 { position: sticky; background: var(--bg); z-index: 1; }
+  .s1 { left: 0; }
+  .s2 { left: 68px; }
+  th.s1, th.s2 { z-index: 2; }
+  .note { font-size: 13px; color: var(--muted); }
+</style>

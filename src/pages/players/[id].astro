@@ -6,7 +6,8 @@ import PlayerSearch from '../../components/PlayerSearch.astro';
 import Silhouette from '../../components/Silhouette.astro';
 import Hexagon from '../../components/Hexagon.astro';
 import { teamColor, darken } from '../../lib/teams';
-import { url } from '../../lib/site';
+import { url, CATEGORIES, formatDate } from '../../lib/site';
+import { postsByPlayer } from '../../lib/post-players';
 import { renderBatter, renderPitcher } from '../../lib/situ';
 import '../../styles/situ.css';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
@@ -48,6 +49,7 @@ const tilesOf = (k: string): [string, string][] => {
 };
 const tiles = tilesOf('career');
 const bio = [p.hand, p.height && p.weight ? `${p.height}cm ${p.weight}kg` : '', p.school ?? '', p.joined ? `${p.joined} 입단` : ''].filter(Boolean).join(' · ');
+const related = (await postsByPlayer()).get(p.id) ?? []; // 관련 글 탭(요청 K): 이 선수 이름이 태그인 글, 최신순
 const word = bat ? '타격' : '투구';
 const head = (k: string) => (k === 'career' ? `통산 ${word} 육각형` : `${k} ${word} 육각형`);
 // 등급(2026-10-28 사용자: 7단계, 기준은 화면에 안 씀). 표본 적음은 데이터(export_players.py)의 판정을 따른다
@@ -82,7 +84,7 @@ const chat = {
 };
 const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과 ${word} 육각형. 통산 ${tiles.map(([v, l]) => `${l} ${v}`).slice(1).join(', ')}.`;
 ---
-<Base title={title} description={desc} chat={chat} breadcrumbs={[{ name: '홈', path: '/' }, { name: '선수검색', path: '/players/' }, { name: p.name, path: `/players/${p.id}/` }]}>
+<Base title={title} description={desc} chat={chat} image={p.hex['2026']?.q ? `og/players/${p.id}.png` : undefined} breadcrumbs={[{ name: '홈', path: '/' }, { name: '선수검색', path: '/players/' }, { name: p.name, path: `/players/${p.id}/` }]}>
   <PlayerSearch />
   <section class="player" data-player>
     <div class="top">
@@ -189,7 +191,18 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       </div>
       {missingNote && <p class="note">{missingNote}</p>}
     </div>
-    <div data-panel="2" hidden><p class="soon muted">관련 글은 추후 제공합니다.</p></div>
+    <div data-panel="2" hidden>
+      {related.length ? (
+        <ul class="plist">
+          {related.map((r) => (
+            <li>
+              <p class="meta-line"><a class="cat" href={url(`category/${r.data.category}`)}>{CATEGORIES[r.data.category]}</a> · <time datetime={r.data.date.toISOString()}>{formatDate(r.data.date).slice(5)}</time></p>
+              <a class="ptitle" href={url(`posts/${r.id}`)}>{r.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      ) : <p class="soon muted">아직 이 선수를 다룬 칼럼이 없어요</p>}
+    </div>
   </section>
 </Base>
 
@@ -294,6 +307,10 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .tabs button { font: inherit; font-size: 15px; padding: 8px 0; color: var(--muted); background: none; border: 0; cursor: pointer; }
   .tabs button[aria-selected='true'] { color: var(--text); font-weight: 600; box-shadow: inset 0 -2px var(--navy); }
   .soon { margin: 20px 0; font-size: 15px; }
+  .plist { list-style: none; margin: 8px 0 0; padding: 0; }
+  .plist li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .plist .meta-line { margin: 0 0 2px; }
+  .plist .ptitle { color: var(--text); font-size: 17px; line-height: 1.45; letter-spacing: -.01em; }
   .seasonbar { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 14px 0 0; font-size: 13px; color: var(--muted); }
   .seasonbar span { margin-right: 4px; }
   .seasonbar button { font: 600 16px/1.4 var(--num); padding: 1px 8px; border: 1px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--text); cursor: pointer; }

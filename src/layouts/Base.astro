@@ -3,7 +3,7 @@ import '../styles/global.css';
 import ChatPanel from '../components/ChatPanel.astro';
 import Visit from '../components/Visit.astro';
 import Search from '../components/Search.astro';
-import { SITE, SOCIAL, CATEGORIES, url } from '../lib/site';
+import { SITE, SOCIAL, MENU, SUBMENU, sectionOf, url, type SearchMode } from '../lib/site';
 
 interface Props {
   title?: string;
@@ -47,10 +47,21 @@ const crumbLd = breadcrumbs.length > 0 && {
   })),
 };
 const path = Astro.url.pathname;
-const nav = [
-  ...Object.entries(CATEGORIES).map(([key, label]) => ({ href: url(`category/${key}`), label })),
-  { href: url('about'), label: '소개' },
-];
+// 메뉴(2026-11-03 사용자): 대분류 한 줄 + 구역 페이지에서만 소분류 두 번째 줄. 정의는 lib/site.ts MENU·SUBMENU
+const section = sectionOf(path);
+const sub = (section && SUBMENU[section]) || [];
+// 소분류 현재 위치: 선수 개인 페이지 = 선수 검색, 글 페이지 = 경로(breadcrumbs)에 있는 카테고리
+const crumbPaths = breadcrumbs.map((c) => c.path);
+const isPlayerPage = /^\/players\/[^/]+\/$/.test(path.slice(url().length - 1)) && !path.startsWith(url('players/compare'));
+const subCurrent = (p: string) => {
+  const href = url(p);
+  if (p === 'players') return path === href || isPlayerPage;
+  if (p === 'columns') return path === href;
+  return path.startsWith(href) || crumbPaths.includes(href);
+};
+// 머리말 검색: 구역 모드로. 같은 구역 검색창이 페이지에 이미 있으면 숨김(홈·선수 검색 첫 화면·선수 페이지·칼럼 첫 화면)
+const searchMode: SearchMode = section === 'players' ? 'players' : section === 'columns' ? 'posts' : 'all';
+const hideSearch = path === url() || path === url('players') || isPlayerPage || path === url('columns');
 ---
 <!doctype html>
 <html lang="ko">
@@ -99,14 +110,18 @@ const nav = [
             <small>{SITE.tagline}</small>
           </span>
         </a>
-        <Search hideButton={path === url()} />
+        <Search hideButton={hideSearch} mode={searchMode} />
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
-        <a href={url()} aria-current={path === url() ? 'page' : undefined}>홈</a>
-        <a href={url('players')} aria-current={path.startsWith(url('players')) && !path.startsWith(url('players/compare')) ? 'page' : undefined}>선수검색</a>
-        <a href={url('players/compare')} aria-current={path.startsWith(url('players/compare')) ? 'page' : undefined}>선수 비교</a>
-        {nav.map((n) => <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        {MENU.map((m) => <a href={url(m.path)} aria-current={section === m.key ? 'page' : undefined}>{m.label}</a>)}
       </nav>
+      {sub.length > 0 && (
+        <nav class="subnav-row" aria-label={`${MENU.find((m) => m.key === section)?.label} 메뉴`}>
+          <div class="wrap nav sub">
+            {sub.map((n) => <a href={url(n.path)} aria-current={subCurrent(n.path) ? 'page' : undefined}>{n.label}</a>)}
+          </div>
+        </nav>
+      )}
     </header>
 
     <div class="wrap layout">
@@ -169,6 +184,10 @@ const nav = [
   .nav a { color: var(--muted); padding: 8px 0 10px; white-space: nowrap; font-size: 15px; }
   .nav a:hover { color: var(--text); text-decoration: none; }
   .nav a[aria-current='page'] { color: var(--accent); font-weight: 600; box-shadow: inset 0 -2px var(--accent); }
+  /* 소분류 줄: 대분류 아래 가는 선으로 나눈 두 번째 줄. 휴대폰은 가로 스크롤 */
+  .subnav-row { border-top: 1px solid var(--line); }
+  .nav.sub { gap: 18px; padding-top: 2px; }
+  .nav.sub a { font-size: 14px; padding: 7px 0 8px; }
 
 
   .site-footer { border-top: 1px solid var(--line); padding: 24px 0 40px; font-size: 14px; color: var(--muted); }

@@ -1,6 +1,6 @@
 ---
 // 홈 "2026 WAR 순위"(요청 H, 2026-11-03 사용자: B안 순위표). 2026 표본 충족 타자·투수 각 5명, 일반 표(숫자판 면 칠하지 않음).
-// 등급은 글자로 S+·S만(그 아래는 빈칸). 전체 순위 페이지가 없어 "전체 순위 보기" 링크는 아직 두지 않는다
+// 등급은 글자로 S+·S만(그 아래는 빈칸). 섹션 머리 오른쪽 "전체 순위 보기" = /rankings/(요청 L)
 import { qualified, SEASON } from '../lib/home';
 import { url } from '../lib/site';
 
@@ -9,7 +9,7 @@ const pools = qualified();
 const tables = (['b', 'p'] as const).map((k) => ({ k, title: k === 'b' ? '타자' : '투수', n: pools[k].length, rows: pools[k].slice(0, TOP) }));
 ---
 <section class="war-board" aria-labelledby="war-h">
-  <div class="sec-head"><h2 id="war-h" class="sec-title">{SEASON} WAR 순위</h2></div>
+  <div class="sec-head"><h2 id="war-h" class="sec-title">{SEASON} WAR 순위</h2><a class="more" href={url('rankings')}>전체 순위 보기</a></div>
   <div class="two">
     {tables.map((t) => (
       <div>
@@ -29,6 +29,8 @@ const tables = (['b', 'p'] as const).map((k) => ({ k, title: k === 'b' ? '타자
 </section>
 
 <style>
+  .more { color: var(--muted); white-space: nowrap; font-size: 13.5px; }
+  .more:hover { color: var(--accent); }
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; padding-top: 12px; }
   .th { margin: 0 0 6px; font-size: 15px; }
   .th span { font-weight: 400; color: var(--muted); font-size: 13.5px; }

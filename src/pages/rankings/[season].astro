@@ -1,0 +1,22 @@
+---
+// 지난 시즌 순위(요청 L, 2026-11-03). 2010~최신 직전 시즌 16장만 만든다. 최신 시즌은 /rankings/(index.astro)
+import Base from '../../layouts/Base.astro';
+import RankingTable from '../../components/RankingTable.astro';
+import { SEASON } from '../../lib/home';
+import { SEASONS, seasonRankings } from '../../lib/rankings';
+import { url } from '../../lib/site';
+
+export function getStaticPaths() {
+  return SEASONS.filter((y) => y !== SEASON).map((y) => ({ params: { season: String(y) } }));
+}
+const season = Number(Astro.params.season);
+const d = seasonRankings(season);
+---
+<Base title={`${season} 선수 순위`} description={`${season} KBO 표본 충족 타자 ${d.b.length}명, 투수 ${d.p.length}명의 WAR 순위와 시즌 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '순위', path: url('rankings') }, { name: String(season), path: url(`rankings/${season}`) }]}>
+  <h1 class="rk-h">{season} 선수 순위</h1>
+  <RankingTable season={season} />
+</Base>
+
+<style>
+  .rk-h { font-size: 24px; margin: 8px 0 6px; }
+</style>

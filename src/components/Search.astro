@@ -2,23 +2,27 @@
 // 머리말 검색(사용자 결정 2026-10-25). 돋보기 → 검색 창. 2026-11-03 사용자: 홈 선수 검색과 하나로 합침 → 창 안은 통합 검색(PlayerSearch posts inline).
 // 선수 후보(최대 6명) 아래 글 결과. 엔터 = 첫 선수 후보로, 선수 후보가 없으면 검색 결과 페이지 /search/?q=. 찾기·글 결과 줄은 src/lib/search.ts.
 // 홈은 맨 위에 같은 통합 검색창이 있으므로 머리말 버튼을 숨긴다(hideButton, 화면에 검색창 하나).
+// mode(2026-11-03 사용자: 구역별 검색 분리) — Base가 구역으로 정한다. 선수 검색 구역 = 선수만, 칼럼 구역 = 글만, 그 밖 = 통합.
+//   페이지 안에 같은 구역 검색창이 이미 있으면(선수 검색 첫 화면·선수 페이지·칼럼 첫 화면) Base가 hideButton으로 숨긴다.
 // 결과 아래 "크봇에게 이 질문하기"를 누르면 입력한 문장을 크봇(ChatPanel) 입력 칸에 채운다: window에 'kbot:ask' 이벤트 { detail: 질문 }.
 // 결과 썸네일은 글 목록과 같은 Thumb(search.json에 HTML로). 그 CSS가 모든 페이지에 실리도록 아래 <template>에 하나 그려 둔다
 // 화면 이벤트(logs/<날짜>/event.jsonl): search_open(창 열기). 검색어·클릭 로그(psearch·psearch_click·search·search_click)는 PlayerSearch·lib/search.ts
 import Thumb from './Thumb.astro';
 import PlayerSearch from './PlayerSearch.astro';
-interface Props { hideButton?: boolean }
-const { hideButton = false } = Astro.props;
+import { SEARCH_PLACEHOLDER, type SearchMode } from '../lib/site';
+interface Props { hideButton?: boolean; mode?: SearchMode }
+const { hideButton = false, mode = 'all' } = Astro.props;
+const dialogLabel = { all: '선수·글 검색', players: '선수 검색', posts: '글 검색' }[mode];
 ---
 <button class:list={['search-btn', { 'is-hidden': hideButton }]} type="button" data-search-open aria-haspopup="dialog">
   <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-  <span class="short">검색</span><span class="long">선수 이름 or 글 검색</span>
+  <span class="short">검색</span><span class="long">{SEARCH_PLACEHOLDER[mode]}</span>
 </button>
 
-<dialog class="search" data-search aria-label="선수·글 검색">
+<dialog class="search" data-search aria-label={dialogLabel}>
   <button class="close" type="button" aria-label="검색 닫기" data-search-close>✕</button>
   <div class="search-body">
-    <PlayerSearch posts inline qid="search-q" />
+    <PlayerSearch mode={mode} inline qid="search-q" />
     <button class="to-kbot" type="button" data-search-kbot hidden>크봇에게 이 질문하기</button>
   </div>
 </dialog>

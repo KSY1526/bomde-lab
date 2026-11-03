@@ -1,5 +1,5 @@
 ---
-// 선수검색 메뉴 첫 화면(설계 docs/블로그/선수검색-설계.md). 검색창 → 후보 → 선수 페이지 /players/<id>/
+// 선수 검색 구역 첫 화면(메뉴 2026-11-03: 소분류 선수 검색·선수 순위·선수 비교는 Base 머리말 두 번째 줄)(설계 docs/블로그/선수검색-설계.md). 검색창 → 후보 → 선수 페이지 /players/<id>/
 import Base from '../../layouts/Base.astro';
 import PlayerSearch from '../../components/PlayerSearch.astro';
 import index from '../../data/player-index.json';
@@ -7,8 +7,8 @@ import { url } from '../../lib/site';
 // 첫 화면엔 크봇을 두지 않는다. 크봇은 선수를 고른 뒤(선수 페이지 맨 아래) 추가 질문용(2026-10-28 사용자)
 const nb = index.filter((r) => r[2] === 'b').length, np = index.length - nb;
 ---
-<Base title="선수검색" description="2010년 이후 KBO 1군 타자·투수의 연도별 기록과 육각형을 선수 이름으로 찾아봅니다.">
-  <h1>선수검색</h1>
+<Base title="선수 검색" description="2010년 이후 KBO 1군 타자·투수의 연도별 기록과 육각형을 선수 이름으로 찾아봅니다.">
+  <h1>선수 검색</h1>
   <PlayerSearch autofocus />
   <p class="muted note">2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
   <p class="note"><a href={url('players/compare')}>육각형 비교</a>: 최대 3명을 겹쳐 봅니다.</p>

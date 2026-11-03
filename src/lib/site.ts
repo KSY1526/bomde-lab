@@ -19,6 +19,41 @@ export const CATEGORIES: Record<string, string> = {
   metrics: '야구 지표 해설',
 };
 
+// 머리말 메뉴(2026-11-03 사용자: 대분류 홈·선수 검색·칼럼·소개, 소분류는 그 구역 페이지에서 두 번째 줄로).
+// 경로는 base 없이(url()에 넣는다). 구역은 sectionOf()로 정한다: 선수 개인 페이지는 선수 검색, 글 페이지는 칼럼.
+export type Section = 'home' | 'players' | 'columns' | 'about';
+export const MENU: { key: Section; label: string; path: string }[] = [
+  { key: 'home', label: '홈', path: '' },
+  { key: 'players', label: '선수 검색', path: 'players' },
+  { key: 'columns', label: '칼럼', path: 'columns' },
+  { key: 'about', label: '소개', path: 'about' },
+];
+export const SUBMENU: Partial<Record<Section, { label: string; path: string }[]>> = {
+  players: [
+    { label: '선수 검색', path: 'players' },
+    { label: '선수 순위', path: 'rankings' },
+    { label: '선수 비교', path: 'players/compare' },
+  ],
+  columns: [
+    { label: '전체', path: 'columns' },
+    ...Object.entries(CATEGORIES).map(([key, label]) => ({ label, path: `category/${key}` })),
+  ],
+};
+
+// 구역별 검색(2026-11-03 사용자): 홈·구역 없는 페이지 = 통합, 선수 검색 구역 = 선수만, 칼럼 구역 = 글만. PlayerSearch mode·머리말 Search가 쓴다
+export type SearchMode = 'all' | 'players' | 'posts';
+export const SEARCH_PLACEHOLDER: Record<SearchMode, string> = { all: '선수 이름 or 글 검색', players: '선수 이름', posts: '글 검색' };
+
+/** 주소(base 포함 pathname)로 구역. 소개·검색 결과·404 같은 구역 없는 페이지는 null */
+export function sectionOf(pathname: string): Section | null {
+  const is = (p: string) => pathname === url(p) || pathname.startsWith(url(p));
+  if (pathname === url()) return 'home';
+  if (is('players') || is('rankings')) return 'players';
+  if (is('columns') || is('category') || is('posts')) return 'columns';
+  if (is('about')) return 'about';
+  return null;
+}
+
 // 카테고리 페이지 맨 위 한 줄 설명(사용자 결정 2026-10-18). 처음 온 사람이 고르기 쉽게, 검색 설명(meta description)으로도 쓴다
 export const CATEGORY_DESC: Record<string, string> = {
   season: '한 시즌 동안 팀과 리그가 어떻게 흘러갔는지 숫자로 짚어 봅니다',

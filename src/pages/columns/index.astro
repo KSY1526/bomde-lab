@@ -1,0 +1,23 @@
+---
+// 칼럼 첫 화면(2026-11-03 사용자: 메뉴 대분류 "칼럼"). 맨 위 글 검색창(글만, PlayerSearch mode="posts") → 전체 글 목록(최신순, 글 목록 형식 PostCard).
+// 소분류(카테고리) 줄은 Base 머리말이 그린다. 머리말 검색 버튼은 이 화면에서 숨긴다(검색창 하나).
+import Base from '../../layouts/Base.astro';
+import PostCard from '../../components/PostCard.astro';
+import PlayerSearch from '../../components/PlayerSearch.astro';
+import { publishedPosts } from '../../lib/posts';
+import { url } from '../../lib/site';
+
+const posts = await publishedPosts();
+---
+<Base title="칼럼" description="봄데 연구소의 모든 글을 최신순으로 모았습니다. 시즌·선수·경기 분석과 야구 지표 해설을 글 검색으로 찾아보세요." breadcrumbs={[{ name: '홈', path: url() }, { name: '칼럼', path: url('columns') }]}>
+  <h1>칼럼</h1>
+  <PlayerSearch mode="posts" qid="columns-q" />
+  <p class="muted count">전체 글 {posts.length}편 · 최신순</p>
+  <div class="posts">{posts.map((p) => <PostCard post={p} />)}</div>
+</Base>
+
+<style>
+  h1 { font-size: 26px; margin: 0 0 14px; }
+  .count { font-size: 14px; margin: 18px 0 8px; }
+  .posts { display: grid; border-top: 1px solid var(--text); }
+</style>

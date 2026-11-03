@@ -1,0 +1,19 @@
+---
+// 순위 페이지 기본 = 최신 시즌(요청 L, 2026-11-03). 지난 시즌은 /rankings/<시즌>/ ([season].astro)
+// 팀 페이지를 나중에 붙여도 /teams/... 또는 /rankings/<시즌>/<팀>/로 갈 수 있게 시즌 주소만 쓴다
+import Base from '../../layouts/Base.astro';
+import RankingTable from '../../components/RankingTable.astro';
+import { SEASON } from '../../lib/home';
+import { seasonRankings } from '../../lib/rankings';
+import { url } from '../../lib/site';
+
+const d = seasonRankings(SEASON);
+---
+<Base title={`${SEASON} 선수 순위`} description={`${SEASON} KBO 표본 충족 타자 ${d.b.length}명, 투수 ${d.p.length}명의 WAR 순위와 시즌 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '순위', path: url('rankings') }]}>
+  <h1 class="rk-h">{SEASON} 선수 순위</h1>
+  <RankingTable season={SEASON} />
+</Base>
+
+<style>
+  .rk-h { font-size: 24px; margin: 8px 0 6px; }
+</style>

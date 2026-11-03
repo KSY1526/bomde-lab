@@ -24,6 +24,14 @@ export function topGradeOf(h: Hex | undefined): string {
   return h.war >= 6 ? 'S+' : h.war >= 4 ? 'S' : '';
 }
 
+// 공동 순위(순위 페이지 src/lib/rankings.ts도 같이 쓴다). 값이 클수록 위. 순위 = 자기보다 큰 값 수 + 1, 같은 값이 둘 이상이면 "공동 k"
+export function tieRanks(vals: number[]): string[] {
+  return vals.map((v) => {
+    const rk = 1 + vals.filter((o) => o > v).length;
+    return vals.filter((o) => o === v).length > 1 ? `공동 ${rk}` : String(rk);
+  });
+}
+
 let cache: { b: Ranked[]; p: Ranked[] } | null = null;
 
 // 시즌에 뛴 선수 중 표본 충족 선수를 타자·투수로 나눠 WAR 내림차순. 순위는 "자기보다 WAR 높은 사람 수 + 1", 동률이면 "공동 k"
@@ -41,12 +49,8 @@ export function qualified(): { b: Ranked[]; p: Ranked[] } {
   }
   for (const k of ['b', 'p'] as const) {
     const pool = out[k].sort((a, b) => b.war - a.war);
-    for (const x of pool) {
-      const rk = 1 + pool.filter((o) => o.war > x.war).length;
-      const tie = pool.filter((o) => o.war === x.war).length > 1;
-      x.rank = tie ? `공동 ${rk}` : String(rk);
-      x.pool = pool.length;
-    }
+    const ranks = tieRanks(pool.map((x) => x.war));
+    pool.forEach((x, i) => { x.rank = ranks[i]; x.pool = pool.length; });
   }
   cache = out;
   return out;
