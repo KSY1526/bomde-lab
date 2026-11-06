@@ -4,7 +4,8 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const height = Number.isFinite(o.height) && o.height! > 0 ? o.height! : 183;
   const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 88;
   const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-  const k = .8 + .4 * clamp((weight / (height / 100) ** 2 - 21) / 9, 0, 1);
+  // 사용자 2026-11-07: 너무 말라 보임 → 전체 20kg쯤 더 찐 체격으로(폭 .8~1.2배 → 1.0~1.3배). 몸무게는 BMI 21~30 구간에 비례
+  const k = 1 + .3 * clamp((weight / (height / 100) ** 2 - 21) / 9, 0, 1);
   // 183cm의 정수리는 -10, 발은 256. 195cm의 요청 배율 1.1은 상단 안전 여백으로 제한한다.
   const tall = height <= 183 ? .9 + .1 * (height - 170) / 13 : 1 + .1 * (height - 183) / 12;
   const sy = clamp(tall, .8, 278 / 266);
