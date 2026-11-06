@@ -1,0 +1,162 @@
+---
+title: "야구 지표 해설 9: WAR 3편, 투수 WAR"
+description: "2026년 KBO 투수 WAR* 1위는 두산 곽빈(6.55), 2위는 KT 고영표(5.87)였다."
+date: 2026-11-07T00:40:00+09:00
+category: metrics
+tags: ["WAR", "투수 WAR", "RA9", "FIP", "대체 선수", "세이버메트릭스"]
+related: ["2026-war-dwar", "2026-war-owar", "2026-wpa"]
+stat: { value: "6.55 vs 5.11", label: "곽빈 WAR*, 실점 기준 vs FIP 기준", short: "곽빈 WAR*", items: [{ v: "6.55", cap: "실점 기준" }, { v: "5.11", cap: "FIP 기준" }], sep: "vs" }
+thumb: { pose: "pitch" }
+dataUntil: "2026 정규시즌 최종전(10/12)까지"
+---
+import d from '../../data/posts/2026-11-07-war-pwar.json';
+import { url as siteUrl } from '../../lib/site';
+
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const sg = (v) => `${v > 0 ? '+' : ''}${v.toFixed(1)}`;
+export const T = (n) => d.top.find((r) => r.name === n);
+export const G = (k) => d.grp.find((r) => r.grp === k);
+export const inn = (o) => `${Math.floor(o / 3)}.${o % 3}`;
+export const warTd = (v) => <td class="lvl cur" style={`--heat:${Math.max(0, Math.round(v * 8))}%`}>{f2(v)}</td>;
+// 인플레이 타구 피안타율은 낮을수록, 잔루율은 높을수록 투수에게 유리(파란색). 리그 평균에서 멀수록 진하게
+export const bTd = (v) => <td class={v <= d.lg_babip ? 'down' : 'up'} style={`--heat:${Math.min(52, Math.round(Math.abs(v - d.lg_babip) * 1200))}%`}>{f3(v)}</td>;
+export const lTd = (v) => <td class={v >= d.lg_lob ? 'down' : 'up'} style={`--heat:${Math.min(52, Math.round(Math.abs(v - d.lg_lob) * 600))}%`}>{f3(v)}</td>;
+export const gapRow = (r) => (
+  <tr><td class="cur" style="text-align:left">{r.name} <small>({r.team})</small></td><td>{inn(r.outs)}</td><td>{f2(r.ra9)}</td><td>{f2(r.fipr9)}</td>{bTd(r.babip)}{lTd(r.lob)}<td>{f2(r.war)}</td><td>{f2(r.war_fip)}</td></tr>
+);
+
+[1편]({siteUrl('/posts/2026-war-owar/')})과 [2편]({siteUrl('/posts/2026-war-dwar/')})에서 야수 WAR을 공격 WAR(oWAR)과 수비 WAR(dWAR)로 나눠 봤다. 이번에는 투수 WAR이다. 투수도 뼈대는 같다. 대체 선수가 던졌을 때보다 팀이 몇 승을 더 거뒀는지를 센다. 올해 KBO 투수 WAR\*을 모두 더하면 {f1(d.total_war)}승이고 리그 전체 WAR의 43%가 투수 몫이다.
+
+야수 WAR과 다른 점은 포지션 보정이 없다는 것이다. 투수는 모두 마운드에서 던진다. 대신 투수에게는 야수에게 없는 문제가 있다. 투수가 내준 점수 가운데 어디까지가 투수 책임일까. 같은 타구도 수비가 잡으면 아웃이고 놓치면 안타다. 투수 WAR을 계산하는 순서를 따라가다 보면 이 문제에서 계산법이 둘로 갈린다.
+
+## 투수 WAR은 막은 점수에서 시작한다
+
+야수 oWAR이 타격 득점, 포지션 보정, 대체 선수 보정으로 이뤄졌다면 투수 WAR은 막은 점수, 대체 선수 보정, 리그 보정으로 이뤄진다. 셋을 점수로 구해 더한 뒤 승수로 바꾼다.
+
+### 투수 WAR 계산법 1 - 막은 점수
+
+막은 점수는 리그 평균 투수가 같은 이닝을 던졌을 때 내줬을 점수에서 실제로 내준 점수를 뺀 값이다. 기준은 9이닝당 실점(RA9)이다. 올해 리그 RA9는 {f2(d.lg_ra9)}점이다. 평균자책점 대신 책임 투수에게 기록된 실점을 모두 센다. 자책점인지는 기록원의 실책 판단에 따라 갈리기 때문이다.
+
+구장도 보정한다. 타자 때와 같은 파크팩터([참고 글]({siteUrl('/posts/2026-park-factor/')}))로 RA9를 나눈다. 올해 파크팩터는 사직 {d.pf['사직']}, 잠실 {d.pf['잠실']}이다. RA9가 4.00인 투수는 사직에서 {f2(4 / d.pf['사직'])}, 잠실에서 {f2(4 / d.pf['잠실'])}으로 고쳐진다.
+
+두산 곽빈은 올해 {inn(T('곽빈').outs)}이닝을 던져 RA9 {f2(T('곽빈').ra9)}를 기록했다. 잠실 보정을 거치면 {f2(T('곽빈').ra9 / T('곽빈').ppf)}으로 리그 평균보다 9이닝당 {f2(d.lg_ra9 - T('곽빈').ra9 / T('곽빈').ppf)}점 낮다. 여기에 던진 이닝 수를 반영하면 {sg(T('곽빈').prev)}점이 곽빈의 막은 점수다. 리그 평균 투수가 같은 이닝을 던졌다면 그만큼 더 내줬다는 계산이다.
+
+### 투수 WAR 계산법 2 - 대체 선수 보정
+
+평균 투수도 대체 선수보다는 잘 던진다. 그 차이만큼 점수를 더해 줘야 한다. 대체 선수 보정은 이 차이를 던진 이닝대로 나눠 준 값이다. [FanGraphs](https://library.fangraphs.com/war/calculating-war-pitchers/)는 대체 선수를 9이닝당 선발 0.12승, 불펜 0.03승으로 둔다. 올해 1승당 {f1(d.runs_per_win)}점으로 바꾸면 선발은 9이닝당 {f2(d.repl_sp_runs9)}점, 불펜은 {f2(d.repl_rp_runs9)}점이다. 선발과 불펜을 오간 투수는 선발 등판 비율대로 섞는다.
+
+불펜의 대체 선수 보정이 선발보다 작은 이유가 있다. [FanGraphs의 Dave Cameron](https://blogs.fangraphs.com/pitcher-win-values-explained-part-three/)은 불펜 투수가 상대할 타자를 골라 맡고 짧은 이닝을 전력으로 던지는 쉬운 역할이라고 설명했다. 그래서 대체 선발의 승률은 .380, 대체 불펜은 .470으로 따로 잡는다. 올해 선발로만 나온 곽빈은 {inn(T('곽빈').outs)}이닝에 선발 기준 9이닝당 {f2(d.repl_sp_runs9)}점을 곱해 {f1(T('곽빈').repl)}점을 받았다.
+
+### 투수 WAR 계산법 3 - 리그 보정
+
+두 값을 리그 모든 투수에게 더해도 합이 정해진 투수 WAR 총량과 맞지 않을 수 있다. FanGraphs는 투수 WAR의 합이 한 시즌 2430경기당 430승이 되도록 이닝마다 같은 값을 더하거나 뺀다. 리그 WAR 총량 1000승의 43%를 투수 몫으로 두는 셈이다. 올해는 720경기라 총량이 {f1(d.total_war)}승이고, 이를 맞추려고 9이닝당 {f2(d.lg_adj_per9)}점을 더했다. 곽빈에게는 {f1(T('곽빈').lg)}점이다.
+
+### 점수를 승수로 바꾸면 WAR
+
+세 가지를 더한 점수를 1승당 점수로 나누면 WAR이 된다. 올해 KBO에서는 1편에서 본 그대로 {f1(d.runs_per_win)}점이 1승이다. 곽빈의 세 값을 더해 {f1(d.runs_per_win)}점으로 나누면 {f2(T('곽빈').war)}승이다.
+
+## 올해 투수 WAR\* 상위권
+
+올해 WAR\* 상위 10명을 뽑아 봤다.
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>RA9</th><th>막은<br />점수</th><th>대체 선수<br />보정</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {d.top.map((r) => <tr><td class="cur" style="text-align:left">{r.name} <small>({r.team})</small></td><td>{inn(r.outs)}</td><td>{f2(r.ra9)}</td><td>{sg(r.prev)}</td><td>{sg(r.repl + r.lg)}</td>{warTd(r.war)}</tr>)}
+  </tbody>
+</table>
+<p class="table-note">2026 정규시즌 투수 WAR* 상위 {d.top.length}명. 득점 단위이고 대체 선수 보정에는 리그 보정이 들어 있다. RA9는 구장 보정 전 값. 회색이 진할수록 WAR*이 높다.</p>
+
+곽빈이 {f2(T('곽빈').war)}으로 1위, 고영표가 {f2(T('고영표').war)}으로 2위다. 곽빈의 {f2(T('곽빈').war)}는 2010년 이후 투수 시즌 가운데 {d.rank_top}위이고, 종전 개인 최고였던 2024년 {f2(d.career_hi['곽빈'])}를 크게 넘었다. 고영표의 개인 최고는 2023년 {f2(d.career_hi['고영표'])}이다.
+
+WAR\*이 비슷해도 구성은 다르다. SSG 아빌라는 {inn(T('아빌라').outs)}이닝만 던졌는데 막은 점수가 {sg(T('아빌라').prev)}점으로 {inn(T('고영표').outs)}이닝을 던진 고영표의 {sg(T('고영표').prev)}점과 비슷하다. 대신 대체 선수 보정은 {sg(T('아빌라').repl + T('아빌라').lg)}점으로 고영표의 {sg(T('고영표').repl + T('고영표').lg)}점보다 작다. 이닝이 쌓이면 대체 선수 보정이 커지니 이닝이 적은 투수가 상위권에 들려면 이닝당 더 많이 막아야 한다.
+
+올해 투수 WAR\*도 크봇에게 물어 바로 뽑아 볼 수 있다.
+
+- "올해 투수 WAR\* 상위 10명 알려 줘"
+- "불펜 투수 WAR\* 순위 보여 줘"
+- "곽빈 연도별 WAR\* 알려 줘"
+
+## 불펜은 WAR이 쌓이지 않는다
+
+선발과 불펜으로 나누면 올해 WAR\*은 거의 선발에서 나온다.
+
+<table>
+  <thead><tr><th>구분</th><th>투수 수</th><th>이닝</th><th>RA9</th><th>WAR*<br />합</th><th>FIP 기준<br />WAR* 합</th></tr></thead>
+  <tbody>
+    {d.grp.map((r) => <tr><td class="cur" style="text-align:left">{r.grp}</td><td>{r.n}</td><td>{r.ip}</td><td>{f2(r.ra9)}</td><td>{sg(r.war)}</td><td>{sg(r.war_fip)}</td></tr>)}
+    <tr class="total"><td style="text-align:left">전체</td><td>{d.grp[0].n + d.grp[1].n}</td><td>{d.grp[0].ip + d.grp[1].ip}</td><td>{f2(d.lg_ra9)}</td><td>{sg(d.grp[0].war + d.grp[1].war)}</td><td>{sg(d.grp[0].war_fip + d.grp[1].war_fip)}</td></tr>
+  </tbody>
+</table>
+<p class="table-note">2026 정규시즌. 경기의 절반 이상 선발로 나온 투수가 선발. 승 단위.</p>
+
+선발 {G('선발').n}명의 WAR\* 합은 {sg(G('선발').war)}승이고 불펜 {G('불펜').n}명의 합은 {sg(G('불펜').war)}승이다. 불펜 평균 RA9는 {f2(G('불펜').ra9)}점으로 선발의 {f2(G('선발').ra9)}점은 물론 리그 평균 {f2(d.lg_ra9)}점보다 높다. 불펜은 리그 평균보다 9이닝당 {f2(G('불펜').ra9 - d.lg_ra9)}점을 더 내줬는데 대체 선수 보정은 {f2(d.repl_rp_runs9)}점뿐이다. 그래서 불펜 전체는 대체 선수 보정을 받고도 마이너스가 된다.
+
+세이브 상위 5명도 보자.
+
+<table>
+  <thead><tr><th>투수</th><th>세이브</th><th>이닝</th><th>RA9</th><th>WAR*</th><th>FIP 기준<br />WAR*</th></tr></thead>
+  <tbody>
+    {d.closers.map((r) => <tr><td class="cur" style="text-align:left">{r.name} <small>({r.team})</small></td><td>{r.sv}</td><td>{inn(r.outs)}</td><td>{f2(r.ra9)}</td><td>{f2(r.war)}</td><td>{f2(r.war_fip)}</td></tr>)}
+  </tbody>
+</table>
+<p class="table-note">2026 정규시즌 세이브 상위 {d.closers.length}명. 승 단위.</p>
+
+마무리 투수의 WAR\*은 {f2(Math.min(...d.closers.map((r) => r.war)))}에서 {f2(Math.max(...d.closers.map((r) => r.war)))} 사이다. 선발 상위 5명이 5승을 넘는 것과 비교하면 작다. 마무리는 {inn(Math.min(...d.closers.map((r) => r.outs)))}에서 {inn(Math.max(...d.closers.map((r) => r.outs)))}이닝을 던졌고 곽빈은 {inn(T('곽빈').outs)}이닝을 던졌다. 이닝이 WAR을 쌓는 가장 큰 요인이다.
+
+## 실점으로 재면 수비와 운이 섞인다
+
+투수 WAR은 막은 점수를 어떤 지표로 구하느냐에서 갈린다. 지금까지는 RA9로 계산했다. FanGraphs는 RA9가 아니라 FIP로 투수 WAR을 계산한다. [FIP](https://library.fangraphs.com/pitching/fip/)는 홈런, 볼넷과 사구, 삼진만으로 투수를 평가하는 지표다. (13 × 홈런 + 3 × (볼넷 + 사구) − 2 × 삼진) ÷ 이닝에 상수를 더한 값이고 상수는 리그 FIP가 리그 평균자책점과 같아지도록 해마다 정한다. 인플레이 타구의 결과는 수비와 운에 달렸다고 보고 뺀다. FanGraphs는 RA9에 수비와 운, 점수가 난 순서가 섞인다고 보고 FIP를 쓴다. RA9로 계산한 RA9-WAR도 따로 내놓는다.
+
+같은 투수를 두 방식으로 계산하면 얼마나 달라질까. 100이닝 이상 던진 {d.n_gap}명 가운데 두 값이 가장 크게 갈린 투수를 골랐다.
+
+<table>
+  <thead><tr><th>투수</th><th>이닝</th><th>RA9</th><th>FIP<br />(실점 환산)</th><th>인플레이 타구<br />피안타율</th><th>잔루율</th><th>WAR*</th><th>FIP 기준<br />WAR*</th></tr></thead>
+  <tbody>
+    {d.gap_hi.map(gapRow)}
+    {d.gap_lo.map(gapRow)}
+    <tr class="total"><td style="text-align:left">리그 평균</td><td></td><td>{f2(d.lg_ra9)}</td><td>{f2(d.lg_ra9)}</td><td>{f3(d.lg_babip)}</td><td>{f3(d.lg_lob)}</td><td></td><td></td></tr>
+  </tbody>
+</table>
+<p class="table-note">2026 정규시즌, 100이닝 이상. 위 세 명은 FIP 기준 WAR*이 낮은 투수, 아래 세 명은 높은 투수. FIP는 리그 평균자책점과 리그 RA9의 차이 {f2(d.fip_adj)}점을 더해 실점 눈금으로 옮겼다. 인플레이 타구 피안타율은 홈런을 뺀 타구의 피안타율(희생플라이 무시). 파란색은 투수에게 유리, 붉은색은 불리하고 리그 평균에서 멀수록 진하다.</p>
+
+NC 라일리는 RA9 {f2(d.gap_hi[0].ra9)}으로 WAR\*이 {f2(d.gap_hi[0].war)}승이지만 FIP를 실점 눈금으로 옮기면 {f2(d.gap_hi[0].fipr9)}이고 WAR\*은 {f2(d.gap_hi[0].war_fip)}승이다. KIA 올러와 두산 곽빈도 FIP 기준이 1.4승 넘게 낮다. 반대로 두산 최승용, KT 오원석, 롯데 비슬리는 FIP 기준이 1.4승 안팎으로 높다.
+
+갈리는 폭은 인플레이 타구 피안타율과 같이 움직인다. 라일리는 {f3(d.gap_hi[0].babip)}, 올러는 {f3(d.gap_hi[1].babip)}으로 리그 평균 {f3(d.lg_babip)}보다 많이 낮고 비슬리는 {f3(d.gap_lo[2].babip)}, 오원석은 {f3(d.gap_lo[1].babip)}으로 높다. 100이닝 이상 {d.n_gap}명에서 두 WAR\*의 차이와 인플레이 타구 피안타율의 상관계수는 {f2(d.babip_corr)}다. 팀으로 보면 KIA 투수진이 {f3(d.teams[0].babip)}으로 가장 낮고 키움이 {f3(d.teams[d.teams.length - 1].babip)}으로 가장 높다. 이 숫자만으로는 투수가 타구를 잘 억제했는지, 수비가 도왔는지, 운이 따랐는지 가를 수 없다. 2편에서 본 대로 KBO는 수비를 믿을 만하게 재기도 어렵다.
+
+그렇다면 어느 쪽이 투수의 실력에 가까울까. 올해 RA9나 FIP가 다음 해 성적을 얼마나 맞히는지 봤다. 2010년 이후 같은 투수가 두 시즌 연속 100이닝 이상 던진 {d.pred.n}쌍이다.
+
+<table>
+  <thead><tr><th>올해 지표</th><th>다음 해 RA9와의<br />상관계수</th><th>다음 해 FIP와의<br />상관계수</th></tr></thead>
+  <tbody>
+    <tr><td class="cur" style="text-align:left">RA9</td><td>{f2(d.pred.ra_to_ra)}</td><td>{f2(d.pred.ra_to_fip)}</td></tr>
+    <tr><td class="cur" style="text-align:left">FIP</td><td>{f2(d.pred.fip_to_ra)}</td><td>{f2(d.pred.fip_to_fip)}</td></tr>
+  </tbody>
+</table>
+<p class="table-note">KBO 2010년부터 2026년까지, 같은 투수의 연속 두 시즌이 모두 100이닝 이상인 {d.pred.n}쌍. FIP는 홈런, 볼넷과 사구, 삼진에 13, 3, -2를 곱해 이닝으로 나눈 값.</p>
+
+다음 해 RA9를 맞히는 상관은 올해 RA9가 {f2(d.pred.ra_to_ra)}, 올해 FIP도 {f2(d.pred.fip_to_ra)}으로 같다. FIP끼리는 {f2(d.pred.fip_to_fip)}, RA9끼리는 {f2(d.pred.ra_to_ra)}으로 FIP가 해마다 더 일정하게 이어진다. 그러나 다음 해 실점을 더 잘 맞히지는 못했다.
+
+필자는 한 시즌의 투수 WAR\*이라면 실점 기준이 낫다고 생각한다. FIP는 인플레이 타구의 결과를 모두 수비와 운으로 돌려 투수가 약한 타구를 유도하는 능력까지 지운다. FanGraphs의 Dave Cameron도 [실점 기반 WAR과 FIP 기반 WAR 가운데 무엇을 고르느냐는 맞고 틀림보다 선호의 문제](https://blogs.fangraphs.com/why-our-pitcher-war-uses-fip-part-two/)라고 썼다. 실점에서 출발하면 해석이 쉽고 KBO 자료에서는 FIP가 다음 해 실점을 더 잘 맞히지도 않았다. 다만 두 값이 1승 넘게 벌어진 투수는 인플레이 타구 결과가 평균에서 많이 벗어난 시즌을 보냈다. 이런 투수는 FIP 기준 WAR\*도 함께 보는 편이 안전하다.
+
+## 계산 방식 정리
+
+이 블로그의 투수 WAR\*은 FanGraphs 방식을 따르되 몇 군데가 다르다.
+
+<table class="text">
+  <thead><tr><th>항목</th><th style="text-align:left">FanGraphs</th><th style="text-align:left">이 블로그</th></tr></thead>
+  <tbody>
+    <tr><td class="cur" style="white-space:nowrap">기준 지표</td><td>FIP(내야 플라이를 삼진으로 센다). RA9-WAR은 따로 낸다</td><td>실점(RA9)이 기본이고 FIP 기준도 함께 계산한다. 내야 플라이 보정은 없다</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">FIP 계수와 상수</td><td>13, 3, -2. 상수는 리그 평균자책점에 맞춘다</td><td>같다</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">구장 보정</td><td>FIP용 파크팩터로 나눈다</td><td>득점 기준 파크팩터(타자와 같은 값)로 나눈다</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">대체 선수</td><td>9이닝당 선발 0.12승, 불펜 0.03승</td><td>같다</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">리그 보정</td><td>투수 WAR 합이 2430경기당 430승</td><td>같다</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">1승당 득점</td><td>투수마다 다르게 쓴다</td><td>리그 값 하나({f1(d.runs_per_win)}점)</td></tr>
+    <tr><td class="cur" style="white-space:nowrap">불펜 레버리지</td><td>불펜 WAR에 (1 + 등판 때 평균 레버리지) ÷ 2를 곱한다</td><td>곱하지 않는다</td></tr>
+  </tbody>
+</table>
+<p class="table-note">FanGraphs의 계산 순서는 <a href="https://library.fangraphs.com/war/calculating-war-pitchers/">투수 WAR 계산법</a>에 있다.</p>
+
+1승당 득점과 불펜 레버리지는 뺐다. WAR은 대체 선수보다 몇 승을 더 거뒀는지를 재는 지표다. 투수마다 1승당 득점을 다르게 쓰면 같은 막은 점수가 투수에 따라 다른 승수가 된다. 불펜에 레버리지를 곱하면 언제 등판했는지라는 상황 가치가 섞인다. 둘 다 WAR의 정의에서 멀어진다고 판단했다. 상황 가치는 [WPA]({siteUrl('/posts/2026-wpa/')})가 따로 다룬다. 그래서 마무리 투수의 WAR\*은 레버리지를 곱하는 방식보다 작게 나온다.
