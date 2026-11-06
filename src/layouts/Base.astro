@@ -104,7 +104,7 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
     <header class="site-header">
       <div class="wrap head-row">
         <a class="brand" href={url()}>
-          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" fill="#fff" stroke="#c4202f" stroke-width="4"/><path d="M15 15c8 8 8 26 0 34M49 15c-8 8-8 26 0 34" fill="none" stroke="#c4202f" stroke-width="3" stroke-dasharray="4 3"/></svg>
+          <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><circle class="lg-ring" cx="32" cy="32" r="29" fill="#fff" stroke-width="4"/><path class="lg-seam" d="M15 15c8 8 8 26 0 34M49 15c-8 8-8 26 0 34" fill="none" stroke-width="3" stroke-dasharray="4 3"/></svg>
           <span>
             <strong>{SITE.title}</strong>
             <small>{SITE.tagline}</small>
@@ -114,6 +114,7 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
         {MENU.map((m) => <a href={url(m.path)} aria-current={section === m.key ? 'page' : undefined}>{m.label}</a>)}
+        <span class="nav-social">{SOCIAL.map((s) => <a href={s.href} target="_blank" rel="noopener">{s.label}</a>)}</span>
       </nav>
       {sub.length > 0 && (
         <nav class="subnav-row" aria-label={`${MENU.find((m) => m.key === section)?.label} 메뉴`}>
@@ -172,6 +173,7 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
   .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text); }
   .brand:hover { text-decoration: none; }
   .logo { width: 40px; height: 40px; flex: none; }
+  .logo .lg-ring, .logo .lg-seam { stroke: var(--accent); }
   .brand strong { display: block; font-size: 23px; letter-spacing: -.02em; line-height: 1.2; }
   .brand small { display: block; font-size: 13px; color: var(--muted); }
   .theme-btn {
@@ -186,6 +188,8 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
   .nav a[aria-current='page'] { color: var(--accent); font-weight: 600; box-shadow: inset 0 -2px var(--accent); }
   /* 소분류 줄: 대분류 아래 가는 선으로 나눈 두 번째 줄. 휴대폰은 가로 스크롤 */
   .subnav-row { border-top: 1px solid var(--line); }
+  .nav-social { display: flex; gap: 14px; margin-left: auto; padding-left: 12px; flex: none; }
+  .nav-social a { font-size: 14px; }
   .nav.sub { gap: 18px; padding-top: 2px; }
   .nav.sub a { font-size: 14px; padding: 7px 0 8px; }
 

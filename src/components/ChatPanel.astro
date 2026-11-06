@@ -246,7 +246,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
   .log :global(.msg.bot) { background: var(--surface); border: 1px solid var(--line); align-self: flex-start; max-width: 100%; }
   .log :global(.msg.me) { background: var(--board); color: var(--board-text); align-self: flex-end; }
   .log :global(.msg.pending) { color: var(--muted); }
-  .log :global(.msg.error) { background: var(--red-soft); color: var(--accent); }
+  .log :global(.msg.error) { background: var(--red-soft); color: var(--neg); }
   .intro { white-space: normal; }
   .log :global(.posts) { display: grid; margin-top: 10px; border-top: 1px solid var(--line); white-space: normal; }
   .log :global(.posts a) { display: grid; gap: 1px; padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--text); }

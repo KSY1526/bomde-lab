@@ -29,6 +29,8 @@ export function getStaticPaths() {
     .map((f) => ({ params: { id: f.slice(0, -5) }, props: { file: join(dir, f) } }));
 }
 const p: Player = JSON.parse(readFileSync((Astro.props as { file: string }).file, 'utf8'));
+// 원본에 이름이 빈 선수가 있다(28명, 2026-11-06). 이름이 비면 구글 탐색경로 구조화 데이터 오류라 팀·포지션·번호로 대신한다
+if (!p.name?.trim()) p.name = `${p.team} ${p.pos} ${p.id}`;
 const bat = p.kind === 'b';
 const CUR = 2026; // 지금 시즌(기록 표 강조·연도 버튼 기본값)
 const keys = [...p.years.map(String).filter((y) => p.hex[y]), ...(p.hex.career ? ['career'] : [])];

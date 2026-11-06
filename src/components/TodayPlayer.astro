@@ -4,27 +4,23 @@
 // 후보 = 2026 표본 충족 + 등급 S+·S(lib/home.ts). 아래 "비교 바로가기" 한 줄도 후보마다 하나씩 같이 바뀐다.
 import type { CollectionEntry } from 'astro:content';
 import Hexagon from './Hexagon.astro';
-import { todayCandidates, qualified, nameIsAmbiguous, SEASON } from '../lib/home';
+import { todayCandidates, nameIsAmbiguous, SEASON } from '../lib/home';
 import { CATEGORIES, url, formatDate } from '../lib/site';
 
 interface Props { posts: CollectionEntry<'posts'>[] }
 const { posts } = Astro.props;
 const cands = todayCandidates();
-const pools = qualified();
 const RELATED = 2;
-// 한글 끝 글자 받침으로 와/과
-const wa = (s: string) => { const c = s.charCodeAt(s.length - 1) - 0xac00; return c >= 0 && c < 11172 && c % 28 ? '과' : '와'; };
 const items = cands.map((c) => {
   const amb = nameIsAmbiguous(c.name);
   const related = posts.filter((p) => p.data.tags.includes(c.name) && (!amb || p.data.tags.includes(c.team))).slice(0, RELATED);
-  const other = pools[c.kind].find((o) => o.id !== c.id)!;
-  return { c, related, other };
+  return { c, related };
 });
 ---
 {items.length > 0 && (
   <section class="today" aria-labelledby="today-h" data-today>
     <div class="sec-head"><h2 id="today-h" class="sec-title">오늘의 선수</h2></div>
-    {items.map(({ c, related, other }, i) => (
+    {items.map(({ c, related }, i) => (
       <div class="tp" data-tp={i} hidden={i !== 0}>
         <div class="grid">
           <div class="hx"><Hexagon vals={c.vals} size={300} /></div>
@@ -41,10 +37,10 @@ const items = cands.map((c) => {
                 </ul>
               </>
             )}
-            <p class="go"><a href={url(`players/${c.id}`)}>{c.name} 선수 페이지</a></p>
+            <a class="go" href={url(`players/${c.id}`)}>{c.name} 상세 기록 보기</a>
+            <p class="go-sub">시즌별 기록 · 육각형 변화 · 통산 성적</p>
           </div>
         </div>
-        <p class="cmp"><a href={`${url('players/compare')}?p=${c.id}:${SEASON},${other.id}:${SEASON}`}>두 선수 겹쳐 보기</a> <span class="muted">예시: {c.name}{wa(c.name)} {other.name}의 {SEASON} 육각형</span></p>
       </div>
     ))}
   </section>
@@ -76,8 +72,9 @@ const items = cands.map((c) => {
   .rel { margin: 0 0 10px; padding-left: 18px; font-size: 14.5px; }
   .rel li { margin: 2px 0; }
   .muted { color: var(--muted); font-size: 13px; }
-  .go { margin: 0; font-size: 14px; }
-  .cmp { margin: 12px 0 0; font-size: 14.5px; }
+  .go { display: inline-block; margin-top: 4px; padding: 10px 18px; border-radius: var(--radius); background: var(--accent); color: var(--bg); font-weight: 700; font-size: 15px; }
+  .go:hover { text-decoration: none; filter: brightness(1.08); }
+  .go-sub { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
   @media (max-width: 560px) {
     .grid { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     .hx { margin: 0 auto; width: 100%; }

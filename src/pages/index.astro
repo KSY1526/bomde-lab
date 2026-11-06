@@ -61,7 +61,7 @@ const nb = rowsIdx.filter((r) => r[2] === 'b').length, np = rowsIdx.length - nb;
         {examples.map((e) => <a href={url(`players/${e.id}`)}>{e.name}<small>{e.team}</small></a>)}
       </p>
     )}
-    <p class="count">2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
+    <p class="count">이름만 검색하면 시즌별 기록·육각형·통산 성적을 한 페이지에서 · 2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
   </div>
 
   <TodayPlayer posts={posts} />

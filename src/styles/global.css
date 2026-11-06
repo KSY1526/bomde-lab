@@ -9,7 +9,7 @@
   --text: #1c2433;
   --muted: #67675f;
   --line: #d9d6cc;
-  --accent: var(--red);
+  --accent: #2a5bb0; /* 강조: 차분한 남청(2026-11-06 사용자: 빨강 톤 정리). 빨강은 --red·--neg(하락·음수) 의미로만 */
   --link: #1d4a8f;
   --board: #e2e6ee;
   --board-text: var(--navy);
@@ -44,7 +44,7 @@
     --text: #e9e4d6;
     --muted: #a19d92;
     --line: #2a3446;
-    --accent: #ff7f89;
+    --accent: #86aef0;
     --link: #9dbbec;
     --board: #22304a;
     --thumb-edge: #ffffff24;
@@ -69,7 +69,7 @@
   --text: #e9e4d6;
   --muted: #a19d92;
   --line: #2a3446;
-  --accent: #ff7f89;
+  --accent: #86aef0;
   --link: #9dbbec;
   --board: #22304a;
   --thumb-edge: #ffffff24;
