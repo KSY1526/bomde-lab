@@ -243,8 +243,9 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
     const b = (x.target as HTMLElement).closest<HTMLButtonElement>('[data-side]');
     if (!b) return;
     ev('player_pitch_side', b.dataset.side);
-    box.querySelectorAll<HTMLButtonElement>('[data-side]').forEach((y) => y.setAttribute('aria-pressed', String(y === b)));
-    box.querySelectorAll<HTMLElement>('[data-side-body]').forEach((y) => { y.hidden = y.dataset.sideBody !== b.dataset.side; });
+    const grp = b.closest<HTMLElement>('.sgrp') ?? box; // 구종 표·존 9분할은 탭이 따로
+    grp.querySelectorAll<HTMLButtonElement>('[data-side]').forEach((y) => y.setAttribute('aria-pressed', String(y === b)));
+    grp.querySelectorAll<HTMLElement>('[data-side-body]').forEach((y) => { y.hidden = y.dataset.sideBody !== b.dataset.side; });
   });
   root.querySelector('[data-cmplink]')!.addEventListener('click', () => ev('player_compare'));
   root.querySelectorAll<HTMLButtonElement>('[data-tab]').forEach((t) => t.addEventListener('click', () => {

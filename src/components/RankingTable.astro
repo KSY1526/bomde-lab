@@ -10,6 +10,11 @@ interface Props { season: number }
 const { season } = Astro.props;
 const data = seasonRankings(season);
 const tables = (['b', 'p'] as const).map((k) => ({ k, title: k === 'b' ? '타자' : '투수', id: k === 'b' ? 'batters' : 'pitchers', cols: COLS[k], rows: data[k] }));
+// 표시 범위(2026-11-06 사용자): 규정 충족이 기본, 규정의 70%·50% 이상, 전부, 투수는 불펜(구원 30이닝 이상)도
+const FILTERS: Record<'b' | 'p', [string, string][]> = {
+  b: [['q', '규정타석'], ['70', '70%'], ['50', '50%'], ['all', '전부']],
+  p: [['q', '규정이닝'], ['70', '70%'], ['50', '50%'], ['all', '전부'], ['rel', '불펜']],
+};
 const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`rankings/${y}`));
 ---
 <div class="rk" data-rk>
@@ -25,7 +30,12 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
 
   {tables.map((t) => (
     <section id={t.id} class="pane" role="tabpanel" aria-labelledby={`tab-${t.id}`} data-pane={t.id}>
-      <h2 class="th">{t.title} <span>(표본 충족 {t.rows.length}명)</span></h2>
+      <div class="phead">
+        <h2 class="th">{t.title} <span data-count>({t.rows.filter((r) => r.q).length}명)</span></h2>
+        <div class="filters" role="group" aria-label={`${t.title} 표시 범위`} data-filters hidden>
+          {FILTERS[t.k].map(([key, label]) => <button type="button" data-f={key} aria-pressed={key === 'q' ? 'true' : 'false'}>{label}</button>)}
+        </div>
+      </div>
       <div class="scroll">
         <table data-table>
           <colgroup><col class="c-rank" /><col class="c-name" /><col class="c-team" />{t.cols.map(() => <col class="c-num" />)}<col class="c-grade" /></colgroup>
@@ -44,7 +54,7 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
           </thead>
           <tbody>
             {t.rows.map((r) => (
-              <tr>
+              <tr data-q={r.q ? '1' : '0'} data-r={r.ratio} data-rel={r.rel ? '1' : '0'} hidden={!r.q}>
                 <td class="c s1" data-rank>{r.rank}</td>
                 <td class="s2"><a href={url(`players/${r.id}`)}>{r.name}</a></td>
                 <td>{r.team}</td>
@@ -57,7 +67,7 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
       </div>
     </section>
   ))}
-  <p class="note">표본 충족 기준과 등급은 선수 페이지와 같습니다. 표 머리의 기록 이름을 누르면 그 기록으로 다시 줄 세웁니다.</p>
+  <p class="note">기본은 규정타석·규정이닝을 채운 선수입니다. 70%·50%는 규정의 그 비율 이상 뛴 선수, 불펜은 구원 30이닝 이상입니다. 기록 이름을 누르면 그 기록으로 다시 줄 세웁니다.</p>
 </div>
 
 <script>
@@ -65,11 +75,12 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
   function rankText(vals: number[], i: number): string {
     const v = vals[i];
     const rk = 1 + vals.filter((o) => o > v).length;
-    return vals.filter((o) => o === v).length > 1 ? `공동 ${rk}` : String(rk);
+    return String(rk);
   }
   function sortTable(table: HTMLTableElement, col: number, desc: boolean) {
     const body = table.tBodies[0];
-    const rows = [...body.rows];
+    const all = [...body.rows];
+    const rows = all.filter((r) => !r.hidden); // 순위는 지금 보이는 줄끼리
     const val = (tr: HTMLTableRowElement) => { const s = tr.cells[col].dataset.s; return s === '' || s == null ? null : Number(s); };
     rows.sort((a, b) => {
       const x = val(a), y = val(b);
@@ -79,11 +90,32 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
     // 순위는 "좋은 쪽" 기준 값으로(오름차순 정렬이면 부호를 뒤집어 같은 함수로)
     const keyed = rows.map((r) => { const v = val(r); return v == null ? -Infinity : desc ? v : -v; });
     rows.forEach((r, i) => { r.cells[0].textContent = val(r) == null ? '' : rankText(keyed, i); body.appendChild(r); });
+    all.filter((r) => r.hidden).forEach((r) => { r.cells[0].textContent = ''; body.appendChild(r); });
     table.querySelectorAll('thead th').forEach((th, i) => {
       if (i === col) th.setAttribute('aria-sort', desc ? 'descending' : 'ascending');
       else th.removeAttribute('aria-sort');
     });
   }
+  // 표시 범위: 규정(기본) · 규정의 70%·50% · 전부 · 불펜. 바꾸면 보이는 줄끼리 지금 정렬 기준으로 순위를 다시 매긴다
+  document.querySelectorAll<HTMLElement>('[data-pane]').forEach((pane) => {
+    const table = pane.querySelector<HTMLTableElement>('[data-table]')!;
+    const box = pane.querySelector<HTMLElement>('[data-filters]')!;
+    box.hidden = false;
+    box.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((b) => b.addEventListener('click', () => {
+      const m = b.dataset.f;
+      box.querySelectorAll<HTMLButtonElement>('[data-f]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      let n = 0;
+      for (const tr of table.tBodies[0].rows) {
+        const ok = m === 'q' ? tr.dataset.q === '1' : m === '70' ? Number(tr.dataset.r) >= 0.7 : m === '50' ? Number(tr.dataset.r) >= 0.5 : m === 'rel' ? tr.dataset.rel === '1' : true;
+        tr.hidden = !ok; if (ok) n++;
+      }
+      const cur = table.querySelector('thead th[aria-sort]');
+      const idx = cur ? [...cur.parentElement!.children].indexOf(cur) : 3;
+      const low = cur?.querySelector<HTMLButtonElement>('button')?.dataset.low;
+      sortTable(table, idx, cur ? cur.getAttribute('aria-sort') === 'descending' : !low);
+      pane.querySelector('[data-count]')!.textContent = `(${n}명)`;
+    }));
+  });
   document.querySelectorAll<HTMLTableElement>('[data-table]').forEach((table) => {
     table.querySelectorAll<HTMLButtonElement>('button[data-col]').forEach((b) => {
       b.addEventListener('click', () => {
@@ -128,6 +160,12 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
   .tabs button[aria-selected='true'] { color: var(--text); border-bottom-color: var(--text); }
   .pane { margin-bottom: 28px; }
   .pane[hidden] { display: none; }
+  .phead { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .phead .th { margin: 0; }
+  .filters { display: flex; flex-wrap: wrap; gap: 4px; }
+  .filters[hidden] { display: none; }
+  .filters button { font: 600 13px/1.4 var(--font); padding: 3px 11px; border: 1px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--text); cursor: pointer; }
+  .filters button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
   .th { margin: 0 0 6px; font-size: 15px; }
   .th span { font-weight: 400; color: var(--muted); font-size: 13.5px; }
   .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }

@@ -28,7 +28,7 @@ const items = cands.map((c) => {
             <h3 class="name"><a href={url(`players/${c.id}`)}>{c.name}</a></h3>
             <p class="sub">{c.team} · {c.pos} · {SEASON} 정규시즌</p>
             <p class="grade"><b>{c.grade}</b><span>{c.type}</span></p>
-            <p class="rank">표본 충족 {c.kind === 'b' ? '타자' : '투수'} {c.pool}명 중 WAR {c.rank}위 ({c.war.toFixed(2)})</p>
+            <p class="rank">{c.kind === 'b' ? '타자' : '투수'} WAR {c.rank}위 <span class="muted">({c.war.toFixed(2)})</span></p>
             {related.length > 0 && (
               <>
                 <h4 class="rel-h">관련 칼럼</h4>
@@ -37,7 +37,7 @@ const items = cands.map((c) => {
                 </ul>
               </>
             )}
-            <a class="go" href={url(`players/${c.id}`)}>{c.name} 선수 기록 더 보기</a>
+            <a class="go" href={url(`players/${c.id}`)}><span>{c.name} 전체 기록 보기</span><i aria-hidden="true">›</i></a>
           </div>
         </div>
       </div>
@@ -71,8 +71,9 @@ const items = cands.map((c) => {
   .rel { margin: 0 0 10px; padding-left: 18px; font-size: 14.5px; }
   .rel li { margin: 2px 0; }
   .muted { color: var(--muted); font-size: 13px; }
-  .go { display: inline-block; margin-top: 2px; padding: 8px 16px; border: 1px solid var(--accent); border-radius: var(--radius); color: var(--accent); font-weight: 600; font-size: 14.5px; }
-  .go:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
+  .go { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 360px; padding: 12px 16px; border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line)); border-radius: 6px; background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--text); font-weight: 600; font-size: 15px; transition: background .15s; }
+  .go i { font-style: normal; font-size: 22px; line-height: 1; color: var(--accent); }
+  .go:hover { background: color-mix(in srgb, var(--accent) 22%, var(--surface)); text-decoration: none; }
   @media (max-width: 560px) {
     .grid { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     .hx { margin: 0 auto; width: 100%; }

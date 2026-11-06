@@ -13,7 +13,7 @@ const tables = (['b', 'p'] as const).map((k) => ({ k, title: k === 'b' ? '타자
   <div class="two">
     {tables.map((t) => (
       <div>
-        <h3 class="th">{t.title} <span>(표본 충족 {t.n}명)</span></h3>
+        <h3 class="th">{t.title}</h3>
         <table>
           <colgroup><col class="c-rank" /><col /><col class="c-team" /><col class="c-war" /><col class="c-grade" /></colgroup>
           <thead><tr><th class="c">순위</th><th>선수</th><th>팀</th><th class="n">WAR</th><th class="c">등급</th></tr></thead>

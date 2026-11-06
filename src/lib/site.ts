@@ -12,11 +12,11 @@ export const SOCIAL = [
 
 // 메뉴 = 카테고리. 새 카테고리는 사용자가 정할 때 여기에 추가한다(content.config.ts enum도 같이).
 export const CATEGORIES: Record<string, string> = {
+  metrics: '야구 지표 해설', // 2026-11-06 사용자: 지표 해설을 다른 분석보다 앞에
   season: '시즌 분석',
   player: '선수 분석',
   game: '경기 분석',
   deep: '심층 분석',
-  metrics: '야구 지표 해설',
 };
 
 // 머리말 메뉴(2026-11-03 사용자: 대분류 홈·선수 검색·칼럼·소개, 소분류는 그 구역 페이지에서 두 번째 줄로).

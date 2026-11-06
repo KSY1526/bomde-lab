@@ -28,7 +28,7 @@ export function topGradeOf(h: Hex | undefined): string {
 export function tieRanks(vals: number[]): string[] {
   return vals.map((v) => {
     const rk = 1 + vals.filter((o) => o > v).length;
-    return vals.filter((o) => o === v).length > 1 ? `공동 ${rk}` : String(rk);
+    return String(rk); // 동률은 같은 번호(2026-11-06 사용자: '공동' 글자 빼기)
   });
 }
 

@@ -12,7 +12,7 @@ export function getStaticPaths() {
 const season = Number(Astro.params.season);
 const d = seasonRankings(season);
 ---
-<Base title={`${season} 선수 순위`} description={`${season} KBO 표본 충족 타자 ${d.b.length}명, 투수 ${d.p.length}명의 WAR 순위와 시즌 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '순위', path: url('rankings') }, { name: String(season), path: url(`rankings/${season}`) }]}>
+<Base title={`${season} 선수 순위`} description={`${season} KBO 표본 충족 타자 ${d.b.filter((r) => r.q).length}명, 투수 ${d.p.filter((r) => r.q).length}명의 WAR 순위와 시즌 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '순위', path: url('rankings') }, { name: String(season), path: url(`rankings/${season}`) }]}>
   <h1 class="rk-h">{season} 선수 순위</h1>
   <RankingTable season={season} />
 </Base>

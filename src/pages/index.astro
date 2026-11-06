@@ -49,8 +49,6 @@ if (examples.length < EXAMPLES) {
   rowsIdx.filter((r) => r[6] === 2026).map((r) => ({ r, w: war2026(r[0]) })).filter((x) => x.w != null)
     .sort((a, b) => b.w! - a.w!).forEach((x) => add(x.r));
 }
-// 검색창 아래 설명 한 줄(선수검색 메뉴 첫 화면과 같은 계산)
-const nb = rowsIdx.filter((r) => r[2] === 'b').length, np = rowsIdx.length - nb;
 ---
 <Base>
   <div class="home-search">
@@ -61,7 +59,6 @@ const nb = rowsIdx.filter((r) => r[2] === 'b').length, np = rowsIdx.length - nb;
         {examples.map((e) => <a href={url(`players/${e.id}`)}>{e.name}<small>{e.team}</small></a>)}
       </p>
     )}
-    <p class="count">이름만 검색하면 시즌별 기록·육각형·통산 성적을 한 페이지에서 · 2010년 이후 1군 타자 {nb.toLocaleString()}명 · 투수 {np.toLocaleString()}명</p>
   </div>
 
   <TodayPlayer posts={posts} />
@@ -101,7 +98,6 @@ const nb = rowsIdx.filter((r) => r[2] === 'b').length, np = rowsIdx.length - nb;
   .examples a { color: var(--text); white-space: nowrap; }
   .examples a:hover { color: var(--accent); text-decoration: none; }
   .examples small { margin-left: 5px; font-size: 12.5px; color: var(--muted); }
-  .count { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
   .cat + .cat, :global(.war-board) + .cat { margin-top: 40px; }
   :global(.war-board) { margin-top: 40px; }
   /* 섹션 머리는 오늘의 선수·WAR 순위 부품도 같이 쓴다 */

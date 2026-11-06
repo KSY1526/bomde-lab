@@ -49,7 +49,8 @@ export const COLS: Record<'b' | 'p', Col[]> = {
 
 /** 한 칸: 정렬값 s(없으면 null), 표시 t */
 export type Cell = { s: number | null; t: string };
-export type RankRow = { id: string; name: string; team: string; grade: string; rank: string; cells: Cell[] };
+/** q = 규정 충족, ratio = 규정 대비 비율(타석 또는 아웃), rel = 구원투수 30이닝 이상(불펜 보기) */
+export type RankRow = { id: string; name: string; team: string; grade: string; rank: string; cells: Cell[]; q: boolean; ratio: number; rel: boolean };
 
 // 이닝 '131.1' → 정렬용 아웃 수(131*3+1)
 const ipOuts = (v: string | number) => { const [a, b = '0'] = String(v).split('.'); return Number(a) * 3 + Number(b); };
@@ -66,32 +67,39 @@ function load(id: string): Player {
 
 const cache = new Map<number, { b: RankRow[]; p: RankRow[] }>();
 
-/** 시즌 표본 충족 타자·투수, WAR 내림차순 + 공동 순위(홈 qualified()와 같은 규칙) */
+/** 시즌 타자·투수 전원(WAR 있는 선수), WAR 내림차순. 처음 보이는 건 규정 충족뿐이고(q), 순위는 규정 충족끼리 매긴다(홈 qualified()와 같은 규칙).
+ *  규정 대비 비율의 기준(규정타석·규정이닝)은 그 시즌 규정 충족 선수 중 가장 적게 뛴 사람의 타석·아웃 수로 잡는다. 70%·50%·전부·불펜 보기는 화면 스크립트가 거른다 */
 export function seasonRankings(season: number): { b: RankRow[]; p: RankRow[] } {
   const hit = cache.get(season);
   if (hit) return hit;
   const y = String(season);
-  const raw: Record<'b' | 'p', (RankRow & { war: number })[]> = { b: [], p: [] };
+  type Raw = RankRow & { war: number; vol: number };
+  const raw: Record<'b' | 'p', Raw[]> = { b: [], p: [] };
   for (const r of playerIndex as IRow[]) {
     if (r[5] > season || r[6] < season) continue;
     const p = load(r[0]);
     const h = p.hex[y];
-    if (!h || !h.q || h.war == null) continue;
-    const rows = p.rows.filter((x) => x.season === season);
-    const row = rows.at(-1);
+    if (!h || h.war == null) continue;
+    const row = p.rows.filter((x) => x.season === season).at(-1);
     if (!row) continue;
     const cells = COLS[p.kind].map((c): Cell => {
       const v = row[c.key];
       if (v == null || v === '') return { s: null, t: '' };
       return { s: c.key === 'ip' ? ipOuts(v) : Number(v), t: c.fmt(v) };
     });
-    raw[p.kind].push({ id: p.id, name: p.name, team: row.team, grade: topGradeOf(h as never), rank: '', cells, war: h.war });
+    const vol = p.kind === 'b' ? Number(row.pa ?? 0) : ipOuts(row.ip ?? 0);
+    if (!vol) continue;
+    const rel = p.kind === 'p' && Number(row.gs) * 2 < Number(row.g) && vol >= 90;
+    raw[p.kind].push({ id: p.id, name: p.name, team: row.team, grade: topGradeOf(h as never), rank: '', cells, q: !!h.q, ratio: 0, rel, war: h.war, vol });
   }
   const out = { b: [] as RankRow[], p: [] as RankRow[] };
   for (const k of ['b', 'p'] as const) {
     const pool = raw[k].sort((a, b) => b.war - a.war || a.name.localeCompare(b.name, 'ko'));
-    const ranks = tieRanks(pool.map((x) => x.war));
-    out[k] = pool.map(({ war: _w, ...x }, i) => ({ ...x, rank: ranks[i] }));
+    const thr = Math.min(...pool.filter((x) => x.q).map((x) => x.vol), Infinity);
+    const qs = pool.filter((x) => x.q);
+    const ranks = tieRanks(qs.map((x) => x.war));
+    let qi = 0;
+    out[k] = pool.map(({ war: _w, vol, ...x }) => ({ ...x, ratio: thr === Infinity ? 0 : Math.round((vol / thr) * 1000) / 1000, rank: x.q ? ranks[qi++] : '' }));
   }
   cache.set(season, out);
   return out;
