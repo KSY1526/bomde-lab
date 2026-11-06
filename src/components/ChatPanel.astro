@@ -130,10 +130,20 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     li.append(box);
   }
 
-  for (const t of loadHistory()) {
+  // 첫 안내(예시 질문)는 답 아래마다 다시 보여 준다(2026-11-06 사용자: 답이 쌓이면 추가 질문이 어렵다) → 맨 아래로 옮긴다
+  const intro = log.querySelector<HTMLLIElement>('.intro')!;
+  function showIntro() { log.append(intro); }
+  // 답 맨 위가 보이게 스크롤(안내가 아래에 붙어 맨 아래로 내리면 답 앞부분이 가려진다)
+  function scrollToAnswer(li: HTMLElement) { log.scrollTop += li.getBoundingClientRect().top - log.getBoundingClientRect().top - 4; }
+
+  const past = loadHistory();
+  let lastAnswer: HTMLLIElement | null = null;
+  for (const t of past) {
     bubble('me', t.q);
-    addPosts(bubble(t.error ? 'bot error' : 'bot', t.a), t.posts);
+    lastAnswer = bubble(t.error ? 'bot error' : 'bot', t.a);
+    addPosts(lastAnswer, t.posts);
   }
+  if (past.length) { showIntro(); if (lastAnswer) scrollToAnswer(lastAnswer); }
 
   q.addEventListener('input', () => { count.textContent = `${q.value.length}/300`; });
   q.addEventListener('keydown', (e) => {
@@ -171,6 +181,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     e.preventDefault();
     const question = q.value.trim();
     if (!question || !online) return;
+    intro.remove();
     bubble('me', question);
     q.value = ''; count.textContent = '0/300';
     const wait = bubble('bot pending', '크봇이 기록을 찾아보는 중이에요…');
@@ -195,7 +206,8 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     wait.className = turn.error ? 'msg bot error' : 'msg bot';
     wait.textContent = turn.a;
     addPosts(wait, turn.posts);
-    log.scrollTop = log.scrollHeight;
+    showIntro();
+    scrollToAnswer(wait);
     saveHistory([...loadHistory(), turn]);
     submit.disabled = !online;
   });
