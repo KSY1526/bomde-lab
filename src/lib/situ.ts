@@ -6,7 +6,7 @@ import { silhouette } from './silhouette';
 
 type ZoneCell = [number, number | null]; // 존 9분할 한 칸: 타석, OPS
 type Split = [number, number | null, number | null, number | null, number | null, number | null, number | null]; // 타석, 타율, 출루, 장타, OPS, 삼진%, 볼넷%
-export type SituB = { fv?: [number, number | null][]; sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
+export type SituB = { lfv?: (number | null)[]; fv?: [number, number | null][]; ptS?: Record<string, [string, number, number | null, number | null, number | null, number][]>; sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
 type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
   sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
@@ -126,21 +126,30 @@ export function renderBatter(e: SituB): string {
     out += h2('좌우 투수') + `<div class="hands">${hands(sp, [['좌투', 'vs 좌투수', true], ['우투', 'vs 우투수', false]], true)}</div>`;
     out += gap('좌투', sp['좌투']?.[4] ?? null, '우투', sp['우투']?.[4] ?? null, true);
   }
-  const pt = (e.pt ?? []).filter((r) => r[1] >= 40).sort((a, b) => b[1] - a[1]);
-  if (pt.length) {
-    const tot = (e.pt ?? []).reduce((a, r) => a + r[1], 0);
-    const rows = pt.map(([t, n, wh, rv]) => {
-      const o = sp[t];
-      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<span class="pa">(${o ? o[0] : 0})</span></td></tr>`;
-    }).join('');
-    out += h2('구종별 대응', '', true);
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  // 구종별 대응: 전체 · 좌투수 · 우투수 탭(2026-11-07 사용자). 탭 전환은 [id].astro가 [data-side]로
+  const ptRows = (rs: [string, number, number | null, number | null, number | null, number][]) => {
+    const tot = rs.reduce((a, r) => a + r[1], 0);
+    return rs.filter((r) => r[1] >= 40).sort((a, b) => b[1] - a[1]).map(([t, n, wh, rv, ops, pa]) =>
+      `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${ops == null ? '-' : f3(ops)}<span class="pa">(${pa})</span></td></tr>`).join('');
+  };
+  const allPt = (e.pt ?? []).map(([t, n, wh, rv]) => [t, n, wh, rv, sp[t]?.[4] ?? null, sp[t]?.[0] ?? 0] as [string, number, number | null, number | null, number | null, number]);
+  const ptSets: [string, string, string][] = [['전체', '전체', ptRows(allPt)], ['좌투', '좌투수', ptRows(e.ptS?.['좌투'] ?? [])], ['우투', '우투수', ptRows(e.ptS?.['우투'] ?? [])]];
+  const ptLive = ptSets.filter(([, , h]) => h);
+  if (ptLive.length) {
+    out += h2('구종별 대응', '', true) + '<div class="sgrp">';
+    if (ptLive.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 투수 고르기">${ptLive.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead>${ptLive.map(([k, , h], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${h}</tbody>`).join('')}</table></div></div>`;
   }
   // 포심 구속 구간별 OPS(2026-11-07 사용자): 타석 마지막 공이 포심인 타석만
   if (e.fv?.some((r) => r[0] > 0)) {
     const labs = ['154km/h 이상', '150~153km/h', '145~149km/h', '144km/h 이하'];
-    const rows = e.fv.map(([pa, ops], i) => `<tr${pa < 20 ? ' class="thin"' : ''}><td class="t"><b>${labs[i]}</b></td><td>${pa ? f3(ops) : '-'}<span class="pa">(${pa})</span></td></tr>`).join('');
-    out += h2('포심 구속별 대응') + `<div class="tw"><table class="pt"><thead><tr><th class="t">포심 구속</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div><p class="note">타석 마지막 공이 포심이었던 타석만 셈 · 20타석 미만은 흐리게(표본 적음)</p>`;
+    const cells = e.fv.map(([pa, ops], i) => {
+      const L = e.lfv?.[i];
+      if (ops == null || !pa || L == null) return `<div class="cc fv thin"><em>${labs[i]}</em><b>-</b><span>${pa}타석</span></div>`;
+      const d = ops - L, a = Math.min(1, Math.abs(d) / 0.5);
+      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${labs[i]}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
+    }).join('');
+    out += h2('포심 구속별 대응', '', true) + `<div class="fvcol">${cells}</div>${legend(true, 20, '<span class="zn">칸 숫자 = OPS</span>')}`;
   }
   out += zoneSection(e, [['전체', '전체', ''], ['좌투', '좌투수', '좌'], ['우투', '우투수', '우']], '스트라이크 존별 대응', '', true);
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응', '', true) + countGrid(sp, e.lgc, true);
