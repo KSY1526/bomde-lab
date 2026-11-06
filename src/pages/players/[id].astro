@@ -10,11 +10,12 @@ import { url, CATEGORIES, formatDate } from '../../lib/site';
 import { postsByPlayer } from '../../lib/post-players';
 import { renderBatter, renderPitcher } from '../../lib/situ';
 import { RECORD_DATE } from '../../lib/team-records';
+import { gradeOf } from '../../lib/grade';
 import '../../styles/situ.css';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-type Hex = { q: boolean; rq?: boolean; role?: string; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
+type Hex = { q: boolean; rq?: boolean; role?: string; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null; gwpa?: number | null };
 type Player = {
   id: string; name: string; kind: 'b' | 'p'; team: string; no: string | null; height: number | null; weight: number | null;
   school: string | null; joined: string | null; years: number[]; missing: number[]; pos: string; hand: string; left: boolean;
@@ -54,13 +55,11 @@ const tiles = tilesOf('career');
 const bio = [p.hand, p.height && p.weight ? `${p.height}cm ${p.weight}kg` : '', p.school ?? '', p.joined ? `${p.joined} 입단` : ''].filter(Boolean).join(' · ');
 const related = (await postsByPlayer()).get(p.id) ?? []; // 관련 글 탭(요청 K): 이 선수 이름이 태그인 글, 최신순
 const word = bat ? '타격' : '투구';
+const wpaVals = p.rows.map((r) => r.wpa).filter((x): x is number => x != null);
+const wpaTotal = wpaVals.length ? wpaVals.reduce((a, b) => a + b, 0) : null; // 통산 WPA = 시즌별 합
 const head = (k: string) => (k === 'career' ? `통산 ${word} 육각형` : `${k} ${word} 육각형`);
 // 등급(2026-10-28 사용자: 7단계, 기준은 화면에 안 씀). 표본 적음은 데이터(export_players.py)의 판정을 따른다
-const grade = (h: Hex) => {
-  if (!h.grade || h.grade === '표본 적음' || h.war == null) return h.grade;
-  const w = h.war;
-  return w >= 6 ? 'S+' : w >= 4 ? 'S' : w >= 3 ? 'A+' : w >= 2 ? 'A' : w >= 1 ? 'B+' : w > 0 ? 'B' : 'C';
-};
+const grade = (h: Hex) => gradeOf(h); // 구원투수는 WPA 기준(lib/grade.ts)
 // 표본 충족: 규정 충족(q) 또는 구원투수 30이닝 이상(rq, scripts/export_patch.py). 구원은 '미달' 대신 중간·마무리로 표시
 const ok = (h: Hex) => h.q || !!h.rq;
 const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
@@ -184,14 +183,14 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
           </table>
         ) : (
           <table class="rec">
-            <thead><tr><th>시즌</th><th class="t">팀</th><th>경기</th><th>선발</th><th>승-패</th><th>세</th><th>홀</th><th>이닝</th><th>ERA</th><th>FIP</th><th>WHIP</th><th>K%</th><th>BB%</th><th>직구</th><th>WAR</th></tr></thead>
+            <thead><tr><th>시즌</th><th class="t">팀</th><th>경기</th><th>승-패</th><th>세</th><th>홀</th><th>이닝</th><th>ERA</th><th>FIP</th><th>WHIP</th><th>K%</th><th>BB%</th><th>직구</th><th>WAR</th><th>WPA</th></tr></thead>
             <tbody>
               {p.rows.map((r) => (
-                <tr class:list={{ on: r.season === CUR }}><td>{r.season}</td><td class="t">{r.team}</td><td>{r.g}</td><td>{r.gs}</td><td>{r.w}-{r.l}</td><td>{r.sv}</td><td>{r.hld}</td><td>{r.ip}</td>
-                  <td><b>{f2(r.era)}</b></td><td>{f2(r.fip)}</td><td>{f2(r.whip)}</td><td>{f1(r.k)}</td><td>{f1(r.bb)}</td><td>{f1(r.velo)}</td><td><b>{f2(r.war)}</b></td></tr>
+                <tr class:list={{ on: r.season === CUR }}><td>{r.season}</td><td class="t">{r.team}</td><td>{r.g}</td><td>{r.w}-{r.l}</td><td>{r.sv}</td><td>{r.hld}</td><td>{r.ip}</td>
+                  <td><b>{f2(r.era)}</b></td><td>{f2(r.fip)}</td><td>{f2(r.whip)}</td><td>{f1(r.k)}</td><td>{f1(r.bb)}</td><td>{f1(r.velo)}</td><td><b>{f2(r.war)}</b></td><td>{f2(r.wpa)}</td></tr>
               ))}
-              <tr class="tot"><td>통산</td><td class="t">{T.seasons}시즌</td><td>{T.g}</td><td>{T.gs}</td><td>{T.w}-{T.l}</td><td>{T.sv}</td><td>{T.hld}</td><td>{T.ip}</td>
-                <td><b>{f2(T.era)}</b></td><td>{f2(T.fip)}</td><td>{f2(T.whip)}</td><td>{f1(T.k)}</td><td>{f1(T.bb)}</td><td></td><td><b>{f2(T.war)}</b></td></tr>
+              <tr class="tot"><td>통산</td><td class="t">{T.seasons}시즌</td><td>{T.g}</td><td>{T.w}-{T.l}</td><td>{T.sv}</td><td>{T.hld}</td><td>{T.ip}</td>
+                <td><b>{f2(T.era)}</b></td><td>{f2(T.fip)}</td><td>{f2(T.whip)}</td><td>{f1(T.k)}</td><td>{f1(T.bb)}</td><td></td><td><b>{f2(T.war)}</b></td><td>{f2(wpaTotal)}</td></tr>
             </tbody>
           </table>
         )}

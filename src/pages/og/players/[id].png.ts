@@ -5,18 +5,15 @@
 import type { APIContext } from 'astro';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { gradeOf } from '../../../lib/grade';
 import { ogPlayerPng, type PlayerOg } from '../../../lib/og';
 
-type Hex = { q: boolean; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
+type Hex = { q: boolean; vals: [string, number, string][]; type: string; grade: string | null; war: number | null; gwpa?: number | null };
 const OG_YEAR = 2026;
 
 // 선수 페이지와 같은 등급 계산(7단계). 그림에는 S+·S만 쓴다
 const thin = (h?: Hex) => !h || !h.grade || h.grade === '표본 적음';
-const grade = (h: Hex) => {
-  if (thin(h) || h.war == null) return null;
-  const w = h.war;
-  return w >= 6 ? 'S+' : w >= 4 ? 'S' : w >= 3 ? 'A+' : w >= 2 ? 'A' : w >= 1 ? 'B+' : w > 0 ? 'B' : 'C';
-};
+const grade = (h: Hex) => (thin(h) ? null : gradeOf(h));
 
 export function getStaticPaths() {
   const dir = join(process.cwd(), 'src/data/players');

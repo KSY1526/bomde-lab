@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import playerIndex from '../data/player-index.json';
+import { topGradeOf } from './grade';
 
 // 홈 "오늘의 선수"·"2026 WAR 순위" 데이터(요청 H, 2026-11-03 사용자: 홈은 C안 + B안 순위표). 빌드 때 계산한다.
 // 표본 충족 = 선수 JSON hex[시즌].q (scripts/export_players.py 판정). 등급은 선수 페이지 grade()와 같은 WAR 기준(6↑ S+, 4↑ S).
@@ -8,7 +9,7 @@ import playerIndex from '../data/player-index.json';
 export const SEASON = 2026;
 const Y = String(SEASON);
 
-type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
+type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null; gwpa?: number | null };
 type Row = { season: number; team: string; war: number };
 type Player = { id: string; name: string; kind: 'b' | 'p'; team: string; pos: string; hand: string; hex: Record<string, Hex>; rows: Row[] };
 type IRow = [string, string, string, string, string, number, number, string[]];
@@ -19,10 +20,7 @@ export type Ranked = {
   rank: string; pool: number;
 };
 
-export function topGradeOf(h: Hex | undefined): string {
-  if (!h || !h.grade || h.grade === '표본 적음' || h.war == null) return '';
-  return h.war >= 6 ? 'S+' : h.war >= 4 ? 'S' : '';
-}
+export { topGradeOf } from './grade'; // 등급 글자 계산은 lib/grade.ts 한 곳
 
 // 공동 순위(순위 페이지 src/lib/rankings.ts도 같이 쓴다). 값이 클수록 위. 순위 = 자기보다 큰 값 수 + 1, 같은 값이 둘 이상이면 "공동 k"
 export function tieRanks(vals: number[]): string[] {
