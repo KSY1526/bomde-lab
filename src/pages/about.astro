@@ -31,9 +31,9 @@ const nf = (n: number) => n.toLocaleString('ko-KR');
     <p><a href={url('players/compare')}>선수 비교</a>는 최대 3명의 육각형을 겹쳐 보여 주고, 주소를 복사하면 같은 화면이 공유됩니다. <a href={url('teams')}>팀 순위</a>에서는 시즌별 승패·득실과 팀 타격·투구 기록을 봅니다.</p>
 
     <h2>칼럼</h2>
-    <p>글 {posts.length}편을 {cols.length}가지 유형으로 나눠 올립니다.</p>
+    <p>칼럼은 계속 올라오고, 아래 유형으로 나뉩니다.</p>
     <ul>
-      {cols.map((c) => <li><a href={url(`category/${c.key}`)}>{c.label}</a> {c.n}편: {c.desc}</li>)}
+      {cols.map((c) => <li><a href={url(`category/${c.key}`)}>{c.label}</a>: {c.desc}</li>)}
     </ul>
 
     <h2>데이터</h2>
@@ -43,9 +43,14 @@ const nf = (n: number) => n.toLocaleString('ko-KR');
       <li>*가 붙은 지표는 자체 계산이라 공식 기록과 다를 수 있습니다</li>
     </ul>
 
-    <h2>영상·오픈채팅</h2>
-    <p>글을 1분 안쪽 세로 영상으로도 올립니다: {SOCIAL.map((s, i) => <>{i > 0 && ', '}<a href={s.href} target="_blank" rel="noopener">{s.label}</a></>)}.
-      롯데 자이언츠 팬 <a href="https://open.kakao.com/o/gLcLEu5h">오픈채팅방</a>에는 크봇이 들어가 있어, 대화 중에 궁금한 기록을 바로 물어볼 수 있습니다.</p>
+    <h2>영상</h2>
+    <p>블로그 글을 1분 안쪽 세로 영상으로도 만들어 올립니다.</p>
+    <ul>
+      {SOCIAL.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.label} @bomde_lab</a></li>)}
+    </ul>
+    <h2>오픈채팅방</h2>
+    <p>롯데 자이언츠 팬 오픈채팅방에도 크봇이 들어가 있어, 대화 중에 궁금한 기록을 바로 물어볼 수 있습니다.</p>
+    <p><a href="https://open.kakao.com/o/gLcLEu5h">오픈채팅방 들어가기</a></p>
 
     <p class="about-foot">봄데 연구소는 롯데 자이언츠 팬이 숫자로 KBO를 보려고 만든 사이트입니다.</p>
   </article>
