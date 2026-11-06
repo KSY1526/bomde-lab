@@ -60,7 +60,6 @@ function rvBar(v: number | null, scale = 2): string {
   return `<div class="rv"><i class="${v > 0 ? 'r pos' : 'l neg'}" style="width:${w.toFixed(0)}%"></i><em></em></div><span class="rvn">${v > 0 ? '+' : ''}${v.toFixed(2)}</span>`;
 }
 const rvHead = () => '<th>구종가치</th>';
-const rvNote = (who: string) => `<p class="tnote">구종가치(100구당): 가운데가 0, 오른쪽(파랑)은 ${who}에게 이득, 왼쪽(빨강)은 손해</p>`;
 
 // 카운트 판: 칸 색 = 리그 같은 카운트 대비 차이(0.5 OPS에서 최대), 20타석 미만 빗금
 function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHigh: boolean): string {
@@ -84,8 +83,7 @@ function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean): stri
     const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
     return `<div class="zc${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
   }).join('');
-  return `<div class="zwrap"><div class="zside"><span>← 3루 쪽</span><span>포수 시점</span><span>1루 쪽 →</span></div><div class="zgrid">${cells}</div></div>
-<p class="tnote">타석을 끝낸 공 기준(존 밖 제외) · ${goodHigh ? '파랑 = 리그보다 강함, 빨강 = 약함' : '파랑 = 리그보다 잘 막음, 빨강 = 많이 맞음'}</p>`;
+  return `<div class="zwrap"><div class="zside"><span>← 3루 쪽</span><span>포수 시점</span><span>1루 쪽 →</span></div><div class="zgrid">${cells}</div></div>`;
 }
 const hasZone = (e: { zone?: ZoneCell[]; lgz?: (number | null)[] }) => !!e.zone && !!e.lgz && e.zone.some((c) => c[0] >= 5);
 
@@ -132,7 +130,7 @@ export function renderBatter(e: SituB): string {
       return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<span class="pa">${o ? o[0] : 0}</span></td></tr>`;
     }).join('');
     out += h2('구종별 대응');
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>${rvNote('타자')}`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응') + countGrid(sp, e.lgc, true);
   if (hasZone(e)) out += h2('스트라이크존 9분할 성적', 'OPS') + zoneGrid(e.zone!, e.lgz!, true);
@@ -248,7 +246,7 @@ ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}c
 <td class="mvd">${mvtxt(hm, vm, e.lgm[t])}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<span class="pa">${pa}</span></td></tr>`).join('');
     const live = sets.filter(([, , rs]) => rs.length);
     if (live.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 타자 고르기">${live.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th><th>움직임</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>${rvNote('투수')}<p class="tnote">구속은 평균 km/h. 움직임은 같은 팔 높이 리그 투수 평균과의 차이(cm): ▲ 덜 떨어짐 · ▼ 더 떨어짐 · ◀▶ 위 그래프의 그 방향으로 더 휨</p>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th><th>움직임</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div><p class="tnote">움직임: 같은 팔 높이 리그 평균과의 차이(cm) · ▲ 덜 떨어짐 · ▼ 더 떨어짐 · ◀▶ 그래프 방향</p>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
   if (hasZone(e)) out += h2('스트라이크존 9분할 성적', '피OPS') + zoneGrid(e.zone!, e.lgz!, false);
