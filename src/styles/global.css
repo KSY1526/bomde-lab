@@ -18,6 +18,7 @@
   --chip-bg: #e9e7e0;
   --pos: #2c4f86;
   --neg: var(--red);
+  --mid: #e9e8e3; /* 리그 평균 수준 칸(배경색과 겹치지 않는 중립 회색) */
   --warn-bg: #fbefc6;
   --warn-text: #6b5200;
   --ok: #2f8a57;
@@ -52,6 +53,7 @@
     --chip-bg: #1f2838;
     --pos: #8fb0e6;
     --neg: #ff7f89;
+  --mid: #383e4a; /* 리그 평균 수준 칸(배경색과 겹치지 않는 중립 회색) */
     --warn-bg: #4a3d0a;
     --warn-text: #ffe28a;
     --ok: #5fcf8e;
@@ -77,6 +79,7 @@
   --chip-bg: #1f2838;
   --pos: #8fb0e6;
   --neg: #ff7f89;
+  --mid: #383e4a; /* 리그 평균 수준 칸(배경색과 겹치지 않는 중립 회색) */
   --warn-bg: #4a3d0a;
   --warn-text: #ffe28a;
   --ok: #5fcf8e;

@@ -76,7 +76,7 @@
 .situ .clegend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
 .situ .sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-left: 8px; }
 .situ .sw.neg { background: var(--neg); } .situ .sw.pos { background: var(--pos); }
-.situ .sw.mid { background: var(--surface); border: 1px solid var(--line); }
+.situ .sw.mid { background: var(--mid); }
 .situ .sw.thinsw { background: repeating-linear-gradient(45deg, var(--surface) 0 3px, color-mix(in srgb, var(--text) 20%, transparent) 3px 5px); }
 
 .situ .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }

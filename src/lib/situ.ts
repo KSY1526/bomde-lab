@@ -56,7 +56,7 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
     const k = `${b}-${s}`, row = sp[k], pa = row?.[0] ?? 0, ops = row?.[4] ?? null, L = lg[k];
     if (ops == null || !pa) { cells += `<div class="cc thin"><em>${k}</em><b>-</b><span>${pa}타석${pa ? ' · 타수 없음' : ''}</span></div>`; continue; }
     const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
-    cells += `<div class="cc${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${k}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
+    cells += `<div class="cc${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--mid))"><em>${k}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
   }
   return `<div class="cgrid-wrap"><div class="cg-y">스트라이크</div><div class="cg-s"><span>0</span><span>1</span><span>2</span></div><div><div class="cg-x"><span>볼 0</span><span>1</span><span>2</span><span>3</span></div>
 <div class="cgrid">${cells}</div></div></div>
@@ -69,7 +69,7 @@ const legend = (goodHigh: boolean, n: number, note = '') => `<div class="clegend
 function zcell([pa, ops]: ZoneCell, L: number | null | undefined, goodHigh: boolean, cls = ''): string {
   if (ops == null || !pa || L == null) return `<div class="zc ${cls} thin"><b>-</b><span>${pa}타석</span></div>`;
   const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
-  return `<div class="zc ${cls}${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 평균 ${f3(L)}</em></div>`;
+  return `<div class="zc ${cls}${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--mid))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 평균 ${f3(L)}</em></div>`;
 }
 function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean, o?: ZoneCell[], lo?: (number | null)[]): string {
   const inner = `<div class="zgrid">${z.map((c, i) => zcell(c, lg[i], goodHigh)).join('')}</div>`;
@@ -148,7 +148,7 @@ export function renderBatter(e: SituB): string {
       const L = e.lfv?.[i];
       if (ops == null || !pa || L == null) return `<div class="cc fv thin"><b>-</b><span>${pa}타석</span></div>`;
       const d = ops - L, a = Math.min(1, Math.abs(d) / 0.5);
-      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
+      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--mid))"><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
     }).join('');
     out += h2('포심 구속별 대응', '', true) + `<div class="fvrow">${heads}${cells}</div>${legend(true, 20, '<span class="zn">칸 숫자 = OPS</span>')}`;
   }
