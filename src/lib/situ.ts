@@ -189,11 +189,12 @@ function front(x: number, h: number, H: number, lg: [number, number] | undefined
   }
   // 상체: 엉덩이 높이에서 자르고 아래는 흐리게
   g += `<defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.6" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><mask id="cut"><rect x="0" y="0" width="${W}" height="${f(Y(hip - 12))}" fill="url(#fade)"/></mask></defs><g mask="url(#cut)">`;
-  g += `<path d="M${f(X(-sx - 3))} ${f(Y(sh + 2))} Q${f(X(0))} ${f(Y(sh + 8))} ${f(X(sx + 3))} ${f(Y(sh + 2))} L${f(X(0.1 * H))} ${f(Y(hip - 12))} L${f(X(-0.1 * H))} ${f(Y(hip - 12))} Z" class="body"/>`;
+  // 체형: 마른 느낌이라 20kg쯤 더 찐 체격으로(사용자 2026-11-07) — 어깨·배·허리를 넓히고 목·머리도 키움
+  g += `<path d="M${f(X(-sx - 7))} ${f(Y(sh + 2))} Q${f(X(0))} ${f(Y(sh + 9))} ${f(X(sx + 7))} ${f(Y(sh + 2))} C${f(X(sx + 10))} ${f(Y(0.74 * H))} ${f(X(0.158 * H))} ${f(Y(0.62 * H))} ${f(X(0.14 * H))} ${f(Y(hip - 12))} L${f(X(-0.14 * H))} ${f(Y(hip - 12))} C${f(X(-0.158 * H))} ${f(Y(0.62 * H))} ${f(X(-sx - 10))} ${f(Y(0.74 * H))} ${f(X(-sx - 7))} ${f(Y(sh + 2))} Z" class="body"/>`;
   const gs = -side;
   g += `<path d="M${f(X(gs * sx))} ${f(Y(sh))} L${f(X(gs * (sx + 12)))} ${f(Y(sh - 28))} L${f(X(gs * 6))} ${f(Y(sh - 22))}" class="limb"/><ellipse cx="${f(X(gs * 6))}" cy="${f(Y(sh - 22))}" rx="11" ry="10" class="body"/></g>`;
-  g += `<circle cx="${f(X(0))}" cy="${f(Y(0.905 * H))}" r="${f(0.062 * H * K)}" class="body"/>`;
-  g += `<path d="M${f(X(-0.07 * H))} ${f(Y(0.93 * H))} Q${f(X(0))} ${f(Y(0.99 * H))} ${f(X(0.07 * H))} ${f(Y(0.93 * H))} Z" class="body"/>`;
+  g += `<circle cx="${f(X(0))}" cy="${f(Y(0.905 * H))}" r="${f(0.07 * H * K)}" class="body"/>`;
+  g += `<path d="M${f(X(-0.085 * H))} ${f(Y(0.93 * H))} Q${f(X(0))} ${f(Y(0.99 * H))} ${f(X(0.085 * H))} ${f(Y(0.93 * H))} Z" class="body"/>`;
   if (lg) g += `<circle cx="${f(X(lg[0]))}" cy="${f(Y(lg[1]))}" r="9" class="lgrel"/>`;
   g += `<path d="M${f(X(ax))} ${f(Y(sh))} L${f(X(x))} ${f(Y(h))}" class="limb arm"/><circle cx="${f(X(x))}" cy="${f(Y(h))}" r="8" class="ball"/>`;
   // 공 높이 표시: 공에서 눈금 쪽으로 점선

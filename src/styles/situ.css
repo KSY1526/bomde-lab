@@ -106,7 +106,7 @@
 .situ .front .ground { stroke: var(--muted); stroke-width: 1.5; }
 .situ .front .tkl { font-size: 11px; fill: var(--muted); }
 .situ .front .body { fill: var(--navy); }
-.situ .front .limb { fill: none; stroke: var(--navy); stroke-width: 15; stroke-linecap: round; stroke-linejoin: round; }
+.situ .front .limb { fill: none; stroke: var(--navy); stroke-width: 19; stroke-linecap: round; stroke-linejoin: round; }
 .situ .front .leg { stroke-width: 20; }
 .situ .front .arm { stroke: var(--accent); }
 .situ .front .ball { fill: var(--surface); stroke: var(--accent); stroke-width: 3; }
