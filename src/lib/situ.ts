@@ -6,7 +6,7 @@ import { silhouette } from './silhouette';
 
 type ZoneCell = [number, number | null]; // 존 9분할 한 칸: 타석, OPS
 type Split = [number, number | null, number | null, number | null, number | null, number | null, number | null]; // 타석, 타율, 출루, 장타, OPS, 삼진%, 볼넷%
-export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
+export type SituB = { fv?: [number, number | null][]; sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
 type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
   sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
@@ -135,6 +135,12 @@ export function renderBatter(e: SituB): string {
     }).join('');
     out += h2('구종별 대응', '', true);
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+  }
+  // 포심 구속 구간별 OPS(2026-11-07 사용자): 타석 마지막 공이 포심인 타석만
+  if (e.fv?.some((r) => r[0] > 0)) {
+    const labs = ['154km/h 이상', '150~153km/h', '145~149km/h', '144km/h 이하'];
+    const rows = e.fv.map(([pa, ops], i) => `<tr${pa < 20 ? ' class="thin"' : ''}><td class="t"><b>${labs[i]}</b></td><td>${pa ? f3(ops) : '-'}<span class="pa">(${pa})</span></td></tr>`).join('');
+    out += h2('포심 구속별 대응') + `<div class="tw"><table class="pt"><thead><tr><th class="t">포심 구속</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div><p class="note">타석 마지막 공이 포심이었던 타석만 셈 · 20타석 미만은 흐리게(표본 적음)</p>`;
   }
   out += zoneSection(e, [['전체', '전체', ''], ['좌투', '좌투수', '좌'], ['우투', '우투수', '우']], '스트라이크 존별 대응', '', true);
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응', '', true) + countGrid(sp, e.lgc, true);

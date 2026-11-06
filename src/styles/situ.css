@@ -46,6 +46,7 @@
 .situ .pt th, .situ .pt td { padding: 7px 8px; text-align: center; }
 .situ .pt th.t, .situ .pt td.t { text-align: left; }
 .situ .pt .pa { margin-left: 4px; font-size: 11px; color: var(--muted); }
+.situ .pt tr.thin { opacity: .6; }
 .situ .mvd { white-space: nowrap; }
 .situ .mv { display: inline-block; margin: 0 3px; font-family: var(--num); font-size: 16px; }
 .situ .mv i { font-style: normal; font-size: 10px; color: var(--muted); margin-right: 2px; vertical-align: 2px; }
