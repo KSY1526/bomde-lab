@@ -1,53 +1,63 @@
-/** 선수 윤곽을 공유한다. 좌표는 발바닥 y=252, 체격 변환의 중심 x=105 기준. */
+/** A: 둥글고 두툼한 픽토그램. 기존 silhouette.ts와 독립적인 선택용 시안. */
 export function silhouette(o: { pitcher?: boolean; height?: number; weight?: number; flip?: boolean; no?: string; numColor?: string; fill?: string }): string {
-  const { pitcher = false, flip = false, no = '', numColor = '#000', fill = 'currentColor' } = o;
+  const { pitcher = false, flip = false, no = '', numColor = '#080b10', fill = 'currentColor' } = o;
   const height = Number.isFinite(o.height) && o.height! > 0 ? o.height! : 183;
   const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 88;
-  const clamp = (n: number) => Math.max(0, Math.min(1, n));
-  const tall = 0.9 + 0.2 * clamp((height - 170) / 25);
-  const k = 0.8 + 0.4 * clamp((weight / (height / 100) ** 2 - 21) / 9);
-  const s = (0.86 * tall).toFixed(3);
-  const esc = (value: string) => value.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
-  const path = (d: string) => `<path fill-rule="evenodd" d="${d}"/>`;
-  // 머리·장비·신발은 연결 지점만 옮겨 몸의 가로 확대에 따라 찌그러지지 않는다.
+  const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+  const k = .8 + .4 * clamp((weight / (height / 100) ** 2 - 21) / 9, 0, 1);
+  // 183cm의 정수리는 -10, 발은 256. 195cm의 요청 배율 1.1은 상단 안전 여백으로 제한한다.
+  const tall = height <= 183 ? .9 + .1 * (height - 170) / 13 : 1 + .1 * (height - 183) / 12;
+  const sy = clamp(tall, .8, 278 / 266);
+  const esc = (v: string) => v.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+  const path = (d: string) => d ? `<path d="${d}"/>` : '';
+  const soft = (d: string, opacity = '1') => `<g opacity="${opacity}" transform="translate(105 0) scale(${k} 1) translate(-105 0)">${path(d)}</g>`;
+  // 머리·장비·신발은 가로 폭을 보존하고 몸의 연결 지점만 따라간다.
   const rigid = (x: number, d: string) => `<g transform="translate(${(x - 105) * (k - 1)} 0)">${path(d)}</g>`;
-
-  const body = pitcher
+  // 어깨와 골반은 옆면으로 잇고 팔다리는 둥근 단색 면으로 겹친다.
+  const shape = pitcher
     ? [
-        // 뒤로 젖힌 오른팔: 넓은 소매, 굽힌 팔꿈치, 세운 전완과 공 쥔 손.
-        'M119 66 Q132 60 143 68 L159 79 Q164 81 165 73 L160 43 L158 33 Q155 28 158 24 L162 23 L164 18 Q168 16 172 20 L178 23 Q181 27 177 33 L173 42 L181 75 Q185 89 176 97 Q169 102 160 97 L136 86 L126 88 Z',
-        // 앞으로 뻗은 왼팔. 소매 끝의 꺾임과 팔꿈치의 완만한 굴곡.
-        'M90 69 Q80 65 70 70 L53 80 L35 77 L30 89 Q49 97 59 94 L84 85 L97 85 Z',
-        // 뒷다리는 마운드를 밀고, 앞다리는 벌려 착지한다.
-        'M116 135 Q133 133 141 146 L154 175 Q157 183 163 190 L183 233 L180 243 L167 245 L162 235 L144 204 Q133 191 127 178 L112 159 Z',
-        'M90 134 L119 145 Q105 166 86 181 Q77 187 73 199 L54 242 L38 241 Q41 219 47 200 L51 184 Q53 174 64 163 Z',
-        // 비틀린 상의와 골반. 허리와 어깨의 틈은 실제 투명 구멍이다.
-        'M91 60 Q107 56 121 64 L135 72 L133 89 Q127 106 135 122 L132 129 L138 138 Q121 150 96 148 L86 143 L88 135 L81 132 L85 120 L78 102 L78 82 Z M91 132 Q111 138 130 130 L130 133 Q112 142 91 135 Z M84 88 L89 94 L88 106 Z M124 116 L130 124 L120 126 L126 122 Z',
-      ].map(path).join('')
+        '',
+        'M83 112 Q104 108 119 127 Q140 153 157 182 Q173 207 183 239 Q179 248 160 248 Q145 220 129 202 Q111 183 96 160 Q81 188 64 207 L45 246 Q35 251 23 242 Q31 210 43 184 Q56 151 68 130 Q73 119 83 112 Z',
+        'M118 28 Q133 28 138 44 Q143 62 130 84 Q119 107 118 129 Q99 144 73 127 Q72 112 81 91 L96 52 Q101 32 118 28 Z',
+        // 던지는 팔은 뒤에서 위로 굽히고 글러브 팔은 오른쪽으로 길게 뻗는다.
+        'M116 36 Q107 27 91 30 L70 39 Q68 25 73 11 Q76 0 66 -3 Q54 -6 51 7 Q45 27 46 45 Q47 61 61 63 Q74 64 99 53 L116 54 Z M125 35 Q137 33 148 43 Q162 53 176 57 Q185 61 182 72 Q179 82 168 78 Q146 73 128 61 Q116 55 117 45 Q118 39 125 35 Z',
+        'M117 36 L119 20 Q112 13 114 2 Q114 -10 131 -10 Q147 -10 150 4 Q150 8 155 10 Q159 12 156 16 L150 19 Q149 30 137 30 L137 40 Z M114 5 Q111 -10 131 -10 Q147 -10 151 3 L159 4 Q165 4 165 9 Q165 13 159 13 L137 10 L116 11 Z',
+        'M171 53 Q176 47 183 51 Q192 56 192 67 Q191 80 180 83 Q170 85 165 76 Q162 70 165 64 Q163 58 168 56 Z',
+        'M23 238 Q33 235 45 240 L45 248 Q55 249 56 256 L15 256 Q11 250 19 245 Z M160 238 Q170 234 183 237 L187 246 Q201 248 201 256 L162 256 Q156 251 160 238 Z',
+      ]
     : [
-        // 후방 팔: 손을 귀 뒤로 모으고 팔꿈치를 들어 타격을 준비한다.
-        'M120 67 Q129 62 137 68 L158 85 Q165 93 159 99 Q154 103 148 97 L130 83 L123 85 Z',
-        // 굽힌 무릎과 종아리, 바지 밑단. 두 다리 사이는 열린 공간.
-        'M111 139 L136 140 Q143 158 153 177 Q158 187 153 199 L147 217 L152 241 L137 245 Q130 223 132 208 L135 191 Q122 180 113 164 Z',
-        'M79 139 L108 146 Q99 167 86 184 Q80 192 79 205 L70 243 L54 243 Q55 224 58 205 L61 186 Q62 177 69 164 Z',
-        // 옆에서 보이는 등판. 소매·옷자락을 직선 사각형 대신 곡선으로 잇는다.
-        'M89 60 Q101 56 114 61 L129 70 L129 86 Q123 104 130 123 L127 130 L134 139 Q108 150 77 143 L73 136 L78 128 L74 112 Q69 96 74 79 Z M80 134 Q102 139 126 133 L126 136 Q103 143 81 137 Z M78 111 L83 119 L80 127 Z M119 119 L124 126 L115 129 L120 125 Z',
-        // 가까운 팔: 아래 팔꿈치에서 손으로 올라가는 삼각형의 빈 공간.
-        'M82 70 Q92 68 99 78 L106 89 L124 72 L132 62 Q136 58 141 61 L145 66 L142 73 L133 79 L114 104 Q107 111 100 106 L82 91 L77 82 Z',
-      ].map(path).join('');
+        'M69 58 L28 3 Q24 -3 29 -7 Q35 -11 39 -4 L77 52 Q81 58 76 62 Q72 65 69 58 Z',
+        'M84 119 Q104 113 122 128 Q133 147 147 168 Q158 185 152 207 L151 241 Q142 248 127 242 Q122 221 125 199 L126 188 Q112 178 102 161 L86 194 Q79 216 70 245 Q57 250 45 241 Q48 209 56 184 Q64 161 67 141 Q70 126 84 119 Z',
+        'M98 30 Q117 28 123 45 Q128 61 123 83 L126 126 Q107 142 77 128 Q75 110 78 89 Q76 70 79 53 Q82 36 98 30 Z',
+        // 두 팔은 몸 뒤쪽 그립으로 모아 어깨의 정면 폭을 드러내지 않는다.
+        'M99 38 Q110 39 111 52 Q112 66 101 78 Q90 89 77 82 Q65 76 57 64 L51 55 Q47 47 54 42 Q62 36 69 44 L80 56 Q84 60 87 58 L87 49 Q87 39 99 38 Z M109 48 Q121 49 120 62 Q119 78 105 86 Q92 93 80 81 L62 60 Q55 53 62 46 Q69 40 77 49 L91 64 Q97 67 99 57 Q101 48 109 48 Z',
+        'M89 36 L89 22 Q80 18 80 6 Q79 -10 97 -10 Q113 -10 117 5 Q118 9 123 11 Q128 14 124 18 L117 20 Q115 30 105 30 L108 40 Z M79 10 Q75 -7 92 -10 Q108 -13 116 0 Q119 4 119 6 L125 7 Q131 7 131 12 Q131 16 125 16 L106 13 Q102 13 101 20 Q100 29 91 29 Q82 27 80 18 Z',
+        '',
+        'M45 237 Q57 234 70 240 L73 248 Q84 250 85 256 L37 256 Q34 249 42 244 Z M127 238 Q137 234 151 238 L157 246 Q170 249 171 256 L128 256 Q122 251 127 238 Z',
+      ];
 
-  const head = pitcher
-    ? rigid(100, 'M90 48 L89 62 Q101 70 112 62 L109 52 Q117 47 117 37 L114 29 L88 29 L84 39 L79 45 L86 48 L87 53 Z M83 31 Q82 15 98 13 Q116 12 120 28 L120 32 L96 33 Q81 37 68 33 L67 30 Z')
-    : rigid(96, 'M84 43 L82 48 L87 51 L87 56 L94 58 L93 64 Q103 70 113 65 L108 53 L112 41 L106 28 L85 29 Z M79 34 Q76 18 89 14 Q106 8 116 22 Q121 31 117 41 L110 46 L107 54 L100 54 Q94 49 96 40 L83 40 L69 38 L68 34 Z M101 40 Q106 37 109 41 L108 47 L103 48 Z');
-  const equipment = pitcher
-    // 글러브의 손가락과 포구 면을 윤곽과 투명 틈으로 표현한다.
-    ? rigid(29, 'M38 79 Q34 71 29 71 L22 65 Q18 65 19 72 L14 68 Q10 69 13 77 Q7 73 7 79 L11 91 Q14 100 24 100 L34 96 L40 88 Z M17 80 L23 86 L32 82 L25 90 Z')
-    // 배럴은 굵고 손잡이로 갈수록 가늘어진다. 손 뒤에 배치한다.
-    : rigid(138, 'M137 66 L155 3 Q157 -4 162 -3 Q167 -2 165 5 L143 68 L144 72 L137 74 L134 71 Z');
-  const feet = pitcher
-    ? rigid(46, 'M38 236 L54 238 L53 244 L57 248 L56 252 L25 252 Q23 247 29 244 Z') + rigid(175, 'M167 238 L180 234 L185 241 L197 245 Q201 247 198 251 L174 252 L166 248 Z')
-    : rigid(62, 'M55 238 L70 239 L71 245 L77 248 L76 252 L43 252 Q42 247 47 245 Z') + rigid(145, 'M136 239 L151 237 L155 244 L167 247 Q170 250 167 252 L138 252 L134 248 Z');
-  const numX = 105 + ((pitcher ? 108 : 106) - 105) * k;
-  const number = no ? `<text x="${numX}" y="122" text-anchor="middle" font-size="${pitcher ? 33 : 36}" font-weight="700" style="font-family:var(--num)" fill="${esc(numColor)}"${flip ? ` transform="translate(${2 * numX} 0) scale(-1 1)"` : ''}>${esc(no)}</text>` : '';
-  return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="${esc(fill)}" transform="translate(105 256) scale(${flip ? -1 : 1} 1) scale(${s}) translate(-105 -252)">${equipment}<g transform="translate(105 0) scale(${k} 1) translate(-105 0)">${body}</g>${head}${feet}${number}</g></svg>`;
+  const art = rigid(pitcher ? 60 : 60, shape[0])
+    + soft(shape[1], '1') + soft(shape[2]) + soft(shape[3])
+    + rigid(pitcher ? 132 : 99, shape[4])
+    + rigid(pitcher ? 176 : 60, shape[5]);
+  // 신발은 한 켤레를 확대하지 않고 각 발목을 따라 별도로 이동한다.
+  const shoes = shape[6].split(/ (?=M)/).map((d, i) => rigid(i ? 166 : 39, d)).join('');
+  // 번호도 SVG path: 외부 폰트 없이 동일한 굵기의 숫자. 반전 그룹 밖에 배치한다.
+  const digits: Record<string, string> = {
+    '0': '111101101101111', '1': '010110010010111', '2': '111001111100111',
+    '3': '111001111001111', '4': '101101111001001', '5': '111100111001111',
+    '6': '111100111101111', '7': '111001010010010', '8': '111101111101111', '9': '111101111001111',
+  };
+  const chars = Array.from(no).filter(c => digits[c]);
+  const unit = Math.min(3.4, 36 / Math.max(1, chars.length * 4 - 1));
+  const nx = 105 + ((pitcher ? 107 : 98) - 105) * k;
+  const screenX = flip ? 210 - nx : nx;
+  const cells = chars.map((c, i) => Array.from(digits[c]).map((on, j) => {
+    if (on !== '1') return '';
+    const x = (i * 4 + j % 3) * unit;
+    const y = Math.floor(j / 3) * unit;
+    return `M${x} ${y}h${unit}v${unit}h${-unit}Z`;
+  }).join('')).join('');
+  const number = cells ? `<g fill="${esc(numColor)}" transform="translate(${screenX - (chars.length * 4 - 1) * unit / 2} ${pitcher ? 84 : 104})">${path(cells)}</g>` : '';
+  return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
 }
