@@ -143,13 +143,14 @@ export function renderBatter(e: SituB): string {
   // 포심 구속 구간별 OPS(2026-11-07 사용자): 타석 마지막 공이 포심인 타석만
   if (e.fv?.some((r) => r[0] > 0)) {
     const labs = ['154km/h 이상', '150~153km/h', '145~149km/h', '144km/h 이하'];
+    const heads = labs.map((l) => `<div class="fvl">${l}</div>`).join('');
     const cells = e.fv.map(([pa, ops], i) => {
       const L = e.lfv?.[i];
-      if (ops == null || !pa || L == null) return `<div class="cc fv thin"><em>${labs[i]}</em><b>-</b><span>${pa}타석</span></div>`;
+      if (ops == null || !pa || L == null) return `<div class="cc fv thin"><b>-</b><span>${pa}타석</span></div>`;
       const d = ops - L, a = Math.min(1, Math.abs(d) / 0.5);
-      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${labs[i]}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
+      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
     }).join('');
-    out += h2('포심 구속별 대응', '', true) + `<div class="fvcol">${cells}</div>${legend(true, 20, '<span class="zn">칸 숫자 = OPS</span>')}`;
+    out += h2('포심 구속별 대응', '', true) + `<div class="fvrow">${heads}${cells}</div>${legend(true, 20, '<span class="zn">칸 숫자 = OPS</span>')}`;
   }
   out += zoneSection(e, [['전체', '전체', ''], ['좌투', '좌투수', '좌'], ['우투', '우투수', '우']], '스트라이크 존별 대응', '', true);
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응', '', true) + countGrid(sp, e.lgc, true);
