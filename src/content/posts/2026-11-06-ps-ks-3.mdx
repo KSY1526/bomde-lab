@@ -1,0 +1,79 @@
+---
+title: "KT가 7안타를 치고도 졌다, 경기는 2회말 구자욱의 3루타에서 갈렸다"
+description: "한국시리즈 3차전, 삼성이 KT를 5-1으로 꺾고 시리즈 2승 1패로 앞섰다."
+date: 2026-11-06T21:40:00+09:00
+category: game
+format: full
+tags: ["포스트시즌", "한국시리즈", "삼성", "KT", "WPA"]
+related: ["2026-11-04-ps-ks-2", "2026-ks-preview", "2026-wpa"]
+stat: { value: "5-1", label: "한국시리즈 3차전, 삼성이 KT를 꺾었다", short: "KS 3차전", items: [{ v: "5", cap: "삼성" }, { v: "1", cap: "KT" }], sep: ":" }
+thumb: { teams: ["삼성", "KT"] }
+dataUntil: "2026 한국시리즈 3차전 (11/06)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-11-06-ps-ks-3.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+삼성이 대구에서 열린 한국시리즈 3차전에서 KT를 5-1으로 꺾고 시리즈 2승 1패로 앞섰다. KT는 1회초 힐리어드의 2루타로 먼저 1점을 냈지만 삼성이 1회말 최형우의 안타로 곧바로 동점을 만들었다. 경기는 2회말에 기울었다. 삼성은 구자욱이 2사 1, 3루에서 주자 2명을 불러들이는 3루타를 쳐 4-1으로 달아났고 8회말 1점을 더했다. 안타는 KT가 7개, 삼성이 4개였다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 삼성 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 삼성이 유리한 쪽이다."
+/>
+
+삼성 승리확률은 1회초 힐리어드의 2루타 뒤 43.2%까지 내려갔다. 1회말 최형우의 안타로 57.9%가 됐고 만루에서 김영웅이 병살타를 치면서 50.0%로 돌아왔다. 그래프는 2회말에 크게 움직였다. 구자욱의 3루타가 64.2%였던 확률을 79.0%로 올렸고 이후에는 한 번도 76.9% 아래로 내려오지 않았다. 5회초에는 86.6%, 8회말에는 98%대까지 올랐고 9회초 마지막 아웃과 함께 100%가 됐다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="2회말, 김지찬이 소형준에게 볼넷을 골랐다">
+1-1이던 2회말 1사 1, 2루에서 김지찬이 소형준을 상대했다. 김지찬은 3-0에서 4구째 볼을 골라 볼넷으로 걸어 나갔고 만루가 됐다. 삼성 승리확률은 58.4%에서 63.8%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="1회말, 최형우의 좌익수 오른쪽 안타로 동점">
+KT가 1-0으로 앞선 1회말 1사 1, 2루에서 최형우가 소형준을 상대했다. 최형우는 3-1에서 5구째를 받아쳐 좌익수 오른쪽 안타를 만들었고 주자 1명이 들어와 1-1이 됐다. 삼성 승리확률은 49.1%에서 57.9%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="1회초, 힐리어드의 중견수 뒤 2루타">
+0-0이던 1회초 2사 2루에서 힐리어드가 후라도를 상대했다. 힐리어드는 2-0에서 3구째를 쳐 중견수 뒤 2루타를 때렸고 주자가 홈을 밟아 KT가 1-0으로 앞섰다. KT 승리확률은 47.8%에서 56.8%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="1회말, 소형준이 만루에서 김영웅을 병살로 잡았다">
+1-1이던 1회말 1사 만루에서 소형준이 김영웅을 상대했다. 소형준은 0-1에서 2구째로 유격수 병살타를 이끌어 내 이닝을 끝냈다. KT 승리확률은 37.1%에서 50.0%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="2회말, 구자욱의 우익수 뒤 3루타">
+삼성이 2-1으로 앞선 2회말 2사 1, 3루에서 구자욱이 소형준을 상대했다. 구자욱은 2-0에서 3구째를 쳐 우익수 뒤 3루타를 만들었고 주자 2명이 들어와 4-1이 됐다. 삼성 승리확률은 64.2%에서 79.0%가 됐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+후라도는 27타석을 상대하며 삼성 승리확률을 28.1%p 올려 선수 가운데 가장 많이 올렸다. 구자욱은 4타석에서 18.6%p, 김지찬은 4타석에서 6.5%p를 더했다. 반대로 소형준은 25타석을 상대하며 KT 승리확률을 14.2%p 깎았고 안현민은 4타석에서 10.4%p를 잃었다. 삼성 타자 가운데서는 1회말 만루에서 병살타를 친 김영웅이 4타석에서 13.1%p로 가장 많이 깎았다.
+
+삼성이 시리즈 2승 1패로 앞선 가운데 4차전은 7일 낮 2시 같은 대구에서 열린다. 선발로는 KT 로건, 삼성 장찬희가 예고됐다.
