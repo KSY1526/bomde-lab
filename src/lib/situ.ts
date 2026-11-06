@@ -127,7 +127,7 @@ export function renderBatter(e: SituB): string {
     const tot = (e.pt ?? []).reduce((a, r) => a + r[1], 0);
     const rows = pt.map(([t, n, wh, rv]) => {
       const o = sp[t];
-      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<span class="pa">${o ? o[0] : 0}</span></td></tr>`;
+      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<span class="pa">(${o ? o[0] : 0})</span></td></tr>`;
     }).join('');
     out += h2('구종별 대응');
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>`;
@@ -211,15 +211,6 @@ function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | '
 <div class="mleg"><span><i class="lgp-sw"></i>${season} ${lgslot ? `${lgslot} 투수 평균` : `리그 평균(${throws === 'R' ? '우' : '좌'}투수)`}</span><span><i class="pd-sw"></i>${esc(name)}</span><span>화살표 = 평균과 얼마나 다르게 움직이나</span></div>`;
 }
 
-// 리그(같은 팔 높이) 평균 대비 움직임: 위·아래(▲ 덜 떨어짐 · ▼ 더 떨어짐)와 좌우(◀▶ = 위 그래프와 같은 방향) 차이를 화살표와 cm로
-function mvtxt(hm: number, vm: number, L: [number, number] | undefined): string {
-  if (!L || hm == null || vm == null) return '-';
-  const dh = hm - L[0], dv = vm - L[1];
-  const v = Math.abs(dv) < 1.5 ? '' : `<span class="mv"><i>${dv > 0 ? '▲' : '▼'}</i>${n0(Math.abs(dv))}</span>`;
-  const h = Math.abs(dh) < 1.5 ? '' : `<span class="mv"><i>${dh < 0 ? '◀' : '▶'}</i>${n0(Math.abs(dh))}</span>`;
-  return v + h || '<span class="muted">평균 수준</span>';
-}
-
 export function renderPitcher(e: SituP, name: string, height: number, season: string): string {
   const sp = e.sp ?? {};
   let out = '';
@@ -243,10 +234,10 @@ ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}c
     // 전체 · 좌타자 · 우타자 탭(2026-10-28 사용자). 탭 전환은 [id].astro가 [data-side]로
     const sets: [string, string, Ars][] = [['전체', '전체', ars], ['좌타', '좌타자', e.arsS?.['좌타'] ?? []], ['우타', '우타자', e.arsS?.['우타'] ?? []]];
     const body = (rs: Ars) => rs.map(([t, u, v, w, hm, vm, rv, ops, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span><span class="ubn">${u.toFixed(1)}%</span></td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
-<td class="mvd">${mvtxt(hm, vm, e.lgm[t])}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<span class="pa">${pa}</span></td></tr>`).join('');
+<td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<span class="pa">(${pa})</span></td></tr>`).join('');
     const live = sets.filter(([, , rs]) => rs.length);
     if (live.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 타자 고르기">${live.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th><th>움직임</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div><p class="tnote">움직임: 같은 팔 높이 리그 평균과의 차이(cm) · ▲ 덜 떨어짐 · ▼ 더 떨어짐 · ◀▶ 그래프 방향</p>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
   if (hasZone(e)) out += h2('스트라이크존 9분할 성적', '피OPS') + zoneGrid(e.zone!, e.lgz!, false);

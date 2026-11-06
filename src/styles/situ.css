@@ -50,7 +50,7 @@
 @media (max-width: 560px) {
   .situ .pt { font-size: 13px; }
   .situ .pt th, .situ .pt td { padding: 7px 2px; }
-  .situ .pt .ub { display: none; }
+  .situ .pt .ub { width: 28px; margin-right: 4px; }
   .situ .pt .ubn { min-width: 0; }
   .situ .rvc .rv { width: 40px; }
   .situ .rvn { width: 32px; font-size: 14px; }
@@ -108,11 +108,11 @@
 .situ .front .zone { fill: var(--line); fill-opacity: .35; stroke: var(--surface); stroke-width: 2; }
 .situ .front .zone.on { fill: var(--accent); fill-opacity: .22; }
 .situ .front .zl { font-size: 11px; fill: var(--muted); }
-.situ .front .zl.on { fill: var(--accent); font-weight: 600; font-size: 12px; }
+.situ .front .zl.on { fill: var(--accent); font-weight: 400; font-size: 12px; }
 .situ .front .hline { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
 .situ .front .lgrel { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 2; }
 .situ .front .rl { font-size: 12px; fill: var(--text); font-weight: 500; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
-.situ .front .rvt { font-family: var(--num); font-size: 15px; fill: var(--accent); font-weight: 700; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.situ .front .rvt { font-family: var(--num); font-size: 15px; fill: var(--accent); font-weight: 500; paint-order: stroke; stroke: var(--surface); stroke-width: 2px; }
 .situ .rcap { font-size: 13px; margin: 8px 0 0; line-height: 1.6; }
 .situ .rcap .slot { font-size: 16px; color: var(--navy); }
 .situ .move { width: 100%; max-width: 320px; display: block; }
