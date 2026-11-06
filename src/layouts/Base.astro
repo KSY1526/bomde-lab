@@ -18,7 +18,7 @@ interface Props {
   /** 경로(홈 › 카테고리 › 글). 구글 검색 결과에 경로로 보이게 BreadcrumbList 구조화 데이터를 붙인다 (2026-10-18) */
   breadcrumbs?: { name: string; path: string }[];
   /** 본문 맨 아래 크봇(선수 페이지 등, 2026-10-28). 없으면 크봇은 헤더 검색에서 부를 때만 뜬다 */
-  chat?: { examples: string[]; lead?: string };
+  chat?: { examples: string[]; lead?: string; ctx?: string };
 }
 const { title, description = SITE.description, image = 'og/default.png?v=2', published, updated, tags = [], breadcrumbs = [], chat } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
@@ -128,7 +128,7 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
     <div class="wrap layout">
       <main id="main">
         <slot />
-        {chat && <ChatPanel inline examples={chat.examples} lead={chat.lead} />}
+        {chat && <ChatPanel inline examples={chat.examples} lead={chat.lead} ctx={chat.ctx} />}
       </main>
       {!chat && <ChatPanel />}
     </div>

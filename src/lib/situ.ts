@@ -84,8 +84,8 @@ function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean): stri
     const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
     return `<div class="zc${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
   }).join('');
-  return `<div class="zwrap"><div class="zgrid">${cells}</div></div>
-<p class="tnote">포수 자리에서 본 스트라이크존(왼쪽 = 3루 쪽). 타석을 끝낸 공이 지나간 칸 기준이고, 존 밖 공은 뺐습니다. 색 = 리그 같은 칸과의 차이: ${goodHigh ? '파랑 리그보다 강함 · 빨강 약함' : '파랑 리그보다 잘 막음 · 빨강 많이 맞음'}</p>`;
+  return `<div class="zwrap"><div class="zside"><span>← 3루 쪽</span><span>포수 시점</span><span>1루 쪽 →</span></div><div class="zgrid">${cells}</div></div>
+<p class="tnote">타석을 끝낸 공 기준(존 밖 제외) · ${goodHigh ? '파랑 = 리그보다 강함, 빨강 = 약함' : '파랑 = 리그보다 잘 막음, 빨강 = 많이 맞음'}</p>`;
 }
 const hasZone = (e: { zone?: ZoneCell[]; lgz?: (number | null)[] }) => !!e.zone && !!e.lgz && e.zone.some((c) => c[0] >= 5);
 
@@ -135,7 +135,7 @@ export function renderBatter(e: SituB): string {
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>${rvNote('타자')}`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응') + countGrid(sp, e.lgc, true);
-  if (hasZone(e)) out += h2('존 9분할 OPS') + zoneGrid(e.zone!, e.lgz!, true);
+  if (hasZone(e)) out += h2('스트라이크존 9분할 성적', 'OPS') + zoneGrid(e.zone!, e.lgz!, true);
   const sprayHtml = e.spray ? spray(e.spray) : '';
   const runners = sp['주자 없음'] ? `<div>${h2('주자 상황', 'OPS')}${diamonds(sp)}</div>` : '';
   if (sprayHtml || runners) {
@@ -251,7 +251,7 @@ ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}c
     out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th><th>움직임</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>${rvNote('투수')}<p class="tnote">구속은 평균 km/h. 움직임은 같은 팔 높이 리그 투수 평균과의 차이(cm): ▲ 덜 떨어짐 · ▼ 더 떨어짐 · ◀▶ 위 그래프의 그 방향으로 더 휨</p>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
-  if (hasZone(e)) out += h2('존 9분할 피OPS') + zoneGrid(e.zone!, e.lgz!, false);
+  if (hasZone(e)) out += h2('스트라이크존 9분할 성적', '피OPS') + zoneGrid(e.zone!, e.lgz!, false);
   if (sp['주자 없음']) out += h2('주자 상황', '피OPS') + diamonds(sp);
   return out || '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>';
 }

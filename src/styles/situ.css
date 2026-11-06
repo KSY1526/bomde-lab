@@ -145,10 +145,11 @@
 .situ .sidebar button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
 
 /* 존 9분할: 가로·세로 3칸, 존 테두리 */
-.situ .zwrap { max-width: 360px; padding: 4px; border: 2px solid var(--muted); border-radius: var(--radius); }
+.situ .zwrap { max-width: 620px; padding: 6px; border: 2px solid var(--muted); border-radius: var(--radius); }
+.situ .zside { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 0 4px 4px; }
 .situ .zgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-.situ .zc { border-radius: 2px; padding: 8px 2px; text-align: center; min-height: 84px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }
-.situ .zc b { font-family: var(--num); font-size: 26px; line-height: 1.1; }
-.situ .zc span, .situ .zc em { font-style: normal; font-size: 11px; color: var(--muted); line-height: 1.4; }
+.situ .zc { border-radius: 2px; padding: 8px 2px; text-align: center; min-height: 104px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }
+.situ .zc b { font-family: var(--num); font-size: 30px; line-height: 1.1; }
+.situ .zc span, .situ .zc em { font-style: normal; font-size: 12px; color: var(--muted); line-height: 1.4; }
 .situ .zc.dk b, .situ .zc.dk span, .situ .zc.dk em { color: var(--bg); }
 .situ .zc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 8%, transparent) 6px 8px); }
