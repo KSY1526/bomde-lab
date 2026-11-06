@@ -228,16 +228,33 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   // 상황별 시즌 버튼: 처음 누를 때 이 선수의 situ.json을 한 번 받아 둔다
   const box = root.querySelector<HTMLElement>('[data-situ]')!;
   let all: Promise<Record<string, any>> | null = null;
-  root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((b) => b.addEventListener('click', async () => {
-    const y = b.dataset.season!;
+  const seasonBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-season]')];
+  const years = seasonBtns.map((b) => b.dataset.season!);
+  let cur = seasonBtns.find((b) => b.getAttribute('aria-pressed') === 'true')?.dataset.season ?? '';
+  // 구종·존·카운트 제목 옆에도 시즌 칸을 둔다. 어느 쪽을 바꿔도 상황별 전체가 같이 바뀐다
+  const mountYr = () => {
+    if (years.length < 2) return;
+    box.querySelectorAll<HTMLElement>('.yrslot').forEach((el) => {
+      el.innerHTML = `<select class="yrsel" aria-label="시즌 고르기">${years.map((y) => `<option value="${y}"${y === cur ? ' selected' : ''}>${y}</option>`).join('')}</select>`;
+    });
+  };
+  const load = async (y: string) => {
+    cur = y;
     ev('player_situ_year', y);
-    root.querySelectorAll<HTMLButtonElement>('[data-season]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    seasonBtns.forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.season === y)));
     root.querySelectorAll<HTMLElement>('[data-sy]').forEach((x) => { x.hidden = x.dataset.sy !== y; });
     all ??= fetch(box.dataset.src!).then((r) => r.json());
     const e = (await all)[y];
     box.innerHTML = !e ? '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>'
       : box.dataset.kind === 'b' ? renderBatter(e) : renderPitcher(e, box.dataset.name!, Number(box.dataset.height), y);
-  }));
+    mountYr();
+  };
+  seasonBtns.forEach((b) => b.addEventListener('click', () => load(b.dataset.season!)));
+  box.addEventListener('change', (x) => {
+    const t = x.target as HTMLSelectElement;
+    if (t.classList.contains('yrsel')) load(t.value);
+  });
+  mountYr();
   // 구종 표 전체·좌타자·우타자 탭(situ.ts가 tbody를 손별로 그려 둠). 시즌을 바꾸면 innerHTML이 새로 들어오므로 위임
   box.addEventListener('click', (x) => {
     const b = (x.target as HTMLElement).closest<HTMLButtonElement>('[data-side]');
