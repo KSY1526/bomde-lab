@@ -1,0 +1,1154 @@
+{
+ "game_id": "20261104SSKT0",
+ "date": "2026-11-04",
+ "round": "한국시리즈",
+ "round_code": "kbo_ps_ks",
+ "series_game": 2,
+ "stadium": "수원",
+ "home": "KT",
+ "away": "삼성",
+ "home_score": 2,
+ "away_score": 3,
+ "winner": "삼성",
+ "series_after": {
+  "KT": 1,
+  "삼성": 1
+ },
+ "format": "full",
+ "max_swing": 52.9,
+ "n_big": 8,
+ "big": 10.0,
+ "short_max": 12.0,
+ "baseline": {
+  "games": 1438,
+  "median_max": 18.0,
+  "avg_big": 4.0,
+  "short_pct": 16.8
+ },
+ "linescore": [
+  {
+   "team": "삼성",
+   "innings": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1
+   ],
+   "r": 3,
+   "h": 14
+  },
+  {
+   "team": "KT",
+   "innings": [
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0
+   ],
+   "r": 2,
+   "h": 11
+  }
+ ],
+ "timeline": [
+  {
+   "i": 0,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 50.0
+  },
+  {
+   "i": 1,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 52.2
+  },
+  {
+   "i": 2,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 53.9
+  },
+  {
+   "i": 3,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 55.1
+  },
+  {
+   "i": 4,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 59.2
+  },
+  {
+   "i": 5,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 55.8
+  },
+  {
+   "i": 6,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 52.8
+  },
+  {
+   "i": 7,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 54.0
+  },
+  {
+   "i": 8,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 50.0
+  },
+  {
+   "i": 9,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 44.9
+  },
+  {
+   "i": 10,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 39.2
+  },
+  {
+   "i": 11,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 40.7
+  },
+  {
+   "i": 12,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 42.6
+  },
+  {
+   "i": 13,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 45.6
+  },
+  {
+   "i": 14,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 43.0
+  },
+  {
+   "i": 15,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 41.2
+  },
+  {
+   "i": 16,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 42.4
+  },
+  {
+   "i": 17,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 39.9
+  },
+  {
+   "i": 18,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 42.2
+  },
+  {
+   "i": 19,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 43.9
+  },
+  {
+   "i": 20,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 42.9
+  },
+  {
+   "i": 21,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 45.2
+  },
+  {
+   "i": 22,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 48.7
+  },
+  {
+   "i": 23,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 45.1
+  },
+  {
+   "i": 24,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 38.9
+  },
+  {
+   "i": 25,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 41.4
+  },
+  {
+   "i": 26,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 38.0
+  },
+  {
+   "i": 27,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 40.8
+  },
+  {
+   "i": 28,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 44.5
+  },
+  {
+   "i": 29,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 50.7
+  },
+  {
+   "i": 30,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 44.3
+  },
+  {
+   "i": 31,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 41.0
+  },
+  {
+   "i": 32,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 52.8
+  },
+  {
+   "i": 33,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 50.0
+  },
+  {
+   "i": 34,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 52.8
+  },
+  {
+   "i": 35,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 55.4
+  },
+  {
+   "i": 36,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 57.0
+  },
+  {
+   "i": 37,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 60.9
+  },
+  {
+   "i": 38,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 51.6
+  },
+  {
+   "i": 39,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 49.8
+  },
+  {
+   "i": 40,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 53.1
+  },
+  {
+   "i": 41,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 50.2
+  },
+  {
+   "i": 42,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 45.6
+  },
+  {
+   "i": 43,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 50.3
+  },
+  {
+   "i": 44,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 57.7
+  },
+  {
+   "i": 45,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 54.4
+  },
+  {
+   "i": 46,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 57.9
+  },
+  {
+   "i": 47,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 57.8
+  },
+  {
+   "i": 48,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 53.8
+  },
+  {
+   "i": 49,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 50.0
+  },
+  {
+   "i": 50,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 53.6
+  },
+  {
+   "i": 51,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 57.1
+  },
+  {
+   "i": 52,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 59.2
+  },
+  {
+   "i": 53,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 54.4
+  },
+  {
+   "i": 54,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 52.0
+  },
+  {
+   "i": 55,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 54.0
+  },
+  {
+   "i": 56,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 49.9
+  },
+  {
+   "i": 57,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 54.7
+  },
+  {
+   "i": 58,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 50.3
+  },
+  {
+   "i": 59,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 44.4
+  },
+  {
+   "i": 60,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 52.7
+  },
+  {
+   "i": 61,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 61.6
+  },
+  {
+   "i": 62,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 56.8
+  },
+  {
+   "i": 63,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 53.3
+  },
+  {
+   "i": 64,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 50.1
+  },
+  {
+   "i": 65,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 42.5
+  },
+  {
+   "i": 66,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 46.2
+  },
+  {
+   "i": 67,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 56.0
+  },
+  {
+   "i": 68,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 65.4
+  },
+  {
+   "i": 69,
+   "inning": 9,
+   "half": "bottom",
+   "home_wp": 58.7
+  },
+  {
+   "i": 70,
+   "inning": 9,
+   "half": "bottom",
+   "home_wp": 67.9
+  },
+  {
+   "i": 71,
+   "inning": 9,
+   "half": "bottom",
+   "home_wp": 59.7
+  },
+  {
+   "i": 72,
+   "inning": 9,
+   "half": "bottom",
+   "home_wp": 50.0
+  },
+  {
+   "i": 73,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 42.5
+  },
+  {
+   "i": 74,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 46.7
+  },
+  {
+   "i": 75,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 43.1
+  },
+  {
+   "i": 76,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 53.5
+  },
+  {
+   "i": 77,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 21.1
+  },
+  {
+   "i": 78,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 21.1
+  },
+  {
+   "i": 79,
+   "inning": 10,
+   "half": "top",
+   "home_wp": 25.3
+  },
+  {
+   "i": 80,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 25.9
+  },
+  {
+   "i": 81,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 25.9
+  },
+  {
+   "i": 82,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 25.9
+  },
+  {
+   "i": 83,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 25.9
+  },
+  {
+   "i": 84,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 78.8
+  },
+  {
+   "i": 85,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 62.4
+  },
+  {
+   "i": 86,
+   "inning": 10,
+   "half": "bottom",
+   "home_wp": 50.4
+  },
+  {
+   "i": 87,
+   "inning": 11,
+   "half": "top",
+   "home_wp": 56.5
+  },
+  {
+   "i": 88,
+   "inning": 11,
+   "half": "top",
+   "home_wp": 60.9
+  },
+  {
+   "i": 89,
+   "inning": 11,
+   "half": "top",
+   "home_wp": 58.6
+  },
+  {
+   "i": 90,
+   "inning": 11,
+   "half": "top",
+   "home_wp": 56.7
+  },
+  {
+   "i": 91,
+   "inning": 11,
+   "half": "top",
+   "home_wp": 64.8
+  },
+  {
+   "i": 92,
+   "inning": 11,
+   "half": "bottom",
+   "home_wp": 59.6
+  },
+  {
+   "i": 93,
+   "inning": 11,
+   "half": "bottom",
+   "home_wp": 55.2
+  },
+  {
+   "i": 94,
+   "inning": 11,
+   "half": "bottom",
+   "home_wp": 50.4
+  },
+  {
+   "i": 95,
+   "inning": 12,
+   "half": "top",
+   "home_wp": 41.0
+  },
+  {
+   "i": 96,
+   "inning": 12,
+   "half": "top",
+   "home_wp": 50.6
+  },
+  {
+   "i": 97,
+   "inning": 12,
+   "half": "top",
+   "home_wp": 49.9
+  },
+  {
+   "i": 98,
+   "inning": 12,
+   "half": "top",
+   "home_wp": 21.2
+  },
+  {
+   "i": 99,
+   "inning": 12,
+   "half": "top",
+   "home_wp": 25.4
+  },
+  {
+   "i": 100,
+   "inning": 12,
+   "half": "bottom",
+   "home_wp": 17.2
+  },
+  {
+   "i": 101,
+   "inning": 12,
+   "half": "bottom",
+   "home_wp": 13.1
+  },
+  {
+   "i": 102,
+   "inning": 12,
+   "half": "bottom",
+   "home_wp": 13.1
+  },
+  {
+   "i": 103,
+   "inning": 12,
+   "half": "bottom",
+   "home_wp": 0.0
+  }
+ ],
+ "top": [
+  {
+   "i": 84,
+   "pa_id": "20261104SSKT0_84",
+   "inning": 10,
+   "half": "bottom",
+   "inning_label": "10회말",
+   "outs": "1사",
+   "bases": "만루",
+   "score_before": {
+    "KT": 1,
+    "삼성": 2
+   },
+   "batter": "김현수",
+   "batter_team": "KT",
+   "pitcher": "원태인",
+   "pitcher_team": "삼성",
+   "result_text": "볼넷",
+   "runs": 1,
+   "rbi": null,
+   "wpa": 52.9,
+   "bat_wp_before": 25.9,
+   "bat_wp_after": 78.8,
+   "home_wp_after": 78.8,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "3-0",
+    "nth": 4
+   },
+   "rank": 1
+  },
+  {
+   "i": 77,
+   "pa_id": "20261104SSKT0_77",
+   "inning": 10,
+   "half": "top",
+   "inning_label": "10회초",
+   "outs": "2사",
+   "bases": "1, 2루",
+   "score_before": {
+    "KT": 1,
+    "삼성": 1
+   },
+   "batter": "디아즈",
+   "batter_team": "삼성",
+   "pitcher": "전용주",
+   "pitcher_team": "KT",
+   "result_text": "우익수 앞 1루타",
+   "runs": 1,
+   "rbi": null,
+   "wpa": 32.4,
+   "bat_wp_before": 46.5,
+   "bat_wp_after": 78.9,
+   "home_wp_after": 21.1,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "0-1",
+    "nth": 2
+   },
+   "rank": 2
+  },
+  {
+   "i": 98,
+   "pa_id": "20261104SSKT0_98",
+   "inning": 12,
+   "half": "top",
+   "inning_label": "12회초",
+   "outs": "1사",
+   "bases": "1, 2루",
+   "score_before": {
+    "KT": 2,
+    "삼성": 2
+   },
+   "batter": "이재현",
+   "batter_team": "삼성",
+   "pitcher": "우규민",
+   "pitcher_team": "KT",
+   "result_text": "투수 앞 땅볼로 출루",
+   "runs": 1,
+   "rbi": null,
+   "wpa": 28.7,
+   "bat_wp_before": 50.1,
+   "bat_wp_after": 78.8,
+   "home_wp_after": 21.2,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-2",
+    "nth": 6
+   },
+   "rank": 3
+  },
+  {
+   "i": 85,
+   "pa_id": "20261104SSKT0_85",
+   "inning": 10,
+   "half": "bottom",
+   "inning_label": "10회말",
+   "outs": "1사",
+   "bases": "만루",
+   "score_before": {
+    "KT": 2,
+    "삼성": 2
+   },
+   "batter": "오윤석",
+   "batter_team": "KT",
+   "pitcher": "원태인",
+   "pitcher_team": "삼성",
+   "result_text": "1루수 라인드라이브 아웃",
+   "runs": 0,
+   "rbi": null,
+   "wpa": -16.4,
+   "bat_wp_before": 78.8,
+   "bat_wp_after": 62.4,
+   "home_wp_after": 62.4,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "1-1",
+    "nth": 3
+   },
+   "rank": 4
+  },
+  {
+   "i": 103,
+   "pa_id": "20261104SSKT0_103",
+   "inning": 12,
+   "half": "bottom",
+   "inning_label": "12회말",
+   "outs": "2사",
+   "bases": "2루",
+   "score_before": {
+    "KT": 2,
+    "삼성": 3
+   },
+   "batter": "김현수",
+   "batter_team": "KT",
+   "pitcher": "배찬승",
+   "pitcher_team": "삼성",
+   "result_text": "2루수 땅볼 아웃 (2루수->1루수 송구아웃)",
+   "runs": 0,
+   "rbi": null,
+   "wpa": -13.1,
+   "bat_wp_before": 13.1,
+   "bat_wp_after": 0.0,
+   "home_wp_after": 0.0,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-2",
+    "nth": 5
+   },
+   "rank": 5
+  }
+ ],
+ "players": [
+  {
+   "name": "페덱",
+   "team": "삼성",
+   "pa": 29,
+   "wpa": 35.8,
+   "role": "투수"
+  },
+  {
+   "name": "고영표",
+   "team": "KT",
+   "pa": 27,
+   "wpa": 35.7,
+   "role": "투수"
+  },
+  {
+   "name": "박영현",
+   "team": "KT",
+   "pa": 7,
+   "wpa": 26.6,
+   "role": "투수"
+  },
+  {
+   "name": "김현수",
+   "team": "KT",
+   "pa": 6,
+   "wpa": 26.1,
+   "role": "타자"
+  },
+  {
+   "name": "배찬승",
+   "team": "삼성",
+   "pa": 4,
+   "wpa": 25.4,
+   "role": "투수"
+  },
+  {
+   "name": "김정운",
+   "team": "KT",
+   "pa": 7,
+   "wpa": 18.6,
+   "role": "투수"
+  },
+  {
+   "name": "디아즈",
+   "team": "삼성",
+   "pa": 6,
+   "wpa": 18.3,
+   "role": "타자"
+  },
+  {
+   "name": "김태훈",
+   "team": "삼성",
+   "pa": 3,
+   "wpa": 14.4,
+   "role": "투수"
+  },
+  {
+   "name": "이재현",
+   "team": "삼성",
+   "pa": 6,
+   "wpa": 11.6,
+   "role": "타자"
+  },
+  {
+   "name": "이승민",
+   "team": "삼성",
+   "pa": 5,
+   "wpa": 9.0,
+   "role": "투수"
+  },
+  {
+   "name": "구자욱",
+   "team": "삼성",
+   "pa": 5,
+   "wpa": 8.9,
+   "role": "타자"
+  },
+  {
+   "name": "힐리어드",
+   "team": "KT",
+   "pa": 6,
+   "wpa": 7.4,
+   "role": "타자"
+  },
+  {
+   "name": "최형우",
+   "team": "삼성",
+   "pa": 3,
+   "wpa": 7.2,
+   "role": "타자"
+  },
+  {
+   "name": "스기모토",
+   "team": "KT",
+   "pa": 4,
+   "wpa": 3.5,
+   "role": "투수"
+  },
+  {
+   "name": "허경민",
+   "team": "KT",
+   "pa": 5,
+   "wpa": 3.4,
+   "role": "타자"
+  },
+  {
+   "name": "김상준",
+   "team": "삼성",
+   "pa": 1,
+   "wpa": 0.7,
+   "role": "타자"
+  },
+  {
+   "name": "손동현",
+   "team": "KT",
+   "pa": 2,
+   "wpa": 0.4,
+   "role": "투수"
+  },
+  {
+   "name": "장진혁",
+   "team": "KT",
+   "pa": 1,
+   "wpa": 0.0,
+   "role": "타자"
+  },
+  {
+   "name": "김지찬",
+   "team": "삼성",
+   "pa": 6,
+   "wpa": -0.5,
+   "role": "타자"
+  },
+  {
+   "name": "오원석",
+   "team": "KT",
+   "pa": 3,
+   "wpa": -0.5,
+   "role": "투수"
+  },
+  {
+   "name": "장준원",
+   "team": "KT",
+   "pa": 3,
+   "wpa": -1.0,
+   "role": "타자"
+  },
+  {
+   "name": "김성윤",
+   "team": "삼성",
+   "pa": 6,
+   "wpa": -1.9,
+   "role": "타자"
+  },
+  {
+   "name": "최원준",
+   "team": "KT",
+   "pa": 6,
+   "wpa": -3.9,
+   "role": "타자"
+  },
+  {
+   "name": "류지혁",
+   "team": "삼성",
+   "pa": 5,
+   "wpa": -4.1,
+   "role": "타자"
+  },
+  {
+   "name": "김도환",
+   "team": "삼성",
+   "pa": 1,
+   "wpa": -4.4,
+   "role": "타자"
+  },
+  {
+   "name": "김영웅",
+   "team": "삼성",
+   "pa": 2,
+   "wpa": -5.8,
+   "role": "타자"
+  },
+  {
+   "name": "장성우",
+   "team": "KT",
+   "pa": 1,
+   "wpa": -6.7,
+   "role": "타자"
+  },
+  {
+   "name": "강민호",
+   "team": "삼성",
+   "pa": 3,
+   "wpa": -7.0,
+   "role": "타자"
+  },
+  {
+   "name": "원태인",
+   "team": "삼성",
+   "pa": 9,
+   "wpa": -7.2,
+   "role": "투수"
+  },
+  {
+   "name": "박계범",
+   "team": "삼성",
+   "pa": 1,
+   "wpa": -8.1,
+   "role": "타자"
+  },
+  {
+   "name": "배정대",
+   "team": "KT",
+   "pa": 1,
+   "wpa": -8.2,
+   "role": "타자"
+  },
+  {
+   "name": "박승규",
+   "team": "삼성",
+   "pa": 3,
+   "wpa": -9.3,
+   "role": "타자"
+  },
+  {
+   "name": "김현준",
+   "team": "삼성",
+   "pa": 1,
+   "wpa": -9.4,
+   "role": "타자"
+  },
+  {
+   "name": "류현인",
+   "team": "KT",
+   "pa": 3,
+   "wpa": -9.9,
+   "role": "타자"
+  },
+  {
+   "name": "김민혁",
+   "team": "KT",
+   "pa": 4,
+   "wpa": -12.9,
+   "role": "타자"
+  },
+  {
+   "name": "권동진",
+   "team": "KT",
+   "pa": 2,
+   "wpa": -14.1,
+   "role": "타자"
+  },
+  {
+   "name": "오윤석",
+   "team": "KT",
+   "pa": 1,
+   "wpa": -16.4,
+   "role": "타자"
+  },
+  {
+   "name": "한승택",
+   "team": "KT",
+   "pa": 5,
+   "wpa": -19.8,
+   "role": "타자"
+  },
+  {
+   "name": "안현민",
+   "team": "KT",
+   "pa": 6,
+   "wpa": -21.4,
+   "role": "타자"
+  },
+  {
+   "name": "전병우",
+   "team": "삼성",
+   "pa": 4,
+   "wpa": -23.6,
+   "role": "타자"
+  },
+  {
+   "name": "우규민",
+   "team": "KT",
+   "pa": 2,
+   "wpa": -24.5,
+   "role": "투수"
+  },
+  {
+   "name": "전용주",
+   "team": "KT",
+   "pa": 1,
+   "wpa": -32.4,
+   "role": "투수"
+  }
+ ],
+ "n_pa": 103,
+ "source": "kbo_livetext+wp_table"
+}

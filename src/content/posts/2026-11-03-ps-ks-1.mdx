@@ -1,0 +1,79 @@
+---
+title: "8-0이던 경기가 8-7이 됐다, KT를 구한 건 박영현의 삼진 세 개였다"
+description: "한국시리즈 1차전, KT가 삼성을 8-7으로 꺾고 시리즈 1승 0패로 앞섰다."
+date: 2026-11-03T22:30:00+09:00
+category: game
+format: full
+tags: ["포스트시즌", "한국시리즈", "KT", "삼성", "WPA"]
+related: ["2026-ks-preview", "2026-11-01-ps-po-5", "2026-wpa"]
+stat: { value: "8-7", label: "한국시리즈 1차전, KT가 삼성을 꺾었다", short: "KS 1차전", items: [{ v: "8", cap: "KT" }, { v: "7", cap: "삼성" }], sep: ":" }
+thumb: { teams: ["KT", "삼성"] }
+dataUntil: "2026 한국시리즈 1차전 (11/03)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-11-03-ps-ks-1.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+KT가 수원에서 열린 한국시리즈 1차전에서 삼성을 8-7으로 꺾고 시리즈 1승 0패로 앞섰다. KT는 1회말 3점, 3회말 안현민의 2점 홈런, 5회말 한승택의 홈런, 6회말 김현수의 2점 홈런으로 6회까지 8-0을 만들었다. 삼성은 7회초 5점, 8회초 2점으로 한 점 차까지 따라붙었지만 박영현이 9회초 세 타자를 모두 삼진으로 잡고 경기를 끝냈다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KT 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KT가 유리한 쪽이다."
+/>
+
+KT 승리확률은 1회말 힐리어드의 2루타 뒤 72.7%, 김상수의 안타 뒤 76.7%가 됐고 3회말 안현민의 홈런으로 91.4%까지 올랐다. 6회말 김현수의 홈런 뒤에는 99.5%였다. 7회초 삼성이 5점을 내면서 6회말이 끝났을 때 98.2%였던 확률이 92.3%로 내려갔고, 8회초 김성윤의 안타로 78.2%까지 떨어졌다. 8회초가 끝났을 때는 84.5%였다. 9회초 박영현이 삼진 세 개를 잡는 동안 88.8%, 95.6%, 100%로 올랐다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="1회말, 김상수의 내야안타로 3점째">
+KT가 2-0으로 앞선 1회말 2사 3루에서 김상수가 최원태의 3구째를 쳤다. 1-1 카운트에서 나온 타구가 2루수 왼쪽 내야안타가 되면서 3루주자 힐리어드가 홈을 밟았다. KT 승리확률은 69.9%에서 76.7%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="9회초, 박영현이 이재현을 삼진으로 잡았다">
+KT가 8-7으로 앞선 9회초 무사 주자 없는 상황에서 박영현이 이재현을 상대했다. 박영현은 풀카운트 6구째에 삼진을 잡아 첫 아웃을 만들었다. KT 승리확률은 81.6%에서 88.8%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="3회말, 안현민의 2점 홈런">
+KT가 3-0으로 앞선 3회말 무사 2루에서 안현민이 최원태의 2구째를 받아쳤다. 0-1 카운트에서 친 타구가 좌익수 뒤 담장을 넘어가 점수는 5-0이 됐다. KT 승리확률은 82.3%에서 91.4%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="8회초, 김성윤의 안타로 8-6">
+KT가 8-5으로 앞선 8회초 1사 1, 2루에서 김성윤이 오원석의 4구째를 쳤다. 타구가 중견수 오른쪽으로 가는 안타가 되면서 2루주자 박승규가 홈을 밟았다. 삼성 승리확률은 12.6%에서 21.8%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="1회말, 힐리어드의 2점 2루타">
+0-0이던 1회말 1사 1, 3루에서 힐리어드가 0-2 카운트에서 최원태의 3구째를 쳤다. 타구는 좌중간 2루타가 됐고 3루주자 최원준과 1루주자 안현민이 홈을 밟았다. KT 승리확률은 59.9%에서 72.7%가 됐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+박영현은 5타석을 상대하며 KT 승리확률을 28.0%p 올렸다. 9회초에는 세 타자를 삼진으로 돌려세워 경기를 끝냈다. 승리투수 대니엘은 22타석에서 19.6%p를 더했고 힐리어드는 1회말 2루타를 포함한 5타석에서 12.8%p를 올렸다. 삼성에서는 최원태가 12타석에서 승리확률을 23.3%p 깎았다. 최원태는 1회말에 3점, 3회말 안현민의 홈런으로 2점을 내준 뒤 3회말에 양창섭과 교체됐다. 김정운도 7회초 이재현의 안타로 주자 2명이 들어오는 장면을 포함해 7.3%p를 깎았다.
+
+KT는 1차전을 이겨 한국시리즈에서 1승 0패가 됐다.

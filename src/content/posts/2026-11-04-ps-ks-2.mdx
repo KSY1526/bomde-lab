@@ -1,0 +1,79 @@
+---
+title: "만루 밀어내기로 동점이 된 10회, 삼성은 12회에 다시 앞섰다"
+description: "한국시리즈 2차전, 삼성이 KT를 12회 끝에 3-2으로 이겼다."
+date: 2026-11-04T23:50:00+09:00
+category: game
+format: full
+tags: ["포스트시즌", "한국시리즈", "삼성", "KT", "WPA"]
+related: ["2026-11-03-ps-ks-1", "2026-ks-preview", "2026-wpa"]
+stat: { value: "3-2", label: "한국시리즈 2차전, 삼성이 KT를 12회 끝에 꺾었다", short: "KS 2차전", items: [{ v: "3", cap: "삼성" }, { v: "2", cap: "KT" }], sep: ":" }
+thumb: { teams: ["삼성", "KT"] }
+dataUntil: "2026 한국시리즈 2차전 (11/04)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-11-04-ps-ks-2.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+삼성이 수원에서 열린 한국시리즈 2차전에서 KT를 12회 접전 끝에 3-2으로 이겼다. 1차전을 내줬던 삼성은 시리즈를 1승 1패로 맞췄다. 2회초 삼성이 먼저 1점을 냈고 4회말 KT가 따라붙은 경기는 10회부터 움직였다. 삼성이 10회초에 앞서자 KT가 10회말 만루에서 밀어내기 볼넷으로 동점을 만들었고 삼성은 12회초 이재현의 타석에서 다시 앞섰다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 KT 승리확률"
+  caption="번호는 아래 결정적 순간 순위. 회색 칸이 KT가 유리한 쪽이다."
+/>
+
+9회말까지 KT 승리확률은 38.0%에서 67.9% 사이를 오르내렸고 어느 쪽도 크게 앞서지 못했다. 그래프가 크게 움직인 건 연장이다. 10회초 디아즈의 안타 뒤 KT 승리확률은 21.1%까지 내려갔다가 10회말 김현수의 볼넷으로 78.8%가 됐다. 같은 이닝 오윤석이 아웃되며 62.4%로 내려왔고 이닝이 끝났을 때는 50.4%였다. 12회초 이재현의 타석 뒤에는 21.2%까지 떨어졌고, 12회말 마지막 아웃과 함께 0%가 됐다.
+
+## 결정적 순간 TOP 5
+
+<KeyPlay play={play(5)} home={d.home} away={d.away} headline="12회말, 배찬승이 김현수를 땅볼로 잡았다">
+3-2으로 앞선 12회말 2사 2루에서 배찬승이 김현수를 상대했다. 배찬승은 2-2에서 5구째로 2루수 땅볼을 이끌어 냈고, 2루수가 1루로 던져 경기를 끝냈다. 삼성 승리확률은 86.9%에서 100%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(4)} home={d.home} away={d.away} headline="10회말, 원태인이 오윤석의 라인드라이브를 잡았다">
+2-2 동점이 된 직후인 10회말 1사 만루에서 원태인이 오윤석을 상대했다. 원태인은 1-1에서 3구째로 1루수 라인드라이브 아웃을 이끌어 냈다. 삼성 승리확률은 21.2%에서 37.6%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="12회초, 이재현의 투수 앞 땅볼로 다시 앞선 삼성">
+2-2이던 12회초 1사 1, 2루에서 이재현이 우규민을 상대했다. 이재현은 2-2에서 6구째를 쳐 투수 앞 땅볼로 출루했고 이 사이 주자 1명이 들어와 3-2가 됐다. 삼성 승리확률은 50.1%에서 78.8%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="10회초, 디아즈의 우익수 앞 적시타">
+1-1이던 10회초 2사 1, 2루에서 디아즈가 전용주를 상대했다. 디아즈는 2구째를 받아쳐 우익수 앞 안타를 만들었고 주자가 홈을 밟아 2-1이 됐다. 삼성 승리확률은 46.5%에서 78.9%가 됐다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="10회말, 원태인이 만루에서 김현수에게 볼넷을 내줬다">
+삼성이 2-1으로 앞선 10회말 1사 만루에서 김현수가 원태인을 상대했다. 김현수는 3-0에서 4구째 볼을 골라 볼넷으로 걸어 나갔고 밀려 들어온 주자 덕에 2-2 동점이 됐다. KT 승리확률은 25.9%에서 78.8%가 됐다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+투수 쪽에서는 페덱과 고영표가 각각 29타석, 27타석을 상대하며 소속 팀 승리확률을 35.8%p, 35.7%p 올렸다. 박영현은 7타석에서 26.6%p를 보탰다. 반대로 전용주는 디아즈에게 맞은 안타 한 타석으로 KT 승리확률을 32.4%p 깎았고 우규민은 2타석에서 24.5%p를 잃었다. 삼성 타자 중에서는 4타석에 나온 전병우가 23.6%p를 깎아 가장 많이 내렸다.
+
+삼성과 KT는 한국시리즈 1·2차전을 1승씩 나눠 가졌다.
