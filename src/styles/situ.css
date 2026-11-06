@@ -43,7 +43,7 @@
 .situ .ubn { display: inline-block; min-width: 3em; text-align: right; font-variant-numeric: tabular-nums; }
 /* 구종 표: 숫자 칸은 가운데 줄맞춤, 칸 사이 여백을 줄여 한 화면에 */
 .situ .pt { width: auto; }
-.situ .pt th, .situ .pt td { padding: 7px 14px; text-align: center; }
+.situ .pt th, .situ .pt td { padding: 7px 8px; text-align: center; }
 .situ .pt th.t, .situ .pt td.t { text-align: left; }
 .situ .pt .pa { margin-left: 4px; font-size: 11px; color: var(--muted); }
 .situ .mvd { white-space: nowrap; }
@@ -150,7 +150,19 @@
 .situ .sidebar button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
 
 /* 존 9분할: 가로·세로 3칸, 존 테두리 */
-.situ .zwrap { max-width: 620px; padding: 6px; border: 2px solid var(--muted); border-radius: var(--radius); }
+.situ .zwrap { max-width: 620px; }
+.situ .zin { padding: 6px; border: 2px solid var(--muted); border-radius: var(--radius); }
+.situ .zfull { display: grid; grid-template-columns: minmax(44px, 0.45fr) 1fr minmax(44px, 0.45fr); gap: 3px; align-items: stretch; }
+.situ .zfull > .zin { grid-column: 2; grid-row: 2; }
+.situ .zo { display: flex; }
+.situ .zo .zc { flex: 1; }
+.situ .zo-tl { grid-area: 1 / 1; } .situ .zo-t { grid-area: 1 / 2; } .situ .zo-tr { grid-area: 1 / 3; }
+.situ .zo-l { grid-area: 2 / 1; } .situ .zo-r { grid-area: 2 / 3; }
+.situ .zo-bl { grid-area: 3 / 1; } .situ .zo-b { grid-area: 3 / 2; } .situ .zo-br { grid-area: 3 / 3; }
+.situ .zc.sm { min-height: 44px; padding: 4px 1px; }
+.situ .zc.sm b { font-size: 17px; }
+.situ .zc.sm span { font-size: 10px; }
+.situ .zc.sm em { display: none; }
 .situ .zside { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 0 4px 4px; }
 .situ .zgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
 .situ .zc { border-radius: 2px; padding: 8px 2px; text-align: center; min-height: 104px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }

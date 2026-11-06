@@ -4,7 +4,7 @@
 
 type ZoneCell = [number, number | null]; // 존 9분할 한 칸: 타석, OPS
 type Split = [number, number | null, number | null, number | null, number | null, number | null, number | null]; // 타석, 타율, 출루, 장타, OPS, 삼진%, 볼넷%
-export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]> };
+export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
 type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
   sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
@@ -52,7 +52,7 @@ function gap(aLab: string, a: number | null, bLab: string, b: number | null, goo
   if (a == null || b == null) return '';
   const d = a - b, w = Math.min(50, (Math.abs(d) / 0.4) * 50), better = (d > 0) === goodHigh;
   return `<div class="gap"><span>${aLab}</span><div class="track"><i class="${d > 0 ? 'l' : 'r'} ${better ? 'pos' : 'neg'}" style="width:${w.toFixed(0)}%"></i><em></em></div><span>${bLab}</span></div>
-<p class="gapcap">${goodHigh ? 'OPS' : '피OPS'} 차이 <b>${f3(Math.abs(d))}</b> (${d > 0 ? aLab : bLab} 쪽이 높음)</p>`;
+<p class="gapcap">${goodHigh ? 'OPS' : '피OPS'} 차이 <b>${f3(Math.abs(d))}</b> (${better ? aLab : bLab} 상대 성적이 더 좋음)</p>`;
 }
 
 function rvBar(v: number | null, scale = 2): string {
@@ -77,26 +77,31 @@ ${legend(goodHigh, 20)}`;
 }
 const legend = (goodHigh: boolean, n: number, note = '') => `<div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>${n}타석 미만(표본 적음)${note}</div>`;
 
-// 존 9분할: 스트라이크존을 가로·세로 3등분, 칸 색 = 리그 같은 칸 대비 차이(0.5 OPS에서 최대), 10타석 미만 빗금. 포수 시점
-function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean): string {
-  const cells = z.map(([pa, ops], i) => {
-    const L = lg[i];
-    if (ops == null || !pa || L == null) return `<div class="zc thin"><b>-</b><span>${pa}타석</span></div>`;
-    const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
-    return `<div class="zc${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
-  }).join('');
-  return `<div class="zwrap"><div class="zside"><span>← 3루 쪽</span><span>포수 시점</span><span>1루 쪽 →</span></div><div class="zgrid">${cells}</div></div>${legend(goodHigh, 10, `<span class="zn">칸 숫자 = ${goodHigh ? 'OPS' : '피OPS'} · 존 안에서 끝난 타석만</span>`)}`;
+// 존 9분할 + 바깥 8칸: 스트라이크존을 가로·세로 3등분, 칸 색 = 리그 같은 칸 대비 차이(0.5 OPS에서 최대), 10타석 미만 빗금. 포수 시점
+// 바깥 8칸(위·아래·왼·오른·네 모서리)은 존 밖에서 끝난 타석. o·lo는 9칸 배열(위·가운데·아래 × 왼·가운데·오른), 가운데(4번)는 비어 있음
+function zcell([pa, ops]: ZoneCell, L: number | null | undefined, goodHigh: boolean, cls = ''): string {
+  if (ops == null || !pa || L == null) return `<div class="zc ${cls} thin"><b>-</b><span>${pa}타석</span></div>`;
+  const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
+  return `<div class="zc ${cls}${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
+}
+function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean, o?: ZoneCell[], lo?: (number | null)[]): string {
+  const inner = `<div class="zgrid">${z.map((c, i) => zcell(c, lg[i], goodHigh)).join('')}</div>`;
+  const head = '<div class="zside"><span>← 3루 쪽</span><span>포수 시점</span><span>1루 쪽 →</span></div>';
+  const note = `<span class="zn">칸 숫자 = ${goodHigh ? 'OPS' : '피OPS'} · 굵은 선 안 = 스트라이크존${o ? ', 바깥 = 존 밖' : ' (존 안에서 끝난 타석만)'}</span>`;
+  if (!o || !lo) return `<div class="zwrap">${head}<div class="zin">${inner}</div></div>${legend(goodHigh, 10, note)}`;
+  const out = (i: number, nm: string) => `<div class="zo zo-${nm}">${zcell(o[i], lo[i], goodHigh, 'sm')}</div>`;
+  return `<div class="zwrap">${head}<div class="zfull">${out(0, 'tl')}${out(1, 't')}${out(2, 'tr')}${out(3, 'l')}<div class="zin">${inner}</div>${out(5, 'r')}${out(6, 'bl')}${out(7, 'b')}${out(8, 'br')}</div></div>${legend(goodHigh, 10, note)}`;
 }
 const hasZone = (e: { zone?: ZoneCell[]; lgz?: (number | null)[] }) => !!e.zone && !!e.lgz && e.zone.some((c) => c[0] >= 5);
 
 // 존 9분할 + 전체·손별 탭(구종 표와 같은 모양). 탭 전환은 [id].astro가 같은 묶음(.sgrp) 안에서만
-type ZoneSrc = { zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]> };
+type ZoneSrc = { zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]>; zone?: ZoneCell[]; lgz?: (number | null)[]; zoneS?: Record<string, ZoneCell[]>; lgzS?: Record<string, (number | null)[]>; zout?: ZoneCell[]; lgo?: (number | null)[]; zoutS?: Record<string, ZoneCell[]>; lgoS?: Record<string, (number | null)[]> };
 function zoneSection(e: ZoneSrc, hands: [string, string, string][], title: string, small: string, goodHigh: boolean): string {
   if (!hasZone(e)) return '';
-  const sets = hands.map(([k, lab, h]) => [k, lab, h ? e.zoneS?.[h] : e.zone, h ? e.lgzS?.[h] : e.lgz] as const)
+  const sets = hands.map(([k, lab, h]) => [k, lab, h ? e.zoneS?.[h] : e.zone, h ? e.lgzS?.[h] : e.lgz, h ? e.zoutS?.[h] : e.zout, h ? e.lgoS?.[h] : e.lgo] as const)
     .filter(([, , z, l]) => z && l && z.some((c) => c[0] >= 5));
   const tabs = sets.length > 1 ? `<div class="sidebar" role="group" aria-label="상대 고르기">${sets.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>` : '';
-  return h2(title, small, true) + `<div class="sgrp">${tabs}${sets.map(([k, , z, l], i) => `<div data-side-body="${k}"${i ? ' hidden' : ''}>${zoneGrid(z!, l!, goodHigh)}</div>`).join('')}</div>`;
+  return h2(title, small, true) + `<div class="sgrp">${tabs}${sets.map(([k, , z, l, o, lo], i) => `<div data-side-body="${k}"${i ? ' hidden' : ''}>${zoneGrid(z!, l!, goodHigh, o, lo)}</div>`).join('')}</div>`;
 }
 
 function diamonds(sp: Record<string, Split>): string {
