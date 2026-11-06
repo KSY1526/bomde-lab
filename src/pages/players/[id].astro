@@ -13,7 +13,7 @@ import '../../styles/situ.css';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
+type Hex = { q: boolean; rq?: boolean; role?: string; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null };
 type Player = {
   id: string; name: string; kind: 'b' | 'p'; team: string; no: string | null; height: number | null; weight: number | null;
   school: string | null; joined: string | null; years: number[]; missing: number[]; pos: string; hand: string; left: boolean;
@@ -60,6 +60,8 @@ const grade = (h: Hex) => {
   const w = h.war;
   return w >= 6 ? 'S+' : w >= 4 ? 'S' : w >= 3 ? 'A+' : w >= 2 ? 'A' : w >= 1 ? 'B+' : w > 0 ? 'B' : 'C';
 };
+// 표본 충족: 규정 충족(q) 또는 구원투수 30이닝 이상(rq, scripts/export_patch.py). 구원은 '미달' 대신 중간·마무리로 표시
+const ok = (h: Hex) => h.q || !!h.rq;
 const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
 // 상황별 탭: 기본 시즌(지금 시즌, 없으면 마지막 시즌)만 미리 그리고, 다른 시즌은 버튼을 누를 때 situ.json을 받아 같은 함수로 그린다
 const situPath = join(process.cwd(), 'src/data/players-situ', `${p.id}.json`);
@@ -97,9 +99,9 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       </div>
 
       <div class="hexwrap">
-        {keys.map((k) => <div class="hexhead" data-y={k} hidden={k !== first}><b>{head(k)}</b></div>)}
+        {keys.map((k) => <div class="hexhead" data-y={k} hidden={k !== first}><b>{head(k)}{p.hex[k].role && k !== 'career' ? <span class="role"> · {p.hex[k].role}</span> : null}</b></div>)}
         <div class="years" role="group" aria-label="시즌 고르기">
-          {keys.map((k) => <button type="button" data-pick={k} aria-pressed={k === first ? 'true' : 'false'} class:list={{ nq: !p.hex[k].q }}>{k === 'career' ? '통산' : k}</button>)}
+          {keys.map((k) => <button type="button" data-pick={k} aria-pressed={k === first ? 'true' : 'false'} class:list={{ nq: !ok(p.hex[k]) }}>{k === 'career' ? '통산' : k}</button>)}
         </div>
         {keys.map((k) => <div class="hexbig" data-y={k} hidden={k !== first}><Hexagon vals={p.hex[k].vals} size={340} /></div>)}
         <a class="cmplink" data-cmplink href={`${url('players/compare')}?p=${p.id}:${first}`}>다른 선수와 육각형 비교</a>
@@ -130,9 +132,9 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
         <h2>연도별 모양 변화</h2>
         <div class="strip">
           {keys.filter((k) => k !== 'career').map((k) => (
-            <button type="button" class:list={['mini', { nq: !p.hex[k].q }]} data-pick={k} aria-label={`${k} 육각형 보기`}>
+            <button type="button" class:list={['mini', { nq: !ok(p.hex[k]) }]} data-pick={k} aria-label={`${k} 육각형 보기`}>
               <Hexagon vals={p.hex[k].vals} size={120} labels={false} ring={false} />
-              <span>{k}{p.hex[k].q ? '' : ' · 미달'}</span>
+              <span>{k}{p.hex[k].q ? '' : p.hex[k].rq ? ` · ${p.hex[k].role}` : ' · 미달'}</span>
             </button>
           ))}
         </div>
@@ -268,6 +270,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
 
   .hexwrap { grid-area: hex; text-align: center; min-width: 0; }
   .hexhead b { font-size: 17px; display: block; }
+  .hexhead .role { font-weight: 400; color: var(--muted); font-size: 14px; }
   .years { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin: 10px 0 0; }
   .years button {
     font: 600 16px/1.4 var(--num); padding: 1px 8px; border: 1px solid var(--line); border-radius: var(--radius);

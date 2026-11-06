@@ -37,8 +37,7 @@ const items = cands.map((c) => {
                 </ul>
               </>
             )}
-            <a class="go" href={url(`players/${c.id}`)}>{c.name} 상세 기록 보기</a>
-            <p class="go-sub">시즌별 기록 · 육각형 변화 · 통산 성적</p>
+            <a class="go" href={url(`players/${c.id}`)}>{c.name} 선수 기록 더 보기</a>
           </div>
         </div>
       </div>
@@ -72,9 +71,8 @@ const items = cands.map((c) => {
   .rel { margin: 0 0 10px; padding-left: 18px; font-size: 14.5px; }
   .rel li { margin: 2px 0; }
   .muted { color: var(--muted); font-size: 13px; }
-  .go { display: inline-block; margin-top: 4px; padding: 10px 18px; border-radius: var(--radius); background: var(--accent); color: var(--bg); font-weight: 700; font-size: 15px; }
-  .go:hover { text-decoration: none; filter: brightness(1.08); }
-  .go-sub { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+  .go { display: inline-block; margin-top: 2px; padding: 8px 16px; border: 1px solid var(--accent); border-radius: var(--radius); color: var(--accent); font-weight: 600; font-size: 14.5px; }
+  .go:hover { background: var(--accent); color: var(--bg); text-decoration: none; }
   @media (max-width: 560px) {
     .grid { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     .hx { margin: 0 auto; width: 100%; }

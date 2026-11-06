@@ -34,16 +34,29 @@
 .situ th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .situ .t { text-align: left; }
 .situ td small, .situ th small { display: block; color: var(--muted); font-size: 11px; font-weight: 400; }
-.situ .rvc .rv { display: inline-block; width: 140px; vertical-align: middle; }
-.situ .rvn { display: inline-block; width: 46px; font-family: var(--num); font-size: 16px; }
-.situ .rvh { text-align: center; }
-.situ .rvaxis { display: flex; justify-content: space-between; width: 140px; font-weight: 400; font-size: 11px; margin: 0 46px 0 auto; }
-.situ .ub { display: inline-block; width: 56px; height: 8px; background: var(--chip-bg); margin-right: 8px; vertical-align: middle; }
+.situ .rvc .rv { display: inline-block; width: 84px; vertical-align: middle; }
+.situ .rvn { display: inline-block; width: 40px; font-family: var(--num); font-size: 16px; }
+.situ .ub { display: inline-block; width: 40px; height: 8px; background: var(--chip-bg); margin-right: 6px; vertical-align: middle; }
 .situ .ub i { display: block; height: 100%; background: var(--pos); }
-.situ .ubn { display: inline-block; min-width: 3.4em; text-align: right; font-variant-numeric: tabular-nums; }
-.situ .mvd { white-space: normal; min-width: 120px; font-size: 13px; color: var(--muted); line-height: 1.3; text-align: left; }
-.situ .mvd b { color: var(--text); font-family: var(--num); font-size: 16px; }
-.situ .mvd small { font-size: 12px; }
+.situ .ubn { display: inline-block; min-width: 3em; text-align: right; font-variant-numeric: tabular-nums; }
+/* 구종 표: 숫자 칸은 가운데 줄맞춤, 칸 사이 여백을 줄여 한 화면에 */
+.situ .pt th, .situ .pt td { padding: 7px 5px; text-align: center; }
+.situ .pt th.t, .situ .pt td.t { text-align: left; }
+.situ .pt .pa { margin-left: 4px; font-size: 11px; color: var(--muted); }
+.situ .mvd { white-space: nowrap; }
+.situ .mv { display: inline-block; margin: 0 3px; font-family: var(--num); font-size: 16px; }
+.situ .mv i { font-style: normal; font-size: 10px; color: var(--muted); margin-right: 2px; vertical-align: 2px; }
+.situ .tnote { margin: 6px 0 0; font-size: 12px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 560px) {
+  .situ .pt { font-size: 13px; }
+  .situ .pt th, .situ .pt td { padding: 7px 2px; }
+  .situ .pt .ub { display: none; }
+  .situ .pt .ubn { min-width: 0; }
+  .situ .rvc .rv { width: 40px; }
+  .situ .rvn { width: 32px; font-size: 14px; }
+  .situ .pt th { font-size: 12px; }
+  .situ .mv { margin: 0 2px; font-size: 15px; }
+}
 
 .situ .cgrid-wrap { display: grid; grid-template-columns: 18px 14px minmax(0, 1fr); gap: 4px; max-width: 620px; }
 .situ .cg-y { writing-mode: vertical-rl; font-size: 12px; color: var(--muted); text-align: center; }
@@ -95,10 +108,10 @@
 .situ .front .zone { fill: var(--line); fill-opacity: .35; stroke: var(--surface); stroke-width: 2; }
 .situ .front .zone.on { fill: var(--accent); fill-opacity: .22; }
 .situ .front .zl { font-size: 11px; fill: var(--muted); }
-.situ .front .zl.on { fill: var(--accent); font-weight: 700; font-size: 13px; }
+.situ .front .zl.on { fill: var(--accent); font-weight: 600; font-size: 12px; }
 .situ .front .hline { stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 3 3; }
 .situ .front .lgrel { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 3 2; }
-.situ .front .rl { font-size: 12px; fill: var(--text); font-weight: 600; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+.situ .front .rl { font-size: 12px; fill: var(--text); font-weight: 500; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
 .situ .front .rvt { font-family: var(--num); font-size: 15px; fill: var(--accent); font-weight: 700; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
 .situ .rcap { font-size: 13px; margin: 8px 0 0; line-height: 1.6; }
 .situ .rcap .slot { font-size: 16px; color: var(--navy); }
@@ -106,13 +119,13 @@
 .situ .move .ax { stroke: var(--line); }
 .situ .move .ring { fill: none; stroke: var(--line); stroke-dasharray: 3 3; }
 .situ .move .tk { font-size: 11px; fill: var(--muted); }
-.situ .move .arml { fill: var(--accent); font-weight: 600; }
+.situ .move .arml { fill: var(--accent); }
 .situ .move .armside { fill: var(--accent); fill-opacity: .06; }
 .situ .move .pd { fill: var(--pos); stroke: var(--surface); stroke-width: 2; }
 .situ .move .lgp { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 2 2; }
 .situ .move .arw { stroke: var(--pos); stroke-width: 1.5; }
 .situ .move .ahd { fill: var(--pos); }
-.situ .move .pl { font-size: 12px; fill: var(--text); font-weight: 600; paint-order: stroke; stroke: var(--bg); stroke-width: 4px; stroke-linejoin: round; }
+.situ .move .pl { font-size: 11.5px; fill: var(--text); font-weight: 500; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
 .situ .mleg { display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--muted); margin-top: 4px; }
 .situ .mleg i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .situ .lgp-sw { border: 1.5px dashed var(--muted); } .situ .pd-sw { background: var(--pos); }
@@ -130,3 +143,12 @@
 .situ .sidebar { display: flex; gap: 4px; margin: 14px 0 6px; }
 .situ .sidebar button { font: 600 14px/1.4 var(--font); padding: 3px 12px; border: 1px solid var(--line); border-radius: var(--radius); background: transparent; color: var(--text); cursor: pointer; }
 .situ .sidebar button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
+
+/* 존 9분할: 가로·세로 3칸, 존 테두리 */
+.situ .zwrap { max-width: 360px; padding: 4px; border: 2px solid var(--muted); border-radius: var(--radius); }
+.situ .zgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+.situ .zc { border-radius: 2px; padding: 8px 2px; text-align: center; min-height: 84px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }
+.situ .zc b { font-family: var(--num); font-size: 26px; line-height: 1.1; }
+.situ .zc span, .situ .zc em { font-style: normal; font-size: 11px; color: var(--muted); line-height: 1.4; }
+.situ .zc.dk b, .situ .zc.dk span, .situ .zc.dk em { color: var(--bg); }
+.situ .zc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 8%, transparent) 6px 8px); }

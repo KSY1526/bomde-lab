@@ -2,12 +2,13 @@
 // HTML 문자열을 돌려주는 함수라서 빌드 때(기본 시즌, set:html)와 브라우저에서(다른 시즌 버튼, situ.json을 받아) 똑같이 쓴다.
 // 데이터 = scripts/export_players.py situ() → src/data/players-situ/<id>.json {시즌: 묶음}. 스타일 src/styles/situ.css
 
+type ZoneCell = [number, number | null]; // 존 9분할 한 칸: 타석, OPS
 type Split = [number, number | null, number | null, number | null, number | null, number | null, number | null]; // 타석, 타율, 출루, 장타, OPS, 삼진%, 볼넷%
-export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R' };
+export type SituB = { sp?: Record<string, Split>; pt?: [string, number, number | null, number | null][]; spray?: Record<string, [number, number, number]>; lgc: Record<string, number>; side?: 'L' | 'R'; zone?: ZoneCell[]; lgz?: (number | null)[] };
 type Ars = [string, number, number, number, number, number, number | null, number | null, number][]; // 구종, 비율, 구속, 헛스윙, 움직임 좌우·상하, 구종가치, 피OPS, 타석
 export type SituP = {
   sp?: Record<string, Split>; ars?: Ars; arsS?: Record<string, Ars>;
-  rel?: [number, number, number]; throws: 'L' | 'R'; lgm: Record<string, [number, number]>; lgslot?: string; lgr?: [number, number]; lgc: Record<string, number>;
+  rel?: [number, number, number]; throws: 'L' | 'R'; lgm: Record<string, [number, number]>; lgslot?: string; lgr?: [number, number]; lgc: Record<string, number>; zone?: ZoneCell[]; lgz?: (number | null)[];
 };
 
 const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
@@ -58,7 +59,8 @@ function rvBar(v: number | null, scale = 2): string {
   const w = Math.min(50, (Math.abs(v) / scale) * 50);
   return `<div class="rv"><i class="${v > 0 ? 'r pos' : 'l neg'}" style="width:${w.toFixed(0)}%"></i><em></em></div><span class="rvn">${v > 0 ? '+' : ''}${v.toFixed(2)}</span>`;
 }
-const rvHead = (who: string) => `<th class="rvh">구종가치 /100구<div class="rvaxis"><span>손해</span><span>0</span><span>${who} 이득</span></div></th>`;
+const rvHead = () => '<th>구종가치</th>';
+const rvNote = (who: string) => `<p class="tnote">구종가치(100구당): 가운데가 0, 오른쪽(파랑)은 ${who}에게 이득, 왼쪽(빨강)은 손해</p>`;
 
 // 카운트 판: 칸 색 = 리그 같은 카운트 대비 차이(0.5 OPS에서 최대), 20타석 미만 빗금
 function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHigh: boolean): string {
@@ -73,6 +75,19 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
 <div class="cgrid">${cells}</div></div></div>
 <div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>20타석 미만(표본 적음)</div>`;
 }
+
+// 존 9분할: 스트라이크존을 가로·세로 3등분, 칸 색 = 리그 같은 칸 대비 차이(0.5 OPS에서 최대), 10타석 미만 빗금. 포수 시점
+function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean): string {
+  const cells = z.map(([pa, ops], i) => {
+    const L = lg[i];
+    if (ops == null || !pa || L == null) return `<div class="zc thin"><b>-</b><span>${pa}타석</span></div>`;
+    const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
+    return `<div class="zc${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
+  }).join('');
+  return `<div class="zwrap"><div class="zgrid">${cells}</div></div>
+<p class="tnote">포수 자리에서 본 스트라이크존(왼쪽 = 3루 쪽). 타석을 끝낸 공이 지나간 칸 기준이고, 존 밖 공은 뺐습니다. 색 = 리그 같은 칸과의 차이: ${goodHigh ? '파랑 리그보다 강함 · 빨강 약함' : '파랑 리그보다 잘 막음 · 빨강 많이 맞음'}</p>`;
+}
+const hasZone = (e: { zone?: ZoneCell[]; lgz?: (number | null)[] }) => !!e.zone && !!e.lgz && e.zone.some((c) => c[0] >= 5);
 
 function diamonds(sp: Record<string, Split>): string {
   const on: Record<string, number[]> = { '주자 없음': [0, 0, 0], '주자 있음': [1, 0, 0], 득점권: [0, 1, 0], 만루: [1, 1, 1] };
@@ -114,12 +129,13 @@ export function renderBatter(e: SituB): string {
     const tot = (e.pt ?? []).reduce((a, r) => a + r[1], 0);
     const rows = pt.map(([t, n, wh, rv]) => {
       const o = sp[t];
-      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<small>${o ? o[0] : 0}</small></td></tr>`;
+      return `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, (n / tot) * 250).toFixed(0)}%"></i></span><span class="ubn">${n0((n / tot) * 100)}%</span></td><td class="rvc">${rvBar(rv)}</td><td>${wh == null ? '-' : n0(wh) + '%'}</td><td>${o ? f3(o[4]) : '-'}<span class="pa">${o ? o[0] : 0}</span></td></tr>`;
     }).join('');
     out += h2('구종별 대응');
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>상대한 비율</th>${rvHead('타자')}<th>헛스윙률</th><th>결과 OPS<small>타석</small></th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead><tbody>${rows}</tbody></table></div>${rvNote('타자')}`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 대응') + countGrid(sp, e.lgc, true);
+  if (hasZone(e)) out += h2('존 9분할 OPS') + zoneGrid(e.zone!, e.lgz!, true);
   const sprayHtml = e.spray ? spray(e.spray) : '';
   const runners = sp['주자 없음'] ? `<div>${h2('주자 상황', 'OPS')}${diamonds(sp)}</div>` : '';
   if (sprayHtml || runners) {
@@ -197,11 +213,13 @@ function move(ars: NonNullable<SituP['ars']>, lgm: SituP['lgm'], throws: 'L' | '
 <div class="mleg"><span><i class="lgp-sw"></i>${season} ${lgslot ? `${lgslot} 투수 평균` : `리그 평균(${throws === 'R' ? '우' : '좌'}투수)`}</span><span><i class="pd-sw"></i>${esc(name)}</span><span>화살표 = 평균과 얼마나 다르게 움직이나</span></div>`;
 }
 
-function mvtxt(hm: number, vm: number, L: [number, number] | undefined, throws: 'L' | 'R'): string {
+// 리그(같은 팔 높이) 평균 대비 움직임: 위·아래(▲ 덜 떨어짐 · ▼ 더 떨어짐)와 좌우(◀▶ = 위 그래프와 같은 방향) 차이를 화살표와 cm로
+function mvtxt(hm: number, vm: number, L: [number, number] | undefined): string {
   if (!L || hm == null || vm == null) return '-';
-  const dh = hm - L[0], dv = vm - L[1], arm = (dh < 0) === (throws === 'R');
-  const v = Math.abs(dv) < 1.5 ? '높이는 평균과 비슷' : `<b>${n0(Math.abs(dv))}cm</b> ${dv > 0 ? '덜 떨어짐' : '더 떨어짐'}`;
-  return v + (Math.abs(dh) < 1.5 ? '' : `<br><small>${arm ? '던지는 팔 쪽' : '반대쪽'}으로 ${n0(Math.abs(dh))}cm 더</small>`);
+  const dh = hm - L[0], dv = vm - L[1];
+  const v = Math.abs(dv) < 1.5 ? '' : `<span class="mv"><i>${dv > 0 ? '▲' : '▼'}</i>${n0(Math.abs(dv))}</span>`;
+  const h = Math.abs(dh) < 1.5 ? '' : `<span class="mv"><i>${dh < 0 ? '◀' : '▶'}</i>${n0(Math.abs(dh))}</span>`;
+  return v + h || '<span class="muted">평균 수준</span>';
 }
 
 export function renderPitcher(e: SituP, name: string, height: number, season: string): string {
@@ -227,12 +245,13 @@ ${lg ? `<br><span class="muted">점선 원 = 리그 ${hand} 평균(${n0(lg[1])}c
     // 전체 · 좌타자 · 우타자 탭(2026-10-28 사용자). 탭 전환은 [id].astro가 [data-side]로
     const sets: [string, string, Ars][] = [['전체', '전체', ars], ['좌타', '좌타자', e.arsS?.['좌타'] ?? []], ['우타', '우타자', e.arsS?.['우타'] ?? []]];
     const body = (rs: Ars) => rs.map(([t, u, v, w, hm, vm, rv, ops, pa]) => `<tr><td class="t"><b>${esc(t)}</b></td><td><span class="ub"><i style="width:${Math.min(100, u * 2.5).toFixed(0)}%"></i></span><span class="ubn">${u.toFixed(1)}%</span></td><td>${v?.toFixed(1) ?? '-'}</td><td>${w?.toFixed(1) ?? '-'}%</td>
-<td class="mvd">${mvtxt(hm, vm, e.lgm[t], e.throws)}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<small>${pa}</small></td></tr>`).join('');
+<td class="mvd">${mvtxt(hm, vm, e.lgm[t])}</td><td class="rvc">${rvBar(rv)}</td><td>${f3(ops)}<span class="pa">${pa}</span></td></tr>`).join('');
     const live = sets.filter(([, , rs]) => rs.length);
     if (live.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 타자 고르기">${live.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>평균 km/h</th><th>헛스윙률</th><th>리그 대비 움직임</th>${rvHead('투수')}<th>피OPS<small>타석</small></th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th><th>구속</th><th>헛스윙</th><th>움직임</th>${rvHead()}<th>피OPS(타석)</th></tr></thead>${live.map(([k, , rs], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${body(rs)}</tbody>`).join('')}</table></div>${rvNote('투수')}<p class="tnote">구속은 평균 km/h. 움직임은 같은 팔 높이 리그 투수 평균과의 차이(cm): ▲ 덜 떨어짐 · ▼ 더 떨어짐 · ◀▶ 위 그래프의 그 방향으로 더 휨</p>`;
   }
   if (Object.keys(sp).some((k) => /^\d-\d$/.test(k))) out += h2('카운트별 결과') + countGrid(sp, e.lgc, false);
+  if (hasZone(e)) out += h2('존 9분할 피OPS') + zoneGrid(e.zone!, e.lgz!, false);
   if (sp['주자 없음']) out += h2('주자 상황', '피OPS') + diamonds(sp);
   return out || '<p class="soon">이 시즌은 상황별 기록이 없습니다.</p>';
 }
