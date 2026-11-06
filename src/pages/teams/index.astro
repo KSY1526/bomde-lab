@@ -1,0 +1,15 @@
+---
+// 팀 순위 페이지 기본 = 최신 시즌. 지난 시즌은 /teams/<시즌>/ ([season].astro). 선수 검색 아래 소분류(2026-11-07 사용자)
+import Base from '../../layouts/Base.astro';
+import TeamTable from '../../components/TeamTable.astro';
+import { SEASON } from '../../lib/home';
+import { url } from '../../lib/site';
+---
+<Base title={`${SEASON} 팀 순위`} description={`${SEASON} KBO 10개 팀의 순위, 득실, 기대승률과 팀 타격·투구 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '팀 순위', path: url('teams') }]}>
+  <h1 class="rk-h">{SEASON} 팀 순위</h1>
+  <TeamTable season={SEASON} />
+</Base>
+
+<style>
+  .rk-h { font-size: 24px; margin: 8px 0 6px; }
+</style>

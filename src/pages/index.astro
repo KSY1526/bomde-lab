@@ -6,9 +6,9 @@ import TodayPlayer from '../components/TodayPlayer.astro';
 import WarBoard from '../components/WarBoard.astro';
 import { publishedPosts } from '../lib/posts';
 import { CATEGORIES, url } from '../lib/site';
+import { SEASON } from '../lib/home';
 import playerIndex from '../data/player-index.json';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import popular from '../data/popular-players.json';
 
 const RECENT = 5;
 const PER_CATEGORY = 2;
@@ -26,36 +26,19 @@ const sections = Object.entries(CATEGORIES)
   })
   .filter((s) => s.total > 0);
 
-// 검색창 아래 예시 선수(2026-11-03 사용자: 3명, 이름+팀만, 등급 글자 없음). 빌드 때 계산: 최신 글부터 frontmatter tags에 이름이 있는 선수
-// (동명이인은 2026에 뛴 선수만, 그래도 여럿이면 글 태그의 팀으로 고르고 못 고르면 건너뜀). 3명이 안 되면 2026 WAR 높은 순으로 채움
+// 검색창 아래 "많이 찾은 선수"(2026-11-07 사용자: 예시 선수 3명 대신). 최근 선수 검색 클릭을 서로 다른 방문자 수로 센 목록
+// src/data/popular-players.json (scripts/popular_players.py가 로그에서 만든다). 홈에는 지금 시즌에 뛴 선수만 나온다
 type IRow = [string, string, string, string, string, number, number, string[]];
-const rowsIdx = playerIndex as IRow[];
-const EXAMPLES = 3;
-const examples: { id: string; name: string; team: string }[] = [];
-const add = (r: IRow) => { if (examples.length < EXAMPLES && !examples.some((e) => e.id === r[0])) examples.push({ id: r[0], name: r[1], team: r[3] }); };
-for (const p of posts) {
-  for (const t of p.data.tags) {
-    let same = rowsIdx.filter((r) => r[1] === t && r[6] === 2026);
-    if (same.length > 1) same = same.filter((r) => p.data.tags.includes(r[3]));
-    if (same.length === 1) add(same[0]);
-  }
-  if (examples.length >= EXAMPLES) break;
-}
-if (examples.length < EXAMPLES) {
-  const war2026 = (id: string) => {
-    const h = JSON.parse(readFileSync(join(process.cwd(), 'src/data/players', `${id}.json`), 'utf8')).hex?.['2026'];
-    return h && h.war != null ? (h.war as number) : null;
-  };
-  rowsIdx.filter((r) => r[6] === 2026).map((r) => ({ r, w: war2026(r[0]) })).filter((x) => x.w != null)
-    .sort((a, b) => b.w! - a.w!).forEach((x) => add(x.r));
-}
+const lastSeason = new Map((playerIndex as IRow[]).map((r) => [r[0], r[6]]));
+const POPULAR = 5;
+const examples = popular.players.filter((x) => lastSeason.get(x.id) === SEASON).slice(0, POPULAR);
 ---
 <Base>
   <div class="home-search">
     <PlayerSearch posts qid="home-q" />
     {examples.length > 0 && (
       <p class="examples">
-        <span class="ex-label">예시</span>
+        <span class="ex-label">많이 찾은 선수</span>
         {examples.map((e) => <a href={url(`players/${e.id}`)}>{e.name}<small>{e.team}</small></a>)}
       </p>
     )}

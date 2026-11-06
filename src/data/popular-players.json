@@ -1,0 +1,54 @@
+{
+ "asOf": "2026-11-07",
+ "days": 14,
+ "players": [
+  {
+   "id": "64021",
+   "name": "박세웅",
+   "team": "롯데",
+   "visitors": 5
+  },
+  {
+   "id": "64001",
+   "name": "고영표",
+   "team": "KT",
+   "visitors": 4
+  },
+  {
+   "id": "68525",
+   "name": "한동희",
+   "team": "롯데",
+   "visitors": 4
+  },
+  {
+   "id": "50030",
+   "name": "소형준",
+   "team": "KT",
+   "visitors": 3
+  },
+  {
+   "id": "52060",
+   "name": "박영현",
+   "team": "KT",
+   "visitors": 3
+  },
+  {
+   "id": "52568",
+   "name": "한태양",
+   "team": "롯데",
+   "visitors": 3
+  },
+  {
+   "id": "52605",
+   "name": "김도영",
+   "team": "KIA",
+   "visitors": 3
+  },
+  {
+   "id": "53123",
+   "name": "오스틴",
+   "team": "LG",
+   "visitors": 3
+  }
+ ]
+}

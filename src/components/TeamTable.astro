@@ -1,0 +1,92 @@
+---
+// 팀 순위 본문. 일반 표, 숫자판 면 칠하지 않음. 선수 순위(RankingTable)와 같은 시즌 링크·표 모양.
+// 표 둘: 순위·득실(승패, 득점, 실점, 득실 기대승률) / 타격·투구(팀 타격·팀 투구 기록).
+import { TEAM_SEASONS, seasonTeams, RECORD_DATE } from '../lib/team-records';
+import { SEASON } from '../lib/home';
+import { url } from '../lib/site';
+
+interface Props { season: number }
+const { season } = Astro.props;
+const rows = seasonTeams(season);
+const seasonHref = (y: number) => (y === SEASON ? url('teams') : url(`teams/${y}`));
+const rate = (v: number) => v.toFixed(3).replace(/^0/, '');
+const sign = (v: number, d = 0) => (v > 0 ? '+' : '') + v.toFixed(d);
+---
+<div class="tm">
+  <nav class="seasons" aria-label="시즌">
+    {TEAM_SEASONS.map((y) => (y === season ? <span aria-current="page">{y}</span> : <a href={seasonHref(y)}>{y}</a>))}
+  </nav>
+
+  <h2 class="th">순위·득실</h2>
+  <div class="scroll">
+    <table class="t1">
+      <thead>
+        <tr>
+          <th class="c s1" scope="col">순위</th><th class="s2" scope="col">팀</th>
+          <th class="n" title="경기">경기</th><th class="n">승</th><th class="n">패</th><th class="n">무</th>
+          <th class="n" title="승률">승률</th><th class="n">득점</th><th class="n">실점</th><th class="n" title="득점 − 실점">득실차</th>
+          <th class="n" title="득점·실점으로 계산한 기대 승률(피타고리안, 지수 1.83)">기대승률</th>
+          <th class="n" title="실제 승수 − 득실 기준 기대 승수. 플러스면 득실차보다 더 많이 이긴 팀">운(승)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td class="c s1">{r.rank}</td><td class="s2">{r.team}</td>
+            <td class="n">{r.g}</td><td class="n">{r.w}</td><td class="n">{r.l}</td><td class="n">{r.d}</td>
+            <td class="n">{rate(r.pct)}</td><td class="n">{r.rs}</td><td class="n">{r.ra}</td><td class="n">{sign(r.diff)}</td>
+            <td class="n">{rate(r.pyth)}</td><td class="n">{sign(r.luck, 1)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="th">팀 타격·투구</h2>
+  <div class="scroll">
+    <table class="t2">
+      <thead>
+        <tr>
+          <th class="c s1" scope="col">순위</th><th class="s2" scope="col">팀</th>
+          <th class="n">타율</th><th class="n">출루율</th><th class="n">장타율</th><th class="n">OPS</th>
+          <th class="n" title="조정 득점 창출력(리그 평균 100)">wRC+</th><th class="n">홈런</th><th class="n">도루</th>
+          <th class="n" title="평균자책점">ERA</th><th class="n" title="이닝당 출루 허용">WHIP</th>
+          <th class="n" title="투수 탈삼진률">K%</th><th class="n" title="투수 볼넷률">BB%</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => (
+          <tr>
+            <td class="c s1">{r.rank}</td><td class="s2">{r.team}</td>
+            <td class="n">{rate(r.avg)}</td><td class="n">{rate(r.obp)}</td><td class="n">{rate(r.slg)}</td><td class="n">{rate(r.ops)}</td>
+            <td class="n">{r.wrc.toFixed(0)}</td><td class="n">{r.hr}</td><td class="n">{r.sb}</td>
+            <td class="n">{r.era.toFixed(2)}</td><td class="n">{r.whip.toFixed(2)}</td>
+            <td class="n">{r.k.toFixed(1)}%</td><td class="n">{r.bb.toFixed(1)}%</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="note">
+    {season === SEASON && RECORD_DATE ? `${RECORD_DATE}까지의 정규시즌 기록입니다. ` : ''}팀 이름은 지금 이름으로 통일했습니다(SK=SSG, 넥센=키움).
+    기대승률은 득점·실점으로 계산한 값이고, 운(승)이 플러스면 득실차보다 더 많이 이긴 팀입니다. 열 이름에 마우스를 올리면 설명이 나옵니다.
+  </p>
+</div>
+
+<style>
+  .seasons { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 14px; font-variant-numeric: tabular-nums; margin: 4px 0 16px; }
+  .seasons a { color: var(--muted); text-decoration: none; }
+  .seasons a:hover { color: var(--text); text-decoration: underline; }
+  .seasons [aria-current] { color: var(--accent); font-weight: 700; }
+  .th { margin: 22px 0 6px; font-size: 15px; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); padding: 6px 6px; border-bottom: 1px solid var(--text); white-space: nowrap; }
+  td { padding: 7px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .n { text-align: right; }
+  .c { text-align: center; width: 52px; }
+  .s1, .s2 { position: sticky; background: var(--bg); z-index: 1; }
+  .s1 { left: 0; }
+  .s2 { left: 52px; font-weight: 600; }
+  .note { font-size: 13px; color: var(--muted); margin-top: 12px; }
+</style>

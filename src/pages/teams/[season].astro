@@ -1,0 +1,21 @@
+---
+// 지난 시즌 팀 순위. 최신 시즌은 /teams/(index.astro)
+import Base from '../../layouts/Base.astro';
+import TeamTable from '../../components/TeamTable.astro';
+import { SEASON } from '../../lib/home';
+import { TEAM_SEASONS } from '../../lib/team-records';
+import { url } from '../../lib/site';
+
+export function getStaticPaths() {
+  return TEAM_SEASONS.filter((y) => y !== SEASON).map((y) => ({ params: { season: String(y) } }));
+}
+const season = Number(Astro.params.season);
+---
+<Base title={`${season} 팀 순위`} description={`${season} KBO 팀 순위, 득실, 기대승률과 팀 타격·투구 기록`} breadcrumbs={[{ name: '홈', path: url() }, { name: '팀 순위', path: url('teams') }, { name: String(season), path: url(`teams/${season}`) }]}>
+  <h1 class="rk-h">{season} 팀 순위</h1>
+  <TeamTable season={season} />
+</Base>
+
+<style>
+  .rk-h { font-size: 24px; margin: 8px 0 6px; }
+</style>

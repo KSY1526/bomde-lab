@@ -9,6 +9,7 @@ import { teamColor, darken } from '../../lib/teams';
 import { url, CATEGORIES, formatDate } from '../../lib/site';
 import { postsByPlayer } from '../../lib/post-players';
 import { renderBatter, renderPitcher } from '../../lib/situ';
+import { RECORD_DATE } from '../../lib/team-records';
 import '../../styles/situ.css';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -112,6 +113,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
         {keys.map((k) => <div class="type" data-y={k} hidden={k !== first}>{p.hex[k].type}</div>)}
         {keys.map((k) => <div class="tiles" data-y={k} hidden={k !== first}><span class="tl">{k === 'career' ? '통산' : `${k} 시즌`}</span>{tilesOf(k).map(([v, l]) => <div class="tile"><b>{v}</b><span>{l}</span></div>)}</div>)}
         {bio && <p class="cap">{bio}</p>}
+        {RECORD_DATE && <p class="cap asof">기록 기준일 {RECORD_DATE} ({CUR} 정규시즌까지)</p>}
       </div>
     </div>
 
@@ -311,6 +313,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
   .tile span { font-size: 12px; white-space: nowrap; }
   .cap { font-size: 13px; color: var(--muted); margin: 10px 0 0; line-height: 1.55; }
   .cap :global(b) { color: var(--text); }
+  .asof { margin-top: 2px; }
 
   .ai { margin: 22px 0 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
   .ai p { margin: 0; font-size: 15px; }

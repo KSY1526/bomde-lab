@@ -20,7 +20,7 @@ interface Props {
   /** 본문 맨 아래 크봇(선수 페이지 등, 2026-10-28). 없으면 크봇은 헤더 검색에서 부를 때만 뜬다 */
   chat?: { examples: string[]; lead?: string; ctx?: string };
 }
-const { title, description = SITE.description, image = 'og/default.png?v=2', published, updated, tags = [], breadcrumbs = [], chat } = Astro.props;
+const { title, description = SITE.description, image = 'og/default.png?v=3', published, updated, tags = [], breadcrumbs = [], chat } = Astro.props;
 const fullTitle = title ? `${title} | ${SITE.title}` : `${SITE.title} — ${SITE.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -110,11 +110,22 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
             <small>{SITE.tagline}</small>
           </span>
         </a>
-        <Search hideButton={hideSearch} mode={searchMode} />
+        <div class="head-right">
+          <div class="social-top">
+            {SOCIAL.map((s) => (
+              <a class="soc" href={s.href} target="_blank" rel="noopener" aria-label={`${s.label} 채널`}>
+                {s.key === 'youtube'
+                  ? <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5" fill="currentColor"/><path d="M10 9.2v5.6l5-2.8z" fill="var(--bg)"/></svg>
+                  : <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.1" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.2" cy="6.8" r="1.3" fill="currentColor"/></svg>}
+                <span>{s.label}</span>
+              </a>
+            ))}
+          </div>
+          <Search hideButton={hideSearch} mode={searchMode} />
+        </div>
       </div>
       <nav class="wrap nav" aria-label="주 메뉴">
         {MENU.map((m) => <a href={url(m.path)} aria-current={section === m.key ? 'page' : undefined}>{m.label}</a>)}
-        <span class="nav-social">{SOCIAL.map((s) => <a href={s.href} target="_blank" rel="noopener">{s.label}</a>)}</span>
       </nav>
       {sub.length > 0 && (
         <nav class="subnav-row" aria-label={`${MENU.find((m) => m.key === section)?.label} 메뉴`}>
@@ -188,8 +199,13 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
   .nav a[aria-current='page'] { color: var(--accent); font-weight: 600; box-shadow: inset 0 -2px var(--accent); }
   /* 소분류 줄: 대분류 아래 가는 선으로 나눈 두 번째 줄. 휴대폰은 가로 스크롤 */
   .subnav-row { border-top: 1px solid var(--line); }
-  .nav-social { display: flex; gap: 14px; margin-left: auto; padding-left: 12px; flex: none; }
-  .nav-social a { font-size: 14px; }
+  .head-right { display: flex; align-items: center; gap: 8px; flex: none; }
+  .social-top { display: flex; gap: 6px; }
+  .soc { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border: 1px solid var(--text); border-radius: var(--radius); color: var(--text); font-size: 13.5px; font-weight: 600; white-space: nowrap; }
+  .soc svg { width: 17px; height: 17px; flex: none; }
+  .soc:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
+  /* 휴대폰: 글자를 빼고 아이콘만(머리말이 한 줄에 들어가게) */
+  @media (max-width: 640px) { .soc span { display: none; } .soc { padding: 6px 8px; } }
   .nav.sub { gap: 18px; padding-top: 2px; }
   .nav.sub a { font-size: 14px; padding: 7px 0 8px; }
 

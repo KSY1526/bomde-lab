@@ -4,6 +4,7 @@
 // 정렬 규칙은 홈 WarBoard와 같다: 순위·등급 가운데, 숫자 오른쪽, 글자 왼쪽, table-layout fixed.
 import { COLS, SEASONS, seasonRankings } from '../lib/rankings';
 import { SEASON } from '../lib/home';
+import { RECORD_DATE } from '../lib/team-records';
 import { url } from '../lib/site';
 
 interface Props { season: number }
@@ -67,7 +68,7 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
       </div>
     </section>
   ))}
-  <p class="note">기본은 규정타석·규정이닝을 채운 선수입니다. 70%·50%는 규정의 그 비율 이상 뛴 선수, 불펜은 구원 30이닝 이상입니다. 기록 이름을 누르면 그 기록으로 다시 줄 세웁니다.</p>
+  <p class="note">{season === SEASON && RECORD_DATE ? `기록 기준일 ${RECORD_DATE}. ` : ''}기본은 규정타석·규정이닝을 채운 선수입니다. 70%·50%는 규정의 그 비율 이상 뛴 선수, 불펜은 구원 30이닝 이상입니다. 기록 이름을 누르면 그 기록으로 다시 줄 세웁니다.</p>
 </div>
 
 <script>

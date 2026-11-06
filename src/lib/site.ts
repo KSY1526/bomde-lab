@@ -1,13 +1,13 @@
 export const SITE = {
   title: '봄데 연구소',
-  tagline: '자이언츠 팬이 숫자로 보는 KBO',
+  tagline: 'KBO 선수 기록 검색과 숫자로 읽는 칼럼',
   description: 'KBO 투구·기록 데이터를 가공한 통계와 차트로 읽는 야구 블로그. 크봇에게 기록을 물어보세요.',
 };
 
 // 쇼츠·릴스 채널. 푸터와 소개 페이지에 링크로 나온다.
 export const SOCIAL = [
-  { label: '유튜브', href: 'https://www.youtube.com/@bomde_lab' },
-  { label: '인스타그램', href: 'https://www.instagram.com/bomde_lab/' },
+  { key: 'youtube', label: '유튜브', href: 'https://www.youtube.com/@bomde_lab' },
+  { key: 'instagram', label: '인스타그램', href: 'https://www.instagram.com/bomde_lab/' },
 ];
 
 // 메뉴 = 카테고리. 새 카테고리는 사용자가 정할 때 여기에 추가한다(content.config.ts enum도 같이).
@@ -32,6 +32,7 @@ export const SUBMENU: Partial<Record<Section, { label: string; path: string }[]>
   players: [
     { label: '선수 검색', path: 'players' },
     { label: '선수 순위', path: 'rankings' },
+    { label: '팀 순위', path: 'teams' },
     { label: '선수 비교', path: 'players/compare' },
   ],
   columns: [
@@ -48,7 +49,7 @@ export const SEARCH_PLACEHOLDER: Record<SearchMode, string> = { all: '선수 이
 export function sectionOf(pathname: string): Section | null {
   const is = (p: string) => pathname === url(p) || pathname.startsWith(url(p));
   if (pathname === url()) return 'home';
-  if (is('players') || is('rankings')) return 'players';
+  if (is('players') || is('rankings') || is('teams')) return 'players';
   if (is('columns') || is('category') || is('posts')) return 'columns';
   if (is('about')) return 'about';
   return null;
