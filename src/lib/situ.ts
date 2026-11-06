@@ -56,20 +56,20 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
     const k = `${b}-${s}`, row = sp[k], pa = row?.[0] ?? 0, ops = row?.[4] ?? null, L = lg[k];
     if (ops == null || !pa) { cells += `<div class="cc thin"><em>${k}</em><b>-</b><span>${pa}타석${pa ? ' · 타수 없음' : ''}</span></div>`; continue; }
     const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
-    cells += `<div class="cc${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${k}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
+    cells += `<div class="cc${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><em>${k}</em><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
   }
   return `<div class="cgrid-wrap"><div class="cg-y">스트라이크</div><div class="cg-s"><span>0</span><span>1</span><span>2</span></div><div><div class="cg-x"><span>볼 0</span><span>1</span><span>2</span><span>3</span></div>
 <div class="cgrid">${cells}</div></div></div>
 ${legend(goodHigh, 20, `<span class="zn">칸 숫자 = ${goodHigh ? 'OPS' : '피OPS'} · 칸 이름 = 볼-스트라이크</span>`)}`;
 }
-const legend = (goodHigh: boolean, n: number, note = '') => `<div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>${n}타석 미만(표본 적음)${note}</div>`;
+const legend = (goodHigh: boolean, n: number, note = '') => `<div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그 평균보다 약함' : '리그 평균보다 많이 맞음'}<span class="sw mid"></span>리그 평균 수준<span class="sw pos"></span>${goodHigh ? '리그 평균보다 강함' : '리그 평균보다 잘 막음'}<span class="sw thinsw"></span>${n}타석 미만(표본 적음)${note}</div>`;
 
 // 존 9분할 + 바깥 8칸: 스트라이크존을 가로·세로 3등분, 칸 색 = 리그 같은 칸 대비 차이(0.5 OPS에서 최대), 10타석 미만 빗금. 포수 시점
 // 바깥 8칸(위·아래·왼·오른·네 모서리)은 존 밖에서 끝난 타석. o·lo는 9칸 배열(위·가운데·아래 × 왼·가운데·오른), 가운데(4번)는 비어 있음
 function zcell([pa, ops]: ZoneCell, L: number | null | undefined, goodHigh: boolean, cls = ''): string {
   if (ops == null || !pa || L == null) return `<div class="zc ${cls} thin"><b>-</b><span>${pa}타석</span></div>`;
   const d = ops - L, good = (d > 0) === goodHigh, a = Math.min(1, Math.abs(d) / 0.5);
-  return `<div class="zc ${cls}${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 ${f3(L)}</em></div>`;
+  return `<div class="zc ${cls}${pa < 10 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${good ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석</span><em>리그 평균 ${f3(L)}</em></div>`;
 }
 function zoneGrid(z: ZoneCell[], lg: (number | null)[], goodHigh: boolean, o?: ZoneCell[], lo?: (number | null)[]): string {
   const inner = `<div class="zgrid">${z.map((c, i) => zcell(c, lg[i], goodHigh)).join('')}</div>`;
@@ -148,7 +148,7 @@ export function renderBatter(e: SituB): string {
       const L = e.lfv?.[i];
       if (ops == null || !pa || L == null) return `<div class="cc fv thin"><b>-</b><span>${pa}타석</span></div>`;
       const d = ops - L, a = Math.min(1, Math.abs(d) / 0.5);
-      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석 · 리그 ${f3(L)}</span></div>`;
+      return `<div class="cc fv${pa < 20 ? ' thin' : ''}${a > 0.5 ? ' dk' : ''}" style="background:color-mix(in srgb, var(${d > 0 ? '--pos' : '--neg'}) ${Math.round(a * 85)}%, var(--surface))"><b>${f3(ops)}</b><span>${pa}타석 · 리그 평균 ${f3(L)}</span></div>`;
     }).join('');
     out += h2('포심 구속별 대응', '', true) + `<div class="fvrow">${heads}${cells}</div>${legend(true, 20, '<span class="zn">칸 숫자 = OPS</span>')}`;
   }
