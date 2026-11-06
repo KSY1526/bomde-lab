@@ -1,3 +1,5 @@
+import { silhouette } from './silhouette';
+
 // 선수 페이지 상황별 탭(설계 docs/블로그/선수검색-설계.md 5절). 목업 gen4.py·release_mock.py의 그림을 옮긴 것.
 // HTML 문자열을 돌려주는 함수라서 빌드 때(기본 시즌, set:html)와 브라우저에서(다른 시즌 버튼, situ.json을 받아) 똑같이 쓴다.
 // 데이터 = scripts/export_players.py situ() → src/data/players-situ/<id>.json {시즌: 묶음}. 스타일 src/styles/situ.css
@@ -17,22 +19,7 @@ const n0 = (x: number) => x.toFixed(0);
 
 // 실루엣(Silhouette.astro와 같은 모양, 체격 기본값). 색은 currentColor
 function sil(pitcher: boolean, flip: boolean): string {
-  const k = 0.8 + 0.4 * Math.max(0, Math.min(1, (90 / 1.85 ** 2 - 21) / 9)), s = (0.86 * (0.9 + 0.2 * (15 / 25))).toFixed(3);
-  const torso = (d: string) => d.replace(/(\d+) (\d+)/g, (_, x, y) => `${(105 + (Number(x) - 105) * k).toFixed(1)} ${y}`);
-  const line = (pts: number[][]) => 'M' + pts.map(([x, y]) => `${x} ${y}`).join(' L');
-  const B = pitcher
-    ? { arms: [[[126, 70], [160, 56], [176, 22]], [[92, 72], [62, 86], [46, 74]]], legs: [[[100, 134], [62, 172], [40, 242]], [[132, 134], [158, 190], [184, 244]]], feet: [[[28, 244], [50, 244]], [[176, 246], [196, 240]]],
-        body: 'M78 62 Q112 46 144 64 L150 136 L92 146 L74 120 Z', head: [104, 38], cap: 'M124 36 Q122 16 104 16 Q86 16 84 34 L72 36 L74 42 L122 42 Z' }
-    : { arms: [[[86, 70], [110, 84], [136, 54]], [[124, 68], [150, 76], [138, 54]]], legs: [[[88, 136], [72, 190], [62, 246]], [[122, 136], [140, 190], [150, 246]]], feet: [[[52, 248], [70, 248]], [[146, 248], [164, 248]]],
-        body: 'M70 64 Q105 48 140 64 L146 142 L66 142 Z', head: [105, 36], cap: 'M85 34 Q86 14 106 14 Q124 14 126 32 L136 34 L134 40 L86 40 Z' };
-  let g = pitcher ? '<circle cx="180" cy="15" r="9" stroke="none"/><ellipse cx="40" cy="74" rx="13" ry="11" stroke="none"/>'
-    : '<rect x="146" y="-14" width="10" height="80" rx="5" stroke="none" transform="rotate(32 151 50)"/>';
-  for (const p of B.arms) g += `<path d="${line(p)}" fill="none" stroke-width="${(24 * k).toFixed(1)}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  g += `<path d="${torso(B.body)}" stroke="none"/>`;
-  for (const p of B.legs) g += `<path d="${line(p)}" fill="none" stroke-width="${(33 * k).toFixed(1)}" stroke-linecap="round" stroke-linejoin="round"/>`;
-  for (const p of B.feet) g += `<path d="${line(p)}" fill="none" stroke-width="16" stroke-linecap="round"/>`;
-  g += `<circle cx="${B.head[0]}" cy="${B.head[1]}" r="21" stroke="none"/><path d="${B.cap}" stroke="none"/>`;
-  return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(105 256) scale(${flip ? -1 : 1} 1) scale(${s}) translate(-105 -252)" fill="currentColor" stroke="currentColor">${g}</g></svg>`;
+  return silhouette({ pitcher, flip, fill: 'currentColor' });
 }
 
 // yr = 시즌 고르기 자리(구종·존·카운트 제목 옆). [id].astro가 시즌 선택 칸을 채우고, 어느 쪽을 바꿔도 상황별 전체가 바뀐다
