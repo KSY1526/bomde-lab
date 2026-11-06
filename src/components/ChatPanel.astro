@@ -7,6 +7,7 @@
 //   GET  {API}/health → { ok, remaining_today: number }  (ok:false = 사용 한도가 차서 쉬는 중, 2026-10-24)
 //   POST {API}/chat   { question, history: [{ q, a }] } → { reply, posts?, remaining_today } | 4xx/5xx { error, remaining_today? }
 //   history = 30분 안의 직전 문답 최대 2개(추가 질문 맥락)
+//   ctx(선택) = 페이지가 window.kbotCtx()로 넘기는 질문 배경 글자(선수 비교 화면의 비교 중인 선수들, 2026-11-07)
 //   posts = 답과 관련된 발행 글 최대 2편 [{ id, title, category, date }] → 답 아래 글 링크로 보인다(2026-10-25)
 // 닉네임은 받지 않는다(사용자 결정 2026-10-25, 질문 문턱 낮추기).
 // 헤더 검색(Search.astro)·검색 결과 페이지의 "크봇에게 이 질문하기"는 window 'kbot:ask' 이벤트로 질문을 넘긴다 → 창을 열고 입력 칸에 채운다.
@@ -181,6 +182,11 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
     }
   }
 
+  // 페이지가 정한 질문 배경(선수 비교 화면: 지금 비교 중인 선수들). window.kbotCtx가 글자를 돌려주면 서버에 같이 보낸다. 말풍선·보관 문답에는 넣지 않는다
+  function pageContext(): string {
+    try { return String((window as unknown as { kbotCtx?: () => string }).kbotCtx?.() ?? '').slice(0, 160); } catch { return ''; }
+  }
+
   function recentContext() {
     const cutoff = Date.now() - CONTEXT_WINDOW_MS;
     return loadHistory().filter((t) => !t.error && t.at >= cutoff).slice(-CONTEXT_TURNS).map(({ q, a }) => ({ q, a }));
@@ -200,7 +206,7 @@ const api = (import.meta.env.PUBLIC_KBOT_API ?? '').replace(/\/$/, '');
       const r = await fetch(`${api}/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question, history: recentContext() }),
+        body: JSON.stringify({ question, history: recentContext(), ctx: pageContext() }),
         signal: AbortSignal.timeout(200_000),
       });
       const j = await r.json().catch(() => ({}));
