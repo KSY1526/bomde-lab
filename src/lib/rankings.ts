@@ -20,6 +20,7 @@ const f = (d: number) => (v: number | string) => Number(v).toFixed(d);
 const rate = (v: number | string) => Number(v).toFixed(3).replace(/^0/, ''); // .283, 1.012
 const pct = (v: number | string) => `${Number(v).toFixed(1)}%`;
 const int = (v: number | string) => String(v);
+const sgn = (v: number | string) => (Number(v) > 0 ? '+' : '') + Number(v).toFixed(2);
 
 export const COLS: Record<'b' | 'p', Col[]> = {
   b: [
@@ -29,6 +30,7 @@ export const COLS: Record<'b' | 'p', Col[]> = {
     { key: 'obp', label: '출루율', title: '출루율', fmt: rate },
     { key: 'slg', label: '장타율', title: '장타율', fmt: rate },
     { key: 'ops', label: 'OPS', title: '출루율 + 장타율', fmt: rate },
+    { key: 'wpa', label: 'WPA', title: '승리확률 기여(상황별 승리확률 변화의 합)', fmt: sgn },
     { key: 'hr', label: '홈런', title: '홈런', fmt: int },
     { key: 'sb', label: '도루', title: '도루', fmt: int },
     { key: 'pa', label: '타석', title: '타석', fmt: int },
@@ -40,6 +42,7 @@ export const COLS: Record<'b' | 'p', Col[]> = {
     { key: 'whip', label: 'WHIP', title: '이닝당 출루 허용', low: true, fmt: f(2) },
     { key: 'k', label: 'K%', title: '탈삼진률', fmt: pct },
     { key: 'bb', label: 'BB%', title: '볼넷률', low: true, fmt: pct },
+    { key: 'wpa', label: 'WPA', title: '승리확률 기여(상황별 승리확률 변화의 합)', fmt: sgn },
     { key: 'ip', label: '이닝', title: '이닝', fmt: int },
     { key: 'w', label: '승', title: '승', fmt: int },
     { key: 'sv', label: '세이브', title: '세이브', fmt: int },
