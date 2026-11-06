@@ -150,22 +150,22 @@
 .situ .sidebar button[aria-pressed='true'] { background: var(--navy); color: var(--bg); border-color: var(--navy); }
 
 /* 존 9분할: 가로·세로 3칸, 존 테두리 */
-.situ .zwrap { max-width: 620px; }
-.situ .zin { padding: 6px; border: 2px solid var(--muted); border-radius: var(--radius); }
-.situ .zfull { display: grid; grid-template-columns: minmax(44px, 0.45fr) 1fr minmax(44px, 0.45fr); gap: 3px; align-items: stretch; }
+.situ .zwrap { max-width: 560px; }
+.situ .zin { padding: 6px; border: 3px solid var(--text); border-radius: var(--radius); background: color-mix(in srgb, var(--text) 10%, var(--bg)); }
+.situ .zfull { display: grid; grid-template-columns: 64px 1fr 64px; gap: 6px; align-items: stretch; }
 .situ .zfull > .zin { grid-column: 2; grid-row: 2; }
 .situ .zo { display: flex; }
 .situ .zo .zc { flex: 1; }
 .situ .zo-tl { grid-area: 1 / 1; } .situ .zo-t { grid-area: 1 / 2; } .situ .zo-tr { grid-area: 1 / 3; }
 .situ .zo-l { grid-area: 2 / 1; } .situ .zo-r { grid-area: 2 / 3; }
 .situ .zo-bl { grid-area: 3 / 1; } .situ .zo-b { grid-area: 3 / 2; } .situ .zo-br { grid-area: 3 / 3; }
-.situ .zc.sm { min-height: 44px; padding: 4px 1px; }
+.situ .zc.sm { min-height: 58px; padding: 4px 1px; opacity: .92; }
 .situ .zc.sm b { font-size: 17px; }
 .situ .zc.sm span { font-size: 10px; }
-.situ .zc.sm em { display: none; }
+.situ .zc.sm em { font-size: 10px; white-space: nowrap; }
 .situ .zside { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); padding: 0 4px 4px; }
 .situ .zgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-.situ .zc { border-radius: 2px; padding: 8px 2px; text-align: center; min-height: 104px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }
+.situ .zc { border-radius: 2px; padding: 6px 2px; text-align: center; min-height: 78px; background: var(--surface); display: flex; flex-direction: column; justify-content: center; }
 .situ .zc b { font-family: var(--num); font-size: 30px; line-height: 1.1; }
 .situ .zc span, .situ .zc em { font-style: normal; font-size: 12px; color: var(--muted); line-height: 1.4; }
 .situ .zc.dk b, .situ .zc.dk span, .situ .zc.dk em { color: var(--bg); }
