@@ -39,7 +39,7 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
       </div>
       <div class="scroll">
         <table data-table>
-          <colgroup><col class="c-rank" /><col class="c-name" /><col class="c-team" />{t.cols.map(() => <col class="c-num" />)}<col class="c-grade" /></colgroup>
+          <colgroup><col class="c-rank" /><col class="c-name" /><col class="c-team" />{t.cols.map(() => <col class="c-num" />)}</colgroup>
           <thead>
             <tr>
               <th class="c s1" scope="col">순위</th>
@@ -50,7 +50,6 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
                   <button type="button" data-col={i + 3} data-low={c.low ? '1' : undefined} title={c.title}>{c.label}</button>
                 </th>
               ))}
-              <th class="c" scope="col">등급</th>
             </tr>
           </thead>
           <tbody>
@@ -60,7 +59,6 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
                 <td class="s2"><a href={url(`players/${r.id}`)}>{r.name}</a></td>
                 <td>{r.team}</td>
                 {r.cells.map((c) => <td class="n" data-s={c.s ?? ''}>{c.t}</td>)}
-                <td class="c g">{r.grade}</td>
               </tr>
             ))}
           </tbody>
@@ -173,7 +171,7 @@ const seasonHref = (y: number) => (y === SEASON ? url('rankings') : url(`ranking
   table { width: 100%; min-width: 760px; table-layout: fixed; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
   th { text-align: left; font-weight: 600; font-size: 13px; color: var(--muted); padding: 6px 6px; border-bottom: 1px solid var(--text); white-space: nowrap; }
   td { padding: 7px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .c-rank { width: 68px; } .c-name { width: 6.5em; } .c-team { width: 3.6em; } .c-num { width: 3.8em; } .c-grade { width: 3.2em; }
+  .c-rank { width: 68px; } .c-name { width: 6.5em; } .c-team { width: 3.6em; } .c-num { width: 3.8em; }
   td a { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .n { text-align: right; }
   .c { text-align: center; }
