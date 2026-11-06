@@ -60,7 +60,7 @@ function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHi
   }
   return `<div class="cgrid-wrap"><div class="cg-y">스트라이크</div><div class="cg-s"><span>0</span><span>1</span><span>2</span></div><div><div class="cg-x"><span>볼 0</span><span>1</span><span>2</span><span>3</span></div>
 <div class="cgrid">${cells}</div></div></div>
-${legend(goodHigh, 20)}`;
+${legend(goodHigh, 20, `<span class="zn">칸 숫자 = ${goodHigh ? 'OPS' : '피OPS'} · 칸 이름 = 볼-스트라이크</span>`)}`;
 }
 const legend = (goodHigh: boolean, n: number, note = '') => `<div class="clegend"><span class="sw neg"></span>${goodHigh ? '리그보다 약함' : '리그보다 많이 맞음'}<span class="sw mid"></span>리그 수준<span class="sw pos"></span>${goodHigh ? '리그보다 강함' : '리그보다 잘 막음'}<span class="sw thinsw"></span>${n}타석 미만(표본 적음)${note}</div>`;
 
