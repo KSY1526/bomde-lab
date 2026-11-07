@@ -50,7 +50,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
     '6': '111100111101111', '7': '111001010010010', '8': '111101111101111', '9': '111101111001111',
   };
   const chars = Array.from(no).filter(c => digits[c]);
-  const unit = Math.min(3.4, 36 / Math.max(1, chars.length * 4 - 1));
+  const unit = Math.min(5.2, 44 / Math.max(1, chars.length * 4 - 1)); // 등번호 키움(사용자 2026-11-07: 3.4 → 5.2)
   const nx = 105 + ((pitcher ? 107 : 98) - 105) * k;
   const screenX = flip ? 210 - nx : nx;
   const cells = chars.map((c, i) => Array.from(digits[c]).map((on, j) => {
@@ -59,6 +59,6 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
     const y = Math.floor(j / 3) * unit;
     return `M${x} ${y}h${unit}v${unit}h${-unit}Z`;
   }).join('')).join('');
-  const number = cells ? `<g fill="${esc(numColor)}" transform="translate(${screenX - (chars.length * 4 - 1) * unit / 2} ${pitcher ? 84 : 104})">${path(cells)}</g>` : '';
+  const number = cells ? `<g fill="${esc(numColor)}" transform="translate(${screenX - (chars.length * 4 - 1) * unit / 2} ${pitcher ? 82 : 92})">${path(cells)}</g>` : '';
   return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
 }
