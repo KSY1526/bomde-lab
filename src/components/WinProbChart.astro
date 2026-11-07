@@ -1,65 +1,156 @@
 ---
-// 경기 승리확률 그래프(Baseball-Reference 박스스코어 방식). 빌드 때 SVG로 그려 JS 없이 보인다.
-// timeline: 타석마다 홈팀 승리확률(%), i=0은 경기 시작. 위로 갈수록 홈팀, 아래로 갈수록 원정팀이 유리하다.
-// marks: 결정적 순간 번호(rank)를 그 타석(i) 위치에 찍는다.
-interface Point { i: number; inning: number; half: string; home_wp: number }
-interface Mark { i: number; rank: number }
-interface Props { timeline: Point[]; home: string; away: string; marks?: Mark[]; title: string; caption?: string }
-const { timeline, home, away, marks = [], title, caption } = Astro.props;
+// 경기 승리확률 그래프. 빌드 때 SVG로 그려 JS 없이 보인다.
+// 2026-11-07 사용자 결정(시안 D1+D4+X1, _workspace/handoff/blog-wpchart/): 축 하나(홈팀 승리확률 0~100%),
+// 50% 위는 홈팀 색 선·옅은 면, 아래는 원정팀 색, 결정적 순간은 작은 점 + 손글씨 'n위' + 밑줄 + 끊긴 연결선,
+// X축은 이닝마다 옅은 교차 띠와 초·말 칸. 옛 네모 번호 칩과 '유리' 칸은 없앴다(이질감).
+// timeline: 타석마다 홈팀 승리확률(%), i=0은 경기 시작. marks: 결정적 순간 순위(rank)를 그 타석(i)에 찍는다.
+import { teamColor } from '../lib/teams';
 
-const W = 560, H = 300, L = 40, R = 14, T = 22, B = 32;
-const n = timeline[timeline.length - 1].i;
-const x = (i: number) => L + (i / (n || 1)) * (W - L - R);
-const y = (wp: number) => T + (1 - wp / 100) * (H - T - B);
-const path = timeline.map((p, k) => `${k ? 'L' : 'M'}${x(p.i).toFixed(1)},${y(p.home_wp).toFixed(1)}`).join(' ');
-// 이닝 시작(초 공격 첫 타석) 위치에 눈금
-const innings = timeline.filter((p, k) => k > 0 && p.half === 'top' && timeline[k - 1].inning !== p.inning || k === 0);
-const at = (i: number) => timeline.find((p) => p.i === i)!;
+interface Point { i: number; inning: number; half: string; home_wp: number }
+interface Mark { i: number; rank: number; label?: string }
+// side: 'away'면 원정팀 승리확률(100 - 홈팀 값)로 뒤집어 그린다. 제목이 원정 승리 팀 기준인 글(2026-11-07 사용자 결정: 준PO3·PO1)
+interface Props { timeline: Point[]; home: string; away: string; marks?: Mark[]; title: string; caption?: string; side?: 'home' | 'away' }
+const { timeline, home, away, marks = [], title, caption, side = 'home' } = Astro.props;
+const upTeam = side === 'away' ? away : home, downTeam = side === 'away' ? home : away;
+const wp = (p: Point) => (side === 'away' ? 100 - p.home_wp : p.home_wp);
+
+// 휴대폰 폭(약 470px)에서 글자가 줄어들지 않게 좁은 viewBox(560)에 큰 글자를 쓴다(옛 그래프와 같은 폭)
+const W = 560, H = 346, L = 46, R = 546, T = 34, B = 300;
+const min = timeline[0].i, max = timeline[timeline.length - 1].i;
+const x = (i: number) => L + ((i - min) / Math.max(1, max - min)) * (R - L);
+const y = (wp: number) => B - (wp / 100) * (B - T);
+const MID = y(50);
+const f = (v: number) => v.toFixed(1);
+const path = timeline.map((p, k) => `${k ? 'L' : 'M'}${f(x(p.i))},${f(y(wp(p)))}`).join(' ');
+const area = `${path} L${f(x(max))},${f(MID)} L${f(x(min))},${f(MID)} Z`;
+
+// 팀색(클래스 home = 50% 위 팀, away = 아래 팀): 라이트는 구단 주색, 다크는 밝게 섞은 색(검정 계열 팀은 밝은 회색이 된다)
+// 어두운 색(검정·남색)만 크게 밝히고, 빨강처럼 이미 밝은 색은 조금만(많이 섞으면 분홍이 된다)
+const lighten = (hex: string) => {
+  const rgb = [1, 3, 5].map((k) => parseInt(hex.slice(k, k + 2), 16));
+  const lum = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
+  const m = lum < 0.12 ? 0.55 : 0.18;
+  return '#' + rgb.map((v) => Math.round(v * (1 - m) + 255 * m).toString(16).padStart(2, '0')).join('');
+};
+const hc = teamColor(upTeam).c, ac = teamColor(downTeam).c;
+const vars = `--wp-home-l:${hc};--wp-home-d:${lighten(hc)};--wp-away-l:${ac};--wp-away-d:${lighten(ac)}`;
+
+// 한 쪽에 여러 그래프가 있어도 clipPath id가 겹치지 않게
+const uid = 'wp' + Math.abs([...title + home + away + timeline.length].reduce((h, c) => (h * 31 + c.charCodeAt(0)) | 0, 7)).toString(36);
+
+// X축: 이닝 구간과 초·말 경계는 타석 순서에서 계산
+type Span = { inning: number; left: number; right: number; halves: { half: string; left: number; right: number }[] };
+const groups: { inning: number; pts: Point[] }[] = [];
+for (const p of timeline) {
+  const g = groups[groups.length - 1];
+  if (!g || g.inning !== p.inning) groups.push({ inning: p.inning, pts: [p] });
+  else g.pts.push(p);
+}
+const spans: Span[] = groups.map((g, k) => {
+  const left = x(g.pts[0].i), right = k + 1 < groups.length ? x(groups[k + 1].pts[0].i) : x(max);
+  const hs = ['top', 'bottom'].map((half) => ({ half, p: g.pts.find((p) => p.half === half) })).filter((h) => h.p) as { half: string; p: Point }[];
+  return { inning: g.inning, left, right, halves: hs.map((h, j) => ({ half: h.half, left: x(h.p.i), right: j + 1 < hs.length ? x(hs[j + 1].p.i) : right })) };
+});
+
+// 순위 주석: 점 둘레 후보 자리 중 그림 안이면서 다른 주석·곡선·다른 점과 겹치지 않는 가장 가까운 자리.
+// 경기마다 점 위치가 달라 고정 좌표를 쓰지 않는다(1위부터 좋은 자리를 고른다)
+const LW = 34, LH = 20;
+const curveY = (cx: number) => {
+  for (let k = 1; k < timeline.length; k++) {
+    const a = timeline[k - 1], b = timeline[k], xa = x(a.i), xb = x(b.i);
+    if (cx >= xa && cx <= xb) return y(wp(a)) + ((cx - xa) / Math.max(1e-6, xb - xa)) * (y(wp(b)) - y(wp(a)));
+  }
+  return y(wp(timeline[timeline.length - 1]));
+};
+const markPts = marks.map((m) => timeline.find((t) => t.i === m.i)).filter(Boolean).map((p) => ({ x: x(p!.i), y: y(wp(p!)) }));
+const CANDS: [number, number][] = [];
+for (const r of [30, 44, 60, 78]) for (const deg of [-50, 50, -25, 25, 0, -130, 130, 180, -155, 155, -80, 80]) CANDS.push([r * Math.cos((deg * Math.PI) / 180), r * Math.sin((deg * Math.PI) / 180)]);
+const placed: { x: number; y: number }[] = [];
+const notes = [...marks].sort((a, b) => a.rank - b.rank).flatMap((m) => {
+  const p = timeline.find((t) => t.i === m.i);
+  if (!p) return [];
+  const px = x(p.i), py = y(wp(p));
+  const box = ([dx, dy]: [number, number]) => ({ lx: dx < 0 ? px + dx - LW : px + dx, ly: py + dy });
+  const fits = (c: [number, number]) => {
+    const { lx, ly } = box(c), top = ly - LH / 2 - 2, bot = ly + LH / 2 + 6;
+    if (lx < L + 2 || lx + LW > W - 2 || top < 4 || bot > B - 2) return false;
+    for (let cx = lx - 3; cx <= lx + LW + 3; cx += 2) { const cy = curveY(cx); if (cy > top && cy < bot) return false; }
+    if (markPts.some((q) => q.x > lx - 4 && q.x < lx + LW + 4 && q.y > top && q.y < bot)) return false;
+    return placed.every((q) => Math.abs(q.x - lx) > LW + 6 || Math.abs(q.y - ly) > LH + 6);
+  };
+  const c = CANDS.find(fits) ?? CANDS[0];
+  const { lx, ly } = box(c);
+  placed.push({ x: lx, y: ly });
+  return [{ rank: m.rank, label: m.label, px, py, lx, ly, side: wp(p) >= 50 ? 'home' : 'away', left: c[0] < 0 }];
+});
 ---
-<figure class="chart">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&text=0123456789%EC%9C%84&display=swap" />
+<figure class="wp" style={vars}>
   <figcaption class="title">{title}</figcaption>
-  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={title}>
-    <rect x={L} y={T} width={W - L - R} height={(H - T - B) / 2} class="half-home" />
-    {[0, 25, 50, 75, 100].map((v) => (
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`${title}, 결정적 순간 TOP ${marks.length}`}>
+    <defs>
+      <clipPath id={`${uid}-a`}><rect x={L - 1} y={T - 2} width={R - L + 2} height={MID - T + 2} /></clipPath>
+      <clipPath id={`${uid}-b`}><rect x={L - 1} y={MID} width={R - L + 2} height={B - MID + 2} /></clipPath>
+    </defs>
+    <path d={area} class="area home" clip-path={`url(#${uid}-a)`} />
+    <path d={area} class="area away" clip-path={`url(#${uid}-b)`} />
+    <line x1={L} x2={R} y1={MID} y2={MID} class="mid" />
+    {[0, 50, 100].map((v) => <text x={L - 10} y={y(v)} class="tick" text-anchor="end" dominant-baseline="central">{v}%</text>)}
+    <text x={L} y={16} class="tick" dominant-baseline="central">{upTeam} 승리확률 (%)</text>
+    {spans.map((s, k) => (
       <g>
-        <line x1={L} x2={W - R} y1={y(v)} y2={y(v)} class={v === 50 ? 'mid' : 'grid'} />
-        <text x={L - 6} y={y(v)} class="tick" text-anchor="end" dominant-baseline="central">{v === 50 ? '50' : v > 50 ? v : 100 - v}</text>
+        {k % 2 === 0 && <rect x={s.left} y={B + 5} width={s.right - s.left} height={38} class="strip" />}
+        <line x1={s.left} x2={s.left} y1={B} y2={B + 43} class="axis" />
+        <text x={(s.left + s.right) / 2} y={B + 38} text-anchor="middle" class="inn">{s.right - s.left < 30 ? s.inning : `${s.inning}회`}</text>
+        {s.halves.map((h, j) => (
+          <g>
+            {j > 0 && <line x1={h.left} x2={h.left} y1={B + 1} y2={B + 8} class="axis" />}
+            {h.right - h.left >= 14 && <text x={(h.left + h.right) / 2} y={B + 19} text-anchor="middle" class="half">{h.half === 'top' ? '초' : '말'}</text>}
+          </g>
+        ))}
       </g>
     ))}
-    <text x={L + 6} y={T + 13} class="side">{home} 유리</text>
-    <text x={L + 6} y={H - B - 7} class="side">{away} 유리</text>
-    {innings.map((p) => (
-      <g>
-        <line x1={x(p.i)} x2={x(p.i)} y1={T} y2={H - B} class="inn" />
-        <text x={x(p.i) + 2} y={H - B + 16} class="tick">{p.inning}회</text>
+    <line x1={R} x2={R} y1={B} y2={B + 43} class="axis" />
+    <path d={path} class="curve home" clip-path={`url(#${uid}-a)`} />
+    <path d={path} class="curve away" clip-path={`url(#${uid}-b)`} />
+    {notes.map((n) => (
+      <g class={`note ${n.side}`}>
+        {n.label && <title>{n.label}</title>}
+        <line x1={n.px} y1={n.py} x2={n.left ? n.lx + LW + 2 : n.lx - 4} y2={n.ly} class="guide" />
+        <text x={n.lx} y={n.ly} class="hand" dominant-baseline="central">{n.rank}위</text>
+        <circle cx={n.px} cy={n.py} r="3" />
+        <path d={`M${f(n.lx - 1)},${f(n.ly + 11)} Q${f(n.lx + 14)},${f(n.ly + 9.5)} ${f(n.lx + 29)},${f(n.ly + 10.5)}`} class="under" />
       </g>
     ))}
-    <path d={path} class="line" />
-    {marks.map((m) => {
-      const p = at(m.i);
-      return (
-        <g class="mark">
-          <rect x={x(p.i) - 11} y={y(p.home_wp) - 11} width="22" height="22" rx="3" />
-          <text x={x(p.i)} y={y(p.home_wp)} text-anchor="middle" dominant-baseline="central">{m.rank}</text>
-        </g>
-      );
-    })}
   </svg>
   {caption && <figcaption class="cap">{caption}</figcaption>}
 </figure>
 
 <style>
-  .chart { margin: 1.8em 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
+  .wp { --wp-home: var(--wp-home-l); --wp-away: var(--wp-away-l); --wp-area: .055; margin: 1.8em 0; padding: 12px 0 0; border-top: 1px solid var(--line); }
+  :global(:root[data-theme='dark']) .wp { --wp-home: var(--wp-home-d); --wp-away: var(--wp-away-d); --wp-area: .09; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme='light'])) .wp { --wp-home: var(--wp-home-d); --wp-away: var(--wp-away-d); --wp-area: .09; }
+  }
   .title { font-weight: 700; font-size: 15px; margin-bottom: 8px; }
   .cap { color: var(--muted); font-size: 13px; margin-top: 8px; }
-  svg { width: 100%; height: auto; display: block; }
-  .half-home { fill: var(--board); opacity: .5; }
-  .grid { stroke: var(--line); stroke-width: 1; }
-  .mid { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 4 3; }
-  .inn { stroke: var(--line); stroke-width: 1; }
+  svg { width: 100%; height: auto; display: block; overflow: visible; }
   .tick { fill: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
-  .side { fill: var(--muted); font-size: 14px; font-weight: 700; }
-  .line { fill: none; stroke: var(--pos); stroke-width: 2.4; stroke-linejoin: round; }
-  .mark rect { fill: var(--board); stroke: var(--navy); stroke-width: 1.5; }
-  .mark text { fill: var(--board-text); font-family: var(--num); font-size: 17px; font-weight: 700; }
+  .mid { stroke: var(--muted); stroke-width: .8; stroke-dasharray: 3 4; }
+  .strip { fill: var(--board); opacity: .48; }
+  .axis { stroke: var(--muted); stroke-width: .8; }
+  .inn { fill: var(--text); font-size: 14px; font-weight: 600; }
+  .half { fill: var(--muted); font-size: 11px; }
+  .area { stroke: none; opacity: var(--wp-area); }
+  .area.home { fill: var(--wp-home); }
+  .area.away { fill: var(--wp-away); }
+  .curve { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .curve.home { stroke: var(--wp-home); }
+  .curve.away { stroke: var(--wp-away); }
+  .note.home { --mark: var(--wp-home); }
+  .note.away { --mark: var(--wp-away); }
+  .note circle { fill: var(--mark); }
+  .guide { stroke: var(--mark); stroke-width: .9; stroke-dasharray: 2.5 1.3; stroke-linecap: round; }
+  .under { fill: none; stroke: var(--mark); stroke-width: 1; stroke-linecap: round; }
+  .hand { fill: var(--text); font-family: 'Gaegu', 'Segoe Print', cursive; font-size: 20px; font-weight: 700; }
 </style>
