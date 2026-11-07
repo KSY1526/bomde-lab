@@ -72,7 +72,7 @@
 .situ .cc b { display: block; font-family: var(--num); font-size: 26px; line-height: 1.1; }
 .situ .cc span { font-size: 11px; color: var(--muted); }
 .situ .cc.dk em, .situ .cc.dk b, .situ .cc.dk span { color: var(--bg); }
-.situ .cc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 8%, transparent) 6px 8px); }
+.situ .cc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 18%, transparent) 6px 8px) !important; }
 .situ .clegend { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; color: var(--muted); margin-top: 8px; }
 .situ .sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-left: 8px; }
 .situ .sw.neg { background: var(--neg); } .situ .sw.pos { background: var(--pos); }
@@ -131,7 +131,7 @@
 .situ .move .arw { stroke: var(--pos); stroke-width: 2; }
 .situ .move .pdif { font-size: 10.5px; font-weight: 400; fill: var(--muted); }
 .situ .move .ahd { fill: var(--pos); }
-.situ .move .pl { font-size: 11px; fill: color-mix(in srgb, var(--text) 82%, var(--bg)); font-weight: 400; paint-order: stroke; stroke: var(--bg); stroke-width: 2px; stroke-linejoin: round; }
+.situ .move .pl { font-size: 12px; fill: var(--text); font-weight: 600; paint-order: stroke; stroke: var(--bg); stroke-width: 1.2px; stroke-linejoin: round; } /* 모바일에서 굵은 테두리에 글자가 뭉개져 가늘게(2026-11-07 사용자) */
 .situ .mleg { display: flex; flex-direction: column; gap: 2px; font-size: 12px; color: var(--muted); margin-top: 4px; }
 .situ .mleg i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
 .situ .lgp-sw { border: 1.5px dashed var(--muted); } .situ .pd-sw { background: var(--pos); }
@@ -170,7 +170,7 @@
 .situ .zc b { font-family: var(--num); font-size: 30px; line-height: 1.1; }
 .situ .zc span, .situ .zc em { font-style: normal; font-size: 12px; color: var(--muted); line-height: 1.4; }
 .situ .zc.dk b, .situ .zc.dk span, .situ .zc.dk em { color: var(--bg); }
-.situ .zc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 8%, transparent) 6px 8px); }
+.situ .zc.thin { background-image: repeating-linear-gradient(45deg, transparent 0 6px, color-mix(in srgb, var(--text) 18%, transparent) 6px 8px) !important; } /* 칸 색(인라인 background)이 빗금을 지우던 문제 */
 .situ .fvrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
 .situ .fvrow .fvl { text-align: center; font-size: 12px; color: var(--muted); font-weight: 600; padding: 2px 0; }
 .situ .fvrow .cc.fv { min-height: 0; padding: 10px 2px; }
