@@ -62,5 +62,5 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
     return `M${x} ${y}h${unit}v${unit}h${-unit}Z`;
   }).join('')).join('');
   const number = cells ? `<g fill="${esc(numColor)}" transform="translate(${screenX - (chars.length * 4 - 1) * unit / 2} ${pitcher ? 82 : 92})">${path(cells)}</g>` : '';
-  return `<svg class="sil" viewBox="-60 -24 330 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
+  return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
 }
