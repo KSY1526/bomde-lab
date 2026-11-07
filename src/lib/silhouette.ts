@@ -72,7 +72,8 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   // 투수는 기울어진 몸통 중심에 배치하되 숫자는 똑바로 유지한다.
   const nx=pitcher ? chest[0]*.4+hip[0]*.6 : chest[0]*.35+hip[0]*.65;
   const numberY=pitcher ? chest[1]*.4+hip[1]*.6-9 : hip[1]-36;
+  // 획 굵게(2026-11-07 사용자): 같은 색 외곽선으로 칸을 0.45칸만큼 키운다.
   const cells=chars.map((c,i)=>Array.from(digits[c]).map((on,j)=>on==='1'?`M${(i*4+j%3)*unit} ${Math.floor(j/3)*unit}h${unit}v${unit}h${-unit}Z`:'').join('')).join('');
-  const number=cells?`<g fill="${esc(numColor)}" transform="translate(${(flip?210-nx:nx)-(chars.length*4-1)*unit/2} ${Y(numberY)})">${path(cells)}</g>`:'';
+  const number=cells?`<g fill="${esc(numColor)}" stroke="${esc(numColor)}" stroke-width="${(unit*.45).toFixed(2)}" stroke-linejoin="miter" transform="translate(${(flip?210-nx:nx)-(chars.length*4-1)*unit/2} ${Y(numberY)})">${path(cells)}</g>`:'';
   return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g fill="${esc(fill)}"${flip?' transform="translate(210 0) scale(-1 1)"':''}>${art}</g>${number}</svg>`;
 }
