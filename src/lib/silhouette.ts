@@ -5,7 +5,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 88;
   const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
   // 사용자 2026-11-07: 너무 말라 보임 → 전체 20kg쯤 더 찐 체격으로(폭 .8~1.2배 → 1.0~1.3배). 몸무게는 BMI 21~30 구간에 비례
-  const k = 1 + .3 * clamp((weight / (height / 100) ** 2 - 21) / 9, 0, 1);
+  const k = 1.15 + .35 * clamp((weight / (height / 100) ** 2 - 21) / 9, 0, 1); // 기본 체격↑·몸무게 비례 폭 1.15~1.5배(사용자 2026-11-07: 운동선수인데 작음, 류현진은 대놓고 뚱뚱해 보여도 됨)
   // 183cm의 정수리는 -10, 발은 256. 195cm의 요청 배율 1.1은 상단 안전 여백으로 제한한다.
   const tall = height <= 183 ? .9 + .1 * (height - 170) / 13 : 1 + .1 * (height - 183) / 12;
   const sy = clamp(tall, .8, 278 / 266);
@@ -60,5 +60,5 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
     return `M${x} ${y}h${unit}v${unit}h${-unit}Z`;
   }).join('')).join('');
   const number = cells ? `<g fill="${esc(numColor)}" transform="translate(${screenX - (chars.length * 4 - 1) * unit / 2} ${pitcher ? 82 : 92})">${path(cells)}</g>` : '';
-  return `<svg class="sil" viewBox="0 -24 210 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
+  return `<svg class="sil" viewBox="-20 -24 250 280" preserveAspectRatio="xMidYMax meet" aria-hidden="true"><g transform="translate(0 256) scale(1 ${sy}) translate(0 -256)"><g fill="${esc(fill)}"${flip ? ' transform="translate(210 0) scale(-1 1)"' : ''}>${art}${shoes}</g>${number}</g></svg>`;
 }
