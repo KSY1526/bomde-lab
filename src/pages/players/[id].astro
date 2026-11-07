@@ -76,6 +76,10 @@ const ai: Record<string, { text: string }> = existsSync(aiPath) ? JSON.parse(rea
 // 상황별 AI 요약(scripts/situ_summary.py, Sonnet, 2026 시즌 일부 선수만). 시즌 버튼을 누르면 그 시즌 것만 보인다
 const sumPath = join(process.cwd(), 'src/data/situ-summary', `${p.id}.json`);
 const situAi: Record<string, { text: string }> = existsSync(sumPath) ? JSON.parse(readFileSync(sumPath, 'utf8')) : {};
+// 표본이 모자란 시즌(타자 50타석·투수 20이닝 미만)은 일괄 문구로(사용자 2026-11-07)
+const THIN_MSG = 'AI 요약 제공을 위한 충분한 표본을 쌓지 못했습니다.';
+const outsOf = (ip: string) => { const [a, b = '0'] = String(ip).split('.'); return Number(a) * 3 + Number(b); };
+const thin = (k: string) => { const r = p.rows.find((x) => String(x.season) === k) as any; return !!r && (bat ? (r.pa ?? 0) < 50 : outsOf(r.ip ?? '0') < 60); };
 const aiHtml = (t: string) => t.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 const title = `${p.name} 기록 · ${word} 육각형`;
 // 맨 아래 크봇: 이 페이지에 없는 기록만 예시로(2026-10-28 사용자. 시즌이 끝나 "최근 N경기"는 뺌)
@@ -124,7 +128,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
               <p class="aitext" set:html={aiHtml(ai[k].text)} />
               <p class="who">AI 요약 · {k}년 기록으로 생성</p>
             </>
-          ) : <p class="muted">AI 요약은 추후 제공합니다.</p>}
+          ) : <p class="muted">{k !== 'career' && thin(k) ? THIN_MSG : 'AI 요약은 추후 제공합니다.'}</p>}
         </div>
       ))}
     </div>
@@ -160,7 +164,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
                 <p class="aitext" set:html={aiHtml(situAi[y].text)} />
                 <p class="who">AI 요약 · {y}년 상황별 기록으로 생성</p>
               </>
-            ) : <p class="muted">상황별 AI 요약은 추후 제공합니다.</p>}
+            ) : <p class="muted">{thin(y) ? THIN_MSG : '상황별 AI 요약은 추후 제공합니다.'}</p>}
           </div>
         ))}
       </div>
