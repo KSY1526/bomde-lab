@@ -5,6 +5,8 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const height = Number.isFinite(o.height) && o.height! > 0 ? clamp(o.height!, 145, 210) : 183;
   const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 88;
   const bulk = clamp((weight / (height / 100) ** 2 - 20) / 14, 0, 1);
+  // 뚱뚱한 선수 가중(2026-11-07 사용자: 류현진·후라도 더 뚱뚱하게). BMI 28 넘는 상위 10%만 32에서 최대로 추가로 넓힌다.
+  const fat = clamp((weight / (height / 100) ** 2 - 28) / 4, 0, 1);
   // 발바닥은 고정. 좌표 길이만 변경하고 머리·장비는 각 부착점에서 원형 유지.
   const sy = clamp(height / 190, .79, 1.025);
   const Y = (y: number) => 256 + (y - 256) * sy;
@@ -25,7 +27,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   // 시안마다 어깨·골반·팔꿈치·손·무릎·발목의 동작을 다르게 배치한다.
   const pose = pitcher ? { chest: [114, 85] as P, hip: [87, 155] as P, head: [119, 47] as P, elbows: [[44, 83], [160, 106]] as P[], hands: [[30, 37], [183, 91]] as P[], knees: [[60, 200], [143, 195]] as P[], ankles: [[30, 238], [171, 238]] as P[] } : { chest: [99, 65] as P, hip: [92, 139] as P, head: [96, 28] as P, elbows: [[64, 88], [115, 86]] as P[], hands: [[61, 52], [67, 57]] as P[], knees: [[71, 191], [140, 162]] as P[], ankles: [[67, 238], [137, 204]] as P[] };
   const { chest, hip, head, elbows, hands, knees, ankles } = pose;
-  const shoulder=19+bulk*7, waist=17+bulk*13, thigh=12+bulk*7, arm=7+bulk*3;
+  const shoulder=19+bulk*7+fat*4, waist=17+bulk*13+fat*11, thigh=12+bulk*7+fat*4, arm=7+bulk*3+fat*2;
   const left: P=[chest[0]-shoulder+4,chest[1]+5], right: P=[chest[0]+shoulder-4,chest[1]+5];
   let art='';
   // 배트: 끝은 굵고 손잡이는 가늘게. 몸통과 별개인 고정 폭 장비.
