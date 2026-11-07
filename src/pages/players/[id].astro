@@ -215,7 +215,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       ) : <p class="soon muted">아직 이 선수를 다룬 칼럼이 없어요</p>}
     </div>
   </section>
-  <Comments slug={`player-${p.id}`} />
+  <Comments slot="after" slug={`player-${p.id}`} />
 </Base>
 
 <script>

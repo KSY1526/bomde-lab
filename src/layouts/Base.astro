@@ -140,6 +140,7 @@ const hideSearch = path === url() || path === url('players') || isPlayerPage || 
       <main id="main">
         <slot />
         {chat && <ChatPanel inline examples={chat.examples} lead={chat.lead} ctx={chat.ctx} />}
+        <slot name="after" />
       </main>
       {!chat && <ChatPanel />}
     </div>
