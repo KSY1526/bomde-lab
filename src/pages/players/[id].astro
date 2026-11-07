@@ -8,6 +8,7 @@ import Hexagon from '../../components/Hexagon.astro';
 import { teamColor, darken } from '../../lib/teams';
 import { url, CATEGORIES, formatDate } from '../../lib/site';
 import { postsByPlayer } from '../../lib/post-players';
+import Comments from '../../components/Comments.astro';
 import { renderBatter, renderPitcher } from '../../lib/situ';
 import { RECORD_DATE } from '../../lib/team-records';
 import { gradeOf } from '../../lib/grade';
@@ -214,6 +215,7 @@ const desc = `${p.name}(${p.team} ${p.pos}) ${span} KBO 1군 연도별 기록과
       ) : <p class="soon muted">아직 이 선수를 다룬 칼럼이 없어요</p>}
     </div>
   </section>
+  <Comments slug={`player-${p.id}`} />
 </Base>
 
 <script>
