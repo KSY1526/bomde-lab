@@ -47,7 +47,7 @@ function rvBar(v: number | null, scale = 2): string {
   const w = Math.min(50, (Math.abs(v) / scale) * 50);
   return `<div class="rv"><i class="${v > 0 ? 'r pos' : 'l neg'}" style="width:${w.toFixed(0)}%"></i><em></em></div><span class="rvn">${v > 0 ? '+' : ''}${v.toFixed(2)}</span>`;
 }
-const rvHead = () => '<th>구종가치</th>';
+const rvHead = (bat = false) => `<th>${bat ? '구종 대응' : '구종가치'}</th>`; // 타자는 '구종 대응'(사용자 결정 2026-11-07)
 
 // 카운트 판: 칸 색 = 리그 같은 카운트 대비 차이(0.5 OPS에서 최대), 20타석 미만 빗금
 function countGrid(sp: Record<string, Split>, lg: Record<string, number>, goodHigh: boolean): string {
@@ -138,7 +138,7 @@ export function renderBatter(e: SituB): string {
   if (ptLive.length) {
     out += h2('구종별 대응', '', true) + '<div class="sgrp">';
     if (ptLive.length > 1) out += `<div class="sidebar" role="group" aria-label="상대 투수 고르기">${ptLive.map(([k, lab], i) => `<button type="button" data-side="${k}" aria-pressed="${i === 0}">${lab}</button>`).join('')}</div>`;
-    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead()}<th>헛스윙</th><th>OPS(타석)</th></tr></thead>${ptLive.map(([k, , h], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${h}</tbody>`).join('')}</table></div></div>`;
+    out += `<div class="tw"><table class="pt"><thead><tr><th class="t">구종</th><th>비율</th>${rvHead(true)}<th>헛스윙</th><th>OPS(타석)</th></tr></thead>${ptLive.map(([k, , h], i) => `<tbody data-side-body="${k}"${i ? ' hidden' : ''}>${h}</tbody>`).join('')}</table></div></div>`;
   }
   // 포심 구속 구간별 OPS(2026-11-07 사용자): 타석 마지막 공이 포심인 타석만
   if (e.fv?.some((r) => r[0] > 0)) {
