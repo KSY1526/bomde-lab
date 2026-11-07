@@ -14,6 +14,8 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const soft = (d: string, opacity = '1') => `<g opacity="${opacity}" transform="translate(105 0) scale(${k} 1) translate(-105 0)">${path(d)}</g>`;
   // 머리·장비·신발은 가로 폭을 보존하고 몸의 연결 지점만 따라간다.
   const rigid = (x: number, d: string) => `<g transform="translate(${(x - 105) * (k - 1)} 0)">${path(d)}</g>`;
+  // 머리: 몸이 커진 만큼 1.25배(사용자 2026-11-07). 목 아래(y 38)를 기준으로 키워 위로 자란다
+  const head = (x: number, cx: number, d: string) => `<g transform="translate(${(x - 105) * (k - 1)} 0)"><g transform="translate(${cx} 38) scale(1.25) translate(${-cx} -38)">${path(d)}</g></g>`;
   // 어깨와 골반은 옆면으로 잇고 팔다리는 둥근 단색 면으로 겹친다.
   const shape = pitcher
     ? [
@@ -39,7 +41,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
 
   const art = rigid(pitcher ? 60 : 60, shape[0])
     + soft(shape[1], '1') + soft(shape[2]) + soft(shape[3])
-    + rigid(pitcher ? 132 : 99, shape[4])
+    + head(pitcher ? 132 : 99, pitcher ? 137 : 103, shape[4])
     + rigid(pitcher ? 176 : 60, shape[5]);
   // 신발은 한 켤레를 확대하지 않고 각 발목을 따라 별도로 이동한다.
   const shoes = shape[6].split(/ (?=M)/).map((d, i) => rigid(i ? 166 : 39, d)).join('');
