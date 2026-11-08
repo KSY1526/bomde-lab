@@ -35,7 +35,7 @@ const examples = popular.players.filter((x) => lastSeason.get(x.id) === SEASON).
 ---
 <Base>
   <div class="home-search">
-    <PlayerSearch posts qid="home-q" />
+    <PlayerSearch qid="home-q" />
     {examples.length > 0 && (
       <p class="examples">
         <span class="ex-label">많이 찾은 선수</span>
