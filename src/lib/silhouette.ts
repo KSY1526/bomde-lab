@@ -3,7 +3,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const { pitcher = false, flip = false, no = '', numColor = '#080b10', fill = 'currentColor' } = o;
   const clamp = (n: number, a: number, b: number) => Math.max(a, Math.min(b, n));
   const height = Number.isFinite(o.height) && o.height! > 0 ? clamp(o.height!, 145, 210) : 183;
-  const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 88;
+  const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 98;
   const bulk = clamp((weight / (height / 100) ** 2 - 20) / 14, 0, 1);
   // 발바닥은 고정. 좌표 길이만 변경하고 머리·장비는 각 부착점에서 원형 유지.
   const sy = clamp(height / 190, .79, 1.025);
@@ -28,6 +28,11 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   // 체격 가중치 1.5배(2026-11-07 사용자: 뚱뚱한 선수가 더 뚱뚱하게)
   const shoulder=19+bulk*10.5, waist=17+bulk*19.5, thigh=12+bulk*10.5, arm=7+bulk*4.5;
   const left: P=[chest[0]-shoulder+4,chest[1]+5], right: P=[chest[0]+shoulder-4,chest[1]+5];
+  const wp = waist+6*(1-bulk);
+  // 투수는 몸이 기울어 있다. 어깨 앞점~허리 앞점을 잇는 선 위에서 배가 낮게(허리 위쪽) 볼록 나오게 한다.
+  const waistFront0 = hip[0]+wp*.85+bulk*6, frontTop = chest[0]+shoulder;
+  const lineX = (y: number) => frontTop + (waistFront0-frontTop) * clamp((y-(chest[1]+3))/((hip[1]-9)-(chest[1]+3)),0,1);
+  const bellyY = hip[1]-(pitcher ? 16 : 24), bellyX = lineX(bellyY)+2+bulk*(pitcher ? 17 : 15);
   let art='';
   // 배트: 끝은 굵고 손잡이는 가늘게. 몸통과 별개인 고정 폭 장비.
   if (!pitcher) art += bone([23, -5], hands[0], 6, 2.5)
@@ -44,10 +49,25 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
     art += bone(root,cuff,thigh,9+bulk*3);
   });
   // 골반과 상의 사이 3px의 투명 벨트 선. 검은 덧칠 없이 팀 배경이 보인다.
-  art += path(`M${hip[0]-waist} ${Y(hip[1]-1)}L${hip[0]+waist} ${Y(hip[1]-1)}L${hip[0]+waist-2} ${Y(hip[1]+15)}L${hip[0]-waist+2} ${Y(hip[1]+15)}Z`);
-  art += angular
-    ? path(`M${chest[0]-shoulder} ${Y(chest[1])}L${chest[0]+shoulder} ${Y(chest[1])}L${hip[0]+waist+2} ${Y(hip[1]-5)}L${hip[0]-waist-2} ${Y(hip[1]-5)}Z`)
-    : path(`M${chest[0]-shoulder} ${Y(chest[1]+3)}Q${chest[0]} ${Y(chest[1]-10)} ${chest[0]+shoulder} ${Y(chest[1]+3)}Q${hip[0]+waist+5} ${Y(hip[1]-28)} ${hip[0]+waist} ${Y(hip[1]-5)}L${hip[0]-waist} ${Y(hip[1]-5)}Q${hip[0]-waist-4} ${Y(hip[1]-30)} ${chest[0]-shoulder} ${Y(chest[1]+3)}Z`);
+  if (!pitcher) art += path(`M${hip[0]-waist} ${Y(hip[1]-1)}L${hip[0]+waist} ${Y(hip[1]-1)}L${hip[0]+waist-2} ${Y(hip[1]+15)}L${hip[0]-waist+2} ${Y(hip[1]+15)}Z`);
+  {
+    // 가슴→복부→허리→골반을 연속 곡선으로 연결. 체격이 클수록 복부가 앞으로 나온다.
+    const front = chest[0]+shoulder;
+    const belly = bellyX;
+    const waistFront = waistFront0;
+    const back = hip[0]-wp;
+    art += path(`M${chest[0]-shoulder} ${Y(chest[1]+3)}
+      C${chest[0]-shoulder+4} ${Y(chest[1]-7)} ${front-6} ${Y(chest[1]-9)} ${front} ${Y(chest[1]+3)}
+      C${front-5} ${Y(chest[1]+18)} ${lineX(bellyY-14)} ${Y(bellyY-22)} ${belly-1} ${Y(bellyY-9)}
+      ${pitcher
+        ? `C${belly+4} ${Y(bellyY-2)} ${belly+1} ${Y(hip[1]+1)} ${hip[0]+waist-1} ${Y(hip[1]+7)}
+      C${hip[0]+waist-5} ${Y(hip[1]+13)} ${back+5} ${Y(hip[1]+13)} ${back+1} ${Y(hip[1]+7)}
+      C${back-1} ${Y(hip[1]+1)} ${back+6} ${Y(hip[1]-8)} ${back+8} ${Y(hip[1]-17)}`
+        : `C${belly+3} ${Y(bellyY-1)} ${belly+1} ${Y(hip[1]-9)} ${hip[0]+waist} ${Y(hip[1]-5)}
+      L${hip[0]-waist} ${Y(hip[1]-5)}
+      C${back+3} ${Y(hip[1]-12)} ${back+6} ${Y(hip[1]-20)} ${back+8} ${Y(hip[1]-28)}`}
+      C${back+9} ${Y(hip[1]-26)} ${chest[0]-shoulder-9} ${Y(chest[1]+22)} ${chest[0]-shoulder} ${Y(chest[1]+3)}Z`);
+  }
   [left,right].forEach((s,i) => {
     art += bone(s,elbows[i],arm+3,arm) + bone(elbows[i],hands[i],arm-1,5.5);
   });
@@ -69,9 +89,10 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   }
   const digits: Record<string,string> = {'0':'111101101101111','1':'010110010010111','2':'111001111100111','3':'111001111001111','4':'101101111001001','5':'111100111001111','6':'111100111101111','7':'111001010010010','8':'111101111101111','9':'111101111001111'};
   const chars=Array.from(no).filter(c=>digits[c]);
-  const unit=Math.min(4.6,(waist*2-8)/Math.max(1,chars.length*4-1));
+  const backX=hip[0]-wp+4;
+  const unit=Math.min(4.6,(pitcher?lineX(118)+3+bulk*3-backX-18:waist*2-8)/Math.max(1,chars.length*4-1));
   // 투수는 기울어진 몸통 중심에 배치하되 숫자는 똑바로 유지한다.
-  const nx=pitcher ? chest[0]*.4+hip[0]*.6 : chest[0]*.35+hip[0]*.65;
+  const nx=pitcher ? (lineX(118)+3+bulk*3+backX)/2+3 : chest[0]*.35+hip[0]*.65;
   const numberY=pitcher ? chest[1]*.4+hip[1]*.6-9 : hip[1]-36;
   // 획 굵게(2026-11-07 사용자): 같은 색 외곽선으로 칸을 0.45칸만큼 키운다.
   const cells=chars.map((c,i)=>Array.from(digits[c]).map((on,j)=>on==='1'?`M${(i*4+j%3)*unit} ${Math.floor(j/3)*unit}h${unit}v${unit}h${-unit}Z`:'').join('')).join('');

@@ -2,7 +2,7 @@
 import { silhouette } from '../lib/silhouette';
 
 interface Props { pitcher?: boolean; height?: number; weight?: number; flip?: boolean; no?: string; c?: string }
-const { pitcher = false, height = 183, weight = 88, flip = false, no = '', c = '#000' } = Astro.props;
+const { pitcher = false, height = 183, weight = 98, flip = false, no = '', c = '#000' } = Astro.props;
 ---
 <Fragment set:html={silhouette({ pitcher, height, weight, flip, no, numColor: c, fill: '#fff' })} />
 
