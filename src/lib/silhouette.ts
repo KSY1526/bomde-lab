@@ -3,7 +3,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   const { pitcher = false, flip = false, no = '', numColor = '#080b10', fill = 'currentColor' } = o;
   const clamp = (n: number, a: number, b: number) => Math.max(a, Math.min(b, n));
   const height = Number.isFinite(o.height) && o.height! > 0 ? clamp(o.height!, 145, 210) : 183;
-  const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 98;
+  const weight = Number.isFinite(o.weight) && o.weight! > 0 ? o.weight! : 92;
   const bulk = clamp((weight / (height / 100) ** 2 - 20) / 14, 0, 1);
   // 발바닥은 고정. 좌표 길이만 변경하고 머리·장비는 각 부착점에서 원형 유지.
   const sy = clamp(height / 190, .79, 1.025);
@@ -32,7 +32,7 @@ export function silhouette(o: { pitcher?: boolean; height?: number; weight?: num
   // 투수는 몸이 기울어 있다. 어깨 앞점~허리 앞점을 잇는 선 위에서 배가 낮게(허리 위쪽) 볼록 나오게 한다.
   const waistFront0 = hip[0]+wp*.85+bulk*6, frontTop = chest[0]+shoulder;
   const lineX = (y: number) => frontTop + (waistFront0-frontTop) * clamp((y-(chest[1]+3))/((hip[1]-9)-(chest[1]+3)),0,1);
-  const bellyY = hip[1]-(pitcher ? 16 : 24), bellyX = lineX(bellyY)+2+bulk*(pitcher ? 17 : 15);
+  const bellyY = hip[1]-(pitcher ? 16 : 24), bellyX = lineX(bellyY)+1+bulk*bulk*(pitcher ? 19 : 17);
   let art='';
   // 배트: 끝은 굵고 손잡이는 가늘게. 몸통과 별개인 고정 폭 장비.
   if (!pitcher) art += bone([23, -5], hands[0], 6, 2.5)
