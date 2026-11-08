@@ -11,13 +11,14 @@ const Y = String(SEASON);
 
 type Hex = { q: boolean; n: number | null; vals: [string, number, string][]; type: string; grade: string | null; war: number | null; gwpa?: number | null };
 type Row = { season: number; team: string; war: number };
-type Player = { id: string; name: string; kind: 'b' | 'p'; team: string; pos: string; hand: string; hex: Record<string, Hex>; rows: Row[] };
+type Player = { height?: number | null; weight?: number | null; no?: string | null; left?: boolean; id: string; name: string; kind: 'b' | 'p'; team: string; pos: string; hand: string; hex: Record<string, Hex>; rows: Row[] };
 type IRow = [string, string, string, string, string, number, number, string[]];
 
 export type Ranked = {
   id: string; name: string; kind: 'b' | 'p'; team: string; pos: string;
   war: number; grade: string; type: string; vals: Hex['vals'];
   rank: string; pool: number;
+  height: number | null; weight: number | null; no: string | null; left: boolean;
 };
 
 export { topGradeOf } from './grade'; // 등급 글자 계산은 lib/grade.ts 한 곳
@@ -43,7 +44,7 @@ export function qualified(): { b: Ranked[]; p: Ranked[] } {
     if (!h || !h.q || h.war == null) continue;
     const row = p.rows.filter((x) => x.season === SEASON).at(-1);
     if (!row) continue;
-    out[p.kind].push({ id: p.id, name: p.name, kind: p.kind, team: row.team, pos: p.pos, war: h.war, grade: topGradeOf(h), type: h.type, vals: h.vals, rank: '', pool: 0 });
+    out[p.kind].push({ id: p.id, name: p.name, kind: p.kind, team: row.team, pos: p.pos, war: h.war, grade: topGradeOf(h), type: h.type, vals: h.vals, rank: '', pool: 0, height: p.height ?? null, weight: p.weight ?? null, no: p.no ?? null, left: !!p.left });
   }
   for (const k of ['b', 'p'] as const) {
     const pool = out[k].sort((a, b) => b.war - a.war);

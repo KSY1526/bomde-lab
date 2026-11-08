@@ -6,6 +6,8 @@ import type { CollectionEntry } from 'astro:content';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import Hexagon from './Hexagon.astro';
+import Silhouette from './Silhouette.astro';
+import { teamColor } from '../lib/teams';
 import { todayCandidates, nameIsAmbiguous, SEASON } from '../lib/home';
 import { CATEGORIES, url, formatDate } from '../lib/site';
 
@@ -35,6 +37,7 @@ const items = cands.map((c) => {
         <div class="grid">
           <div class="hx"><Hexagon vals={c.vals} size={300} /></div>
           <div class="info">
+            <div class="tsil" style={`--tc:${teamColor(c.team).c}`}><Silhouette pitcher={c.kind === 'p'} height={c.height ?? undefined} weight={c.weight ?? undefined} flip={c.left} no={c.no ?? ''} c={teamColor(c.team).c} /></div>
             <h3 class="name"><a href={url(`players/${c.id}`)}>{c.name}</a></h3>
             <p class="sub">{c.team} · {c.pos} · {SEASON} 정규시즌</p>
             <p class="grade"><b>{c.grade}</b><span>{c.type}</span></p>
@@ -78,6 +81,9 @@ const items = cands.map((c) => {
   .today { margin-bottom: 40px; }
   .grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 28px; align-items: center; padding-top: 14px; }
   .hx { max-width: 300px; }
+  .info { position: relative; }
+  .tsil { position: absolute; top: 0; right: 0; width: 84px; height: 104px; padding: 4px 6px; border-radius: 6px; background: var(--tc); }
+  .name, .sub { padding-right: 96px; }
   .name { margin: 0; font-size: 26px; letter-spacing: -.02em; }
   .name a { color: var(--text); }
   .sub { margin: 4px 0 12px; font-size: 14px; color: var(--muted); }
@@ -99,5 +105,6 @@ const items = cands.map((c) => {
     .grid { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     .hx { margin: 0 auto; width: 100%; }
     .name { font-size: 24px; }
+    .tsil { width: 68px; height: 84px; }
   }
 </style>
