@@ -60,7 +60,7 @@ const wpaVals = p.rows.map((r) => r.wpa).filter((x): x is number => x != null);
 const wpaTotal = wpaVals.length ? wpaVals.reduce((a, b) => a + b, 0) : null; // 통산 WPA = 시즌별 합
 const head = (k: string) => (k === 'career' ? `통산 ${word} 육각형` : `${k} ${word} 육각형`);
 // 등급(2026-10-28 사용자: 7단계, 기준은 화면에 안 씀). 표본 적음은 데이터(export_players.py)의 판정을 따른다
-const grade = (h: Hex) => gradeOf(h); // 구원투수는 WPA 기준(lib/grade.ts)
+const grade = (h: Hex) => gradeOf(h); // 구원투수는 WAR 기반 + WPA 보너스(lib/grade.ts)
 // 표본 충족: 규정 충족(q) 또는 구원투수 30이닝 이상(rq, scripts/export_patch.py). 구원은 '미달' 대신 중간·마무리로 표시
 const ok = (h: Hex) => h.q || !!h.rq;
 const missingNote = p.missing.length ? `${p.missing.join('·')}년은 1군 기록 없음.` : '';
