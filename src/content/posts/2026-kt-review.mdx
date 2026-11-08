@@ -42,9 +42,9 @@ export const rankRow = (label, show, key) => <tr><td>{label}</td><td class="cur"
 export const KEYB = ['최원준', '힐리어드', '안현민'];
 export const KEYP = ['고영표', '소형준', '로건', '박영현'];
 
-한국시리즈 1차전은 KT가 이겼다. 수원에서 6회까지 8-0으로 앞섰고 7회와 8회에 7점을 내줬지만 8-7 승리를 지켰다. 그 뒤 네 경기는 모두 삼성이 가져갔다. 2차전을 연장 12회 2-3으로 내줬고 대구에서는 1-5, 5-10, 1-12 패배가 이어졌다. 2\~5차전 네 경기에서 KT가 낸 점수는 모두 9점이다.
+한국시리즈 1차전은 KT가 8-7 승리를 거뒀다. 수원에서 6회까지 8-0으로 앞섰지만 7회와 8회에 7점을 내줘 한 점 차로 겨우 지켰다. 이 경기가 KT의 유일한 승리였다. 2차전은 연장 12회 2-3으로 졌다. 대구에서 열린 3\~5차전도 모두 패했고 점수는 1-5, 5-10, 1-12였다. 2\~5차전 네 경기에서 낸 점수를 다 합쳐도 9점이다.
 
-정규시즌의 KT는 이렇게 지는 팀이 아니었다. {rec(kt.w, kt.l, kt.d)}, 승률 {f3(kt.win_pct)}으로 2위 삼성({rec(ss.w, ss.l, ss.d)})보다 7승을 더 거뒀다. 정규시즌 경기당 {kt.rs_g}점을 내고 {kt.ra_g}점을 내준 팀이 한국시리즈 다섯 경기에서는 경기당 {d.ks_team.kt_r_g}점을 내고 {d.ks_team.opp_r_g}점을 잃었다. 90승 팀이 한국시리즈에서 왜 이렇게 무기력했는지 보려면 정규시즌에 어떻게 이겼는지부터 봐야 한다.
+정규시즌의 KT는 이렇게 지는 팀이 아니었다. {rec(kt.w, kt.l, kt.d)}, 승률 {f3(kt.win_pct)}으로 2위 삼성({rec(ss.w, ss.l, ss.d)})보다 7승을 더 거뒀다. 정규시즌 경기당 {kt.rs_g}점을 내고 {kt.ra_g}점을 내준 팀이 한국시리즈 다섯 경기에서는 경기당 {d.ks_team.kt_r_g}점을 내고 {d.ks_team.opp_r_g}점을 내줬다. 90승 팀이 한국시리즈에서 왜 이렇게 무기력했는지 보려면 정규시즌에 어떻게 이겼는지부터 봐야 한다.
 
 ## 9월 10일부터 1위를 놓치지 않았다
 
@@ -88,7 +88,7 @@ KT는 정규시즌 {kt.rs}점, 경기당 {kt.rs_g}점으로 10개 구단 중 가
 
 ## 결이 다른 세 타자
 
-KT 타자 가운데 <a href={siteUrl('posts/2026-war-owar')}>WAR*</a>이 가장 높은 세 명은 최원준, 힐리어드, 안현민이다. 네 번째인 허경민은 {d.kt_war_top.batters[3].war}으로 세 명과 차이가 컸다. 팀 타자 WAR* 합은 {d.team_war[0].bat_war}으로 KIA에 이어 2위였다.
+KT 타자 가운데 <a href={siteUrl('posts/2026-war-owar')}>WAR*</a>이 가장 높은 세 명은 최원준, 힐리어드, 안현민이다. 네 번째인 허경민은 {d.kt_war_top.batters[3].war}으로 세 명과 차이가 컸다. 팀 타자 WAR* 합은 {d.team_war.find((r) => r.team === 'KT').bat_war}으로 KIA에 이어 2위였다.
 
 <table>
   <thead><tr><th>타자</th><th>경기</th><th>타석</th><th>타율/출루율/장타율</th><th>홈런</th><th>우르크</th><th>WAR*</th></tr></thead>
@@ -103,44 +103,36 @@ KT 타자 가운데 <a href={siteUrl('posts/2026-war-owar')}>WAR*</a>이 가장 
 
 장타는 힐리어드가 맡았다. 팀 홈런 {kt.hr}개 중 {kb('힐리어드').hr}개를 혼자 쳤고 리그 홈런 2위, 장타율 {f3(kb('힐리어드').slg)} 3위에 {kb('힐리어드').rbi}타점이다. 삼진율이 {kb('힐리어드').k_pct}%로 높은 대신 맞히면 멀리 보냈다.
 
-안현민은 {kb('안현민').g}경기, {kb('안현민').pa}타석만 나왔는데도 출루율 {f3(kb('안현민').obp)}으로 리그 2위였다. 볼넷률이 {kb('안현민').bb_pct}%였고 우르크 {f1(kb('안현민').wrc_plus)}는 세 타자 중 가장 높다.
+안현민은 {kb('안현민').g}경기 {kb('안현민').pa}타석에서 출루율 {f3(kb('안현민').obp)}으로 리그 2위였다. 타석이 적을수록 비율 지표는 높게 나오기 쉬워 이 순위는 감안해서 봐야 한다. 볼넷률은 {kb('안현민').bb_pct}%였고 우르크 {f1(kb('안현민').wrc_plus)}는 세 타자 중 가장 높다.
 
 ## 선발이 길게 막고 박영현이 끝냈다
 
 KT 팀 실점은 {kt.ra}점으로 두산({tm('두산').ra}점)에 이어 두 번째로 적었다. 실점을 막은 중심은 선발이었다. 선발 평균자책점 {f2(sp.era)}는 2위였고 9이닝당 실점과 <a href={siteUrl('posts/2026-war-pwar')}>FIP</a>는 1위였다. 선발 경기당 {qs.ip_per_start}이닝을 던져 2위, 퀄리티 스타트는 {qs.qs}번({qs.qs_pct}%)으로 1위다.
 
 <table>
-  <thead><tr><th>구분</th><th>지표</th><th>KT</th><th>10개 구단 중</th></tr></thead>
+  <thead><tr><th>구분</th><th>평균자책점</th><th>9이닝당 실점</th><th>FIP</th><th>사사구 비율</th><th>이닝</th><th>QS (비율)</th></tr></thead>
   <tbody>
-    <tr><td>선발</td><td>평균자책점</td><td>{f2(sp.era)}</td><td>{sp.era_rank}위</td></tr>
-    <tr><td></td><td>9이닝당 실점</td><td>{f2(sp.ra9)}</td><td>{sp.ra9_rank}위</td></tr>
-    <tr><td></td><td>FIP</td><td>{f2(sp.fip)}</td><td>{sp.fip_rank}위</td></tr>
-    <tr><td></td><td>이닝</td><td>{inn(sp.outs)}</td><td>{sp.outs_rank}위</td></tr>
-    <tr><td></td><td>QS (비율)</td><td>{qs.qs} ({qs.qs_pct}%)</td><td>{qs.qs_pct_rank}위</td></tr>
-    <tr><td></td><td>볼넷+몸에 맞는 공 비율</td><td>{sp.bbhbp_pct}%</td><td>{sp.bbhbp_pct_rank}위 (적은 순)</td></tr>
-    <tr><td>불펜</td><td>평균자책점</td><td>{f2(rp.era)}</td><td>{rp.era_rank}위</td></tr>
-    <tr><td></td><td>9이닝당 실점</td><td>{f2(rp.ra9)}</td><td>{rp.ra9_rank}위</td></tr>
-    <tr><td></td><td>FIP</td><td>{f2(rp.fip)}</td><td>{rp.fip_rank}위</td></tr>
-    <tr><td></td><td>이닝</td><td>{inn(rp.outs)}</td><td>{rp.outs_rank}위 (많은 순)</td></tr>
+    <tr><td>선발</td><td>{f2(sp.era)} <small>({sp.era_rank}위)</small></td><td>{f2(sp.ra9)} <small>({sp.ra9_rank}위)</small></td><td>{f2(sp.fip)} <small>({sp.fip_rank}위)</small></td><td>{sp.bbhbp_pct}% <small>({sp.bbhbp_pct_rank}위)</small></td><td>{inn(sp.outs)} <small>({sp.outs_rank}위)</small></td><td>{qs.qs} ({qs.qs_pct}%) <small>({qs.qs_pct_rank}위)</small></td></tr>
+    <tr><td>불펜</td><td>{f2(rp.era)} <small>({rp.era_rank}위)</small></td><td>{f2(rp.ra9)} <small>({rp.ra9_rank}위)</small></td><td>{f2(rp.fip)} <small>({rp.fip_rank}위)</small></td><td>{rp.bbhbp_pct}% <small>({rp.bbhbp_pct_rank}위)</small></td><td>{inn(rp.outs)} <small>({rp.outs_rank}위)</small></td><td>-</td></tr>
   </tbody>
 </table>
 
-<p class="table-note">QS = 선발 6이닝 이상 3자책 이하. <a href={siteUrl('posts/2026-war-pwar')}>FIP</a> = 삼진, 볼넷, 홈런만으로 계산한 투수 실점 지표. 순위는 이닝을 빼고 낮을수록 위다.</p>
+<p class="table-note">QS = 선발 6이닝 이상 3자책 이하. <a href={siteUrl('posts/2026-war-pwar')}>FIP</a> = 삼진, 볼넷, 홈런만으로 계산한 투수 실점 지표. 사사구 비율 = 볼넷과 몸에 맞는 공을 합한 타석 비율. 괄호는 10개 구단 중 순위이고 이닝과 QS는 많은 순, 나머지는 낮은 순이다.</p>
 
-불펜은 평균자책점 4위, FIP 3위로 중상위였다. 불펜 이닝은 10개 구단 중 두 번째로 적었고 그만큼 선발이 많은 이닝을 맡았다.
+불펜은 평균자책점 4위, FIP 3위로 중상위였다.
 
 <table>
   <thead><tr><th>투수</th><th>경기(선발)</th><th>이닝</th><th>평균자책점</th><th>FIP</th><th>삼진율/볼넷률</th><th>WAR*</th></tr></thead>
   <tbody>
-    {KEYP.map((n) => { const p = kp(n); return <tr><td>{n}</td><td>{p.g}({p.gs})</td><td>{p.ip_display}</td><td>{f2(p.era)}</td><td>{f2(p.fip)}</td><td>{p.k_pct}%/{p.bb_pct}%</td><td>{f2(p.war.war)} <small>({p.war.lg_war_rank}위)</small></td></tr>; })}
+    {[kp('고영표'), kp('소형준'), kp('로건'), ...d.extra_pitchers, kp('박영현')].map((p) => { const n = p.name; return <tr><td>{n}</td><td>{p.g}({p.gs})</td><td>{p.ip_display}</td><td>{f2(p.era)}</td><td>{f2(p.fip)}</td><td>{p.k_pct}%/{p.bb_pct}%</td><td>{f2(p.war.war)} <small>({p.war.lg_war_rank}위)</small></td></tr>; })}
   </tbody>
 </table>
 
-<p class="table-note"><a href={siteUrl('posts/2026-war-pwar')}>투수 WAR*</a>은 실점 기준 자체 추정치이고 괄호는 리그 투수 중 순위. 로건과 박영현은 규정이닝의 70%에 못 미침.</p>
+<p class="table-note"><a href={siteUrl('posts/2026-war-pwar')}>투수 WAR*</a>은 실점 기준 자체 추정치이고 괄호는 리그 투수 중 순위. 로건, 대니엘, 배제성, 박영현은 규정이닝의 70%에 못 미침. 대니엘과 배제성은 키플레이어 밖의 비교용.</p>
 
 고영표는 {kp('고영표').gs}번 선발로 나와 {kp('고영표').ip_display}이닝을 던졌다. 볼넷률 {kp('고영표').bb_pct}%에 삼진율 {kp('고영표').k_pct}%였고 FIP {f2(kp('고영표').fip)}는 평균자책점 {f2(kp('고영표').era)}보다도 낮다. WAR* {f2(kp('고영표').war.war)}는 리그 투수 2위다. 소형준은 {kp('소형준').gs}번 선발에 평균자책점 {f2(kp('소형준').era)}으로 규정이닝의 70% 이상 투수 중 5위였고 {kp('소형준').w}승 {kp('소형준').l}패를 거뒀다. 두 투수가 퀄리티 스타트 {d.kt_rotation[0].qs + d.kt_rotation[1].qs}번을 합작했다.
 
-팀 투수 WAR* 3위 로건은 {kp('로건').gs}번 선발에 평균자책점 {f2(kp('로건').era)}였다. 4위 대니엘({d.kt_war_top.pitchers[3].war}), 5위 배제성({d.kt_war_top.pitchers[4].war})과 차이는 작다. 선발 자리가 모두 좋았던 것은 아니어서 18번씩 선발로 나온 사우어와 오원석은 평균자책점 {f2(d.kt_rotation.find((r) => r.pitcher_name === '사우어').era)}, {f2(d.kt_rotation.find((r) => r.pitcher_name === '오원석').era)}였다.
+팀 투수 WAR* 3위 로건은 {kp('로건').gs}번 선발에 평균자책점 {f2(kp('로건').era)}였다. 4위 대니엘({d.kt_war_top.pitchers[3].war}), 5위 배제성({d.kt_war_top.pitchers[4].war})과 차이는 작아서 표에 함께 넣었다. 대니엘은 {+d.extra_pitchers[0].first_game.slice(5, 7)}월 {+d.extra_pitchers[0].first_game.slice(8, 10)}일에 첫 등판한 대체 선수라 {d.extra_pitchers[0].g}경기 {d.extra_pitchers[0].ip_display}이닝으로 기록은 많지 않지만 평균자책점 {f2(d.extra_pitchers[0].era)}에 삼진율 {d.extra_pitchers[0].k_pct}%로 좋았다. 배제성은 {d.extra_pitchers[1].g}경기({d.extra_pitchers[1].gs}선발) {d.extra_pitchers[1].ip_display}이닝에 평균자책점 {f2(d.extra_pitchers[1].era)}를 기록했다. 반면 선발 자리가 모두 좋았던 것은 아니어서 18번씩 선발로 나온 사우어와 오원석은 평균자책점 {f2(d.kt_rotation.find((r) => r.pitcher_name === '사우어').era)}, {f2(d.kt_rotation.find((r) => r.pitcher_name === '오원석').era)}였다.
 
 경기 끝은 박영현이 맡았다. {kp('박영현').g}경기 {kp('박영현').ip_display}이닝에 평균자책점 {f2(kp('박영현').era)}, {kp('박영현').sv}세이브(리그 {d.closer_sv_rank}위)에 {kp('박영현').w}승 무패다. 박영현이 나온 {d.closer_games.g}경기에서 KT는 {d.closer_games.team_w}승 {d.closer_games.team_l}패였다. FIP는 {f2(kp('박영현').fip)}으로 평균자책점보다 높고 볼넷률도 {kp('박영현').bb_pct}%였지만 실점은 적었다.
 
@@ -169,7 +161,7 @@ KT의 득실차는 +{kt.diff}으로 1위였다. 득점과 실점으로 기대 �
 
 <p class="table-note">승률은 무승부를 뺀 값. 7회 종료 점수는 투구 기록으로 계산했고 최종 점수와 맞지 않는 다른 팀 경기 1경기는 뺐다.</p>
 
-1점 차 경기는 20승 10패, 2점 차 이내는 33승 17패로 승률이 모두 1위였다. 7회를 앞선 채 마친 83경기에서는 77승 3패 3무를 거뒀다. 7회를 뒤진 채 마친 48경기에서는 4승에 그쳐 이 승률은 7위였다. KT는 뒤집는 팀이 아니라 앞선 경기를 끝까지 지키는 팀이었다. 득실차로 기대한 승수보다 많이 이긴 것도 같은 방향이다. 다만 기대 승수와의 차이에는 운도 섞여 있어 접전과 앞선 경기를 잘 잡은 것이 이 차이의 전부라고 할 수는 없다.
+1점 차 경기는 20승 10패, 2점 차 이내는 33승 17패로 승률이 모두 1위였다. 7회를 앞선 채 마친 83경기에서는 77승 3패 3무를 거뒀다. 7회를 뒤진 채 마친 48경기에서는 4승에 그쳐 이 승률은 7위였다. KT는 뒤집는 팀이 아니라 앞선 경기를 끝까지 지키는 팀이었다. 득실차로 기대한 승수보다 많이 이긴 것도 같은 이야기다. 똑같이 점수를 내고 내줘도 KT는 접전과 앞선 경기를 더 많이 승리로 바꿨다.
 
 수비 쪽 기록은 실책만 본다. KT 실책은 {d.errors[0].e}개로 삼성, SSG(85개)에 이어 세 번째로 적었고 리그 팀 평균은 {d.league.e_avg}개다. KT 수비는 조직력이 좋았다는 인상을 남긴 시즌이었지만 이 글이 숫자로 보이는 것은 실책 수까지다.
 
@@ -204,16 +196,16 @@ KT의 득실차는 +{kt.diff}으로 1위였다. 득점과 실점으로 기대 �
 
 투수 쪽에서는 3·4차전 선발이 경기 초반에 흔들렸다. 3차전 소형준은 타자 {ksp('소형준').pa}명을 상대하며 KT 승리확률을 {f1(-ksp('소형준').wpa)}%p 떨어뜨렸다. 삼성은 1회 1점, 2회 3점을 냈고 그 경기에서 승리확률이 가장 크게 움직인 장면은 2회 소형준이 맞은 구자욱의 2타점 3루타였다. 4차전 로건은 타자 12명에 −41.0%p였다. 삼성이 1회에만 6점을 냈고 김도환의 3타점 2루타, 디아즈와 김영웅의 적시타가 모두 이 1회에 나왔다.
 
-이 가운데 가장 눈에 띄는 선수는 박영현이다. 1차전 +28.0%p, 2차전 +26.6%p로 두 경기 합 {sg(ksp('박영현').wpa)}%p를 올려 키플레이어 일곱 명 중 한국시리즈 WPA가 가장 높았다. 3\~5차전에는 등판 기록이 없다.
+이 가운데 가장 눈에 띄는 선수는 박영현이다. 1차전 +28.0%p, 2차전 +26.6%p로 두 경기 합 {sg(ksp('박영현').wpa)}%p를 올려 키플레이어 일곱 명 중 한국시리즈 WPA가 가장 높았다. 3\~5차전에는 등판하지 않았다.
 
 고영표는 2차전에서 타자 27명을 상대하며 +35.7%p를 올렸지만 KT는 그 경기를 12회 2-3으로 졌다. 5차전에는 타자 12명에 −16.0%p였다.
 
 타선에서는 힐리어드만 정규시즌보다 나았다. 다섯 경기 모두 WPA가 플러스였고 1차전 1회 2타점 2루타와 3차전 1회 1타점 2루타가 있었다. 경기당 {sg(ksp('힐리어드').wpa_per_game)}%p로 정규시즌 경기당 {sg(kb('힐리어드').wpa.wpa_per_game)}%p보다 높다.
 
-정규시즌 출루율이 규정타석의 70% 이상 타자 중 2·3위였던 안현민과 최원준은 반대로 갔다. 안현민은 1차전 3회 2점 홈런을 포함해 +8.5%p를 올렸지만 2차전 6타석에서 −21.4%p, 3차전 4타석에서 −10.4%p였고 5차전에는 기록이 없다. 최원준은 21타석에서 −12.8%p로 2·3·4차전이 모두 마이너스였고 3차전은 1타석만 기록됐다. 안현민의 5차전과 최원준의 3차전이 왜 그렇게 기록됐는지는 기록만으로 알 수 없다.
+정규시즌 출루율이 규정타석의 70% 이상 타자 중 2·3위였던 안현민과 최원준은 반대로 갔다. 안현민은 1차전 3회 2점 홈런을 포함해 +8.5%p를 올렸지만 2차전 6타석에서 −21.4%p, 3차전 4타석에서 −10.4%p였고 5차전에는 출전하지 않았다. 최원준은 21타석에서 −12.8%p로 2·3·4차전이 모두 마이너스였고 3차전은 부상으로 1타석만 소화했다.
 
 한국시리즈는 다섯 경기뿐이고 타자는 20타석 안팎, 투수는 한두 경기라 한 이닝이 합계를 크게 바꾼다. 로건의 −41.0%p도 대부분 1회 한 이닝에서 쌓였다.
 
 ## 앞서는 경기를 만들지 못했다
 
-정규시즌 KT는 선발이 길게 막고 출루로 점수를 쌓아 7회에 앞서면 박영현으로 끝내는 팀이었고 그렇게 7회를 앞선 83경기에서 77승을 했다. 한국시리즈에서는 그 첫 단계가 끊겼다. 3·4차전에서 소형준과 로건이 1·2회에 실점했고 출루로 득점을 만들던 최원준과 안현민의 WPA가 마이너스였다. WPA 합이 가장 높았던 박영현, 그다음 힐리어드, 2차전의 고영표는 정규시즌 몫을 했지만 KT가 7회를 앞선 채 마친 경기는 1차전 하나였다. 다섯 경기의 숫자로 선수의 실력이나 운을 가를 수는 없다. 숫자가 보여 주는 것은 정규시즌 90승을 받친 앞선 경기가 한국시리즈에서는 나오지 않았다는 데까지다.
+정규시즌 KT는 선발이 길게 막고 출루로 점수를 쌓아 7회에 앞서면 박영현으로 끝내는 팀이었고 그렇게 7회를 앞선 83경기에서 77승을 했다. 한국시리즈에서는 그 시작인 선발 야구가 되지 않았다. 3·4차전에서 소형준과 로건이 1·2회에 실점해 처음부터 끌려갔고 출루로 득점을 만들던 최원준과 안현민의 WPA도 마이너스였다. 박영현과 힐리어드, 2차전의 고영표는 정규시즌 몫을 했지만 KT가 7회를 앞선 채 마친 경기는 1차전 하나였다. 정규시즌 90승을 받친 선발 야구와 앞선 경기가 한국시리즈에서는 나오지 않았다.

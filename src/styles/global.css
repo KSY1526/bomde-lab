@@ -144,8 +144,9 @@ img, svg { max-width: 100%; }
 .prose tr.ours td:first-child { font-weight: 700; color: var(--accent); }
 .prose th.cur { color: var(--accent); }
 .prose td.cur { font-weight: 700; }
-.prose td.up { background: color-mix(in srgb, var(--accent) var(--heat, 15%), transparent); }
-.prose td.down { background: color-mix(in srgb, var(--pos) var(--heat, 15%), transparent); }
+/* 표 유불리 색: up=붉은색, down=파란색 고정. 강조색(--accent)·--pos 변수를 쓰면 테마 색을 바꿀 때 둘 다 파랗게 되므로 쓰지 않는다(2026-11-08 재발) */
+.prose td.up { background: color-mix(in srgb, var(--red) var(--heat, 15%), transparent); }
+.prose td.down { background: color-mix(in srgb, #2a5bb0 var(--heat, 15%), transparent); }
 .prose td.hot { background: color-mix(in srgb, var(--red) var(--heat, 15%), transparent); }
 .prose td.cold { background: color-mix(in srgb, #2a5bb0 var(--heat, 15%), transparent); }
 .prose td.lvl { background: color-mix(in srgb, var(--text) var(--heat, 10%), transparent); }
