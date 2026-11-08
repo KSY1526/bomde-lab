@@ -1,0 +1,71 @@
+---
+title: "정규시즌 1위 KT를 꺾은 삼성의 업셋 우승, 0-1이던 3회말 2사에서 뒤집혔다"
+description: "한국시리즈 5차전, 삼성이 KT를 12-1으로 꺾고 시리즈 4승 1패로 우승했다."
+date: 2026-11-08T18:27:00+09:00
+category: game
+format: short
+tags: ["포스트시즌", "한국시리즈", "삼성", "KT", "WPA"]
+related: ["2026-11-07-ps-ks-4", "2026-ks-preview", "2026-won-taein"]
+stat: { value: "12-1", label: "한국시리즈 5차전, 삼성이 KT를 꺾고 우승했다", short: "KS 5차전", items: [{ v: "12", cap: "삼성" }, { v: "1", cap: "KT" }], sep: ":" }
+thumb: { teams: ["삼성", "KT"] }
+dataUntil: "2026 한국시리즈 5차전 (11/08)"
+---
+import WinProbChart from '../../components/WinProbChart.astro';
+import KeyPlay from '../../components/KeyPlay.astro';
+import d from '../../data/posts/2026-11-08-ps-ks-5.json';
+
+export const play = (rank) => d.top.find((p) => p.rank === rank);
+export const innings = d.linescore[0].innings.map((_, k) => k + 1);
+
+삼성이 대구에서 열린 한국시리즈 5차전에서 KT를 12-1으로 꺾고 시리즈 4승 1패로 우승했다. 정규시즌 1위 KT를 넘은 삼성의 업셋 우승이다. 정규시즌 2위 삼성은 83승 58패 3무로 1위 KT(90승 49패 5무)에 8경기 뒤졌고, 플레이오프에서 3위 KIA를 3승 2패로 꺾고 올라왔다. 한국시리즈에서는 1차전을 내준 뒤 네 경기를 내리 이겼다. 이날 먼저 점수를 낸 쪽은 KT였다. 3회초 1점을 내준 삼성은 3회말 2사 뒤 구자욱, 디아즈, 김영웅의 적시타로 3-1으로 뒤집었고, 5회말에는 8점을 몰아 11-1으로 달아났다. 안타는 삼성 14개, KT 4개였다.
+
+<table>
+  <thead><tr><th>팀</th>{innings.map((k) => <th>{k}</th>)}<th>R</th><th>H</th></tr></thead>
+  <tbody>
+    {d.linescore.map((t) => (
+      <tr><td class={t.team === d.winner ? 'cur' : ''}>{t.team}</td>{t.innings.map((r) => <td>{r ?? 'X'}</td>)}<td class={t.team === d.winner ? 'cur' : ''}>{t.r}</td><td>{t.h}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<WinProbChart
+  timeline={d.timeline}
+  home={d.home}
+  away={d.away}
+  marks={d.top.map((p) => ({ i: p.i, rank: p.rank }))}
+  title="타석마다 바뀐 삼성 승리확률"
+  caption="순위는 아래 결정적 순간. 선이 50% 위면 삼성, 아래면 KT가 유리하다."
+/>
+
+이 경기의 흐름은 3회말과 5회말 두 이닝에서 갈렸다. 삼성 승리확률은 KT가 1점을 낸 3회초 한때 41.3%까지 내려갔고, 3회말 2사 1루에서도 41.7%에 머물렀다. 구자욱의 2루타가 나오자 53.3%로 올라섰다. 디아즈의 안타가 이어지며 63.0%, 김영웅의 안타 뒤에는 71.6%까지 올랐다. 5회초가 끝났을 때 79.0%였던 확률은 5회말 삼성이 8점을 내는 사이 99.0%에 닿았고, 그 뒤로는 한 번도 95% 밑으로 떨어지지 않았다.
+
+## 결정적 순간 TOP 3
+
+<KeyPlay play={play(3)} home={d.home} away={d.away} headline="3회말, 김영웅의 중견수 앞 적시타">
+삼성이 2-1으로 앞선 3회말 2사 1, 2루, 김영웅이 대니엘과 맞섰다. 2-2에서 6구째를 받아친 타구는 중견수 왼쪽 안타가 됐고, 주자 1명이 홈을 밟아 점수는 3-1으로 벌어졌다. 이 안타로 삼성 승리확률은 64.9%에서 71.6%로 올랐다.
+</KeyPlay>
+
+<KeyPlay play={play(2)} home={d.home} away={d.away} headline="3회말, 디아즈의 역전 적시타">
+1-1이던 3회말 2사 2루, 대니엘과 마주한 디아즈는 2-2에서 5구째를 쳐 우익수 오른쪽 뒤로 가는 안타를 때렸다. 주자 1명이 들어오면서 삼성이 2-1으로 앞섰고, 승리확률도 53.3%에서 63.0%로 뛰었다.
+</KeyPlay>
+
+<KeyPlay play={play(1)} home={d.home} away={d.away} headline="3회말, 구자욱의 동점 2루타">
+KT가 1-0으로 앞선 3회말 2사 1루, 삼성 승리확률은 41.7%였다. 타석의 구자욱은 2-2에서 대니엘의 6구째를 받아쳐 우익수 오른쪽 2루타를 기록했고, 1루 주자가 홈까지 들어와 1-1 동점이 됐다. 이 타구로 확률은 53.3%까지 올라왔다.
+</KeyPlay>
+
+## 승리확률을 가장 많이 올리고 내린 선수
+
+<table>
+  <thead><tr><th>선수</th><th>팀</th><th>구분</th><th>타석</th><th>WPA</th></tr></thead>
+  <tbody>
+    {[...d.players.slice(0, 3), ...d.players.slice(-3)].map((r, k) => (
+      <tr><td class={k === 0 ? 'cur' : ''}>{r.name}</td><td>{r.team}</td><td>{r.role}</td><td>{r.pa}</td><td class={r.wpa > 0 ? 'up' : 'down'} style="--heat:20%">{r.wpa > 0 ? '+' : ''}{r.wpa.toFixed(1)}%p</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">WPA = 그 선수가 나온 타석에서 소속 팀 승리확률이 오르내린 합. 투수는 상대한 타석 기준. 붉은색은 올린 쪽, 파란색은 내린 쪽.</p>
+
+원태인은 21타석 동안 삼성 승리확률을 18.3%p 올려 선수 가운데 가장 큰 폭을 기록했다. 타자 중에서는 김영웅이 5타석에서 13.2%p, 디아즈가 5타석에서 8.4%p를 보탰다. KT에서는 권동진이 3타석에서 8.4%p로 가장 높았다. 반대로 KT 투수 고영표는 12타석 동안 KT 승리확률을 16.0%p 떨어뜨렸고, 대니엘도 16타석에서 15.0%p를 깎았다. 타자 쪽에서는 김현수가 4타석에서 9.1%p를 잃었다.
+
+이 승리로 삼성은 2026 한국시리즈 우승을 확정했다. 플레이오프 다섯 경기와 한국시리즈 다섯 경기를 더한 삼성의 포스트시즌 성적은 7승 3패다.
