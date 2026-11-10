@@ -119,6 +119,13 @@ const capShown = (cap: string, k: number) => !(sides.length === 2 && cap === sid
   .cap { font-size: 14px; opacity: .85; white-space: nowrap; }
   .sep { font-size: 28px; opacity: .6; }
 
+  /* PC: 맨 위 글 판을 제목·요약 폭까지 채우고, 선수 하나일 때 실루엣이 배경 등번호를 가리지 않게 나란히 둔다(2026-11-10 사용자: PC 썸네일 어색) */
+  @media (min-width: 561px) {
+    .wide { max-width: none; height: 240px; }
+    .wide:not(.two) .fig { right: 5%; width: 26%; }
+    .wide:not(.two) .ghost { right: auto; left: 52%; top: -6%; }
+  }
+
   @media (max-width: 560px) {
     .bv { font-size: 21px; }
     .bcap { font-size: 10px; }
