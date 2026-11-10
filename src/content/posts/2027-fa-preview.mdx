@@ -1,0 +1,268 @@
+---
+title: "역대급으로 뜨거울 2027 FA 시장, 돈은 어디로 몰릴까"
+description: "구단마다 쓸 수 있는 돈이 크게 늘어난 2027 FA 시장에서 주요 선수 10명의 예상 몸값과 구단별 샐러리캡 사정을 계산했다."
+date: 2026-11-10T10:38:46+09:00
+category: season
+tags: ["FA", "2027", "샐러리캡", "원태인", "구자욱", "최지훈", "박동원", "양의지", "홍창기"]
+related: ["2026-war-owar", "2026-won-taein", "2026-kt-review"]
+stat: { value: "155억", label: "원태인 4년 봄데 연구소 예측", short: "원태인 예측" }
+thumb: { player: "원태인" }
+dataUntil: "2026 정규시즌 + 한국시리즈(11/8), FA 명단은 공시 전 예상"
+draft: false
+---
+import { url as siteUrl } from '../../lib/site';
+import d from '../../data/posts/2027-fa-preview.json';
+
+export const p = (n) => d.players.find((x) => x.name === n);
+export const sy = (n, y) => p(n).seasons.find((s) => s.season === y);
+export const tm = (t) => d.teams[t];
+export const cp = (t) => d.cap27.find((x) => x.team === t);
+export const ch = (y) => d.cap_hist.find((x) => x.year === y);
+export const my = (y) => d.model.by_year.find((x) => x.fa_year === y);
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2);
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const pc = (v) => `${v > 0 ? '+' : ''}${Math.round(v)}%`;
+export const won = (v) => `${Math.round(v)}억`;
+export const man = (n) => `${Math.floor(n / 10000).toLocaleString('ko-KR')}만 ${(n % 10000).toLocaleString('ko-KR')}`;
+export const batTable = (n) => (
+  <table>
+    <thead><tr><th>{n}</th><th>팀(포지션)</th><th>경기</th><th>타석</th><th>타율/출루율/장타율</th><th>홈런</th><th>도루</th><th>우르크</th><th>WAR*</th></tr></thead>
+    <tbody>
+      {p(n).seasons.map((s) => (
+        <tr><td>{s.season}</td><td>{s.team}({s.pos})</td><td>{s.g}</td><td>{s.pa}</td><td>{f3(s.avg)}/{f3(s.obp)}/{f3(s.slg)}</td><td>{s.hr}</td><td>{s.sb}</td><td>{f1(s.wrc_plus)}</td><td>{f2(s.war)}</td></tr>
+      ))}
+      <tr class="total"><td colspan="8">가중 WAR* (1:2:3)</td><td>{f2(p(n).ww)}</td></tr>
+    </tbody>
+  </table>
+);
+export const pitTable = (n) => (
+  <table>
+    <thead><tr><th>{n}</th><th>팀</th><th>경기(선발)</th><th>이닝</th><th>평균자책점</th><th>FIP</th><th>삼진율</th><th>볼넷률</th><th>WAR*</th></tr></thead>
+    <tbody>
+      {p(n).seasons.map((s) => (
+        <tr><td>{s.season}</td><td>{s.team}</td><td>{s.g}({s.gs})</td><td>{s.ip}</td><td>{f2(s.era)}</td><td>{f2(s.fip)}</td><td>{f1(s.k_pct)}%</td><td>{f1(s.bb_pct)}%</td><td>{f2(s.war)}</td></tr>
+      ))}
+      <tr class="total"><td colspan="8">가중 WAR* (1:2:3)</td><td>{f2(p(n).ww)}</td></tr>
+    </tbody>
+  </table>
+);
+export const fee = (n) => <p class="table-note">{p(n).team} {p(n).pos}, 2027년 {p(n).age}세, 예상 등급 {p(n).grade}. 모델 예상 {p(n).years}년 {won(p(n).total)}, 봄데 연구소 예측 {won(p(n).bomde)}.</p>;
+export const won_ = p('원태인'), gu = p('구자욱'), cj = p('최지훈'), kh = p('김호령'), js = p('정수빈');
+export const pd = p('박동원'), yj = p('양의지'), kt = p('김태군'), hc = p('홍창기'), kd = p('권희동');
+export const yt = d.model.young_top;
+export const gr = d.grade_rule, gc = d.grade_cases, ck = d.comp_known;
+export const CMP = ['박동원', '양의지', '김태군', '홍창기', '권희동'];
+export const DEST = {
+  원태인: '삼성 잔류, SSG, KIA, 한화, NC, 해외',
+  구자욱: '삼성 잔류, SSG, 롯데, NC, 해외',
+  최지훈: 'SSG 잔류, 롯데, NC',
+  박동원: 'LG 잔류, KT, SSG',
+  김호령: 'KIA 잔류, 롯데, NC, 한화',
+  정수빈: '두산 잔류, 롯데, 한화',
+  홍창기: 'LG 잔류, KIA, 두산',
+  양의지: '두산(옵션 실행), 롯데',
+  권희동: 'NC 잔류',
+  김태군: 'KIA 잔류, 삼성',
+};
+export const LV = ['최상', '상', '중', '하'];
+
+한국시리즈는 11월 8일 대구에서 끝났다. 삼성이 KT를 {d.season.ks_series['삼성']}승 {d.season.ks_series['KT']}패로 꺾고 우승했고 시리즈 MVP는 구자욱이 받았다. 우승 팀의 간판 타자와 에이스가 곧 FA 시장의 최대어가 된다.
+
+시장은 바로 열린다. 지난해 일정 간격대로라면 11월 13일쯤 FA 자격 선수가 공시된다. 15일에 승인 신청을 마감하고 16일에 승인 선수를 공시한 뒤 17일부터 교섭이 시작된다. 이 글의 명단과 등급은 공시 전 예상이다.
+
+## 올해 시장은 과열된다
+
+야구로 들어오는 돈이 늘었다. 2026시즌 관중은 {man(d.season.attendance_2026)}명으로 역대 최다였다. 2025년의 {d.season.attendance_2025_approx_man.toLocaleString('ko-KR')}만 명을 다시 넘었고 {d.season.ten_million_streak}년 연속 1,000만 관중이다. 100만 관중을 넘긴 구단도 {d.season.million_clubs}곳이었고 중계권료도 올랐다.
+
+구단이 FA에게 쓸 수 있는 돈도 늘었다. 경쟁균형세(샐러리캡)는 외국인과 신인을 뺀 구단별 연봉 상위 40명의 합계에 상한을 둔다. 상한에서 그해 합계를 뺀 금액이 구단이 더 쓸 수 있는 돈이다. 최근 몇 년과 2027년을 비교하면 차이가 크다.
+
+<table>
+  <thead><tr><th>연도</th><th>상한</th><th>상한까지 남은 금액 (구단 평균)</th><th>남은 금액 30억 이상 구단</th></tr></thead>
+  <tbody>
+    {d.cap_hist.map((h) => (
+      <tr class={h.estimate ? 'total' : undefined}><td>{h.year}{h.estimate ? ' (예상)' : ''}</td><td>{f1(h.cap)}억</td><td>{f1(h.avg_room_ex_kiwoom)}억</td><td>{h.n_room30}곳</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">키움을 뺀 9개 구단. 2023\~2025년은 KBO가 발표한 그해 상위 40명 합계, 2027년은 원소속 FA를 잡은 뒤 외부 영입 전의 예상 합계로 셈했다.</p>
+
+2024년에는 상한까지 남은 금액이 구단 평균 {f1(ch(2024).avg_room_ex_kiwoom)}억이었고 30억 이상 남은 구단이 없었다. 2027년 예상은 평균 {f1(ch(2027).avg_room_ex_kiwoom)}억이고 30억 이상 남는 구단이 {ch(2027).n_room30}곳이다. 2023\~2025년 숫자는 FA 계약이 끝난 뒤의 합계이고 2027년은 외부 영입 전이라 같은 기준으로 비교한 값은 아니다. 기준이 다른 점을 감안해도 격차가 크다.
+
+작년 시장도 이미 뜨거웠다. 뒤에서 설명할 계산법을 과거 계약에 대입하면 2026시즌을 앞둔 작년 시장의 계약 {my(2026).n}건은 예측보다 중앙값으로 {Math.round(my(2026).median_resid_pct)}% 비쌌다. 그 앞 네 번의 시장은 {pc(my(2024).median_resid_pct)}에서 {pc(my(2025).median_resid_pct)} 사이였다. 올해는 작년보다 관중이 늘었고 구단이 쓸 수 있는 돈은 더 많다. 계산으로 낸 예상 금액은 과거 시장의 평균에 맞춘 값이라 올겨울 실제 계약은 예상보다 분명 과열된다. 경쟁이 몰리는 선수일수록 그 폭이 크다.
+
+## 구단별 지갑 사정
+
+2027년 상한은 {f1(d.cap2027)}억이고 올해부터 하한 {f1(d.floor2027)}억도 생긴다. 구단마다 이미 계약이 확정된 선수의 2027년 예상 합계에 원소속 FA를 잡을 때의 연평균을 더하면 아래와 같다.
+
+여기에 프랜차이즈 예외가 더해진다. 한 구단에 7시즌 이상 소속 선수로 등록된 선수 1명을 지정하면 그 선수 보수의 50%만 합계에 들어간다. FA로 다시 계약한 선수뿐 아니라 기존 다년계약 선수도 지정할 수 있다. 아래 표는 구단마다 이 요건을 채운 선수 가운데 연평균이 가장 큰 선수를 지정한다고 가정했다.
+
+<table>
+  <thead><tr><th>구단</th><th>2027 예상 (FA 제외)</th><th>잡을 원소속 FA</th><th>잡은 뒤 합계</th><th>상한까지 남은 금액</th><th>예외 지정 (연평균)</th><th>예외 적용 시 남은 금액</th></tr></thead>
+  <tbody>
+    {[...d.cap27].sort((a, b) => b.room_franchise - a.room_franchise).map((c) => (
+      <tr><td>{c.team}</td><td>{f1(c.ex_fa)}억</td><td>{c.own_fa.length ? c.own_fa.join(', ') : '-'}</td><td>{f1(c.keep)}억</td><td class={c.room < 10 ? 'down' : undefined} style={c.room < 10 ? '--heat:38%' : undefined}>{f1(c.room)}억</td><td>{c.franchise_player} ({f1(c.franchise_aav)}억)</td><td>{f1(c.room_franchise)}억</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">원소속 FA는 뒤에서 계산한 모델 예상 연평균으로 더했고 양의지는 옵션 연 {d.yj_option / 2}억으로 넣었다. 원태인은 삼성과 재계약할 때의 예상 연평균. 파란 칸은 남은 금액 10억 미만.</p>
+
+표의 숫자는 계약 연평균 기준이다. 구단은 연차별 연봉을 나눠 상한을 맞추므로 특정 해의 실제 금액은 다를 수 있다.
+
+가장 빠듯한 곳은 삼성이다. 원태인과 구자욱을 모두 잡으면 합계가 {f1(cp('삼성').keep)}억으로 상한까지 {f1(cp('삼성').room)}억밖에 남지 않는다. 원태인과 재계약해 예외로 지정하면 연 {f1(cp('삼성').franchise_cut)}억이 빠져 남는 금액이 {f1(cp('삼성').room_franchise)}억이 된다. 둘을 다 잡으려면 예외가 사실상 필수다.
+
+다른 구단도 예외를 적용하면 쓸 수 있는 돈이 10억 안팎 커진다. SSG는 최정을 지정하면 {f1(cp('SSG').room)}억에서 {f1(cp('SSG').room_franchise)}억으로, KT는 고영표를 지정하면 {f1(cp('KT').room_franchise)}억으로 늘어난다. LG는 박동원과 홍창기를 잡으면 {f1(cp('LG').room)}억이 남지만 오지환을 지정하면 {f1(cp('LG').room_franchise)}억이다. 두산은 양의지 지정으로 {f1(cp('두산').room_franchise)}억, 한화는 류현진 지정으로 {f1(cp('한화').room_franchise)}억, KIA는 양현종 지정으로 {f1(cp('KIA').room_franchise)}억까지 쓸 수 있다.
+
+상한까지 남은 금액이 가장 큰 구단은 롯데({f1(cp('롯데').room)}억)와 NC({f1(cp('NC').room)}억)다. 변수는 투자 의지다. 두 구단 모두 최근 3년 외부 FA 영입이 없었다. NC는 원소속 FA를 빼면 2027년 합계가 {f1(cp('NC').ex_fa)}억으로 하한 아래라 권희동을 잡거나 다른 선수를 사야 한다.
+
+한화는 남은 금액이 {f1(cp('한화').room)}억으로 중간이지만 최근 3년 외부 FA {cp('한화').ext_fa_3y}건에 {cp('한화').ext_fa_3y_total}억을 써 가장 공격적으로 투자한 구단이다.
+
+키움은 남은 금액이 {f1(cp('키움').room)}억으로 가장 크고 팀 전력상 보강할 자리도 가장 많다. 그러나 최근 3년 외부 FA 영입이 한 건도 없었고 공격적으로 투자하지 않는 구단이다. 2027년 예상 합계 {f1(cp('키움').keep)}억은 하한보다 {f1(cp('키움').floor_gap_keep)}억 적다. NC와 키움은 상한보다 하한이 먼저인 구단이라 예외의 효과가 작다.
+
+## 몸값은 이렇게 셈했다
+
+기준은 최근 5년 FA 계약이다. {d.model.fa_years[0]}\~{d.model.fa_years[1]}시즌을 앞두고 맺은 계약 {d.model.n}건에 계약 직전 3시즌의 성적과 나이를 붙여 연평균 금액을 맞췄다. 1년·1+1년 계약, 사인 앤드 트레이드, 해외 복귀처럼 성격이 다른 {d.model.n_excluded}건은 뺐다.
+
+성적은 <a href={siteUrl('posts/2026-war-owar')}>WAR\*</a>을 직전 3시즌 1:2:3으로 가중했다. 2027년 FA라면 2024년에 1, 2025년에 2, 2026년에 3의 비중을 준다. 타자 WAR\*은 타격과 포지션 보정만 담고 수비와 주루는 빠져 있다. 투수는 <a href={siteUrl('posts/2026-war-pwar')}>FIP 기준과 실점 기준 WAR\*</a>의 평균을 썼다.
+
+나이는 몸값을 크게 깎는다. 아래는 같은 가중 WAR\*에 나이만 바꿔 넣은 4년 총액이다.
+
+<table>
+  <thead><tr><th>2027년 나이</th>{d.model.age_examples[0].by_war.map((w) => <th>가중 WAR* {f1(w.war)}</th>)}</tr></thead>
+  <tbody>
+    {d.model.age_examples.map((a) => (
+      <tr><td>{a.age}세</td>{a.by_war.map((w) => <td>{w.total4}억</td>)}</tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">4년 계약 기준 예상 총액.</p>
+
+가중 WAR\* 2인 선수는 28세면 {d.model.age_examples[0].by_war[1].total4}억, 36세면 {d.model.age_examples[2].by_war[1].total4}억이다. 계약 기간은 모두 4년으로 두고 40세 양의지만 2년으로 했다. 이 계산에서 나온 값을 모델 예상이라고 부른다.
+
+모델 예상은 과거 시장의 평균이라 올겨울의 열기를 담지 못한다. 그래서 경쟁 강도를 네 단계로 나누고 단계마다 웃돈을 얹은 값을 봄데 연구소 예측으로 따로 적었다. 웃돈은 작년 시장 계약이 예측보다 {Math.round(my(2026).median_resid_pct)}% 비쌌고 올해는 구단이 쓸 수 있는 돈이 더 많다는 점을 근거로 정했다. 최상은 {d.mult['최상']}배, 상은 {d.mult['상']}배, 중은 {d.mult['중']}배이고 하는 웃돈 없이 모델 예상 그대로 두었다.
+
+## 주요 선수 10명
+
+경쟁 강도에는 FA 등급도 크게 작용한다. 다른 구단 FA를 데려가면 원소속팀에 보상을 해야 하는데 등급마다 부담이 다르다.
+
+<table>
+  <thead><tr><th>등급</th><th>보상</th></tr></thead>
+  <tbody>
+    <tr><td>A</td><td>보호선수 {gr.A.protect}인 외 1명 + 직전 연봉 {gr.A.pct_with}%, 또는 직전 연봉 {gr.A.pct_only}%</td></tr>
+    <tr><td>B</td><td>보호선수 {gr.B.protect}인 외 1명 + 직전 연봉 {gr.B.pct_with}%, 또는 직전 연봉 {gr.B.pct_only}%</td></tr>
+    <tr><td>C</td><td>보상선수 없이 직전 연봉 {gr.C.pct_only}%</td></tr>
+  </tbody>
+</table>
+
+A등급의 보상 장벽에 막힌 선수가 적지 않다. {gc.a_blocked[0].fa_year}년 FA {gc.a_blocked[0].name}은 시장에서 관심을 받지 못하고 {gc.a_blocked[0].team}와 {gc.a_blocked[0].years} {gc.a_blocked[0].total}억에 남았다. {gc.a_blocked[1].fa_year}년 {gc.a_blocked[1].name}도 {gc.a_blocked[1].team}와 {gc.a_blocked[1].years} {gc.a_blocked[1].total}억에 잔류했는데 그해 FA 가운데 가장 늦은 계약이었다. 그래도 원하는 구단이 있으면 A등급도 옮긴다. {gc.a_moved[0].name}은 LG에서 삼성으로 {gc.a_moved[0].years} {gc.a_moved[0].total}억, NC {gc.a_moved[1].name}은 KT로 {gc.a_moved[1].years} {gc.a_moved[1].total}억에 이적했다. C등급은 문턱이 낮다. {gc.c_moved[0].name}은 보상금 {gc.c_moved[0].comp}억만 내고 키움에서 KT로 옮겼고({gc.c_moved[0].years} {gc.c_moved[0].total}억) {gc.c_moved[1].name}도 보상금 {gc.c_moved[1].comp}억에 LG에서 KT로 갔다({gc.c_moved[1].years} {gc.c_moved[1].total}억).
+
+### 원태인, 선례가 없는 20대 에이스
+
+{pitTable('원태인')}
+{fee('원태인')}
+
+원태인은 세 시즌 모두 145이닝 넘게 던졌다. 2026년 평균자책점은 {f2(sy('원태인', 2026).era)}으로 셋 중 가장 나빴지만 FIP는 {f2(sy('원태인', 2026).fip)}으로 가장 좋았다. 선발 WAR\*(FIP 기준)은 100이닝 이상 던진 국내 선발 {won_.profile_2026.dom_sp_n}명 중 {won_.profile_2026.dom_sp_war_rank}위였다.
+
+모델 예상은 4년 {won(won_.total)}, 연평균 {f1(won_.aav)}억으로 이번 명단에서 가장 비싸다. 이 값도 원태인에게는 낮다. 표본 {d.model.n}건 가운데 30세 이하 계약은 {d.model.young_n}건이었고 가중 WAR\*이 3을 넘은 선수는 {yt.fa_year}년 {yt.player}({yt.age}세, {f2(yt.ww)}) 한 명이다. {yt.player}은 KT에서 한화로 옮기며 {yt.years}년 {won(yt.total)}을 받았다. 27세에 가중 WAR\* {f2(won_.ww)}인 FA는 최근 5년 시장에 없었다. 비교할 계약이 없는 어린 S급 선수에게는 계산에 없는 프리미엄이 붙는다.
+
+A등급이라 데려가는 구단은 보호선수 {gr.A.protect}인 외 1명과 보상금을 내야 하고 보상금만 내면 최대 {ck.won_comp_max}억(2026년 연봉 {ck.won_salary_2026}억의 {gr.A.pct_only}%)이다. 이 정도 선수에게는 장벽이 되지 못한다. 원태인은 원래 해외 진출에 긍정적이었고 해외 에이전트도 이미 두었다. 국내 구단끼리의 경쟁에 해외 구단까지 끼어드는 셈이다.
+
+원소속팀 삼성의 사정은 앞의 지갑 장에 적었다. 삼성 말고도 원태인을 원할 만한 구단이 넷이다. SSG는 선발 WAR\*(FIP 기준)이 {f2(tm('SSG').sp_war)}으로 10개 구단 중 {tm('SSG').sp_war_rank}위, KIA는 국내 선발 WAR\*이 {f2(tm('KIA').dom_sp_war)}으로 {tm('KIA').dom_sp_war_rank}위였다. 한화는 선발 평균 이닝이 {f2(tm('한화').sp_ip_per_start)}이닝으로 {tm('한화').sp_ip_rank}위였고 QS도 {tm('한화').qs}번으로 가장 적었다. 한화는 상한까지 남은 {f1(cp('한화').room)}억이 원태인 연평균과 비슷하지만 최근 몇 년 FA 시장에서 가장 공격적으로 영입한 구단이다. NC는 국내 선발 WAR\* {tm('NC').dom_sp_war}으로 {tm('NC').dom_sp_war_rank}위이고 샐러리캡 여유는 많지만 투자 의지가 변수다.
+
+삼성과 국내 네 구단에 해외까지 붙을 수 있는 선수라 경쟁 강도는 최상으로 판단했다. 봄데 연구소 예측은 4년 {won(won_.bomde)} 규모이며 실제로는 더 과열될 여지도 많다.
+
+### 구자욱, 리그 최고 타자와 34세라는 나이
+
+{batTable('구자욱')}
+{fee('구자욱')}
+
+구자욱의 2026년은 커리어 최고였다. 타율 {f3(sy('구자욱', 2026).avg)}와 출루율 {f3(sy('구자욱', 2026).obp)}는 300타석 이상 타자 {gu.profile_2026.qual_n}명 중 1위였고 우르크(wRC+)는 {f1(sy('구자욱', 2026).wrc_plus)}으로 {gu.profile_2026.wrc_rank}위다. 우투수 상대 OPS와 좌투수 상대 OPS가 모두 {f3(gu.profile_2026.ops_vsr)}였다. 홈런 {sy('구자욱', 2024).hr}개를 친 2024년부터 세 시즌 WAR\*이 모두 4를 넘었다.
+
+약점은 나이다. 2027년이면 34세라 4년 계약이 끝날 때 {gu.age + 3}세가 된다. 가중 WAR\* {f2(gu.ww)}는 원태인({f2(won_.ww)})보다 높은데 모델 예상은 4년 {won(gu.total)}(연평균 {f1(gu.aav)}억)으로 {won_.total - gu.total}억 적다. 같은 성적이라도 30대 중반 FA에게 시장이 덜 쓴 결과가 계산에 그대로 들어 있다.
+
+구자욱도 A등급이지만 원태인과 마찬가지로 보상이 걸림돌이 될 선수는 아니다. 오히려 해외 변수가 생겼다. 구자욱은 한국시리즈 우승 직후 미국 무대에 도전하고 싶다는 뜻을 밝혔다.
+
+삼성의 사정은 지갑 장에 적은 대로다. 구자욱을 찾을 만한 다른 구단은 코너 외야가 약한 팀이다. 좌익수와 우익수 WAR\* 합이 SSG {tm('SSG').corner_of.rank}위({f2(tm('SSG').corner_of.war)}), 롯데 {tm('롯데').corner_of.rank}위({f2(tm('롯데').corner_of.war)}), NC {tm('NC').corner_of.rank}위({f2(tm('NC').corner_of.war)})였다. NC는 좌타자 타석 비중도 {f1(tm('NC').lhb_pa_pct)}%로 가장 낮다. 세 구단 모두 상한까지 50억 넘게 남는다.
+
+나이가 약점이어도 삼성과 국내 세 구단, 해외까지 리그 최고 타자를 노린다. 그래서 경쟁 강도는 최상으로 봤고 봄데 연구소 예측은 4년 {won(gu.bomde)}이다.
+
+### 최지훈·김호령·정수빈, 수비로 값을 받는 중견수
+
+이번 시장에는 주전 중견수가 셋 나온다. 셋 다 타격 성적은 평범하지만 리그에서 수비가 우수한 선수들이다. WAR\*에는 <a href={siteUrl('posts/2026-war-dwar')}>수비 가치(dWAR)</a>가 빠져 있어 셋 모두 모델 계산보다 10억 정도 더 받을 만하다고 생각한다. 아래 봄데 연구소 예측은 모델 예상에 이 10억을 더한 뒤 경쟁 강도를 반영했다.
+
+{batTable('최지훈')}
+{fee('최지훈')}
+
+최지훈은 2026년 중견수로 {cj.cf_2026.inn}이닝을 뛰어 리그 최다였고 도루 {sy('최지훈', 2026).sb}개를 했다. 출루율 {f3(sy('최지훈', 2026).obp)}는 300타석 이상 타자 {cj.profile_2026.qual_n}명 중 {cj.profile_2026.obp_rank}위로 낮았다. 가중 WAR\* {f2(cj.ww)}으로 세 중견수 중 가장 낮은데 모델 예상은 {won(cj.total)}으로 가장 높다. 2027년 30세라 나이 감액이 거의 없어서다. B등급이라 보호선수 {gr.B.protect}인 외 1명을 내줘야 하지만 30세 주전 중견수라면 감수할 구단이 있다. 경쟁 강도는 상, 봄데 연구소 예측은 {won(cj.bomde)}이다.
+
+{batTable('김호령')}
+{fee('김호령')}
+
+김호령은 2024년 {sy('김호령', 2024).pa}타석에 그쳤다가 2025년 WAR\* {f2(sy('김호령', 2025).war)}으로 올라섰다. 2026년에는 {sy('김호령', 2026).g}경기에 나서 중견수 {kh.cf_2026.inn}이닝으로 리그 {kh.cf_2026.rank}위였다. C등급이라 보상선수 없이 직전 연봉의 {gr.C.pct_only}%만 내면 데려갈 수 있다. 세 중견수 가운데 영입 문턱이 가장 낮아 경쟁 강도는 상으로 판단했다. 모델 예상은 {won(kh.total)}, 봄데 연구소 예측은 {won(kh.bomde)}이다.
+
+{batTable('정수빈')}
+{fee('정수빈')}
+
+정수빈은 2024년 도루 {sy('정수빈', 2024).sb}개를 했고 2026년에도 중견수 {js.cf_2026.inn}이닝으로 {js.cf_2026.rank}위였다. 2027년 37세이고 우르크는 {f1(sy('정수빈', 2026).wrc_plus)}까지 내려왔다. 37세 B등급이라 보상선수까지 내주고 데려갈 구단은 적다. 경쟁 강도는 중으로 봤다. 모델 예상은 {won(js.total)}이고 봄데 연구소 예측은 {won(js.bomde)}이다.
+
+세 원소속팀(SSG, KIA, 두산)은 모두 잡을 돈이 있다. 중견수가 필요한 다른 구단도 세 곳이다. 롯데는 중견수 WAR\*이 {f2(tm('롯데').CF.war)}으로 10위였고 중견수 방향 타구 아웃률도 {f1(tm('롯데').cf_out_pct)}%로 가장 낮았다. NC는 중견수 WAR\* {f2(tm('NC').CF.war)}으로 {tm('NC').CF.rank}위다. 한화는 중견수 WAR\*이 {tm('한화').CF.rank}위로 평균이지만 가장 많이 뛴 {tm('한화').CF.starter}의 비중이 {tm('한화').CF.starter_share}%라 고정 주전이 없었다.
+
+### 포수 시장과 출루형 외야수
+
+나머지 다섯 명은 한 표로 본다. 포수 박동원·양의지·김태군, 출루형 외야수 홍창기·권희동이다.
+
+<table>
+  <thead><tr><th>선수(팀)</th><th>2027년 나이</th><th>등급</th><th>WAR* 2024/2025/2026</th><th>2026 타율/출루율/장타율</th><th>모델 예상</th><th>봄데 연구소 예측</th></tr></thead>
+  <tbody>
+    {CMP.map((n) => (
+      <tr><td>{n}({p(n).team})</td><td>{p(n).age}세</td><td>{p(n).grade}</td><td>{p(n).seasons.map((s) => f2(s.war)).join(' / ')}</td><td>{f3(sy(n, 2026).avg)}/{f3(sy(n, 2026).obp)}/{f3(sy(n, 2026).slg)}</td><td>{p(n).years}년 {won(p(n).total)}</td><td>{won(p(n).bomde)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+박동원은 2025년 WAR\* {f2(sy('박동원', 2025).war)}에서 2026년 {f2(sy('박동원', 2026).war)}으로 급락했다. 장타율은 {f3(sy('박동원', 2025).slg)}에서 {f3(sy('박동원', 2026).slg)}으로 내려갔다. 포수로 {pd.catcher_2026.c_inn}이닝을 뛰었는데 도루 저지율은 {f1(pd.catcher_2026.cs_pct)}%로 2,000구 이상 받은 포수 {d.catchers_n}명 중 꼴찌였다. 그래도 포수 시장에서 주전 마스크를 맡을 매물은 사실상 박동원뿐이다. 포수 WAR\*이 KT {tm('KT').C.rank}위, SSG {tm('SSG').C.rank}위였고 두 구단 모두 쓸 돈이 있다. B등급 보상을 감수할 만한 자리라 경쟁 강도를 상으로 매겼다. 봄데 연구소 예측은 {won(pd.bomde)}이다.
+
+양의지는 40세에도 홈런 {sy('양의지', 2026).hr}개를 쳤지만 포수로 뛴 이닝은 {yj.catcher_2026.c_inn}이닝이고 지명타자로 {yj.catcher_2026.dh_inn}이닝을 나섰다. 시장에 나온다면 2년 {won(yj.total)}이 예상된다. 양의지는 C등급이고 계약에 조건 없는 방출 합의가 있어 보상 없이 데려갈 수 있다. 그러나 두산과 맺은 4+2년 계약의 선수 옵션으로 2년 최대 {d.yj_option}억을 받을 수 있어 옵트아웃할 가능성은 낮다. 나오더라도 타격을 보고 롯데 정도가 관심을 보일 만하다. 경쟁 강도는 하로 판단했다.
+
+김태군은 포수로 {kt.catcher_2026.c_inn}이닝을 뛰었고 우르크는 {f1(sy('김태군', 2026).wrc_plus)}이었다. 공격 보강을 원하는 KT와는 맞지 않아 주전 포수의 나이가 많은 삼성 정도가 영입을 생각할 만하다. 경쟁 강도는 하로 봤다.
+
+홍창기는 2024년 WAR\* {f2(sy('홍창기', 2024).war)}에서 2026년 {f2(sy('홍창기', 2026).war)}으로 떨어졌다. 출루율은 여전히 {hc.profile_2026.obp_rank}위였지만 홈런 {sy('홍창기', 2026).hr}개에 장타율에서 타율을 뺀 ISO가 {f3(sy('홍창기', 2026).iso)}였다. 1·2번 타순 출루율이 낮은 KIA({tm('KIA').obp_top2_rank}위)와 두산({tm('두산').obp_top2_rank}위)이 눈여겨볼 만하다. 다만 A등급이라 급락한 직후의 선수에게 보호선수 {gr.A.protect}인 외 1명까지 내주기는 부담이다. 그래서 경쟁 강도는 중, 봄데 연구소 예측은 {won(hc.bomde)}이다.
+
+권희동은 좌투수에게 강하다. 2026년 좌투수 상대 OPS는 {f3(kd.profile_2026.ops_vsl)}였고 우투수 상대는 {f3(kd.profile_2026.ops_vsr)}였다. B등급이라 보상선수까지 내주며 데려갈 구단은 많지 않고 하한을 맞춰야 하는 NC가 잡을 이유가 가장 크다. 경쟁 강도는 하로 두었다.
+
+## 나머지 FA 후보들
+
+<table>
+  <thead><tr><th>선수(팀)</th><th>포지션</th><th>2027년 나이</th><th>예상 등급</th><th>WAR* 2024/2025/2026</th><th>가중</th></tr></thead>
+  <tbody>
+    {d.others.map((o) => (
+      <tr><td>{o.name}({o.team})</td><td>{o.pos}</td><td>{o.age}세</td><td>{o.grade ?? '-'}</td><td>{o.war.map(f2).join(' / ')}</td><td>{f2(o.ww)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">가중 WAR* 순. 투수 WAR*은 FIP 기준과 실점 기준의 평균. 등급은 알려진 선수만 적었다.</p>
+
+이들은 FA를 신청하지 않거나 원소속팀에 싸게 남을 가능성이 높다. 가중 WAR\*이 1을 넘는 선수는 김상수 한 명이다. 한화 박상원은 세 시즌 모두 구원으로 꾸준히 던졌지만 A등급이라 이적 장벽이 높다.
+
+## 최대어 순위와 과열 지점
+
+<table>
+  <thead><tr><th>순위</th><th>선수(원소속)</th><th>경쟁 강도</th><th>모델 예상</th><th>봄데 연구소 예측</th><th>유력 행선지</th></tr></thead>
+  <tbody>
+    {[...d.players].sort((a, b) => b.bomde - a.bomde).map((x, i) => (
+      <tr><td>{i + 1}</td><td>{x.name}({x.team})</td><td>{x.level}</td><td>{x.years}년 {won(x.total)}</td><td class="cur">{won(x.bomde)}</td><td>{DEST[x.name]}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">봄데 연구소 예측 = 모델 예상 × 경쟁 강도(최상 {d.mult['최상']}, 상 {d.mult['상']}, 중 {d.mult['중']}, 하 {d.mult['하']}). 중견수 3명(최지훈, 김호령, 정수빈)은 모델 예상에 수비 가치 10억을 더한 뒤 곱했다.</p>
+
+올겨울 시장은 모델 예상보다 분명 뜨겁다. 작년 계약이 이미 예측보다 {Math.round(my(2026).median_resid_pct)}% 비쌌고 2027년에는 상한까지 30억 넘게 남는 구단이 {ch(2027).n_room30}곳으로 늘었다.
+
+가장 크게 과열될 곳은 원태인과 구자욱이다. 국내 구단만 해도 원태인에게 넷, 구자욱에게 셋이 관심을 보일 만한데 두 선수 모두 해외 진출 가능성까지 열려 있다. 둘 중 한 명이라도 해외로 떠나면 삼성은 그 빈자리를 메우려고 외부 FA 영입에 적극 나설 것이고 남은 매물의 값은 더 오른다. 그다음은 중견수다. 롯데, NC, 한화가 같은 자리를 찾는데 매물은 세 명이다. 포수 시장에서는 양의지가 두산에 남는다면 주전 포수감이 박동원 한 명이라 KT와 SSG가 한 선수를 두고 다툰다.
+
+한국시리즈 우승 팀 삼성이 과열된 FA 시장에서 구자욱과 원태인을 지켜내 축제 분위기를 이어갈 수 있을지가 이번 겨울의 포인트다.
