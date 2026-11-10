@@ -3143,5 +3143,58 @@
         "comp": 7.5
       }
     ]
+  },
+  "attendance_hist": {
+    "note": "정규시즌 총 관중. 2021~2025는 KBO 공식 관중 현황(2026-11-10 확인), 2026은 season.attendance_2026. 2020·2021은 코로나19 관중 제한, 2022년부터 전면 입장. man은 만 명 단위 내림(영상 표기용).",
+    "source": "https://koreabaseball.com/Record/Crowd/History.aspx",
+    "rows": [
+      {
+        "year": 2021,
+        "attendance": 1228489,
+        "note": "관중 제한(부분 입장)",
+        "source": "KBO 공식 관중 현황 https://koreabaseball.com/Record/Crowd/History.aspx (2026-11-10 확인)",
+        "man": 122
+      },
+      {
+        "year": 2022,
+        "attendance": 6076074,
+        "source": "KBO 공식 관중 현황 https://koreabaseball.com/Record/Crowd/History.aspx (2026-11-10 확인)",
+        "man": 607
+      },
+      {
+        "year": 2023,
+        "attendance": 8100326,
+        "source": "KBO 공식 관중 현황 https://koreabaseball.com/Record/Crowd/History.aspx (2026-11-10 확인)",
+        "man": 810
+      },
+      {
+        "year": 2024,
+        "attendance": 10887705,
+        "source": "KBO 공식 관중 현황 https://koreabaseball.com/Record/Crowd/History.aspx (2026-11-10 확인)",
+        "man": 1088
+      },
+      {
+        "year": 2025,
+        "attendance": 12312519,
+        "source": "KBO 공식 관중 현황 https://koreabaseball.com/Record/Crowd/History.aspx (2026-11-10 확인)",
+        "man": 1231
+      },
+      {
+        "year": 2026,
+        "attendance": 12770551,
+        "source": "season.attendance_2026(기존 스냅샷)",
+        "man": 1277
+      }
+    ]
+  },
+  "samsung_bomde_calc": {
+    "note": "영상용 파생 계산(2026-11-10). 원소속 FA 두 명을 봄데 연구소 예측(bomde/years) 연평균으로 넣은 삼성 2027 합계. cap27.삼성.ex_fa + 원태인 bomde/years + 구자욱 bomde/years, 프랜차이즈 예외는 원태인 연평균의 50%를 뺀다. 원문 표(모델 예상 연평균 기준 keep 147.9·room 3.3·room_franchise 18.2)와 기준이 다르다. room_bomde_franchise는 151.17 기준 6.3~6.4(반올림 경계), 영상은 '약 6억'으로 표기.",
+    "won_aav_bomde": 38.75,
+    "gu_aav_bomde": 31.75,
+    "keep_bomde": 164.2,
+    "over_cap_bomde": 13.0,
+    "franchise_cut_bomde": 19.4,
+    "keep_bomde_franchise": 144.8,
+    "room_bomde_franchise": 6.3
   }
 }
