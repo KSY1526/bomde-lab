@@ -78,5 +78,13 @@
   "weight": 105,
   "pitcher": false,
   "left": false
+ },
+ "김도영": {
+  "team": "KIA",
+  "no": "5",
+  "height": 183,
+  "weight": 85,
+  "pitcher": false,
+  "left": false
  }
 }
