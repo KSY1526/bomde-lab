@@ -86,5 +86,13 @@
   "weight": 85,
   "pitcher": false,
   "left": false
+ },
+ "김휘집": {
+  "team": "NC",
+  "no": "44",
+  "height": 180,
+  "weight": 92,
+  "pitcher": false,
+  "left": false
  }
 }
