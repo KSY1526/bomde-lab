@@ -1,0 +1,1714 @@
+{
+ "game_id": "88881113KRJP02026",
+ "date": "2026-11-13",
+ "round": "APBC 예선 2차전",
+ "round_code": "apbc",
+ "series_game": 2,
+ "stadium": "도쿄돔",
+ "home": "일본",
+ "away": "대한민국",
+ "home_score": 9,
+ "away_score": 5,
+ "winner": "일본",
+ "series_after": {
+  "일본": 2,
+  "대한민국": 0
+ },
+ "format": "full",
+ "max_swing": 39.4,
+ "n_big": 5,
+ "big": 10.0,
+ "short_max": 12.0,
+ "baseline": {
+  "games": 1405,
+  "median_max": 18.5,
+  "avg_big": 4.6,
+  "short_pct": 15.7
+ },
+ "linescore": [
+  {
+   "team": "대한민국",
+   "innings": [
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    4,
+    0
+   ],
+   "r": 5,
+   "h": 8,
+   "e": 1,
+   "b": 3
+  },
+  {
+   "team": "일본",
+   "innings": [
+    0,
+    0,
+    2,
+    0,
+    0,
+    1,
+    2,
+    4,
+    null
+   ],
+   "r": 9,
+   "h": 10,
+   "e": 0,
+   "b": 8
+  }
+ ],
+ "timeline": [
+  {
+   "i": 0,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 50.0,
+   "kor_wp": 50.0
+  },
+  {
+   "i": 1,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 52.2,
+   "kor_wp": 47.8
+  },
+  {
+   "i": 2,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 50.1,
+   "kor_wp": 49.9
+  },
+  {
+   "i": 3,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 47.1,
+   "kor_wp": 52.9
+  },
+  {
+   "i": 4,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 51.0,
+   "kor_wp": 49.0
+  },
+  {
+   "i": 5,
+   "inning": 1,
+   "half": "top",
+   "home_wp": 55.1,
+   "kor_wp": 44.9
+  },
+  {
+   "i": 6,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 52.8,
+   "kor_wp": 47.2
+  },
+  {
+   "i": 7,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 51.2,
+   "kor_wp": 48.8
+  },
+  {
+   "i": 8,
+   "inning": 1,
+   "half": "bottom",
+   "home_wp": 50.0,
+   "kor_wp": 50.0
+  },
+  {
+   "i": 9,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 52.5,
+   "kor_wp": 47.5
+  },
+  {
+   "i": 10,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 54.1,
+   "kor_wp": 45.9
+  },
+  {
+   "i": 11,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 53.0,
+   "kor_wp": 47.0
+  },
+  {
+   "i": 12,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 51.1,
+   "kor_wp": 48.9
+  },
+  {
+   "i": 13,
+   "inning": 2,
+   "half": "top",
+   "home_wp": 55.4,
+   "kor_wp": 44.6
+  },
+  {
+   "i": 14,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 58.4,
+   "kor_wp": 41.6
+  },
+  {
+   "i": 15,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 63.4,
+   "kor_wp": 36.6
+  },
+  {
+   "i": 16,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 62.1,
+   "kor_wp": 37.9
+  },
+  {
+   "i": 17,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 55.4,
+   "kor_wp": 44.6
+  },
+  {
+   "i": 18,
+   "inning": 2,
+   "half": "bottom",
+   "home_wp": 50.0,
+   "kor_wp": 50.0
+  },
+  {
+   "i": 19,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 52.5,
+   "kor_wp": 47.5
+  },
+  {
+   "i": 20,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 54.5,
+   "kor_wp": 45.5
+  },
+  {
+   "i": 21,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 43.9,
+   "kor_wp": 56.1
+  },
+  {
+   "i": 22,
+   "inning": 3,
+   "half": "top",
+   "home_wp": 45.2,
+   "kor_wp": 54.8
+  },
+  {
+   "i": 23,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 46.8,
+   "kor_wp": 53.2
+  },
+  {
+   "i": 24,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 65.8,
+   "kor_wp": 34.2
+  },
+  {
+   "i": 25,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 68.6,
+   "kor_wp": 31.4
+  },
+  {
+   "i": 26,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 67.2,
+   "kor_wp": 32.8
+  },
+  {
+   "i": 27,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 68.6,
+   "kor_wp": 31.4
+  },
+  {
+   "i": 28,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 65.4,
+   "kor_wp": 34.6
+  },
+  {
+   "i": 29,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 67.4,
+   "kor_wp": 32.6
+  },
+  {
+   "i": 30,
+   "inning": 3,
+   "half": "bottom",
+   "home_wp": 60.9,
+   "kor_wp": 39.1
+  },
+  {
+   "i": 31,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 63.7,
+   "kor_wp": 36.3
+  },
+  {
+   "i": 32,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 61.0,
+   "kor_wp": 39.0
+  },
+  {
+   "i": 33,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 64.6,
+   "kor_wp": 35.4
+  },
+  {
+   "i": 34,
+   "inning": 4,
+   "half": "top",
+   "home_wp": 67.4,
+   "kor_wp": 32.6
+  },
+  {
+   "i": 35,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 65.2,
+   "kor_wp": 34.8
+  },
+  {
+   "i": 36,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 63.4,
+   "kor_wp": 36.6
+  },
+  {
+   "i": 37,
+   "inning": 4,
+   "half": "bottom",
+   "home_wp": 62.2,
+   "kor_wp": 37.8
+  },
+  {
+   "i": 38,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 65.7,
+   "kor_wp": 34.3
+  },
+  {
+   "i": 39,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 67.9,
+   "kor_wp": 32.1
+  },
+  {
+   "i": 40,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 66.4,
+   "kor_wp": 33.6
+  },
+  {
+   "i": 41,
+   "inning": 5,
+   "half": "top",
+   "home_wp": 69.6,
+   "kor_wp": 30.4
+  },
+  {
+   "i": 42,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 67.3,
+   "kor_wp": 32.7
+  },
+  {
+   "i": 43,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 65.7,
+   "kor_wp": 34.3
+  },
+  {
+   "i": 44,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 66.7,
+   "kor_wp": 33.3
+  },
+  {
+   "i": 45,
+   "inning": 5,
+   "half": "bottom",
+   "home_wp": 64.3,
+   "kor_wp": 35.7
+  },
+  {
+   "i": 46,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 68.1,
+   "kor_wp": 31.9
+  },
+  {
+   "i": 47,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 70.9,
+   "kor_wp": 29.1
+  },
+  {
+   "i": 48,
+   "inning": 6,
+   "half": "top",
+   "home_wp": 72.7,
+   "kor_wp": 27.3
+  },
+  {
+   "i": 49,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 70.1,
+   "kor_wp": 29.9
+  },
+  {
+   "i": 50,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 68.7,
+   "kor_wp": 31.3
+  },
+  {
+   "i": 51,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 80.2,
+   "kor_wp": 19.8
+  },
+  {
+   "i": 52,
+   "inning": 6,
+   "half": "bottom",
+   "home_wp": 79.2,
+   "kor_wp": 20.8
+  },
+  {
+   "i": 53,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 83.1,
+   "kor_wp": 16.9
+  },
+  {
+   "i": 54,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 85.4,
+   "kor_wp": 14.6
+  },
+  {
+   "i": 55,
+   "inning": 7,
+   "half": "top",
+   "home_wp": 86.7,
+   "kor_wp": 13.3
+  },
+  {
+   "i": 56,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 86.8,
+   "kor_wp": 13.2
+  },
+  {
+   "i": 57,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 95.3,
+   "kor_wp": 4.7
+  },
+  {
+   "i": 58,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 93.2,
+   "kor_wp": 6.8
+  },
+  {
+   "i": 59,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 96.4,
+   "kor_wp": 3.6
+  },
+  {
+   "i": 60,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 95.2,
+   "kor_wp": 4.8
+  },
+  {
+   "i": 61,
+   "inning": 7,
+   "half": "bottom",
+   "home_wp": 94.4,
+   "kor_wp": 5.6
+  },
+  {
+   "i": 62,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 93.4,
+   "kor_wp": 6.6
+  },
+  {
+   "i": 63,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 93.8,
+   "kor_wp": 6.2
+  },
+  {
+   "i": 64,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 89.3,
+   "kor_wp": 10.7
+  },
+  {
+   "i": 65,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 49.9,
+   "kor_wp": 50.1
+  },
+  {
+   "i": 66,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 54.7,
+   "kor_wp": 45.3
+  },
+  {
+   "i": 67,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 58.5,
+   "kor_wp": 41.5
+  },
+  {
+   "i": 68,
+   "inning": 8,
+   "half": "top",
+   "home_wp": 61.6,
+   "kor_wp": 38.4
+  },
+  {
+   "i": 69,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 66.6,
+   "kor_wp": 33.4
+  },
+  {
+   "i": 70,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 64.4,
+   "kor_wp": 35.6
+  },
+  {
+   "i": 71,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 57.9,
+   "kor_wp": 42.1
+  },
+  {
+   "i": 72,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 59.3,
+   "kor_wp": 40.7
+  },
+  {
+   "i": 73,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 95.9,
+   "kor_wp": 4.1
+  },
+  {
+   "i": 74,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 96.2,
+   "kor_wp": 3.8
+  },
+  {
+   "i": 75,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 98.2,
+   "kor_wp": 1.8
+  },
+  {
+   "i": 76,
+   "inning": 8,
+   "half": "bottom",
+   "home_wp": 98.0,
+   "kor_wp": 2.0
+  },
+  {
+   "i": 77,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 96.7,
+   "kor_wp": 3.3
+  },
+  {
+   "i": 78,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 98.5,
+   "kor_wp": 1.5
+  },
+  {
+   "i": 79,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 99.6,
+   "kor_wp": 0.4
+  },
+  {
+   "i": 80,
+   "inning": 9,
+   "half": "top",
+   "home_wp": 100.0,
+   "kor_wp": 0.0
+  }
+ ],
+ "top": [
+  {
+   "i": 65,
+   "pa_id": "88881113KRJP02026_65",
+   "inning": 8,
+   "half": "top",
+   "inning_label": "8회초",
+   "outs": "무사",
+   "bases": "1, 3루",
+   "score_before": {
+    "일본": 5,
+    "대한민국": 2
+   },
+   "batter": "김휘집",
+   "batter_team": "대한민국",
+   "pitcher": "S.모리타",
+   "pitcher_team": "일본",
+   "result_text": "중견수 뒤 홈런",
+   "result_text_ja": "センター3ランホームラン（打点3）",
+   "runs": 3,
+   "rbi": 3,
+   "wpa": 39.4,
+   "bat_wp_before": 10.7,
+   "bat_wp_after": 50.1,
+   "home_wp_after": 49.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "1-1",
+    "nth": null
+   },
+   "kor_wp_before": 10.7,
+   "kor_wp_after": 50.1,
+   "kor_wpa": 39.4,
+   "kor_role": "타격",
+   "kor_player": "김휘집",
+   "opp_player": "S.모리타",
+   "rank": 1
+  },
+  {
+   "i": 73,
+   "pa_id": "88881113KRJP02026_73",
+   "inning": 8,
+   "half": "bottom",
+   "inning_label": "8회말",
+   "outs": "2사",
+   "bases": "1, 2루",
+   "score_before": {
+    "일본": 5,
+    "대한민국": 5
+   },
+   "batter": "R.무네야마",
+   "batter_team": "일본",
+   "pitcher": "김영우",
+   "pitcher_team": "대한민국",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライト3ランホームラン（打点3）",
+   "runs": 3,
+   "rbi": 3,
+   "wpa": 36.6,
+   "bat_wp_before": 59.3,
+   "bat_wp_after": 95.9,
+   "home_wp_after": 95.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-0",
+    "nth": null
+   },
+   "kor_wp_before": 40.7,
+   "kor_wp_after": 4.1,
+   "kor_wpa": -36.6,
+   "kor_role": "수비",
+   "kor_player": "김영우",
+   "opp_player": "R.무네야마",
+   "rank": 2
+  },
+  {
+   "i": 24,
+   "pa_id": "88881113KRJP02026_24",
+   "inning": 3,
+   "half": "bottom",
+   "inning_label": "3회말",
+   "outs": "무사",
+   "bases": "3루",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 1
+   },
+   "batter": "T.마사키",
+   "batter_team": "일본",
+   "pitcher": "김진욱",
+   "pitcher_team": "대한민국",
+   "result_text": "좌중간 홈런",
+   "result_text_ja": "左中間2ランホームラン（打点2）",
+   "runs": 2,
+   "rbi": 2,
+   "wpa": 19.0,
+   "bat_wp_before": 46.8,
+   "bat_wp_after": 65.8,
+   "home_wp_after": 65.8,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "1-1",
+    "nth": null
+   },
+   "kor_wp_before": 53.2,
+   "kor_wp_after": 34.2,
+   "kor_wpa": -19.0,
+   "kor_role": "수비",
+   "kor_player": "김진욱",
+   "opp_player": "T.마사키",
+   "rank": 3
+  },
+  {
+   "i": 51,
+   "pa_id": "88881113KRJP02026_51",
+   "inning": 6,
+   "half": "bottom",
+   "inning_label": "6회말",
+   "outs": "2사",
+   "bases": "주자 없음",
+   "score_before": {
+    "일본": 2,
+    "대한민국": 1
+   },
+   "batter": "T.코지마",
+   "batter_team": "일본",
+   "pitcher": "전준표",
+   "pitcher_team": "대한민국",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライトソロホームラン（打点1）",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 11.5,
+   "bat_wp_before": 68.7,
+   "bat_wp_after": 80.2,
+   "home_wp_after": 80.2,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "3-1",
+    "nth": null
+   },
+   "kor_wp_before": 31.3,
+   "kor_wp_after": 19.8,
+   "kor_wpa": -11.5,
+   "kor_role": "수비",
+   "kor_player": "전준표",
+   "opp_player": "T.코지마",
+   "rank": 4
+  },
+  {
+   "i": 21,
+   "pa_id": "88881113KRJP02026_21",
+   "inning": 3,
+   "half": "top",
+   "inning_label": "3회초",
+   "outs": "2사",
+   "bases": "주자 없음",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 0
+   },
+   "batter": "한동희",
+   "batter_team": "대한민국",
+   "pitcher": "K.타케마루",
+   "pitcher_team": "일본",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライトソロホームラン（打点1）",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 10.6,
+   "bat_wp_before": 45.5,
+   "bat_wp_after": 56.1,
+   "home_wp_after": 43.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "0-1",
+    "nth": null
+   },
+   "kor_wp_before": 45.5,
+   "kor_wp_after": 56.1,
+   "kor_wpa": 10.6,
+   "kor_role": "타격",
+   "kor_player": "한동희",
+   "opp_player": "K.타케마루",
+   "rank": 5
+  }
+ ],
+ "players": [
+  {
+   "name": "R.무네야마",
+   "team": "일본",
+   "pa": 5,
+   "wpa": 44.0,
+   "role": "타자"
+  },
+  {
+   "name": "김휘집",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 30.2,
+   "role": "타자"
+  },
+  {
+   "name": "T.마사키",
+   "team": "일본",
+   "pa": 5,
+   "wpa": 17.0,
+   "role": "타자"
+  },
+  {
+   "name": "Y.이시다",
+   "team": "일본",
+   "pa": 7,
+   "wpa": 15.8,
+   "role": "투수"
+  },
+  {
+   "name": "K.타케마루",
+   "team": "일본",
+   "pa": 18,
+   "wpa": 12.2,
+   "role": "투수"
+  },
+  {
+   "name": "K.야마구치",
+   "team": "일본",
+   "pa": 5,
+   "wpa": 10.6,
+   "role": "타자"
+  },
+  {
+   "name": "한동희",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 8.0,
+   "role": "타자"
+  },
+  {
+   "name": "G.스즈키",
+   "team": "일본",
+   "pa": 3,
+   "wpa": 7.5,
+   "role": "투수"
+  },
+  {
+   "name": "김진욱",
+   "team": "대한민국",
+   "pa": 23,
+   "wpa": 5.3,
+   "role": "투수"
+  },
+  {
+   "name": "H.시노하라",
+   "team": "일본",
+   "pa": 4,
+   "wpa": 2.0,
+   "role": "투수"
+  },
+  {
+   "name": "안현민",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": 1.7,
+   "role": "타자"
+  },
+  {
+   "name": "T.코지마",
+   "team": "일본",
+   "pa": 4,
+   "wpa": 1.7,
+   "role": "타자"
+  },
+  {
+   "name": "우강훈",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -1.2,
+   "role": "투수"
+  },
+  {
+   "name": "김지찬",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -1.9,
+   "role": "타자"
+  },
+  {
+   "name": "S.와타나베",
+   "team": "일본",
+   "pa": 5,
+   "wpa": -2.0,
+   "role": "타자"
+  },
+  {
+   "name": "이준혁",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -2.1,
+   "role": "투수"
+  },
+  {
+   "name": "김도영",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -2.7,
+   "role": "타자"
+  },
+  {
+   "name": "R.와타라이",
+   "team": "일본",
+   "pa": 4,
+   "wpa": -2.7,
+   "role": "타자"
+  },
+  {
+   "name": "문정빈",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -4.5,
+   "role": "타자"
+  },
+  {
+   "name": "S.나카모리",
+   "team": "일본",
+   "pa": 3,
+   "wpa": -5.1,
+   "role": "투수"
+  },
+  {
+   "name": "M.니시카와",
+   "team": "일본",
+   "pa": 5,
+   "wpa": -6.0,
+   "role": "타자"
+  },
+  {
+   "name": "전준표",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -6.5,
+   "role": "투수"
+  },
+  {
+   "name": "박시원",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -6.5,
+   "role": "투수"
+  },
+  {
+   "name": "Y.쇼지",
+   "team": "일본",
+   "pa": 4,
+   "wpa": -7.7,
+   "role": "타자"
+  },
+  {
+   "name": "김민석",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -9.5,
+   "role": "타자"
+  },
+  {
+   "name": "S.하세가와",
+   "team": "일본",
+   "pa": 4,
+   "wpa": -9.6,
+   "role": "타자"
+  },
+  {
+   "name": "허인서",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -12.9,
+   "role": "타자"
+  },
+  {
+   "name": "김주원",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -13.1,
+   "role": "타자"
+  },
+  {
+   "name": "S.모리타",
+   "team": "일본",
+   "pa": 4,
+   "wpa": -27.7,
+   "role": "투수"
+  },
+  {
+   "name": "김영우",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -34.3,
+   "role": "투수"
+  }
+ ],
+ "n_pa": 80,
+ "source": "npb_playbyplay+naver_record+wp_table",
+ "kor": "대한민국",
+ "kor_is_home": false,
+ "opponent": "일본",
+ "kor_result": "패",
+ "kor_record_after": {
+  "승": 0,
+  "패": 2
+ },
+ "kor_worst": [
+  {
+   "i": 73,
+   "pa_id": "88881113KRJP02026_73",
+   "inning": 8,
+   "half": "bottom",
+   "inning_label": "8회말",
+   "outs": "2사",
+   "bases": "1, 2루",
+   "score_before": {
+    "일본": 5,
+    "대한민국": 5
+   },
+   "batter": "R.무네야마",
+   "batter_team": "일본",
+   "pitcher": "김영우",
+   "pitcher_team": "대한민국",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライト3ランホームラン（打点3）",
+   "runs": 3,
+   "rbi": 3,
+   "wpa": 36.6,
+   "bat_wp_before": 59.3,
+   "bat_wp_after": 95.9,
+   "home_wp_after": 95.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-0",
+    "nth": null
+   },
+   "kor_wp_before": 40.7,
+   "kor_wp_after": 4.1,
+   "kor_wpa": -36.6,
+   "kor_role": "수비",
+   "kor_player": "김영우",
+   "opp_player": "R.무네야마",
+   "rank": 1
+  },
+  {
+   "i": 24,
+   "pa_id": "88881113KRJP02026_24",
+   "inning": 3,
+   "half": "bottom",
+   "inning_label": "3회말",
+   "outs": "무사",
+   "bases": "3루",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 1
+   },
+   "batter": "T.마사키",
+   "batter_team": "일본",
+   "pitcher": "김진욱",
+   "pitcher_team": "대한민국",
+   "result_text": "좌중간 홈런",
+   "result_text_ja": "左中間2ランホームラン（打点2）",
+   "runs": 2,
+   "rbi": 2,
+   "wpa": 19.0,
+   "bat_wp_before": 46.8,
+   "bat_wp_after": 65.8,
+   "home_wp_after": 65.8,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "1-1",
+    "nth": null
+   },
+   "kor_wp_before": 53.2,
+   "kor_wp_after": 34.2,
+   "kor_wpa": -19.0,
+   "kor_role": "수비",
+   "kor_player": "김진욱",
+   "opp_player": "T.마사키",
+   "rank": 2
+  },
+  {
+   "i": 51,
+   "pa_id": "88881113KRJP02026_51",
+   "inning": 6,
+   "half": "bottom",
+   "inning_label": "6회말",
+   "outs": "2사",
+   "bases": "주자 없음",
+   "score_before": {
+    "일본": 2,
+    "대한민국": 1
+   },
+   "batter": "T.코지마",
+   "batter_team": "일본",
+   "pitcher": "전준표",
+   "pitcher_team": "대한민국",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライトソロホームラン（打点1）",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 11.5,
+   "bat_wp_before": 68.7,
+   "bat_wp_after": 80.2,
+   "home_wp_after": 80.2,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "3-1",
+    "nth": null
+   },
+   "kor_wp_before": 31.3,
+   "kor_wp_after": 19.8,
+   "kor_wpa": -11.5,
+   "kor_role": "수비",
+   "kor_player": "전준표",
+   "opp_player": "T.코지마",
+   "rank": 3
+  },
+  {
+   "i": 57,
+   "pa_id": "88881113KRJP02026_57",
+   "inning": 7,
+   "half": "bottom",
+   "inning_label": "7회말",
+   "outs": "무사",
+   "bases": "1루",
+   "score_before": {
+    "일본": 3,
+    "대한민국": 1
+   },
+   "batter": "R.무네야마",
+   "batter_team": "일본",
+   "pitcher": "박시원",
+   "pitcher_team": "대한민국",
+   "result_text": "우중간 홈런",
+   "result_text_ja": "右中間2ランホームラン（打点2）",
+   "runs": 2,
+   "rbi": 2,
+   "wpa": 8.5,
+   "bat_wp_before": 86.8,
+   "bat_wp_after": 95.3,
+   "home_wp_after": 95.3,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "0-0",
+    "nth": null
+   },
+   "kor_wp_before": 13.2,
+   "kor_wp_after": 4.7,
+   "kor_wpa": -8.5,
+   "kor_role": "수비",
+   "kor_player": "박시원",
+   "opp_player": "R.무네야마",
+   "rank": 4
+  },
+  {
+   "i": 15,
+   "pa_id": "88881113KRJP02026_15",
+   "inning": 2,
+   "half": "bottom",
+   "inning_label": "2회말",
+   "outs": "무사",
+   "bases": "1루",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 0
+   },
+   "batter": "S.와타나베",
+   "batter_team": "일본",
+   "pitcher": "김진욱",
+   "pitcher_team": "대한민국",
+   "result_text": "볼넷",
+   "result_text_ja": "フォアボール",
+   "runs": 0,
+   "rbi": 0,
+   "wpa": 5.0,
+   "bat_wp_before": 58.4,
+   "bat_wp_after": 63.4,
+   "home_wp_after": 63.4,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "3-0",
+    "nth": null
+   },
+   "kor_wp_before": 41.6,
+   "kor_wp_after": 36.6,
+   "kor_wpa": -5.0,
+   "kor_role": "수비",
+   "kor_player": "김진욱",
+   "opp_player": "S.와타나베",
+   "rank": 5
+  }
+ ],
+ "kor_best": [
+  {
+   "i": 65,
+   "pa_id": "88881113KRJP02026_65",
+   "inning": 8,
+   "half": "top",
+   "inning_label": "8회초",
+   "outs": "무사",
+   "bases": "1, 3루",
+   "score_before": {
+    "일본": 5,
+    "대한민국": 2
+   },
+   "batter": "김휘집",
+   "batter_team": "대한민국",
+   "pitcher": "S.모리타",
+   "pitcher_team": "일본",
+   "result_text": "중견수 뒤 홈런",
+   "result_text_ja": "センター3ランホームラン（打点3）",
+   "runs": 3,
+   "rbi": 3,
+   "wpa": 39.4,
+   "bat_wp_before": 10.7,
+   "bat_wp_after": 50.1,
+   "home_wp_after": 49.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "1-1",
+    "nth": null
+   },
+   "kor_wp_before": 10.7,
+   "kor_wp_after": 50.1,
+   "kor_wpa": 39.4,
+   "kor_role": "타격",
+   "kor_player": "김휘집",
+   "opp_player": "S.모리타",
+   "rank": 1
+  },
+  {
+   "i": 21,
+   "pa_id": "88881113KRJP02026_21",
+   "inning": 3,
+   "half": "top",
+   "inning_label": "3회초",
+   "outs": "2사",
+   "bases": "주자 없음",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 0
+   },
+   "batter": "한동희",
+   "batter_team": "대한민국",
+   "pitcher": "K.타케마루",
+   "pitcher_team": "일본",
+   "result_text": "우익수 뒤 홈런",
+   "result_text_ja": "ライトソロホームラン（打点1）",
+   "runs": 1,
+   "rbi": 1,
+   "wpa": 10.6,
+   "bat_wp_before": 45.5,
+   "bat_wp_after": 56.1,
+   "home_wp_after": 43.9,
+   "hero": "batter",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "0-1",
+    "nth": null
+   },
+   "kor_wp_before": 45.5,
+   "kor_wp_after": 56.1,
+   "kor_wpa": 10.6,
+   "kor_role": "타격",
+   "kor_player": "한동희",
+   "opp_player": "K.타케마루",
+   "rank": 2
+  },
+  {
+   "i": 17,
+   "pa_id": "88881113KRJP02026_17",
+   "inning": 2,
+   "half": "bottom",
+   "inning_label": "2회말",
+   "outs": "1사",
+   "bases": "2, 3루",
+   "score_before": {
+    "일본": 0,
+    "대한민국": 0
+   },
+   "batter": "S.하세가와",
+   "batter_team": "일본",
+   "pitcher": "김진욱",
+   "pitcher_team": "대한민국",
+   "result_text": "헛스윙 삼진",
+   "result_text_ja": "空振り三振",
+   "runs": 0,
+   "rbi": 0,
+   "wpa": -6.7,
+   "bat_wp_before": 62.1,
+   "bat_wp_after": 55.4,
+   "home_wp_after": 55.4,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-2",
+    "nth": null
+   },
+   "kor_wp_before": 37.9,
+   "kor_wp_after": 44.6,
+   "kor_wpa": 6.7,
+   "kor_role": "수비",
+   "kor_player": "김진욱",
+   "opp_player": "S.하세가와",
+   "rank": 3
+  },
+  {
+   "i": 30,
+   "pa_id": "88881113KRJP02026_30",
+   "inning": 3,
+   "half": "bottom",
+   "inning_label": "3회말",
+   "outs": "2사",
+   "bases": "만루",
+   "score_before": {
+    "일본": 2,
+    "대한민국": 1
+   },
+   "batter": "S.하세가와",
+   "batter_team": "일본",
+   "pitcher": "김진욱",
+   "pitcher_team": "대한민국",
+   "result_text": "좌익수 플라이 아웃",
+   "result_text_ja": "レフトフライ",
+   "runs": 0,
+   "rbi": 0,
+   "wpa": -6.5,
+   "bat_wp_before": 67.4,
+   "bat_wp_after": 60.9,
+   "home_wp_after": 60.9,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "2-2",
+    "nth": null
+   },
+   "kor_wp_before": 32.6,
+   "kor_wp_after": 39.1,
+   "kor_wpa": 6.5,
+   "kor_role": "수비",
+   "kor_player": "김진욱",
+   "opp_player": "S.하세가와",
+   "rank": 4
+  },
+  {
+   "i": 71,
+   "pa_id": "88881113KRJP02026_71",
+   "inning": 8,
+   "half": "bottom",
+   "inning_label": "8회말",
+   "outs": "1사",
+   "bases": "2루",
+   "score_before": {
+    "일본": 5,
+    "대한민국": 5
+   },
+   "batter": "Y.쇼지",
+   "batter_team": "일본",
+   "pitcher": "김영우",
+   "pitcher_team": "대한민국",
+   "result_text": "중견수 플라이 아웃",
+   "result_text_ja": "センターフライ",
+   "runs": 0,
+   "rbi": 0,
+   "wpa": -6.5,
+   "bat_wp_before": 64.4,
+   "bat_wp_after": 57.9,
+   "home_wp_after": 57.9,
+   "hero": "pitcher",
+   "last_pitch": {
+    "type": null,
+    "kmh": null,
+    "count": "0-0",
+    "nth": null
+   },
+   "kor_wp_before": 35.6,
+   "kor_wp_after": 42.1,
+   "kor_wpa": 6.5,
+   "kor_role": "수비",
+   "kor_player": "김영우",
+   "opp_player": "Y.쇼지",
+   "rank": 5
+  }
+ ],
+ "kor_players": [
+  {
+   "name": "김휘집",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 30.2,
+   "role": "타자"
+  },
+  {
+   "name": "한동희",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 8.0,
+   "role": "타자"
+  },
+  {
+   "name": "김진욱",
+   "team": "대한민국",
+   "pa": 23,
+   "wpa": 5.3,
+   "role": "투수"
+  },
+  {
+   "name": "안현민",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": 1.7,
+   "role": "타자"
+  },
+  {
+   "name": "우강훈",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -1.2,
+   "role": "투수"
+  },
+  {
+   "name": "김지찬",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -1.9,
+   "role": "타자"
+  },
+  {
+   "name": "이준혁",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -2.1,
+   "role": "투수"
+  },
+  {
+   "name": "김도영",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -2.7,
+   "role": "타자"
+  },
+  {
+   "name": "문정빈",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -4.5,
+   "role": "타자"
+  },
+  {
+   "name": "전준표",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -6.5,
+   "role": "투수"
+  },
+  {
+   "name": "박시원",
+   "team": "대한민국",
+   "pa": 3,
+   "wpa": -6.5,
+   "role": "투수"
+  },
+  {
+   "name": "김민석",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -9.5,
+   "role": "타자"
+  },
+  {
+   "name": "허인서",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -12.9,
+   "role": "타자"
+  },
+  {
+   "name": "김주원",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -13.1,
+   "role": "타자"
+  },
+  {
+   "name": "김영우",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -34.3,
+   "role": "투수"
+  }
+ ],
+ "kor_top3": [
+  {
+   "name": "김휘집",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 30.2,
+   "role": "타자"
+  },
+  {
+   "name": "한동희",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": 8.0,
+   "role": "타자"
+  },
+  {
+   "name": "김진욱",
+   "team": "대한민국",
+   "pa": 23,
+   "wpa": 5.3,
+   "role": "투수"
+  }
+ ],
+ "kor_bottom3": [
+  {
+   "name": "김영우",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -34.3,
+   "role": "투수"
+  },
+  {
+   "name": "김주원",
+   "team": "대한민국",
+   "pa": 5,
+   "wpa": -13.1,
+   "role": "타자"
+  },
+  {
+   "name": "허인서",
+   "team": "대한민국",
+   "pa": 4,
+   "wpa": -12.9,
+   "role": "타자"
+  }
+ ],
+ "opp_best": [
+  {
+   "name": "R.무네야마",
+   "team": "일본",
+   "pa": 5,
+   "wpa": 44.0,
+   "role": "타자"
+  }
+ ],
+ "kor_next_games": [
+  {
+   "game_id": "88881114TWKR02026",
+   "datetime": "2026-11-14T19:00:00",
+   "home": "대한민국",
+   "away": "차이니스 타이베이",
+   "home_score": 0,
+   "away_score": 0,
+   "status": "BEFORE",
+   "stadium": null
+  }
+ ],
+ "tournament_schedule": [
+  {
+   "game_id": "88881112AUKR02026",
+   "datetime": "2026-11-12T12:00:00",
+   "home": "대한민국",
+   "away": "호주",
+   "home_score": 7,
+   "away_score": 8,
+   "status": "RESULT",
+   "stadium": null
+  },
+  {
+   "game_id": "88881112JPTW02026",
+   "datetime": "2026-11-12T19:00:00",
+   "home": "차이니스 타이베이",
+   "away": "일본",
+   "home_score": 0,
+   "away_score": 5,
+   "status": "RESULT",
+   "stadium": null
+  },
+  {
+   "game_id": "88881113TWAU02026",
+   "datetime": "2026-11-13T12:00:00",
+   "home": "호주",
+   "away": "차이니스 타이베이",
+   "home_score": 4,
+   "away_score": 6,
+   "status": "RESULT",
+   "stadium": null
+  },
+  {
+   "game_id": "88881113KRJP02026",
+   "datetime": "2026-11-13T19:00:00",
+   "home": "일본",
+   "away": "대한민국",
+   "home_score": 9,
+   "away_score": 5,
+   "status": "RESULT",
+   "stadium": null
+  },
+  {
+   "game_id": "88881114JPAU02026",
+   "datetime": "2026-11-14T12:00:00",
+   "home": "호주",
+   "away": "일본",
+   "home_score": 0,
+   "away_score": 0,
+   "status": "BEFORE",
+   "stadium": null
+  },
+  {
+   "game_id": "88881114TWKR02026",
+   "datetime": "2026-11-14T19:00:00",
+   "home": "대한민국",
+   "away": "차이니스 타이베이",
+   "home_score": 0,
+   "away_score": 0,
+   "status": "BEFORE",
+   "stadium": null
+  },
+  {
+   "game_id": "88881115T1T202026",
+   "datetime": "2026-11-15T11:00:00",
+   "home": "F4",
+   "away": "F3",
+   "home_score": 0,
+   "away_score": 0,
+   "status": "BEFORE",
+   "stadium": null
+  },
+  {
+   "game_id": "88881115F1F202026",
+   "datetime": "2026-11-15T19:00:00",
+   "home": "F2",
+   "away": "F1",
+   "home_score": 0,
+   "away_score": 0,
+   "status": "BEFORE",
+   "stadium": null
+  }
+ ],
+ "winning_pitcher": "",
+ "losing_pitcher": "",
+ "etc_records": [],
+ "notes": {
+  "wp": "wp_table.py(2024~26 KBO 정규시즌 상황표) 직접 계산. 국제대회 득점 환경 차이는 반영 안 됨",
+  "tiebreak": false,
+  "pitch": "구종·구속·몇 구째 없음(NPB 경기 진행은 마지막 공 직전 카운트만)",
+  "steal": "타석 사이 도루·도루실패는 어느 타석 WPA에도 넣지 않음(다음 타석 '전' 값에 반영)",
+  "npb_slug": "2026/1113/jpn-kor-80"
+ }
+}
