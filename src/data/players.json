@@ -94,5 +94,13 @@
   "weight": 92,
   "pitcher": false,
   "left": false
+ },
+ "전병우": {
+  "team": "삼성",
+  "no": "61",
+  "height": 182,
+  "weight": 93,
+  "pitcher": false,
+  "left": false
  }
 }
