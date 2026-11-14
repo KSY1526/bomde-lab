@@ -102,5 +102,13 @@
   "weight": 93,
   "pitcher": false,
   "left": false
+ },
+ "박재현": {
+  "team": "KIA",
+  "no": "15",
+  "height": 180,
+  "weight": 73,
+  "pitcher": false,
+  "left": true
  }
 }
