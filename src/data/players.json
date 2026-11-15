@@ -110,5 +110,13 @@
   "weight": 73,
   "pitcher": false,
   "left": true
+ },
+ "안재석": {
+  "team": "두산",
+  "no": "62",
+  "height": 185,
+  "weight": 75,
+  "pitcher": false,
+  "left": true
  }
 }
