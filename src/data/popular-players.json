@@ -1,37 +1,7 @@
 {
- "asOf": "2026-11-09",
+ "asOf": "2026-11-16",
  "days": 14,
  "players": [
-  {
-   "id": "64021",
-   "name": "박세웅",
-   "team": "롯데",
-   "visitors": 5
-  },
-  {
-   "id": "68525",
-   "name": "한동희",
-   "team": "롯데",
-   "visitors": 5
-  },
-  {
-   "id": "64001",
-   "name": "고영표",
-   "team": "KT",
-   "visitors": 4
-  },
-  {
-   "id": "76715",
-   "name": "류현진",
-   "team": "한화",
-   "visitors": 4
-  },
-  {
-   "id": "50030",
-   "name": "소형준",
-   "team": "KT",
-   "visitors": 3
-  },
   {
    "id": "52060",
    "name": "박영현",
@@ -39,16 +9,46 @@
    "visitors": 3
   },
   {
+   "id": "52591",
+   "name": "윤동희",
+   "team": "롯데",
+   "visitors": 3
+  },
+  {
+   "id": "64021",
+   "name": "박세웅",
+   "team": "롯데",
+   "visitors": 3
+  },
+  {
+   "id": "76715",
+   "name": "류현진",
+   "team": "한화",
+   "visitors": 3
+  },
+  {
+   "id": "50030",
+   "name": "소형준",
+   "team": "KT",
+   "visitors": 2
+  },
+  {
    "id": "52568",
    "name": "한태양",
    "team": "롯데",
-   "visitors": 3
+   "visitors": 2
   },
   {
    "id": "52605",
    "name": "김도영",
    "team": "KIA",
-   "visitors": 3
+   "visitors": 2
+  },
+  {
+   "id": "53375",
+   "name": "후라도",
+   "team": "삼성",
+   "visitors": 2
   }
  ]
 }
