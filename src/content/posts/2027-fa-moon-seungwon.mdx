@@ -1,0 +1,143 @@
+---
+title: "보상선수 없는 C등급 문승원, 싸게 데려올 수 있을까"
+description: "2026년 SSG 불펜에서 62경기 평균자책점 3.45를 기록한 문승원이 C등급 FA 자격을 얻었다. 2026년 연봉이 8억이라 보상금은 12억이다."
+date: 2026-11-16T23:30:00+09:00
+category: player
+tags: ["문승원", "SSG", "FA", "2027", "C등급"]
+related: ["2026-war-pwar", "2027-fa-preview", "2026-wpa"]
+stat: { value: "12억", label: "문승원을 데려갈 때 SSG에 주는 보상금(C등급)", short: "C등급 보상금" }
+thumb: { player: "문승원" }
+dataUntil: "2026 정규시즌(크봇 DB)"
+draft: false
+---
+import { url as siteUrl } from '../../lib/site';
+import d from '../../data/posts/2027-fa-moon-seungwon.json';
+
+export const f1 = (v) => v.toFixed(1).replace('-', '−');
+export const f2 = (v) => v.toFixed(2).replace('-', '−');
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const sg = (v) => (v > 0 ? '+' : '') + f2(v);
+export const c = d.career;
+export const m = d.league_rp_2026.metrics;
+export const N = d.league_rp_2026.n;
+export const t = d.teams;
+export const p = d.price;
+export const ipOf = (o) => `${Math.floor(Math.round(o) / 3)}.${Math.round(o) % 3}`;
+export const rTd = (x, txt) => { const mid = (x.n + 1) / 2; const good = x.rank <= x.n / 3; const bad = x.rank > (x.n * 2) / 3; if (!good && !bad) return <td>{txt}</td>; const pc = Math.round(12 + (Math.abs(x.rank - mid) / mid) * 40); return <td class={good ? 'down' : 'up'} style={`--heat:${pc}%`}>{txt}</td>; };
+export const ROWS = [
+  ['평균자책점', 'era', (v) => f2(v)],
+  ['WPA', 'wpa', (v) => sg(v) + '승'],
+  ['실점 기준 WAR*', 'war_ra9', (v) => f2(v)],
+  ['이닝', 'outs', (v) => ipOf(v)],
+  ['세이브+홀드', 'svhld', (v) => (Number.isInteger(v) ? v : f1(v))],
+  ['FIP', 'fip', (v) => f2(v)],
+  ['FIP 기준 WAR*', 'war_fip', (v) => f2(v)],
+  ['삼진율', 'k_pct', (v) => f1(v) + '%'],
+  ['볼넷률', 'bb_pct', (v) => f1(v) + '%'],
+  ['삼진율−볼넷률', 'k_bb', (v) => f1(v) + '%p'],
+  ['9이닝당 피홈런', 'hr9', (v) => f2(v)],
+  ['BABIP', 'babip', (v) => f3(v)],
+  ['잔루율', 'lob_pct', (v) => f1(v) + '%'],
+  ['WAR*(두 기준 평균)', 'war', (v) => f2(v)],
+];
+export const tRk = (v, r) => <td class={r >= 8 ? 'up' : undefined} style={r >= 8 ? `--heat:${[0, 0, 0, 0, 0, 0, 0, 0, 18, 30, 42][r]}%` : undefined}>{v} ({r}위)</td>;
+
+2026년 SSG 문승원은 불펜에서 62경기 62.2이닝을 던져 평균자책점 3.45, 2세이브 17홀드를 기록했다. 40이닝 이상 던진 리그 구원 투수 53명 가운데 평균자책점은 16위, WPA는 +1.08승으로 12위였다.
+
+1989년생 문승원은 2027년에 38세가 된다. 11월 13일 KBO가 공시한 2027 FA 자격 선수 명단에는 C등급으로 이름을 올렸다. 다른 구단이 데려가도 SSG에 보상선수를 내줄 필요가 없는 등급이다. 16일 공시된 FA 승인 선수 명단에도 C등급으로 올라 17일부터 모든 구단과 협상할 수 있다.
+
+## 1\~3점 앞설 때 평균자책점 2.66
+
+문승원은 62번 등판 가운데 47번을 실점 없이 막았다. 6회에 15번, 7회에 15번, 8회에 18번 올라왔고 던진 이닝은 비교군 53명 중 9위였다. 세이브와 홀드를 더한 19개는 15위다.
+
+가장 잘 던진 때는 리드를 지킬 때였다. SSG가 1\~3점 앞선 상황에 22번 나와 20.1이닝 평균자책점 2.66을 기록했고 이 상황에서만 WPA +1.23승을 쌓았다. 시즌 전체 WPA보다 많다. <a href={siteUrl('posts/2026-wpa')}>WPA</a>는 타석마다 바뀐 승리확률을 더한 값이라 같은 무실점도 접전에서 더 크게 쳐 준다. SSG 불펜에서 문승원의 WPA는 조병현(2.21), 김민(1.25) 다음 3위였다.
+
+전날에 이어 던진 연투 10번은 12.1이닝 평균자책점 1.46이었고 3연투는 없었다. 주자가 있을 때 피OPS는 .634로 주자가 없을 때 .782보다 낮았고 득점권 76타자 상대로는 .601이었다. 9이닝당 실점으로 계산한 <a href={siteUrl('posts/2026-war-pwar')}>실점 기준 WAR\*</a>은 1.07로 비교군 13위다.
+
+## 불펜이 무너진 키움과 NC는 돈도 남는다
+
+2026년 10개 구단 불펜을 평균자책점, FIP, WAR\*, WPA 순위의 평균으로 줄 세우면 아래와 같다.
+
+<table>
+  <thead><tr><th>구단</th><th>불펜 평균자책점</th><th>불펜 FIP</th><th>불펜 WAR*</th><th>불펜 WPA</th><th>문승원보다 WAR* 높은 불펜</th><th>상한까지 남은 금액</th></tr></thead>
+  <tbody>
+    {d.weak_bullpen_order.map((k) => { const x = t[k]; return (
+      <tr class={k === 'SSG' ? 'cur' : undefined}><td>{k}</td>{tRk(f2(x.rp_era), x.rp_era_rank)}{tRk(f2(x.rp_fip), x.rp_fip_rank)}{tRk(f2(x.rp_war), x.rp_war_rank)}{tRk(f2(x.rp_wpa), x.rp_wpa_rank)}<td>{x.rp_pool_vs_moon.war_better}/{x.rp_pool_vs_moon.n_pool}명</td><td>{f1(x.cap_room)}억</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">WAR*은 FIP 기준과 실점 기준의 평균. 10개 구단 순위. 붉은 칸은 8\~10위로 순위가 낮을수록 진하다. 불펜 WAR*은 선수 WAR*에 구원으로 잡은 아웃 비율을 곱해 더했다. 문승원보다 WAR* 높은 불펜은 그 구단의 40이닝 이상 구원 투수 가운데 수이고 SSG는 문승원을 포함한 수. 상한까지 남은 금액은 2027 FA 시장 글의 2027년 예상으로, 그 글에서 다룬 원소속 FA를 잡은 뒤 외부 영입 전 값이다. SSG는 최지훈만 넣었고 문승원 재계약은 넣지 않았다.</p>
+
+키움 불펜은 평균자책점 6.14, FIP 5.55, WAR\* −6.88이 모두 10위였다. 상한까지 남은 금액은 100.5억으로 가장 많다. NC는 불펜 WAR\* −2.36과 WPA −8.28이 9위였고 남은 금액은 87.1억이다. 두 구단에서 40이닝 이상 던진 구원 투수는 4명씩인데 문승원보다 2026년 WAR\*, WPA, 평균자책점이 좋은 투수는 한 명도 없었다. 데이터로 보면 이 두 구단의 수요가 가장 분명하다.
+
+한화는 불펜이 던진 이닝 비중이 47.7%로 가장 컸고 불펜 WPA −10.72는 10위였다. 다만 40이닝 이상 구원 투수 4명 가운데 3명이 문승원보다 WAR\*이 높았고 남은 금액은 32.0억이다. 원소속 SSG도 불펜 평균자책점 7위, FIP 9위로 약한 쪽이었다.
+
+## 보상선수 대신 보상금 12억
+
+C등급 보상은 직전 연봉의 150%다. 문승원은 2021년 12월 SSG와 5년 55억(연봉 47억, 옵션 8억) 비FA 다년계약을 맺었다. 박종훈과 같은 날 맺은 KBO 첫 비FA 다년계약이었다. 계약 기간은 2022년부터 2026년까지였고 2026년 연봉은 8억이었다. 다른 구단이 문승원을 데려가면 SSG에 12억을 줘야 한다.
+
+몸값은 <a href={siteUrl('posts/2027-fa-preview')}>2027 FA 시장 글</a>과 같은 방식으로 셈했다. 최근 5년 FA 계약에 계약 직전 3시즌 WAR\*을 1:2:3으로 가중한 값과 나이를 붙여 연평균 금액을 맞춘 계산이다. 문승원의 가중 WAR\* {f2(p.ww)}에 38세를 넣으면 모델 예상은 연평균 {f1(p.aav)}억, 1년 {f1(p.total1)}억, 2년 {f1(p.total2)}억이다. 보상금 12억은 연평균 예상의 약 3배이고 2년 예상 총액보다도 많다.
+
+모델이 나이와 성적이 비슷하다고 본 투수 계약은 8건이다.
+
+<table>
+  <thead><tr><th>투수</th><th>FA 연도</th><th>계약 때 나이</th><th>원소속 → 계약 구단</th><th>가중 WAR*</th><th>계약</th></tr></thead>
+  <tbody>
+    {p.comps_model.map((x) => (
+      <tr><td>{x.player}</td><td>{x.fa_year}</td><td>{x.age}세</td><td>{x.from_team} → {x.to_team}</td><td>{f2(x.ww)}</td><td>{x.years}년 {x.total}억</td></tr>
+    ))}
+    <tr class="total"><td>문승원</td><td>2027</td><td>{p.age}세</td><td>SSG → ?</td><td>{f2(p.ww)}</td><td>모델 예상 1년 {f1(p.total1)}억 / 2년 {f1(p.total2)}억</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">계약 직전 3시즌 WAR*을 1:2:3으로 가중했다. 투수 WAR*은 FIP 기준과 실점 기준의 평균. 나이는 FA 연도에서 출생 연도를 뺀 값.</p>
+
+2년 계약을 맺은 김진성, 김대우, 임창민, 우규민의 총액은 4억에서 8억 사이였다. 문승원의 보상금 하나가 이 계약들 총액보다 크다. 다른 구단이 모델 예상대로 데려가면 보상금까지 1년에 {f1(p.with_comp_total1)}억, 2년에 {f1(p.with_comp_total2)}억이 든다.
+
+## 평균자책점 3.45 뒤의 FIP 5.74
+
+같은 비교군 53명 안에서 지표별 순위를 모두 늘어놓으면 결과와 투구 내용이 갈린다.
+
+<table>
+  <thead><tr><th>2026 지표</th><th>문승원</th><th>비교군 평균</th><th>순위</th></tr></thead>
+  <tbody>
+    {ROWS.map(([label, k, fmt]) => { const x = m[k]; return (
+      <tr><td>{label}</td>{rTd(x, fmt(x.value))}<td>{fmt(x.avg)}</td><td>{x.rank}/{x.n}위</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">2026 정규시즌 40이닝 이상, 아웃의 90% 이상을 구원으로 잡은 {N}명. 순위는 투수에게 좋은 쪽이 1위(BABIP는 낮은 쪽, 잔루율은 높은 쪽). 파란색은 상위 3분의 1, 붉은색은 하위 3분의 1이고 끝 순위에 가까울수록 진하다.</p>
+
+<a href={siteUrl('posts/2026-war-pwar')}>FIP</a>는 홈런, 볼넷과 사구, 삼진만으로 투수를 평가하는 지표다. 문승원의 FIP는 5.74로 46위였다. 평균자책점과의 차이 2.29점은 비교군에서 삼성 배찬승(3.73), 두산 김정우(2.30) 다음으로 컸다. 삼진율 13.0%는 50위로 비교군 평균 19.7%에 크게 못 미쳤고 볼넷률 10.5%는 33위였다. 삼진율에서 볼넷률을 뺀 값은 2.5%p로 51위다. FIP로 계산한 WAR\*은 −0.34승이라 실점 기준 1.07승과 평균하면 0.36승, 53명 중 27위로 딱 중간이 된다.
+
+인플레이 타구 결과는 투수에게 유리했다. 홈런을 뺀 인플레이 타구의 피안타율인 BABIP는 .266으로 비교군 평균 .302보다 낮았고 잔루율(내보낸 주자를 득점 없이 남긴 비율) 76.8%는 평균 71.4%보다 높았다. 이 숫자만으로는 문승원이 약한 타구를 잘 유도했는지, 수비가 도왔는지, 운이 따랐는지는 가릴 수 없다.
+
+성적은 시즌 초반에 몰려 있다. 3\~5월 22경기 28이닝의 평균자책점은 0.96이었고 4월 1.23, 5월 0.73이었다. 6\~8월 28경기 23.2이닝에서는 6.85로 치솟았다. 6월 9.00, 7월 6.48, 8월 4.91이었고 삼진율은 6월 4.9%, 7월 2.5%까지 떨어졌다. 9월과 10월 평균자책점은 둘 다 2.45였다.
+
+이번 시장에 나온 구원 투수는 FA를 신청한 한화 박상원, KT 한승혁·김민수, 두산 박치국, 문승원과 옵트아웃으로 LG와의 남은 계약을 포기한 함덕주까지 6명이다. 이 가운데 2026년 평균자책점은 문승원이 가장 낮았고 FIP는 가장 높았다.
+
+## 선발과 불펜을 오간 13시즌
+
+<table>
+  <thead><tr><th>시즌</th><th>경기(선발)</th><th>이닝</th><th>평균자책점</th><th>FIP</th><th>삼진율</th><th>볼넷률</th><th>세이브/홀드</th><th>FIP 기준 WAR*</th><th>실점 기준 WAR*</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {d.seasons.map((s) => { const sm = s.outs < 90; return (
+      <tr class={s.season === 2026 ? 'cur' : undefined}><td>{s.season}</td><td>{s.g}({s.gs})</td><td>{s.ip}</td><td class={sm ? 'small' : undefined}>{f2(s.era)}</td><td class={sm ? 'small' : undefined}>{f2(s.fip)}</td><td>{f1(s.k_pct)}%</td><td>{f1(s.bb_pct)}%</td><td>{s.sv}/{s.hld}</td><td>{f2(s.war_fip)}</td><td>{f2(s.war_ra9)}</td><td>{f2(s.war)}</td></tr>
+    ); })}
+    <tr class="total"><td>통산</td><td>{c.g}({c.gs})</td><td>{c.ip.replace(/^(\d)(\d{3})/, '$1,$2')}</td><td>{f2(c.era)}</td><td>-</td><td>{f1(c.k_pct)}%</td><td>{f1(c.bb_pct)}%</td><td>{c.sv}/{c.hld}</td><td>{f2(c.war_fip)}</td><td>{f2(c.war_ra9)}</td><td>{f2(c.war)}</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">노란 칸은 30이닝 미만. 2014년과 2015년은 상무 복무로 1군 기록이 없다. WAR*은 FIP 기준과 실점 기준의 평균.</p>
+
+문승원은 2017년부터 2021년까지 선발로 뛰었다. 커리어 최고는 2020년으로 25경기 145.2이닝 평균자책점 3.65, WAR\* 3.98이었다. 2021년에는 6월 팔꿈치 인대접합 수술을 받아 9경기 만에 시즌을 마쳤고 2022년 7월 불펜으로 돌아왔다.
+
+그 뒤로는 보직이 자주 바뀌었다. 2023년에는 선발 12경기 평균자책점 6.11, 구원 38경기 3.89였고 2024년에는 불펜에서 20세이브를 올렸다. 2025년에는 다시 선발로 21경기에 나와 선발 평균자책점 5.28을 기록했다. 선발 15경기 이상, 100이닝 이상 던진 국내 투수 22명 가운데 WAR\*은 21위였다.
+
+FIP는 2024년 5.32, 2025년 5.59, 2026년 5.74로 3년 연속 5점대였다. BABIP는 2023년 .353, 2024년 .326, 2025년 .285였고 2026년 .266으로 4년 중 가장 낮았다.
+
+## 38세 투수에게 붙는 12억
+
+불펜이 무너진 키움과 NC에 가면 문승원은 2026년 성적으로 팀 구원 투수 가운데 가장 앞에 선다. 리드 1\~3점 평균자책점 2.66과 WPA 12위도 실제로 쌓은 기록이다. 그래도 필자는 문승원이 매력적인 매물은 아니라고 본다. 보상선수는 없지만 보상금 12억이 모델 예상 연평균 4.1억의 약 3배라 모델 예상대로 2년을 계약해도 보상금을 더해 20억이 넘는다. 평균자책점 3.45를 받친 낮은 BABIP와 높은 잔루율이 이어진다고 볼 근거는 약하다. 2027년 38세가 되는 투수의 2026년 FIP는 5.74였다.

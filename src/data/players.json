@@ -126,5 +126,13 @@
   "weight": 94,
   "pitcher": false,
   "left": false
+ },
+ "문승원": {
+  "team": "SSG",
+  "no": "42",
+  "height": 180,
+  "weight": 88,
+  "pitcher": true,
+  "left": false
  }
 }
