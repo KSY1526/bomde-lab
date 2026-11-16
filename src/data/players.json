@@ -118,5 +118,13 @@
   "weight": 75,
   "pitcher": false,
   "left": true
+ },
+ "최재훈": {
+  "team": "한화",
+  "no": "13",
+  "height": 178,
+  "weight": 94,
+  "pitcher": false,
+  "left": false
  }
 }

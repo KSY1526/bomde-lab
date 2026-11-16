@@ -1,0 +1,2808 @@
+{
+ "data_until": "2026 정규시즌(크봇 DB)",
+ "profile": {
+  "name": "최재훈",
+  "player_id": "78288",
+  "birthday": "1989년 08월 27일",
+  "birth_year": 1989,
+  "age_2027": 38,
+  "career": "화곡초-덕수중-덕수고-(방송통신대)-두산-경찰-두산",
+  "joininfo": "08두산",
+  "salary_2026": "40000만원",
+  "hand": "우투우타",
+  "height": 178,
+  "weight": 94,
+  "team_2026": "한화",
+  "back_no": "13"
+ },
+ "seasons": [
+  {
+   "season": 2012,
+   "team": "두산",
+   "g": 52,
+   "g_listed": 69,
+   "pa": 104,
+   "avg": 0.209,
+   "obp": 0.27,
+   "slg": 0.286,
+   "ops": 0.556,
+   "h": 19,
+   "hr": 1,
+   "rbi": 8,
+   "bb": 4,
+   "so": 17,
+   "hbp": 4,
+   "bb_pct": 3.8,
+   "k_pct": 16.3,
+   "bb_k": 0.24,
+   "wrc_plus": 67.1,
+   "war": 0.23,
+   "bat_runs": -3.7,
+   "pos_runs": 2.4,
+   "wpa": -0.42,
+   "c_inn": "284.2",
+   "c_outs": 854,
+   "c_g": 67,
+   "errors": 6
+  },
+  {
+   "season": 2013,
+   "team": "두산",
+   "g": 43,
+   "g_listed": 60,
+   "pa": 108,
+   "avg": 0.27,
+   "obp": 0.365,
+   "slg": 0.393,
+   "ops": 0.759,
+   "h": 24,
+   "hr": 2,
+   "rbi": 8,
+   "bb": 6,
+   "so": 19,
+   "hbp": 8,
+   "bb_pct": 5.6,
+   "k_pct": 17.6,
+   "bb_k": 0.32,
+   "wrc_plus": 120.2,
+   "war": 0.86,
+   "bat_runs": 2.6,
+   "pos_runs": 2.4,
+   "wpa": 0.03,
+   "c_inn": "276",
+   "c_outs": 828,
+   "c_g": 59,
+   "errors": 2
+  },
+  {
+   "season": 2014,
+   "team": "두산",
+   "g": 43,
+   "g_listed": 48,
+   "pa": 125,
+   "avg": 0.241,
+   "obp": 0.287,
+   "slg": 0.313,
+   "ops": 0.599,
+   "h": 27,
+   "hr": 1,
+   "rbi": 10,
+   "bb": 5,
+   "so": 22,
+   "hbp": 3,
+   "bb_pct": 4.0,
+   "k_pct": 17.6,
+   "bb_k": 0.23,
+   "wrc_plus": 56.7,
+   "war": -0.03,
+   "bat_runs": -7.6,
+   "pos_runs": 2.6,
+   "wpa": -1.44,
+   "c_inn": "301",
+   "c_outs": 903,
+   "c_g": 48,
+   "errors": 2
+  },
+  {
+   "season": 2015,
+   "team": "두산",
+   "g": 51,
+   "g_listed": 71,
+   "pa": 114,
+   "avg": 0.152,
+   "obp": 0.234,
+   "slg": 0.182,
+   "ops": 0.416,
+   "h": 15,
+   "hr": 0,
+   "rbi": 7,
+   "bb": 3,
+   "so": 19,
+   "hbp": 8,
+   "bb_pct": 2.6,
+   "k_pct": 16.7,
+   "bb_k": 0.16,
+   "wrc_plus": 19.7,
+   "war": -0.52,
+   "bat_runs": -12.3,
+   "pos_runs": 2.4,
+   "wpa": -1.27,
+   "c_inn": "281.2",
+   "c_outs": 845,
+   "c_g": 69,
+   "errors": 1
+  },
+  {
+   "season": 2016,
+   "team": "두산",
+   "g": 12,
+   "g_listed": 22,
+   "pa": 22,
+   "avg": 0.167,
+   "obp": 0.273,
+   "slg": 0.222,
+   "ops": 0.495,
+   "h": 3,
+   "hr": 0,
+   "rbi": 4,
+   "bb": 2,
+   "so": 2,
+   "hbp": 1,
+   "bb_pct": 9.1,
+   "k_pct": 9.1,
+   "bb_k": 1.0,
+   "wrc_plus": 38.7,
+   "war": -0.05,
+   "bat_runs": -1.9,
+   "pos_runs": 0.5,
+   "wpa": -0.27,
+   "c_inn": "58.1",
+   "c_outs": 175,
+   "c_g": 20,
+   "errors": 1
+  },
+  {
+   "season": 2017,
+   "team": "한화",
+   "g": 99,
+   "g_listed": 104,
+   "pa": 307,
+   "avg": 0.257,
+   "obp": 0.338,
+   "slg": 0.305,
+   "ops": 0.643,
+   "h": 69,
+   "hr": 1,
+   "rbi": 17,
+   "bb": 25,
+   "so": 36,
+   "hbp": 8,
+   "bb_pct": 8.1,
+   "k_pct": 11.7,
+   "bb_k": 0.69,
+   "wrc_plus": 70.0,
+   "war": 0.4,
+   "bat_runs": -12.4,
+   "pos_runs": 6.0,
+   "wpa": -1.29,
+   "c_inn": "706",
+   "c_outs": 2118,
+   "c_g": 102,
+   "errors": 1
+  },
+  {
+   "season": 2018,
+   "team": "한화",
+   "g": 117,
+   "g_listed": 128,
+   "pa": 341,
+   "avg": 0.262,
+   "obp": 0.337,
+   "slg": 0.329,
+   "ops": 0.666,
+   "h": 78,
+   "hr": 1,
+   "rbi": 27,
+   "bb": 20,
+   "so": 61,
+   "hbp": 15,
+   "bb_pct": 5.9,
+   "k_pct": 17.9,
+   "bb_k": 0.33,
+   "wrc_plus": 73.2,
+   "war": 0.59,
+   "bat_runs": -12.8,
+   "pos_runs": 7.1,
+   "wpa": -1.11,
+   "c_inn": "830.2",
+   "c_outs": 2492,
+   "c_g": 126,
+   "errors": 5
+  },
+  {
+   "season": 2019,
+   "team": "한화",
+   "g": 132,
+   "g_listed": 135,
+   "pa": 451,
+   "avg": 0.29,
+   "obp": 0.398,
+   "slg": 0.362,
+   "ops": 0.76,
+   "h": 108,
+   "hr": 3,
+   "rbi": 31,
+   "bb": 56,
+   "so": 61,
+   "hbp": 14,
+   "bb_pct": 12.4,
+   "k_pct": 13.5,
+   "bb_k": 0.92,
+   "wrc_plus": 122.8,
+   "war": 3.59,
+   "bat_runs": 12.1,
+   "pos_runs": 8.8,
+   "wpa": -0.35,
+   "c_inn": "1,022.2",
+   "c_outs": 3068,
+   "c_g": 132,
+   "errors": 6
+  },
+  {
+   "season": 2020,
+   "team": "한화",
+   "g": 123,
+   "g_listed": 126,
+   "pa": 389,
+   "avg": 0.301,
+   "obp": 0.383,
+   "slg": 0.383,
+   "ops": 0.766,
+   "h": 102,
+   "hr": 3,
+   "rbi": 36,
+   "bb": 29,
+   "so": 44,
+   "hbp": 16,
+   "bb_pct": 7.5,
+   "k_pct": 11.3,
+   "bb_k": 0.66,
+   "wrc_plus": 113.6,
+   "war": 2.56,
+   "bat_runs": 6.9,
+   "pos_runs": 7.2,
+   "wpa": -0.04,
+   "c_inn": "857.2",
+   "c_outs": 2573,
+   "c_g": 119,
+   "errors": 5
+  },
+  {
+   "season": 2021,
+   "team": "한화",
+   "g": 112,
+   "g_listed": 116,
+   "pa": 465,
+   "avg": 0.273,
+   "obp": 0.402,
+   "slg": 0.385,
+   "ops": 0.787,
+   "h": 102,
+   "hr": 7,
+   "rbi": 43,
+   "bb": 71,
+   "so": 68,
+   "hbp": 12,
+   "bb_pct": 15.3,
+   "k_pct": 14.6,
+   "bb_k": 1.04,
+   "wrc_plus": 126.5,
+   "war": 3.68,
+   "bat_runs": 15.2,
+   "pos_runs": 7.0,
+   "wpa": 0.71,
+   "c_inn": "903",
+   "c_outs": 2709,
+   "c_g": 108,
+   "errors": 1
+  },
+  {
+   "season": 2022,
+   "team": "한화",
+   "g": 113,
+   "g_listed": 114,
+   "pa": 437,
+   "avg": 0.222,
+   "obp": 0.338,
+   "slg": 0.301,
+   "ops": 0.639,
+   "h": 81,
+   "hr": 5,
+   "rbi": 30,
+   "bb": 44,
+   "so": 65,
+   "hbp": 21,
+   "bb_pct": 10.1,
+   "k_pct": 14.9,
+   "bb_k": 0.68,
+   "wrc_plus": 88.8,
+   "war": 1.56,
+   "bat_runs": -5.7,
+   "pos_runs": 6.7,
+   "wpa": -1.03,
+   "c_inn": "853.2",
+   "c_outs": 2561,
+   "c_g": 106,
+   "errors": 3
+  },
+  {
+   "season": 2023,
+   "team": "한화",
+   "g": 123,
+   "g_listed": 125,
+   "pa": 416,
+   "avg": 0.248,
+   "obp": 0.391,
+   "slg": 0.294,
+   "ops": 0.684,
+   "h": 81,
+   "hr": 1,
+   "rbi": 33,
+   "bb": 55,
+   "so": 48,
+   "hbp": 23,
+   "bb_pct": 13.2,
+   "k_pct": 11.5,
+   "bb_k": 1.15,
+   "wrc_plus": 104.6,
+   "war": 2.36,
+   "bat_runs": 2.2,
+   "pos_runs": 7.4,
+   "wpa": -0.01,
+   "c_inn": "884.1",
+   "c_outs": 2653,
+   "c_g": 120,
+   "errors": 3,
+   "c_starts": 106,
+   "catcher_def": {
+    "name": "최재훈",
+    "team": "한화",
+    "taken": 8302,
+    "framing": 107.9,
+    "framing_per1000": 13.0,
+    "calling_rv100": 0.02,
+    "sb_allowed": 61,
+    "cs": 27,
+    "cs_pct": 30.7,
+    "framing_rank": 2,
+    "calling_rv100_rank": 10,
+    "cs_pct_rank": 6,
+    "n": 19
+   },
+   "rank_among_catchers": {
+    "n": 11,
+    "obp": 1,
+    "bb_pct": 1,
+    "ops": 6,
+    "wrc_plus": 5,
+    "war": 5,
+    "avg": 8
+   },
+   "rank_300pa": {
+    "n": 83,
+    "obp": 10,
+    "bb_pct": 7
+   }
+  },
+  {
+   "season": 2024,
+   "team": "한화",
+   "g": 109,
+   "g_listed": 116,
+   "pa": 348,
+   "avg": 0.257,
+   "obp": 0.371,
+   "slg": 0.336,
+   "ops": 0.706,
+   "h": 72,
+   "hr": 4,
+   "rbi": 37,
+   "bb": 33,
+   "so": 58,
+   "hbp": 21,
+   "bb_pct": 9.5,
+   "k_pct": 16.7,
+   "bb_k": 0.57,
+   "wrc_plus": 91.7,
+   "war": 1.36,
+   "bat_runs": -3.9,
+   "pos_runs": 6.8,
+   "wpa": -0.74,
+   "c_inn": "791.2",
+   "c_outs": 2375,
+   "c_g": 115,
+   "errors": 5,
+   "c_starts": 95,
+   "catcher_def": {
+    "name": "최재훈",
+    "team": "한화",
+    "taken": 7289,
+    "framing": 0.7,
+    "framing_per1000": 0.1,
+    "calling_rv100": 0.31,
+    "sb_allowed": 62,
+    "cs": 23,
+    "cs_pct": 27.1,
+    "framing_rank": 11,
+    "calling_rv100_rank": 2,
+    "cs_pct_rank": 2,
+    "n": 20
+   },
+   "rank_among_catchers": {
+    "n": 12,
+    "obp": 2,
+    "bb_pct": 4,
+    "ops": 9,
+    "wrc_plus": 7,
+    "war": 6,
+    "avg": 9
+   },
+   "rank_300pa": {
+    "n": 89,
+    "obp": 29,
+    "bb_pct": 37
+   }
+  },
+  {
+   "season": 2025,
+   "team": "한화",
+   "g": 115,
+   "g_listed": 121,
+   "pa": 348,
+   "avg": 0.286,
+   "obp": 0.414,
+   "slg": 0.353,
+   "ops": 0.767,
+   "h": 77,
+   "hr": 1,
+   "rbi": 35,
+   "bb": 46,
+   "so": 48,
+   "hbp": 17,
+   "bb_pct": 13.2,
+   "k_pct": 13.8,
+   "bb_k": 0.96,
+   "wrc_plus": 115.0,
+   "war": 2.47,
+   "bat_runs": 6.4,
+   "pos_runs": 7.0,
+   "wpa": 1.68,
+   "c_inn": "813",
+   "c_outs": 2439,
+   "c_g": 121,
+   "errors": 5,
+   "c_starts": 107,
+   "catcher_def": {
+    "name": "최재훈",
+    "team": "한화",
+    "taken": 7247,
+    "framing": -12.8,
+    "framing_per1000": -1.8,
+    "calling_rv100": 0.59,
+    "sb_allowed": 64,
+    "cs": 20,
+    "cs_pct": 23.8,
+    "framing_rank": 17,
+    "calling_rv100_rank": 1,
+    "cs_pct_rank": 7,
+    "n": 18
+   },
+   "rank_among_catchers": {
+    "n": 13,
+    "obp": 1,
+    "bb_pct": 1,
+    "ops": 3,
+    "wrc_plus": 3,
+    "war": 3,
+    "avg": 2
+   },
+   "rank_300pa": {
+    "n": 80,
+    "obp": 3,
+    "bb_pct": 7
+   }
+  },
+  {
+   "season": 2026,
+   "team": "한화",
+   "g": 40,
+   "g_listed": 55,
+   "pa": 122,
+   "avg": 0.17,
+   "obp": 0.292,
+   "slg": 0.17,
+   "ops": 0.462,
+   "h": 17,
+   "hr": 0,
+   "rbi": 13,
+   "bb": 11,
+   "so": 21,
+   "hbp": 7,
+   "bb_pct": 9.0,
+   "k_pct": 17.2,
+   "bb_k": 0.52,
+   "wrc_plus": 31.0,
+   "war": -0.4,
+   "bat_runs": -10.9,
+   "pos_runs": 2.5,
+   "wpa": -0.5,
+   "c_inn": "287",
+   "c_outs": 861,
+   "c_g": 55,
+   "errors": 2,
+   "c_starts": 35,
+   "catcher_def": {
+    "name": "최재훈",
+    "team": "한화",
+    "taken": 2916,
+    "framing": 2.6,
+    "framing_per1000": 0.9,
+    "calling_rv100": -0.16,
+    "sb_allowed": 11,
+    "cs": 6,
+    "cs_pct": 35.3,
+    "framing_rank": 6,
+    "calling_rv100_rank": 14,
+    "cs_pct_rank": 1,
+    "n": 18
+   },
+   "rank_among_catchers": null,
+   "rank_300pa": null
+  }
+ ],
+ "recent4": {
+  "pa": 1234,
+  "war": 5.79,
+  "obp": 0.382,
+  "bb_pct": 11.8,
+  "k_pct": 14.2,
+  "hr": 6
+ },
+ "career": {
+  "seasons": 15,
+  "first": 2012,
+  "last": 2026,
+  "g": 1284,
+  "pa": 4097,
+  "h": 875,
+  "hr": 30,
+  "rbi": 339,
+  "bb": 410,
+  "so": 589,
+  "avg": 0.257,
+  "obp": 0.364,
+  "slg": 0.329,
+  "bb_pct": 10.0,
+  "k_pct": 14.4,
+  "bb_k": 0.7,
+  "wrc_plus_pa_weighted": 95.9,
+  "war": 18.66,
+  "wpa": -6.05,
+  "c_inn": "9,151.1",
+  "c_g": 1367,
+  "errors": 48,
+  "sb_allowed": 688,
+  "cs": 282,
+  "cs_pct": 29.1,
+  "hanwha": {
+   "frm": 2017,
+   "to": 2026,
+   "war": 18.17,
+   "pa": 3624
+  },
+  "doosan": {
+   "frm": 2012,
+   "to": 2016,
+   "war": 0.49,
+   "pa": 473
+  },
+  "ops": 0.693
+ },
+ "prev_fa": {
+  "fa_year": 2022,
+  "from_team": "한화",
+  "to_team": "한화",
+  "years": "5년",
+  "total": 54.0,
+  "option": 5.0,
+  "guaranteed": 49.0,
+  "age": 33,
+  "war_prev3": [
+   3.59,
+   2.56,
+   3.68
+  ],
+  "war_avg3": 3.277
+ },
+ "hanwha_2026": {
+  "team": {
+   "g": 144,
+   "w": 57,
+   "l": 83,
+   "d": 4,
+   "rank": 9
+  },
+  "catchers": [
+   {
+    "name": "허인서",
+    "player_id": "52764",
+    "inn": "925.2",
+    "share": 72.8,
+    "c_g": 126,
+    "starts": 104,
+    "pa": 459,
+    "ops": 0.819,
+    "wrc_plus": 108.7,
+    "war": 2.73,
+    "age_2027": 24
+   },
+   {
+    "name": "최재훈",
+    "player_id": "78288",
+    "inn": "287",
+    "share": 22.6,
+    "c_g": 55,
+    "starts": 35,
+    "pa": 122,
+    "ops": 0.462,
+    "wrc_plus": 31.0,
+    "war": -0.4,
+    "age_2027": 38
+   },
+   {
+    "name": "장규현",
+    "player_id": "51762",
+    "inn": "58",
+    "share": 4.6,
+    "c_g": 17,
+    "starts": 5,
+    "pa": 49,
+    "ops": 0.771,
+    "wrc_plus": 107.4,
+    "war": 0.23,
+    "age_2027": 25
+   }
+  ],
+  "total_inn": "1,270.2",
+  "starts_by_month": {
+   "3": {
+    "최재훈": 3
+   },
+   "4": {
+    "최재훈": 16,
+    "허인서": 8
+   },
+   "5": {
+    "허인서": 20,
+    "최재훈": 5
+   },
+   "6": {
+    "허인서": 19,
+    "최재훈": 5
+   },
+   "7": {
+    "허인서": 16,
+    "최재훈": 3,
+    "기타": 1
+   },
+   "8": {
+    "허인서": 16,
+    "최재훈": 2
+   },
+   "9": {
+    "허인서": 19,
+    "기타": 4
+   },
+   "10": {
+    "허인서": 6,
+    "최재훈": 1
+   }
+  },
+  "choi_by_month": {
+   "3": {
+    "c_g": 3,
+    "c_inn": "21",
+    "starts": 3,
+    "pa": 8
+   },
+   "4": {
+    "c_g": 17,
+    "c_inn": "120",
+    "starts": 16,
+    "pa": 53
+   },
+   "5": {
+    "c_g": 10,
+    "c_inn": "49",
+    "starts": 5,
+    "pa": 24
+   },
+   "6": {
+    "c_g": 8,
+    "c_inn": "44",
+    "starts": 5,
+    "pa": 19
+   },
+   "7": {
+    "c_g": 5,
+    "c_inn": "22",
+    "starts": 3,
+    "pa": 8
+   },
+   "8": {
+    "c_g": 6,
+    "c_inn": "20",
+    "starts": 2,
+    "pa": 7
+   },
+   "9": {
+    "c_g": 2,
+    "c_inn": "2",
+    "starts": 0,
+    "pa": 0
+   },
+   "10": {
+    "c_g": 4,
+    "c_inn": "9",
+    "starts": 1,
+    "pa": 3
+   }
+  },
+  "choi_first_start": "2026-03-28",
+  "choi_last_start": "2026-10-10",
+  "choi_longest_gap": {
+   "days": 45,
+   "frm": "2026-08-26",
+   "to": "2026-10-10"
+  },
+  "heo": {
+   "birthday": "2003년 07월 11일",
+   "age_2027": 24,
+   "career": "순천북초-여수중-효천고-한화-상무",
+   "joininfo": "22한화",
+   "salary_2026": "3600만원",
+   "seasons": [
+    {
+     "season": 2022,
+     "g": 8,
+     "pa": 19,
+     "avg": 0.167,
+     "obp": 0.211,
+     "slg": 0.167,
+     "ops": 0.377,
+     "hr": 0,
+     "bb_pct": 5.3,
+     "k_pct": 42.1,
+     "wrc_plus": 7.2,
+     "war": -0.11,
+     "c_inn": "43",
+     "c_starts": null
+    },
+    {
+     "season": 2025,
+     "g": 15,
+     "pa": 30,
+     "avg": 0.172,
+     "obp": 0.2,
+     "slg": 0.207,
+     "ops": 0.407,
+     "hr": 0,
+     "bb_pct": 0.0,
+     "k_pct": 40.0,
+     "wrc_plus": 3.6,
+     "war": -0.19,
+     "c_inn": "65",
+     "c_starts": 2
+    },
+    {
+     "season": 2026,
+     "g": 127,
+     "pa": 459,
+     "avg": 0.283,
+     "obp": 0.347,
+     "slg": 0.472,
+     "ops": 0.819,
+     "hr": 20,
+     "bb_pct": 7.6,
+     "k_pct": 28.1,
+     "wrc_plus": 108.7,
+     "war": 2.73,
+     "c_inn": "925.2",
+     "c_starts": 104
+    }
+   ],
+   "catcher_def_2026": {
+    "name": "허인서",
+    "team": "한화",
+    "taken": 9140,
+    "framing": -16.8,
+    "framing_per1000": -1.8,
+    "calling_rv100": -0.48,
+    "sb_allowed": 47,
+    "cs": 23,
+    "cs_pct": 32.9,
+    "framing_rank": 17,
+    "calling_rv100_rank": 17,
+    "cs_pct_rank": 2,
+    "n": 18
+   },
+   "rank_among_catchers_2026": {
+    "n": 11,
+    "obp": 4,
+    "bb_pct": 7,
+    "ops": 1,
+    "wrc_plus": 3,
+    "war": 3,
+    "avg": 1
+   }
+  },
+  "note": "최재훈 2026 출전 감소 이유(부상·기용)는 DB로 단정하지 않음. 사실 확인 단계에서 확인"
+ },
+ "league_catchers_2026": [
+  {
+   "name": "한준수",
+   "team": "KIA",
+   "pa": 388,
+   "obp": 0.398,
+   "ops": 0.818,
+   "wrc_plus": 125.7,
+   "war": 2.89,
+   "c_inn": "659"
+  },
+  {
+   "name": "양의지",
+   "team": "두산",
+   "pa": 537,
+   "obp": 0.354,
+   "ops": 0.797,
+   "wrc_plus": 116.2,
+   "war": 2.81,
+   "c_inn": "593.1"
+  },
+  {
+   "name": "허인서",
+   "team": "한화",
+   "pa": 459,
+   "obp": 0.347,
+   "ops": 0.819,
+   "wrc_plus": 108.7,
+   "war": 2.73,
+   "c_inn": "925.2"
+  },
+  {
+   "name": "김형준",
+   "team": "NC",
+   "pa": 408,
+   "obp": 0.328,
+   "ops": 0.769,
+   "wrc_plus": 100.6,
+   "war": 2.1,
+   "c_inn": "891.2"
+  },
+  {
+   "name": "박동원",
+   "team": "LG",
+   "pa": 419,
+   "obp": 0.335,
+   "ops": 0.725,
+   "wrc_plus": 99.1,
+   "war": 2.07,
+   "c_inn": "917.2"
+  },
+  {
+   "name": "강민호",
+   "team": "삼성",
+   "pa": 344,
+   "obp": 0.352,
+   "ops": 0.797,
+   "wrc_plus": 106.4,
+   "war": 1.91,
+   "c_inn": "656"
+  },
+  {
+   "name": "김건희",
+   "team": "키움",
+   "pa": 409,
+   "obp": 0.322,
+   "ops": 0.714,
+   "wrc_plus": 96.8,
+   "war": 1.84,
+   "c_inn": "831.1"
+  },
+  {
+   "name": "조형우",
+   "team": "SSG",
+   "pa": 379,
+   "obp": 0.324,
+   "ops": 0.729,
+   "wrc_plus": 90.7,
+   "war": 1.49,
+   "c_inn": "835.2"
+  },
+  {
+   "name": "손성빈",
+   "team": "롯데",
+   "pa": 385,
+   "obp": 0.33,
+   "ops": 0.734,
+   "wrc_plus": 85.5,
+   "war": 1.32,
+   "c_inn": "917.1"
+  },
+  {
+   "name": "김태군",
+   "team": "KIA",
+   "pa": 249,
+   "obp": 0.328,
+   "ops": 0.711,
+   "wrc_plus": 93.8,
+   "war": 1.07,
+   "c_inn": "554.2"
+  },
+  {
+   "name": "한승택",
+   "team": "KT",
+   "pa": 365,
+   "obp": 0.302,
+   "ops": 0.6,
+   "wrc_plus": 59.4,
+   "war": 0.07,
+   "c_inn": "843"
+  }
+ ],
+ "catcher_def_2026": [
+  {
+   "name": "한승택",
+   "team": "KT",
+   "taken": 7530,
+   "framing": 27.0,
+   "framing_per1000": 3.6,
+   "calling_rv100": 0.21,
+   "sb_allowed": 55,
+   "cs": 18,
+   "cs_pct": 24.7,
+   "framing_rank": 1,
+   "calling_rv100_rank": 5,
+   "cs_pct_rank": 8,
+   "n": 18
+  },
+  {
+   "name": "양의지",
+   "team": "두산",
+   "taken": 5415,
+   "framing": 16.5,
+   "framing_per1000": 3.1,
+   "calling_rv100": 0.48,
+   "sb_allowed": 55,
+   "cs": 14,
+   "cs_pct": 20.3,
+   "framing_rank": 2,
+   "calling_rv100_rank": 2,
+   "cs_pct_rank": 11,
+   "n": 18
+  },
+  {
+   "name": "김태군",
+   "team": "KIA",
+   "taken": 5171,
+   "framing": 7.7,
+   "framing_per1000": 1.5,
+   "calling_rv100": 0.57,
+   "sb_allowed": 37,
+   "cs": 8,
+   "cs_pct": 17.8,
+   "framing_rank": 3,
+   "calling_rv100_rank": 1,
+   "cs_pct_rank": 14,
+   "n": 18
+  },
+  {
+   "name": "김동헌",
+   "team": "키움",
+   "taken": 2589,
+   "framing": 5.8,
+   "framing_per1000": 2.2,
+   "calling_rv100": -0.57,
+   "sb_allowed": 26,
+   "cs": 6,
+   "cs_pct": 18.8,
+   "framing_rank": 4,
+   "calling_rv100_rank": 18,
+   "cs_pct_rank": 13,
+   "n": 18
+  },
+  {
+   "name": "김도환",
+   "team": "삼성",
+   "taken": 2831,
+   "framing": 4.0,
+   "framing_per1000": 1.4,
+   "calling_rv100": 0.26,
+   "sb_allowed": 23,
+   "cs": 9,
+   "cs_pct": 28.1,
+   "framing_rank": 5,
+   "calling_rv100_rank": 4,
+   "cs_pct_rank": 6,
+   "n": 18
+  },
+  {
+   "name": "최재훈",
+   "team": "한화",
+   "taken": 2916,
+   "framing": 2.6,
+   "framing_per1000": 0.9,
+   "calling_rv100": -0.16,
+   "sb_allowed": 11,
+   "cs": 6,
+   "cs_pct": 35.3,
+   "framing_rank": 6,
+   "calling_rv100_rank": 14,
+   "cs_pct_rank": 1,
+   "n": 18
+  },
+  {
+   "name": "강민호",
+   "team": "삼성",
+   "taken": 5836,
+   "framing": 0.5,
+   "framing_per1000": 0.1,
+   "calling_rv100": 0.09,
+   "sb_allowed": 59,
+   "cs": 12,
+   "cs_pct": 16.9,
+   "framing_rank": 7,
+   "calling_rv100_rank": 8,
+   "cs_pct_rank": 16,
+   "n": 18
+  },
+  {
+   "name": "조형우",
+   "team": "SSG",
+   "taken": 8452,
+   "framing": -0.8,
+   "framing_per1000": -0.1,
+   "calling_rv100": -0.14,
+   "sb_allowed": 47,
+   "cs": 18,
+   "cs_pct": 27.7,
+   "framing_rank": 8,
+   "calling_rv100_rank": 12,
+   "cs_pct_rank": 7,
+   "n": 18
+  },
+  {
+   "name": "윤준호",
+   "team": "두산",
+   "taken": 5010,
+   "framing": -1.0,
+   "framing_per1000": -0.2,
+   "calling_rv100": 0.48,
+   "sb_allowed": 28,
+   "cs": 6,
+   "cs_pct": 17.6,
+   "framing_rank": 9,
+   "calling_rv100_rank": 2,
+   "cs_pct_rank": 15,
+   "n": 18
+  },
+  {
+   "name": "김형준",
+   "team": "NC",
+   "taken": 8671,
+   "framing": -2.0,
+   "framing_per1000": -0.2,
+   "calling_rv100": -0.06,
+   "sb_allowed": 49,
+   "cs": 21,
+   "cs_pct": 30.0,
+   "framing_rank": 10,
+   "calling_rv100_rank": 10,
+   "cs_pct_rank": 4,
+   "n": 18
+  },
+  {
+   "name": "이지영",
+   "team": "SSG",
+   "taken": 2912,
+   "framing": -2.4,
+   "framing_per1000": -0.8,
+   "calling_rv100": -0.06,
+   "sb_allowed": 21,
+   "cs": 5,
+   "cs_pct": 19.2,
+   "framing_rank": 11,
+   "calling_rv100_rank": 10,
+   "cs_pct_rank": 12,
+   "n": 18
+  },
+  {
+   "name": "안중열",
+   "team": "NC",
+   "taken": 3578,
+   "framing": -4.2,
+   "framing_per1000": -1.2,
+   "calling_rv100": -0.17,
+   "sb_allowed": 31,
+   "cs": 8,
+   "cs_pct": 20.5,
+   "framing_rank": 12,
+   "calling_rv100_rank": 15,
+   "cs_pct_rank": 10,
+   "n": 18
+  },
+  {
+   "name": "김건희",
+   "team": "키움",
+   "taken": 8004,
+   "framing": -4.5,
+   "framing_per1000": -0.6,
+   "calling_rv100": -0.27,
+   "sb_allowed": 51,
+   "cs": 24,
+   "cs_pct": 32.0,
+   "framing_rank": 13,
+   "calling_rv100_rank": 16,
+   "cs_pct_rank": 3,
+   "n": 18
+  },
+  {
+   "name": "손성빈",
+   "team": "롯데",
+   "taken": 8518,
+   "framing": -4.8,
+   "framing_per1000": -0.6,
+   "calling_rv100": -0.14,
+   "sb_allowed": 35,
+   "cs": 14,
+   "cs_pct": 28.6,
+   "framing_rank": 14,
+   "calling_rv100_rank": 12,
+   "cs_pct_rank": 5,
+   "n": 18
+  },
+  {
+   "name": "이주헌",
+   "team": "LG",
+   "taken": 3136,
+   "framing": -5.9,
+   "framing_per1000": -1.9,
+   "calling_rv100": -0.0,
+   "sb_allowed": 27,
+   "cs": 8,
+   "cs_pct": 22.9,
+   "framing_rank": 15,
+   "calling_rv100_rank": 9,
+   "cs_pct_rank": 9,
+   "n": 18
+  },
+  {
+   "name": "박동원",
+   "team": "LG",
+   "taken": 8493,
+   "framing": -6.2,
+   "framing_per1000": -0.7,
+   "calling_rv100": 0.1,
+   "sb_allowed": 94,
+   "cs": 16,
+   "cs_pct": 14.5,
+   "framing_rank": 16,
+   "calling_rv100_rank": 7,
+   "cs_pct_rank": 18,
+   "n": 18
+  },
+  {
+   "name": "허인서",
+   "team": "한화",
+   "taken": 9140,
+   "framing": -16.8,
+   "framing_per1000": -1.8,
+   "calling_rv100": -0.48,
+   "sb_allowed": 47,
+   "cs": 23,
+   "cs_pct": 32.9,
+   "framing_rank": 17,
+   "calling_rv100_rank": 17,
+   "cs_pct_rank": 2,
+   "n": 18
+  },
+  {
+   "name": "한준수",
+   "team": "KIA",
+   "taken": 6264,
+   "framing": -22.0,
+   "framing_per1000": -3.5,
+   "calling_rv100": 0.15,
+   "sb_allowed": 72,
+   "cs": 13,
+   "cs_pct": 15.3,
+   "framing_rank": 18,
+   "calling_rv100_rank": 6,
+   "cs_pct_rank": 17,
+   "n": 18
+  }
+ ],
+ "wpa_2026": {
+  "top": [
+   {
+    "game_date": "2026-05-17",
+    "inning": 4,
+    "inning_half": "top",
+    "pitcher_name": "사우어",
+    "pitcher_team": "KT",
+    "result_text": "우익수 오른쪽 1루타",
+    "wpa": 18.2
+   },
+   {
+    "game_date": "2026-04-30",
+    "inning": 2,
+    "inning_half": "bottom",
+    "pitcher_name": "김건우",
+    "pitcher_team": "SSG",
+    "result_text": "중견수 앞 1루타",
+    "wpa": 8.8
+   },
+   {
+    "game_date": "2026-04-19",
+    "inning": 2,
+    "inning_half": "top",
+    "pitcher_name": "박세웅",
+    "pitcher_team": "롯데",
+    "result_text": "3루수 땅볼 실책으로 출루 (3루수 포구 실책)",
+    "wpa": 8.5
+   }
+  ],
+  "low": [
+   {
+    "game_date": "2026-05-08",
+    "inning": 10,
+    "inning_half": "bottom",
+    "pitcher_name": "김영우",
+    "pitcher_team": "LG",
+    "result_text": "중견수 플라이 아웃",
+    "wpa": -15.4
+   },
+   {
+    "game_date": "2026-04-28",
+    "inning": 8,
+    "inning_half": "bottom",
+    "pitcher_name": "문승원",
+    "pitcher_team": "SSG",
+    "result_text": "좌익수 희생플라이 아웃",
+    "wpa": -12.3
+   }
+  ]
+ },
+ "wpa_2025_top": [
+  {
+   "game_date": "2025-07-09",
+   "inning": 4,
+   "inning_half": "bottom",
+   "pitcher_name": "양현종",
+   "pitcher_team": "KIA",
+   "result_text": "좌익수 뒤 홈런 (홈런거리:110M)",
+   "wpa": 31.5
+  },
+  {
+   "game_date": "2025-07-24",
+   "inning": 8,
+   "inning_half": "top",
+   "pitcher_name": "이영하",
+   "pitcher_team": "두산",
+   "result_text": "우익수 앞 1루타",
+   "wpa": 18.7
+  }
+ ],
+ "teams": {
+  "KT": {
+   "c_war_2026": 0.62,
+   "c_rank_2026": 10,
+   "lg_avg": 1.87,
+   "starter": "한승택",
+   "starter_share": 65,
+   "starter_war": 0.07,
+   "starter_age_2027": 33,
+   "catchers": [
+    {
+     "name": "한승택",
+     "inn": "843",
+     "share": 65.2,
+     "starts": 104,
+     "pa": 365,
+     "ops": 0.6,
+     "wrc_plus": 59.4,
+     "war": 0.07,
+     "age_2027": 33
+    },
+    {
+     "name": "조대현",
+     "inn": "198.2",
+     "share": 15.4,
+     "starts": 17,
+     "pa": 66,
+     "ops": 0.739,
+     "wrc_plus": 97.2,
+     "war": 0.36,
+     "age_2027": 28
+    },
+    {
+     "name": "장성우",
+     "inn": "155.1",
+     "share": 12.0,
+     "starts": 18,
+     "pa": 267,
+     "ops": 0.772,
+     "wrc_plus": 103.6,
+     "war": 0.75,
+     "age_2027": 37
+    },
+    {
+     "name": "강현우",
+     "inn": "82.1",
+     "share": 6.4,
+     "starts": 5,
+     "pa": 32,
+     "ops": 0.466,
+     "wrc_plus": 40.5,
+     "war": -0.06,
+     "age_2027": 26
+    }
+   ],
+   "c_war_2025": 1.48,
+   "c_rank_2025": 6,
+   "c_war_2024": 3.05,
+   "c_rank_2024": 2,
+   "cap_room": 42.8,
+   "cap_room_franchise": 53.5,
+   "own_fa": [],
+   "team_rank_2026": 1,
+   "team_cs_pct": 18.8,
+   "team_cs_rank": 7,
+   "team_framing": 27.3,
+   "team_framing_rank": 1
+  },
+  "삼성": {
+   "c_war_2026": 1.48,
+   "c_rank_2026": 7,
+   "lg_avg": 1.87,
+   "starter": "강민호",
+   "starter_share": 51,
+   "starter_war": 1.91,
+   "starter_age_2027": 42,
+   "catchers": [
+    {
+     "name": "강민호",
+     "inn": "656",
+     "share": 51.2,
+     "starts": 89,
+     "pa": 344,
+     "ops": 0.797,
+     "wrc_plus": 106.4,
+     "war": 1.91,
+     "age_2027": 42
+    },
+    {
+     "name": "김도환",
+     "inn": "303.1",
+     "share": 23.7,
+     "starts": 34,
+     "pa": 132,
+     "ops": 0.677,
+     "wrc_plus": 77.3,
+     "war": 0.3,
+     "age_2027": 27
+    },
+    {
+     "name": "장승현",
+     "inn": "166.1",
+     "share": 13.0,
+     "starts": 8,
+     "pa": 37,
+     "ops": 0.329,
+     "wrc_plus": -4.9,
+     "war": -0.22,
+     "age_2027": 33
+    },
+    {
+     "name": "박세혁",
+     "inn": "145.1",
+     "share": 11.4,
+     "starts": 13,
+     "pa": 57,
+     "ops": 0.38,
+     "wrc_plus": -3.1,
+     "war": -0.42,
+     "age_2027": 37
+    }
+   ],
+   "c_war_2025": 1.42,
+   "c_rank_2025": 7,
+   "c_war_2024": 2.51,
+   "c_rank_2024": 5,
+   "cap_room": 3.3,
+   "cap_room_franchise": 18.2,
+   "own_fa": [
+    "원태인",
+    "구자욱"
+   ],
+   "team_rank_2026": 2,
+   "team_cs_pct": 17.3,
+   "team_cs_rank": 8,
+   "team_framing": 7.9,
+   "team_framing_rank": 3
+  },
+  "KIA": {
+   "c_war_2026": 3.48,
+   "c_rank_2026": 1,
+   "lg_avg": 1.87,
+   "starter": "한준수",
+   "starter_share": 51,
+   "starter_war": 2.89,
+   "starter_age_2027": 28,
+   "catchers": [
+    {
+     "name": "한준수",
+     "inn": "659",
+     "share": 51.5,
+     "starts": 74,
+     "pa": 388,
+     "ops": 0.818,
+     "wrc_plus": 125.7,
+     "war": 2.89,
+     "age_2027": 28
+    },
+    {
+     "name": "김태군",
+     "inn": "554.2",
+     "share": 43.3,
+     "starts": 64,
+     "pa": 249,
+     "ops": 0.711,
+     "wrc_plus": 93.8,
+     "war": 1.07,
+     "age_2027": 38
+    },
+    {
+     "name": "주효상",
+     "inn": "66",
+     "share": 5.2,
+     "starts": 6,
+     "pa": 24,
+     "ops": 0.519,
+     "wrc_plus": 47.1,
+     "war": -0.02,
+     "age_2027": 30
+    }
+   ],
+   "c_war_2025": 2.41,
+   "c_rank_2025": 3,
+   "c_war_2024": 2.68,
+   "c_rank_2024": 4,
+   "cap_room": 40.2,
+   "cap_room_franchise": 47.7,
+   "own_fa": [
+    "김태군",
+    "김호령"
+   ],
+   "team_rank_2026": 3,
+   "team_cs_pct": 16.4,
+   "team_cs_rank": 10,
+   "team_framing": -19.6,
+   "team_framing_rank": 10
+  },
+  "LG": {
+   "c_war_2026": 1.93,
+   "c_rank_2026": 5,
+   "lg_avg": 1.87,
+   "starter": "박동원",
+   "starter_share": 72,
+   "starter_war": 2.07,
+   "starter_age_2027": 37,
+   "catchers": [
+    {
+     "name": "박동원",
+     "inn": "917.2",
+     "share": 72.0,
+     "starts": 102,
+     "pa": 419,
+     "ops": 0.725,
+     "wrc_plus": 99.1,
+     "war": 2.07,
+     "age_2027": 37
+    },
+    {
+     "name": "이주헌",
+     "inn": "346",
+     "share": 27.2,
+     "starts": 42,
+     "pa": 154,
+     "ops": 0.577,
+     "wrc_plus": 54.0,
+     "war": -0.08,
+     "age_2027": 24
+    },
+    {
+     "name": "김민수",
+     "inn": "10",
+     "share": 0.8,
+     "starts": 0,
+     "pa": 3,
+     "ops": 0.0,
+     "wrc_plus": -109.1,
+     "war": -0.06,
+     "age_2027": 36
+    }
+   ],
+   "c_war_2025": 4.23,
+   "c_rank_2025": 2,
+   "c_war_2024": 2.7,
+   "c_rank_2024": 3,
+   "cap_room": 29.1,
+   "cap_room_franchise": 39.4,
+   "own_fa": [
+    "박동원",
+    "홍창기"
+   ],
+   "team_rank_2026": 4,
+   "team_cs_pct": 16.6,
+   "team_cs_rank": 9,
+   "team_framing": -13.0,
+   "team_framing_rank": 9
+  },
+  "두산": {
+   "c_war_2026": 1.51,
+   "c_rank_2026": 6,
+   "lg_avg": 1.87,
+   "starter": "양의지",
+   "starter_share": 46,
+   "starter_war": 2.81,
+   "starter_age_2027": 40,
+   "catchers": [
+    {
+     "name": "양의지",
+     "inn": "593.1",
+     "share": 46.3,
+     "starts": 78,
+     "pa": 537,
+     "ops": 0.797,
+     "wrc_plus": 116.2,
+     "war": 2.81,
+     "age_2027": 40
+    },
+    {
+     "name": "윤준호",
+     "inn": "530",
+     "share": 41.3,
+     "starts": 51,
+     "pa": 197,
+     "ops": 0.558,
+     "wrc_plus": 52.5,
+     "war": -0.07,
+     "age_2027": 27
+    },
+    {
+     "name": "김기연",
+     "inn": "150.1",
+     "share": 11.7,
+     "starts": 15,
+     "pa": 65,
+     "ops": 0.544,
+     "wrc_plus": 52.2,
+     "war": -0.05,
+     "age_2027": 30
+    }
+   ],
+   "c_war_2025": 4.33,
+   "c_rank_2025": 1,
+   "c_war_2024": 3.12,
+   "c_rank_2024": 1,
+   "cap_room": 38.6,
+   "cap_room_franchise": 49.1,
+   "own_fa": [
+    "양의지",
+    "정수빈"
+   ],
+   "team_rank_2026": 5,
+   "team_cs_pct": 19.0,
+   "team_cs_rank": 6,
+   "team_framing": 18.0,
+   "team_framing_rank": 2
+  },
+  "SSG": {
+   "c_war_2026": 1.32,
+   "c_rank_2026": 8,
+   "lg_avg": 1.87,
+   "starter": "조형우",
+   "starter_share": 66,
+   "starter_war": 1.49,
+   "starter_age_2027": 25,
+   "catchers": [
+    {
+     "name": "조형우",
+     "inn": "835.2",
+     "share": 65.8,
+     "starts": 103,
+     "pa": 379,
+     "ops": 0.729,
+     "wrc_plus": 90.7,
+     "war": 1.49,
+     "age_2027": 25
+    },
+    {
+     "name": "이지영",
+     "inn": "301",
+     "share": 23.7,
+     "starts": 29,
+     "pa": 139,
+     "ops": 0.65,
+     "wrc_plus": 72.2,
+     "war": 0.23,
+     "age_2027": 41
+    },
+    {
+     "name": "김민식",
+     "inn": "70.1",
+     "share": 5.5,
+     "starts": 8,
+     "pa": 28,
+     "ops": 0.286,
+     "wrc_plus": -33.7,
+     "war": -0.31,
+     "age_2027": 38
+    },
+    {
+     "name": "신범수",
+     "inn": "63.1",
+     "share": 5.0,
+     "starts": 4,
+     "pa": 28,
+     "ops": 0.522,
+     "wrc_plus": 32.9,
+     "war": -0.09,
+     "age_2027": 29
+    }
+   ],
+   "c_war_2025": 0.78,
+   "c_rank_2025": 9,
+   "c_war_2024": 0.27,
+   "c_rank_2024": 9,
+   "cap_room": 51.3,
+   "cap_room_franchise": 65.0,
+   "own_fa": [
+    "최지훈"
+   ],
+   "team_rank_2026": 6,
+   "team_cs_pct": 26.5,
+   "team_cs_rank": 3,
+   "team_framing": -2.2,
+   "team_framing_rank": 5
+  },
+  "롯데": {
+   "c_war_2026": 1.09,
+   "c_rank_2026": 9,
+   "lg_avg": 1.87,
+   "starter": "손성빈",
+   "starter_share": 72,
+   "starter_war": 1.32,
+   "starter_age_2027": 25,
+   "catchers": [
+    {
+     "name": "손성빈",
+     "inn": "917.1",
+     "share": 71.9,
+     "starts": 112,
+     "pa": 385,
+     "ops": 0.734,
+     "wrc_plus": 85.5,
+     "war": 1.32,
+     "age_2027": 25
+    },
+    {
+     "name": "유강남",
+     "inn": "183.2",
+     "share": 14.4,
+     "starts": 20,
+     "pa": 128,
+     "ops": 0.586,
+     "wrc_plus": 41.6,
+     "war": -0.4,
+     "age_2027": 35
+    },
+    {
+     "name": "박건우",
+     "inn": "118",
+     "share": 9.2,
+     "starts": 11,
+     "pa": 44,
+     "ops": 0.605,
+     "wrc_plus": 52.0,
+     "war": -0.02,
+     "age_2027": 24
+    },
+    {
+     "name": "박재엽",
+     "inn": "41",
+     "share": 3.2,
+     "starts": 1,
+     "pa": 12,
+     "ops": 0.962,
+     "wrc_plus": 145.1,
+     "war": 0.14,
+     "age_2027": 21
+    },
+    {
+     "name": "정보근",
+     "inn": "16",
+     "share": 1.3,
+     "starts": 0,
+     "pa": 5,
+     "ops": 0.4,
+     "wrc_plus": -8.6,
+     "war": -0.04,
+     "age_2027": 28
+    }
+   ],
+   "c_war_2025": 1.22,
+   "c_rank_2025": 8,
+   "c_war_2024": -1.23,
+   "c_rank_2024": 10,
+   "cap_room": 77.0,
+   "cap_room_franchise": 86.0,
+   "own_fa": [],
+   "team_rank_2026": 7,
+   "team_cs_pct": 24.7,
+   "team_cs_rank": 5,
+   "team_framing": -5.7,
+   "team_framing_rank": 6
+  },
+  "NC": {
+   "c_war_2026": 2.87,
+   "c_rank_2026": 2,
+   "lg_avg": 1.87,
+   "starter": "김형준",
+   "starter_share": 70,
+   "starter_war": 2.1,
+   "starter_age_2027": 28,
+   "catchers": [
+    {
+     "name": "김형준",
+     "inn": "891.2",
+     "share": 69.8,
+     "starts": 105,
+     "pa": 408,
+     "ops": 0.769,
+     "wrc_plus": 100.6,
+     "war": 2.1,
+     "age_2027": 28
+    },
+    {
+     "name": "안중열",
+     "inn": "356",
+     "share": 27.8,
+     "starts": 37,
+     "pa": 174,
+     "ops": 0.744,
+     "wrc_plus": 100.1,
+     "war": 0.85,
+     "age_2027": 32
+    },
+    {
+     "name": "김정호",
+     "inn": "25.2",
+     "share": 2.0,
+     "starts": 2,
+     "pa": 8,
+     "ops": 0.25,
+     "wrc_plus": -43.6,
+     "war": -0.09,
+     "age_2027": 29
+    }
+   ],
+   "c_war_2025": 1.82,
+   "c_rank_2025": 5,
+   "c_war_2024": 1.36,
+   "c_rank_2024": 7,
+   "cap_room": 87.1,
+   "cap_room_franchise": 96.6,
+   "own_fa": [
+    "권희동"
+   ],
+   "team_rank_2026": 8,
+   "team_cs_pct": 26.1,
+   "team_cs_rank": 4,
+   "team_framing": -7.8,
+   "team_framing_rank": 7
+  },
+  "한화": {
+   "c_war_2026": 2.44,
+   "c_rank_2026": 3,
+   "lg_avg": 1.87,
+   "starter": "허인서",
+   "starter_share": 73,
+   "starter_war": 2.73,
+   "starter_age_2027": 24,
+   "catchers": [
+    {
+     "name": "허인서",
+     "inn": "925.2",
+     "share": 72.8,
+     "starts": 104,
+     "pa": 459,
+     "ops": 0.819,
+     "wrc_plus": 108.7,
+     "war": 2.73,
+     "age_2027": 24
+    },
+    {
+     "name": "최재훈",
+     "inn": "287",
+     "share": 22.6,
+     "starts": 35,
+     "pa": 122,
+     "ops": 0.462,
+     "wrc_plus": 31.0,
+     "war": -0.4,
+     "age_2027": 38
+    },
+    {
+     "name": "장규현",
+     "inn": "58",
+     "share": 4.6,
+     "starts": 5,
+     "pa": 49,
+     "ops": 0.771,
+     "wrc_plus": 107.4,
+     "war": 0.23,
+     "age_2027": 25
+    }
+   ],
+   "c_war_2025": 2.19,
+   "c_rank_2025": 4,
+   "c_war_2024": 1.39,
+   "c_rank_2024": 6,
+   "cap_room": 32.0,
+   "cap_room_franchise": 42.6,
+   "own_fa": [],
+   "team_rank_2026": 9,
+   "team_cs_pct": 34.3,
+   "team_cs_rank": 1,
+   "team_framing": -11.7,
+   "team_framing_rank": 8
+  },
+  "키움": {
+   "c_war_2026": 2.02,
+   "c_rank_2026": 4,
+   "lg_avg": 1.87,
+   "starter": "김건희",
+   "starter_share": 66,
+   "starter_war": 1.84,
+   "starter_age_2027": 23,
+   "catchers": [
+    {
+     "name": "김건희",
+     "inn": "831.1",
+     "share": 65.6,
+     "starts": 93,
+     "pa": 409,
+     "ops": 0.714,
+     "wrc_plus": 96.8,
+     "war": 1.84,
+     "age_2027": 23
+    },
+    {
+     "name": "김동헌",
+     "inn": "269",
+     "share": 21.2,
+     "starts": 33,
+     "pa": 113,
+     "ops": 0.604,
+     "wrc_plus": 69.2,
+     "war": 0.16,
+     "age_2027": 23
+    },
+    {
+     "name": "김재현",
+     "inn": "98.2",
+     "share": 7.8,
+     "starts": 9,
+     "pa": 40,
+     "ops": 0.82,
+     "wrc_plus": 122.9,
+     "war": 0.32,
+     "age_2027": 34
+    },
+    {
+     "name": "박성빈",
+     "inn": "63",
+     "share": 5.0,
+     "starts": 9,
+     "pa": 25,
+     "ops": 0.285,
+     "wrc_plus": -18.3,
+     "war": -0.23,
+     "age_2027": 23
+    }
+   ],
+   "c_war_2025": 0.77,
+   "c_rank_2025": 10,
+   "c_war_2024": 0.59,
+   "c_rank_2024": 8,
+   "cap_room": 100.5,
+   "cap_room_franchise": 105.5,
+   "own_fa": [],
+   "team_rank_2026": 10,
+   "team_cs_pct": 29.3,
+   "team_cs_rank": 2,
+   "team_framing": 7.0,
+   "team_framing_rank": 4
+  }
+ },
+ "focus": {
+  "삼성": [
+   {
+    "name": "강민호",
+    "age_2027": 42,
+    "war": [
+     2.63,
+     2.0,
+     1.91
+    ],
+    "pa": [
+     450,
+     462,
+     344
+    ],
+    "ww": 2.06,
+    "c_inn_by_season": {
+     "2024": "803",
+     "2025": "876.2",
+     "2026": "656"
+    }
+   },
+   {
+    "name": "김도환",
+    "age_2027": 27,
+    "war": [
+     -0.07,
+     0.01,
+     0.3
+    ],
+    "pa": [
+     3,
+     14,
+     132
+    ],
+    "ww": 0.14,
+    "c_inn_by_season": {
+     "2024": "6",
+     "2025": "31",
+     "2026": "303.1"
+    }
+   },
+   {
+    "name": "장승현",
+    "age_2027": 33,
+    "war": [
+     -0.01,
+     -0.03,
+     -0.22
+    ],
+    "pa": [
+     23,
+     2,
+     37
+    ],
+    "ww": -0.12,
+    "c_inn_by_season": {
+     "2024": "58",
+     "2025": "11",
+     "2026": "166.1"
+    }
+   },
+   {
+    "name": "박세혁",
+    "age_2027": 37,
+    "war": [
+     0.52,
+     -0.34,
+     -0.42
+    ],
+    "pa": [
+     171,
+     93,
+     57
+    ],
+    "ww": -0.24,
+    "c_inn_by_season": {
+     "2024": "357.1",
+     "2025": "185.1",
+     "2026": "145.1"
+    }
+   }
+  ],
+  "LG": [
+   {
+    "name": "박동원",
+    "age_2027": 37,
+    "war": [
+     3.0,
+     3.8,
+     2.07
+    ],
+    "pa": [
+     497,
+     521,
+     419
+    ],
+    "ww": 2.8,
+    "c_inn_by_season": {
+     "2024": "944.2",
+     "2025": "938.1",
+     "2026": "917.2"
+    }
+   },
+   {
+    "name": "이주헌",
+    "age_2027": 24,
+    "war": [
+     0.21,
+     0.88,
+     -0.08
+    ],
+    "pa": [
+     6,
+     156,
+     154
+    ],
+    "ww": 0.29,
+    "c_inn_by_season": {
+     "2024": "14",
+     "2025": "332",
+     "2026": "346"
+    }
+   },
+   {
+    "name": "김민수",
+    "age_2027": 36,
+    "war": [
+     0.05,
+     0.0,
+     -0.06
+    ],
+    "pa": [
+     8,
+     0,
+     3
+    ],
+    "ww": -0.02,
+    "c_inn_by_season": {
+     "2024": "23",
+     "2025": "0",
+     "2026": "10"
+    }
+   }
+  ],
+  "KT": [
+   {
+    "name": "한승택",
+    "age_2027": 33,
+    "war": [
+     0.12,
+     0.03,
+     0.07
+    ],
+    "pa": [
+     15,
+     23,
+     365
+    ],
+    "ww": 0.07,
+    "c_inn_by_season": {
+     "2024": "47",
+     "2025": "54",
+     "2026": "843"
+    }
+   },
+   {
+    "name": "조대현",
+    "age_2027": 28,
+    "war": [
+     0.14,
+     -0.1,
+     0.36
+    ],
+    "pa": [
+     45,
+     90,
+     66
+    ],
+    "ww": 0.17,
+    "c_inn_by_season": {
+     "2024": "120",
+     "2025": "248.2",
+     "2026": "198.2"
+    }
+   },
+   {
+    "name": "장성우",
+    "age_2027": 37,
+    "war": [
+     2.32,
+     1.76,
+     0.75
+    ],
+    "pa": [
+     488,
+     479,
+     267
+    ],
+    "ww": 1.35,
+    "c_inn_by_season": {
+     "2024": "856.1",
+     "2025": "836.2",
+     "2026": "155.1"
+    }
+   },
+   {
+    "name": "강현우",
+    "age_2027": 26,
+    "war": [
+     0.38,
+     -0.05,
+     -0.06
+    ],
+    "pa": [
+     36,
+     78,
+     32
+    ],
+    "ww": 0.02,
+    "c_inn_by_season": {
+     "2024": "81",
+     "2025": "160.1",
+     "2026": "82.1"
+    }
+   }
+  ]
+ },
+ "fa_catchers": [
+  {
+   "name": "양의지",
+   "team": "두산",
+   "grade": "C",
+   "age": 40,
+   "ww": 3.84,
+   "war3": [
+    3.22,
+    5.7,
+    2.81
+   ],
+   "model_total": 35,
+   "model_years": 2,
+   "model_aav": 17.4,
+   "catcher_2026": {
+    "team": "두산",
+    "pitches": 5415,
+    "framing": 16.5,
+    "framing_rank": 2,
+    "calling_rv100": 0.48,
+    "sb_allowed": 55,
+    "cs": 10,
+    "cs_pct": 15.4,
+    "calling_rank": 2,
+    "cs_rank": 12,
+    "calling_tie": true,
+    "catchers_n": 18,
+    "c_inn": "593.1",
+    "dh_inn": "439.2"
+   }
+  },
+  {
+   "name": "박동원",
+   "team": "LG",
+   "grade": "B",
+   "age": 37,
+   "ww": 2.8,
+   "war3": [
+    3.0,
+    3.8,
+    2.07
+   ],
+   "model_total": 51,
+   "model_years": 4,
+   "model_aav": 12.7,
+   "catcher_2026": {
+    "team": "LG",
+    "pitches": 8493,
+    "framing": -6.2,
+    "framing_rank": 16,
+    "calling_rv100": 0.1,
+    "sb_allowed": 94,
+    "cs": 8,
+    "cs_pct": 7.8,
+    "calling_rank": 7,
+    "cs_rank": 18,
+    "calling_tie": false,
+    "catchers_n": 18,
+    "c_inn": "917.2",
+    "dh_inn": "0"
+   }
+  },
+  {
+   "name": "김태군",
+   "team": "KIA",
+   "grade": "B",
+   "age": 38,
+   "ww": 1.13,
+   "war3": [
+    0.92,
+    1.33,
+    1.07
+   ],
+   "model_total": 28,
+   "model_years": 4,
+   "model_aav": 6.9,
+   "catcher_2026": {
+    "team": "KIA",
+    "pitches": 5171,
+    "framing": 7.7,
+    "framing_rank": 3,
+    "calling_rv100": 0.57,
+    "sb_allowed": 37,
+    "cs": 5,
+    "cs_pct": 11.9,
+    "calling_rank": 1,
+    "cs_rank": 15,
+    "calling_tie": false,
+    "catchers_n": 18,
+    "c_inn": "554.2",
+    "dh_inn": "4"
+   }
+  },
+  {
+   "name": "최재훈",
+   "team": "한화",
+   "grade": "B",
+   "age": 38,
+   "ww": 0.85,
+   "war3": [
+    1.36,
+    2.47,
+    -0.4
+   ],
+   "model_total": null,
+   "model_years": null,
+   "model_aav": null,
+   "catcher_2026": null
+  }
+ ],
+ "price": {
+  "age": 38,
+  "ww": 0.85,
+  "war_3y": [
+   1.36,
+   2.47,
+   -0.4
+  ],
+  "clip": 0.3,
+  "model": "c2: 33+ & WAR≥3",
+  "in_old_hiwar_group": false,
+  "aav": 5.7,
+  "total1": 5.7,
+  "total2": 11.4,
+  "total3": 17.2,
+  "note": "v6 채택 모델(2027-fa-preview와 같음). 모델 표본은 1년·1+1년·사인 앤 트레이드 등을 뺀 80건(10억 미만 포함). 38세는 표본 안쪽 끝",
+  "n_comps_all": 10,
+  "comps_model": [
+   {
+    "player": "허도환",
+    "role": "타자",
+    "pos": "포",
+    "fa_year": 2022,
+    "age": 38,
+    "ww": 0.25,
+    "years": 2,
+    "total": 4.0,
+    "from_team": "KT",
+    "to_team": "LG"
+   },
+   {
+    "player": "김헌곤",
+    "role": "타자",
+    "pos": "좌",
+    "fa_year": 2025,
+    "age": 37,
+    "ww": 0.02,
+    "years": 2,
+    "total": 6.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "김진성",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2023,
+    "age": 38,
+    "ww": 0.31,
+    "years": 2,
+    "total": 7.0,
+    "from_team": "LG",
+    "to_team": "LG"
+   },
+   {
+    "player": "원종현",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2023,
+    "age": 36,
+    "ww": 0.83,
+    "years": 4,
+    "total": 25.0,
+    "from_team": "NC",
+    "to_team": "키움"
+   },
+   {
+    "player": "장시환",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2023,
+    "age": 36,
+    "ww": 0.04,
+    "years": 3,
+    "total": 9.3,
+    "from_team": "한화",
+    "to_team": "한화"
+   },
+   {
+    "player": "김대우",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2024,
+    "age": 36,
+    "ww": 0.17,
+    "years": 2,
+    "total": 4.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "임창민",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2024,
+    "age": 39,
+    "ww": 0.3,
+    "years": 2,
+    "total": 8.0,
+    "from_team": "키움",
+    "to_team": "삼성"
+   },
+   {
+    "player": "김강률",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2025,
+    "age": 37,
+    "ww": 0.27,
+    "years": 4,
+    "total": 14.0,
+    "from_team": "두산",
+    "to_team": "LG"
+   },
+   {
+    "player": "우규민",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2025,
+    "age": 40,
+    "ww": 0.88,
+    "years": 2,
+    "total": 7.0,
+    "from_team": "KT",
+    "to_team": "KT"
+   },
+   {
+    "player": "이용찬",
+    "role": "투수",
+    "pos": "투수",
+    "fa_year": 2025,
+    "age": 36,
+    "ww": 0.2,
+    "years": 3,
+    "total": 10.0,
+    "from_team": "NC",
+    "to_team": "NC"
+   }
+  ],
+  "comps_catcher": [
+   {
+    "player": "허도환",
+    "role": "타자",
+    "pos": "포",
+    "fa_year": 2022,
+    "age": 38,
+    "ww": 0.25,
+    "years": 2,
+    "total": 4.0,
+    "from_team": "KT",
+    "to_team": "LG"
+   }
+  ],
+  "comps_batter": [
+   {
+    "player": "허도환",
+    "role": "타자",
+    "pos": "포",
+    "fa_year": 2022,
+    "age": 38,
+    "ww": 0.25,
+    "years": 2,
+    "total": 4.0,
+    "from_team": "KT",
+    "to_team": "LG"
+   },
+   {
+    "player": "김헌곤",
+    "role": "타자",
+    "pos": "좌",
+    "fa_year": 2025,
+    "age": 37,
+    "ww": 0.02,
+    "years": 2,
+    "total": 6.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   }
+  ],
+  "catchers_33plus_in_sample": [
+   {
+    "player": "강민호",
+    "fa_year": 2022,
+    "age": 37,
+    "ww": 2.64,
+    "years": 4,
+    "total": 36.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "최재훈",
+    "fa_year": 2022,
+    "age": 33,
+    "ww": 3.29,
+    "years": 5,
+    "total": 54.0,
+    "from_team": "한화",
+    "to_team": "한화"
+   },
+   {
+    "player": "허도환",
+    "fa_year": 2022,
+    "age": 38,
+    "ww": 0.25,
+    "years": 2,
+    "total": 4.0,
+    "from_team": "KT",
+    "to_team": "LG"
+   },
+   {
+    "player": "박동원",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 2.84,
+    "years": 4,
+    "total": 65.0,
+    "from_team": "KIA",
+    "to_team": "LG"
+   },
+   {
+    "player": "박세혁",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 1.33,
+    "years": 4,
+    "total": 46.0,
+    "from_team": "두산",
+    "to_team": "NC"
+   },
+   {
+    "player": "양의지",
+    "fa_year": 2023,
+    "age": 36,
+    "ww": 4.57,
+    "years": 6,
+    "total": 152.0,
+    "from_team": "NC",
+    "to_team": "두산"
+   },
+   {
+    "player": "김민식",
+    "fa_year": 2024,
+    "age": 35,
+    "ww": 0.59,
+    "years": 2,
+    "total": 5.0,
+    "from_team": "SSG",
+    "to_team": "SSG"
+   },
+   {
+    "player": "강민호",
+    "fa_year": 2026,
+    "age": 41,
+    "ww": 2.41,
+    "years": 2,
+    "total": 20.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "장성우",
+    "fa_year": 2026,
+    "age": 36,
+    "ww": 2.08,
+    "years": 2,
+    "total": 16.0,
+    "from_team": "KT",
+    "to_team": "KT"
+   }
+  ],
+  "catchers_csv_all": [
+   {
+    "player": "강민호",
+    "fa_year": 2022,
+    "age": 37,
+    "ww": 2.64,
+    "years": "4년",
+    "total": 36.0,
+    "from_team": "삼성",
+    "to_team": "삼성",
+    "excluded": null
+   },
+   {
+    "player": "장성우",
+    "fa_year": 2022,
+    "age": 32,
+    "ww": 1.6,
+    "years": "4년",
+    "total": 42.0,
+    "from_team": "KT",
+    "to_team": "KT",
+    "excluded": null
+   },
+   {
+    "player": "최재훈",
+    "fa_year": 2022,
+    "age": 33,
+    "ww": 3.29,
+    "years": "5년",
+    "total": 54.0,
+    "from_team": "한화",
+    "to_team": "한화",
+    "excluded": null
+   },
+   {
+    "player": "허도환",
+    "fa_year": 2022,
+    "age": 38,
+    "ww": 0.25,
+    "years": "2년",
+    "total": 4.0,
+    "from_team": "KT",
+    "to_team": "LG",
+    "excluded": "총액 10억 미만"
+   },
+   {
+    "player": "박동원",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 2.84,
+    "years": "4년",
+    "total": 65.0,
+    "from_team": "KIA",
+    "to_team": "LG",
+    "excluded": null
+   },
+   {
+    "player": "박세혁",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 1.33,
+    "years": "4년",
+    "total": 46.0,
+    "from_team": "두산",
+    "to_team": "NC",
+    "excluded": null
+   },
+   {
+    "player": "양의지",
+    "fa_year": 2023,
+    "age": 36,
+    "ww": 4.57,
+    "years": "4+2년",
+    "total": 152.0,
+    "from_team": "NC",
+    "to_team": "두산",
+    "excluded": null
+   },
+   {
+    "player": "유강남",
+    "fa_year": 2023,
+    "age": 31,
+    "ww": 2.49,
+    "years": "4년",
+    "total": 80.0,
+    "from_team": "LG",
+    "to_team": "롯데",
+    "excluded": null
+   },
+   {
+    "player": "김민식",
+    "fa_year": 2024,
+    "age": 35,
+    "ww": 0.59,
+    "years": "2년",
+    "total": 5.0,
+    "from_team": "SSG",
+    "to_team": "SSG",
+    "excluded": "총액 10억 미만"
+   },
+   {
+    "player": "이지영",
+    "fa_year": 2024,
+    "age": 38,
+    "ww": 0.77,
+    "years": "2년",
+    "total": 4.0,
+    "from_team": "키움",
+    "to_team": "SSG",
+    "excluded": "사인 앤 트레이드"
+   },
+   {
+    "player": "강민호",
+    "fa_year": 2026,
+    "age": 41,
+    "ww": 2.41,
+    "years": "2년",
+    "total": 20.0,
+    "from_team": "삼성",
+    "to_team": "삼성",
+    "excluded": null
+   },
+   {
+    "player": "장성우",
+    "fa_year": 2026,
+    "age": 36,
+    "ww": 2.08,
+    "years": "2년",
+    "total": 16.0,
+    "from_team": "KT",
+    "to_team": "KT",
+    "excluded": null
+   },
+   {
+    "player": "한승택",
+    "fa_year": 2026,
+    "age": 32,
+    "ww": -0.0,
+    "years": "4년",
+    "total": 10.0,
+    "from_team": "KIA",
+    "to_team": "KT",
+    "excluded": "직전 3시즌 중 2시즌 이상 공백"
+   }
+  ]
+ },
+ "grade_b": {
+  "rule": {
+   "protect": 25,
+   "pct_with": 100,
+   "pct_only": 200
+  },
+  "salary_2026_man": 40000,
+  "comp_with_player_man": 40000,
+  "comp_only_man": 80000,
+  "note": "B등급: 보호선수 25명 외 1명 + 직전 연봉 100%, 또는 직전 연봉 200%. 연봉은 player_info.json 2026 연봉"
+ },
+ "preview_copy": {
+  "others_choi": {
+   "name": "최재훈",
+   "role": "B",
+   "team": "한화",
+   "pos": "포수",
+   "age": 38,
+   "grade": "B",
+   "war": [
+    1.36,
+    2.47,
+    -0.4
+   ],
+   "ww": 0.85,
+   "seasons": [
+    {
+     "season": 2024,
+     "team": "한화",
+     "pos": "포",
+     "g": 109,
+     "pa": 348,
+     "avg": 0.257,
+     "obp": 0.371,
+     "slg": 0.336,
+     "hr": 4,
+     "sb": 0,
+     "wrc_plus": 91.7,
+     "war": 1.36
+    },
+    {
+     "season": 2025,
+     "team": "한화",
+     "pos": "포",
+     "g": 115,
+     "pa": 348,
+     "avg": 0.286,
+     "obp": 0.414,
+     "slg": 0.353,
+     "hr": 1,
+     "sb": 1,
+     "wrc_plus": 115.0,
+     "war": 2.47
+    },
+    {
+     "season": 2026,
+     "team": "한화",
+     "pos": "포",
+     "g": 40,
+     "pa": 122,
+     "avg": 0.17,
+     "obp": 0.292,
+     "slg": 0.17,
+     "hr": 0,
+     "sb": 0,
+     "wrc_plus": 31.0,
+     "war": -0.4
+    }
+   ],
+   "last": {
+    "season": 2026,
+    "team": "한화",
+    "pos": "포",
+    "g": 40,
+    "pa": 122,
+    "avg": 0.17,
+    "obp": 0.292,
+    "slg": 0.17,
+    "hr": 0,
+    "sb": 0,
+    "wrc_plus": 31.0,
+    "war": -0.4
+   }
+  },
+  "grade_rule": {
+   "A": {
+    "protect": 20,
+    "pct_with": 200,
+    "pct_only": 300
+   },
+   "B": {
+    "protect": 25,
+    "pct_with": 100,
+    "pct_only": 200
+   },
+   "C": {
+    "pct_only": 150
+   }
+  },
+  "cap2027": 151.17,
+  "catchers_n": 18
+ }
+}

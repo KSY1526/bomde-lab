@@ -1,0 +1,159 @@
+---
+title: "허인서에 밀린 최재훈, 38세 B등급 포수를 부를 팀은"
+description: "2025년 포수 가운데 출루율 1위였던 한화 최재훈이 2026년 122타석에 그친 뒤 B등급 FA로 시장에 나온다."
+date: 2026-11-16T10:54:50+09:00
+category: player
+tags: ["최재훈", "한화", "FA", "2027", "B등급", "포수"]
+related: ["2026-war-owar", "2027-fa-preview", "2026-war-dwar"]
+stat: { value: "8억", label: "보상선수 없이 최재훈을 데려갈 때 한화에 주는 보상금(B등급)", short: "B등급 보상금" }
+thumb: { player: "최재훈" }
+dataUntil: "2026 정규시즌(크봇 DB)"
+draft: false
+---
+import { url as siteUrl } from '../../lib/site';
+import d from '../../data/posts/2027-fa-choi-jaehoon.json';
+
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => v.toFixed(2).replace('-', '−');
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const wrcTd = (v, small = false) => { const g = Math.round(v - 100); const pc = [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(g) - 1e-9) / 20))]; if (small) return <td class="small">{f1(v)}</td>; if (!g) return <td>{f1(v)}</td>; return <td class={g > 0 ? 'up' : 'down'} style={`--heat:${pc}%`}>{f1(v)}</td>; };
+export const sgn = (v) => (v > 0 ? '+' : '') + f1(v).replace('-', '−');
+export const c = d.career;
+export const S = d.seasons.filter((s) => s.season >= 2023);
+export const s26 = S.find((s) => s.season === 2026);
+export const h = d.hanwha_2026;
+export const heo = h.heo.seasons.find((s) => s.season === 2026);
+export const MONTHS = ['3', '4', '5', '6', '7', '8', '9', '10'];
+export const t = d.teams;
+export const FOCUS = ['삼성', 'LG', 'KT'];
+export const rankTd = (r) => <td class={r >= 8 ? 'down' : undefined} style={r >= 8 ? `--heat:${[0, 0, 0, 0, 0, 0, 0, 0, 18, 30, 42][r]}%` : undefined}>{r}위</td>;
+export const cd = (n) => d.catcher_def_2026.find((x) => x.name === n);
+export const p = d.price;
+export const FA = d.fa_catchers.filter((x) => x.name !== '양의지');
+export const P33 = p.catchers_33plus_in_sample.filter((x) => x.player !== '양의지');
+
+2025년 한화 최재훈은 출루율 .414를 기록했다. 200타석 넘게 선 주 포지션 포수 13명 가운데 1위였고 300타석 이상 리그 타자 80명 중에서도 3위였다. 1년 뒤인 2026년에는 122타석에서 타율 .170, 출루율 .292에 그쳤다. 안타 17개가 모두 단타였다.
+
+1989년생 최재훈은 2027년에 38세가 된다. 2021년 11월 한화와 맺은 5년 54억 계약은 2026년으로 끝났고 이번 FA 시장에는 B등급으로 나온다.
+
+## 최근 4년, 출루가 무기였던 포수
+
+2023년부터 2026년까지의 성적이다. 경기는 타석에 선 경기, 포수 출전은 포수로 수비 이닝이 있는 경기다.
+
+<table>
+  <thead><tr><th>시즌</th><th>경기</th><th>포수 출전(선발)</th><th>타석</th><th>타율/출루율/장타율</th><th>홈런</th><th>볼넷률</th><th>삼진율</th><th>우르크</th><th>WAR*</th><th>포수 이닝</th></tr></thead>
+  <tbody>
+    {S.map((s) => (
+      <tr class={s.season === 2026 ? 'cur' : undefined}><td>{s.season}</td><td>{s.g}</td><td>{s.c_g}({s.c_starts})</td><td>{s.pa}</td><td>{f3(s.avg)}/{f3(s.obp)}/{f3(s.slg)}</td><td>{s.hr}</td><td>{f1(s.bb_pct)}%</td><td>{f1(s.k_pct)}%</td>{wrcTd(s.wrc_plus)}<td>{f2(s.war)}</td><td>{s.c_inn}</td></tr>
+    ))}
+    <tr class="total"><td>통산</td><td>{c.g.toLocaleString('ko-KR')}</td><td>{c.c_g.toLocaleString('ko-KR')}</td><td>{c.pa.toLocaleString('ko-KR')}</td><td>{f3(c.avg)}/{f3(c.obp)}/{f3(c.slg)}</td><td>{c.hr}</td><td>{f1(c.bb_pct)}%</td><td>{f1(c.k_pct)}%</td>{wrcTd(c.wrc_plus_pa_weighted)}<td>{f2(c.war)}</td><td>{c.c_inn}</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">우르크는 100이 리그 평균 타자이고 붉을수록 높고 파랄수록 낮다. 통산은 {c.first}\~{c.last}년 {c.seasons}시즌, 통산 우르크는 타석 가중 평균. 선발은 팀 투수의 첫 공을 받은 경기.</p>
+
+<a href={siteUrl('posts/2026-wrc-basics')}>우르크(wRC+)</a>는 타자가 만든 득점을 리그 평균 타자 100에 견준 값이다. WAR\*은 타격과 포지션 보정을 담고 수비와 주루는 뺀 값으로 <a href={siteUrl('posts/2026-war-owar')}>WAR\* 글</a>에 정리했다.
+
+200타석 이상 주 포지션 포수 가운데 최재훈은 2023년 출루율과 볼넷률이 모두 11명 중 1위였고 2024년 출루율은 12명 중 2위, 2025년 출루율과 볼넷률은 다시 13명 중 1위였다. 몸에 맞는 공도 2023년 {S[0].hbp}개, 2024년 {S[1].hbp}개, 2025년 {S[2].hbp}개로 많았다. 2025년에는 포수 중 OPS, 우르크, WAR\*이 모두 3위였다. 최근 4년 {d.recent4.pa.toLocaleString('ko-KR')}타석의 출루율은 {f3(d.recent4.obp)}, 삼진율은 {f1(d.recent4.k_pct)}%였다.
+
+장타는 약했다. 같은 4년 동안 홈런은 {d.recent4.hr}개였고 장타율은 가장 높았던 2025년에도 .353이었다. 2026년에는 장타가 하나도 없어 타율과 장타율이 똑같이 .170이었다. 우르크 {f1(s26.wrc_plus)}, WAR\* {f2(s26.war)}으로 15시즌 가운데 가장 나빴다.
+
+## 수비 기록은 해마다 오르내렸다
+
+WAR\*에 빠진 <a href={siteUrl('posts/2026-war-dwar')}>수비</a>는 포수 기록으로 따로 셌다. 그 시즌 타자가 치지 않은 공을 2,000개 이상 받은 포수끼리 순위를 매겼다.
+
+<table>
+  <thead><tr><th>시즌</th><th>프레이밍(순위)</th><th>도루 허용/저지</th><th>도루 저지율(순위)</th><th>대상 포수</th></tr></thead>
+  <tbody>
+    {S.map((s) => { const x = s.catcher_def; return (
+      <tr class={s.season === 2026 ? 'cur' : undefined}><td>{s.season}</td><td>{sgn(x.framing)} ({x.framing_rank}위)</td><td>{x.sb_allowed}/{x.cs}</td><td>{f1(x.cs_pct)}% ({x.cs_pct_rank}위)</td><td>{x.n}명</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">프레이밍은 공의 위치로 기대한 것보다 더 얻어 낸 스트라이크 수. 도루 저지율은 저지 / (허용 + 저지).</p>
+
+도루 저지는 꾸준한 편이었다. 2024년 저지율 {f1(S[1].catcher_def.cs_pct)}%는 20명 중 2위였고 2026년에는 {S[3].catcher_def.sb_allowed + S[3].catcher_def.cs}번의 시도 가운데 {S[3].catcher_def.cs}번을 잡아 {f1(S[3].catcher_def.cs_pct)}%로 1위였다. {c.first}년부터 통산 저지율은 {f1(c.cs_pct)}%다. 프레이밍은 2023년 +107.9개로 2위였다가 2025년 −12.8개로 17위까지 내려갔다.
+
+## 5월부터 허인서가 마스크를 썼다
+
+2026년 한화 포수 이닝 {h.total_inn}이닝 가운데 허인서가 {h.catchers[0].inn}이닝({f1(h.catchers[0].share)}%)을, 최재훈이 {h.catchers[1].inn}이닝({f1(h.catchers[1].share)}%)을 맡았다. 시즌 초에는 순서가 반대였다.
+
+<table>
+  <thead><tr><th>2026 월</th><th>최재훈 선발</th><th>허인서 선발</th><th>다른 포수 선발</th><th>최재훈 포수 이닝</th><th>최재훈 타석</th></tr></thead>
+  <tbody>
+    {MONTHS.map((m) => { const s = h.starts_by_month[m]; const x = h.choi_by_month[m]; return (
+      <tr><td>{m}월</td><td>{s['최재훈'] ?? 0}</td><td>{s['허인서'] ?? 0}</td><td>{s['기타'] ?? 0}</td><td>{x.c_inn}</td><td>{x.pa}</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">선발은 팀 투수의 첫 공을 받은 포수. 다른 포수는 장규현.</p>
+
+최재훈은 3월 개막전부터 4월까지 19경기에 선발로 나왔고 허인서는 8경기였다. 5월에는 허인서가 20경기, 최재훈이 5경기로 뒤집혔고 이 흐름이 시즌 끝까지 이어졌다. 최재훈의 5월 이후 선발은 16경기였다. 8월 26일 선발 뒤 다음 선발은 45일 지난 10월 10일이었고 9월에는 2이닝만 포수로 나섰다.
+
+허인서는 2003년생으로 2027년에 24세가 된다. 2022년 입단 뒤 상무를 거쳤고 2026년 전까지 1군 타석은 2022년 19타석, 2025년 30타석이 전부였다. 2026년에는 {heo.g}경기에서 타율 {f3(heo.avg)}, 출루율 {f3(heo.obp)}, 장타율 {f3(heo.slg)}, 홈런 {heo.hr}개를 쳤다. 200타석 이상 포수 {h.heo.rank_among_catchers_2026.n}명 중 OPS와 타율이 1위, WAR\* {f2(heo.war)}은 3위였다. 한화의 2026년 포수 WAR\*은 {f2(t['한화'].c_war_2026)}으로 10개 구단 중 {t['한화'].c_rank_2026}위였다. 젊은 포수가 주전 자리를 가져가면서 최재훈은 출전 기회를 잃었다.
+
+## 포수가 흔들리는 삼성과 KT, 박동원이 걸린 LG
+
+수요는 2026년 구단별 포수 WAR\*로 따져 볼 수 있다. 그 구단에서 포수로 뛴 선수들의 WAR\*을 포수 이닝 비중만큼 더한 값이다.
+
+<table>
+  <thead><tr><th>구단</th><th>2026 포수 WAR*</th><th>2026 순위</th><th>2025 순위</th><th>2024 순위</th><th>주전 포수(이닝 점유)</th><th>주전 2027 나이</th><th>상한까지 남은 금액</th></tr></thead>
+  <tbody>
+    {FOCUS.map((k) => { const x = t[k]; return (
+      <tr><td>{k}</td><td>{f2(x.c_war_2026)}</td>{rankTd(x.c_rank_2026)}{rankTd(x.c_rank_2025)}{rankTd(x.c_rank_2024)}<td>{x.starter}({x.starter_share}%)</td><td>{x.starter_age_2027}세</td><td>{f1(x.cap_room)}억</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">10개 구단 순위. 파란 칸은 8\~10위로 순위가 낮을수록 진하다. 2026년 리그 평균 팀 포수 WAR*은 {f2(t['KT'].lg_avg)}. 상한까지 남은 금액은 원소속 FA를 잡은 뒤 외부 영입 전의 2027년 예상.</p>
+
+삼성은 주전 강민호가 2027년에 42세가 된다. 2026년에도 포수로 {t['삼성'].catchers[0].inn}이닝을 맡아 WAR\* {f2(t['삼성'].catchers[0].war)}을 냈지만 포수 이닝은 2025년 876.2이닝에서 줄었다. 뒤를 받친 포수들은 약했다. 김도환이 {t['삼성'].catchers[1].inn}이닝에 WAR\* {f2(t['삼성'].catchers[1].war)}, 장승현이 {t['삼성'].catchers[2].inn}이닝에 {f2(t['삼성'].catchers[2].war)}, 박세혁이 {t['삼성'].catchers[3].inn}이닝에 {f2(t['삼성'].catchers[3].war)}였다. 팀 포수 WAR\*은 {f2(t['삼성'].c_war_2026)}으로 {t['삼성'].c_rank_2026}위다.
+
+KT는 팀 포수 WAR\*이 2024년 3.05(2위)에서 2025년 1.48(6위), 2026년 0.62(10위)로 떨어졌다. 2024년과 2025년에 포수로 856.1이닝, 836.2이닝을 뛴 장성우가 2026년에는 {t['KT'].catchers[2].inn}이닝만 마스크를 썼다. 그 자리를 맡은 한승택은 {t['KT'].catchers[0].inn}이닝에 OPS {f3(t['KT'].catchers[0].ops)}, WAR\* 0.07로 200타석 이상 포수 11명 중 가장 낮았다.
+
+LG의 2026년 포수 WAR\*은 {f2(t['LG'].c_war_2026)}으로 5위라 지금은 문제가 없다. 다만 주전 박동원이 B등급 FA다. 박동원은 포수 이닝의 {t['LG'].catchers[0].share}%를 맡았는데 그다음으로 많이 뛴 이주헌은 {t['LG'].catchers[1].inn}이닝에 OPS {f3(t['LG'].catchers[1].ops)}, WAR\* {f2(t['LG'].catchers[1].war)}였다. 박동원이 떠나면 대안이 약하다. LG의 팀 도루 저지율 {f1(t['LG'].team_cs_pct)}%는 10개 구단 중 {t['LG'].team_cs_rank}위였다.
+
+## 38세 B등급이라는 벽
+
+같은 시장에 나오는 포수는 세 명이다. 최근 3시즌 WAR\*을 1:2:3으로 가중하면 최재훈이 가장 낮다.
+
+<table>
+  <thead><tr><th>FA 포수</th><th>팀(등급)</th><th>2027 나이</th><th>2024 WAR*</th><th>2025 WAR*</th><th>2026 WAR*</th><th>가중 WAR*</th></tr></thead>
+  <tbody>
+    {FA.map((x) => (
+      <tr class={x.name === '최재훈' ? 'cur' : undefined}><td>{x.name}</td><td>{x.team}({x.grade})</td><td>{x.age}세</td><td>{f2(x.war3[0])}</td><td>{f2(x.war3[1])}</td><td>{f2(x.war3[2])}</td><td>{f2(x.ww)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">가중 WAR*은 2024·2025·2026년에 1:2:3의 비중을 준 평균.</p>
+
+동갑 김태군의 가중 WAR\*은 {f2(FA[1].ww)}으로 최재훈({f2(p.ww)})보다 조금 높고 37세 박동원은 {f2(FA[0].ww)}이다.
+
+B등급 선수를 데려가는 구단은 원소속 구단에 보호선수 {d.grade_b.rule.protect}명 밖의 선수 1명과 직전 연봉의 {d.grade_b.rule.pct_with}%를 주거나 선수 없이 연봉의 {d.grade_b.rule.pct_only}%를 준다. 최재훈의 2026년 연봉은 4억이라 보상선수 1명과 4억, 또는 8억이다.
+
+## 몸값은 연 5.7억
+
+몸값은 <a href={siteUrl('posts/2027-fa-preview')}>2027 FA 시장 글</a>과 같은 방식으로 셈했다. 최근 5년 FA 계약에 계약 직전 3시즌 WAR\*을 1:2:3으로 가중한 값과 나이를 붙여 연평균 금액을 맞춘 계산이다. 최재훈의 2024년 {f2(p.war_3y[0])}, 2025년 {f2(p.war_3y[1])}, 2026년 {f2(p.war_3y[2])}을 가중한 값은 {f2(p.ww)}다.
+
+모델 예상은 연평균 {f1(p.aav)}억으로 1년이면 {f1(p.total1)}억, 2년이면 {f1(p.total2)}억, 3년이면 {f1(p.total3)}억이다. 33세 이상 포수의 주요 FA 계약은 아래와 같다.
+
+<table>
+  <thead><tr><th>포수</th><th>FA 연도</th><th>계약 때 나이</th><th>원소속 → 계약 구단</th><th>가중 WAR*</th><th>계약</th></tr></thead>
+  <tbody>
+    {P33.map((x) => (
+      <tr class={x.player === '최재훈' ? 'cur' : undefined}><td>{x.player}</td><td>{x.fa_year}</td><td>{x.age}세</td><td>{x.from_team} → {x.to_team}</td><td>{f2(x.ww)}</td><td>{x.years}년 {x.total}억</td></tr>
+    ))}
+    <tr class="total"><td>최재훈</td><td>2027</td><td>{p.age}세</td><td>한화 → ?</td><td>{f2(p.ww)}</td><td>모델 예상 2년 {f1(p.total2)}억 / 3년 {f1(p.total3)}억</td></tr>
+  </tbody>
+</table>
+
+<p class="table-note">계약 직전 3시즌 WAR*을 1:2:3으로 가중했다. 나이는 FA 연도에서 출생 연도를 뺀 값.</p>
+
+2022년 FA 때(33세) 최재훈은 가중 WAR\* 3.29로 5년 54억을 받았다. 이번에는 같은 값이 0.85로 내려갔고 나이는 38세다. 모델이 나이와 성적이 비슷하다고 본 사례 가운데 포수는 허도환 한 명이다. 2022년 FA 때(38세) 가중 0.25로 KT에서 LG로 옮기며 2년 4억에 계약했다. 표본 밖에서는 2024년 FA 때(38세) 이지영이 사인 앤 트레이드로 2년 4억에 SSG로 갔다.
+
+다른 구단이 데려가면 계약금과 연봉 말고도 보상이 붙는다. 모델 예상 2년 11.4억에 보상금 8억을 더하면 19.4억이다.
+
+강민호 뒤가 약한 삼성, 포수 WAR\*이 10위로 떨어진 KT, 박동원을 놓치면 대안이 마땅치 않은 LG가 최재훈에게 관심을 보일 것으로 본다. 2025년 포수 출루율 1위였고 통산 9,151.1이닝을 앉은 포수다. 다만 38세 B등급이라는 조건이 발목을 잡는다. 같은 시장 포수 중 가중 WAR\*이 가장 낮은데 보상까지 따른다.
