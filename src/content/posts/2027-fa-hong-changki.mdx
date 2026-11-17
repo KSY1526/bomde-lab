@@ -1,0 +1,176 @@
+---
+title: "FA 홍창기, 우투수 직구 대응에 내년 부활이 달렸다"
+description: "LG 홍창기의 2026년 우투수 포심 헛스윙률은 16.0%로 2024년 9.9%에서 올랐고, 우르크는 139에서 95로 내려갔다."
+date: 2026-11-17T20:07:00+09:00
+category: player
+tags: ["홍창기", "LG", "FA", "2027", "A등급", "직구", "출루"]
+related: ["2026-variant-fastball", "2027-fa-preview", "2026-yoon-donghee"]
+stat: { value: "9.9% → 16.0%", label: "홍창기 우투수 포심 헛스윙률, 2024 → 2026", short: "우투 포심 헛스윙", items: [{ v: "9.9%", cap: "2024" }, { v: "16.0%", cap: "2026" }], sep: "→" }
+thumb: { player: "홍창기" }
+dataUntil: "2026 정규시즌(크봇 DB)"
+draft: false
+---
+import { url as siteUrl } from '../../lib/site';
+import d from '../../data/posts/2027-fa-hong-changki.json';
+
+export const f1 = (v) => v.toFixed(1);
+export const f2 = (v) => (v > 0 ? '+' : '') + v.toFixed(2).replace('-', '−');
+export const f3 = (v) => v.toFixed(3).replace(/^0(?=\.)/, '');
+export const one = (arr, o) => arr.find((r) => Object.entries(o).every(([k, v]) => r[k] === v));
+export const sy = (y) => one(d.seasons, { season: y });
+export const iso = (y) => one(d.iso_obp, { season: y });
+export const dr = (y) => one(d.disc_rank, { season: y });
+export const lgBabip = (y) => one(d.babip_lg, { season: y }).babip;
+export const s24 = sy(2024), s26 = sy(2026), i24 = iso(2024), i26 = iso(2026);
+export const inj = (part) => one(d.inj_2025, { part });
+export const hp = (hand, season) => one(d.hand_pa, { hand, season });
+export const rv = (hand, grp, season) => one(d.hand_pitch.rv, { hand, grp, season });
+export const ds = (hand, grp, season) => one(d.hand_pitch.disc, { hand, grp, season });
+export const reach = (w, season) => one(d.count[w], { season });
+export const fp = (w, season) => one(d.count[w], { season });
+export const es = (state, season) => one(d.count.end_state, { state, season });
+export const dir = (name, season) => one(d.direction, { dir: name, season });
+export const mx = (w, season) => one(d.mix[w], { season });
+export const rs = (season) => one(d.monthly.rfb_season, { season });
+export const half = (part) => one(d.monthly.rfb_half, { part });
+export const halfPa = (part) => one(d.monthly.half_pa, { part });
+export const SMALL_N = 100;
+// gap > 0 = 타자 우세(붉은색), gap < 0 = 투수 우세(파란색). step만큼 멀어질 때마다 한 단계 진해진다
+export const heat = (gap, step) => (gap === 0 ? null : { cls: gap > 0 ? 'up' : 'down', pct: [12, 24, 38, 52][Math.min(3, Math.floor((Math.abs(gap) - 1e-9) / step))] });
+export const td = (text, gap, step, small = false) => { if (small) return <td class="small">{text}</td>; const h = heat(gap, step); return h ? <td class={h.cls} style={`--heat:${h.pct}%`}>{text}</td> : <td>{text}</td>; };
+export const ROWS = [['R', '포심'], ['R', '투심·커터'], ['R', '슬라이더·커브'], ['R', '체인지업·포크'], ['L', '포심'], ['L', '투심·커터'], ['L', '슬라이더·커브'], ['L', '체인지업·포크']];
+export const HAND = { R: '우투수', L: '좌투수' };
+export const fa = d.fa;
+export const md = (iso) => { const [, m, dd] = iso.split('-'); return `${+m}월 ${+dd}일`; };
+
+홍창기는 2021년, 2023년, 2024년 규정타석 타자 가운데 출루율 1위였다. 2024년에는 635타석에서 타율 {f3(s24.avg)}, 출루율 {f3(s24.obp)}, <a href={siteUrl('posts/2026-wrc-basics')}>우르크(wRC+)</a> {f1(s24.wrc_plus)}을 기록했다. 우르크는 리그 평균 타자를 100으로 놓은 득점 생산력이다.
+
+2026년에는 {s26.pa}타석에서 타율 {f3(s26.avg)}, 우르크 {f1(s26.wrc_plus)}에 그쳤다. 홈런은 없었고 WAR\*은 {f2(s24.war).replace('+', '')}에서 {f2(s26.war).replace('+', '')}으로 내려갔다. {fa.birth_year}년생 홍창기는 이번 겨울 {fa.grade}등급 FA로 시장에 나왔다. 부상 탓이니 내년엔 돌아온다는 쪽과 내리막이 시작됐다는 쪽으로 평가가 갈린다.
+
+데이터가 가리키는 이유는 하나로 모인다. 우투수의 직구를 예전처럼 맞히지 못했다. 그리고 시즌 후반에는 그 직구를 다시 맞히기 시작했다.
+
+<table>
+  <thead><tr><th>시즌</th><th>경기</th><th>타석</th><th>타율/출루율/장타율</th><th>순출루율(순위)</th><th>볼넷률</th><th>삼진율</th><th>BABIP(리그 좌타)</th><th>우르크</th><th>WAR*</th></tr></thead>
+  <tbody>
+    {d.seasons.map((s) => { const i = iso(s.season); return (
+      <tr class={s.season === 2026 ? 'cur' : undefined}><td>{s.season}</td><td>{s.g}</td><td>{s.pa}</td><td>{f3(s.avg)}/{f3(s.obp)}/{f3(s.slg)}</td><td>{i ? `${f3(i.iso_obp)} (${i.rank_high}위)` : '-'}</td><td>{f1(s.bb_pct)}%</td><td>{f1(s.k_pct)}%</td><td>{f3(s.babip)} ({f3(lgBabip(s.season))})</td>{td(f1(s.wrc_plus), Math.round(s.wrc_plus - 100), 20)}<td>{s.war.toFixed(2)}</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">순출루율 = 출루율 − 타율. 순위는 그 시즌 규정타석 타자 중 순위이고 2025년은 51경기로 규정타석에 못 미쳤다. BABIP는 홈런을 뺀 인플레이 타구의 안타 비율. 우르크는 100보다 높으면 붉은색, 낮으면 파란색이다. 기록은 봄데 연구소 DB 기준이라 공식 기록과 소수점 셋째 자리가 다를 수 있다(2021년 출루율 DB .453, 공식 .456). WAR\*은 타격과 포지션 보정만 담은 값으로 <a href={siteUrl('posts/2026-war-owar')}>WAR\* 글</a>에 정리했다.</p>
+
+## 눈은 그대로다
+
+순출루율은 출루율에서 타율을 뺀 값이다. 안타 말고 볼넷과 몸에 맞는 공으로 1루에 나간 몫이다. 홍창기의 2026년 순출루율은 {f3(i26.iso_obp)}, 규정타석 {i26.nq}명 가운데 {i26.rank_high}위였다. 타율이 {i26.avg_rank}위까지 떨어진 해에 순출루율은 2020년 이후 가장 높았다. 규정타석 타자 평균은 {f3(i26.lg_iso_obp)}이었다.
+
+존 밖으로 빠지는 공에 방망이를 낸 비율도 그대로였다. 2020년부터 2026년까지 매 시즌 12\~15% 사이였고 규정타석을 채운 6시즌 가운데 5시즌은 리그에서 가장 낮았다. 나머지 한 번인 2022년은 끝에서 2위였다.
+
+<table>
+  <thead><tr><th>시즌</th><th>존 밖 스윙률(규정타석 평균)</th><th>낮은 순위</th><th>전체 스윙률(규정타석 평균)</th><th>낮은 순위</th></tr></thead>
+  <tbody>
+    {d.disc_rank.map((r) => (
+      <tr class={r.season === 2026 ? 'cur' : undefined}><td>{r.season}</td><td>{f1(r.chase)}% ({f1(r.lg_chase)}%)</td><td>{r.chase_rank_low}위/{r.nq}명</td><td>{f1(r.swing)}% ({f1(r.lg_swing)}%)</td><td>{r.swing_rank_low}위/{r.nq}명</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">낮은 순위 1위 = 그 시즌 규정타석 타자 중 가장 적게 휘두른 타자. 존은 공 위치 좌표의 스트라이크 존 기준이다.</p>
+
+공을 고르는 눈은 2024년과 같았다. 무너진 쪽은 휘두른 공을 맞히는 능력이었다. 삼진율은 2024년 {f1(s24.k_pct)}%에서 2026년 {f1(s26.k_pct)}%로 올랐고 BABIP는 {f3(s24.babip)}에서 {f3(s26.babip)}까지 내려가 리그 좌타자 평균({f3(lgBabip(2026))})보다 낮아졌다.
+
+## 부상 전부터 떨어지고 있었다
+
+2025년 홍창기는 {md(inj('before').last_date)} 수비 중 1루수와 부딪쳐 무릎을 다쳤고 수술을 받았다. 1군에 다시 나온 날은 넉 달 뒤인 {md(inj('after').first_date)}이었다. 부진을 이 부상 탓으로 보는 시각이 많지만 하락은 부상 전에 이미 시작됐다.
+
+부상 전 {inj('before').g}경기 {inj('before').pa}타석의 성적은 타율 {f3(inj('before').avg)}, 장타율 {f3(inj('before').slg)}, 삼진율 {f1(inj('before').k_pct)}%였다. 안타·볼넷 종류에 득점 기여만큼 무게를 준 출루율인 wOBA는 2024년 {f3(one(d.woba_season, { season: 2024 }).woba)}에서 {f3(inj('before').woba)}까지 내려와 있었다. 돌아온 뒤 {inj('after').pa}타석에서는 wOBA {f3(inj('after').woba)}를 냈지만 한 달이 채 안 되는 표본이다.
+
+## 우투수 직구에서 무너졌다
+
+투수 손으로 나누면 차이가 선명하다. 우투수 상대 wOBA는 2024년 {f3(hp('R', 2024).woba)}에서 2026년 {f3(hp('R', 2026).woba)}까지 내려갔다. 좌투수 상대 wOBA는 거의 그대로였다(2024년 {f3(hp('L', 2024).woba)}, 2026년 {f3(hp('L', 2026).woba)}). 2026년 {s26.pa}타석 가운데 {hp('R', 2026).pa}타석이 우투수 상대였다.
+
+우투수에게서도 어떤 공에서 무너졌는지 구종별로 나눴다. 100구당 득점가치는 공 하나마다 볼카운트와 타석 결과가 바뀌며 생긴 기대 득점의 변화를 타자 쪽에서 더한 값이다. 플러스면 타자가 이득을 봤다는 뜻이다.
+
+<table>
+  <thead><tr><th>상대·구종</th><th>100구당 득점가치 2023</th><th>2024</th><th>2026</th><th>헛스윙률 2024 → 2026</th><th>2026 투구 수</th></tr></thead>
+  <tbody>
+    {ROWS.map(([h, g]) => { const a = rv(h, g, 2023), b = rv(h, g, 2024), c = rv(h, g, 2026), w4 = ds(h, g, 2024), w6 = ds(h, g, 2026); return (
+      <tr><td>{HAND[h]} {g}</td>{td(f2(a.rv100), Math.round(a.rv100 * 10), 5, a.n < SMALL_N)}{td(f2(b.rv100), Math.round(b.rv100 * 10), 5, b.n < SMALL_N)}{td(f2(c.rv100), Math.round(c.rv100 * 10), 5, c.n < SMALL_N)}<td>{f1(w4.whiff)}% → {f1(w6.whiff)}%</td><td>{c.n}</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">붉은 칸은 타자 이득, 파란 칸은 투수 이득이고 0에서 멀수록 진하다. 노란 칸은 그 시즌 100구 미만이라 표본이 적다. 헛스윙률 = 헛스윙 / 스윙. 투심·커터는 포심과 같은 빠른 공 계열로 <a href={siteUrl('posts/2026-variant-fastball')}>변형 직구 글</a>에서 다뤘다.</p>
+
+가장 크게 바뀐 칸은 우투수 포심이다. 2024년 871구에서 100구당 {f2(rv('R', '포심', 2024).rv100)}였던 득점가치가 2026년 {f2(rv('R', '포심', 2026).rv100)}이 됐다. 헛스윙률은 {f1(ds('R', '포심', 2024).whiff)}%에서 {f1(ds('R', '포심', 2026).whiff)}%로, 존 안 공을 휘둘러 맞힌 비율은 {f1(ds('R', '포심', 2024).zcon)}%에서 {f1(ds('R', '포심', 2026).zcon)}%로 바뀌었다. 표에서 가장 나쁜 칸은 우투수 투심·커터({f2(rv('R', '투심·커터', 2026).rv100)})였다.
+
+좌투수 포심의 득점가치는 2026년에도 플러스({f2(rv('L', '포심', 2026).rv100)})였고 헛스윙률도 {f1(ds('L', '포심', 2026).whiff)}%로 2024년과 비슷했다. 같은 포심이라도 좌투수 공은 쳤고 우투수 공은 놓쳤다.
+
+## 3타석 중 2타석이 2스트라이크까지 갔다
+
+홍창기는 원래 초구를 잘 치지 않는 타자다. 2026년에는 더 기다렸다. 초구가 존 안으로 들어와도 휘두른 비율이 2023년 {f1(fp('fp_me', 2023).fp_zone_swing)}%, 2024년 {f1(fp('fp_me', 2024).fp_zone_swing)}%, 2026년 {f1(fp('fp_me', 2026).fp_zone_swing)}%로 줄었다. 같은 해 리그 좌타자는 {f1(fp('fp_lg', 2026).fp_zone_swing)}%였으니 절반을 조금 넘는 수준이다.
+
+<table>
+  <thead><tr><th>시즌</th><th>존 안 초구 스윙률(리그 좌타)</th><th>2스트라이크까지 간 타석(리그 좌타)</th><th>2스트라이크 이후 wOBA</th><th>유리한 카운트 장타율</th></tr></thead>
+  <tbody>
+    {[2023, 2024, 2026].map((y) => (
+      <tr class={y === 2026 ? 'cur' : undefined}><td>{y}</td><td>{f1(fp('fp_me', y).fp_zone_swing)}% ({f1(fp('fp_lg', y).fp_zone_swing)}%)</td><td>{f1(reach('reach_me', y).reach_2s)}% ({f1(reach('reach_lg', y).reach_2s)}%)</td><td>{f3(es('2스트라이크', y).woba)}</td><td>{f3(es('유리', y).slg)}</td></tr>
+    ))}
+  </tbody>
+</table>
+
+<p class="table-note">리그 좌타 = 홍창기를 뺀 좌타자 전체. 2스트라이크 이후 wOBA는 2스트라이크에서 끝난 타석, 유리한 카운트는 볼이 스트라이크보다 많을 때 끝난 타석.</p>
+
+투수의 초구 스트라이크 비율은 2024년 {f1(fp('fp_me', 2024).fp_strike)}%, 2026년 {f1(fp('fp_me', 2026).fp_strike)}%로 비슷했다. 달라진 쪽은 홍창기였다. 2스트라이크까지 간 타석이 {f1(reach('reach_me', 2024).reach_2s)}%에서 {f1(reach('reach_me', 2026).reach_2s)}%로 늘었고 2스트라이크 이후 wOBA는 {f3(es('2스트라이크', 2024).woba)}에서 {f3(es('2스트라이크', 2026).woba)}까지 떨어졌다. 볼카운트가 유리할 때 친 공의 장타율도 {f3(es('유리', 2024).slg)}에서 {f3(es('유리', 2026).slg)}까지 낮아졌다.
+
+## 땅볼이 1·2루 쪽으로 몰렸다
+
+2024년 홍창기는 좌익수 쪽 타구의 안타 비율이 {f3(dir('좌익수 쪽(밀어)', 2024).hit_rate)}에 이를 만큼 높았다. 2026년에는 인플레이 타구 가운데 1루수·2루수가 처리한 타구가 {f1(dir('1·2루 쪽', 2024).pct)}%에서 {f1(dir('1·2루 쪽', 2026).pct)}%로 늘었다. 이 타구가 안타가 된 비율은 {f3(dir('1·2루 쪽', 2024).hit_rate)}에서 {f3(dir('1·2루 쪽', 2026).hit_rate)}까지 떨어져 절반이 됐다. 좌익수 쪽 타구 비중은 {f1(dir('좌익수 쪽(밀어)', 2024).pct)}%에서 {f1(dir('좌익수 쪽(밀어)', 2026).pct)}%로 조금 줄었다.
+
+2024년 {f3(s24.babip)}이었던 BABIP가 리그 평균 아래인 {f3(s26.babip)}까지 내려간 데에는 이 변화가 겹쳐 있다. 타구 속도 기록이 없어 얼마나 약하게 맞았는지는 확인할 수 없다.
+
+## 투수들은 직구를 더 던졌다
+
+투수들도 변화를 읽었다. 홍창기가 받은 공 가운데 직구 계열(포심·투심·커터) 비율은 2024년 {f1(mx('me', 2024).fb_family)}%에서 2026년 {f1(mx('me', 2026).fb_family)}%가 됐다. 리그 좌타자는 같은 기간 {f1(mx('lg', 2024).fb_family)}%에서 {f1(mx('lg', 2026).fb_family)}%였다.
+
+<table>
+  <thead><tr><th>시즌</th><th>받은 공 중 직구 계열(리그 좌타)</th><th>우투수 공 중 투심·커터(리그 좌타)</th><th>우투수가 2스트라이크 뒤 던진 변화구(리그 좌타)</th></tr></thead>
+  <tbody>
+    {d.mix.me.map((m) => { const l = mx('lg', m.season); return (
+      <tr class={m.season === 2026 ? 'cur' : undefined}><td>{m.season}</td><td>{f1(m.fb_family)}% ({f1(l.fb_family)}%)</td><td>{f1(m.r_two_cut)}% ({f1(l.r_two_cut)}%)</td><td>{f1(m.r_offspeed_2s)}% ({f1(l.r_offspeed_2s)}%)</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">변화구 = 직구 계열이 아닌 공. 2025년은 51경기 표본.</p>
+
+우투수가 던진 투심·커터는 2024년 {f1(mx('me', 2024).r_two_cut)}%에서 2026년 {f1(mx('me', 2026).r_two_cut)}%로 두 배를 넘었다. 우투수는 2스트라이크 뒤에도 변화구 비율이 {f1(mx('me', 2026).r_offspeed_2s)}%로 리그 좌타자({f1(mx('lg', 2026).r_offspeed_2s)}%)보다 낮았다. 결정구까지 직구로 들어가도 된다고 본 배합으로 읽힌다.
+
+## 직구가 먼저 늦어진다는 통념
+
+타자는 나이가 들면 빠른 공 대응부터 무뎌진다고 흔히들 말한다. 홍창기의 2026년은 그 말과 닮았다. 공을 고르는 눈과 볼넷은 그대로인데 우투수 직구에 헛스윙이 늘었고 맞힌 공은 당겨 친 땅볼이 됐다. 2027년은 만 33세, 서른 중반에 들어서는 시즌이다. 비관론은 여기서 나온다.
+
+## 8월부터 돌아온 직구 컨택
+
+시즌을 월별로 나누면 다른 그림도 보인다. 우투수 직구 계열에 대한 헛스윙률이 5월 {f1(one(d.monthly.rfb, { m: 5 }).whiff)}%에서 9월 {f1(one(d.monthly.rfb, { m: 9 }).whiff)}%까지 내려갔다.
+
+<table>
+  <thead><tr><th>2026</th><th>우투수 직구 계열 투구 수</th><th>헛스윙률</th><th>존 안 컨택률</th><th>타석</th><th>타율</th><th>BABIP</th></tr></thead>
+  <tbody>
+    {d.monthly.rfb.map((r) => { const p = one(d.monthly.pa, { m: r.m }); const small = r.n < SMALL_N; return (
+      <tr><td>{r.m}월</td><td>{r.n}</td>{small ? <td class="small">{f1(r.whiff)}%</td> : <td>{f1(r.whiff)}%</td>}{small ? <td class="small">{f1(r.zcon)}%</td> : <td>{f1(r.zcon)}%</td>}<td>{p.pa}</td><td>{f3(p.avg)}</td><td>{f3(p.babip)}</td></tr>
+    ); })}
+  </tbody>
+</table>
+
+<p class="table-note">우투수 직구 계열 = 포심·투심·커터. 존 안 컨택률 = 존 안 공에 휘두른 스윙 중 맞힌 비율. 노란 칸은 100구 미만. 타석·타율·BABIP는 투수 손 구분 없는 그달 전체 성적.</p>
+
+3\~7월과 8\~10월로 묶으면 차이가 분명하다. 우투수 직구 계열 헛스윙률은 {f1(half('3~7월').whiff)}%에서 {f1(half('8~10월').whiff)}%로, 존 안 컨택률은 {f1(half('3~7월').zcon)}%에서 {f1(half('8~10월').zcon)}%로 바뀌었다. 같은 기준으로 2024년은 {f1(rs(2024).whiff)}%와 {f1(rs(2024).zcon)}%였다. 시즌 막판에는 우투수 직구를 2024년에 가깝게 맞혔다. 삼진율도 {f1(halfPa('3~7월').k_pct)}%에서 {f1(halfPa('8~10월').k_pct)}%로 줄었다.
+
+결과는 따라오지 않았다. 8\~10월 {halfPa('8~10월').pa}타석에서 타율 {f3(halfPa('8~10월').avg)}, BABIP {f3(halfPa('8~10월').babip)}, wOBA {f3(halfPa('8~10월').woba)}이었고 셋 다 3\~7월보다 낮았다. 맞히는 능력은 돌아왔는데 맞힌 공이 안타가 되지 않았다. 운이 나빴던 것인지 타구가 약했던 것인지는 내년에 가려진다.
+
+## 그래서, 사야 할까
+
+홍창기는 {fa.grade}등급이다. 다른 구단이 데려가면 LG에 보호선수 {fa.grade_rule_A.protect}명 외 1명과 직전 연봉의 {fa.grade_rule_A.pct_with}%를 주거나 연봉의 {fa.grade_rule_A.pct_only}%를 줘야 한다. <a href={siteUrl('posts/2027-fa-preview')}>FA 시장 글</a>에서 봄데 연구소는 홍창기의 몸값을 {fa.bomde}억으로 예측했고 행선지 후보로 {fa.dest} 세 곳을 꼽았다.
+
+이 돈과 보상은 2023년의 홍창기가 돌아온다는 데 거는 값이 아니다. 우투수 직구를 다시 맞히기 시작한 8월 이후의 모습이 이어질지에 거는 값이다. 그 컨택이 안타로 이어지면 타율과 출루율이 함께 돌아온다. 이어지지 않더라도 남는 것이 있다. 타율이 {i26.avg_rank}위로 떨어진 해에도 순출루율은 {i26.nq}명 중 {i26.rank_high}위였다. 홍창기는 안타가 줄어도 볼넷으로 1루를 가는 타자다. 그 위에 무엇을 더할지는 우투수 직구 앞에서 판가름 난다.

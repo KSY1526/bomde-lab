@@ -1,0 +1,1691 @@
+{
+ "meta": {
+  "player": "홍창기",
+  "player_id": "66108",
+  "data_until": "2026-10-12",
+  "px_check": [
+   {
+    "side": "L",
+    "avg_px": 1.95,
+    "n": 339
+   },
+   {
+    "side": "R",
+    "avg_px": -1.89,
+    "n": 499
+   }
+  ]
+ },
+ "fa": {
+  "birth_year": 1993,
+  "age": 34,
+  "grade": "A",
+  "years": 4,
+  "total": 40,
+  "aav": 10.1,
+  "bomde": 44,
+  "level": "중",
+  "profile_2026": {
+   "pa": 518,
+   "obp_rank": 22,
+   "avg_rank": 74,
+   "slg_rank": 80,
+   "wrc_rank": 63,
+   "war_rank": 66,
+   "qual_n": 82,
+   "ops_vsr": 0.597,
+   "ops_vsl": 0.814,
+   "pa_vsl": 150,
+   "ops_risp": 0.811,
+   "top2_pa": 397
+  },
+  "dest": "LG 잔류, KIA, 두산",
+  "grade_rule_A": {
+   "protect": 20,
+   "pct_with": 200,
+   "pct_only": 300
+  },
+  "preview_data_until": "2026 정규시즌 + 한국시리즈(11/8), FA 명단은 공시 전 예상"
+ },
+ "seasons": [
+  {
+   "season": 2020,
+   "g": 127,
+   "pa": 506,
+   "avg": 0.279,
+   "obp": 0.41,
+   "slg": 0.417,
+   "hr": 5,
+   "wrc_plus": 135.3,
+   "k_pct": 17.2,
+   "bb_pct": 16.2,
+   "war": 3.72,
+   "qualified": true,
+   "babip": 0.342
+  },
+  {
+   "season": 2021,
+   "g": 144,
+   "pa": 647,
+   "avg": 0.328,
+   "obp": 0.453,
+   "slg": 0.408,
+   "hr": 4,
+   "wrc_plus": 155.6,
+   "k_pct": 14.7,
+   "bb_pct": 16.2,
+   "war": 6.35,
+   "qualified": true,
+   "babip": 0.393
+  },
+  {
+   "season": 2022,
+   "g": 118,
+   "pa": 525,
+   "avg": 0.286,
+   "obp": 0.39,
+   "slg": 0.355,
+   "hr": 1,
+   "wrc_plus": 126.2,
+   "k_pct": 14.3,
+   "bb_pct": 11.2,
+   "war": 2.84,
+   "qualified": true,
+   "babip": 0.339
+  },
+  {
+   "season": 2023,
+   "g": 141,
+   "pa": 641,
+   "avg": 0.332,
+   "obp": 0.442,
+   "slg": 0.412,
+   "hr": 1,
+   "wrc_plus": 154.5,
+   "k_pct": 12.9,
+   "bb_pct": 13.4,
+   "war": 5.66,
+   "qualified": true,
+   "babip": 0.388
+  },
+  {
+   "season": 2024,
+   "g": 139,
+   "pa": 635,
+   "avg": 0.337,
+   "obp": 0.447,
+   "slg": 0.411,
+   "hr": 5,
+   "wrc_plus": 139.1,
+   "k_pct": 14.6,
+   "bb_pct": 15.0,
+   "war": 4.49,
+   "qualified": true,
+   "babip": 0.4
+  },
+  {
+   "season": 2025,
+   "g": 51,
+   "pa": 215,
+   "avg": 0.287,
+   "obp": 0.399,
+   "slg": 0.328,
+   "hr": 1,
+   "wrc_plus": 116.5,
+   "k_pct": 18.6,
+   "bb_pct": 13.5,
+   "war": 0.91,
+   "qualified": false,
+   "babip": 0.358
+  },
+  {
+   "season": 2026,
+   "g": 124,
+   "pa": 518,
+   "avg": 0.239,
+   "obp": 0.375,
+   "slg": 0.284,
+   "hr": 0,
+   "wrc_plus": 94.8,
+   "k_pct": 20.8,
+   "bb_pct": 15.1,
+   "war": 0.9,
+   "qualified": true,
+   "babip": 0.317
+  }
+ ],
+ "babip_lg": [
+  {
+   "season": 2020,
+   "babip": 0.323
+  },
+  {
+   "season": 2021,
+   "babip": 0.309
+  },
+  {
+   "season": 2022,
+   "babip": 0.318
+  },
+  {
+   "season": 2023,
+   "babip": 0.311
+  },
+  {
+   "season": 2024,
+   "babip": 0.333
+  },
+  {
+   "season": 2025,
+   "babip": 0.32
+  },
+  {
+   "season": 2026,
+   "babip": 0.326
+  }
+ ],
+ "woba_season": [
+  {
+   "season": 2020,
+   "woba": 0.386
+  },
+  {
+   "season": 2021,
+   "woba": 0.415
+  },
+  {
+   "season": 2022,
+   "woba": 0.355
+  },
+  {
+   "season": 2023,
+   "woba": 0.408
+  },
+  {
+   "season": 2024,
+   "woba": 0.403
+  },
+  {
+   "season": 2025,
+   "woba": 0.351
+  },
+  {
+   "season": 2026,
+   "woba": 0.328
+  }
+ ],
+ "disc_rank": [
+  {
+   "season": 2020,
+   "nq": 79,
+   "swing": 38.9,
+   "lg_swing": 44.7,
+   "swing_rank_low": 4,
+   "zswing": 64.0,
+   "lg_zswing": 65.9,
+   "zswing_rank_low": 32,
+   "chase": 14.1,
+   "lg_chase": 27.0,
+   "chase_rank_low": 1,
+   "fp_swing": 19.6,
+   "lg_fp_swing": 26.7,
+   "fp_rank_low": 14
+  },
+  {
+   "season": 2021,
+   "nq": 70,
+   "swing": 35.5,
+   "lg_swing": 43.4,
+   "swing_rank_low": 2,
+   "zswing": 57.7,
+   "lg_zswing": 63.7,
+   "zswing_rank_low": 12,
+   "chase": 12.4,
+   "lg_chase": 25.5,
+   "chase_rank_low": 1,
+   "fp_swing": 19.4,
+   "lg_fp_swing": 24.6,
+   "fp_rank_low": 19
+  },
+  {
+   "season": 2022,
+   "nq": 78,
+   "swing": 39.2,
+   "lg_swing": 45.6,
+   "swing_rank_low": 7,
+   "zswing": 61.8,
+   "lg_zswing": 65.9,
+   "zswing_rank_low": 17,
+   "chase": 13.2,
+   "lg_chase": 26.4,
+   "chase_rank_low": 2,
+   "fp_swing": 21.4,
+   "lg_fp_swing": 27.2,
+   "fp_rank_low": 20
+  },
+  {
+   "season": 2023,
+   "nq": 78,
+   "swing": 39.6,
+   "lg_swing": 44.3,
+   "swing_rank_low": 10,
+   "zswing": 61.9,
+   "lg_zswing": 63.7,
+   "zswing_rank_low": 25,
+   "chase": 14.7,
+   "lg_chase": 25.4,
+   "chase_rank_low": 1,
+   "fp_swing": 22.9,
+   "lg_fp_swing": 25.1,
+   "fp_rank_low": 26
+  },
+  {
+   "season": 2024,
+   "nq": 87,
+   "swing": 35.8,
+   "lg_swing": 45.5,
+   "swing_rank_low": 2,
+   "zswing": 59.2,
+   "lg_zswing": 66.6,
+   "zswing_rank_low": 9,
+   "chase": 14.5,
+   "lg_chase": 28.5,
+   "chase_rank_low": 1,
+   "fp_swing": 16.9,
+   "lg_fp_swing": 27.0,
+   "fp_rank_low": 12
+  },
+  {
+   "season": 2026,
+   "nq": 79,
+   "swing": 35.2,
+   "lg_swing": 44.6,
+   "swing_rank_low": 1,
+   "zswing": 57.5,
+   "lg_zswing": 65.1,
+   "zswing_rank_low": 10,
+   "chase": 13.6,
+   "lg_chase": 28.1,
+   "chase_rank_low": 1,
+   "fp_swing": 12.7,
+   "lg_fp_swing": 25.6,
+   "fp_rank_low": 5
+  }
+ ],
+ "iso_obp": [
+  {
+   "season": 2020,
+   "iso_obp": 0.131,
+   "rank_high": 2,
+   "nq": 79,
+   "lg_iso_obp": 0.077,
+   "obp_rank": 5,
+   "avg_rank": 46
+  },
+  {
+   "season": 2021,
+   "iso_obp": 0.125,
+   "rank_high": 4,
+   "nq": 70,
+   "lg_iso_obp": 0.086,
+   "obp_rank": 1,
+   "avg_rank": 4
+  },
+  {
+   "season": 2022,
+   "iso_obp": 0.104,
+   "rank_high": 7,
+   "nq": 78,
+   "lg_iso_obp": 0.075,
+   "obp_rank": 6,
+   "avg_rank": 25
+  },
+  {
+   "season": 2023,
+   "iso_obp": 0.11,
+   "rank_high": 5,
+   "nq": 78,
+   "lg_iso_obp": 0.075,
+   "obp_rank": 1,
+   "avg_rank": 4
+  },
+  {
+   "season": 2024,
+   "iso_obp": 0.11,
+   "rank_high": 4,
+   "nq": 87,
+   "lg_iso_obp": 0.072,
+   "obp_rank": 1,
+   "avg_rank": 8
+  },
+  {
+   "season": 2026,
+   "iso_obp": 0.136,
+   "rank_high": 2,
+   "nq": 79,
+   "lg_iso_obp": 0.077,
+   "obp_rank": 21,
+   "avg_rank": 73
+  }
+ ],
+ "chase_me": [
+  {
+   "season": 2020,
+   "chase": 14.1
+  },
+  {
+   "season": 2021,
+   "chase": 12.4
+  },
+  {
+   "season": 2022,
+   "chase": 13.2
+  },
+  {
+   "season": 2023,
+   "chase": 14.7
+  },
+  {
+   "season": 2024,
+   "chase": 14.5
+  },
+  {
+   "season": 2025,
+   "chase": 13.4
+  },
+  {
+   "season": 2026,
+   "chase": 13.6
+  }
+ ],
+ "inj_2025": [
+  {
+   "part": "before",
+   "first_date": "2025-03-22",
+   "last_date": "2025-05-13",
+   "g": 38,
+   "pa": 169,
+   "avg": 0.269,
+   "slg": 0.313,
+   "k_pct": 20.7,
+   "woba": 0.346,
+   "obp": 0.395
+  },
+  {
+   "part": "after",
+   "first_date": "2025-09-13",
+   "last_date": "2025-10-01",
+   "g": 13,
+   "pa": 46,
+   "avg": 0.35,
+   "slg": 0.375,
+   "k_pct": 10.9,
+   "woba": 0.369,
+   "obp": 0.413
+  }
+ ],
+ "hand_pitch": {
+  "disc": [
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "n": 349,
+    "swing": 37.0,
+    "whiff": 20.9,
+    "zcon": 88.4
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "n": 331,
+    "swing": 37.5,
+    "whiff": 17.7,
+    "zcon": 89.8
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "n": 206,
+    "swing": 35.4,
+    "whiff": 26.0,
+    "zcon": 81.8
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "n": 46,
+    "swing": 47.8,
+    "whiff": 27.3,
+    "zcon": 75.0
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "n": 29,
+    "swing": 55.2,
+    "whiff": 18.8,
+    "zcon": 100.0
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "n": 21,
+    "swing": 42.9,
+    "whiff": 11.1,
+    "zcon": 100.0
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2023,
+    "n": 78,
+    "swing": 39.7,
+    "whiff": 19.4,
+    "zcon": 88.0
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2024,
+    "n": 131,
+    "swing": 39.7,
+    "whiff": 5.8,
+    "zcon": 97.6
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2026,
+    "n": 86,
+    "swing": 26.7,
+    "whiff": 17.4,
+    "zcon": 88.9
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2023,
+    "n": 470,
+    "swing": 39.4,
+    "whiff": 10.8,
+    "zcon": 91.2
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2024,
+    "n": 436,
+    "swing": 34.9,
+    "whiff": 8.6,
+    "zcon": 91.2
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2026,
+    "n": 350,
+    "swing": 34.0,
+    "whiff": 9.2,
+    "zcon": 91.6
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "n": 368,
+    "swing": 41.3,
+    "whiff": 18.4,
+    "zcon": 87.7
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "n": 382,
+    "swing": 27.7,
+    "whiff": 24.5,
+    "zcon": 81.3
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "n": 254,
+    "swing": 35.4,
+    "whiff": 13.3,
+    "zcon": 89.0
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "n": 320,
+    "swing": 43.1,
+    "whiff": 25.4,
+    "zcon": 82.2
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "n": 292,
+    "swing": 43.5,
+    "whiff": 20.5,
+    "zcon": 92.6
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "n": 269,
+    "swing": 34.6,
+    "whiff": 21.5,
+    "zcon": 92.3
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2023,
+    "n": 233,
+    "swing": 34.3,
+    "whiff": 12.5,
+    "zcon": 89.7
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2024,
+    "n": 173,
+    "swing": 32.4,
+    "whiff": 16.1,
+    "zcon": 88.9
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2026,
+    "n": 383,
+    "swing": 33.9,
+    "whiff": 16.9,
+    "zcon": 83.9
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2023,
+    "n": 797,
+    "swing": 39.8,
+    "whiff": 10.4,
+    "zcon": 90.8
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2024,
+    "n": 868,
+    "swing": 36.1,
+    "whiff": 9.9,
+    "zcon": 90.9
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2026,
+    "n": 769,
+    "swing": 37.3,
+    "whiff": 16.0,
+    "zcon": 85.8
+   }
+  ],
+  "rv": [
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "n": 348,
+    "rv100": 1.4
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "n": 331,
+    "rv100": 0.79
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "n": 207,
+    "rv100": 1.42
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "n": 46,
+    "rv100": -0.61
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "n": 29,
+    "rv100": -0.56
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "n": 21,
+    "rv100": 3.41
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2023,
+    "n": 78,
+    "rv100": 1.47
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2024,
+    "n": 130,
+    "rv100": 1.43
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2026,
+    "n": 86,
+    "rv100": -2.18
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2023,
+    "n": 470,
+    "rv100": 1.43
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2024,
+    "n": 436,
+    "rv100": 1.34
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2026,
+    "n": 350,
+    "rv100": 1.03
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "n": 369,
+    "rv100": 1.03
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "n": 382,
+    "rv100": 0.48
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "n": 254,
+    "rv100": -0.03
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "n": 320,
+    "rv100": 2.77
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "n": 291,
+    "rv100": 0.55
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "n": 269,
+    "rv100": -0.63
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2023,
+    "n": 236,
+    "rv100": 0.97
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2024,
+    "n": 173,
+    "rv100": -0.06
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2026,
+    "n": 383,
+    "rv100": -2.04
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2023,
+    "n": 800,
+    "rv100": 0.78
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2024,
+    "n": 871,
+    "rv100": 1.62
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2026,
+    "n": 767,
+    "rv100": -0.37
+   }
+  ],
+  "pa": [
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "pa": 83,
+    "avg": 0.365,
+    "slg": 0.378,
+    "k_pct": 20.5,
+    "woba": 0.364
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "pa": 82,
+    "avg": 0.26,
+    "slg": 0.356,
+    "k_pct": 13.4,
+    "woba": 0.326
+   },
+   {
+    "hand": "L",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "pa": 52,
+    "avg": 0.295,
+    "slg": 0.364,
+    "k_pct": 32.7,
+    "woba": 0.353
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "pa": 14,
+    "avg": 0.154,
+    "slg": 0.154,
+    "k_pct": 14.3,
+    "woba": 0.187
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "pa": 9,
+    "avg": 0.25,
+    "slg": 0.25,
+    "k_pct": 22.2,
+    "woba": 0.287
+   },
+   {
+    "hand": "L",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "pa": 8,
+    "avg": 0.333,
+    "slg": 0.333,
+    "k_pct": 25.0,
+    "woba": 0.416
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2023,
+    "pa": 17,
+    "avg": 0.308,
+    "slg": 0.462,
+    "k_pct": 23.5,
+    "woba": 0.447
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2024,
+    "pa": 33,
+    "avg": 0.448,
+    "slg": 0.448,
+    "k_pct": 9.1,
+    "woba": 0.43
+   },
+   {
+    "hand": "L",
+    "grp": "투심·커터",
+    "season": 2026,
+    "pa": 21,
+    "avg": 0.167,
+    "slg": 0.167,
+    "k_pct": 9.5,
+    "woba": 0.239
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2023,
+    "pa": 117,
+    "avg": 0.371,
+    "slg": 0.449,
+    "k_pct": 6.0,
+    "woba": 0.464
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2024,
+    "pa": 101,
+    "avg": 0.403,
+    "slg": 0.455,
+    "k_pct": 9.9,
+    "woba": 0.47
+   },
+   {
+    "hand": "L",
+    "grp": "포심",
+    "season": 2026,
+    "pa": 69,
+    "avg": 0.385,
+    "slg": 0.462,
+    "k_pct": 15.9,
+    "woba": 0.463
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2023,
+    "pa": 91,
+    "avg": 0.286,
+    "slg": 0.351,
+    "k_pct": 17.6,
+    "woba": 0.342
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2024,
+    "pa": 73,
+    "avg": 0.276,
+    "slg": 0.31,
+    "k_pct": 20.5,
+    "woba": 0.349
+   },
+   {
+    "hand": "R",
+    "grp": "슬라이더·커브",
+    "season": 2026,
+    "pa": 53,
+    "avg": 0.143,
+    "slg": 0.19,
+    "k_pct": 24.5,
+    "woba": 0.273
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2023,
+    "pa": 83,
+    "avg": 0.368,
+    "slg": 0.5,
+    "k_pct": 15.7,
+    "woba": 0.429
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2024,
+    "pa": 81,
+    "avg": 0.289,
+    "slg": 0.355,
+    "k_pct": 19.8,
+    "woba": 0.317
+   },
+   {
+    "hand": "R",
+    "grp": "체인지업·포크",
+    "season": 2026,
+    "pa": 60,
+    "avg": 0.164,
+    "slg": 0.2,
+    "k_pct": 30.0,
+    "woba": 0.214
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2023,
+    "pa": 45,
+    "avg": 0.29,
+    "slg": 0.29,
+    "k_pct": 15.6,
+    "woba": 0.424
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2024,
+    "pa": 36,
+    "avg": 0.324,
+    "slg": 0.441,
+    "k_pct": 25.0,
+    "woba": 0.351
+   },
+   {
+    "hand": "R",
+    "grp": "투심·커터",
+    "season": 2026,
+    "pa": 82,
+    "avg": 0.191,
+    "slg": 0.206,
+    "k_pct": 23.2,
+    "woba": 0.26
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2023,
+    "pa": 191,
+    "avg": 0.325,
+    "slg": 0.437,
+    "k_pct": 8.9,
+    "woba": 0.424
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2024,
+    "pa": 220,
+    "avg": 0.369,
+    "slg": 0.47,
+    "k_pct": 12.3,
+    "woba": 0.459
+   },
+   {
+    "hand": "R",
+    "grp": "포심",
+    "season": 2026,
+    "pa": 173,
+    "avg": 0.254,
+    "slg": 0.308,
+    "k_pct": 15.0,
+    "woba": 0.362
+   }
+  ]
+ },
+ "hand_pa": [
+  {
+   "season": 2023,
+   "hand": "L",
+   "pa": 231,
+   "avg": 0.349,
+   "slg": 0.402,
+   "k_pct": 13.0,
+   "woba": 0.41,
+   "babip": 0.407
+  },
+  {
+   "season": 2024,
+   "hand": "L",
+   "pa": 225,
+   "avg": 0.348,
+   "slg": 0.406,
+   "k_pct": 11.6,
+   "woba": 0.404,
+   "babip": 0.394
+  },
+  {
+   "season": 2025,
+   "hand": "L",
+   "pa": 75,
+   "avg": 0.203,
+   "slg": 0.219,
+   "k_pct": 21.3,
+   "woba": 0.263,
+   "babip": 0.265
+  },
+  {
+   "season": 2026,
+   "hand": "L",
+   "pa": 150,
+   "avg": 0.317,
+   "slg": 0.375,
+   "k_pct": 21.3,
+   "woba": 0.39,
+   "babip": 0.427
+  },
+  {
+   "season": 2023,
+   "hand": "R",
+   "pa": 410,
+   "avg": 0.322,
+   "slg": 0.418,
+   "k_pct": 12.9,
+   "woba": 0.407,
+   "babip": 0.377
+  },
+  {
+   "season": 2024,
+   "hand": "R",
+   "pa": 410,
+   "avg": 0.33,
+   "slg": 0.414,
+   "k_pct": 16.3,
+   "woba": 0.402,
+   "babip": 0.403
+  },
+  {
+   "season": 2025,
+   "hand": "R",
+   "pa": 140,
+   "avg": 0.336,
+   "slg": 0.391,
+   "k_pct": 17.1,
+   "woba": 0.398,
+   "babip": 0.409
+  },
+  {
+   "season": 2026,
+   "hand": "R",
+   "pa": 368,
+   "avg": 0.207,
+   "slg": 0.247,
+   "k_pct": 20.7,
+   "woba": 0.302,
+   "babip": 0.274
+  }
+ ],
+ "count": {
+  "reach_me": [
+   {
+    "season": 2023,
+    "reach_2s": 51.2
+   },
+   {
+    "season": 2024,
+    "reach_2s": 53.9
+   },
+   {
+    "season": 2026,
+    "reach_2s": 66.0
+   }
+  ],
+  "reach_lg": [
+   {
+    "season": 2023,
+    "reach_2s": 50.4
+   },
+   {
+    "season": 2024,
+    "reach_2s": 51.2
+   },
+   {
+    "season": 2026,
+    "reach_2s": 51.0
+   }
+  ],
+  "fp_me": [
+   {
+    "season": 2023,
+    "fp_swing": 22.9,
+    "fp_zone_swing": 40.0,
+    "fp_strike": 53.5
+   },
+   {
+    "season": 2024,
+    "fp_swing": 16.9,
+    "fp_zone_swing": 29.1,
+    "fp_strike": 56.7
+   },
+   {
+    "season": 2026,
+    "fp_swing": 12.7,
+    "fp_zone_swing": 22.9,
+    "fp_strike": 54.7
+   }
+  ],
+  "fp_lg": [
+   {
+    "season": 2023,
+    "fp_swing": 27.1,
+    "fp_zone_swing": 41.0,
+    "fp_strike": 57.4
+   },
+   {
+    "season": 2024,
+    "fp_swing": 27.5,
+    "fp_zone_swing": 42.5,
+    "fp_strike": 58.5
+   },
+   {
+    "season": 2026,
+    "fp_swing": 24.8,
+    "fp_zone_swing": 38.7,
+    "fp_strike": 57.2
+   }
+  ],
+  "end_state": [
+   {
+    "state": "2스트라이크",
+    "season": 2023,
+    "pa": 330,
+    "avg": 0.26,
+    "slg": 0.315,
+    "k_pct": 25.2,
+    "woba": 0.341
+   },
+   {
+    "state": "2스트라이크",
+    "season": 2024,
+    "pa": 344,
+    "avg": 0.273,
+    "slg": 0.311,
+    "k_pct": 27.0,
+    "woba": 0.338
+   },
+   {
+    "state": "2스트라이크",
+    "season": 2026,
+    "pa": 343,
+    "avg": 0.187,
+    "slg": 0.237,
+    "k_pct": 31.5,
+    "woba": 0.279
+   },
+   {
+    "state": "대등·불리",
+    "season": 2023,
+    "pa": 155,
+    "avg": 0.399,
+    "slg": 0.503,
+    "k_pct": 0.0,
+    "woba": 0.428
+   },
+   {
+    "state": "대등·불리",
+    "season": 2024,
+    "pa": 139,
+    "avg": 0.397,
+    "slg": 0.466,
+    "k_pct": 0.0,
+    "woba": 0.407
+   },
+   {
+    "state": "대등·불리",
+    "season": 2026,
+    "pa": 86,
+    "avg": 0.347,
+    "slg": 0.387,
+    "k_pct": 0.0,
+    "woba": 0.373
+   },
+   {
+    "state": "유리",
+    "season": 2023,
+    "pa": 156,
+    "avg": 0.426,
+    "slg": 0.537,
+    "k_pct": 0.0,
+    "woba": 0.53
+   },
+   {
+    "state": "유리",
+    "season": 2024,
+    "pa": 152,
+    "avg": 0.437,
+    "slg": 0.621,
+    "k_pct": 0.0,
+    "woba": 0.548
+   },
+   {
+    "state": "유리",
+    "season": 2026,
+    "pa": 89,
+    "avg": 0.351,
+    "slg": 0.386,
+    "k_pct": 0.0,
+    "woba": 0.473
+   }
+  ]
+ },
+ "direction": [
+  {
+   "dir": "1·2루 쪽",
+   "season": 2023,
+   "n": 119,
+   "pct": 27.0,
+   "hit_rate": 0.076
+  },
+  {
+   "dir": "1·2루 쪽",
+   "season": 2024,
+   "n": 114,
+   "pct": 26.8,
+   "hit_rate": 0.061
+  },
+  {
+   "dir": "1·2루 쪽",
+   "season": 2026,
+   "n": 97,
+   "pct": 31.6,
+   "hit_rate": 0.031
+  },
+  {
+   "dir": "3루·유격수 쪽",
+   "season": 2023,
+   "n": 49,
+   "pct": 11.1,
+   "hit_rate": 0.041
+  },
+  {
+   "dir": "3루·유격수 쪽",
+   "season": 2024,
+   "n": 67,
+   "pct": 15.8,
+   "hit_rate": 0.06
+  },
+  {
+   "dir": "3루·유격수 쪽",
+   "season": 2026,
+   "n": 37,
+   "pct": 12.1,
+   "hit_rate": 0.108
+  },
+  {
+   "dir": "우익수 쪽(당겨)",
+   "season": 2023,
+   "n": 58,
+   "pct": 13.2,
+   "hit_rate": 0.828
+  },
+  {
+   "dir": "우익수 쪽(당겨)",
+   "season": 2024,
+   "n": 55,
+   "pct": 12.9,
+   "hit_rate": 0.818
+  },
+  {
+   "dir": "우익수 쪽(당겨)",
+   "season": 2026,
+   "n": 36,
+   "pct": 11.7,
+   "hit_rate": 0.778
+  },
+  {
+   "dir": "좌익수 쪽(밀어)",
+   "season": 2023,
+   "n": 107,
+   "pct": 24.3,
+   "hit_rate": 0.654
+  },
+  {
+   "dir": "좌익수 쪽(밀어)",
+   "season": 2024,
+   "n": 95,
+   "pct": 22.4,
+   "hit_rate": 0.589
+  },
+  {
+   "dir": "좌익수 쪽(밀어)",
+   "season": 2026,
+   "n": 66,
+   "pct": 21.5,
+   "hit_rate": 0.561
+  },
+  {
+   "dir": "중견수 쪽",
+   "season": 2023,
+   "n": 84,
+   "pct": 19.1,
+   "hit_rate": 0.464
+  },
+  {
+   "dir": "중견수 쪽",
+   "season": 2024,
+   "n": 79,
+   "pct": 18.6,
+   "hit_rate": 0.696
+  },
+  {
+   "dir": "중견수 쪽",
+   "season": 2026,
+   "n": 50,
+   "pct": 16.3,
+   "hit_rate": 0.5
+  },
+  {
+   "dir": "투수·포수 앞",
+   "season": 2023,
+   "n": 23,
+   "pct": 5.2,
+   "hit_rate": 0.217
+  },
+  {
+   "dir": "투수·포수 앞",
+   "season": 2024,
+   "n": 15,
+   "pct": 3.5,
+   "hit_rate": 0.267
+  },
+  {
+   "dir": "투수·포수 앞",
+   "season": 2026,
+   "n": 21,
+   "pct": 6.8,
+   "hit_rate": 0.095
+  }
+ ],
+ "mix": {
+  "me": [
+   {
+    "season": 2022,
+    "n": 2152,
+    "fb_family": 59.8,
+    "r_two_cut": 14.4,
+    "r_offspeed_2s": 49.3
+   },
+   {
+    "season": 2023,
+    "n": 2670,
+    "fb_family": 59.4,
+    "r_two_cut": 13.7,
+    "r_offspeed_2s": 48.7
+   },
+   {
+    "season": 2024,
+    "n": 2648,
+    "fb_family": 60.9,
+    "r_two_cut": 10.1,
+    "r_offspeed_2s": 46.2
+   },
+   {
+    "season": 2025,
+    "n": 933,
+    "fb_family": 62.4,
+    "r_two_cut": 16.5,
+    "r_offspeed_2s": 44.9
+   },
+   {
+    "season": 2026,
+    "n": 2339,
+    "fb_family": 67.9,
+    "r_two_cut": 22.9,
+    "r_offspeed_2s": 37.8
+   }
+  ],
+  "lg": [
+   {
+    "season": 2022,
+    "n": 107830,
+    "fb_family": 54.8,
+    "r_two_cut": 12.5,
+    "r_offspeed_2s": 51.3
+   },
+   {
+    "season": 2023,
+    "n": 106209,
+    "fb_family": 53.5,
+    "r_two_cut": 11.2,
+    "r_offspeed_2s": 53.0
+   },
+   {
+    "season": 2024,
+    "n": 106189,
+    "fb_family": 52.7,
+    "r_two_cut": 8.4,
+    "r_offspeed_2s": 54.8
+   },
+   {
+    "season": 2025,
+    "n": 105967,
+    "fb_family": 53.4,
+    "r_two_cut": 11.2,
+    "r_offspeed_2s": 52.7
+   },
+   {
+    "season": 2026,
+    "n": 109205,
+    "fb_family": 55.3,
+    "r_two_cut": 15.3,
+    "r_offspeed_2s": 51.6
+   }
+  ]
+ },
+ "monthly": {
+  "rfb": [
+   {
+    "m": 3,
+    "n": 45,
+    "whiff": 14.3,
+    "zcon": 85.7,
+    "rv100": 2.0
+   },
+   {
+    "m": 4,
+    "n": 193,
+    "whiff": 14.1,
+    "zcon": 87.9,
+    "rv100": -0.98
+   },
+   {
+    "m": 5,
+    "n": 224,
+    "whiff": 21.5,
+    "zcon": 78.8,
+    "rv100": -0.52
+   },
+   {
+    "m": 6,
+    "n": 238,
+    "whiff": 19.2,
+    "zcon": 83.1,
+    "rv100": -1.35
+   },
+   {
+    "m": 7,
+    "n": 164,
+    "whiff": 15.0,
+    "zcon": 87.8,
+    "rv100": 0.29
+   },
+   {
+    "m": 8,
+    "n": 142,
+    "whiff": 14.3,
+    "zcon": 89.5,
+    "rv100": -2.95
+   },
+   {
+    "m": 9,
+    "n": 103,
+    "whiff": 10.5,
+    "zcon": 88.2,
+    "rv100": -0.44
+   },
+   {
+    "m": 10,
+    "n": 41,
+    "whiff": 7.1,
+    "zcon": 90.9,
+    "rv100": -2.72
+   }
+  ],
+  "rfb_season": [
+   {
+    "season": 2023,
+    "n": 1030,
+    "whiff": 10.8,
+    "zcon": 90.6,
+    "rv100": 0.85
+   },
+   {
+    "season": 2024,
+    "n": 1040,
+    "whiff": 10.9,
+    "zcon": 90.6,
+    "rv100": 1.32
+   },
+   {
+    "season": 2026,
+    "n": 1150,
+    "whiff": 16.3,
+    "zcon": 85.2,
+    "rv100": -0.93
+   }
+  ],
+  "rfb_half": [
+   {
+    "part": "3~7월",
+    "n": 864,
+    "whiff": 17.7,
+    "zcon": 84.0,
+    "rv100": -0.57
+   },
+   {
+    "part": "8~10월",
+    "n": 286,
+    "whiff": 11.9,
+    "zcon": 89.2,
+    "rv100": -2.01
+   }
+  ],
+  "pa": [
+   {
+    "m": 3,
+    "pa": 14,
+    "avg": 0.2,
+    "slg": 0.2,
+    "k_pct": 21.4,
+    "woba": 0.342,
+    "babip": 0.286
+   },
+   {
+    "m": 4,
+    "pa": 88,
+    "avg": 0.164,
+    "slg": 0.239,
+    "k_pct": 22.7,
+    "woba": 0.313,
+    "babip": 0.234
+   },
+   {
+    "m": 5,
+    "pa": 111,
+    "avg": 0.284,
+    "slg": 0.307,
+    "k_pct": 22.5,
+    "woba": 0.348,
+    "babip": 0.385
+   },
+   {
+    "m": 6,
+    "pa": 91,
+    "avg": 0.275,
+    "slg": 0.325,
+    "k_pct": 25.3,
+    "woba": 0.33,
+    "babip": 0.386
+   },
+   {
+    "m": 7,
+    "pa": 79,
+    "avg": 0.308,
+    "slg": 0.369,
+    "k_pct": 19.0,
+    "woba": 0.376,
+    "babip": 0.392
+   },
+   {
+    "m": 8,
+    "pa": 69,
+    "avg": 0.214,
+    "slg": 0.25,
+    "k_pct": 15.9,
+    "woba": 0.306,
+    "babip": 0.267
+   },
+   {
+    "m": 9,
+    "pa": 49,
+    "avg": 0.189,
+    "slg": 0.243,
+    "k_pct": 18.4,
+    "woba": 0.298,
+    "babip": 0.233
+   },
+   {
+    "m": 10,
+    "pa": 17,
+    "avg": 0.0,
+    "slg": 0.0,
+    "k_pct": 11.8,
+    "woba": 0.184,
+    "babip": 0.0
+   }
+  ],
+  "half_pa": [
+   {
+    "part": "3~7월",
+    "pa": 383,
+    "avg": 0.258,
+    "slg": 0.306,
+    "k_pct": 22.5,
+    "woba": 0.341,
+    "babip": 0.352
+   },
+   {
+    "part": "8~10월",
+    "pa": 135,
+    "avg": 0.181,
+    "slg": 0.219,
+    "k_pct": 16.3,
+    "woba": 0.288,
+    "babip": 0.224
+   }
+  ]
+ }
+}

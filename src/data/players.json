@@ -134,5 +134,13 @@
   "weight": 88,
   "pitcher": true,
   "left": false
+ },
+ "홍창기": {
+  "team": "LG",
+  "no": "51",
+  "height": 189,
+  "weight": 94,
+  "pitcher": false,
+  "left": true
  }
 }
