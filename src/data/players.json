@@ -142,5 +142,13 @@
   "weight": 94,
   "pitcher": false,
   "left": true
+ },
+ "박상원": {
+  "team": "한화",
+  "no": "58",
+  "height": 187,
+  "weight": 98,
+  "pitcher": true,
+  "left": false
  }
 }

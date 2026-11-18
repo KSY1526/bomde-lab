@@ -1,0 +1,8175 @@
+{
+ "data_until": "2026 정규시즌(크봇 DB). 한화 포스트시즌 진출 실패",
+ "profile": {
+  "name": "박상원",
+  "player_id": "67703",
+  "birthday": "1994년 09월 09일",
+  "birth_year": 1994,
+  "age_2027": 33,
+  "career": "백운초-서울이수중-휘문고-연세대",
+  "joininfo": "17한화",
+  "salary_2026": "26300만원",
+  "salary_2026_man": 26300,
+  "hand": "우투우타",
+  "height": 187,
+  "weight": 98,
+  "back_no": "58",
+  "team_2026": "한화"
+ },
+ "grade_a": {
+  "rule": {
+   "protect": 20,
+   "pct_with": 200,
+   "pct_only": 300
+  },
+  "salary_2026_man": 26300,
+  "comp_with_player_man": 52600,
+  "comp_only_man": 78900,
+  "protect_n": 20,
+  "note": "A등급 보상: 직전 연봉 200% + 보호선수 20인 외 1명, 또는 300%(원소속 구단이 고름)",
+  "grade_cases": {
+   "a_blocked": [
+    {
+     "name": "조상우",
+     "fa_year": 2026,
+     "grade": "A",
+     "team": "KIA",
+     "years": "2년",
+     "total": 15
+    },
+    {
+     "name": "주권",
+     "fa_year": 2024,
+     "grade": "A",
+     "team": "KT",
+     "years": "2+2년",
+     "total": 16
+    }
+   ],
+   "a_moved": [
+    {
+     "name": "최원태",
+     "fa_year": 2025,
+     "grade": "A",
+     "from_team": "LG",
+     "to_team": "삼성",
+     "years": "4년",
+     "total": 70
+    },
+    {
+     "name": "최원준",
+     "fa_year": 2026,
+     "grade": "A",
+     "from_team": "NC",
+     "to_team": "KT",
+     "years": "4년",
+     "total": 48
+    }
+   ],
+   "c_moved": [
+    {
+     "name": "박병호",
+     "fa_year": 2022,
+     "grade": "C",
+     "from_team": "키움",
+     "to_team": "KT",
+     "years": "3년",
+     "total": 30,
+     "comp": 22.5
+    },
+    {
+     "name": "김현수",
+     "fa_year": 2026,
+     "grade": "C",
+     "from_team": "LG",
+     "to_team": "KT",
+     "years": "3년",
+     "total": 50,
+     "comp": 7.5
+    }
+   ]
+  },
+  "comp_known": {
+   "won_salary_2026": 10,
+   "won_comp_max": 30,
+   "yj_salary_2026": 42,
+   "yj_comp_c": 63
+  }
+ },
+ "contract_prev": {
+  "kind": "없음(첫 FA, 단년 연봉 계약)",
+  "note": "OSEN 2026-04-25: 올해 145일 이상 등록 시 7시즌으로 FA 자격 취득"
+ },
+ "web_facts": {
+  "military": {
+   "kind": "사회복무요원",
+   "start": "2020-11-05",
+   "end": "2022-08-04",
+   "note": "2021 1군 공백·2022-08-12 복귀의 이유"
+  },
+  "fa_approval": {
+   "date": "2026-11-16",
+   "grade": "A",
+   "approved_n": 22,
+   "others_grade": {
+    "한승혁": "B",
+    "김민수": "B",
+    "박치국": "B",
+    "문승원": "C",
+    "최재훈": "B"
+   }
+  },
+  "demotions_2026": [
+   {
+    "date": "2026-05-06",
+    "reason": "부진(감독 '변화'), 부상 언급 없음",
+    "back": "2026-05-22"
+   },
+   {
+    "date": "2026-09-10",
+    "reason": "허리 통증(9-08 두산전 뒤 호소)",
+    "back": "시즌 중 복귀 없음(DB 9-08 이후 등판 0)"
+   }
+  ]
+ },
+ "seasons": [
+  {
+   "season": 2017,
+   "team": "한화",
+   "g": 18,
+   "gs": 0,
+   "role": "불펜",
+   "w": 0,
+   "l": 0,
+   "sv": 0,
+   "hld": 1,
+   "ip": "21.2",
+   "outs": 65,
+   "era": 4.15,
+   "fip": 5.35,
+   "whip": 1.2,
+   "k_pct": 14.9,
+   "bb_pct": 8.0,
+   "k_bb": 6.9,
+   "hr9": 1.25,
+   "hr": 3,
+   "so": 13,
+   "bb": 7,
+   "hbp": 0,
+   "tbf": 87,
+   "opp_avg": 0.241,
+   "opp_ops": 0.682,
+   "babip": 0.254,
+   "lob_pct": 73.4,
+   "war_fip": 0.04,
+   "war_ra9": 0.38,
+   "war": 0.21,
+   "fb_velo": 145.0,
+   "fb_velo_max": 150.0,
+   "rel_g": 18,
+   "rel_ip": "21.2",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2018,
+   "team": "한화",
+   "g": 69,
+   "gs": 0,
+   "role": "불펜",
+   "w": 4,
+   "l": 2,
+   "sv": 0,
+   "hld": 9,
+   "ip": "60.0",
+   "outs": 180,
+   "era": 2.1,
+   "fip": 3.63,
+   "whip": 1.4,
+   "k_pct": 24.3,
+   "bb_pct": 7.8,
+   "k_bb": 16.5,
+   "hr9": 0.45,
+   "hr": 3,
+   "so": 62,
+   "bb": 20,
+   "hbp": 4,
+   "tbf": 255,
+   "opp_avg": 0.26,
+   "opp_ops": 0.684,
+   "babip": 0.339,
+   "lob_pct": 83.8,
+   "war_fip": 1.21,
+   "war_ra9": 2.08,
+   "war": 1.65,
+   "fb_velo": 146.0,
+   "fb_velo_max": 151.0,
+   "rel_g": 69,
+   "rel_ip": "60.0",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2019,
+   "team": "한화",
+   "g": 61,
+   "gs": 0,
+   "role": "불펜",
+   "w": 1,
+   "l": 4,
+   "sv": 0,
+   "hld": 12,
+   "ip": "59.0",
+   "outs": 177,
+   "era": 3.97,
+   "fip": 4.91,
+   "whip": 1.44,
+   "k_pct": 15.3,
+   "bb_pct": 10.6,
+   "k_bb": 4.7,
+   "hr9": 0.76,
+   "hr": 5,
+   "so": 39,
+   "bb": 27,
+   "hbp": 5,
+   "tbf": 255,
+   "opp_avg": 0.241,
+   "opp_ops": 0.67,
+   "babip": 0.266,
+   "lob_pct": 71.4,
+   "war_fip": -0.36,
+   "war_ra9": 0.25,
+   "war": -0.05,
+   "fb_velo": 145.3,
+   "fb_velo_max": 150.0,
+   "rel_g": 61,
+   "rel_ip": "59.0",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2020,
+   "team": "한화",
+   "g": 62,
+   "gs": 0,
+   "role": "불펜",
+   "w": 1,
+   "l": 0,
+   "sv": 1,
+   "hld": 10,
+   "ip": "58.0",
+   "outs": 174,
+   "era": 4.66,
+   "fip": 4.67,
+   "whip": 1.48,
+   "k_pct": 20.4,
+   "bb_pct": 7.5,
+   "k_bb": 12.9,
+   "hr9": 1.24,
+   "hr": 8,
+   "so": 52,
+   "bb": 19,
+   "hbp": 4,
+   "tbf": 255,
+   "opp_avg": 0.271,
+   "opp_ops": 0.78,
+   "babip": 0.316,
+   "lob_pct": 67.8,
+   "war_fip": 0.18,
+   "war_ra9": -0.02,
+   "war": 0.08,
+   "fb_velo": 145.5,
+   "fb_velo_max": 151.0,
+   "rel_g": 62,
+   "rel_ip": "58.0",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2022,
+   "team": "한화",
+   "g": 14,
+   "gs": 0,
+   "role": "불펜",
+   "w": 0,
+   "l": 0,
+   "sv": 0,
+   "hld": 4,
+   "ip": "12.0",
+   "outs": 36,
+   "era": 2.25,
+   "fip": 1.99,
+   "whip": 1.42,
+   "k_pct": 30.2,
+   "bb_pct": 11.3,
+   "k_bb": 18.9,
+   "hr9": 0.0,
+   "hr": 0,
+   "so": 16,
+   "bb": 6,
+   "hbp": 0,
+   "tbf": 53,
+   "opp_avg": 0.256,
+   "opp_ops": 0.606,
+   "babip": 0.367,
+   "lob_pct": 76.5,
+   "war_fip": 0.34,
+   "war_ra9": 0.26,
+   "war": 0.3,
+   "fb_velo": 147.6,
+   "fb_velo_max": 152.0,
+   "rel_g": 14,
+   "rel_ip": "12.0",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2023,
+   "team": "한화",
+   "g": 55,
+   "gs": 0,
+   "role": "불펜",
+   "w": 5,
+   "l": 3,
+   "sv": 16,
+   "hld": 0,
+   "ip": "61.2",
+   "outs": 185,
+   "era": 3.65,
+   "fip": 3.55,
+   "whip": 1.54,
+   "k_pct": 20.8,
+   "bb_pct": 9.5,
+   "k_bb": 11.3,
+   "hr9": 0.29,
+   "hr": 2,
+   "so": 57,
+   "bb": 26,
+   "hbp": 3,
+   "tbf": 274,
+   "opp_avg": 0.266,
+   "opp_ops": 0.695,
+   "babip": 0.335,
+   "lob_pct": 63.9,
+   "war_fip": 0.74,
+   "war_ra9": -0.02,
+   "war": 0.36,
+   "fb_velo": 147.8,
+   "fb_velo_max": 152.0,
+   "rel_g": 55,
+   "rel_ip": "61.2",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2024,
+   "team": "한화",
+   "g": 65,
+   "gs": 0,
+   "role": "불펜",
+   "w": 3,
+   "l": 3,
+   "sv": 2,
+   "hld": 16,
+   "ip": "66.2",
+   "outs": 200,
+   "era": 4.59,
+   "fip": 3.51,
+   "whip": 1.29,
+   "k_pct": 23.4,
+   "bb_pct": 7.9,
+   "k_bb": 15.5,
+   "hr9": 0.27,
+   "hr": 2,
+   "so": 65,
+   "bb": 22,
+   "hbp": 7,
+   "tbf": 278,
+   "opp_avg": 0.232,
+   "opp_ops": 0.64,
+   "babip": 0.304,
+   "lob_pct": 57.7,
+   "war_fip": 1.31,
+   "war_ra9": 0.57,
+   "war": 0.94,
+   "fb_velo": 146.1,
+   "fb_velo_max": 151.0,
+   "rel_g": 65,
+   "rel_ip": "66.2",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2025,
+   "team": "한화",
+   "g": 74,
+   "gs": 0,
+   "role": "불펜",
+   "w": 4,
+   "l": 3,
+   "sv": 0,
+   "hld": 16,
+   "ip": "66.2",
+   "outs": 200,
+   "era": 4.18,
+   "fip": 4.07,
+   "whip": 1.44,
+   "k_pct": 17.7,
+   "bb_pct": 7.1,
+   "k_bb": 10.6,
+   "hr9": 0.54,
+   "hr": 4,
+   "so": 52,
+   "bb": 21,
+   "hbp": 8,
+   "tbf": 294,
+   "opp_avg": 0.261,
+   "opp_ops": 0.701,
+   "babip": 0.307,
+   "lob_pct": 67.5,
+   "war_fip": 0.69,
+   "war_ra9": 0.55,
+   "war": 0.62,
+   "fb_velo": 147.1,
+   "fb_velo_max": 151.0,
+   "rel_g": 74,
+   "rel_ip": "66.2",
+   "st_ip": "0.0"
+  },
+  {
+   "season": 2026,
+   "team": "한화",
+   "g": 56,
+   "gs": 0,
+   "role": "불펜",
+   "w": 3,
+   "l": 4,
+   "sv": 2,
+   "hld": 11,
+   "ip": "50.2",
+   "outs": 152,
+   "era": 4.8,
+   "fip": 3.75,
+   "whip": 1.46,
+   "k_pct": 23.1,
+   "bb_pct": 8.0,
+   "k_bb": 15.1,
+   "hr9": 0.71,
+   "hr": 4,
+   "so": 52,
+   "bb": 18,
+   "hbp": 3,
+   "tbf": 225,
+   "opp_avg": 0.268,
+   "opp_ops": 0.727,
+   "babip": 0.338,
+   "lob_pct": 64.3,
+   "war_fip": 0.86,
+   "war_ra9": 0.29,
+   "war": 0.57,
+   "fb_velo": 148.4,
+   "fb_velo_max": 153.0,
+   "rel_g": 56,
+   "rel_ip": "50.2",
+   "st_ip": "0.0"
+  }
+ ],
+ "recent3": {
+  "seasons": "2024~2026",
+  "g": 195,
+  "ip": "184.0",
+  "era": 4.5,
+  "fip_ip_weighted": 3.78,
+  "k_pct": 21.2,
+  "bb_pct": 7.7,
+  "hr9": 0.49,
+  "sv": 4,
+  "hld": 43,
+  "war_sum": 2.13,
+  "war_by_season": {
+   "2024": 0.94,
+   "2025": 0.62,
+   "2026": 0.57
+  },
+  "ww": 0.65,
+  "note": "fip_ip_weighted = 시즌 FIP를 이닝으로 가중 평균(시즌 상수가 달라 합계 재계산 대신). ww = 가중 WAR(1:2:3)"
+ },
+ "career": {
+  "seasons": 9,
+  "first": 2017,
+  "last": 2026,
+  "g": 474,
+  "gs": 0,
+  "w": 21,
+  "l": 19,
+  "sv": 21,
+  "hld": 79,
+  "ip": "456.1",
+  "era": 3.94,
+  "k_pct": 20.6,
+  "bb_pct": 8.4,
+  "war_fip": 5.01,
+  "war_ra9": 4.34,
+  "war": 4.68,
+  "missing_seasons": [
+   2021
+  ],
+  "missing_note": "2021 1군 기록 없음(player_info career에 상무·경찰 표기 없음, 사유 미확인)"
+ },
+ "relief_2026": {
+  "entry": {
+   "inning_start": {
+    "g": 42,
+    "ip": "40.0",
+    "era": 4.05,
+    "ra9": 4.72,
+    "wpa": 0.82,
+    "avg_outs": 2.86
+   },
+   "mid_inning": {
+    "g": 14,
+    "ip": "10.2",
+    "era": 7.59,
+    "ra9": 7.59,
+    "wpa": -0.19,
+    "avg_outs": 2.29
+   },
+   "mid_with_runners": {
+    "g": 12,
+    "ip": "9.0",
+    "era": 6.0,
+    "ra9": 6.0,
+    "wpa": -0.13,
+    "avg_outs": 2.25
+   },
+   "inherited_runners": 21,
+   "inherited_scored": 7,
+   "inherited_apps": 12,
+   "inherited_apps_not_finished_half": 1,
+   "by_inning": {
+    "4회": 2,
+    "5회": 2,
+    "6회": 14,
+    "7회": 15,
+    "8회": 12,
+    "9회": 11
+   },
+   "by_margin": {
+    "리드 4점 이상": {
+     "g": 15,
+     "ip": "13.0",
+     "era": 4.15,
+     "ra9": 4.15,
+     "wpa": 0.07,
+     "avg_outs": 2.6
+    },
+    "리드 1~3점": {
+     "g": 18,
+     "ip": "17.0",
+     "era": 4.76,
+     "ra9": 4.76,
+     "wpa": 0.24,
+     "avg_outs": 2.83
+    },
+    "동점": {
+     "g": 9,
+     "ip": "10.0",
+     "era": 3.6,
+     "ra9": 3.6,
+     "wpa": 0.59,
+     "avg_outs": 3.33
+    },
+    "열세 1~3점": {
+     "g": 12,
+     "ip": "8.2",
+     "era": 8.31,
+     "ra9": 11.42,
+     "wpa": -0.29,
+     "avg_outs": 2.17
+    },
+    "열세 4점 이상": {
+     "g": 2,
+     "ip": "2.0",
+     "era": 0.0,
+     "ra9": 0.0,
+     "wpa": 0.02,
+     "avg_outs": 3.0
+    }
+   }
+  },
+  "usage": {
+   "apps": 56,
+   "multi_inning": 2,
+   "outs_dist": {
+    "1이닝(3아웃)": 40,
+    "1아웃 이하": 14,
+    "1이닝 초과~2이닝 미만": 1,
+    "2이닝 이상": 1
+   },
+   "avg_outs": 2.71,
+   "avg_pitches": 15.2,
+   "max_pitches": 33,
+   "b2b": {
+    "g": 14,
+    "ip": "12.2",
+    "era": 4.26,
+    "ra9": 4.26,
+    "wpa": 0.37,
+    "avg_outs": 2.71
+   },
+   "three_in_row": 0,
+   "rest_days": {
+    "1일": 16,
+    "0일(연투)": 14,
+    "2~3일": 17,
+    "4일 이상": 8
+   },
+   "scoreless_apps": 38,
+   "apps_r2plus": 9
+  },
+  "month": {
+   "4월": {
+    "g": 13,
+    "ip": "10.0",
+    "tbf": 52,
+    "era": 10.8,
+    "whip": 2.2,
+    "k_pct": 26.9,
+    "bb_pct": 9.6,
+    "opp_avg": 0.37,
+    "opp_ops": 0.88,
+    "hr": 0
+   },
+   "5월": {
+    "g": 8,
+    "ip": "7.0",
+    "tbf": 32,
+    "era": 5.14,
+    "whip": 1.71,
+    "k_pct": 9.4,
+    "bb_pct": 9.4,
+    "opp_avg": 0.286,
+    "opp_ops": 0.911,
+    "hr": 2
+   },
+   "6월": {
+    "g": 11,
+    "ip": "10.0",
+    "tbf": 38,
+    "era": 1.8,
+    "whip": 0.8,
+    "k_pct": 34.2,
+    "bb_pct": 7.9,
+    "opp_avg": 0.125,
+    "opp_ops": 0.466,
+    "hr": 1
+   },
+   "7월": {
+    "g": 12,
+    "ip": "12.1",
+    "tbf": 50,
+    "era": 4.38,
+    "whip": 1.14,
+    "k_pct": 18.0,
+    "bb_pct": 6.0,
+    "opp_avg": 0.244,
+    "opp_ops": 0.669,
+    "hr": 1
+   },
+   "8월": {
+    "g": 7,
+    "ip": "6.2",
+    "tbf": 30,
+    "era": 4.05,
+    "whip": 1.35,
+    "k_pct": 26.7,
+    "bb_pct": 6.7,
+    "opp_avg": 0.231,
+    "opp_ops": 0.685,
+    "hr": 0
+   },
+   "9월": {
+    "g": 5,
+    "ip": "4.2",
+    "tbf": 23,
+    "era": 0.0,
+    "whip": 1.93,
+    "k_pct": 21.7,
+    "bb_pct": 8.7,
+    "opp_avg": 0.333,
+    "opp_ops": 0.725,
+    "hr": 0
+   }
+  },
+  "hand": {
+   "우타": {
+    "2024": {
+     "g": null,
+     "ip": null,
+     "tbf": 138,
+     "era": null,
+     "whip": null,
+     "k_pct": 18.8,
+     "bb_pct": 5.1,
+     "opp_avg": 0.242,
+     "opp_ops": 0.634,
+     "hr": 0
+    },
+    "2025": {
+     "g": null,
+     "ip": null,
+     "tbf": 162,
+     "era": null,
+     "whip": null,
+     "k_pct": 14.2,
+     "bb_pct": 7.4,
+     "opp_avg": 0.282,
+     "opp_ops": 0.75,
+     "hr": 3
+    },
+    "2023": {
+     "g": null,
+     "ip": null,
+     "tbf": 142,
+     "era": null,
+     "whip": null,
+     "k_pct": 20.4,
+     "bb_pct": 10.6,
+     "opp_avg": 0.252,
+     "opp_ops": 0.666,
+     "hr": 0
+    },
+    "2026": {
+     "g": null,
+     "ip": null,
+     "tbf": 121,
+     "era": null,
+     "whip": null,
+     "k_pct": 25.6,
+     "bb_pct": 5.8,
+     "opp_avg": 0.252,
+     "opp_ops": 0.701,
+     "hr": 3
+    }
+   },
+   "좌타": {
+    "2024": {
+     "g": null,
+     "ip": null,
+     "tbf": 140,
+     "era": null,
+     "whip": null,
+     "k_pct": 27.9,
+     "bb_pct": 10.7,
+     "opp_avg": 0.221,
+     "opp_ops": 0.645,
+     "hr": 2
+    },
+    "2025": {
+     "g": null,
+     "ip": null,
+     "tbf": 132,
+     "era": null,
+     "whip": null,
+     "k_pct": 22.0,
+     "bb_pct": 6.8,
+     "opp_avg": 0.235,
+     "opp_ops": 0.64,
+     "hr": 1
+    },
+    "2023": {
+     "g": null,
+     "ip": null,
+     "tbf": 132,
+     "era": null,
+     "whip": null,
+     "k_pct": 21.2,
+     "bb_pct": 8.3,
+     "opp_avg": 0.28,
+     "opp_ops": 0.725,
+     "hr": 2
+    },
+    "2026": {
+     "g": null,
+     "ip": null,
+     "tbf": 104,
+     "era": null,
+     "whip": null,
+     "k_pct": 20.2,
+     "bb_pct": 10.6,
+     "opp_avg": 0.286,
+     "opp_ops": 0.758,
+     "hr": 1
+    }
+   }
+  },
+  "runner": {
+   "득점권": {
+    "g": null,
+    "ip": null,
+    "tbf": 85,
+    "era": null,
+    "whip": null,
+    "k_pct": 22.4,
+    "bb_pct": 11.8,
+    "opp_avg": 0.229,
+    "opp_ops": 0.664,
+    "hr": 1
+   },
+   "만루": {
+    "g": null,
+    "ip": null,
+    "tbf": 17,
+    "era": null,
+    "whip": null,
+    "k_pct": 23.5,
+    "bb_pct": 17.6,
+    "opp_avg": 0.077,
+    "opp_ops": 0.312,
+    "hr": 0
+   },
+   "주자 없음": {
+    "g": null,
+    "ip": null,
+    "tbf": 109,
+    "era": null,
+    "whip": null,
+    "k_pct": 25.7,
+    "bb_pct": 4.6,
+    "opp_avg": 0.275,
+    "opp_ops": 0.762,
+    "hr": 3
+   },
+   "주자 있음": {
+    "g": null,
+    "ip": null,
+    "tbf": 116,
+    "era": null,
+    "whip": null,
+    "k_pct": 20.7,
+    "bb_pct": 11.2,
+    "opp_avg": 0.26,
+    "opp_ops": 0.689,
+    "hr": 1
+   }
+  },
+  "two_strike": {
+   "2스트라이크": {
+    "2023": {
+     "g": null,
+     "ip": null,
+     "tbf": 143,
+     "era": null,
+     "whip": null,
+     "k_pct": 39.9,
+     "bb_pct": 8.4,
+     "opp_avg": 0.177,
+     "opp_ops": 0.46,
+     "hr": 0
+    },
+    "2026": {
+     "g": null,
+     "ip": null,
+     "tbf": 118,
+     "era": null,
+     "whip": null,
+     "k_pct": 44.1,
+     "bb_pct": 6.8,
+     "opp_avg": 0.206,
+     "opp_ops": 0.58,
+     "hr": 1
+    },
+    "2024": {
+     "g": null,
+     "ip": null,
+     "tbf": 146,
+     "era": null,
+     "whip": null,
+     "k_pct": 44.5,
+     "bb_pct": 6.8,
+     "opp_avg": 0.122,
+     "opp_ops": 0.367,
+     "hr": 0
+    },
+    "2025": {
+     "g": null,
+     "ip": null,
+     "tbf": 147,
+     "era": null,
+     "whip": null,
+     "k_pct": 35.4,
+     "bb_pct": 4.8,
+     "opp_avg": 0.215,
+     "opp_ops": 0.569,
+     "hr": 2
+    }
+   }
+  },
+  "wpa": 0.63,
+  "wpa_pa_top5": [
+   {
+    "game_date": "2026-08-19",
+    "inning": 8,
+    "batter_name": "김호령",
+    "batter_team": "KIA",
+    "result_text": "1루수 앞 땅볼로 출루",
+    "w": 16.6
+   },
+   {
+    "game_date": "2026-08-12",
+    "inning": 9,
+    "batter_name": "김인태",
+    "batter_team": "두산",
+    "result_text": "삼진 아웃",
+    "w": 14.3
+   },
+   {
+    "game_date": "2026-08-19",
+    "inning": 8,
+    "batter_name": "하주석",
+    "batter_team": "KIA",
+    "result_text": "포수 스트라이크 낫 아웃 (포수 태그아웃)",
+    "w": 13.0
+   },
+   {
+    "game_date": "2026-05-24",
+    "inning": 9,
+    "batter_name": "박찬호",
+    "batter_team": "두산",
+    "result_text": "투수 앞 땅볼로 출루",
+    "w": 11.9
+   },
+   {
+    "game_date": "2026-04-23",
+    "inning": 4,
+    "batter_name": "문성주",
+    "batter_team": "LG",
+    "result_text": "1루수 땅볼 아웃 (1루수 1루 터치아웃)",
+    "w": 10.8
+   }
+  ],
+  "wpa_pa_low5": [
+   {
+    "game_date": "2026-08-12",
+    "inning": 9,
+    "batter_name": "박지훈",
+    "batter_team": "두산",
+    "result_text": "우익수 오른쪽 3루타",
+    "w": -48.1
+   },
+   {
+    "game_date": "2026-04-11",
+    "inning": 8,
+    "batter_name": "한준수",
+    "batter_team": "KIA",
+    "result_text": "중견수 앞 1루타",
+    "w": -22.1
+   },
+   {
+    "game_date": "2026-04-11",
+    "inning": 8,
+    "batter_name": "김선빈",
+    "batter_team": "KIA",
+    "result_text": "중견수 앞 1루타",
+    "w": -20.8
+   },
+   {
+    "game_date": "2026-06-17",
+    "inning": 9,
+    "batter_name": "박민우",
+    "batter_team": "NC",
+    "result_text": "우중간 2루타",
+    "w": -17.2
+   },
+   {
+    "game_date": "2026-06-17",
+    "inning": 9,
+    "batter_name": "오태양",
+    "batter_team": "NC",
+    "result_text": "우익수 희생플라이 아웃",
+    "w": -14.9
+   }
+  ],
+  "wpa_app_best3": [
+   {
+    "date": "2026-07-19",
+    "inning": 9,
+    "margin": 0,
+    "outs": 9,
+    "r": 0,
+    "wpa": 0.45
+   },
+   {
+    "date": "2026-08-19",
+    "inning": 8,
+    "margin": 0,
+    "outs": 2,
+    "r": 1,
+    "wpa": 0.214
+   },
+   {
+    "date": "2026-05-29",
+    "inning": 8,
+    "margin": 1,
+    "outs": 3,
+    "r": 0,
+    "wpa": 0.129
+   }
+  ],
+  "wpa_app_worst3": [
+   {
+    "date": "2026-04-11",
+    "inning": 8,
+    "margin": 2,
+    "outs": 3,
+    "r": 2,
+    "wpa": -0.463
+   },
+   {
+    "date": "2026-08-12",
+    "inning": 9,
+    "margin": 1,
+    "outs": 3,
+    "r": 1,
+    "wpa": -0.277
+   },
+   {
+    "date": "2026-06-17",
+    "inning": 8,
+    "margin": 0,
+    "outs": 3,
+    "r": 1,
+    "wpa": -0.262
+   }
+  ],
+  "abs_wpa_per_pa": 4.44,
+  "pa_wpa_null": 0,
+  "score_check": {
+   "games": 56,
+   "match": 56
+  },
+  "apps": [
+   {
+    "game_id": "20260401KTHH0",
+    "date": "2026-04-01",
+    "inning": 6,
+    "outs_entry": 2,
+    "bases_entry": 0,
+    "inning_start": false,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 3,
+    "r": 3,
+    "pitches": 28,
+    "bf": 6,
+    "wpa": -0.126,
+    "abs_wpa_per_pa": 6.52,
+    "innings_span": 2
+   },
+   {
+    "game_id": "20260403HHOB0",
+    "date": "2026-04-03",
+    "inning": 6,
+    "outs_entry": 1,
+    "bases_entry": 7,
+    "inning_start": false,
+    "inherited": 3,
+    "inherited_scored": 3,
+    "finished_entry_half": false,
+    "margin": 7,
+    "outs": 1,
+    "er": 1,
+    "r": 1,
+    "pitches": 11,
+    "bf": 3,
+    "wpa": -0.051,
+    "abs_wpa_per_pa": 3.58,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260404HHOB0",
+    "date": "2026-04-04",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 6,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 18,
+    "bf": 4,
+    "wpa": 0.011,
+    "abs_wpa_per_pa": 0.57,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260407HHSK0",
+    "date": "2026-04-07",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 18,
+    "bf": 4,
+    "wpa": 0.091,
+    "abs_wpa_per_pa": 3.46,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260408HHSK0",
+    "date": "2026-04-08",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 8,
+    "bf": 3,
+    "wpa": 0.091,
+    "abs_wpa_per_pa": 3.02,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260411HTHH0",
+    "date": "2026-04-11",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 3,
+    "inning_start": false,
+    "inherited": 2,
+    "inherited_scored": 2,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 3,
+    "er": 2,
+    "r": 2,
+    "pitches": 23,
+    "bf": 7,
+    "wpa": -0.463,
+    "abs_wpa_per_pa": 10.9,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260412HTHH0",
+    "date": "2026-04-12",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": -3,
+    "outs": 2,
+    "er": 3,
+    "r": 3,
+    "pitches": 28,
+    "bf": 6,
+    "wpa": -0.097,
+    "abs_wpa_per_pa": 2.3,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260414SSHH0",
+    "date": "2026-04-14",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": 5,
+    "outs": 0,
+    "er": 1,
+    "r": 1,
+    "pitches": 8,
+    "bf": 2,
+    "wpa": -0.068,
+    "abs_wpa_per_pa": 3.42,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260416SSHH0",
+    "date": "2026-04-16",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 10,
+    "bf": 3,
+    "wpa": 0.03,
+    "abs_wpa_per_pa": 1.0,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260421HHLG0",
+    "date": "2026-04-21",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -4,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 20,
+    "bf": 3,
+    "wpa": 0.013,
+    "abs_wpa_per_pa": 0.43,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260423HHLG0",
+    "date": "2026-04-23",
+    "inning": 4,
+    "outs_entry": 1,
+    "bases_entry": 3,
+    "inning_start": false,
+    "inherited": 2,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 2,
+    "er": 0,
+    "r": 0,
+    "pitches": 5,
+    "bf": 3,
+    "wpa": 0.127,
+    "abs_wpa_per_pa": 9.45,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260424NCHH0",
+    "date": "2026-04-24",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": -2,
+    "outs": 1,
+    "er": 2,
+    "r": 2,
+    "pitches": 9,
+    "bf": 4,
+    "wpa": -0.101,
+    "abs_wpa_per_pa": 3.29,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260428SKHH0",
+    "date": "2026-04-28",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 15,
+    "bf": 4,
+    "wpa": 0.02,
+    "abs_wpa_per_pa": 1.08,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260501HHSS0",
+    "date": "2026-05-01",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": 3,
+    "outs": 1,
+    "er": 2,
+    "r": 2,
+    "pitches": 12,
+    "bf": 3,
+    "wpa": -0.114,
+    "abs_wpa_per_pa": 5.65,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260502HHSS0",
+    "date": "2026-05-02",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 2,
+    "inning_start": false,
+    "inherited": 1,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 7,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 16,
+    "bf": 5,
+    "wpa": 0.026,
+    "abs_wpa_per_pa": 1.48,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260505HHHT0",
+    "date": "2026-05-05",
+    "inning": 5,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": 0,
+    "outs": 2,
+    "er": 2,
+    "r": 2,
+    "pitches": 18,
+    "bf": 4,
+    "wpa": -0.2,
+    "abs_wpa_per_pa": 9.94,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260523OBHH0",
+    "date": "2026-05-23",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 24,
+    "bf": 5,
+    "wpa": 0.051,
+    "abs_wpa_per_pa": 6.59,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260524OBHH0",
+    "date": "2026-05-24",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 16,
+    "bf": 6,
+    "wpa": 0.042,
+    "abs_wpa_per_pa": 9.92,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260528HHNC0",
+    "date": "2026-05-28",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 10,
+    "bf": 3,
+    "wpa": 0.114,
+    "abs_wpa_per_pa": 3.8,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260529SKHH0",
+    "date": "2026-05-29",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 11,
+    "bf": 3,
+    "wpa": 0.129,
+    "abs_wpa_per_pa": 4.29,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260531SKHH0",
+    "date": "2026-05-31",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 13,
+    "bf": 3,
+    "wpa": 0.019,
+    "abs_wpa_per_pa": 0.64,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260603HHOB0",
+    "date": "2026-06-03",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 15,
+    "bf": 3,
+    "wpa": 0.079,
+    "abs_wpa_per_pa": 2.63,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260605HHLT0",
+    "date": "2026-06-05",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 5,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 12,
+    "bf": 3,
+    "wpa": 0.027,
+    "abs_wpa_per_pa": 0.89,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260607HHLT0",
+    "date": "2026-06-07",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 11,
+    "bf": 3,
+    "wpa": 0.092,
+    "abs_wpa_per_pa": 3.05,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260611HTHH0",
+    "date": "2026-06-11",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 16,
+    "bf": 4,
+    "wpa": 0.054,
+    "abs_wpa_per_pa": 2.85,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260612HHWO0",
+    "date": "2026-06-12",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 15,
+    "bf": 3,
+    "wpa": 0.091,
+    "abs_wpa_per_pa": 3.02,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260614HHWO0",
+    "date": "2026-06-14",
+    "inning": 8,
+    "outs_entry": 2,
+    "bases_entry": 1,
+    "inning_start": false,
+    "inherited": 1,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -1,
+    "outs": 1,
+    "er": 0,
+    "r": 0,
+    "pitches": 13,
+    "bf": 3,
+    "wpa": 0.017,
+    "abs_wpa_per_pa": 2.85,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260617HHNC0",
+    "date": "2026-06-17",
+    "inning": 8,
+    "outs_entry": 2,
+    "bases_entry": 2,
+    "inning_start": false,
+    "inherited": 1,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 3,
+    "er": 1,
+    "r": 1,
+    "pitches": 14,
+    "bf": 5,
+    "wpa": -0.262,
+    "abs_wpa_per_pa": 9.37,
+    "innings_span": 2
+   },
+   {
+    "game_id": "20260619SSHH0",
+    "date": "2026-06-19",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 13,
+    "bf": 3,
+    "wpa": 0.093,
+    "abs_wpa_per_pa": 3.09,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260620SSHH0",
+    "date": "2026-06-20",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 5,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 14,
+    "bf": 4,
+    "wpa": 0.026,
+    "abs_wpa_per_pa": 1.75,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260623OBHH0",
+    "date": "2026-06-23",
+    "inning": 7,
+    "outs_entry": 2,
+    "bases_entry": 3,
+    "inning_start": false,
+    "inherited": 2,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -1,
+    "outs": 1,
+    "er": 0,
+    "r": 0,
+    "pitches": 9,
+    "bf": 2,
+    "wpa": -0.01,
+    "abs_wpa_per_pa": 6.23,
+    "innings_span": 2
+   },
+   {
+    "game_id": "20260626HHSK0",
+    "date": "2026-06-26",
+    "inning": 6,
+    "outs_entry": 2,
+    "bases_entry": 4,
+    "inning_start": false,
+    "inherited": 1,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 3,
+    "outs": 4,
+    "er": 1,
+    "r": 1,
+    "pitches": 15,
+    "bf": 5,
+    "wpa": 0.036,
+    "abs_wpa_per_pa": 4.54,
+    "innings_span": 2
+   },
+   {
+    "game_id": "20260701KTHH0",
+    "date": "2026-07-01",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -2,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 9,
+    "bf": 3,
+    "wpa": 0.041,
+    "abs_wpa_per_pa": 1.38,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260703HHLG0",
+    "date": "2026-07-03",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 8,
+    "outs": 3,
+    "er": 1,
+    "r": 1,
+    "pitches": 13,
+    "bf": 5,
+    "wpa": 0.001,
+    "abs_wpa_per_pa": 0.24,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260704HHLG0",
+    "date": "2026-07-04",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -1,
+    "outs": 3,
+    "er": 1,
+    "r": 1,
+    "pitches": 22,
+    "bf": 7,
+    "wpa": -0.067,
+    "abs_wpa_per_pa": 4.72,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260709NCHH0",
+    "date": "2026-07-09",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 2,
+    "r": 2,
+    "pitches": 20,
+    "bf": 5,
+    "wpa": -0.071,
+    "abs_wpa_per_pa": 3.83,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260716WOHH0",
+    "date": "2026-07-16",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": false,
+    "margin": -1,
+    "outs": 0,
+    "er": 2,
+    "r": 2,
+    "pitches": 13,
+    "bf": 2,
+    "wpa": -0.135,
+    "abs_wpa_per_pa": 6.77,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260717WOHH0",
+    "date": "2026-07-17",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -3,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 13,
+    "bf": 4,
+    "wpa": 0.03,
+    "abs_wpa_per_pa": 1.68,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260719WOHH0",
+    "date": "2026-07-19",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 9,
+    "er": 0,
+    "r": 0,
+    "pitches": 33,
+    "bf": 9,
+    "wpa": 0.45,
+    "abs_wpa_per_pa": 5.0,
+    "innings_span": 3
+   },
+   {
+    "game_id": "20260722HHHT0",
+    "date": "2026-07-22",
+    "inning": 9,
+    "outs_entry": 1,
+    "bases_entry": 2,
+    "inning_start": false,
+    "inherited": 1,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 2,
+    "er": 0,
+    "r": 0,
+    "pitches": 8,
+    "bf": 2,
+    "wpa": 0.026,
+    "abs_wpa_per_pa": 1.29,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260724LGHH0",
+    "date": "2026-07-24",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 13,
+    "bf": 3,
+    "wpa": 0.019,
+    "abs_wpa_per_pa": 0.64,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260726LGHH0",
+    "date": "2026-07-26",
+    "inning": 8,
+    "outs_entry": 1,
+    "bases_entry": 0,
+    "inning_start": false,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 2,
+    "er": 0,
+    "r": 0,
+    "pitches": 6,
+    "bf": 2,
+    "wpa": 0.064,
+    "abs_wpa_per_pa": 3.22,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260729LTHH0",
+    "date": "2026-07-29",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 22,
+    "bf": 4,
+    "wpa": 0.087,
+    "abs_wpa_per_pa": 6.04,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260730LTHH0",
+    "date": "2026-07-30",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -1,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 14,
+    "bf": 4,
+    "wpa": 0.045,
+    "abs_wpa_per_pa": 1.66,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260804HHSS0",
+    "date": "2026-08-04",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 1,
+    "r": 1,
+    "pitches": 20,
+    "bf": 5,
+    "wpa": 0.024,
+    "abs_wpa_per_pa": 1.14,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260812HHOB0",
+    "date": "2026-08-12",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 1,
+    "r": 1,
+    "pitches": 24,
+    "bf": 5,
+    "wpa": -0.277,
+    "abs_wpa_per_pa": 18.16,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260815HHSS0",
+    "date": "2026-08-15",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -2,
+    "outs": 3,
+    "er": 0,
+    "r": 3,
+    "pitches": 21,
+    "bf": 7,
+    "wpa": -0.06,
+    "abs_wpa_per_pa": 1.33,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260819HTHH0",
+    "date": "2026-08-19",
+    "inning": 8,
+    "outs_entry": 1,
+    "bases_entry": 6,
+    "inning_start": false,
+    "inherited": 2,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 2,
+    "er": 1,
+    "r": 1,
+    "pitches": 17,
+    "bf": 3,
+    "wpa": 0.214,
+    "abs_wpa_per_pa": 12.6,
+    "innings_span": 2
+   },
+   {
+    "game_id": "20260821LGHH0",
+    "date": "2026-08-21",
+    "inning": 9,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 11,
+    "bf": 4,
+    "wpa": 0.019,
+    "abs_wpa_per_pa": 0.67,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260826HHSK0",
+    "date": "2026-08-26",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": -5,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 14,
+    "bf": 3,
+    "wpa": 0.005,
+    "abs_wpa_per_pa": 0.15,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260830NCHH0",
+    "date": "2026-08-30",
+    "inning": 8,
+    "outs_entry": 0,
+    "bases_entry": 3,
+    "inning_start": false,
+    "inherited": 2,
+    "inherited_scored": 1,
+    "finished_entry_half": true,
+    "margin": 1,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 10,
+    "bf": 3,
+    "wpa": 0.117,
+    "abs_wpa_per_pa": 3.89,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260902HHKT0",
+    "date": "2026-09-02",
+    "inning": 6,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 15,
+    "bf": 5,
+    "wpa": 0.079,
+    "abs_wpa_per_pa": 6.93,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260903HHKT0",
+    "date": "2026-09-03",
+    "inning": 4,
+    "outs_entry": 1,
+    "bases_entry": 7,
+    "inning_start": false,
+    "inherited": 3,
+    "inherited_scored": 1,
+    "finished_entry_half": true,
+    "margin": 2,
+    "outs": 2,
+    "er": 0,
+    "r": 0,
+    "pitches": 12,
+    "bf": 3,
+    "wpa": 0.098,
+    "abs_wpa_per_pa": 10.44,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260905HHLT0",
+    "date": "2026-09-05",
+    "inning": 5,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 0,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 12,
+    "bf": 5,
+    "wpa": 0.069,
+    "abs_wpa_per_pa": 6.29,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260906HHLT0",
+    "date": "2026-09-06",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 4,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 20,
+    "bf": 5,
+    "wpa": 0.043,
+    "abs_wpa_per_pa": 4.17,
+    "innings_span": 1
+   },
+   {
+    "game_id": "20260908OBHH0",
+    "date": "2026-09-08",
+    "inning": 7,
+    "outs_entry": 0,
+    "bases_entry": 0,
+    "inning_start": true,
+    "inherited": 0,
+    "inherited_scored": 0,
+    "finished_entry_half": true,
+    "margin": 5,
+    "outs": 3,
+    "er": 0,
+    "r": 0,
+    "pitches": 19,
+    "bf": 5,
+    "wpa": 0.022,
+    "abs_wpa_per_pa": 1.38,
+    "innings_span": 1
+   }
+  ],
+  "bbh_pct_team_def": 9.3,
+  "gidp": {
+   "gidp": 0,
+   "gidp_opp": 48
+  },
+  "note": "margin = 등판 직전 한화 점수 − 상대 점수. inherited_scored는 방법 메모 참조. abs_wpa_per_pa는 LI 대신 쓰는 대리 지표(%p)"
+ },
+ "league_rp_2026": {
+  "n": 53,
+  "rule": "2026 40이닝 이상, 아웃의 90% 이상 구원",
+  "metrics": {
+   "era": {
+    "value": 4.8,
+    "rank": 35,
+    "n": 53,
+    "avg": 4.266,
+    "low_is_good": true
+   },
+   "fip": {
+    "value": 3.75,
+    "rank": 5,
+    "n": 53,
+    "avg": 4.778,
+    "low_is_good": true
+   },
+   "whip": {
+    "value": 1.46,
+    "rank": 23,
+    "n": 53,
+    "avg": 1.495,
+    "low_is_good": true
+   },
+   "k_pct": {
+    "value": 23.1,
+    "rank": 12,
+    "n": 53,
+    "avg": 19.723,
+    "low_is_good": false
+   },
+   "bb_pct": {
+    "value": 8.0,
+    "rank": 15,
+    "n": 53,
+    "avg": 9.906,
+    "low_is_good": true
+   },
+   "k_bb": {
+    "value": 15.1,
+    "rank": 9,
+    "n": 53,
+    "avg": 9.817,
+    "low_is_good": false
+   },
+   "hr9": {
+    "value": 0.711,
+    "rank": 15,
+    "n": 53,
+    "avg": 0.934,
+    "low_is_good": true
+   },
+   "war_fip": {
+    "value": 0.86,
+    "rank": 6,
+    "n": 53,
+    "avg": 0.228,
+    "low_is_good": false
+   },
+   "war_ra9": {
+    "value": 0.29,
+    "rank": 31,
+    "n": 53,
+    "avg": 0.451,
+    "low_is_good": false
+   },
+   "war": {
+    "value": 0.575,
+    "rank": 18,
+    "n": 53,
+    "avg": 0.34,
+    "low_is_good": false
+   },
+   "wpa": {
+    "value": 0.63,
+    "rank": 20,
+    "n": 53,
+    "avg": 0.311,
+    "low_is_good": false
+   },
+   "awpa": {
+    "value": 4.444,
+    "rank": 25,
+    "n": 53,
+    "avg": 4.337,
+    "low_is_good": false
+   },
+   "babip": {
+    "value": 0.338,
+    "rank": 45,
+    "n": 53,
+    "avg": 0.302,
+    "low_is_good": true
+   },
+   "lob_pct": {
+    "value": 64.3,
+    "rank": 39,
+    "n": 53,
+    "avg": 71.375,
+    "low_is_good": false
+   },
+   "outs": {
+    "value": 152.0,
+    "rank": 26,
+    "n": 53,
+    "avg": 157.396,
+    "low_is_good": false
+   },
+   "svhld": {
+    "value": 13.0,
+    "rank": 29,
+    "n": 53,
+    "avg": 14.321,
+    "low_is_good": false
+   },
+   "fb_velo": {
+    "value": 148.4,
+    "rank": 14,
+    "n": 52,
+    "avg": 146.156,
+    "low_is_good": false
+   }
+  },
+  "note": "babip는 낮은 쪽을 1위로, lob_pct는 높은 쪽을 1위로 셈. awpa = 타석당 |WPA| 평균(%p, LI 대리)",
+  "era_minus_fip_top": [
+   {
+    "name": "배찬승",
+    "team": "삼성",
+    "era": 2.25,
+    "fip": 5.98,
+    "gap": 3.73
+   },
+   {
+    "name": "김정우",
+    "team": "두산",
+    "era": 2.28,
+    "fip": 4.58,
+    "gap": 2.3
+   },
+   {
+    "name": "문승원",
+    "team": "SSG",
+    "era": 3.45,
+    "fip": 5.74,
+    "gap": 2.29
+   },
+   {
+    "name": "김태훈",
+    "team": "삼성",
+    "era": 2.48,
+    "fip": 4.67,
+    "gap": 2.19
+   },
+   {
+    "name": "박지성",
+    "team": "키움",
+    "era": 4.4,
+    "fip": 6.34,
+    "gap": 1.94
+   }
+  ],
+  "era_over_fip": {
+   "value": 1.05,
+   "rank": 7,
+   "n": 53,
+   "top5": [
+    {
+     "name": "원종현",
+     "team": "키움",
+     "era": 6.19,
+     "fip": 4.1,
+     "gap": 2.09
+    },
+    {
+     "name": "스기모토",
+     "team": "KT",
+     "era": 5.9,
+     "fip": 4.4,
+     "gap": 1.5
+    },
+    {
+     "name": "정해영",
+     "team": "KIA",
+     "era": 6.12,
+     "fip": 4.72,
+     "gap": 1.4
+    },
+    {
+     "name": "박치국",
+     "team": "두산",
+     "era": 5.4,
+     "fip": 4.09,
+     "gap": 1.31
+    },
+    {
+     "name": "유토",
+     "team": "키움",
+     "era": 5.19,
+     "fip": 3.93,
+     "gap": 1.26
+    }
+   ],
+   "note": "ERA − FIP가 큰 순(ERA가 FIP보다 나쁜 쪽 = 결과가 내용보다 나빴던 투수)"
+  },
+  "war_top10": [
+   {
+    "name": "이영하",
+    "team": "두산",
+    "ip": "68.0",
+    "era": 3.18,
+    "fip": 3.09,
+    "war": 1.46,
+    "wpa": 2.35
+   },
+   {
+    "name": "이승민",
+    "team": "삼성",
+    "ip": "68.0",
+    "era": 2.65,
+    "fip": 4.1,
+    "war": 1.38,
+    "wpa": 1.55
+   },
+   {
+    "name": "김재윤",
+    "team": "삼성",
+    "ip": "64.1",
+    "era": 3.22,
+    "fip": 3.74,
+    "war": 1.36,
+    "wpa": 3.39
+   },
+   {
+    "name": "박영현",
+    "team": "KT",
+    "ip": "61.2",
+    "era": 2.48,
+    "fip": 4.11,
+    "war": 1.31,
+    "wpa": 4.14
+   },
+   {
+    "name": "조병현",
+    "team": "SSG",
+    "ip": "54.0",
+    "era": 2.33,
+    "fip": 3.75,
+    "war": 1.2,
+    "wpa": 2.21
+   },
+   {
+    "name": "전상현",
+    "team": "KIA",
+    "ip": "46.1",
+    "era": 2.33,
+    "fip": 3.71,
+    "war": 1.08,
+    "wpa": 1.88
+   },
+   {
+    "name": "김정우",
+    "team": "두산",
+    "ip": "59.1",
+    "era": 2.28,
+    "fip": 4.58,
+    "war": 1.07,
+    "wpa": 1.28
+   },
+   {
+    "name": "김택연",
+    "team": "두산",
+    "ip": "56.2",
+    "era": 2.54,
+    "fip": 4.16,
+    "war": 1.02,
+    "wpa": 1.42
+   },
+   {
+    "name": "박정민",
+    "team": "롯데",
+    "ip": "59.0",
+    "era": 3.66,
+    "fip": 4.54,
+    "war": 1.01,
+    "wpa": 1.07
+   },
+   {
+    "name": "최준용",
+    "team": "롯데",
+    "ip": "60.2",
+    "era": 3.71,
+    "fip": 4.05,
+    "war": 0.95,
+    "wpa": 1.07
+   }
+  ],
+  "wpa_top10": [
+   {
+    "name": "박영현",
+    "team": "KT",
+    "wpa": 4.14,
+    "war": 1.31
+   },
+   {
+    "name": "김재윤",
+    "team": "삼성",
+    "wpa": 3.39,
+    "war": 1.36
+   },
+   {
+    "name": "이영하",
+    "team": "두산",
+    "wpa": 2.35,
+    "war": 1.46
+   },
+   {
+    "name": "손주영",
+    "team": "LG",
+    "wpa": 2.23,
+    "war": 0.71
+   },
+   {
+    "name": "조병현",
+    "team": "SSG",
+    "wpa": 2.21,
+    "war": 1.2
+   },
+   {
+    "name": "전상현",
+    "team": "KIA",
+    "wpa": 1.88,
+    "war": 1.08
+   },
+   {
+    "name": "이승민",
+    "team": "삼성",
+    "wpa": 1.55,
+    "war": 1.38
+   },
+   {
+    "name": "성영탁",
+    "team": "KIA",
+    "wpa": 1.49,
+    "war": 0.5
+   },
+   {
+    "name": "김택연",
+    "team": "두산",
+    "wpa": 1.42,
+    "war": 1.02
+   },
+   {
+    "name": "김정우",
+    "team": "두산",
+    "wpa": 1.28,
+    "war": 1.07
+   }
+  ],
+  "team_pool": [
+   {
+    "name": "조동욱",
+    "ip": "56.1",
+    "era": 4.31,
+    "fip": 4.11,
+    "war": 0.78,
+    "wpa": 0.43,
+    "svhld": 11
+   },
+   {
+    "name": "장유호",
+    "ip": "45.1",
+    "era": 3.57,
+    "fip": 5.18,
+    "war": 0.59,
+    "wpa": -0.24,
+    "svhld": 4
+   },
+   {
+    "name": "박상원",
+    "ip": "50.2",
+    "era": 4.8,
+    "fip": 3.75,
+    "war": 0.57,
+    "wpa": 0.63,
+    "svhld": 13
+   },
+   {
+    "name": "이민우",
+    "ip": "57.0",
+    "era": 4.74,
+    "fip": 5.08,
+    "war": 0.3,
+    "wpa": -1.37,
+    "svhld": 14
+   }
+  ]
+ },
+ "team_share": {
+  "team_rel_ip": "606.2",
+  "my_rel_ip": "50.2",
+  "ip_share": 8.4,
+  "team_rel_war": -1.01,
+  "my_war": 0.57,
+  "rel_ip_rank": 4,
+  "rel_war_rank": 3,
+  "n_relievers": 26,
+  "team_sv": 16,
+  "team_hld": 56,
+  "my_sv": 2,
+  "my_hld": 11,
+  "top_rel": [
+   {
+    "name": "이민우",
+    "rel_ip": "57.0",
+    "rel_g": 59,
+    "era": 4.74,
+    "fip": 5.08,
+    "war_rel": 0.3,
+    "sv": 7,
+    "hld": 7
+   },
+   {
+    "name": "조동욱",
+    "rel_ip": "56.1",
+    "rel_g": 75,
+    "era": 4.31,
+    "fip": 4.11,
+    "war_rel": 0.78,
+    "sv": 1,
+    "hld": 10
+   },
+   {
+    "name": "이상규",
+    "rel_ip": "52.1",
+    "rel_g": 52,
+    "era": 5.19,
+    "fip": 4.71,
+    "war_rel": 0.08,
+    "sv": 0,
+    "hld": 9
+   },
+   {
+    "name": "박상원",
+    "rel_ip": "50.2",
+    "rel_g": 56,
+    "era": 4.8,
+    "fip": 3.75,
+    "war_rel": 0.57,
+    "sv": 2,
+    "hld": 11
+   },
+   {
+    "name": "장유호",
+    "rel_ip": "45.1",
+    "rel_g": 44,
+    "era": 3.57,
+    "fip": 5.18,
+    "war_rel": 0.59,
+    "sv": 0,
+    "hld": 4
+   },
+   {
+    "name": "김종수",
+    "rel_ip": "36.2",
+    "rel_g": 44,
+    "era": 6.63,
+    "fip": 6.97,
+    "war_rel": -0.45,
+    "sv": 0,
+    "hld": 4
+   },
+   {
+    "name": "박준영",
+    "rel_ip": "35.0",
+    "rel_g": 28,
+    "era": 6.06,
+    "fip": 5.92,
+    "war_rel": -0.04,
+    "sv": 0,
+    "hld": 0
+   },
+   {
+    "name": "정우주",
+    "rel_ip": "33.0",
+    "rel_g": 41,
+    "era": 8.02,
+    "fip": 5.99,
+    "war_rel": -0.63,
+    "sv": 0,
+    "hld": 5
+   },
+   {
+    "name": "강재민",
+    "rel_ip": "26.1",
+    "rel_g": 29,
+    "era": 4.44,
+    "fip": 4.7,
+    "war_rel": 0.15,
+    "sv": 0,
+    "hld": 0
+   },
+   {
+    "name": "황준서",
+    "rel_ip": "26.0",
+    "rel_g": 19,
+    "era": 5.51,
+    "fip": 5.51,
+    "war_rel": 0.07,
+    "sv": 0,
+    "hld": 0
+   }
+  ],
+  "note": "한화 구원 등판 기준. war_rel = 시즌 WAR × 구원 아웃 비율(team_needs.py 방식). team_rel_war는 teams 표(team_needs.py) 값으로 통일(섹션 7에서 채움). 팀 불펜 WAR이 음수라 '비중 %'는 계산하지 않음"
+ },
+ "pitch_season": {
+  "me": [
+   {
+    "season": 2017,
+    "n": 317,
+    "swing": 46.7,
+    "whiff": 21.6,
+    "swstr": 10.1,
+    "csw": 24.9,
+    "zone_pct": 34.4,
+    "zcon": 87.5,
+    "chase": 30.5,
+    "rv100": 1.05,
+    "rv": 3.3
+   },
+   {
+    "season": 2018,
+    "n": 1033,
+    "swing": 46.1,
+    "whiff": 25.8,
+    "swstr": 11.9,
+    "csw": 27.2,
+    "zone_pct": 38.1,
+    "zcon": 84.4,
+    "chase": 30.7,
+    "rv100": 0.94,
+    "rv": 9.7
+   },
+   {
+    "season": 2019,
+    "n": 999,
+    "swing": 45.7,
+    "whiff": 22.1,
+    "swstr": 10.1,
+    "csw": 24.6,
+    "zone_pct": 43.5,
+    "zcon": 87.7,
+    "chase": 28.8,
+    "rv100": 0.33,
+    "rv": 3.3
+   },
+   {
+    "season": 2020,
+    "n": 981,
+    "swing": 48.5,
+    "whiff": 22.1,
+    "swstr": 10.7,
+    "csw": 25.2,
+    "zone_pct": 47.9,
+    "zcon": 86.3,
+    "chase": 29.0,
+    "rv100": -0.01,
+    "rv": -0.1
+   },
+   {
+    "season": 2022,
+    "n": 217,
+    "swing": 47.0,
+    "whiff": 32.4,
+    "swstr": 15.2,
+    "csw": 30.0,
+    "zone_pct": 46.1,
+    "zcon": 80.0,
+    "chase": 27.4,
+    "rv100": 0.81,
+    "rv": 1.7
+   },
+   {
+    "season": 2023,
+    "n": 1103,
+    "swing": 45.8,
+    "whiff": 24.8,
+    "swstr": 11.3,
+    "csw": 27.0,
+    "zone_pct": 47.5,
+    "zcon": 83.6,
+    "chase": 26.1,
+    "rv100": 0.14,
+    "rv": 1.6
+   },
+   {
+    "season": 2024,
+    "n": 1116,
+    "swing": 46.8,
+    "whiff": 22.6,
+    "swstr": 10.6,
+    "csw": 27.1,
+    "zone_pct": 44.9,
+    "zcon": 88.8,
+    "chase": 28.8,
+    "rv100": 1.06,
+    "rv": 11.9
+   },
+   {
+    "season": 2025,
+    "n": 1128,
+    "swing": 46.7,
+    "whiff": 18.0,
+    "swstr": 8.4,
+    "csw": 25.7,
+    "zone_pct": 46.5,
+    "zcon": 89.6,
+    "chase": 28.5,
+    "rv100": 0.2,
+    "rv": 2.3
+   },
+   {
+    "season": 2026,
+    "n": 849,
+    "swing": 49.5,
+    "whiff": 22.9,
+    "swstr": 11.3,
+    "csw": 27.6,
+    "zone_pct": 46.6,
+    "zcon": 85.9,
+    "chase": 31.6,
+    "rv100": 0.27,
+    "rv": 2.3
+   }
+  ],
+  "league_all": [
+   {
+    "season": 2017,
+    "n": 219438,
+    "swing": 45.7,
+    "whiff": 20.0,
+    "swstr": 9.1,
+    "csw": 26.7,
+    "zone_pct": 41.1,
+    "zcon": 87.2,
+    "chase": 29.2,
+    "rv100": 0.0,
+    "rv": 1.8
+   },
+   {
+    "season": 2018,
+    "n": 220439,
+    "swing": 46.1,
+    "whiff": 21.6,
+    "swstr": 10.0,
+    "csw": 26.9,
+    "zone_pct": 42.6,
+    "zcon": 85.8,
+    "chase": 29.0,
+    "rv100": 0.0,
+    "rv": 3.0
+   },
+   {
+    "season": 2019,
+    "n": 211628,
+    "swing": 45.5,
+    "whiff": 20.3,
+    "swstr": 9.3,
+    "csw": 26.6,
+    "zone_pct": 45.0,
+    "zcon": 86.8,
+    "chase": 28.0,
+    "rv100": 0.0,
+    "rv": 4.4
+   },
+   {
+    "season": 2020,
+    "n": 220863,
+    "swing": 45.4,
+    "whiff": 20.4,
+    "swstr": 9.3,
+    "csw": 26.2,
+    "zone_pct": 45.8,
+    "zcon": 86.2,
+    "chase": 27.8,
+    "rv100": 0.0,
+    "rv": 2.5
+   },
+   {
+    "season": 2021,
+    "n": 220832,
+    "swing": 44.0,
+    "whiff": 21.4,
+    "swstr": 9.4,
+    "csw": 26.9,
+    "zone_pct": 47.2,
+    "zcon": 85.8,
+    "chase": 26.2,
+    "rv100": 0.0,
+    "rv": 4.1
+   },
+   {
+    "season": 2022,
+    "n": 217025,
+    "swing": 45.9,
+    "whiff": 21.7,
+    "swstr": 10.0,
+    "csw": 27.3,
+    "zone_pct": 48.7,
+    "zcon": 85.5,
+    "chase": 27.1,
+    "rv100": 0.0,
+    "rv": 3.1
+   },
+   {
+    "season": 2023,
+    "n": 219839,
+    "swing": 44.9,
+    "whiff": 20.5,
+    "swstr": 9.2,
+    "csw": 26.8,
+    "zone_pct": 49.6,
+    "zcon": 86.4,
+    "chase": 26.1,
+    "rv100": 0.0,
+    "rv": 2.0
+   },
+   {
+    "season": 2024,
+    "n": 223216,
+    "swing": 45.5,
+    "whiff": 21.5,
+    "swstr": 9.8,
+    "csw": 27.3,
+    "zone_pct": 44.8,
+    "zcon": 86.4,
+    "chase": 28.7,
+    "rv100": 0.0,
+    "rv": 2.7
+   },
+   {
+    "season": 2025,
+    "n": 217857,
+    "swing": 45.1,
+    "whiff": 22.0,
+    "swstr": 9.9,
+    "csw": 27.9,
+    "zone_pct": 44.8,
+    "zcon": 86.5,
+    "chase": 29.1,
+    "rv100": 0.0,
+    "rv": 3.5
+   },
+   {
+    "season": 2026,
+    "n": 221527,
+    "swing": 44.8,
+    "whiff": 22.0,
+    "swstr": 9.9,
+    "csw": 27.9,
+    "zone_pct": 44.7,
+    "zcon": 86.7,
+    "chase": 28.5,
+    "rv100": 0.0,
+    "rv": 2.0
+   }
+  ],
+  "note": "league_all = 그 시즌 리그 전체 투구(선발 포함). rv/rv100 투수 기준(+가 투수에게 좋음)",
+  "pool_rank_2026": {
+   "whiff": {
+    "value": 22.9,
+    "rank": 27,
+    "n": 53,
+    "avg": 22.92,
+    "low_is_good": false
+   },
+   "swstr": {
+    "value": 11.3,
+    "rank": 17,
+    "n": 53,
+    "avg": 10.35,
+    "low_is_good": false
+   },
+   "csw": {
+    "value": 27.6,
+    "rank": 23,
+    "n": 53,
+    "avg": 27.54,
+    "low_is_good": false
+   },
+   "zcon": {
+    "value": 85.9,
+    "rank": 24,
+    "n": 53,
+    "avg": 86.03,
+    "low_is_good": true
+   },
+   "chase": {
+    "value": 31.6,
+    "rank": 14,
+    "n": 53,
+    "avg": 28.8,
+    "low_is_good": false
+   },
+   "zone_pct": {
+    "value": 46.6,
+    "rank": 11,
+    "n": 53,
+    "avg": 44.01,
+    "low_is_good": false
+   },
+   "rv100": {
+    "value": 0.27,
+    "rank": 25,
+    "n": 53,
+    "avg": 0.2,
+    "low_is_good": false
+   },
+   "fb4_velo": {
+    "value": 148.4,
+    "rank": 14,
+    "n": 52,
+    "avg": 146.16,
+    "low_is_good": false
+   }
+  }
+ },
+ "appear_span": {
+  "seasons": [
+   {
+    "season": 2017,
+    "g": 18,
+    "team_games_after_last": 0,
+    "team_games_before_first": 87,
+    "first": "2017-07-20",
+    "last": "2017-10-03"
+   },
+   {
+    "season": 2018,
+    "g": 69,
+    "team_games_after_last": 0,
+    "team_games_before_first": 0,
+    "first": "2018-03-24",
+    "last": "2018-10-13"
+   },
+   {
+    "season": 2019,
+    "g": 61,
+    "team_games_after_last": 3,
+    "team_games_before_first": 0,
+    "first": "2019-03-23",
+    "last": "2019-09-26"
+   },
+   {
+    "season": 2020,
+    "g": 62,
+    "team_games_after_last": 0,
+    "team_games_before_first": 2,
+    "first": "2020-05-07",
+    "last": "2020-10-30"
+   },
+   {
+    "season": 2022,
+    "g": 14,
+    "team_games_after_last": 14,
+    "team_games_before_first": 99,
+    "first": "2022-08-12",
+    "last": "2022-09-18"
+   },
+   {
+    "season": 2023,
+    "g": 55,
+    "team_games_after_last": 0,
+    "team_games_before_first": 14,
+    "first": "2023-04-19",
+    "last": "2023-10-16"
+   },
+   {
+    "season": 2024,
+    "g": 65,
+    "team_games_after_last": 0,
+    "team_games_before_first": 1,
+    "first": "2024-03-24",
+    "last": "2024-09-29"
+   },
+   {
+    "season": 2025,
+    "g": 74,
+    "team_games_after_last": 1,
+    "team_games_before_first": 0,
+    "first": "2025-03-22",
+    "last": "2025-10-01"
+   },
+   {
+    "season": 2026,
+    "g": 56,
+    "team_games_after_last": 23,
+    "team_games_before_first": 3,
+    "first": "2026-04-01",
+    "last": "2026-09-08"
+   }
+  ],
+  "note": "team_games_* = 그 시즌 한화 정규시즌 경기 중 첫 등판 전·마지막 등판 뒤 경기 수(선발 투수 기록으로 셈). 이탈 사유는 DB에 없음"
+ },
+ "pitch_type_season": {
+  "2017": [
+   {
+    "pitch": "포심",
+    "velo": 145.0,
+    "velo_max": 150.0,
+    "h_move": -16.8,
+    "v_move": 33.7,
+    "n": 192,
+    "swing": 51.6,
+    "whiff": 12.1,
+    "swstr": 6.3,
+    "csw": 20.8,
+    "zone_pct": 38.0,
+    "zcon": 90.6,
+    "chase": 30.2,
+    "rv100": 0.35,
+    "rv": 0.7,
+    "usage": 60.6
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 130.2,
+    "velo_max": 139.0,
+    "h_move": 13.6,
+    "v_move": -4.5,
+    "n": 81,
+    "swing": 30.9,
+    "whiff": 20.0,
+    "swstr": 6.2,
+    "csw": 22.2,
+    "zone_pct": 28.2,
+    "zcon": 81.8,
+    "chase": 17.6,
+    "rv100": 1.71,
+    "rv": 1.4,
+    "usage": 25.6
+   },
+   {
+    "pitch": "포크",
+    "velo": 135.4,
+    "velo_max": 140.0,
+    "h_move": -7.8,
+    "v_move": 7.7,
+    "n": 43,
+    "swing": 55.8,
+    "whiff": 62.5,
+    "swstr": 34.9,
+    "csw": 46.5,
+    "zone_pct": 30.2,
+    "zcon": 75.0,
+    "chase": 53.3,
+    "rv100": 2.8,
+    "rv": 1.2,
+    "usage": 13.6
+   }
+  ],
+  "2018": [
+   {
+    "pitch": "포심",
+    "velo": 146.0,
+    "velo_max": 151.0,
+    "h_move": -14.1,
+    "v_move": 34.8,
+    "n": 464,
+    "swing": 47.0,
+    "whiff": 15.1,
+    "swstr": 7.1,
+    "csw": 23.7,
+    "zone_pct": 46.2,
+    "zcon": 84.2,
+    "chase": 21.8,
+    "rv100": 0.85,
+    "rv": 3.9,
+    "usage": 44.9
+   },
+   {
+    "pitch": "포크",
+    "velo": 137.9,
+    "velo_max": 144.0,
+    "h_move": -8.0,
+    "v_move": 11.6,
+    "n": 354,
+    "swing": 49.4,
+    "whiff": 39.4,
+    "swstr": 19.5,
+    "csw": 28.5,
+    "zone_pct": 26.1,
+    "zcon": 79.4,
+    "chase": 39.4,
+    "rv100": 1.71,
+    "rv": 6.0,
+    "usage": 34.3
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 132.3,
+    "velo_max": 141.0,
+    "h_move": 15.5,
+    "v_move": -2.1,
+    "n": 208,
+    "swing": 38.9,
+    "whiff": 25.9,
+    "swstr": 10.1,
+    "csw": 32.7,
+    "zone_pct": 39.1,
+    "zcon": 92.7,
+    "chase": 31.7,
+    "rv100": 0.57,
+    "rv": 1.2,
+    "usage": 20.1
+   }
+  ],
+  "2019": [
+   {
+    "pitch": "포심",
+    "velo": 145.3,
+    "velo_max": 150.0,
+    "h_move": -10.5,
+    "v_move": 39.6,
+    "n": 441,
+    "swing": 44.0,
+    "whiff": 17.0,
+    "swstr": 7.5,
+    "csw": 22.9,
+    "zone_pct": 47.4,
+    "zcon": 84.3,
+    "chase": 21.2,
+    "rv100": 1.21,
+    "rv": 5.3,
+    "usage": 44.1
+   },
+   {
+    "pitch": "포크",
+    "velo": 135.6,
+    "velo_max": 141.0,
+    "h_move": -4.1,
+    "v_move": 10.6,
+    "n": 364,
+    "swing": 49.5,
+    "whiff": 28.3,
+    "swstr": 14.0,
+    "csw": 26.6,
+    "zone_pct": 39.8,
+    "zcon": 88.3,
+    "chase": 37.8,
+    "rv100": -0.37,
+    "rv": -1.4,
+    "usage": 36.4
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 134.6,
+    "velo_max": 141.0,
+    "h_move": 12.8,
+    "v_move": 7.4,
+    "n": 189,
+    "swing": 42.3,
+    "whiff": 21.3,
+    "swstr": 9.0,
+    "csw": 24.9,
+    "zone_pct": 41.0,
+    "zcon": 97.6,
+    "chase": 26.5,
+    "rv100": -0.15,
+    "rv": -0.3,
+    "usage": 18.9
+   }
+  ],
+  "2020": [
+   {
+    "pitch": "포심",
+    "velo": 145.5,
+    "velo_max": 151.0,
+    "h_move": -20.4,
+    "v_move": 39.1,
+    "n": 468,
+    "swing": 48.9,
+    "whiff": 16.6,
+    "swstr": 8.1,
+    "csw": 23.7,
+    "zone_pct": 53.0,
+    "zcon": 87.4,
+    "chase": 25.0,
+    "rv100": 1.14,
+    "rv": 5.3,
+    "usage": 47.7
+   },
+   {
+    "pitch": "포크",
+    "velo": 134.4,
+    "velo_max": 142.0,
+    "h_move": -7.7,
+    "v_move": 8.2,
+    "n": 268,
+    "swing": 52.6,
+    "whiff": 30.5,
+    "swstr": 16.0,
+    "csw": 26.1,
+    "zone_pct": 39.9,
+    "zcon": 81.7,
+    "chase": 36.6,
+    "rv100": -2.24,
+    "rv": -6.0,
+    "usage": 27.3
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 136.8,
+    "velo_max": 143.0,
+    "h_move": 8.1,
+    "v_move": 17.2,
+    "n": 234,
+    "swing": 43.6,
+    "whiff": 21.6,
+    "swstr": 9.4,
+    "csw": 26.9,
+    "zone_pct": 47.6,
+    "zcon": 88.6,
+    "chase": 26.2,
+    "rv100": 0.11,
+    "rv": 0.3,
+    "usage": 23.9
+   }
+  ],
+  "2022": [
+   {
+    "pitch": "포심",
+    "velo": 147.6,
+    "velo_max": 152.0,
+    "h_move": -23.8,
+    "v_move": 40.6,
+    "n": 119,
+    "swing": 44.5,
+    "whiff": 20.8,
+    "swstr": 9.2,
+    "csw": 27.7,
+    "zone_pct": 54.6,
+    "zcon": 84.8,
+    "chase": 13.0,
+    "rv100": 0.42,
+    "rv": 0.5,
+    "usage": 54.8
+   },
+   {
+    "pitch": "포크",
+    "velo": 134.8,
+    "velo_max": 138.0,
+    "h_move": -7.7,
+    "v_move": 2.1,
+    "n": 61,
+    "swing": 52.5,
+    "whiff": 50.0,
+    "swstr": 26.2,
+    "csw": 36.1,
+    "zone_pct": 44.3,
+    "zcon": 68.4,
+    "chase": 38.2,
+    "rv100": 0.84,
+    "rv": 0.5,
+    "usage": 28.1
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 133.7,
+    "velo_max": 139.0,
+    "h_move": 8.9,
+    "v_move": 3.7,
+    "n": 37,
+    "swing": 45.9,
+    "whiff": 35.3,
+    "swstr": 16.2,
+    "csw": 27.0,
+    "zone_pct": 21.6,
+    "zcon": 80.0,
+    "chase": 41.4,
+    "rv100": 1.98,
+    "rv": 0.7,
+    "usage": 17.1
+   }
+  ],
+  "2023": [
+   {
+    "pitch": "포심",
+    "velo": 147.8,
+    "velo_max": 152.0,
+    "h_move": -11.9,
+    "v_move": 42.5,
+    "n": 606,
+    "swing": 47.7,
+    "whiff": 19.4,
+    "swstr": 9.2,
+    "csw": 25.2,
+    "zone_pct": 55.7,
+    "zcon": 83.7,
+    "chase": 18.7,
+    "rv100": 0.12,
+    "rv": 0.7,
+    "usage": 54.9
+   },
+   {
+    "pitch": "포크",
+    "velo": 134.3,
+    "velo_max": 139.0,
+    "h_move": -2.7,
+    "v_move": 0.4,
+    "n": 400,
+    "swing": 44.8,
+    "whiff": 34.6,
+    "swstr": 15.5,
+    "csw": 30.3,
+    "zone_pct": 36.0,
+    "zcon": 80.9,
+    "chase": 35.2,
+    "rv100": 0.72,
+    "rv": 2.9,
+    "usage": 36.3
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 133.3,
+    "velo_max": 138.0,
+    "h_move": 18.8,
+    "v_move": 2.9,
+    "n": 97,
+    "swing": 38.1,
+    "whiff": 18.9,
+    "swstr": 7.2,
+    "csw": 24.7,
+    "zone_pct": 43.3,
+    "zcon": 92.3,
+    "chase": 20.0,
+    "rv100": -2.12,
+    "rv": -2.0,
+    "usage": 8.8
+   }
+  ],
+  "2024": [
+   {
+    "pitch": "포심",
+    "velo": 146.1,
+    "velo_max": 151.0,
+    "h_move": -24.3,
+    "v_move": 39.9,
+    "n": 590,
+    "swing": 44.9,
+    "whiff": 18.9,
+    "swstr": 8.5,
+    "csw": 27.8,
+    "zone_pct": 49.1,
+    "zcon": 86.5,
+    "chase": 24.7,
+    "rv100": 1.08,
+    "rv": 6.4,
+    "usage": 52.9
+   },
+   {
+    "pitch": "포크",
+    "velo": 133.3,
+    "velo_max": 139.0,
+    "h_move": -13.2,
+    "v_move": 4.1,
+    "n": 369,
+    "swing": 50.9,
+    "whiff": 30.9,
+    "swstr": 15.7,
+    "csw": 25.2,
+    "zone_pct": 35.2,
+    "zcon": 91.3,
+    "chase": 35.0,
+    "rv100": 0.74,
+    "rv": 2.7,
+    "usage": 33.1
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 133.1,
+    "velo_max": 142.0,
+    "h_move": 13.1,
+    "v_move": 3.9,
+    "n": 145,
+    "swing": 42.8,
+    "whiff": 12.9,
+    "swstr": 5.5,
+    "csw": 28.3,
+    "zone_pct": 53.5,
+    "zcon": 91.3,
+    "chase": 22.4,
+    "rv100": 2.64,
+    "rv": 3.8,
+    "usage": 13.0
+   }
+  ],
+  "2025": [
+   {
+    "pitch": "포심",
+    "velo": 147.1,
+    "velo_max": 151.0,
+    "h_move": -23.7,
+    "v_move": 35.3,
+    "n": 548,
+    "swing": 45.8,
+    "whiff": 15.5,
+    "swstr": 7.1,
+    "csw": 27.6,
+    "zone_pct": 50.5,
+    "zcon": 86.9,
+    "chase": 27.7,
+    "rv100": -0.03,
+    "rv": -0.2,
+    "usage": 48.6
+   },
+   {
+    "pitch": "포크",
+    "velo": 135.2,
+    "velo_max": 140.0,
+    "h_move": -14.8,
+    "v_move": 5.7,
+    "n": 361,
+    "swing": 52.6,
+    "whiff": 24.7,
+    "swstr": 13.0,
+    "csw": 24.9,
+    "zone_pct": 42.1,
+    "zcon": 91.2,
+    "chase": 36.4,
+    "rv100": 0.73,
+    "rv": 2.6,
+    "usage": 32.0
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 134.4,
+    "velo_max": 141.0,
+    "h_move": 11.4,
+    "v_move": 1.1,
+    "n": 219,
+    "swing": 39.3,
+    "whiff": 10.5,
+    "swstr": 4.1,
+    "csw": 22.4,
+    "zone_pct": 43.8,
+    "zcon": 93.8,
+    "chase": 17.1,
+    "rv100": -0.09,
+    "rv": -0.2,
+    "usage": 19.4
+   }
+  ],
+  "2026": [
+   {
+    "pitch": "포심",
+    "velo": 148.4,
+    "velo_max": 153.0,
+    "h_move": -23.3,
+    "v_move": 38.5,
+    "n": 345,
+    "swing": 49.0,
+    "whiff": 17.8,
+    "swstr": 8.7,
+    "csw": 25.5,
+    "zone_pct": 48.1,
+    "zcon": 87.8,
+    "chase": 30.2,
+    "rv100": -0.53,
+    "rv": -1.8,
+    "usage": 40.6
+   },
+   {
+    "pitch": "포크",
+    "velo": 136.6,
+    "velo_max": 142.0,
+    "h_move": -13.2,
+    "v_move": 11.5,
+    "n": 296,
+    "swing": 52.7,
+    "whiff": 31.4,
+    "swstr": 16.6,
+    "csw": 31.1,
+    "zone_pct": 44.9,
+    "zcon": 79.4,
+    "chase": 36.2,
+    "rv100": 0.74,
+    "rv": 2.2,
+    "usage": 34.9
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 138.8,
+    "velo_max": 145.0,
+    "h_move": 10.9,
+    "v_move": 15.9,
+    "n": 129,
+    "swing": 47.3,
+    "whiff": 23.0,
+    "swstr": 10.9,
+    "csw": 27.1,
+    "zone_pct": 43.4,
+    "zcon": 92.1,
+    "chase": 31.5,
+    "rv100": 0.31,
+    "rv": 0.4,
+    "usage": 15.2
+   },
+   {
+    "pitch": "투심",
+    "velo": 147.2,
+    "velo_max": 151.0,
+    "h_move": -31.8,
+    "v_move": 29.8,
+    "n": 69,
+    "swing": 43.5,
+    "whiff": 6.7,
+    "swstr": 2.9,
+    "csw": 24.6,
+    "zone_pct": 55.1,
+    "zcon": 92.0,
+    "chase": 16.1,
+    "rv100": 1.81,
+    "rv": 1.2,
+    "usage": 8.1
+   }
+  ],
+  "league_2026": [
+   {
+    "pitch": "포심",
+    "velo": 146.4,
+    "n": 88334,
+    "swing": 44.6,
+    "whiff": 15.1,
+    "swstr": 6.7,
+    "csw": 25.9,
+    "zone_pct": 47.8,
+    "zcon": 89.1,
+    "chase": 25.5,
+    "rv100": -0.16,
+    "rv": -144.8
+   },
+   {
+    "pitch": "슬라이더",
+    "velo": 133.4,
+    "n": 36861,
+    "swing": 44.5,
+    "whiff": 29.9,
+    "swstr": 13.3,
+    "csw": 31.4,
+    "zone_pct": 42.9,
+    "zcon": 84.8,
+    "chase": 30.7,
+    "rv100": 0.11,
+    "rv": 39.7
+   },
+   {
+    "pitch": "투심",
+    "velo": 144.7,
+    "n": 18627,
+    "swing": 43.8,
+    "whiff": 12.2,
+    "swstr": 5.3,
+    "csw": 27.2,
+    "zone_pct": 51.2,
+    "zcon": 91.8,
+    "chase": 24.5,
+    "rv100": 0.21,
+    "rv": 39.5
+   },
+   {
+    "pitch": "포크",
+    "velo": 133.4,
+    "n": 18600,
+    "swing": 48.7,
+    "whiff": 30.9,
+    "swstr": 15.1,
+    "csw": 26.8,
+    "zone_pct": 37.2,
+    "zcon": 81.6,
+    "chase": 34.8,
+    "rv100": 0.0,
+    "rv": 0.1
+   }
+  ]
+ },
+ "age_curve": {
+  "rule": "기준 시즌: 30이닝 이상·아웃의 90% 이상 구원·국내 선수, 2010~2025. 나이 = 시즌 − 출생 연도(박상원 2026=32, 2027=33)",
+  "age_32_34": {
+   "n_base": 143,
+   "n_next_any": 132,
+   "n_next_rp30": 85,
+   "pct_next_rp30": 59.4,
+   "base_war": 0.52,
+   "pair_war_base": 0.54,
+   "pair_war_next": 0.25,
+   "pair_war_drop_pct": 68.9,
+   "rp30_fip_base": 4.17,
+   "rp30_fip_next": 4.44,
+   "rp30_k_base": 19.9,
+   "rp30_k_next": 18.9,
+   "rp30_velo_base": 141.36,
+   "rp30_velo_next": 141.3,
+   "n_velo": 84,
+   "two_yr_war_next2": 0.39,
+   "n_two_yr": 136
+  },
+  "age_27_31": {
+   "n_base": 342,
+   "n_next_any": 313,
+   "n_next_rp30": 199,
+   "pct_next_rp30": 58.2,
+   "base_war": 0.5,
+   "pair_war_base": 0.52,
+   "pair_war_next": 0.36,
+   "pair_war_drop_pct": 60.7,
+   "rp30_fip_base": 4.19,
+   "rp30_fip_next": 4.33,
+   "rp30_k_base": 20.7,
+   "rp30_k_next": 20.57,
+   "rp30_velo_base": 142.92,
+   "rp30_velo_next": 142.82,
+   "n_velo": 195,
+   "two_yr_war_next2": 0.6,
+   "n_two_yr": 323
+  },
+  "age_32_34_war03": {
+   "n_base": 86,
+   "n_next_any": 82,
+   "n_next_rp30": 59,
+   "pct_next_rp30": 68.6,
+   "base_war": 0.9,
+   "pair_war_base": 0.91,
+   "pair_war_next": 0.36,
+   "pair_war_drop_pct": 84.1,
+   "rp30_fip_base": 3.83,
+   "rp30_fip_next": 4.43,
+   "rp30_k_base": 21.08,
+   "rp30_k_next": 19.16,
+   "rp30_velo_base": 141.87,
+   "rp30_velo_next": 141.69,
+   "n_velo": 59,
+   "two_yr_war_next2": 0.59,
+   "n_two_yr": 83
+  },
+  "age_27_31_war03": {
+   "n_base": 205,
+   "n_next_any": 192,
+   "n_next_rp30": 144,
+   "pct_next_rp30": 70.2,
+   "base_war": 0.91,
+   "pair_war_base": 0.92,
+   "pair_war_next": 0.5,
+   "pair_war_drop_pct": 72.9,
+   "rp30_fip_base": 3.85,
+   "rp30_fip_next": 4.22,
+   "rp30_k_base": 21.91,
+   "rp30_k_next": 21.18,
+   "rp30_velo_base": 143.05,
+   "rp30_velo_next": 142.86,
+   "n_velo": 142,
+   "two_yr_war_next2": 0.86,
+   "n_two_yr": 196
+  },
+  "age_32": {
+   "n_base": 51,
+   "n_next_any": 45,
+   "n_next_rp30": 28,
+   "pct_next_rp30": 54.9,
+   "base_war": 0.61,
+   "pair_war_base": 0.63,
+   "pair_war_next": 0.32,
+   "pair_war_drop_pct": 66.7,
+   "rp30_fip_base": 3.79,
+   "rp30_fip_next": 4.47,
+   "rp30_k_base": 22.79,
+   "rp30_k_next": 19.86,
+   "rp30_velo_base": 142.25,
+   "rp30_velo_next": 142.24,
+   "n_velo": 28,
+   "two_yr_war_next2": 0.51,
+   "n_two_yr": 49
+  },
+  "age_33": {
+   "n_base": 49,
+   "n_next_any": 45,
+   "n_next_rp30": 30,
+   "pct_next_rp30": 61.2,
+   "base_war": 0.49,
+   "pair_war_base": 0.52,
+   "pair_war_next": 0.24,
+   "pair_war_drop_pct": 71.1,
+   "rp30_fip_base": 4.27,
+   "rp30_fip_next": 4.45,
+   "rp30_k_base": 18.95,
+   "rp30_k_next": 18.3,
+   "rp30_velo_base": 141.08,
+   "rp30_velo_next": 140.9,
+   "n_velo": 29,
+   "two_yr_war_next2": 0.39,
+   "n_two_yr": 45
+  },
+  "note": "pair_* = 다음 시즌 1군 기록이 있는 쌍(1이닝이라도). rp30_* = 다음 시즌도 같은 구원 기준을 넘긴 쌍. two_yr_war_next2 = 다음 두 시즌 WAR 합(기록 없으면 0, 기준 시즌 ≤2024). _war03 = 기준 시즌 WAR 0.3 이상(박상원 2026 WAR 0.57)만. 평균 회귀가 섞여 있어 '나이 효과'만 따로 떼어낸 값이 아님"
+ },
+ "hand_pitch_2026": [
+  {
+   "side": "L",
+   "pitch": "포크",
+   "n": 150,
+   "swing": 50.0,
+   "whiff": 34.7,
+   "swstr": 17.3,
+   "csw": 38.0,
+   "zone_pct": 46.0,
+   "zcon": 79.1,
+   "chase": 39.5,
+   "rv100": 2.83,
+   "rv": 4.2
+  },
+  {
+   "side": "L",
+   "pitch": "포심",
+   "n": 109,
+   "swing": 38.5,
+   "whiff": 11.9,
+   "swstr": 4.6,
+   "csw": 23.9,
+   "zone_pct": 49.5,
+   "zcon": 88.6,
+   "chase": 12.7,
+   "rv100": -5.42,
+   "rv": -5.9
+  },
+  {
+   "side": "L",
+   "pitch": "투심",
+   "n": 65,
+   "swing": 44.6,
+   "whiff": 6.9,
+   "swstr": 3.1,
+   "csw": 26.2,
+   "zone_pct": 58.5,
+   "zcon": 92.0,
+   "chase": 14.8,
+   "rv100": 2.12,
+   "rv": 1.4
+  },
+  {
+   "side": "L",
+   "pitch": "슬라이더",
+   "n": 39,
+   "swing": 48.7,
+   "whiff": 10.5,
+   "swstr": 5.1,
+   "csw": 23.1,
+   "zone_pct": 53.8,
+   "zcon": 100.0,
+   "chase": 22.2,
+   "rv100": -0.25,
+   "rv": -0.1
+  },
+  {
+   "side": "R",
+   "pitch": "포심",
+   "n": 236,
+   "swing": 53.8,
+   "whiff": 19.7,
+   "swstr": 10.6,
+   "csw": 26.3,
+   "zone_pct": 47.5,
+   "zcon": 87.5,
+   "chase": 37.9,
+   "rv100": 1.73,
+   "rv": 4.1
+  },
+  {
+   "side": "R",
+   "pitch": "포크",
+   "n": 146,
+   "swing": 55.5,
+   "whiff": 28.4,
+   "swstr": 15.8,
+   "csw": 24.0,
+   "zone_pct": 43.8,
+   "zcon": 79.6,
+   "chase": 32.9,
+   "rv100": -1.39,
+   "rv": -2.0
+  },
+  {
+   "side": "R",
+   "pitch": "슬라이더",
+   "n": 90,
+   "swing": 46.7,
+   "whiff": 28.6,
+   "swstr": 13.3,
+   "csw": 28.9,
+   "zone_pct": 38.9,
+   "zcon": 87.0,
+   "chase": 34.5,
+   "rv100": 0.56,
+   "rv": 0.5
+  },
+  {
+   "side": "L",
+   "pitch": "전체",
+   "n": 364,
+   "swing": 45.6,
+   "whiff": 21.1,
+   "swstr": 9.6,
+   "csw": 29.9,
+   "zone_pct": 50.3,
+   "zcon": 87.4,
+   "chase": 26.0,
+   "rv100": -0.11,
+   "rv": -0.4
+  },
+  {
+   "side": "R",
+   "pitch": "전체",
+   "n": 485,
+   "swing": 52.4,
+   "whiff": 24.0,
+   "swstr": 12.6,
+   "csw": 25.8,
+   "zone_pct": 43.9,
+   "zcon": 84.8,
+   "chase": 35.3,
+   "rv100": 0.55,
+   "rv": 2.7
+  }
+ ],
+ "arsenal": {
+  "2017": [
+   {
+    "pitch": "포심",
+    "n": 192,
+    "usage": 60.6,
+    "velo": 145.0,
+    "max_velo": 150.0,
+    "whiff": 12.1,
+    "opp_avg": 0.304,
+    "opp_slg": 0.446
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 81,
+    "usage": 25.6,
+    "velo": 130.2,
+    "max_velo": 139.0,
+    "whiff": 20.0,
+    "opp_avg": 0.083,
+    "opp_slg": 0.083
+   },
+   {
+    "pitch": "포크",
+    "n": 43,
+    "usage": 13.6,
+    "velo": 135.4,
+    "max_velo": 140.0,
+    "whiff": 62.5,
+    "opp_avg": 0.091,
+    "opp_slg": 0.364
+   },
+   {
+    "pitch": "커브",
+    "n": 1,
+    "usage": 0.3,
+    "velo": 125.0,
+    "max_velo": 125.0,
+    "whiff": null,
+    "opp_avg": null,
+    "opp_slg": null
+   }
+  ],
+  "2018": [
+   {
+    "pitch": "포심",
+    "n": 464,
+    "usage": 44.9,
+    "velo": 146.0,
+    "max_velo": 151.0,
+    "whiff": 15.1,
+    "opp_avg": 0.295,
+    "opp_slg": 0.402
+   },
+   {
+    "pitch": "포크",
+    "n": 354,
+    "usage": 34.3,
+    "velo": 137.9,
+    "max_velo": 144.0,
+    "whiff": 39.4,
+    "opp_avg": 0.208,
+    "opp_slg": 0.222
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 208,
+    "usage": 20.1,
+    "velo": 132.3,
+    "max_velo": 141.0,
+    "whiff": 25.9,
+    "opp_avg": 0.238,
+    "opp_slg": 0.381
+   },
+   {
+    "pitch": "커브",
+    "n": 7,
+    "usage": 0.7,
+    "velo": 125.9,
+    "max_velo": 134.0,
+    "whiff": 0.0,
+    "opp_avg": 1.0,
+    "opp_slg": 4.0
+   }
+  ],
+  "2019": [
+   {
+    "pitch": "포심",
+    "n": 441,
+    "usage": 44.1,
+    "velo": 145.3,
+    "max_velo": 150.0,
+    "whiff": 17.0,
+    "opp_avg": 0.179,
+    "opp_slg": 0.269
+   },
+   {
+    "pitch": "포크",
+    "n": 364,
+    "usage": 36.4,
+    "velo": 135.6,
+    "max_velo": 141.0,
+    "whiff": 28.3,
+    "opp_avg": 0.265,
+    "opp_slg": 0.378
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 189,
+    "usage": 18.9,
+    "velo": 134.6,
+    "max_velo": 141.0,
+    "whiff": 21.3,
+    "opp_avg": 0.282,
+    "opp_slg": 0.359
+   },
+   {
+    "pitch": "커브",
+    "n": 4,
+    "usage": 0.4,
+    "velo": 122.3,
+    "max_velo": 124.0,
+    "whiff": 0.0,
+    "opp_avg": null,
+    "opp_slg": null
+   },
+   {
+    "pitch": "투심",
+    "n": 1,
+    "usage": 0.1,
+    "velo": 142.0,
+    "max_velo": 142.0,
+    "whiff": 0.0,
+    "opp_avg": 1.0,
+    "opp_slg": 1.0
+   }
+  ],
+  "2020": [
+   {
+    "pitch": "포심",
+    "n": 468,
+    "usage": 47.7,
+    "velo": 145.5,
+    "max_velo": 151.0,
+    "whiff": 16.6,
+    "opp_avg": 0.239,
+    "opp_slg": 0.376
+   },
+   {
+    "pitch": "포크",
+    "n": 268,
+    "usage": 27.3,
+    "velo": 134.4,
+    "max_velo": 142.0,
+    "whiff": 30.5,
+    "opp_avg": 0.343,
+    "opp_slg": 0.612
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 234,
+    "usage": 23.9,
+    "velo": 136.8,
+    "max_velo": 143.0,
+    "whiff": 21.6,
+    "opp_avg": 0.255,
+    "opp_slg": 0.392
+   },
+   {
+    "pitch": "커브",
+    "n": 8,
+    "usage": 0.8,
+    "velo": 122.8,
+    "max_velo": 127.0,
+    "whiff": 33.3,
+    "opp_avg": 0.0,
+    "opp_slg": 0.0
+   },
+   {
+    "pitch": "체인지업",
+    "n": 3,
+    "usage": 0.3,
+    "velo": 133.3,
+    "max_velo": 134.0,
+    "whiff": 100.0,
+    "opp_avg": 0.0,
+    "opp_slg": 0.0
+   }
+  ],
+  "2022": [
+   {
+    "pitch": "포심",
+    "n": 119,
+    "usage": 54.8,
+    "velo": 147.6,
+    "max_velo": 152.0,
+    "whiff": 20.8,
+    "opp_avg": 0.333,
+    "opp_slg": 0.333
+   },
+   {
+    "pitch": "포크",
+    "n": 61,
+    "usage": 28.1,
+    "velo": 134.8,
+    "max_velo": 138.0,
+    "whiff": 50.0,
+    "opp_avg": 0.2,
+    "opp_slg": 0.3
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 37,
+    "usage": 17.1,
+    "velo": 133.7,
+    "max_velo": 139.0,
+    "whiff": 35.3,
+    "opp_avg": 0.111,
+    "opp_slg": 0.111
+   }
+  ],
+  "2023": [
+   {
+    "pitch": "포심",
+    "n": 606,
+    "usage": 54.9,
+    "velo": 147.8,
+    "max_velo": 152.0,
+    "whiff": 19.4,
+    "opp_avg": 0.302,
+    "opp_slg": 0.411
+   },
+   {
+    "pitch": "포크",
+    "n": 400,
+    "usage": 36.3,
+    "velo": 134.3,
+    "max_velo": 139.0,
+    "whiff": 34.6,
+    "opp_avg": 0.202,
+    "opp_slg": 0.238
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 97,
+    "usage": 8.8,
+    "velo": 133.3,
+    "max_velo": 138.0,
+    "whiff": 18.9,
+    "opp_avg": 0.292,
+    "opp_slg": 0.458
+   }
+  ],
+  "2024": [
+   {
+    "pitch": "포심",
+    "n": 590,
+    "usage": 52.9,
+    "velo": 146.1,
+    "max_velo": 151.0,
+    "whiff": 18.9,
+    "opp_avg": 0.242,
+    "opp_slg": 0.331
+   },
+   {
+    "pitch": "포크",
+    "n": 369,
+    "usage": 33.1,
+    "velo": 133.3,
+    "max_velo": 139.0,
+    "whiff": 30.9,
+    "opp_avg": 0.231,
+    "opp_slg": 0.341
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 145,
+    "usage": 13.0,
+    "velo": 133.1,
+    "max_velo": 142.0,
+    "whiff": 12.9,
+    "opp_avg": 0.143,
+    "opp_slg": 0.25
+   },
+   {
+    "pitch": "커브",
+    "n": 6,
+    "usage": 0.5,
+    "velo": 122.7,
+    "max_velo": 124.0,
+    "whiff": 40.0,
+    "opp_avg": 1.0,
+    "opp_slg": 1.0
+   },
+   {
+    "pitch": "투심",
+    "n": 6,
+    "usage": 0.5,
+    "velo": 146.5,
+    "max_velo": 149.0,
+    "whiff": 0.0,
+    "opp_avg": 0.5,
+    "opp_slg": 0.5
+   }
+  ],
+  "2025": [
+   {
+    "pitch": "포심",
+    "n": 548,
+    "usage": 48.6,
+    "velo": 147.1,
+    "max_velo": 151.0,
+    "whiff": 15.5,
+    "opp_avg": 0.26,
+    "opp_slg": 0.439
+   },
+   {
+    "pitch": "포크",
+    "n": 361,
+    "usage": 32.0,
+    "velo": 135.2,
+    "max_velo": 140.0,
+    "whiff": 24.7,
+    "opp_avg": 0.253,
+    "opp_slg": 0.297
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 219,
+    "usage": 19.4,
+    "velo": 134.4,
+    "max_velo": 141.0,
+    "whiff": 10.5,
+    "opp_avg": 0.279,
+    "opp_slg": 0.326
+   }
+  ],
+  "2026": [
+   {
+    "pitch": "포심",
+    "n": 345,
+    "usage": 40.6,
+    "velo": 148.4,
+    "max_velo": 153.0,
+    "whiff": 17.8,
+    "opp_avg": 0.303,
+    "opp_slg": 0.5
+   },
+   {
+    "pitch": "포크",
+    "n": 296,
+    "usage": 34.9,
+    "velo": 136.6,
+    "max_velo": 142.0,
+    "whiff": 31.4,
+    "opp_avg": 0.247,
+    "opp_slg": 0.356
+   },
+   {
+    "pitch": "슬라이더",
+    "n": 129,
+    "usage": 15.2,
+    "velo": 138.8,
+    "max_velo": 145.0,
+    "whiff": 23.0,
+    "opp_avg": 0.286,
+    "opp_slg": 0.321
+   },
+   {
+    "pitch": "투심",
+    "n": 69,
+    "usage": 8.1,
+    "velo": 147.2,
+    "max_velo": 151.0,
+    "whiff": 6.7,
+    "opp_avg": 0.211,
+    "opp_slg": 0.263
+   },
+   {
+    "pitch": "커터",
+    "n": 7,
+    "usage": 0.8,
+    "velo": 143.6,
+    "max_velo": 145.0,
+    "whiff": 0.0,
+    "opp_avg": 0.0,
+    "opp_slg": 0.0
+   },
+   {
+    "pitch": "스위퍼",
+    "n": 3,
+    "usage": 0.4,
+    "velo": 134.7,
+    "max_velo": 137.0,
+    "whiff": 50.0,
+    "opp_avg": 0.0,
+    "opp_slg": 0.0
+   }
+  ]
+ },
+ "postseason": {
+  "team_rank": 9,
+  "team_record": "57승 83패 4무",
+  "team_ps_games": 0,
+  "note": "한화 2026 정규시즌 9위로 포스트시즌 진출 실패 → 등판 없음"
+ },
+ "teams": {
+  "KT": {
+   "rank_2026": 1,
+   "rp_ip": "507.2",
+   "rp_outs": 1523,
+   "rp_ip_share": 39.3,
+   "rp_era": 4.68,
+   "rp_ra9": 5.23,
+   "rp_fip": 4.78,
+   "rp_k_pct": 19.5,
+   "rp_bb_pct": 11.6,
+   "rp_kbb_pct": 9.4,
+   "rp_war_fip": 2.4,
+   "rp_war_ra9": 2.24,
+   "rp_war": 2.32,
+   "rp_wpa": 4.19,
+   "sv": 33,
+   "hld": 86,
+   "cap_room": 42.8,
+   "cap_room_franchise": 53.5,
+   "rp_era_rank": 4,
+   "rp_fip_rank": 3,
+   "rp_war_rank": 3,
+   "rp_wpa_rank": 3,
+   "rp_k_pct_rank": 3,
+   "rp_bb_pct_rank": 2,
+   "rp_war_fip_rank": 2,
+   "rp_war_ra9_rank": 4,
+   "rp_ip_share_rank": 9,
+   "rp_kbb_pct_rank": 2,
+   "rp_outs_rank": 9,
+   "weak_score": 3.25,
+   "rp_pool_vs_me": {
+    "n_pool": 7,
+    "war_better": 2,
+    "wpa_better": 2,
+    "era_better": 5
+   },
+   "cap_note": "한승혁·김민수·김민혁·배정대 등 원소속 FA 재계약 미포함",
+   "ext_fa_3y": [
+    4,
+    148
+   ]
+  },
+  "삼성": {
+   "rank_2026": 2,
+   "rp_ip": "517.1",
+   "rp_outs": 1552,
+   "rp_ip_share": 40.4,
+   "rp_era": 4.23,
+   "rp_ra9": 4.63,
+   "rp_fip": 5.17,
+   "rp_k_pct": 19.5,
+   "rp_bb_pct": 12.1,
+   "rp_kbb_pct": 9.0,
+   "rp_war_fip": 2.03,
+   "rp_war_ra9": 6.71,
+   "rp_war": 4.37,
+   "rp_wpa": 4.66,
+   "sv": 42,
+   "hld": 75,
+   "cap_room": 3.3,
+   "cap_room_franchise": 18.2,
+   "rp_era_rank": 2,
+   "rp_fip_rank": 6,
+   "rp_war_rank": 1,
+   "rp_wpa_rank": 2,
+   "rp_k_pct_rank": 4,
+   "rp_bb_pct_rank": 4,
+   "rp_war_fip_rank": 3,
+   "rp_war_ra9_rank": 1,
+   "rp_ip_share_rank": 8,
+   "rp_kbb_pct_rank": 3,
+   "rp_outs_rank": 8,
+   "weak_score": 2.75,
+   "rp_pool_vs_me": {
+    "n_pool": 6,
+    "war_better": 3,
+    "wpa_better": 3,
+    "era_better": 5
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    4,
+    162
+   ]
+  },
+  "KIA": {
+   "rank_2026": 3,
+   "rp_ip": "547.0",
+   "rp_outs": 1641,
+   "rp_ip_share": 42.7,
+   "rp_era": 4.43,
+   "rp_ra9": 4.9,
+   "rp_fip": 5.01,
+   "rp_k_pct": 17.9,
+   "rp_bb_pct": 11.4,
+   "rp_kbb_pct": 7.9,
+   "rp_war_fip": 0.25,
+   "rp_war_ra9": 2.22,
+   "rp_war": 1.23,
+   "rp_wpa": -0.02,
+   "sv": 29,
+   "hld": 91,
+   "cap_room": 40.2,
+   "cap_room_franchise": 47.7,
+   "rp_era_rank": 3,
+   "rp_fip_rank": 5,
+   "rp_war_rank": 5,
+   "rp_wpa_rank": 5,
+   "rp_k_pct_rank": 9,
+   "rp_bb_pct_rank": 1,
+   "rp_war_fip_rank": 6,
+   "rp_war_ra9_rank": 5,
+   "rp_ip_share_rank": 5,
+   "rp_kbb_pct_rank": 4,
+   "rp_outs_rank": 4,
+   "weak_score": 4.5,
+   "rp_pool_vs_me": {
+    "n_pool": 6,
+    "war_better": 1,
+    "wpa_better": 2,
+    "era_better": 4
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    1,
+    20
+   ]
+  },
+  "LG": {
+   "rank_2026": 4,
+   "rp_ip": "572.1",
+   "rp_outs": 1717,
+   "rp_ip_share": 45.0,
+   "rp_era": 5.05,
+   "rp_ra9": 5.43,
+   "rp_fip": 4.86,
+   "rp_k_pct": 18.4,
+   "rp_bb_pct": 12.4,
+   "rp_kbb_pct": 7.9,
+   "rp_war_fip": 0.05,
+   "rp_war_ra9": 0.08,
+   "rp_war": 0.07,
+   "rp_wpa": 2.47,
+   "sv": 50,
+   "hld": 104,
+   "cap_room": 29.1,
+   "cap_room_franchise": 39.4,
+   "rp_era_rank": 5,
+   "rp_fip_rank": 4,
+   "rp_war_rank": 6,
+   "rp_wpa_rank": 4,
+   "rp_k_pct_rank": 7,
+   "rp_bb_pct_rank": 5,
+   "rp_war_fip_rank": 7,
+   "rp_war_ra9_rank": 7,
+   "rp_ip_share_rank": 2,
+   "rp_kbb_pct_rank": 5,
+   "rp_outs_rank": 2,
+   "weak_score": 4.75,
+   "rp_pool_vs_me": {
+    "n_pool": 5,
+    "war_better": 1,
+    "wpa_better": 2,
+    "era_better": 3
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    2,
+    66
+   ]
+  },
+  "두산": {
+   "rank_2026": 5,
+   "rp_ip": "532.2",
+   "rp_outs": 1598,
+   "rp_ip_share": 41.5,
+   "rp_era": 3.97,
+   "rp_ra9": 4.56,
+   "rp_fip": 4.4,
+   "rp_k_pct": 22.7,
+   "rp_bb_pct": 12.0,
+   "rp_kbb_pct": 12.5,
+   "rp_war_fip": 1.77,
+   "rp_war_ra9": 2.77,
+   "rp_war": 2.27,
+   "rp_wpa": 4.91,
+   "sv": 34,
+   "hld": 59,
+   "cap_room": 38.6,
+   "cap_room_franchise": 49.1,
+   "rp_era_rank": 1,
+   "rp_fip_rank": 1,
+   "rp_war_rank": 4,
+   "rp_wpa_rank": 1,
+   "rp_k_pct_rank": 1,
+   "rp_bb_pct_rank": 3,
+   "rp_war_fip_rank": 4,
+   "rp_war_ra9_rank": 2,
+   "rp_ip_share_rank": 7,
+   "rp_kbb_pct_rank": 1,
+   "rp_outs_rank": 7,
+   "weak_score": 1.75,
+   "rp_pool_vs_me": {
+    "n_pool": 6,
+    "war_better": 3,
+    "wpa_better": 4,
+    "era_better": 4
+   },
+   "cap_note": "박치국 재계약 미포함(양의지·정수빈만 반영)",
+   "ext_fa_3y": [
+    1,
+    80
+   ]
+  },
+  "SSG": {
+   "rank_2026": 6,
+   "rp_ip": "566.1",
+   "rp_outs": 1699,
+   "rp_ip_share": 44.6,
+   "rp_era": 5.16,
+   "rp_ra9": 5.75,
+   "rp_fip": 5.53,
+   "rp_k_pct": 19.3,
+   "rp_bb_pct": 14.3,
+   "rp_kbb_pct": 7.1,
+   "rp_war_fip": -0.97,
+   "rp_war_ra9": 0.15,
+   "rp_war": -0.41,
+   "rp_wpa": -2.11,
+   "sv": 29,
+   "hld": 65,
+   "cap_room": 51.3,
+   "cap_room_franchise": 65.0,
+   "rp_era_rank": 7,
+   "rp_fip_rank": 9,
+   "rp_war_rank": 7,
+   "rp_wpa_rank": 7,
+   "rp_k_pct_rank": 5,
+   "rp_bb_pct_rank": 9,
+   "rp_war_fip_rank": 8,
+   "rp_war_ra9_rank": 6,
+   "rp_ip_share_rank": 3,
+   "rp_kbb_pct_rank": 6,
+   "rp_outs_rank": 3,
+   "weak_score": 7.5,
+   "rp_pool_vs_me": {
+    "n_pool": 7,
+    "war_better": 3,
+    "wpa_better": 3,
+    "era_better": 5
+   },
+   "cap_note": "문승원 재계약 미포함(최지훈만 반영)",
+   "ext_fa_3y": [
+    0,
+    0
+   ]
+  },
+  "롯데": {
+   "rank_2026": 7,
+   "rp_ip": "486.1",
+   "rp_outs": 1459,
+   "rp_ip_share": 38.1,
+   "rp_era": 5.07,
+   "rp_ra9": 5.68,
+   "rp_fip": 4.76,
+   "rp_k_pct": 18.4,
+   "rp_bb_pct": 12.5,
+   "rp_kbb_pct": 7.1,
+   "rp_war_fip": 4.68,
+   "rp_war_ra9": 2.5,
+   "rp_war": 3.59,
+   "rp_wpa": -0.26,
+   "sv": 27,
+   "hld": 71,
+   "cap_room": 77.0,
+   "cap_room_franchise": 86.0,
+   "rp_era_rank": 6,
+   "rp_fip_rank": 2,
+   "rp_war_rank": 2,
+   "rp_wpa_rank": 6,
+   "rp_k_pct_rank": 8,
+   "rp_bb_pct_rank": 6,
+   "rp_war_fip_rank": 1,
+   "rp_war_ra9_rank": 3,
+   "rp_ip_share_rank": 10,
+   "rp_kbb_pct_rank": 7,
+   "rp_outs_rank": 10,
+   "weak_score": 4.0,
+   "rp_pool_vs_me": {
+    "n_pool": 4,
+    "war_better": 2,
+    "wpa_better": 2,
+    "era_better": 3
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    0,
+    0
+   ]
+  },
+  "NC": {
+   "rank_2026": 8,
+   "rp_ip": "543.0",
+   "rp_outs": 1629,
+   "rp_ip_share": 42.7,
+   "rp_era": 5.22,
+   "rp_ra9": 6.02,
+   "rp_fip": 5.34,
+   "rp_k_pct": 20.4,
+   "rp_bb_pct": 16.3,
+   "rp_kbb_pct": 6.3,
+   "rp_war_fip": -1.46,
+   "rp_war_ra9": -3.26,
+   "rp_war": -2.36,
+   "rp_wpa": -8.28,
+   "sv": 28,
+   "hld": 79,
+   "cap_room": 87.1,
+   "cap_room_franchise": 96.6,
+   "rp_era_rank": 8,
+   "rp_fip_rank": 8,
+   "rp_war_rank": 9,
+   "rp_wpa_rank": 9,
+   "rp_k_pct_rank": 2,
+   "rp_bb_pct_rank": 10,
+   "rp_war_fip_rank": 9,
+   "rp_war_ra9_rank": 9,
+   "rp_ip_share_rank": 6,
+   "rp_kbb_pct_rank": 9,
+   "rp_outs_rank": 5,
+   "weak_score": 8.5,
+   "rp_pool_vs_me": {
+    "n_pool": 4,
+    "war_better": 0,
+    "wpa_better": 0,
+    "era_better": 0
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    0,
+    0
+   ]
+  },
+  "한화": {
+   "rank_2026": 9,
+   "rp_ip": "606.2",
+   "rp_outs": 1820,
+   "rp_ip_share": 47.7,
+   "rp_era": 5.41,
+   "rp_ra9": 6.13,
+   "rp_fip": 5.25,
+   "rp_k_pct": 18.5,
+   "rp_bb_pct": 13.8,
+   "rp_kbb_pct": 6.9,
+   "rp_war_fip": 0.76,
+   "rp_war_ra9": -2.78,
+   "rp_war": -1.01,
+   "rp_wpa": -10.72,
+   "sv": 16,
+   "hld": 56,
+   "cap_room": 32.0,
+   "cap_room_franchise": 42.6,
+   "rp_era_rank": 9,
+   "rp_fip_rank": 7,
+   "rp_war_rank": 8,
+   "rp_wpa_rank": 10,
+   "rp_k_pct_rank": 6,
+   "rp_bb_pct_rank": 8,
+   "rp_war_fip_rank": 5,
+   "rp_war_ra9_rank": 8,
+   "rp_ip_share_rank": 1,
+   "rp_kbb_pct_rank": 8,
+   "rp_outs_rank": 1,
+   "weak_score": 8.5,
+   "rp_pool_vs_me": {
+    "n_pool": 4,
+    "war_better": 2,
+    "wpa_better": 0,
+    "era_better": 3
+   },
+   "cap_note": "박상원·최재훈 재계약 미포함, 노시환 MLB 진출 가정(잔류 시 여유 약 4억, team_needs.md 4장)",
+   "ext_fa_3y": [
+    4,
+    300
+   ]
+  },
+  "키움": {
+   "rank_2026": 10,
+   "rp_ip": "542.2",
+   "rp_outs": 1628,
+   "rp_ip_share": 42.8,
+   "rp_era": 6.14,
+   "rp_ra9": 6.62,
+   "rp_fip": 5.55,
+   "rp_k_pct": 16.4,
+   "rp_bb_pct": 12.7,
+   "rp_kbb_pct": 5.6,
+   "rp_war_fip": -4.82,
+   "rp_war_ra9": -8.93,
+   "rp_war": -6.88,
+   "rp_wpa": -3.81,
+   "sv": 29,
+   "hld": 60,
+   "cap_room": 100.5,
+   "cap_room_franchise": 105.5,
+   "rp_era_rank": 10,
+   "rp_fip_rank": 10,
+   "rp_war_rank": 10,
+   "rp_wpa_rank": 8,
+   "rp_k_pct_rank": 10,
+   "rp_bb_pct_rank": 7,
+   "rp_war_fip_rank": 10,
+   "rp_war_ra9_rank": 10,
+   "rp_ip_share_rank": 4,
+   "rp_kbb_pct_rank": 10,
+   "rp_outs_rank": 6,
+   "weak_score": 9.5,
+   "rp_pool_vs_me": {
+    "n_pool": 4,
+    "war_better": 0,
+    "wpa_better": 1,
+    "era_better": 2
+   },
+   "cap_note": null,
+   "ext_fa_3y": [
+    0,
+    0
+   ]
+  }
+ },
+ "weak_bullpen_order": [
+  "키움",
+  "NC",
+  "한화",
+  "SSG",
+  "LG",
+  "KIA",
+  "롯데",
+  "KT",
+  "삼성",
+  "두산"
+ ],
+ "rivals_pitchers": [
+  {
+   "name": "박상원",
+   "team": "한화",
+   "grade": "A",
+   "entry": "FA 승인",
+   "age": 33,
+   "war": [
+    0.94,
+    0.62,
+    0.57
+   ],
+   "ww": 0.65,
+   "last": {
+    "g": 56,
+    "gs": 0,
+    "ip": "50.2",
+    "era": 4.8,
+    "fip": 3.75,
+    "k_pct": 23.1,
+    "bb_pct": 8.0,
+    "war": 0.57
+   }
+  },
+  {
+   "name": "문승원",
+   "team": "SSG",
+   "grade": "C",
+   "entry": "FA 승인",
+   "age": 38,
+   "war": [
+    0.56,
+    0.69,
+    0.37
+   ],
+   "ww": 0.51,
+   "last": {
+    "g": 62,
+    "gs": 0,
+    "ip": "62.2",
+    "era": 3.45,
+    "fip": 5.74,
+    "k_pct": 13.0,
+    "bb_pct": 10.5,
+    "war": 0.37
+   }
+  },
+  {
+   "name": "한승혁",
+   "team": "KT",
+   "grade": "B",
+   "entry": "FA 승인",
+   "age": 34,
+   "war": [
+    0.51,
+    1.32,
+    -0.18
+   ],
+   "ww": 0.44,
+   "last": {
+    "g": 35,
+    "gs": 0,
+    "ip": "32.1",
+    "era": 6.68,
+    "fip": 4.84,
+    "k_pct": 23.6,
+    "bb_pct": 14.0,
+    "war": -0.18
+   }
+  },
+  {
+   "name": "김민수",
+   "team": "KT",
+   "grade": "B",
+   "entry": "FA 승인",
+   "age": 35,
+   "war": [
+    0.49,
+    0.21,
+    -0.06
+   ],
+   "ww": 0.12,
+   "last": {
+    "g": 39,
+    "gs": 0,
+    "ip": "42.2",
+    "era": 5.7,
+    "fip": 4.76,
+    "k_pct": 18.6,
+    "bb_pct": 8.8,
+    "war": -0.06
+   }
+  },
+  {
+   "name": "박치국",
+   "team": "두산",
+   "grade": "B",
+   "entry": "FA 승인",
+   "age": 29,
+   "war": [
+    -0.52,
+    0.14,
+    -0.19
+   ],
+   "ww": -0.14,
+   "last": {
+    "g": 56,
+    "gs": 0,
+    "ip": "48.1",
+    "era": 5.4,
+    "fip": 4.09,
+    "k_pct": 19.3,
+    "bb_pct": 5.6,
+    "war": -0.19
+   }
+  },
+  {
+   "name": "함덕주",
+   "team": "LG",
+   "grade": null,
+   "entry": "옵트아웃",
+   "age": 32,
+   "war": [
+    -0.1,
+    -0.19,
+    -0.29
+   ],
+   "ww": -0.22,
+   "last": {
+    "g": 37,
+    "gs": 1,
+    "ip": "32.0",
+    "era": 6.19,
+    "fip": 5.58,
+    "k_pct": 14.1,
+    "bb_pct": 9.2,
+    "war": -0.29
+   }
+  }
+ ],
+ "targets": {
+  "NC": {
+   "rank_2026": 8,
+   "weak_rank": 2,
+   "rp": {
+    "ip": "543.0",
+    "ip_rank": 5,
+    "era": 5.22,
+    "era_rank": 8,
+    "fip": 5.34,
+    "fip_rank": 8,
+    "kbb": 6.3,
+    "kbb_rank": 9,
+    "war": -2.36,
+    "war_rank": 9,
+    "war_fip": -1.46,
+    "war_ra9": -3.26,
+    "wpa": -8.28,
+    "wpa_rank": 9,
+    "sv": 28,
+    "hld": 79
+   },
+   "better_than_park": {
+    "rule": "2026 이 팀 구원 20이닝 이상, 구원만 따로 계산한 FIP·WAR이 박상원 구원 값(FIP 3.75·WAR 0.57)보다 좋은 투수",
+    "n_rel20": 12,
+    "fip_better": [],
+    "war_better": [],
+    "pool": {
+     "n_pool": 4,
+     "war_better": 0,
+     "wpa_better": 0,
+     "era_better": 0
+    }
+   },
+   "top5_rel_ip": [
+    {
+     "name": "전사민",
+     "rel_g": 69,
+     "rel_ip": "63.0",
+     "era": 5.43,
+     "fip": 5.6,
+     "kbb": 2.4,
+     "war": -0.48,
+     "sv": 10,
+     "hld": 6
+    },
+    {
+     "name": "배재환",
+     "rel_g": 60,
+     "rel_ip": "49.1",
+     "era": 4.93,
+     "fip": 4.42,
+     "kbb": 11.4,
+     "war": 0.2,
+     "sv": 1,
+     "hld": 17
+    },
+    {
+     "name": "임지민",
+     "rel_g": 49,
+     "rel_ip": "46.2",
+     "era": 5.4,
+     "fip": 5.05,
+     "kbb": 12.5,
+     "war": -0.1,
+     "sv": 6,
+     "hld": 9
+    },
+    {
+     "name": "김진호",
+     "rel_g": 58,
+     "rel_ip": "45.1",
+     "era": 6.15,
+     "fip": 7.09,
+     "kbb": -5.3,
+     "war": -0.66,
+     "sv": 1,
+     "hld": 18
+    },
+    {
+     "name": "손주환",
+     "rel_g": 47,
+     "rel_ip": "38.2",
+     "era": 7.45,
+     "fip": 4.96,
+     "kbb": 8.8,
+     "war": -0.64,
+     "sv": 1,
+     "hld": 4
+    }
+   ],
+   "cap": {
+    "room": 87.1,
+    "room_franchise": 96.6,
+    "keep": 64.1,
+    "own_fa": [
+     "권희동"
+    ],
+    "after_park": 81.3,
+    "after_park_franchise": 90.8,
+    "floor2027": 60.7,
+    "below_floor_keep": false,
+    "floor_gap_keep": 0,
+    "keep_plus_park": 69.9,
+    "comp_cash_200": 5.26,
+    "comp_cash_300": 7.89,
+    "first_year_cash_200": 11.1,
+    "first_year_cash_300": 13.7,
+    "note": "after_park = cap27 room − 모델 연평균 5.8억(샐캡은 연평균 기준, preview와 같음). 보상금은 원소속 구단에 주는 돈이라 샐캡 계산에 넣지 않았다(샐캡 산입 여부 미확인). first_year_cash = 첫해 연평균 + 보상금(현금 부담 감각용)"
+   },
+   "swap": {
+    "replaced": [
+     {
+      "name": "김진호",
+      "rel_ip": "45.1",
+      "rel_fip": 7.09,
+      "take_ip": "45.1"
+     },
+     {
+      "name": "류진욱",
+      "rel_ip": "32.0",
+      "rel_fip": 6.65,
+      "take_ip": "4.2"
+     }
+    ],
+    "low_fip": 7.05,
+    "low_war": -0.77,
+    "low_war_fip": -0.96,
+    "park_fip": 3.82,
+    "park_war": 0.55,
+    "park_war_fip": 0.75,
+    "rp_fip_before": 5.34,
+    "rp_fip_after": 5.04,
+    "rp_fip_delta": -0.3,
+    "rp_war_before": -2.36,
+    "rp_war_after": -1.04,
+    "rp_war_delta": 1.32,
+    "runs_fip": 18.0,
+    "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+    "rp_fip_rank_after": 6,
+    "rp_war_rank_after": 9
+   },
+   "moves": {
+    "out_fa": [],
+    "out_military": [],
+    "in_military": [],
+    "out_rel_ip": "0.0",
+    "out_rel_war": 0
+   }
+  },
+  "키움": {
+   "rank_2026": 10,
+   "weak_rank": 1,
+   "rp": {
+    "ip": "542.2",
+    "ip_rank": 6,
+    "era": 6.14,
+    "era_rank": 10,
+    "fip": 5.55,
+    "fip_rank": 10,
+    "kbb": 5.6,
+    "kbb_rank": 10,
+    "war": -6.88,
+    "war_rank": 10,
+    "war_fip": -4.82,
+    "war_ra9": -8.93,
+    "wpa": -3.81,
+    "wpa_rank": 8,
+    "sv": 29,
+    "hld": 60
+   },
+   "better_than_park": {
+    "rule": "2026 이 팀 구원 20이닝 이상, 구원만 따로 계산한 FIP·WAR이 박상원 구원 값(FIP 3.75·WAR 0.57)보다 좋은 투수",
+    "n_rel20": 11,
+    "fip_better": [],
+    "war_better": [],
+    "pool": {
+     "n_pool": 4,
+     "war_better": 0,
+     "wpa_better": 1,
+     "era_better": 2
+    }
+   },
+   "top5_rel_ip": [
+    {
+     "name": "유토",
+     "rel_g": 59,
+     "rel_ip": "50.1",
+     "era": 5.19,
+     "fip": 3.93,
+     "kbb": 15.9,
+     "war": 0.15,
+     "sv": 14,
+     "hld": 12
+    },
+    {
+     "name": "원종현",
+     "rel_g": 53,
+     "rel_ip": "48.0",
+     "era": 6.19,
+     "fip": 4.1,
+     "kbb": 8.7,
+     "war": -0.29,
+     "sv": 7,
+     "hld": 8
+    },
+    {
+     "name": "박지성",
+     "rel_g": 42,
+     "rel_ip": "47.0",
+     "era": 4.4,
+     "fip": 6.34,
+     "kbb": 3.3,
+     "war": -0.51,
+     "sv": 0,
+     "hld": 2
+    },
+    {
+     "name": "조영건",
+     "rel_g": 47,
+     "rel_ip": "42.0",
+     "era": 4.5,
+     "fip": 5.34,
+     "kbb": 11.0,
+     "war": -0.16,
+     "sv": 3,
+     "hld": 6
+    },
+    {
+     "name": "박정훈",
+     "rel_g": 38,
+     "rel_ip": "40.2",
+     "era": 5.09,
+     "fip": 4.68,
+     "kbb": 6.3,
+     "war": -0.25,
+     "sv": 0,
+     "hld": 11
+    }
+   ],
+   "cap": {
+    "room": 100.5,
+    "room_franchise": 105.5,
+    "keep": 50.7,
+    "own_fa": [],
+    "after_park": 94.7,
+    "after_park_franchise": 99.7,
+    "floor2027": 60.7,
+    "below_floor_keep": true,
+    "floor_gap_keep": 9.9,
+    "keep_plus_park": 56.5,
+    "comp_cash_200": 5.26,
+    "comp_cash_300": 7.89,
+    "first_year_cash_200": 11.1,
+    "first_year_cash_300": 13.7,
+    "note": "after_park = cap27 room − 모델 연평균 5.8억(샐캡은 연평균 기준, preview와 같음). 보상금은 원소속 구단에 주는 돈이라 샐캡 계산에 넣지 않았다(샐캡 산입 여부 미확인). first_year_cash = 첫해 연평균 + 보상금(현금 부담 감각용)"
+   },
+   "swap": {
+    "replaced": [
+     {
+      "name": "정현우",
+      "rel_ip": "15.0",
+      "rel_fip": 7.99,
+      "take_ip": "15.0"
+     },
+     {
+      "name": "정다훈",
+      "rel_ip": "28.0",
+      "rel_fip": 7.47,
+      "take_ip": "28.0"
+     },
+     {
+      "name": "김재웅",
+      "rel_ip": "20.1",
+      "rel_fip": 6.95,
+      "take_ip": "7.0"
+     }
+    ],
+    "low_fip": 7.55,
+    "low_war": -1.56,
+    "low_war_fip": -1.58,
+    "park_fip": 3.82,
+    "park_war": 0.55,
+    "park_war_fip": 0.75,
+    "rp_fip_before": 5.55,
+    "rp_fip_after": 5.21,
+    "rp_fip_delta": -0.34,
+    "rp_war_before": -6.88,
+    "rp_war_after": -4.77,
+    "rp_war_delta": 2.11,
+    "runs_fip": 20.8,
+    "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+    "rp_fip_rank_after": 7,
+    "rp_war_rank_after": 10
+   },
+   "moves": {
+    "out_fa": [],
+    "out_military": [],
+    "in_military": [],
+    "out_rel_ip": "0.0",
+    "out_rel_war": 0
+   }
+  }
+ },
+ "others_low": {
+  "한화": {
+   "rank_2026": 9,
+   "weak_rank": 3,
+   "rp_era": 5.41,
+   "rp_fip": 5.25,
+   "rp_kbb": 6.9,
+   "rp_war": -1.01,
+   "cap_room": 32.0,
+   "cap_note": "박상원·최재훈 재계약 미포함, 노시환 MLB 진출 가정(잔류 시 여유 약 4억, team_needs.md 4장)",
+   "ext_fa_3y": [
+    4,
+    300
+   ],
+   "swap_fip_delta": 0.28,
+   "swap_war_delta": -1.5
+  },
+  "SSG": {
+   "rank_2026": 6,
+   "weak_rank": 4,
+   "rp_era": 5.16,
+   "rp_fip": 5.53,
+   "rp_kbb": 7.1,
+   "rp_war": -0.41,
+   "cap_room": 51.3,
+   "cap_note": "문승원 재계약 미포함(최지훈만 반영)",
+   "ext_fa_3y": [
+    0,
+    0
+   ],
+   "swap_fip_delta": -0.29,
+   "swap_war_delta": 1.16
+  },
+  "LG": {
+   "rank_2026": 4,
+   "weak_rank": 5,
+   "rp_era": 5.05,
+   "rp_fip": 4.86,
+   "rp_kbb": 7.9,
+   "rp_war": 0.07,
+   "cap_room": 29.1,
+   "cap_note": null,
+   "ext_fa_3y": [
+    2,
+    66
+   ],
+   "swap_fip_delta": -0.22,
+   "swap_war_delta": 1.97
+  },
+  "KIA": {
+   "rank_2026": 3,
+   "weak_rank": 6,
+   "rp_era": 4.43,
+   "rp_fip": 5.01,
+   "rp_kbb": 7.9,
+   "rp_war": 1.23,
+   "cap_room": 40.2,
+   "cap_note": null,
+   "ext_fa_3y": [
+    1,
+    20
+   ],
+   "swap_fip_delta": -0.32,
+   "swap_war_delta": 1.21
+  }
+ },
+ "fa_history": {
+  "NC": [
+   {
+    "fa": "2021-12",
+    "player": "박건우",
+    "from_team": "두산",
+    "years": 6,
+    "total": 100,
+    "comp_player": "강진성"
+   },
+   {
+    "fa": "2021-12",
+    "player": "손아섭",
+    "from_team": "롯데",
+    "grade": "B",
+    "years": 4,
+    "total": 64,
+    "comp_player": "문경찬"
+   },
+   {
+    "fa": "2022-11",
+    "player": "박세혁",
+    "from_team": "두산",
+    "years": 4,
+    "total": 46,
+    "comp_player": "미확인(위키백과 표기 박준영, 보조)",
+    "note": "경향 2026-11-17: 이후 외부 FA 없음"
+   }
+  ],
+  "키움": [
+   {
+    "fa": "2011",
+    "player": "이택근",
+    "note": "복귀 성격"
+   },
+   {
+    "fa": "2022-11",
+    "player": "원종현",
+    "from_team": "NC",
+    "years": 4,
+    "total": 25,
+    "grade": "미확인",
+    "comp": "미확인"
+   },
+   {
+    "fa": "2022-11",
+    "player": "이형종",
+    "kind": "퓨처스 FA",
+    "years": 4,
+    "total": 20,
+    "comp": "퓨처스 FA라 보상 규정 다름(보상 내용 미확인)"
+   }
+  ],
+  "note": "경향 2026-11-16: 키움 외부 FA는 이택근·원종현이 전부, 이후 4년 시장 관망. 단장 '50대 50', '과열되면 참전 안 함'. 감독 '투수 보강되면 좋겠다'. NC 경향 2026-11-17: 필요하면 움직일 수 있다는 원론, 관심은 중견수(김호령 C등급 거론), 불펜·박상원 언급 없음"
+ },
+ "detail": {
+  "side_results": [
+   {
+    "season": 2023,
+    "side": "L",
+    "pa": 132,
+    "avg": 0.28,
+    "obp": 0.344,
+    "slg": 0.381,
+    "k_pct": 21.2,
+    "bb_pct": 8.3,
+    "hr": 2,
+    "woba": 0.339,
+    "ops": 0.725,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "side": "R",
+    "pa": 142,
+    "avg": 0.252,
+    "obp": 0.338,
+    "slg": 0.328,
+    "k_pct": 20.4,
+    "bb_pct": 10.6,
+    "hr": 0,
+    "woba": 0.319,
+    "ops": 0.666,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "side": "L",
+    "pa": 140,
+    "avg": 0.221,
+    "obp": 0.309,
+    "slg": 0.336,
+    "k_pct": 27.9,
+    "bb_pct": 10.7,
+    "hr": 2,
+    "woba": 0.301,
+    "ops": 0.645,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "side": "R",
+    "pa": 138,
+    "avg": 0.242,
+    "obp": 0.312,
+    "slg": 0.323,
+    "k_pct": 18.8,
+    "bb_pct": 5.1,
+    "hr": 0,
+    "woba": 0.297,
+    "ops": 0.635,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "side": "L",
+    "pa": 132,
+    "avg": 0.235,
+    "obp": 0.318,
+    "slg": 0.322,
+    "k_pct": 22.0,
+    "bb_pct": 6.8,
+    "hr": 1,
+    "woba": 0.305,
+    "ops": 0.64,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "side": "R",
+    "pa": 162,
+    "avg": 0.282,
+    "obp": 0.342,
+    "slg": 0.408,
+    "k_pct": 14.2,
+    "bb_pct": 7.4,
+    "hr": 3,
+    "woba": 0.343,
+    "ops": 0.75,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "side": "L",
+    "pa": 104,
+    "avg": 0.286,
+    "obp": 0.363,
+    "slg": 0.396,
+    "k_pct": 20.2,
+    "bb_pct": 10.6,
+    "hr": 1,
+    "woba": 0.349,
+    "ops": 0.759,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "side": "R",
+    "pa": 121,
+    "avg": 0.252,
+    "obp": 0.308,
+    "slg": 0.393,
+    "k_pct": 25.6,
+    "bb_pct": 5.8,
+    "hr": 3,
+    "woba": 0.318,
+    "ops": 0.701,
+    "small": false
+   }
+  ],
+  "side_results_lg_rhp": [
+   {
+    "season": 2023,
+    "side": "L",
+    "pa": 20391,
+    "avg": 0.265,
+    "obp": 0.342,
+    "slg": 0.375,
+    "k_pct": 17.1,
+    "bb_pct": 9.5,
+    "hr": 296,
+    "woba": 0.339,
+    "ops": 0.717,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "side": "R",
+    "pa": 20095,
+    "avg": 0.26,
+    "obp": 0.33,
+    "slg": 0.373,
+    "k_pct": 18.3,
+    "bb_pct": 8.1,
+    "hr": 369,
+    "woba": 0.332,
+    "ops": 0.703,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "side": "L",
+    "pa": 20413,
+    "avg": 0.288,
+    "obp": 0.362,
+    "slg": 0.429,
+    "k_pct": 18.1,
+    "bb_pct": 9.8,
+    "hr": 448,
+    "woba": 0.359,
+    "ops": 0.791,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "side": "R",
+    "pa": 19948,
+    "avg": 0.27,
+    "obp": 0.341,
+    "slg": 0.417,
+    "k_pct": 18.9,
+    "bb_pct": 8.3,
+    "hr": 560,
+    "woba": 0.344,
+    "ops": 0.758,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "side": "L",
+    "pa": 20394,
+    "avg": 0.269,
+    "obp": 0.344,
+    "slg": 0.4,
+    "k_pct": 18.9,
+    "bb_pct": 9.3,
+    "hr": 425,
+    "woba": 0.344,
+    "ops": 0.744,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "side": "R",
+    "pa": 20079,
+    "avg": 0.253,
+    "obp": 0.326,
+    "slg": 0.383,
+    "k_pct": 20.7,
+    "bb_pct": 8.1,
+    "hr": 485,
+    "woba": 0.328,
+    "ops": 0.709,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "side": "L",
+    "pa": 22128,
+    "avg": 0.276,
+    "obp": 0.352,
+    "slg": 0.406,
+    "k_pct": 18.0,
+    "bb_pct": 9.8,
+    "hr": 463,
+    "woba": 0.349,
+    "ops": 0.758,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "side": "R",
+    "pa": 20715,
+    "avg": 0.254,
+    "obp": 0.33,
+    "slg": 0.394,
+    "k_pct": 21.3,
+    "bb_pct": 8.4,
+    "hr": 550,
+    "woba": 0.333,
+    "ops": 0.724,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "side": null,
+    "pa": 2,
+    "avg": 0.5,
+    "obp": 0.5,
+    "slg": 0.5,
+    "k_pct": 0.0,
+    "bb_pct": 0.0,
+    "hr": 0,
+    "woba": 0.464,
+    "ops": 1.0,
+    "small": true
+   }
+  ],
+  "side_mix": {
+   "2023_L": {
+    "포심": {
+     "n": 297,
+     "usage": 55.0,
+     "rv100": -0.78,
+     "whiff": 14.5,
+     "small": false
+    },
+    "포크": {
+     "n": 216,
+     "usage": 40.0,
+     "rv100": 1.39,
+     "whiff": 31.3,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 27,
+     "usage": 5.0,
+     "rv100": -3.42,
+     "whiff": 21.4,
+     "small": true
+    },
+    "_total": 540
+   },
+   "2023_R": {
+    "포심": {
+     "n": 309,
+     "usage": 54.9,
+     "rv100": 0.98,
+     "whiff": 23.8,
+     "small": false
+    },
+    "포크": {
+     "n": 184,
+     "usage": 32.7,
+     "rv100": -0.06,
+     "whiff": 38.8,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 70,
+     "usage": 12.4,
+     "rv100": -1.61,
+     "whiff": 17.4,
+     "small": true
+    },
+    "_total": 563
+   },
+   "2024_L": {
+    "포심": {
+     "n": 327,
+     "usage": 53.0,
+     "rv100": 0.81,
+     "whiff": 22.2,
+     "small": false
+    },
+    "포크": {
+     "n": 239,
+     "usage": 38.7,
+     "rv100": 0.91,
+     "whiff": 37.7,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 42,
+     "usage": 6.8,
+     "rv100": 5.11,
+     "whiff": 14.3,
+     "small": true
+    },
+    "투심": {
+     "n": 6,
+     "usage": 1.0,
+     "rv100": -10.56,
+     "whiff": 0.0,
+     "small": true
+    },
+    "커브": {
+     "n": 3,
+     "usage": 0.5,
+     "rv100": -17.36,
+     "whiff": 50.0,
+     "small": true
+    },
+    "_total": 617
+   },
+   "2024_R": {
+    "포심": {
+     "n": 263,
+     "usage": 52.7,
+     "rv100": 1.42,
+     "whiff": 14.9,
+     "small": false
+    },
+    "포크": {
+     "n": 130,
+     "usage": 26.1,
+     "rv100": 0.44,
+     "whiff": 20.3,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 103,
+     "usage": 20.6,
+     "rv100": 1.63,
+     "whiff": 12.2,
+     "small": false
+    },
+    "커브": {
+     "n": 3,
+     "usage": 0.6,
+     "rv100": 2.23,
+     "whiff": 33.3,
+     "small": true
+    },
+    "_total": 499
+   },
+   "2025_L": {
+    "포심": {
+     "n": 257,
+     "usage": 51.2,
+     "rv100": 0.28,
+     "whiff": 21.0,
+     "small": false
+    },
+    "포크": {
+     "n": 179,
+     "usage": 35.7,
+     "rv100": 1.44,
+     "whiff": 22.9,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 66,
+     "usage": 13.1,
+     "rv100": -0.21,
+     "whiff": 4.3,
+     "small": true
+    },
+    "_total": 502
+   },
+   "2025_R": {
+    "포심": {
+     "n": 291,
+     "usage": 46.5,
+     "rv100": -0.3,
+     "whiff": 11.6,
+     "small": false
+    },
+    "포크": {
+     "n": 182,
+     "usage": 29.1,
+     "rv100": 0.04,
+     "whiff": 26.6,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 153,
+     "usage": 24.4,
+     "rv100": -0.04,
+     "whiff": 12.7,
+     "small": false
+    },
+    "_total": 626
+   },
+   "2026_L": {
+    "포크": {
+     "n": 150,
+     "usage": 41.2,
+     "rv100": 2.83,
+     "whiff": 34.7,
+     "small": false
+    },
+    "포심": {
+     "n": 109,
+     "usage": 29.9,
+     "rv100": -5.42,
+     "whiff": 11.9,
+     "small": false
+    },
+    "투심": {
+     "n": 65,
+     "usage": 17.9,
+     "rv100": 2.12,
+     "whiff": 6.9,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 39,
+     "usage": 10.7,
+     "rv100": -0.25,
+     "whiff": 10.5,
+     "small": true
+    },
+    "커터": {
+     "n": 1,
+     "usage": 0.3,
+     "rv100": 0.0,
+     "whiff": 0.0,
+     "small": true
+    },
+    "_total": 364
+   },
+   "2026_R": {
+    "포심": {
+     "n": 236,
+     "usage": 48.7,
+     "rv100": 1.73,
+     "whiff": 19.7,
+     "small": false
+    },
+    "포크": {
+     "n": 146,
+     "usage": 30.1,
+     "rv100": -1.39,
+     "whiff": 28.4,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 90,
+     "usage": 18.6,
+     "rv100": 0.56,
+     "whiff": 28.6,
+     "small": true
+    },
+    "커터": {
+     "n": 6,
+     "usage": 1.2,
+     "rv100": 1.92,
+     "whiff": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 4,
+     "usage": 0.8,
+     "rv100": -3.33,
+     "whiff": 0.0,
+     "small": true
+    },
+    "스위퍼": {
+     "n": 3,
+     "usage": 0.6,
+     "rv100": 4.95,
+     "whiff": 50.0,
+     "small": true
+    },
+    "_total": 485
+   }
+  },
+  "sinker_check": [
+   {
+    "season": 2022,
+    "pitch": "포심",
+    "n": 119,
+    "velo": 147.6,
+    "h_move": -23.8,
+    "v_move": 40.6,
+    "rel_h": 173.7,
+    "rel_x": -59.92,
+    "h_sd": 7.5,
+    "v_sd": 4.0
+   },
+   {
+    "season": 2023,
+    "pitch": "포심",
+    "n": 606,
+    "velo": 147.8,
+    "h_move": -11.9,
+    "v_move": 42.5,
+    "rel_h": 177.2,
+    "rel_x": -53.79,
+    "h_sd": 9.2,
+    "v_sd": 4.8
+   },
+   {
+    "season": 2024,
+    "pitch": "투심",
+    "n": 6,
+    "velo": 146.5,
+    "h_move": -31.3,
+    "v_move": 28.8,
+    "rel_h": 174.9,
+    "rel_x": -57.91,
+    "h_sd": 4.4,
+    "v_sd": 4.8
+   },
+   {
+    "season": 2024,
+    "pitch": "포심",
+    "n": 590,
+    "velo": 146.1,
+    "h_move": -24.3,
+    "v_move": 39.9,
+    "rel_h": 177.5,
+    "rel_x": -47.9,
+    "h_sd": 9.9,
+    "v_sd": 6.4
+   },
+   {
+    "season": 2025,
+    "pitch": "포심",
+    "n": 548,
+    "velo": 147.1,
+    "h_move": -23.7,
+    "v_move": 35.3,
+    "rel_h": 178.0,
+    "rel_x": -55.05,
+    "h_sd": 8.3,
+    "v_sd": 7.9
+   },
+   {
+    "season": 2026,
+    "pitch": "커터",
+    "n": 7,
+    "velo": 143.6,
+    "h_move": 7.3,
+    "v_move": 28.9,
+    "rel_h": 170.6,
+    "rel_x": -51.63,
+    "h_sd": 9.5,
+    "v_sd": 3.9
+   },
+   {
+    "season": 2026,
+    "pitch": "투심",
+    "n": 69,
+    "velo": 147.2,
+    "h_move": -31.8,
+    "v_move": 29.8,
+    "rel_h": 174.7,
+    "rel_x": -48.77,
+    "h_sd": 7.8,
+    "v_sd": 3.9
+   },
+   {
+    "season": 2026,
+    "pitch": "포심",
+    "n": 345,
+    "velo": 148.4,
+    "h_move": -23.3,
+    "v_move": 38.5,
+    "rel_h": 172.8,
+    "rel_x": -49.33,
+    "h_sd": 8.4,
+    "v_sd": 8.1
+   }
+  ],
+  "fb_tail": [
+   {
+    "season": 2023,
+    "n": 606,
+    "tail_n": 43,
+    "tail_pct": 7.1
+   },
+   {
+    "season": 2024,
+    "n": 590,
+    "tail_n": 183,
+    "tail_pct": 31.0
+   },
+   {
+    "season": 2025,
+    "n": 548,
+    "tail_n": 145,
+    "tail_pct": 26.5
+   },
+   {
+    "season": 2026,
+    "n": 345,
+    "tail_n": 93,
+    "tail_pct": 27.0
+   }
+  ],
+  "sinker_by_month_2026": [
+   {
+    "m": 4,
+    "sinker": 1,
+    "four": 100
+   },
+   {
+    "m": 5,
+    "sinker": 5,
+    "four": 63
+   },
+   {
+    "m": 6,
+    "sinker": 12,
+    "four": 57
+   },
+   {
+    "m": 7,
+    "sinker": 22,
+    "four": 65
+   },
+   {
+    "m": 8,
+    "sinker": 24,
+    "four": 33
+   },
+   {
+    "m": 9,
+    "sinker": 5,
+    "four": 27
+   }
+  ],
+  "count_mix": {
+   "2023_2스트라이크": {
+    "포심": {
+     "n": 158,
+     "usage": 50.5,
+     "whiff": 21.2,
+     "k": 25,
+     "k_per_pitch": 15.8,
+     "small": false
+    },
+    "포크": {
+     "n": 133,
+     "usage": 42.5,
+     "whiff": 29.9,
+     "k": 29,
+     "k_per_pitch": 21.8,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 22,
+     "usage": 7.0,
+     "whiff": 20.0,
+     "k": 3,
+     "k_per_pitch": 13.6,
+     "small": true
+    },
+    "_total": 313
+   },
+   "2023_동률(1-1)": {
+    "포심": {
+     "n": 53,
+     "usage": 50.0,
+     "whiff": 30.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 46,
+     "usage": 43.4,
+     "whiff": 52.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 7,
+     "usage": 6.6,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 106
+   },
+   "2023_불리(볼 많음)": {
+    "포심": {
+     "n": 193,
+     "usage": 69.4,
+     "whiff": 14.5,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "포크": {
+     "n": 69,
+     "usage": 24.8,
+     "whiff": 30.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 16,
+     "usage": 5.8,
+     "whiff": 20.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 278
+   },
+   "2023_유리(스트 많음, 2S 전)": {
+    "포크": {
+     "n": 60,
+     "usage": 45.5,
+     "whiff": 36.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포심": {
+     "n": 56,
+     "usage": 42.4,
+     "whiff": 13.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 16,
+     "usage": 12.1,
+     "whiff": 16.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 132
+   },
+   "2023_초구": {
+    "포심": {
+     "n": 146,
+     "usage": 53.3,
+     "whiff": 21.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "포크": {
+     "n": 92,
+     "usage": 33.6,
+     "whiff": 39.1,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 36,
+     "usage": 13.1,
+     "whiff": 33.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 274
+   },
+   "2024_2스트라이크": {
+    "포심": {
+     "n": 179,
+     "usage": 49.6,
+     "whiff": 17.1,
+     "k": 31,
+     "k_per_pitch": 17.3,
+     "small": false
+    },
+    "포크": {
+     "n": 139,
+     "usage": 38.5,
+     "whiff": 31.6,
+     "k": 28,
+     "k_per_pitch": 20.1,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 34,
+     "usage": 9.4,
+     "whiff": 11.8,
+     "k": 5,
+     "k_per_pitch": 14.7,
+     "small": true
+    },
+    "투심": {
+     "n": 5,
+     "usage": 1.4,
+     "whiff": 0.0,
+     "k": 1,
+     "k_per_pitch": 20.0,
+     "small": true
+    },
+    "커브": {
+     "n": 4,
+     "usage": 1.1,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 361
+   },
+   "2024_동률(1-1)": {
+    "포심": {
+     "n": 49,
+     "usage": 47.1,
+     "whiff": 5.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 44,
+     "usage": 42.3,
+     "whiff": 20.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 10,
+     "usage": 9.6,
+     "whiff": 12.5,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "커브": {
+     "n": 1,
+     "usage": 1.0,
+     "whiff": 100.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 104
+   },
+   "2024_불리(볼 많음)": {
+    "포심": {
+     "n": 150,
+     "usage": 66.7,
+     "whiff": 10.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "포크": {
+     "n": 53,
+     "usage": 23.6,
+     "whiff": 41.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 21,
+     "usage": 9.3,
+     "whiff": 12.5,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 1,
+     "usage": 0.4,
+     "whiff": null,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 225
+   },
+   "2024_유리(스트 많음, 2S 전)": {
+    "포심": {
+     "n": 70,
+     "usage": 47.9,
+     "whiff": 32.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 57,
+     "usage": 39.0,
+     "whiff": 26.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 18,
+     "usage": 12.3,
+     "whiff": 8.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "커브": {
+     "n": 1,
+     "usage": 0.7,
+     "whiff": 100.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 146
+   },
+   "2024_초구": {
+    "포심": {
+     "n": 142,
+     "usage": 50.7,
+     "whiff": 33.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "포크": {
+     "n": 76,
+     "usage": 27.1,
+     "whiff": 32.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 62,
+     "usage": 22.1,
+     "whiff": 17.6,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 280
+   },
+   "2025_2스트라이크": {
+    "포심": {
+     "n": 178,
+     "usage": 52.4,
+     "whiff": 15.8,
+     "k": 28,
+     "k_per_pitch": 15.7,
+     "small": false
+    },
+    "포크": {
+     "n": 125,
+     "usage": 36.8,
+     "whiff": 22.2,
+     "k": 19,
+     "k_per_pitch": 15.2,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 37,
+     "usage": 10.9,
+     "whiff": 14.3,
+     "k": 5,
+     "k_per_pitch": 13.5,
+     "small": true
+    },
+    "_total": 340
+   },
+   "2025_동률(1-1)": {
+    "포심": {
+     "n": 49,
+     "usage": 44.1,
+     "whiff": 16.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 38,
+     "usage": 34.2,
+     "whiff": 22.2,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 24,
+     "usage": 21.6,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 111
+   },
+   "2025_불리(볼 많음)": {
+    "포심": {
+     "n": 124,
+     "usage": 52.5,
+     "whiff": 11.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 57,
+     "usage": 24.2,
+     "whiff": 16.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 55,
+     "usage": 23.3,
+     "whiff": 28.6,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 236
+   },
+   "2025_유리(스트 많음, 2S 전)": {
+    "포심": {
+     "n": 64,
+     "usage": 43.5,
+     "whiff": 34.8,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 63,
+     "usage": 42.9,
+     "whiff": 25.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 20,
+     "usage": 13.6,
+     "whiff": 7.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 147
+   },
+   "2025_초구": {
+    "포심": {
+     "n": 133,
+     "usage": 45.2,
+     "whiff": 9.5,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": false
+    },
+    "슬라이더": {
+     "n": 81,
+     "usage": 27.6,
+     "whiff": 7.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 80,
+     "usage": 27.2,
+     "whiff": 29.6,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 294
+   },
+   "2026_2스트라이크": {
+    "포심": {
+     "n": 105,
+     "usage": 40.1,
+     "whiff": 22.4,
+     "k": 19,
+     "k_per_pitch": 18.1,
+     "small": false
+    },
+    "포크": {
+     "n": 92,
+     "usage": 35.1,
+     "whiff": 28.6,
+     "k": 19,
+     "k_per_pitch": 20.7,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 35,
+     "usage": 13.4,
+     "whiff": 18.2,
+     "k": 7,
+     "k_per_pitch": 20.0,
+     "small": true
+    },
+    "투심": {
+     "n": 24,
+     "usage": 9.2,
+     "whiff": 7.1,
+     "k": 5,
+     "k_per_pitch": 20.8,
+     "small": true
+    },
+    "커터": {
+     "n": 3,
+     "usage": 1.1,
+     "whiff": 0.0,
+     "k": 1,
+     "k_per_pitch": 33.3,
+     "small": true
+    },
+    "스위퍼": {
+     "n": 3,
+     "usage": 1.1,
+     "whiff": 50.0,
+     "k": 1,
+     "k_per_pitch": 33.3,
+     "small": true
+    },
+    "_total": 262
+   },
+   "2026_동률(1-1)": {
+    "포크": {
+     "n": 35,
+     "usage": 43.2,
+     "whiff": 18.2,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포심": {
+     "n": 27,
+     "usage": 33.3,
+     "whiff": 22.2,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 15,
+     "usage": 18.5,
+     "whiff": 11.1,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 3,
+     "usage": 3.7,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "커터": {
+     "n": 1,
+     "usage": 1.2,
+     "whiff": null,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 81
+   },
+   "2026_불리(볼 많음)": {
+    "포심": {
+     "n": 87,
+     "usage": 53.7,
+     "whiff": 7.7,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 47,
+     "usage": 29.0,
+     "whiff": 37.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 14,
+     "usage": 8.6,
+     "whiff": 33.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 14,
+     "usage": 8.6,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 162
+   },
+   "2026_유리(스트 많음, 2S 전)": {
+    "포심": {
+     "n": 46,
+     "usage": 39.0,
+     "whiff": 11.8,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포크": {
+     "n": 33,
+     "usage": 28.0,
+     "whiff": 38.9,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 27,
+     "usage": 22.9,
+     "whiff": 30.8,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 10,
+     "usage": 8.5,
+     "whiff": 20.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "커터": {
+     "n": 2,
+     "usage": 1.7,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 118
+   },
+   "2026_초구": {
+    "포크": {
+     "n": 89,
+     "usage": 39.4,
+     "whiff": 36.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "포심": {
+     "n": 80,
+     "usage": 35.4,
+     "whiff": 21.4,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "슬라이더": {
+     "n": 38,
+     "usage": 16.8,
+     "whiff": 27.3,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "투심": {
+     "n": 18,
+     "usage": 8.0,
+     "whiff": 0.0,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "커터": {
+     "n": 1,
+     "usage": 0.4,
+     "whiff": null,
+     "k": 0,
+     "k_per_pitch": 0.0,
+     "small": true
+    },
+    "_total": 226
+   }
+  },
+  "two_strike": {
+   "2023": {
+    "pitches": 313,
+    "k": 57,
+    "k_per_pitch": 18.2,
+    "fork_n": 133,
+    "fork_pct": 42.5,
+    "fork_k": 29,
+    "fork_k_per_pitch": 21.8,
+    "fork_whiff": 29.9
+   },
+   "2024": {
+    "pitches": 361,
+    "k": 65,
+    "k_per_pitch": 18.0,
+    "fork_n": 139,
+    "fork_pct": 38.5,
+    "fork_k": 28,
+    "fork_k_per_pitch": 20.1,
+    "fork_whiff": 31.6
+   },
+   "2025": {
+    "pitches": 340,
+    "k": 52,
+    "k_per_pitch": 15.3,
+    "fork_n": 125,
+    "fork_pct": 36.8,
+    "fork_k": 19,
+    "fork_k_per_pitch": 15.2,
+    "fork_whiff": 22.2
+   },
+   "2026": {
+    "pitches": 262,
+    "k": 52,
+    "k_per_pitch": 19.8,
+    "fork_n": 92,
+    "fork_pct": 35.1,
+    "fork_k": 19,
+    "fork_k_per_pitch": 20.7,
+    "fork_whiff": 28.6
+   }
+  },
+  "two_strike_pa": [
+   {
+    "season": 2023,
+    "pa2s": 143,
+    "k": 57,
+    "k_rate": 39.9,
+    "pool_k_rate": 37.3
+   },
+   {
+    "season": 2024,
+    "pa2s": 146,
+    "k": 65,
+    "k_rate": 44.5,
+    "pool_k_rate": 39.1
+   },
+   {
+    "season": 2025,
+    "pa2s": 147,
+    "k": 52,
+    "k_rate": 35.4,
+    "pool_k_rate": 39.6
+   },
+   {
+    "season": 2026,
+    "pa2s": 118,
+    "k": 52,
+    "k_rate": 44.1,
+    "pool_k_rate": 38.4
+   }
+  ],
+  "runner_seasons": [
+   {
+    "season": 2023,
+    "sit": "주자 없음",
+    "pa": 122,
+    "avg": 0.268,
+    "obp": 0.328,
+    "slg": 0.339,
+    "k_pct": 22.1,
+    "bb_pct": 7.4,
+    "hr": 1,
+    "woba": 0.319,
+    "ops": 0.667,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "sit": "주자 있음",
+    "pa": 152,
+    "avg": 0.264,
+    "obp": 0.351,
+    "slg": 0.368,
+    "k_pct": 19.7,
+    "bb_pct": 11.2,
+    "hr": 1,
+    "woba": 0.337,
+    "ops": 0.719,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "주자 없음",
+    "pa": 147,
+    "avg": 0.182,
+    "obp": 0.265,
+    "slg": 0.273,
+    "k_pct": 24.5,
+    "bb_pct": 7.5,
+    "hr": 2,
+    "woba": 0.256,
+    "ops": 0.538,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "주자 있음",
+    "pa": 131,
+    "avg": 0.289,
+    "obp": 0.362,
+    "slg": 0.395,
+    "k_pct": 22.1,
+    "bb_pct": 8.4,
+    "hr": 0,
+    "woba": 0.347,
+    "ops": 0.757,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "주자 없음",
+    "pa": 159,
+    "avg": 0.215,
+    "obp": 0.289,
+    "slg": 0.326,
+    "k_pct": 18.2,
+    "bb_pct": 7.5,
+    "hr": 3,
+    "woba": 0.29,
+    "ops": 0.615,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "주자 있음",
+    "pa": 135,
+    "avg": 0.319,
+    "obp": 0.382,
+    "slg": 0.425,
+    "k_pct": 17.0,
+    "bb_pct": 6.7,
+    "hr": 1,
+    "woba": 0.37,
+    "ops": 0.807,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "주자 없음",
+    "pa": 109,
+    "avg": 0.275,
+    "obp": 0.321,
+    "slg": 0.441,
+    "k_pct": 25.7,
+    "bb_pct": 4.6,
+    "hr": 3,
+    "woba": 0.345,
+    "ops": 0.762,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "주자 있음",
+    "pa": 116,
+    "avg": 0.26,
+    "obp": 0.345,
+    "slg": 0.344,
+    "k_pct": 20.7,
+    "bb_pct": 11.2,
+    "hr": 1,
+    "woba": 0.319,
+    "ops": 0.689,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "sit": "득점권",
+    "pa": 92,
+    "avg": 0.307,
+    "obp": 0.385,
+    "slg": 0.427,
+    "k_pct": 15.2,
+    "bb_pct": 10.9,
+    "hr": 1,
+    "woba": 0.371,
+    "ops": 0.812,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "득점권",
+    "pa": 83,
+    "avg": 0.264,
+    "obp": 0.337,
+    "slg": 0.389,
+    "k_pct": 26.5,
+    "bb_pct": 8.4,
+    "hr": 0,
+    "woba": 0.331,
+    "ops": 0.726,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "득점권",
+    "pa": 95,
+    "avg": 0.253,
+    "obp": 0.33,
+    "slg": 0.316,
+    "k_pct": 18.9,
+    "bb_pct": 7.4,
+    "hr": 0,
+    "woba": 0.304,
+    "ops": 0.646,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "득점권",
+    "pa": 85,
+    "avg": 0.229,
+    "obp": 0.321,
+    "slg": 0.343,
+    "k_pct": 22.4,
+    "bb_pct": 11.8,
+    "hr": 1,
+    "woba": 0.303,
+    "ops": 0.664,
+    "small": false
+   }
+  ],
+  "runner_pool": [
+   {
+    "season": 2023,
+    "sit": "득점권",
+    "pa": 3934,
+    "avg": 0.258,
+    "obp": 0.352,
+    "slg": 0.352,
+    "k_pct": 18.6,
+    "bb_pct": 12.0,
+    "hr": 44,
+    "woba": 0.332,
+    "ops": 0.704,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "sit": "주자 1루만",
+    "pa": 2569,
+    "avg": 0.249,
+    "obp": 0.316,
+    "slg": 0.352,
+    "k_pct": 18.0,
+    "bb_pct": 7.1,
+    "hr": 41,
+    "woba": 0.318,
+    "ops": 0.668,
+    "small": false
+   },
+   {
+    "season": 2023,
+    "sit": "주자 없음",
+    "pa": 6574,
+    "avg": 0.247,
+    "obp": 0.316,
+    "slg": 0.352,
+    "k_pct": 20.3,
+    "bb_pct": 8.4,
+    "hr": 113,
+    "woba": 0.318,
+    "ops": 0.668,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "득점권",
+    "pa": 3965,
+    "avg": 0.267,
+    "obp": 0.353,
+    "slg": 0.384,
+    "k_pct": 20.4,
+    "bb_pct": 11.2,
+    "hr": 70,
+    "woba": 0.335,
+    "ops": 0.737,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "주자 1루만",
+    "pa": 2364,
+    "avg": 0.272,
+    "obp": 0.338,
+    "slg": 0.391,
+    "k_pct": 17.8,
+    "bb_pct": 7.8,
+    "hr": 46,
+    "woba": 0.335,
+    "ops": 0.729,
+    "small": false
+   },
+   {
+    "season": 2024,
+    "sit": "주자 없음",
+    "pa": 6307,
+    "avg": 0.254,
+    "obp": 0.327,
+    "slg": 0.385,
+    "k_pct": 22.1,
+    "bb_pct": 8.8,
+    "hr": 148,
+    "woba": 0.327,
+    "ops": 0.712,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "득점권",
+    "pa": 3902,
+    "avg": 0.246,
+    "obp": 0.339,
+    "slg": 0.365,
+    "k_pct": 19.7,
+    "bb_pct": 11.1,
+    "hr": 61,
+    "woba": 0.325,
+    "ops": 0.704,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "주자 1루만",
+    "pa": 2498,
+    "avg": 0.258,
+    "obp": 0.326,
+    "slg": 0.368,
+    "k_pct": 19.0,
+    "bb_pct": 7.6,
+    "hr": 48,
+    "woba": 0.324,
+    "ops": 0.694,
+    "small": false
+   },
+   {
+    "season": 2025,
+    "sit": "주자 없음",
+    "pa": 6748,
+    "avg": 0.244,
+    "obp": 0.32,
+    "slg": 0.362,
+    "k_pct": 21.5,
+    "bb_pct": 8.5,
+    "hr": 144,
+    "woba": 0.319,
+    "ops": 0.682,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "득점권",
+    "pa": 3752,
+    "avg": 0.26,
+    "obp": 0.355,
+    "slg": 0.406,
+    "k_pct": 19.8,
+    "bb_pct": 11.8,
+    "hr": 98,
+    "woba": 0.346,
+    "ops": 0.761,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "주자 1루만",
+    "pa": 2361,
+    "avg": 0.27,
+    "obp": 0.343,
+    "slg": 0.393,
+    "k_pct": 18.3,
+    "bb_pct": 8.0,
+    "hr": 49,
+    "woba": 0.34,
+    "ops": 0.736,
+    "small": false
+   },
+   {
+    "season": 2026,
+    "sit": "주자 없음",
+    "pa": 6123,
+    "avg": 0.247,
+    "obp": 0.328,
+    "slg": 0.371,
+    "k_pct": 20.5,
+    "bb_pct": 9.6,
+    "hr": 136,
+    "woba": 0.326,
+    "ops": 0.699,
+    "small": false
+   }
+  ],
+  "lob_seasons": {
+   "2023": {
+    "lob_pct": 63.9,
+    "babip": 0.335,
+    "era": 3.65,
+    "fip": 3.55
+   },
+   "2024": {
+    "lob_pct": 57.7,
+    "babip": 0.304,
+    "era": 4.59,
+    "fip": 3.51
+   },
+   "2025": {
+    "lob_pct": 67.5,
+    "babip": 0.307,
+    "era": 4.18,
+    "fip": 4.07
+   },
+   "2026": {
+    "lob_pct": 64.3,
+    "babip": 0.338,
+    "era": 4.8,
+    "fip": 3.75
+   }
+  },
+  "inherited": {
+   "2025": {
+    "unavailable": true,
+    "reason": "DB pa·pitches의 2025 runs_charged가 전부 비어 있음(2025 승계 주자 득점 계산 불가)"
+   },
+   "2023": {
+    "me_inherited": 25,
+    "me_scored": 10,
+    "me_rate": 40.0,
+    "pool_n": 53,
+    "pool_inherited": 1540,
+    "pool_scored": 536,
+    "pool_rate": 34.8,
+    "n_inh10": 52,
+    "rank_inh10": 36,
+    "in_pool": true
+   },
+   "2024": {
+    "me_inherited": 30,
+    "me_scored": 11,
+    "me_rate": 36.7,
+    "pool_n": 49,
+    "pool_inherited": 1570,
+    "pool_scored": 565,
+    "pool_rate": 36.0,
+    "n_inh10": 49,
+    "rank_inh10": 25,
+    "in_pool": true
+   },
+   "2026": {
+    "me_inherited": 21,
+    "me_scored": 7,
+    "me_rate": 33.3,
+    "pool_n": 53,
+    "pool_inherited": 1535,
+    "pool_scored": 555,
+    "pool_rate": 36.2,
+    "n_inh10": 53,
+    "rank_inh10": 23,
+    "in_pool": true
+   },
+   "note": "승계 주자 = 등판 첫 타석 직전 주자 수(같은 반 이닝 중간 등판). 득점 = 같은 반 이닝 앞 타석들의 runs_charged 합 − 그 타석들에서 이미 난 득점(타석 단위 근사, 0~승계 주자 수로 자름). 비교군 = 그 시즌 40이닝·구원 90% 이상. rank_inh10 = 승계 주자 10명 이상 비교군 중 낮은 비율 순위(1=가장 적게 들여보냄). relief_2026.entry(투구 단위 계산, 7/21)와 방법이 약간 달라 숫자가 다를 수 있음"
+  },
+  "note": "small = 타석 50 미만 또는 투구 100 미만. 카운트 구분: 초구 0-0 / 2스트라이크(볼 무관) / 불리 = 볼>스트(2S 제외) / 유리 = 스트>볼(2S 전) / 동률 1-1. k_per_pitch = 그 구종으로 삼진이 끝난 비율(투구당). side_results_lg_rhp = 리그 우투수 전체 상대 좌우 결과(참고)"
+ },
+ "roster_moves": {
+  "KT": {
+   "out_fa": [
+    {
+     "name": "한승혁",
+     "rel_g": 35,
+     "rel_ip": "32.1",
+     "rel_era": 6.68,
+     "rel_fip": 4.84,
+     "rel_war": -0.17,
+     "sv": 0,
+     "hld": 10
+    },
+    {
+     "name": "김민수",
+     "rel_g": 39,
+     "rel_ip": "42.2",
+     "rel_era": 5.7,
+     "rel_fip": 4.76,
+     "rel_war": -0.06,
+     "sv": 1,
+     "hld": 3
+    }
+   ],
+   "out_military": [],
+   "in_military": [],
+   "out_rel_ip": "75.0",
+   "out_rel_war": -0.23
+  },
+  "삼성": {
+   "out_fa": [],
+   "out_military": [
+    {
+     "name": "이승현",
+     "rel_g": 60,
+     "rel_ip": "43.1",
+     "rel_era": 6.02,
+     "rel_fip": 4.96,
+     "rel_war": -0.06,
+     "sv": 1,
+     "hld": 11
+    }
+   ],
+   "in_military": [],
+   "out_rel_ip": "43.1",
+   "out_rel_war": -0.06
+  },
+  "KIA": {
+   "out_fa": [],
+   "out_military": [
+    {
+     "name": "정해영",
+     "rel_g": 55,
+     "rel_ip": "50.0",
+     "rel_era": 6.12,
+     "rel_fip": 4.72,
+     "rel_war": -0.39,
+     "sv": 2,
+     "hld": 11
+    },
+    {
+     "name": "한재승",
+     "rel_g": 45,
+     "rel_ip": "42.0",
+     "rel_era": 4.5,
+     "rel_fip": 5.82,
+     "rel_war": -0.05,
+     "sv": 0,
+     "hld": 1
+    }
+   ],
+   "in_military": [],
+   "out_rel_ip": "92.0",
+   "out_rel_war": -0.44
+  },
+  "LG": {
+   "out_fa": [
+    {
+     "name": "함덕주",
+     "rel_g": 36,
+     "rel_ip": "30.0",
+     "rel_era": 6.6,
+     "rel_fip": 5.46,
+     "rel_war": -0.27,
+     "sv": 1,
+     "hld": 6
+    }
+   ],
+   "out_military": [],
+   "in_military": [
+    {
+     "name": "정지헌"
+    }
+   ],
+   "out_rel_ip": "30.0",
+   "out_rel_war": -0.27
+  },
+  "두산": {
+   "out_fa": [
+    {
+     "name": "박치국",
+     "rel_g": 56,
+     "rel_ip": "48.1",
+     "rel_era": 5.4,
+     "rel_fip": 4.09,
+     "rel_war": -0.19,
+     "sv": 0,
+     "hld": 8
+    }
+   ],
+   "out_military": [
+    {
+     "name": "최지강",
+     "rel_g": 16,
+     "rel_ip": "13.1",
+     "rel_era": 9.45,
+     "rel_fip": 4.0,
+     "rel_war": -0.4,
+     "sv": 0,
+     "hld": 0
+    }
+   ],
+   "in_military": [],
+   "out_rel_ip": "61.2",
+   "out_rel_war": -0.59
+  },
+  "SSG": {
+   "out_fa": [
+    {
+     "name": "문승원",
+     "rel_g": 62,
+     "rel_ip": "62.2",
+     "rel_era": 3.45,
+     "rel_fip": 5.74,
+     "rel_war": 0.37,
+     "sv": 2,
+     "hld": 17
+    }
+   ],
+   "out_military": [],
+   "in_military": [],
+   "out_rel_ip": "62.2",
+   "out_rel_war": 0.37
+  },
+  "롯데": {
+   "out_fa": [],
+   "out_military": [
+    {
+     "name": "최준용",
+     "rel_g": 61,
+     "rel_ip": "60.2",
+     "rel_era": 3.71,
+     "rel_fip": 4.05,
+     "rel_war": 0.95,
+     "sv": 15,
+     "hld": 10
+    },
+    {
+     "name": "이민석",
+     "rel_g": 16,
+     "rel_ip": "25.0",
+     "rel_era": 7.2,
+     "rel_fip": 6.52,
+     "rel_war": 0.04,
+     "sv": 0,
+     "hld": 1
+    }
+   ],
+   "in_military": [
+    {
+     "name": "전미르"
+    },
+    {
+     "name": "진승현"
+    }
+   ],
+   "out_rel_ip": "85.2",
+   "out_rel_war": 0.99
+  },
+  "NC": {
+   "out_fa": [],
+   "out_military": [],
+   "in_military": [],
+   "out_rel_ip": "0.0",
+   "out_rel_war": 0
+  },
+  "한화": {
+   "out_fa": [
+    {
+     "name": "박상원",
+     "rel_g": 56,
+     "rel_ip": "50.2",
+     "rel_era": 4.8,
+     "rel_fip": 3.75,
+     "rel_war": 0.57,
+     "sv": 2,
+     "hld": 11
+    }
+   ],
+   "out_military": [],
+   "in_military": [
+    {
+     "name": "김규연"
+    }
+   ],
+   "out_rel_ip": "50.2",
+   "out_rel_war": 0.57
+  },
+  "키움": {
+   "out_fa": [],
+   "out_military": [],
+   "in_military": [],
+   "out_rel_ip": "0.0",
+   "out_rel_war": 0
+  }
+ },
+ "roster_moves_note": "out_fa = 2027 FA 승인 구원 투수(재계약하면 빠지지 않음) + LG 함덕주 옵트아웃. out_military = 상무 최종 합격 투수(12-07 입대 예정, 최준용은 아시안게임 금메달 시 취소 조건 — 결과 미확인). in_military = 2026-11-11 상무 전역 투수 중 기사에 이름이 나온 4명(15명 전체 명단 미확인). 현역·사회복무 입대·소집해제, 방출·트레이드, 외국인·아시아쿼터 교체는 미반영",
+ "swap_impact": {
+  "KT": {
+   "replaced": [
+    {
+     "name": "이상동",
+     "rel_ip": "23.2",
+     "rel_fip": 6.61,
+     "take_ip": "23.2"
+    },
+    {
+     "name": "주권",
+     "rel_ip": "53.0",
+     "rel_fip": 5.31,
+     "take_ip": "26.1"
+    }
+   ],
+   "low_fip": 5.92,
+   "low_war": -0.23,
+   "low_war_fip": -0.32,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 4.78,
+   "rp_fip_after": 4.57,
+   "rp_fip_delta": -0.21,
+   "rp_war_before": 2.32,
+   "rp_war_after": 3.11,
+   "rp_war_delta": 0.79,
+   "runs_fip": 11.7,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 2,
+   "rp_war_rank_after": 3
+  },
+  "삼성": {
+   "replaced": [
+    {
+     "name": "양창섭",
+     "rel_ip": "12.1",
+     "rel_fip": 9.15,
+     "take_ip": "12.1"
+    },
+    {
+     "name": "사토시",
+     "rel_ip": "16.2",
+     "rel_fip": 7.87,
+     "take_ip": "16.2"
+    },
+    {
+     "name": "백정현",
+     "rel_ip": "24.2",
+     "rel_fip": 7.02,
+     "take_ip": "21.0"
+    }
+   ],
+   "low_fip": 7.83,
+   "low_war": -0.33,
+   "low_war_fip": -0.53,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 5.17,
+   "rp_fip_after": 4.78,
+   "rp_fip_delta": -0.39,
+   "rp_war_before": 4.37,
+   "rp_war_after": 5.25,
+   "rp_war_delta": 0.88,
+   "runs_fip": 22.3,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 3,
+   "rp_war_rank_after": 1
+  },
+  "KIA": {
+   "replaced": [
+    {
+     "name": "황동하",
+     "rel_ip": "15.2",
+     "rel_fip": 9.82,
+     "take_ip": "15.2"
+    },
+    {
+     "name": "최지민",
+     "rel_ip": "36.2",
+     "rel_fip": 6.18,
+     "take_ip": "34.1"
+    }
+   ],
+   "low_fip": 7.32,
+   "low_war": -0.65,
+   "low_war_fip": -0.56,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 5.01,
+   "rp_fip_after": 4.69,
+   "rp_fip_delta": -0.32,
+   "rp_war_before": 1.23,
+   "rp_war_after": 2.44,
+   "rp_war_delta": 1.21,
+   "runs_fip": 19.5,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 2,
+   "rp_war_rank_after": 3
+  },
+  "LG": {
+   "replaced": [
+    {
+     "name": "배재준",
+     "rel_ip": "27.1",
+     "rel_fip": 6.44,
+     "take_ip": "27.1"
+    },
+    {
+     "name": "이정용",
+     "rel_ip": "22.2",
+     "rel_fip": 6.11,
+     "take_ip": "22.2"
+    }
+   ],
+   "low_fip": 6.29,
+   "low_war": -1.42,
+   "low_war_fip": -0.58,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 4.86,
+   "rp_fip_after": 4.64,
+   "rp_fip_delta": -0.22,
+   "rp_war_before": 0.07,
+   "rp_war_after": 2.04,
+   "rp_war_delta": 1.97,
+   "runs_fip": 13.7,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 2,
+   "rp_war_rank_after": 5
+  },
+  "두산": {
+   "replaced": [
+    {
+     "name": "김동주",
+     "rel_ip": "13.2",
+     "rel_fip": 6.86,
+     "take_ip": "13.2"
+    },
+    {
+     "name": "이용찬",
+     "rel_ip": "44.0",
+     "rel_fip": 5.38,
+     "take_ip": "36.1"
+    }
+   ],
+   "low_fip": 5.79,
+   "low_war": -0.13,
+   "low_war_fip": -0.6,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 4.4,
+   "rp_fip_after": 4.22,
+   "rp_fip_delta": -0.18,
+   "rp_war_before": 2.27,
+   "rp_war_after": 2.95,
+   "rp_war_delta": 0.68,
+   "runs_fip": 10.9,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 1,
+   "rp_war_rank_after": 3
+  },
+  "SSG": {
+   "replaced": [
+    {
+     "name": "최용준",
+     "rel_ip": "15.0",
+     "rel_fip": 8.94,
+     "take_ip": "15.0"
+    },
+    {
+     "name": "노경은",
+     "rel_ip": "47.2",
+     "rel_fip": 6.33,
+     "take_ip": "35.0"
+    }
+   ],
+   "low_fip": 7.11,
+   "low_war": -0.6,
+   "low_war_fip": -0.98,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 5.53,
+   "rp_fip_after": 5.24,
+   "rp_fip_delta": -0.29,
+   "rp_war_before": -0.41,
+   "rp_war_after": 0.75,
+   "rp_war_delta": 1.16,
+   "runs_fip": 18.3,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 7,
+   "rp_war_rank_after": 6
+  },
+  "롯데": {
+   "replaced": [
+    {
+     "name": "최이준",
+     "rel_ip": "13.0",
+     "rel_fip": 6.86,
+     "take_ip": "13.0"
+    },
+    {
+     "name": "이민석",
+     "rel_ip": "25.0",
+     "rel_fip": 6.52,
+     "take_ip": "25.0"
+    },
+    {
+     "name": "박준우",
+     "rel_ip": "16.0",
+     "rel_fip": 5.58,
+     "take_ip": "12.0"
+    }
+   ],
+   "low_fip": 6.38,
+   "low_war": -0.28,
+   "low_war_fip": 0.02,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 4.76,
+   "rp_fip_after": 4.5,
+   "rp_fip_delta": -0.26,
+   "rp_war_before": 3.59,
+   "rp_war_after": 4.43,
+   "rp_war_delta": 0.84,
+   "runs_fip": 14.3,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 2,
+   "rp_war_rank_after": 1
+  },
+  "NC": {
+   "replaced": [
+    {
+     "name": "김진호",
+     "rel_ip": "45.1",
+     "rel_fip": 7.09,
+     "take_ip": "45.1"
+    },
+    {
+     "name": "류진욱",
+     "rel_ip": "32.0",
+     "rel_fip": 6.65,
+     "take_ip": "4.2"
+    }
+   ],
+   "low_fip": 7.05,
+   "low_war": -0.77,
+   "low_war_fip": -0.96,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 5.34,
+   "rp_fip_after": 5.04,
+   "rp_fip_delta": -0.3,
+   "rp_war_before": -2.36,
+   "rp_war_after": -1.04,
+   "rp_war_delta": 1.32,
+   "runs_fip": 18.0,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 6,
+   "rp_war_rank_after": 9
+  },
+  "한화": {
+   "replaced": [
+    {
+     "name": "김서현",
+     "rel_ip": "26.0",
+     "rel_fip": 7.16,
+     "take_ip": "26.0"
+    },
+    {
+     "name": "김종수",
+     "rel_ip": "36.2",
+     "rel_fip": 6.97,
+     "take_ip": "24.0"
+    }
+   ],
+   "low_fip": 7.07,
+   "low_war": -0.91,
+   "low_war_fip": -0.8,
+   "park_fip": 3.75,
+   "park_war": 0.57,
+   "park_war_fip": null,
+   "rp_fip_before": 5.25,
+   "rp_fip_after": 5.53,
+   "rp_fip_delta": 0.28,
+   "rp_war_before": -1.01,
+   "rp_war_after": -2.51,
+   "rp_war_delta": -1.5,
+   "runs_fip": 18.7,
+   "mode": "이탈 시(박상원 2026 실제 구원 몫 → 하위 투수 비율)",
+   "rp_fip_rank_after": 8,
+   "rp_war_rank_after": 9
+  },
+  "키움": {
+   "replaced": [
+    {
+     "name": "정현우",
+     "rel_ip": "15.0",
+     "rel_fip": 7.99,
+     "take_ip": "15.0"
+    },
+    {
+     "name": "정다훈",
+     "rel_ip": "28.0",
+     "rel_fip": 7.47,
+     "take_ip": "28.0"
+    },
+    {
+     "name": "김재웅",
+     "rel_ip": "20.1",
+     "rel_fip": 6.95,
+     "take_ip": "7.0"
+    }
+   ],
+   "low_fip": 7.55,
+   "low_war": -1.56,
+   "low_war_fip": -1.58,
+   "park_fip": 3.82,
+   "park_war": 0.55,
+   "park_war_fip": 0.75,
+   "rp_fip_before": 5.55,
+   "rp_fip_after": 5.21,
+   "rp_fip_delta": -0.34,
+   "rp_war_before": -6.88,
+   "rp_war_after": -4.77,
+   "rp_war_delta": 2.11,
+   "runs_fip": 20.8,
+   "mode": "영입 시(하위 50이닝 → 박상원 가중 몫)",
+   "rp_fip_rank_after": 7,
+   "rp_war_rank_after": 10
+  }
+ },
+ "swap_impact_note": "각 팀 2026 구원 10이닝 이상 투수(박상원 제외)를 구원 FIP 나쁜 순으로 50이닝(150아웃)까지 모아(마지막 투수는 비율로) 박상원 2024~2026 가중(1:2:3) FIP·WAR 50이닝 몫으로 바꿨다. FIP는 아웃 가중 평균이라 같은 시즌 상수에서 정확히 더하고 뺄 수 있다. WAR = (war_fip+war_ra9)/2 × 구원 아웃 비율(team_needs.py). runs_fip = (하위 FIP − 박상원 FIP) × 50/9 점. 한계: 2026 한 시즌 팀 구성 기준, 다른 팀 변화·박상원 나이 하락(age_curve)·구장·수비·레버리지 미반영, 하위 투수가 실제로 50이닝을 비켜 준다는 가정. 한화만 mode가 다르다: 2026 팀 수치에 박상원이 이미 있으므로 그의 실제 2026 구원 50.2이닝(FIP·WAR)을 하위 투수 비율로 바꾼 '이탈 시' 값이다(delta가 +면 나빠짐)",
+ "cap_lookup": {
+  "source": "2027-fa-preview.json cap27(room=원소속 FA 잔류 뒤 2027 상한 151.2억 대비 여유, room_franchise=프랜차이즈 예외 적용)",
+  "floor2027": 60.6538
+ },
+ "sp_fa": [
+  {
+   "name": "원태인",
+   "team": "삼성",
+   "grade": "A",
+   "age": 27,
+   "ww": 4.01
+  }
+ ],
+ "price": {
+  "age": 33,
+  "ww": 0.65,
+  "war_3y": [
+   0.94,
+   0.62,
+   0.57
+  ],
+  "clip": 0.3,
+  "aav": 5.8,
+  "total1": 5.8,
+  "total2": 11.6,
+  "total3": 17.4,
+  "n_comps_all": 28,
+  "n_comps_pitcher": 17,
+  "comps_model": [
+   {
+    "player": "이재학",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.52,
+    "years": 3,
+    "total": 9.0,
+    "from_team": "NC",
+    "to_team": "NC"
+   },
+   {
+    "player": "이태양",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.76,
+    "years": 4,
+    "total": 25.0,
+    "from_team": "SSG",
+    "to_team": "한화"
+   },
+   {
+    "player": "정찬헌",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.82,
+    "years": 2,
+    "total": 8.6,
+    "from_team": "키움",
+    "to_team": "키움"
+   },
+   {
+    "player": "김재윤",
+    "fa_year": 2024,
+    "age": 34,
+    "ww": 1.61,
+    "years": 4,
+    "total": 58.0,
+    "from_team": "KT",
+    "to_team": "삼성"
+   },
+   {
+    "player": "임찬규",
+    "fa_year": 2024,
+    "age": 32,
+    "ww": 1.14,
+    "years": 4,
+    "total": 50.0,
+    "from_team": "LG",
+    "to_team": "LG"
+   },
+   {
+    "player": "장민재",
+    "fa_year": 2024,
+    "age": 34,
+    "ww": 0.47,
+    "years": 3,
+    "total": 8.0,
+    "from_team": "한화",
+    "to_team": "한화"
+   },
+   {
+    "player": "홍건희",
+    "fa_year": 2024,
+    "age": 32,
+    "ww": 0.6,
+    "years": 4,
+    "total": 24.5,
+    "from_team": "두산",
+    "to_team": "두산"
+   },
+   {
+    "player": "구승민",
+    "fa_year": 2025,
+    "age": 35,
+    "ww": 0.65,
+    "years": 4,
+    "total": 21.0,
+    "from_team": "롯데",
+    "to_team": "롯데"
+   },
+   {
+    "player": "김원중",
+    "fa_year": 2025,
+    "age": 32,
+    "ww": 1.28,
+    "years": 4,
+    "total": 54.0,
+    "from_team": "롯데",
+    "to_team": "롯데"
+   },
+   {
+    "player": "임기영",
+    "fa_year": 2025,
+    "age": 32,
+    "ww": 0.43,
+    "years": 3,
+    "total": 15.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "임정호",
+    "fa_year": 2025,
+    "age": 35,
+    "ww": 0.33,
+    "years": 3,
+    "total": 12.0,
+    "from_team": "NC",
+    "to_team": "NC"
+   },
+   {
+    "player": "김범수",
+    "fa_year": 2026,
+    "age": 31,
+    "ww": 0.45,
+    "years": 3,
+    "total": 20.0,
+    "from_team": "한화",
+    "to_team": "KIA"
+   },
+   {
+    "player": "김태훈",
+    "fa_year": 2026,
+    "age": 34,
+    "ww": 0.43,
+    "years": 4,
+    "total": 20.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "이승현",
+    "fa_year": 2026,
+    "age": 35,
+    "ww": 0.23,
+    "years": 2,
+    "total": 6.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "이준영",
+    "fa_year": 2026,
+    "age": 34,
+    "ww": 0.14,
+    "years": 3,
+    "total": 12.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "조상우",
+    "fa_year": 2026,
+    "age": 32,
+    "ww": 0.35,
+    "years": 2,
+    "total": 15.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "최원준",
+    "fa_year": 2026,
+    "age": 32,
+    "ww": -0.25,
+    "years": 4,
+    "total": 38.0,
+    "from_team": "두산",
+    "to_team": "두산"
+   }
+  ],
+  "total4": 23.1,
+  "total4_lo": 18.7,
+  "total4_hi": 30.0,
+  "stay_med_pct": -2.3,
+  "move_med_pct": 11.4,
+  "with_comp": {
+   "1년": {
+    "contract": 5.8,
+    "plus_200": 11.0,
+    "plus_300": 13.7
+   },
+   "2년": {
+    "contract": 11.6,
+    "plus_200": 16.8,
+    "plus_300": 19.5
+   },
+   "3년": {
+    "contract": 17.4,
+    "plus_200": 22.6,
+    "plus_300": 25.2
+   },
+   "4년": {
+    "contract": 23.1,
+    "plus_200": 28.4,
+    "plus_300": 31.0
+   }
+  },
+  "note": "v6 채택 모델(2027-fa-preview와 같음). 등급·보상은 모델에 없음. total4_lo/hi = LOO log 잔차 25~75%(preview의 lo/hi와 같은 방식). with_comp = 이적 시 보상금(200%안은 보상선수 1명 별도)을 더한 총비용(억). stay/move_med_pct = 표본 잔류·이적 계약의 모델 대비 중앙 잔차(%)",
+  "sample_max_age": 43,
+  "sample_n_age_ge_36": 23,
+  "sample_pitchers_age_31_35": [
+   {
+    "player": "백정현",
+    "fa_year": 2022,
+    "age": 35,
+    "ww": 2.79,
+    "years": 4,
+    "total": 38.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "이재학",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.52,
+    "years": 3,
+    "total": 9.0,
+    "from_team": "NC",
+    "to_team": "NC"
+   },
+   {
+    "player": "이태양",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.76,
+    "years": 4,
+    "total": 25.0,
+    "from_team": "SSG",
+    "to_team": "한화"
+   },
+   {
+    "player": "정찬헌",
+    "fa_year": 2023,
+    "age": 33,
+    "ww": 0.82,
+    "years": 2,
+    "total": 8.6,
+    "from_team": "키움",
+    "to_team": "키움"
+   },
+   {
+    "player": "김재윤",
+    "fa_year": 2024,
+    "age": 34,
+    "ww": 1.61,
+    "years": 4,
+    "total": 58.0,
+    "from_team": "KT",
+    "to_team": "삼성"
+   },
+   {
+    "player": "임찬규",
+    "fa_year": 2024,
+    "age": 32,
+    "ww": 1.14,
+    "years": 4,
+    "total": 50.0,
+    "from_team": "LG",
+    "to_team": "LG"
+   },
+   {
+    "player": "장민재",
+    "fa_year": 2024,
+    "age": 34,
+    "ww": 0.47,
+    "years": 3,
+    "total": 8.0,
+    "from_team": "한화",
+    "to_team": "한화"
+   },
+   {
+    "player": "홍건희",
+    "fa_year": 2024,
+    "age": 32,
+    "ww": 0.6,
+    "years": 4,
+    "total": 24.5,
+    "from_team": "두산",
+    "to_team": "두산"
+   },
+   {
+    "player": "구승민",
+    "fa_year": 2025,
+    "age": 35,
+    "ww": 0.65,
+    "years": 4,
+    "total": 21.0,
+    "from_team": "롯데",
+    "to_team": "롯데"
+   },
+   {
+    "player": "김원중",
+    "fa_year": 2025,
+    "age": 32,
+    "ww": 1.28,
+    "years": 4,
+    "total": 54.0,
+    "from_team": "롯데",
+    "to_team": "롯데"
+   },
+   {
+    "player": "임기영",
+    "fa_year": 2025,
+    "age": 32,
+    "ww": 0.43,
+    "years": 3,
+    "total": 15.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "임정호",
+    "fa_year": 2025,
+    "age": 35,
+    "ww": 0.33,
+    "years": 3,
+    "total": 12.0,
+    "from_team": "NC",
+    "to_team": "NC"
+   },
+   {
+    "player": "김범수",
+    "fa_year": 2026,
+    "age": 31,
+    "ww": 0.45,
+    "years": 3,
+    "total": 20.0,
+    "from_team": "한화",
+    "to_team": "KIA"
+   },
+   {
+    "player": "김태훈",
+    "fa_year": 2026,
+    "age": 34,
+    "ww": 0.43,
+    "years": 4,
+    "total": 20.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "이승현",
+    "fa_year": 2026,
+    "age": 35,
+    "ww": 0.23,
+    "years": 2,
+    "total": 6.0,
+    "from_team": "삼성",
+    "to_team": "삼성"
+   },
+   {
+    "player": "이준영",
+    "fa_year": 2026,
+    "age": 34,
+    "ww": 0.14,
+    "years": 3,
+    "total": 12.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "조상우",
+    "fa_year": 2026,
+    "age": 32,
+    "ww": 0.35,
+    "years": 2,
+    "total": 15.0,
+    "from_team": "KIA",
+    "to_team": "KIA"
+   },
+   {
+    "player": "최원준",
+    "fa_year": 2026,
+    "age": 32,
+    "ww": -0.25,
+    "years": 4,
+    "total": 38.0,
+    "from_team": "두산",
+    "to_team": "두산"
+   }
+  ]
+ },
+ "preview_copy": {
+  "others_me": {
+   "name": "박상원",
+   "role": "P",
+   "team": "한화",
+   "pos": "투수",
+   "age": 33,
+   "grade": "A",
+   "war": [
+    0.94,
+    0.62,
+    0.57
+   ],
+   "ww": 0.65,
+   "seasons": [
+    {
+     "season": 2024,
+     "team": "한화",
+     "g": 65,
+     "gs": 0,
+     "ip": "66.2",
+     "era": 4.59,
+     "fip": 3.51,
+     "k_pct": 23.4,
+     "bb_pct": 7.9,
+     "war_fip": 1.31,
+     "war_ra9": 0.57,
+     "war": 0.94
+    },
+    {
+     "season": 2025,
+     "team": "한화",
+     "g": 74,
+     "gs": 0,
+     "ip": "66.2",
+     "era": 4.18,
+     "fip": 4.07,
+     "k_pct": 17.7,
+     "bb_pct": 7.1,
+     "war_fip": 0.69,
+     "war_ra9": 0.55,
+     "war": 0.62
+    },
+    {
+     "season": 2026,
+     "team": "한화",
+     "g": 56,
+     "gs": 0,
+     "ip": "50.2",
+     "era": 4.8,
+     "fip": 3.75,
+     "k_pct": 23.1,
+     "bb_pct": 8.0,
+     "war_fip": 0.86,
+     "war_ra9": 0.29,
+     "war": 0.57
+    }
+   ],
+   "last": {
+    "season": 2026,
+    "team": "한화",
+    "g": 56,
+    "gs": 0,
+    "ip": "50.2",
+    "era": 4.8,
+    "fip": 3.75,
+    "k_pct": 23.1,
+    "bb_pct": 8.0,
+    "war_fip": 0.86,
+    "war_ra9": 0.29,
+    "war": 0.57
+   }
+  },
+  "grade_rule": {
+   "A": {
+    "protect": 20,
+    "pct_with": 200,
+    "pct_only": 300
+   },
+   "B": {
+    "protect": 25,
+    "pct_with": 100,
+    "pct_only": 200
+   },
+   "C": {
+    "pct_only": 150
+   }
+  },
+  "cap2027": 151.17
+ }
+}
